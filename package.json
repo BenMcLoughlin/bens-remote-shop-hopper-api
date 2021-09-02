@@ -6,7 +6,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "fetch": "ts-node ./script.ts"
+    "fetch": "ts-node ./lib/script.ts"
   },
   "keywords": [],
   "author": "",
