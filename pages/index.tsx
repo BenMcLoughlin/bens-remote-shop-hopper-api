@@ -2,7 +2,7 @@ import React from "react"
 import { GetStaticProps } from "next"
 import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
-import prisma from '../lib/prisma';
+import prisma from "../lib/prisma"
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.post.findMany({
@@ -12,33 +12,33 @@ export const getStaticProps: GetStaticProps = async () => {
         select: { name: true },
       },
     },
-  });
+  })
 
   const allUsers = await prisma.user.findMany({
     include: { posts: true },
   })
 
-  const users = dateStripped(allUsers);
+  const users = dateStripped(allUsers)
   // console.dir(users, { depth: null })
 
-  return { props: { feed, users } };
-};
+  return { props: { feed, users } }
+}
 
-const dateStripped = obj => {
+const dateStripped = (obj) => {
   let newObj = {}
-  Object.keys(obj).forEach(key => {
+  Object.keys(obj).forEach((key) => {
     let value = obj[key]
     if (value !== null) {
       // If array, loop...
       if (Array.isArray(value)) {
-        value = value.map(item => dateStripped(item))
+        value = value.map((item) => dateStripped(item))
       }
       // ...if property is date/time, stringify/parse...
-      else if (typeof value === 'object' && typeof value.getMonth === 'function') {
+      else if (typeof value === "object" && typeof value.getMonth === "function") {
         value = JSON.parse(JSON.stringify(value))
       }
       // ...and if a deep object, loop.
-      else if (typeof value === 'object') {
+      else if (typeof value === "object") {
         value = dateStripped(value)
       }
     }
@@ -52,7 +52,7 @@ type Props = {
 }
 
 const Blog: React.FC<Props> = (props) => {
-  console.log('props:', props)
+  console.log("props:", props)
   return (
     <Layout>
       <div className="page">
