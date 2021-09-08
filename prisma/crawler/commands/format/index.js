@@ -1,2 +1,1 @@
-export { products } from "./products"
-export { shopInfo } from "./shopInfo"
+export * as shopify from "./shopify"

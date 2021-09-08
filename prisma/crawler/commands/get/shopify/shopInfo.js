@@ -10,9 +10,11 @@ export async function shopInfo() {
   //   shopList.forEach(async ({ domain, businessName }) => {
   //     for (let page = 1; page <= 20; page++) {
   //const url = `https://${domain}/shop.json`
-  const url = "https://babyandme.ca/shop.json"
+  console.log("Hello from shopInfo")
+  const url = "https://babyandme.ca/products.json"
   const response = await fetch(url)
-  console.log("response: ", response)
+  const data = await response.json()
+  console.log("data: ", data)
   //const data = await response.json()
   //console.log("data: ", data)
 

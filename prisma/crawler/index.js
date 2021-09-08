@@ -16,11 +16,10 @@ function Crawler() {
     get.shopify.shopInfo()
     format.products()
     format.shopInfo()
-    post.products()
+    post.toExcel.products()
   }
 
   this.sayHi = () => console.log("hi")
-  post.shopInfo()
 }
 
 export default Crawler

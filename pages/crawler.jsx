@@ -9,15 +9,10 @@ const Draft = () => {
     <Layout>
       <div>
         <h1>Fetch Shopify Data</h1>
-        <button
-          onClick={async () => {
-            const { productList } = await crawler.get.shopify.products()
-            console.log("productList: ", productList)
-          }}
-        >
-          Fetch Products
-        </button>
-        <button onClick={() => crawler.get.shopify.shopInfo()}>Fetch Shop Details</button>
+        <button onClick={async () => await crawler.get.shopify.products()}>Get Shopify Products</button>
+        <button onClick={async () => await crawler.format.shopify.products()}>Format Product Data</button>
+        {/* <button onClick={() => crawler.get.shopify.shopInfo()}>Fetch Shop Details</button> */}
+        <button onClick={() => crawler.post.toExcel.products()}>Export to Excel</button>
       </div>
       <style jsx>{`
         .page {
