@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 const url = "https://www.healinghollow.com/products.json";
 // const url = "https://www.funktional.ca/products.json";
 

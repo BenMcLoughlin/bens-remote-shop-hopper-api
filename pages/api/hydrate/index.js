@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { getSession } from 'next-auth/client';
 import prisma from '../../../lib/prisma.js';
 import { fetchProducts } from '../fetch.ts';
@@ -29,10 +30,18 @@ export default async (req, res) => {
 
     if (req.method === 'POST') {
         if (req.body.request === 'DESTROY') {
-            await prisma.product.deleteMany({}); // be careful this wipes the DB
-            console.log("DESTROY"); 
+            console.log("DESTROY");
 
-            return res.status(200).json({ result: "DESTROYED" }); 
+            // be careful this wipes the DB
+            const result = await prisma.product.deleteMany({}) 
+                .catch((e) => {
+                    console.log('e:', e);
+                    throw e;
+                }).finally(async () => {
+                    await prisma.$disconnect();
+                });
+
+            return res.status(200).json({ removed: result, action: "DESTROYED" }); 
         }
 
         try {
