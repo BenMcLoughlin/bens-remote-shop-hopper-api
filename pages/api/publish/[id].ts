@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import prisma from '../../../lib/prisma';
+import prisma from '../../../prisma/prisma';
 import type { NextApiRequest, NextApiResponse } from "next";
 
 // PUT /api/publish/:id

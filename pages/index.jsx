@@ -5,7 +5,7 @@ import Router from 'next/router';
 import PropTypes from "prop-types";
 import Layout from "../components/Layout";
 import { useSession } from "next-auth/client";
-import prisma from '../lib/prisma';
+import prisma from '../prisma/prisma';
 import { fetchProducts } from "./api/fetch";
 import hydrateRequest from "../lib/requests/hydrateRequest";
 
@@ -88,7 +88,7 @@ const Blog = (props) => {
 
     console.log('this.props:', props);
 
-    console.log('DATABASE_URL:', process.env.DATABASE_URL);
+    console.log('DATABASE_URL:', process.env);
 
     return (
         <Layout>
