@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { getSession } from 'next-auth/client';
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from '../../../lib/prisma';
+import prisma from '../../../prisma/prisma';
 
 // POST /api/post
 // Required fields in body: title
