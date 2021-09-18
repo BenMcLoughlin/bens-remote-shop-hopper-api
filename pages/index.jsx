@@ -98,11 +98,11 @@ const Blog = (props) => {
                             <button onClick={_sendProducts}>
                                 <a>Send Products to db</a>
                             </button>
-                            { process.env.NODE_ENV === 'development' &&
-                                <button onClick={_wipeDatabase}>
-                                    <a className="red">Permanently Wipe DB (testing only)</a>
-                                </button>
-                            }
+                            {/* { process.env.NODE_ENV === 'development' && */}
+                            <button onClick={_wipeDatabase}>
+                                <a className="red">Permanently Wipe DB (testing only)</a>
+                            </button>
+                            {/* } */}
                             <main className="main">
                                 <div className="notice hov">
                                     <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique Products matching this criteria: <span className="blue">{DB_Param}</span> in the Database</p>
