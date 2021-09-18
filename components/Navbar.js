@@ -10,9 +10,9 @@ const Navbar = () => {
       <Link href="/crawler">
         <a>Crawler</a>
       </Link>
-      <Link href="/drafts/">
+      {/* <Link href="/drafts/">
         <a>Drafts</a>
-      </Link>
+      </Link> */}
       <style jsx>{`
         nav {
           margin: 10px auto 80px;

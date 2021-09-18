@@ -10,6 +10,7 @@ export function products() {
         ...product,
       })
     )
+    console.log('productList:', productList)
   })
 
   this.productList = productList
