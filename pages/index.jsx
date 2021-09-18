@@ -11,7 +11,7 @@ import hydrateRequest from "../lib/requests/hydrateRequest";
 const DB_Param = 'Diffuser Jewelry';
 
 // We might use this to do user fetching .....
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     const feed = await prisma.post.findMany({
         where: { published: true },
         include: {
@@ -84,6 +84,8 @@ const Blog = (props) => {
     };
 
     const isLoggedIn = session[0]?.user;
+
+    console.log('this.props:', props);
 
     return (
         <Layout>
