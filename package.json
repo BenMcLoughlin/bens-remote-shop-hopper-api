@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "next",
+    "dev": "set NODE_ENV=development && next",
     "build": "next build",
     "start": "next start"
   },

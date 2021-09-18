@@ -2,20 +2,9 @@ import { getSession } from 'next-auth/client';
 import prisma from '../../../lib/prisma.js';
 import { fetchProducts } from '../fetch.ts';
 
-async function createProducts(productArray) {
+async function createRows(productArray) {
     let result = {};
-    // async function createProducts() {
-    //     await Promise.all(
-    //         productArray.map(async (item) => {
-    //             await prisma.product.create({
-    //                 data: item,
-    //                 skipDuplicates: true
-    //             })
-    //         })
-    //     )
-    // }
 
-    // await prisma.product.deleteMany({}) // be careful this wipes the DB
     await Promise.all(productArray.map(async (item) => {
         result = await prisma.product.createMany({
             data: item,
@@ -39,6 +28,13 @@ export default async (req, res) => {
     }
 
     if (req.method === 'POST') {
+        if (req.body.request === 'DESTROY') {
+            await prisma.product.deleteMany({}); // be careful this wipes the DB
+            console.log("DESTROY"); 
+
+            return res.status(200).json({ result: "DESTROYED" }); 
+        }
+
         try {
             const { body } = req;
             let json = [];
@@ -83,7 +79,7 @@ export default async (req, res) => {
                 return data;
             });
 
-            const result = createProducts(productArray);
+            const result = createRows(productArray);
 
             return res.status(200).json(result);
         } catch (error) {
