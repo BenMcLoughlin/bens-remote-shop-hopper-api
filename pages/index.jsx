@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 import { useSession } from "next-auth/client";
 import prisma from '../lib/prisma';
 import { fetchProducts } from "./api/fetch";
-import hydrateRequest from "../lib/functions/hydrateRequest";
+import hydrateRequest from "../lib/requests/hydrateRequest";
 
 const DB_Param = 'Diffuser Jewelry';
 
