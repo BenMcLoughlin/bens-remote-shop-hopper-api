@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import prisma from '../../../lib/prisma';
 
 // DELETE /api/post/:id

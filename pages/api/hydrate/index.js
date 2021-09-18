@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { getSession } from 'next-auth/client';
 import prisma from '../../../lib/prisma.js';
 import { fetchProducts } from '../fetch.ts';
@@ -40,7 +41,7 @@ export default async (req, res) => {
                     await prisma.$disconnect();
                 });
 
-            return res.status(200).json({ result: result, action: "DESTROYED" }); 
+            return res.status(200).json({ removed: result, action: "DESTROYED" }); 
         }
 
         try {
