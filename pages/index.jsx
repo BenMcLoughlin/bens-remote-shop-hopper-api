@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-undef */
 import React, { useState } from "react";
 import Router from 'next/router';
@@ -86,6 +87,8 @@ const Blog = (props) => {
     const isLoggedIn = session[0]?.user;
 
     console.log('this.props:', props);
+
+    console.log('DATABASE_URL:', process.env.DATABASE_URL);
 
     return (
         <Layout>
