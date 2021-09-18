@@ -1,1 +1,1 @@
-export * as toExcel from "./toExcel"
+export * as toExcel from './toExcel';

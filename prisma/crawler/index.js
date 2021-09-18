@@ -1,25 +1,25 @@
-import { connectScope } from "./utils/connectScope"
-import * as commands from "./commands"
+import { connectScope } from './utils/connectScope';
+import * as commands from './commands';
 
 function Crawler() {
-  this.connectScope = connectScope.bind(this)
-  this.connectScope(commands)
+  this.connectScope = connectScope.bind(this);
+  this.connectScope(commands);
 
-  this.productList = []
-  this.shopList = []
-  const { get, format, post } = this
+  this.productList = [];
+  this.shopList = [];
+  const { get, format, post } = this;
 
-  get.shops.list()
+  get.shops.list();
 
   this.runAllFunctions = () => {
-    get.shopify.products()
-    get.shopify.shopInfo()
-    format.products()
-    format.shopInfo()
-    post.toExcel.products()
-  }
+    get.shopify.products();
+    get.shopify.shopInfo();
+    format.products();
+    format.shopInfo();
+    post.toExcel.products();
+  };
 
-  this.sayHi = () => console.log("hi")
+  this.sayHi = () => console.log('hi');
 }
 
-export default Crawler
+export default Crawler;

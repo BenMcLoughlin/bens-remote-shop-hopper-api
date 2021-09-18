@@ -1,19 +1,21 @@
-import Link from "next/link"
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import Link from 'next/link';
 
-const Navbar = () => {
-  return (
-    <nav>
-      <div className="logo"></div>
-      <Link href="/">
-        <a>Home</a>
-      </Link>
-      <Link href="/crawler">
-        <a>Crawler</a>
-      </Link>
-      {/* <Link href="/drafts/">
+const Navbar = () => (
+  <nav>
+    <div className="logo" />
+    <Link href="/">
+      <a>Home</a>
+    </Link>
+    <Link href="/crawler">
+      <a>Crawler</a>
+    </Link>
+    {/* <Link href="/drafts/">
         <a>Drafts</a>
       </Link> */}
-      <style jsx>{`
+    <style jsx>
+      {`
         nav {
           margin: 10px auto 80px;
           padding: 10px 0;
@@ -28,9 +30,9 @@ const Navbar = () => {
           text-decoration: none;
           color: grey;
         }
-      `}</style>
-    </nav>
-  )
-}
+      `}
+    </style>
+  </nav>
+);
 
-export default Navbar
+export default Navbar;

@@ -1,17 +1,15 @@
 export function products() {
-  const { productsByBusiness } = this
+  const { productsByBusiness } = this;
 
-  const productList = []
+  const productList = [];
 
   productsByBusiness.forEach(({ products, businessName }) => {
-    products.forEach((product) =>
-      productList.push({
-        businessName,
-        ...product,
-      })
-    )
-    console.log('productList:', productList)
-  })
+    products.forEach((product) => productList.push({
+      businessName,
+      ...product,
+    }));
+    console.log('productList:', productList);
+  });
 
-  this.productList = productList
+  this.productList = productList;
 }

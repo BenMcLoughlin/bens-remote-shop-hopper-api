@@ -4,7 +4,7 @@ import { useSession } from "next-auth/client";
 // import Post, { PostProps } from "../components/Post"
 import prisma from '../lib/prisma';
 import { fetchProducts } from "./api/fetch";
-import sendProducts from "../lib/requests/sendProducts";
+import sendProducts from "../lib/functions/sendProducts";
 
 const DB_Param = 'Diffuser Jewelry';
 

@@ -1,3 +1,3 @@
 export function shopInfo() {
- const {} = this 
+  const {} = this;
 }

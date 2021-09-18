@@ -1,1 +1,1 @@
-export * as shopify from "./shopify"
+export * as shopify from './shopify';
