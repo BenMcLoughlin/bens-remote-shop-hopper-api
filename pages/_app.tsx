@@ -1,12 +1,12 @@
+import React from 'react';
 import { Provider } from 'next-auth/client';
 import { AppProps } from 'next/app';
 
-const App = ({ Component, pageProps }: AppProps) => {
-  return (
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const App = ({ Component, pageProps }: AppProps) => (
     <Provider session={pageProps.session}>
-      <Component {...pageProps} />
+        <Component {...pageProps} />
     </Provider>
-  );
-};
+);
 
 export default App;

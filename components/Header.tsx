@@ -4,20 +4,19 @@ import { useRouter } from 'next/router';
 import { signOut, useSession } from 'next-auth/client';
 
 const Header: React.FC = () => {
-  const router = useRouter();
-  const isActive: (pathname: string) => boolean = (pathname) =>
-    router.pathname === pathname;
+    const router = useRouter();
+    const isActive: (pathname: string) => boolean = (pathname) => router.pathname === pathname;
 
-  const [session, loading] = useSession();
+    const [ session, loading ] = useSession();
 
-  let left = (
-    <div className="left">
-      <Link href="/">
-        <a className="bold" data-active={isActive('/')}>
-          Feed
-        </a>
-      </Link>
-      <style jsx>{`
+    let left = (
+        <div className="left">
+            <Link href="/">
+                <a className="bold" data-active={isActive('/')}>
+          Home
+                </a>
+            </Link>
+            <style jsx>{`
         .bold {
           font-weight: bold;
         }
@@ -36,20 +35,20 @@ const Header: React.FC = () => {
           margin-left: 1rem;
         }
       `}</style>
-    </div>
-  );
+        </div>
+    );
 
-  let right = null;
+    let right = null;
 
-  if (loading) {
-    left = (
-      <div className="left">
-        <Link href="/">
-          <a className="bold" data-active={isActive('/')}>
-            Feed
-          </a>
-        </Link>
-        <style jsx>{`
+    if (loading) {
+        left = (
+            <div className="left">
+                <Link href="/">
+                    <a className="bold" data-active={isActive('/')}>
+            Home
+                    </a>
+                </Link>
+                <style jsx>{`
           .bold {
             font-weight: bold;
           }
@@ -68,27 +67,28 @@ const Header: React.FC = () => {
             margin-left: 1rem;
           }
         `}</style>
-      </div>
-    );
-    right = (
-      <div className="right">
-        <p>Validating session ...</p>
-        <style jsx>{`
+            </div>
+        );
+
+        right = (
+            <div className="right">
+                <p>Validating session ...</p>
+                <style jsx>{`
           .right {
             margin-left: auto;
           }
         `}</style>
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 
-  if (!session) {
-    right = (
-      <div className="right">
-        <Link href="/api/auth/signin">
-          <a data-active={isActive('/signup')}>Log in</a>
-        </Link>
-        <style jsx>{`
+    if (!session) {
+        right = (
+            <div className="right">
+                <Link href="/api/auth/signin">
+                    <a data-active={isActive('/signup')}>Log in</a>
+                </Link>
+                <style jsx>{`
           a {
             text-decoration: none;
             color: var(--geist-foreground);
@@ -109,22 +109,22 @@ const Header: React.FC = () => {
             border-radius: 3px;
           }
         `}</style>
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 
-  if (session) {
-    left = (
-      <div className="left">
-        <Link href="/">
-          <a className="bold" data-active={isActive('/')}>
-            Feed
-          </a>
-        </Link>
-        <Link href="/drafts">
+    if (session) {
+        left = (
+            <div className="left">
+                <Link href="/">
+                    <a className="bold" data-active={isActive('/')}>
+            Home
+                    </a>
+                </Link>
+                {/* <Link href="/drafts">
           <a data-active={isActive('/drafts')}>My drafts</a>
-        </Link>
-        <style jsx>{`
+        </Link> */}
+                <style jsx>{`
           .bold {
             font-weight: bold;
           }
@@ -143,22 +143,23 @@ const Header: React.FC = () => {
             margin-left: 1rem;
           }
         `}</style>
-      </div>
-    );
-    right = (
-      <div className="right">
-        <p>
-          {session.user.name} ({session.user.email})
-        </p>
-        <Link href="/create">
+            </div>
+        );
+
+        right = (
+            <div className="right">
+                <p>
+                    {session.user.name} ({session.user.email})
+                </p>
+                {/* <Link href="/create">
           <button>
             <a>New post</a>
           </button>
-        </Link>
-        <button onClick={() => signOut()}>
-          <a>Log out</a>
-        </button>
-        <style jsx>{`
+        </Link> */}
+                <button onClick={() => signOut()}>
+                    <a>Log out</a>
+                </button>
+                <style jsx>{`
           a {
             text-decoration: none;
             color: var(--geist-foreground);
@@ -189,23 +190,23 @@ const Header: React.FC = () => {
             border: none;
           }
         `}</style>
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 
-  return (
-    <nav>
-      {left}
-      {right}
-      <style jsx>{`
+    return (
+        <nav>
+            {left}
+            {right}
+            <style jsx>{`
         nav {
           display: flex;
           padding: 2rem;
           align-items: center;
         }
       `}</style>
-    </nav>
-  );
+        </nav>
+    );
 };
 
 export default Header;
