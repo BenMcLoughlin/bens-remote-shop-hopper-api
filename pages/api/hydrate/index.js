@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { getSession } from 'next-auth/client';
-import prisma from '../../../lib/prisma.js';
+import prisma from '../../../prisma/prisma.js';
 import { fetchProducts } from '../fetch.ts';
 
 async function createRows(productArray) {

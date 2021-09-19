@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import prisma from '../../../lib/prisma';
+import prisma from '../../../prisma/prisma';
 
 // DELETE /api/post/:id
 export default async function handle(req, res) {

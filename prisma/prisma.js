@@ -4,7 +4,8 @@ import { PrismaClient } from '@prisma/client';
 let prisma = {};
 
 if (process.env.NODE_ENV !== "production") {
-    prisma = new PrismaClient({ log: [ "query", "info", "warn" ] });
+    // prisma = new PrismaClient({ log: [ "query", "info", "warn" ] });
+    prisma = new PrismaClient();
 } else {
     if (!global.prisma) {
         console.log("GLOBAL PRISMA:");
