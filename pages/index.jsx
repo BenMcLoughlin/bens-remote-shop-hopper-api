@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import React, { useState } from "react";
 import Link from 'next/link';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import PropTypes from "prop-types";
 import Layout from "../components/Layout";
 import { useSession } from "next-auth/client";
@@ -73,6 +73,10 @@ const Blog = (props) => {
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
 
+    const refreshData = () => {
+        router.replace(router.asPath);
+    };
+
     const _getProducts = async () => {
         const json = await fetchProducts();
         set_Raw_Products(json.products);
@@ -83,10 +87,9 @@ const Blog = (props) => {
         const result = await hydrateRequest({ request: 'SEND' });
         if (result) {
             console.log('result:', result);
+            refreshData();
             setLoading(false);
         }
-
-        await Router.push('/');
     };
 
     const _wipeDatabase = async () => {
@@ -94,10 +97,9 @@ const Blog = (props) => {
         const result = await hydrateRequest({ request: 'DESTROY' });
         if (result) {
             console.log('result:', result);
+            refreshData();
             setLoading(false);
         }
-
-        await Router.push('/');
     };
 
     const isLoggedIn = session[0]?.user;
@@ -105,7 +107,6 @@ const Blog = (props) => {
     console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
     console.log('Feed:', Object.keys(props.feed).length > 1 ? 'This is production DB' : props.feed);
     console.log('Products:', props.products);
-    console.log('this.props:', props);
 
     return (
         <Layout>
