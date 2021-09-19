@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-undef */
 import React, { useState } from "react";
-import Router from 'next/router';
+import Link from 'next/link';
+import Router, { useRouter } from 'next/router';
 import PropTypes from "prop-types";
 import Layout from "../components/Layout";
 import { useSession } from "next-auth/client";
@@ -68,6 +69,9 @@ const dateStripped = (obj) => {
 const Blog = (props) => {
     const session = useSession();
     const [ raw_products, set_Raw_Products ] = useState([]);
+    const [ loading, setLoading ] = useState(false);
+    const router = useRouter();
+    const isActive = (pathname) => router.pathname === pathname;
 
     const _getProducts = async () => {
         const json = await fetchProducts();
@@ -75,20 +79,32 @@ const Blog = (props) => {
     };
 
     const _sendProducts = async () => {
-        await hydrateRequest({ request: 'SEND' });
+        setLoading('sendProducts');
+        const result = await hydrateRequest({ request: 'SEND' });
+        if (result) {
+            console.log('result:', result);
+            setLoading(false);
+        }
+
         await Router.push('/');
     };
 
     const _wipeDatabase = async () => {
-        await hydrateRequest({ request: 'DESTROY' });
+        setLoading('wipeDatabase');
+        const result = await hydrateRequest({ request: 'DESTROY' });
+        if (result) {
+            console.log('result:', result);
+            setLoading(false);
+        }
+
         await Router.push('/');
     };
 
     const isLoggedIn = session[0]?.user;
 
-    console.log('this.props:', props);
-
-    console.log('DATABASE_URL:', process.env);
+    console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
+    console.log('Feed:', Object.keys(props.feed).length > 1 ? 'This is production DB' : props.feed);
+    console.log('Products:', props.products);
 
     return (
         <Layout>
@@ -98,17 +114,19 @@ const Blog = (props) => {
                     isLoggedIn ?
                         <React.Fragment>
                             <button onClick={_getProducts}>
-                                <a>Fetch Products</a>
-                            </button>
-                            <button onClick={_sendProducts}>
-                                <a>Send Products to db</a>
+                                <a>Fetch Directly from Shopify, display below</a>
                             </button>
                             {/* { process.env.NODE_ENV === 'development' && */}
                             <button onClick={_wipeDatabase}>
-                                <a className="red">Permanently Wipe DB (testing only)</a>
+                                {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
                             </button>
                             {/* } */}
                             <main className="main">
+                                <button className="send hov" onClick={_sendProducts}>
+                                    {loading === 'sendProducts'
+                                        ? "Loading..."
+                                        : <a>Fetch Products, and send to DB, also, they will be listed below when this component pulls them in and it re-renders.</a>} 
+                                </button>
                                 <div className="notice hov">
                                     <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique Products matching this criteria: <span className="blue">{DB_Param}</span> in the Database</p>
                                 </div>
@@ -126,15 +144,26 @@ const Blog = (props) => {
                             </main>
                         </React.Fragment>
                         :
-                        <div className="notice hov">
-                            <p>Might as well Log in</p>
-                        </div>
+                        <Link href="/api/auth/signin">
+                            <div className="notice hov">
+                                <a data-active={isActive('/signup')}>Might as well Log in</a>
+                            </div>
+                        </Link>
                 }
             </div>
             <style jsx>{`
         .main {
           margin-top: 20px;
           margin-bottom: 20px;
+        }
+
+        .send {
+            background: lightGrey;
+            border-radius: 50px;
+            border: none;
+            padding: 10px;
+            transition: box-shadow 0.1s ease-in;
+            margin-bottom: 20px;
         }
 
         .post {
@@ -173,7 +202,9 @@ const Blog = (props) => {
 };
 
 Blog.propTypes = {
-    products: PropTypes.object
+    products: PropTypes.object,
+    users: PropTypes.object,
+    feed: PropTypes.object
 };
 
 export default Blog;
