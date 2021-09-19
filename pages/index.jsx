@@ -105,6 +105,7 @@ const Blog = (props) => {
     console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
     console.log('Feed:', Object.keys(props.feed).length > 1 ? 'This is production DB' : props.feed);
     console.log('Products:', props.products);
+    console.log('this.props:', props);
 
     return (
         <Layout>
