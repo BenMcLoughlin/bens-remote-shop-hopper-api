@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://ncmoseley:password@localhost:5432/template1"
 }
 
 generator client {
@@ -39,13 +39,13 @@ model Variant {
   option2           String?
   option3           String?
   sku               String?
-  requires_shipping String?
+  requires_shipping Boolean
   taxable           Boolean
   featured_image    Image?   @relation(fields: [featuredImageId], references: [id])
   featuredImageId   Int?
   available         Boolean
   price             String?
-  grams             Boolean
+  grams             Int?
   compare_at_price  Int?
   position          Int?
   product_id        Int?

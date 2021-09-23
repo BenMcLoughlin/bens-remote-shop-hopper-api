@@ -9,6 +9,7 @@ import { useSession } from "next-auth/client";
 import prisma from '../prisma/prisma';
 import { fetchProducts } from "./api/fetch";
 import hydrateRequest from "../lib/requests/hydrateRequest";
+import fetchVariant from "../lib/requests/fetchVariant";
 
 const DB_Param = 'Diffuser Jewelry';
 
@@ -82,6 +83,12 @@ const Blog = (props) => {
         set_Raw_Products(json.products);
     };
 
+    const _getProductWithVariant = async (variantId) => {
+        setLoading('getVariant');
+        const json = await fetchVariant(variantId);
+        set_Raw_Products(json.products);
+    };
+
     const _sendProducts = async () => {
         setLoading('sendProducts');
         const result = await hydrateRequest({ request: 'SEND' });
@@ -135,6 +142,10 @@ const Blog = (props) => {
                                 {Object.keys(props.products).map((key) => (
                                     <div key={key} className="notice hov">
                                         <p>{props.products[key].title}</p>
+                                        <p>{JSON.stringify(props.products[key])}</p>
+                                        <button onClick={() => _getProductWithVariant(props.products[key].variantId)}>
+                                            {loading === 'getVariant' ? "Loading..." : <a className="red">Get variant for this product</a>}
+                                        </button>
                                     </div>
                                 ))}
                                 {raw_products.map((item) => (
