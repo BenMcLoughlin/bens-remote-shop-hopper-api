@@ -114,7 +114,7 @@ const Blog = (props) => {
                 <h1>Welcome to ShopHopper</h1>
                 {
                     isLoggedIn ?
-                        <React.Fragment>
+                        <>
                             <button onClick={_getProducts}>
                                 <a>Fetch Directly from Shopify, display below</a>
                             </button>
@@ -132,9 +132,9 @@ const Blog = (props) => {
                                 <div className="notice hov">
                                     <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique Products matching this criteria: <span className="blue">{DB_Param}</span> in the Database</p>
                                 </div>
-                                {Object.keys(props.products).map((key) => (
+                                {Object.entries(props.products).map(([ key, value ]) => (
                                     <div key={key} className="notice hov">
-                                        <p>{props.products[key].title}</p>
+                                        <p>{value.title}</p>
                                     </div>
                                 ))}
                                 {raw_products.map((item) => (
@@ -144,7 +144,7 @@ const Blog = (props) => {
                                     </div>
                                 ))}
                             </main>
-                        </React.Fragment>
+                        </>
                         :
                         <Link href="/api/auth/signin">
                             <div className="notice hov">

@@ -44,38 +44,44 @@ const Draft: React.FC = () => {
                     />
                     <input disabled={!content || !title} type="submit" value="Create" />
                     <a className="back" href="#" onClick={() => Router.push('/')}>
-            or Cancel
+                        or Cancel
                     </a>
                 </form>
             </div>
             <style jsx>{`
-        .page {
-          background: var(--geist-background);
-          padding: 3rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+                .page {
+                    background: rgb(252, 252, 252);
+                    background: linear-gradient(
+                        14deg,
+                        rgba(252, 252, 252, 1) 0%,
+                        rgba(252, 252, 252, 0.3211659663865546) 38%,
+                        rgba(242, 239, 239, 0.6797093837535014) 100%
+                    );
+                    padding: 3rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
 
-        input[type='text'],
-        textarea {
-          width: 100%;
-          padding: 0.5rem;
-          margin: 0.5rem 0;
-          border-radius: 0.25rem;
-          border: 0.125rem solid rgba(0, 0, 0, 0.2);
-        }
+                input[type='text'],
+                textarea {
+                    width: 100%;
+                    padding: 0.5rem;
+                    margin: 0.5rem 0;
+                    border-radius: 0.25rem;
+                    border: 0.125rem solid rgba(0, 0, 0, 0.2);
+                }
 
-        input[type='submit'] {
-          background: #ececec;
-          border: 0;
-          padding: 1rem 2rem;
-        }
+                input[type='submit'] {
+                    background: #ececec;
+                    border: 0;
+                    padding: 1rem 2rem;
+                }
 
-        .back {
-          margin-left: 1rem;
-        }
-      `}</style>
+                .back {
+                    margin-left: 1rem;
+                }
+            `}</style>
         </Layout>
     );
 };
