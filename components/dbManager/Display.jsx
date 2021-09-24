@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Metrics from './Metrics';
 import Button from '../buttons/Button';
 import SelectShop from './SelectShop';
@@ -6,13 +6,18 @@ import SelectShop from './SelectShop';
 const Display = (props) => {
     const { shopsList, set, selected } = props;
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const updateProducts = async () => {
-        await fetch('/api/updateProducts', {
+        setIsLoading(true);
+        const uploaded = await fetch('/api/updateProducts', {
             method: 'POST',
             body: JSON.stringify(props.selected),
         });
+        uploaded && setIsLoading(false);
+        console.log(uploaded);
     };
-
+    console.log('selected: ', selected);
     return (
         <>
             <div className="wrapper">
@@ -53,6 +58,8 @@ const Display = (props) => {
                     gap: 1rem;
                     height: 120rem;
                 }
+                .spinner {
+                }
                 .top {
                     height: 35rem;
                     width: 100%;
@@ -61,7 +68,6 @@ const Display = (props) => {
                     height: 15rem;
                     display: flex;
                     align-items: center;
-             
                 }
             `}</style>
         </>

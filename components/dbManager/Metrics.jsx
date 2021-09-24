@@ -10,9 +10,19 @@ const Metrics = ({ header, selected, shopsList }) => {
         ,
     ];
 
+    const updateMetrics = async () => {
+        const metrics = await fetch('/api/dbMetrics', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
+        console.log(metrics);
+    };
+
     return (
         <div className="wrapper">
-            <div className="header">{startCase(header)}</div>
+            <div className="header" onClick={() => updateMetrics()}>
+                {startCase(header)}
+            </div>
             <div className="row">
                 <div className="left">
                     <div className="date">21 Sept 2021</div>
@@ -35,8 +45,6 @@ const Metrics = ({ header, selected, shopsList }) => {
                     width: 80rem;
                     display: flex;
                     flex-direction: column;
-                    
-                    
                 }
                 .header {
                     height: 5rem;

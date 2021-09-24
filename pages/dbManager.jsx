@@ -24,7 +24,6 @@ const ExtractTransformLoad = () => {
         selected: {
             siteHost: camelCase(siteHost),
             businessName: camelCase(businessName),
-            update: 'allShops',
             domain,
         },
         set: {
@@ -39,7 +38,7 @@ const ExtractTransformLoad = () => {
                 <div className="column">
                     <div className="title">Database Manager</div>
                     <div className="row">
-                        <SideNav {...props} />
+                        <SideNav  {...props} />
                         <Display {...props} />
                     </div>
                 </div>

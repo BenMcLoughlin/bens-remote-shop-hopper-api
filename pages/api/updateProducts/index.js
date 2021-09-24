@@ -11,9 +11,9 @@ const updateDatabase = async (req, res) => {
         ? await extract.single(businessName, domain)
         : await extract.allShops[siteHost]();
 
-    const formatedData = await format.products(rawData);
+    const formatedData = format.products(rawData);
 
-    await load.products(formatedData);
+    load.products(formatedData);
 
     res.status(200).json({
         status: 'success',
