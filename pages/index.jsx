@@ -1,16 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-undef */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PropTypes from "prop-types";
 import Layout from "../components/Layout";
 import { useSession } from "next-auth/client";
 import prisma from '../prisma/prisma';
-import { fetchProducts } from "./api/fetch";
+// import { fetchProducts } from "./api/fetch";
 import hydrateRequest from "../lib/requests/hydrateRequest";
+import incrementProduct from "../lib/requests/incrementProduct";
+import searchRequest from "../lib/requests/search";
+import fetchTags from "../lib/requests/fetchTags";
 
-const DB_Param = 'Diffuser Jewelry';
+const DB_Param = "diffusing jewelry";
 
 // We might use this to do user fetching .....
 export const getServerSideProps = async () => {
@@ -29,7 +32,14 @@ export const getServerSideProps = async () => {
 
     // Example Query
     const productsFeed = await prisma.product.findMany({
-        where: { product_type: DB_Param }
+        where: {
+            tags: {
+                has: DB_Param
+            },
+            rating: {
+                gt: 10
+            }
+        }
     });
 
     const users = dateStripped(allUsers);
@@ -66,20 +76,62 @@ const dateStripped = (obj) => {
     return newObj;
 };
 
-const Blog = (props) => {
+const Home = (props) => {
     const session = useSession();
-    const [ raw_products, set_Raw_Products ] = useState([]);
+    // const [ raw_products, set_Raw_Products ] = useState([]);
+    const [ search_products, set_search_products ] = useState([]);
+    const [ raw_Tags, set_Raw_Tags ] = useState([]);
     const [ loading, setLoading ] = useState(false);
+    const [ query, setQuery ] = useState(false);
+    const [ search, toggleSearch ] = useState(false);
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
+
+    useEffect(() => {
+        const _getAllTags = async () => {
+            setLoading('getAllTags');
+            const tags = await fetchTags();
+            if (tags) {
+                set_Raw_Tags(tags.uniqueTags);
+                setLoading(false);
+            }
+        };
+
+        _getAllTags();
+    }, []);
 
     const refreshData = () => {
         router.replace(router.asPath);
     };
 
-    const _getProducts = async () => {
-        const json = await fetchProducts();
-        set_Raw_Products(json.products);
+    // const _getProducts = async () => {
+    //     const json = await fetchProducts();
+    //     set_Raw_Products(json.products);
+    // };
+
+    const _noSearch = () => {
+        toggleSearch(false);
+        setQuery(false);
+    };
+
+    const _incrementProduct = async (title) => {
+        setLoading('incrementProduct');
+        const result = await incrementProduct(title);
+        if (result) {
+            refreshData();
+            setLoading(false);
+        }
+    };
+
+    const _search = async (e) => {
+        e.preventDefault();
+        setLoading('search');
+        const result = await searchRequest(query);
+        if (result) {
+            set_search_products(result);
+            // refreshData();
+            setLoading(false);
+        }
     };
 
     const _sendProducts = async () => {
@@ -111,38 +163,100 @@ const Blog = (props) => {
     return (
         <Layout>
             <div className="page">
-                <h1>Welcome to ShopHopper</h1>
                 {
                     isLoggedIn ?
                         <React.Fragment>
-                            <button onClick={_getProducts}>
+                            {/* <button className="send hov" onClick={_getProducts}>
                                 <a>Fetch Directly from Shopify, display below</a>
-                            </button>
-                            {/* { process.env.NODE_ENV === 'development' && */}
-                            <button onClick={_wipeDatabase}>
-                                {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
+                            </button> */}
+                            <button className="send hov" onClick={_sendProducts}>
+                                {loading === 'sendProducts'
+                                    ? "Loading..."
+                                    : <a>Fetch Products, and send to DB, also, they will be listed below when this component pulls them in and it re-renders.</a>} 
                             </button>
                             {/* } */}
                             <main className="main">
-                                <button className="send hov" onClick={_sendProducts}>
-                                    {loading === 'sendProducts'
-                                        ? "Loading..."
-                                        : <a>Fetch Products, and send to DB, also, they will be listed below when this component pulls them in and it re-renders.</a>} 
+                                { search_products.length ? 
+                                    <React.Fragment>
+                                        <div className="notice hov" onClick={() => set_search_products([])}>
+                                            <p>Currently  <span className="blue">{search_products.length}</span> unique Products matching this criteria: <a className="blue">{query}</a> in the Database</p><span className="tiny">  Again?</span>
+                                        </div>
+                                        <div className="cards">
+                                            {
+                                                search_products.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.title)}>
+                                                    <img className="image" src={product.images[0].src} />
+                                                    <button className="hov">
+                                                        {product.rating > 10 && <p className="star">⭐️</p>}
+                                                        {<a className="blue">
+                                                            {product.title}
+                                                            <span className="red">{product.rating}</span>
+                                                        </a>}
+                                                    </button>
+                                                </div>)
+                                            }
+                                        </div>
+                                    </React.Fragment>
+                                    :
+                                    search ? 
+                                        <form onSubmit={_search}>
+                                            <h2 className="hov" onClick={() => toggleSearch(false)}>New Search</h2>
+                                            {
+                                                query ? 
+                                                    <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${ query }?`} />
+                                                    :
+                                                    raw_Tags.map((tag) => <button key={tag} onClick={() => setQuery(tag)}>
+                                                        {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
+                                                    </button>)
+                                            }
+                                            <button className="red hov">
+                                                <a onClick={() => _noSearch()}>
+                                                    Cancel
+                                                </a>
+                                            </button>
+                                        </form>
+                                        :
+                                        <h2 className="hov" onClick={() => toggleSearch(true)}>New Search?</h2>
+                                }
+
+                                { 
+                                    !search_products.length && !search ? 
+                                        <React.Fragment>
+                                            <div className="notice hov">
+                                                <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique products that have this tag <a className="blue">{DB_Param}</a>with a rating higher than <span className="blue">10</span> in the Database. <a className="link" onClick={() => toggleSearch(true)}>Search</a> to see more.</p>
+
+                                                <p className="tiny">*Note* Some data doesn&apos;t update in real time like state data, so the counters don&apos;t seem like the are working but, they are. Thank you for coming to my Ted Talk</p>
+                                            </div>
+
+                                            <div className="cards">
+                                                {Object.keys(props.products).map((key) => <div className="card hov" key={key} onClick={() => _incrementProduct(props.products[key].title)}>
+                                                    <img className="image" src={props.products[key].images[0].src} />
+                                                    <button className="hov">
+                                                        {props.products[key].rating > 10 && <p className="star">⭐️</p>}
+                                                        {<a className="blue">
+                                                            {props.products[key].title}
+                                                            <span className="red">{props.products[key].rating}</span>
+                                                        </a>}
+                                                    </button>
+                                                </div>)}
+                                            </div>
+                                        </React.Fragment>
+                                        :
+                                        null
+                                }
+
+                                {/* { process.env.NODE_ENV === 'development' && */}
+                                <button className="send hov" onClick={_wipeDatabase}>
+                                    {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
                                 </button>
-                                <div className="notice hov">
-                                    <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique Products matching this criteria: <span className="blue">{DB_Param}</span> in the Database</p>
-                                </div>
-                                {Object.keys(props.products).map((key) => (
-                                    <div key={key} className="notice hov">
-                                        <p>{props.products[key].title}</p>
-                                    </div>
-                                ))}
-                                {raw_products.map((item) => (
+
+                                <div></div>
+
+                                {/* {raw_products.map((item) => (
                                     <div key={item.id} className="post hov">
                                         <p>{raw_products.length}</p>
                                         <p>{JSON.stringify(item)}</p>
                                     </div>
-                                ))}
+                                ))} */}
                             </main>
                         </React.Fragment>
                         :
@@ -155,8 +269,49 @@ const Blog = (props) => {
             </div>
             <style jsx>{`
         .main {
-          margin-top: 20px;
-          margin-bottom: 20px;
+            display: block;
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .tiny {
+            font-size: 10px;
+        }
+
+        .link {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .send {
+            background: lightGrey;
+            border-radius: 50px;
+            border: none;
+            padding: 10px;
+            transition: box-shadow 0.1s ease-in;
+            margin: 1rem;
+        }
+
+        .cards {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .card {
+            margin: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            transition: box-shadow 0.1s ease-in;
+            width: 275px;
+            height: 300px;
+            padding: 1rem;
         }
 
         .send {
@@ -187,8 +342,15 @@ const Blog = (props) => {
           margin-top: 1rem;
         }
 
+        .image {
+            width: 200px;
+            height: auto;
+            object-fit: contain;
+        }
+
         .blue {
-          color: blue;
+            color: blue;
+            margin: 1rem;
         }
 
         .red {
@@ -198,15 +360,25 @@ const Blog = (props) => {
         .hov:hover {
           box-shadow: 1px 1px 3px #aaa;
         }
+
+        .star {
+            position: absolute;
+            transform: scale(3,3) translate(-5px, -10px);
+        }
+
+        .star:hover {
+            transform: scale(5, 5);
+            transition: all 1s;
+        }
       `}</style>
         </Layout>
     );
 };
 
-Blog.propTypes = {
+Home.propTypes = {
     products: PropTypes.object,
     users: PropTypes.object,
-    feed: PropTypes.object
+    feed: PropTypes.array
 };
 
-export default Blog;
+export default Home;
