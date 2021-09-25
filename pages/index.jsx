@@ -70,6 +70,7 @@ const dateStripped = (obj) => {
 const Blog = (props) => {
     const session = useSession();
     const [ raw_products, set_Raw_Products ] = useState([]);
+    const [ raw_Variant, set_Raw_Variant ] = useState('');
     const [ loading, setLoading ] = useState(false);
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
@@ -85,8 +86,12 @@ const Blog = (props) => {
 
     const _getProductWithVariant = async (variantId) => {
         setLoading('getVariant');
-        const json = await fetchVariant(variantId);
-        set_Raw_Products(json.products);
+        const variant = await fetchVariant(variantId);
+        if (variant) {
+            console.log('variant:', variant);
+            set_Raw_Variant(JSON.stringify(variant.result));
+            setLoading(false);
+        }
     };
 
     const _sendProducts = async () => {
@@ -111,9 +116,9 @@ const Blog = (props) => {
 
     const isLoggedIn = session[0]?.user;
 
-    console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
-    console.log('Feed:', Object.keys(props.feed).length > 1 ? 'This is production DB' : props.feed);
-    console.log('Products:', props.products);
+    // console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
+    // console.log('Feed:', Object.keys(props.feed).length > 1 ? 'This is production DB' : props.feed);
+    // console.log('Products:', props.products);
 
     return (
         <Layout>
@@ -139,6 +144,7 @@ const Blog = (props) => {
                                 <div className="notice hov">
                                     <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique Products matching this criteria: <span className="blue">{DB_Param}</span> in the Database</p>
                                 </div>
+                                <p>{raw_Variant}</p>
                                 {Object.keys(props.products).map((key) => (
                                     <div key={key} className="notice hov">
                                         <p>{props.products[key].title}</p>
