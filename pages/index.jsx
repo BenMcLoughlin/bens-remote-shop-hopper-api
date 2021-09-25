@@ -13,7 +13,7 @@ import incrementProduct from "../lib/requests/incrementProduct";
 import searchRequest from "../lib/requests/search";
 import fetchTags from "../lib/requests/fetchTags";
 
-const DB_Param = "diffusing jewelry";
+const DB_Param = "jewellry";
 
 // We might use this to do user fetching .....
 export const getServerSideProps = async () => {
@@ -29,22 +29,20 @@ export const getServerSideProps = async () => {
     const allUsers = await prisma.user.findMany({
         include: { posts: true }
     });
+    const users = dateStripped(allUsers);
 
     // Example Query
     const productsFeed = await prisma.product.findMany({
         where: {
             tags: {
                 has: DB_Param
-            },
-            rating: {
-                gt: 10
             }
+            // rating: {
+            //     gt: 10
+            // }
         }
     });
-
-    const users = dateStripped(allUsers);
     const products = dateStripped(productsFeed);
-    // console.dir(users, { depth: null }) this is neat
 
     return { props: { feed, users, products } };
 };
@@ -156,6 +154,11 @@ const Home = (props) => {
 
     const isLoggedIn = session[0]?.user;
 
+    const order = (a, b) => {
+        console.log('a, b:', a.rating, b.rating);
+        Number(a.rating) < Number(b.rating) ? -1 : (Number(a.rating) < Number(b.rating) ? 1 : 0);
+    };
+
     console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
     console.log('Feed:', Object.keys(props.feed).length > 1 ? 'This is production DB' : props.feed);
     console.log('Products:', props.products);
@@ -192,7 +195,7 @@ const Home = (props) => {
                                                             <span className="red">{product.rating}</span>
                                                         </a>}
                                                     </button>
-                                                </div>)
+                                                </div>).sort(order)
                                             }
                                         </div>
                                     </React.Fragment>
@@ -237,7 +240,7 @@ const Home = (props) => {
                                                             <span className="red">{props.products[key].rating}</span>
                                                         </a>}
                                                     </button>
-                                                </div>)}
+                                                </div>).sort(order)}
                                             </div>
                                         </React.Fragment>
                                         :
