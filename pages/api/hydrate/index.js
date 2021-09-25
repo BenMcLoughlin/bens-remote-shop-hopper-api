@@ -58,15 +58,15 @@ export default async (req, res) => {
                     title,
                     handle,
                     body_html,
+                    created_at,
                     published_at,
-                    // created_at,
                     updated_at,
                     vendor,
                     product_type,
-                    tags
-                    // variants,
-                    // images,
-                    // options,
+                    tags,
+                    variants,
+                    images,
+                    options
                 } = product;
 
                 const data = {
@@ -76,21 +76,21 @@ export default async (req, res) => {
                     body_html,
                     vendor,
                     product_type,
-                    publishedAt: published_at,
-                    updatedAt: updated_at,
+                    created_at,
+                    published_at,
+                    updated_at,
                     tags,
-                    // todo
-                    variantId: null,
-                    imageId: null,
-                    optionId: null
+                    variants,
+                    images,
+                    options
                 };
 
-                return data;
+                return data; 
             });
 
             const result = createRows(productArray);
 
-            return res.status(200).json(result);
+            return res.status(200).json({ result });
         } catch (error) {
             return res.status(422).json(error);
         }

@@ -10,12 +10,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model hotItems {
-  id       Int     @id @default(autoincrement())
-  name     String  @unique
-  value    Int?
-}
-
 model Product {
   id           Int      @id @default(autoincrement())
   title        String   @unique
@@ -23,18 +17,69 @@ model Product {
   body_html    String?  @unique
   vendor       String?
   product_type String?
-  created_at   DateTime?
-  published_at DateTime @default(now())
-  updated_at   DateTime
+  publishedAt  DateTime @default(now()) @map(name: "published_at")
+  updatedAt    DateTime @updatedAt @map(name: "updated_at")
   tags         String[]
-  variants     Json?
-  images       Json?
-  options      Json?
-  rating       Int?     @default(0)
+  variants     Variant? @relation(fields: [variantId], references: [id])
+  variantId    Int?
+  images       Image?   @relation(fields: [imageId], references: [id])
+  imageId      Int?
+  options      Option?  @relation(fields: [optionId], references: [id])
+  optionId     Int?
 
   @@map(name: "products")
   User   User? @relation(fields: [userId], references: [id])
   userId Int?
+}
+
+model Variant {
+  id                Int      @id @default(autoincrement())
+  title             String
+  option1           String?
+  option2           String?
+  option3           String?
+  sku               String?
+  requires_shipping Boolean
+  taxable           Boolean
+  featured_image    Image?   @relation(fields: [featuredImageId], references: [id])
+  featuredImageId   Int?
+  available         Boolean
+  price             String?
+  grams             Int?
+  compare_at_price  Int?
+  position          Int?
+  product_id        Int?
+  createdAt         DateTime @default(now()) @map(name: "created_at")
+  updatedAt         DateTime @updatedAt @map(name: "updated_at")
+
+  Product Product[]
+  @@map(name: "variants")
+}
+
+model Image {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  position    Int?
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+  product_id  Int?
+  variant_ids Int[]
+  src         String?
+  width       Int?
+  height      Int?
+
+  Product Product[]
+  Variant Variant[]
+  @@map(name: "images")
+}
+
+model Option {
+  id       Int      @id @default(autoincrement())
+  name     String?
+  position Int?
+  values   String[]
+
+  Product Product[]
+  @@map(name: "options")
 }
 
 model Post {
