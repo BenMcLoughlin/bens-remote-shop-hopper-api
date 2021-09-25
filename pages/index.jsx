@@ -107,6 +107,7 @@ const Blog = (props) => {
         setLoading('incrementProduct');
         const result = await incrementProduct(title);
         if (result) {
+            refreshData();
             setLoading(false);
         }
     };
@@ -144,13 +145,9 @@ const Blog = (props) => {
                 {
                     isLoggedIn ?
                         <React.Fragment>
-                            <button className="send hov" onClick={_getProducts}>
+                            {/* <button className="send hov" onClick={_getProducts}>
                                 <a>Fetch Directly from Shopify, display below</a>
-                            </button>
-                            {/* { process.env.NODE_ENV === 'development' && */}
-                            <button className="send hov" onClick={_wipeDatabase}>
-                                {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
-                            </button>
+                            </button> */}
                             <button className="send hov" onClick={_sendProducts}>
                                 {loading === 'sendProducts'
                                     ? "Loading..."
@@ -162,10 +159,23 @@ const Blog = (props) => {
                                     <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique Products matching this criteria: <span className="blue">{DB_Param}</span> in the Database</p>
                                 </div>
 
-                                {Object.keys(props.products).map((key) => <button className="send hov" key={key} onClick={() => _incrementProduct(props.products[key].title)}>
-                                    {loading === 'incrementItem' ? "Loading..." : <a className="blue">{props.products[key].title}</a>}
-                                </button>)
-                                }
+                                <div className="cards">
+                                    {Object.keys(props.products).map((key) => <div className="card hov" key={key}>
+                                        <img className="image" src={props.products[key].images[0].src} />
+                                        <button className="hov" onClick={() => _incrementProduct(props.products[key].title)}>
+                                            {props.products[key].rating > 10 && <p className="star">⭐️</p>}
+                                            {<a className="blue">
+                                                {props.products[key].title}
+                                                <span className="red">{props.products[key].rating}</span>
+                                            </a>}
+                                        </button>
+                                    </div>)}
+                                </div>
+
+                                {/* { process.env.NODE_ENV === 'development' && */}
+                                <button className="send hov" onClick={_wipeDatabase}>
+                                    {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
+                                </button>
 
                                 <div></div>
 
@@ -194,7 +204,10 @@ const Blog = (props) => {
             </div>
             <style jsx>{`
         .main {
-          margin-bottom: 20px;
+            display: block;
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
         }
 
         .send {
@@ -204,6 +217,27 @@ const Blog = (props) => {
             padding: 10px;
             transition: box-shadow 0.1s ease-in;
             margin: 1rem;
+        }
+
+        .cards {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .card {
+            margin: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            transition: box-shadow 0.1s ease-in;
+            width: 275px;
+            height: 300px;
+            padding: 1rem;
         }
 
         .post {
@@ -225,6 +259,12 @@ const Blog = (props) => {
           margin-top: 1rem;
         }
 
+        .image {
+            width: 200px;
+            height: auto;
+            object-fit: contain;
+        }
+
         .blue {
             color: blue;
             margin: 1rem;
@@ -236,6 +276,16 @@ const Blog = (props) => {
 
         .hov:hover {
           box-shadow: 1px 1px 3px #aaa;
+        }
+
+        .star {
+            position: absolute;
+            transform: scale(3,3) translate(-5px, -10px);
+        }
+
+        .star:hover {
+            transform: scale(5, 5);
+            transition: all 1s;
         }
       `}</style>
         </Layout>
