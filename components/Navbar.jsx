@@ -8,15 +8,9 @@ const Navbar = () => (
         <Link href="/">
             <a>Home</a>
         </Link>
-<<<<<<< HEAD
         <Link href="/tags">
             <a>Tags</a>
         </Link>
-=======
-        {/* <Link href="/crawler">
-      <a>Crawler</a>
-    </Link> */}
->>>>>>> 7c70430c8616e8cf483e24c5753c9de4ce772fbe
         {/* <Link href="/drafts/">
         <a>Drafts</a>
       </Link> */}
