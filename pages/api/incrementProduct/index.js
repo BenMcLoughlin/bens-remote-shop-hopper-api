@@ -3,23 +3,12 @@ import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
 async function addPointToProduct(title) {
-    const product = await prisma.product.findUnique({
-        where: {
-            title
-        }
-    }).catch((e) => {
-        console.log('e:', e);
-        throw e;
-    }).finally(async () => {
-        await prisma.$disconnect();
-    });
-
     const result = await prisma.product.update({
         where: {
             title: title
         },
         data: {
-            rating: product?.rating ? product.rating + 1 : 1
+            rating: { increment: 1 }
         }
     }).catch((e) => {
         console.log('e:', e);

@@ -2,7 +2,7 @@
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
-async function getRows() {
+export async function getRows() {
     const result = await prisma.$queryRaw`
         SELECT tags FROM products
   `.catch((e) => {
@@ -35,8 +35,6 @@ export default async (req, res) => {
 
                 return true;
             }));
-
-            console.log('uniqueTags:', uniqueTags);
 
             return res.status(200).json({ uniqueTags });
         } catch (error) {

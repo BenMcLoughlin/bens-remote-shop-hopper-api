@@ -2,11 +2,13 @@
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
-async function addPointToItem(tag) {
-    const result = await prisma.hotItems.upsert({
-        where: { name: tag },
-        create: { name: tag, value: 1 },
-        update: { name: tag, value: { increment: 1 } }
+export async function search(tag) {
+    const result = await prisma.product.findMany({
+        where: {
+            tags: {
+                has: tag
+            }
+        }
     }).catch((e) => {
         console.log('e:', e);
         throw e;
@@ -27,7 +29,7 @@ export default async (req, res) => {
     if (req.method === 'POST') {
         try {
             const { body } = req;
-            const result = await addPointToItem(body);
+            const result = await search(body);
 
             return res.status(200).json({ result });
         } catch (error) {
