@@ -13,7 +13,7 @@ const Header: React.FC = () => {
         <div className="left">
             <Link href="/">
                 <a className="bold" data-active={isActive('/')}>
-                  Home
+                    <h1>Welcome to ShopHopper</h1>
                 </a>
             </Link>
             <style jsx>{`
@@ -45,7 +45,7 @@ const Header: React.FC = () => {
             <div className="left">
                 <Link href="/">
                     <a className="bold" data-active={isActive('/')}>
-            Home
+                        <h1>Welcome to ShopHopper</h1>
                     </a>
                 </Link>
                 <style jsx>{`
@@ -118,7 +118,7 @@ const Header: React.FC = () => {
             <div className="left">
                 <Link href="/">
                     <a className="bold" data-active={isActive('/')}>
-                      Home
+                        <h1>Welcome to ShopHopper</h1>
                     </a>
                 </Link>
                 {/* <Link href="/drafts">
@@ -151,11 +151,11 @@ const Header: React.FC = () => {
                 <p>
                     {session.user.name} ({session.user.email})
                 </p>
-                {/* <Link href="/create">
-          <button>
-            <a>New post</a>
-          </button>
-        </Link> */}
+                <Link href="/tags">
+                    <button>
+                        <a>See All Tags</a>
+                    </button>
+                </Link>
                 <button onClick={() => signOut()}>
                     <a>Log out</a>
                 </button>
