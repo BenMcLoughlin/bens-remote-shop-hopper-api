@@ -41,6 +41,9 @@ const Tags = () => {
                     isLoggedIn ?
                         <React.Fragment>
                             <main className="main">
+                                <div className="notice hov" onClick={() => set_search_products([])}>
+                                    <p>When clicking on a Tag, it is added to a list in the DB of &quot;Hot Items&quot;. If you click it again it gets a better score</p>
+                                </div>
                                 <button className="hov" onClick={() => _getAllTags()}>
                                     {loading === 'getAllTags' ? "Loading..." : <a className="red">Get Tags</a>}
                                 </button>
@@ -108,6 +111,7 @@ const Tags = () => {
           background: white;
           transition: box-shadow 0.1s ease-in;
           padding: 20px;
+            margin: 1rem;
         }
 
         .notice + .notice {
