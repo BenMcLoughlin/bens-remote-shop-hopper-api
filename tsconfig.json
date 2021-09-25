@@ -24,5 +24,5 @@
     "**/*.tsx",
     "lib/script.ts",
     "pages/index.jsx"
-, "script.js", "prisma/prisma.js", "pages/tags.jsx"  ]
+, "script.js", "prisma/prisma.js"  ]
 }

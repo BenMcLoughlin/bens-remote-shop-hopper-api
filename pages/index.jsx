@@ -314,6 +314,15 @@ const Home = (props) => {
             padding: 1rem;
         }
 
+        .send {
+            background: lightGrey;
+            border-radius: 50px;
+            border: none;
+            padding: 10px;
+            transition: box-shadow 0.1s ease-in;
+            margin-bottom: 20px;
+        }
+
         .post {
           background: white;
           transition: box-shadow 0.1s ease-in;
