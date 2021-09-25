@@ -9,7 +9,8 @@ import { useSession } from "next-auth/client";
 import prisma from '../prisma/prisma';
 import { fetchProducts } from "./api/fetch";
 import hydrateRequest from "../lib/requests/hydrateRequest";
-import fetchVariant from "../lib/requests/fetchVariant";
+import fetchTags from "../lib/requests/fetchTags";
+import incrementItem from "../lib/requests/incrementItem";
 
 const DB_Param = 'Diffuser Jewelry';
 
@@ -70,7 +71,7 @@ const dateStripped = (obj) => {
 const Blog = (props) => {
     const session = useSession();
     const [ raw_products, set_Raw_Products ] = useState([]);
-    const [ raw_Variant, set_Raw_Variant ] = useState('');
+    const [ raw_Tags, set_Raw_Tags ] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
@@ -84,12 +85,19 @@ const Blog = (props) => {
         set_Raw_Products(json.products);
     };
 
-    const _getProductWithVariant = async (variantId) => {
-        setLoading('getVariant');
-        const variant = await fetchVariant(variantId);
-        if (variant) {
-            console.log('variant:', variant);
-            set_Raw_Variant(JSON.stringify(variant.result));
+    const _getAllTags = async () => {
+        setLoading('getAllTags');
+        const tags = await fetchTags();
+        if (tags) {
+            set_Raw_Tags(tags.uniqueTags);
+            setLoading(false);
+        }
+    };
+
+    const _incrementItem = async (tag) => {
+        setLoading('incrementItem');
+        const result = await incrementItem(tag);
+        if (result) {
             setLoading(false);
         }
     };
@@ -141,17 +149,20 @@ const Blog = (props) => {
                                         ? "Loading..."
                                         : <a>Fetch Products, and send to DB, also, they will be listed below when this component pulls them in and it re-renders.</a>} 
                                 </button>
+                                <button onClick={() => _getAllTags()}>
+                                    {loading === 'getAllTags' ? "Loading..." : <a className="red">Get Tags</a>}
+                                </button>
+                                {raw_Tags.map((tag) => <button key={tag} onClick={() => _incrementItem(tag)}>
+                                    {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
+                                </button>)}
+                                <p>{JSON.stringify(raw_Tags)}</p>
                                 <div className="notice hov">
                                     <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique Products matching this criteria: <span className="blue">{DB_Param}</span> in the Database</p>
                                 </div>
-                                <p>{raw_Variant}</p>
                                 {Object.keys(props.products).map((key) => (
                                     <div key={key} className="notice hov">
                                         <p>{props.products[key].title}</p>
                                         <p>{JSON.stringify(props.products[key])}</p>
-                                        <button onClick={() => _getProductWithVariant(props.products[key].variantId)}>
-                                            {loading === 'getVariant' ? "Loading..." : <a className="red">Get variant for this product</a>}
-                                        </button>
                                     </div>
                                 ))}
                                 {raw_products.map((item) => (

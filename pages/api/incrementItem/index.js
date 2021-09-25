@@ -2,9 +2,20 @@
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
-async function getRows(variantId) {
-    let result = await prisma.variant.findUnique({
-        where: { id: variantId }
+async function addPointToItem(tag) {
+    const item = await prisma.hotItems.findUnique({
+        where: { name: tag }
+    }).catch((e) => {
+        console.log('e:', e);
+        throw e;
+    }).finally(async () => {
+        await prisma.$disconnect();
+    });
+
+    const result = await prisma.hotItems.upsert({
+        where: { name: tag },
+        create: { name: tag, value: 1 },
+        update: { name: tag, value: item?.value ? item.value + 1 : 1 }
     }).catch((e) => {
         console.log('e:', e);
         throw e;
@@ -24,9 +35,8 @@ export default async (req, res) => {
 
     if (req.method === 'POST') {
         try {
-            const id = req.body;
-
-            const result = await getRows(id);
+            const { body } = req;
+            const result = await addPointToItem(body);
 
             return res.status(200).json({ result });
         } catch (error) {
