@@ -135,36 +135,37 @@ const Blog = (props) => {
                 {
                     isLoggedIn ?
                         <React.Fragment>
-                            <button onClick={_getProducts}>
+                            <button className="send hov" onClick={_getProducts}>
                                 <a>Fetch Directly from Shopify, display below</a>
                             </button>
                             {/* { process.env.NODE_ENV === 'development' && */}
-                            <button onClick={_wipeDatabase}>
+                            <button className="send hov" onClick={_wipeDatabase}>
                                 {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
+                            </button>
+                            <button className="send hov" onClick={_sendProducts}>
+                                {loading === 'sendProducts'
+                                    ? "Loading..."
+                                    : <a>Fetch Products, and send to DB, also, they will be listed below when this component pulls them in and it re-renders.</a>} 
                             </button>
                             {/* } */}
                             <main className="main">
-                                <button className="send hov" onClick={_sendProducts}>
-                                    {loading === 'sendProducts'
-                                        ? "Loading..."
-                                        : <a>Fetch Products, and send to DB, also, they will be listed below when this component pulls them in and it re-renders.</a>} 
-                                </button>
-                                <button onClick={() => _getAllTags()}>
+                                <div className="notice hov">
+                                    <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique Products matching this criteria: <span className="blue">{DB_Param}</span> in the Database</p>
+                                </div>
+
+                                {Object.keys(props.products).map((key) => <button className="send hov" key={key} onClick={() => _incrementItem(props.products[key].title)}>
+                                    {loading === 'incrementItem' ? "Loading..." : <a className="blue">{props.products[key].title}</a>}
+                                </button>)}
+
+                                <div></div>
+
+                                <button className="hov" onClick={() => _getAllTags()}>
                                     {loading === 'getAllTags' ? "Loading..." : <a className="red">Get Tags</a>}
                                 </button>
                                 {raw_Tags.map((tag) => <button key={tag} onClick={() => _incrementItem(tag)}>
                                     {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
                                 </button>)}
-                                <p>{JSON.stringify(raw_Tags)}</p>
-                                <div className="notice hov">
-                                    <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique Products matching this criteria: <span className="blue">{DB_Param}</span> in the Database</p>
-                                </div>
-                                {Object.keys(props.products).map((key) => (
-                                    <div key={key} className="notice hov">
-                                        <p>{props.products[key].title}</p>
-                                        <p>{JSON.stringify(props.products[key])}</p>
-                                    </div>
-                                ))}
+
                                 {raw_products.map((item) => (
                                     <div key={item.id} className="post hov">
                                         <p>{raw_products.length}</p>
@@ -183,7 +184,6 @@ const Blog = (props) => {
             </div>
             <style jsx>{`
         .main {
-          margin-top: 20px;
           margin-bottom: 20px;
         }
 
@@ -193,7 +193,7 @@ const Blog = (props) => {
             border: none;
             padding: 10px;
             transition: box-shadow 0.1s ease-in;
-            margin-bottom: 20px;
+            margin: 1rem;
         }
 
         .post {
@@ -216,7 +216,8 @@ const Blog = (props) => {
         }
 
         .blue {
-          color: blue;
+            color: blue;
+            margin: 1rem;
         }
 
         .red {
