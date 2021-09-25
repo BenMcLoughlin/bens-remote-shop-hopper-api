@@ -224,7 +224,7 @@ const Home = (props) => {
                                             <div className="notice hov">
                                                 <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique products that have this tag <a className="blue">{DB_Param}</a>with a rating higher than <span className="blue">10</span> in the Database. <a className="link" onClick={() => toggleSearch(true)}>Search</a> to see more.</p>
 
-                                                <p className="tiny">*Note* Server Side Props data doesn&apos;t update in real time like state data, so the counters don&apos;t seem like the are working but, they are. They are working in real time on the data returned from the search. Thank you for coming to my Ted Talk</p>
+                                                <p className="tiny">*Note* Some data doesn&apos;t update in real time like state data, so the counters don&apos;t seem like the are working but, they are. Thank you for coming to my Ted Talk</p>
                                             </div>
 
                                             <div className="cards">
