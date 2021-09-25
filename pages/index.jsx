@@ -11,6 +11,7 @@ import { fetchProducts } from "./api/fetch";
 import hydrateRequest from "../lib/requests/hydrateRequest";
 import fetchTags from "../lib/requests/fetchTags";
 import incrementItem from "../lib/requests/incrementItem";
+import incrementProduct from "../lib/requests/incrementProduct";
 
 const DB_Param = 'Diffuser Jewelry';
 
@@ -102,6 +103,14 @@ const Blog = (props) => {
         }
     };
 
+    const _incrementProduct = async (title) => {
+        setLoading('incrementProduct');
+        const result = await incrementProduct(title);
+        if (result) {
+            setLoading(false);
+        }
+    };
+
     const _sendProducts = async () => {
         setLoading('sendProducts');
         const result = await hydrateRequest({ request: 'SEND' });
@@ -153,9 +162,10 @@ const Blog = (props) => {
                                     <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique Products matching this criteria: <span className="blue">{DB_Param}</span> in the Database</p>
                                 </div>
 
-                                {Object.keys(props.products).map((key) => <button className="send hov" key={key} onClick={() => _incrementItem(props.products[key].title)}>
+                                {Object.keys(props.products).map((key) => <button className="send hov" key={key} onClick={() => _incrementProduct(props.products[key].title)}>
                                     {loading === 'incrementItem' ? "Loading..." : <a className="blue">{props.products[key].title}</a>}
-                                </button>)}
+                                </button>)
+                                }
 
                                 <div></div>
 
@@ -235,7 +245,7 @@ const Blog = (props) => {
 Blog.propTypes = {
     products: PropTypes.object,
     users: PropTypes.object,
-    feed: PropTypes.object
+    feed: PropTypes.array
 };
 
 export default Blog;

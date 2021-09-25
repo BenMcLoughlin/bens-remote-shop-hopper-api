@@ -30,6 +30,7 @@ model Product {
   variants     Json?
   images       Json?
   options      Json?
+  rating       Int?     @default(0)
 
   @@map(name: "products")
   User   User? @relation(fields: [userId], references: [id])
