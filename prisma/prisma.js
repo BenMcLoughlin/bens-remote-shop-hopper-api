@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import { PrismaClient } from '@prisma/client';
 
-// let prisma = {};
+let prisma = {};
 
 // if (process.env.NODE_ENV !== "production") {
 //     // prisma = new PrismaClient({ log: [ "query", "info", "warn" ] });
@@ -35,4 +35,6 @@ function createPrisma() {
     return globalThis.prisma;
 }
 
-export default prisma = createPrisma();
+prisma = createPrisma();
+
+export default prisma;
