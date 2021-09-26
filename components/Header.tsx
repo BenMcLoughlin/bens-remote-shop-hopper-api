@@ -122,12 +122,6 @@ const Header: React.FC = () => {
                         <h1>Welcome to ShopHopper</h1>
                     </a>
                 </Link>
-                <Link href="/dbManager">
-                    <a>DB Manager</a>
-                </Link>
-                {/* <Link href="/drafts">
-          <a data-active={isActive('/drafts')}>My drafts</a>
-        </Link> */}
                 <style jsx>{`
                     .bold {
                         font-weight: bold;
@@ -154,17 +148,23 @@ const Header: React.FC = () => {
 
         right = (
             <div className="right">
-                <p>
-                    {session.user.name} ({session.user.email})
-                </p>
-                <Link href="/tags">
-                    <button>
-                        <a>See All Tags</a>
+                <div>
+                    <p>{session.user.name} ({session.user.email})</p>
+
+                    <button onClick={() => signOut()}>
+                        <a>Log out</a>
                     </button>
+                </div>                  
+                <Link href="/">
+                    <a>Home</a>
                 </Link>
-                <button onClick={() => signOut()}>
-                    <a>Log out</a>
-                </button>
+                <Link href="/tags">
+                    <a>See All Tags</a>
+                </Link>
+                <Link href="/dbManager">
+                    <a>DB Manager</a>
+                </Link>
+                
                 <style jsx>{`
                     a {
                         text-decoration: none;

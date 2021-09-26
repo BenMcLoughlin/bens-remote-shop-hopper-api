@@ -169,7 +169,7 @@ const Home = (props) => {
                 {
                     isLoggedIn ?
                         <>
-                            <button onClick={_getProducts}>
+                            {/* <button onClick={_getProducts}>
                                 <a>Fetch Directly from Shopify, display below</a>
                             </button> */}
                             <button className="send hov" onClick={_sendProducts}>
@@ -202,7 +202,7 @@ const Home = (props) => {
                                     :
                                     search ? 
                                         <form onSubmit={_search}>
-                                            <h2 className="hov" onClick={() => toggleSearch(false)}>New Search</h2>
+                                            <h2 className="search hov" onClick={() => toggleSearch(false)}>New Search</h2>
                                             {
                                                 query ? 
                                                     <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${ query }?`} />
@@ -218,7 +218,7 @@ const Home = (props) => {
                                             </button>
                                         </form>
                                         :
-                                        <h2 className="hov" onClick={() => toggleSearch(true)}>New Search?</h2>
+                                        <h2 className="search hov" onClick={() => toggleSearch(true)}>New Search?</h2>
                                 }
 
                                 { 
@@ -251,20 +251,6 @@ const Home = (props) => {
                                 <button className="send hov" onClick={_wipeDatabase}>
                                     {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
                                 </button>
-                                <div className="notice hov">
-                                    <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique Products matching this criteria: <span className="blue">{DB_Param}</span> in the Database</p>
-                                </div>
-                                {Object.entries(props.products).map(([ key, value ]) => (
-                                    <div key={key} className="notice hov">
-                                        <p>{value.title}</p>
-                                    </div>
-                                ))}
-                                {raw_products.map((item) => (
-                                    <div key={item.id} className="post hov">
-                                        <p>{raw_products.length}</p>
-                                        <p>{JSON.stringify(item)}</p>
-                                    </div>
-                                ))}
                             </main>
                         </>
                         :
@@ -276,11 +262,19 @@ const Home = (props) => {
                 }
             </div>
             <style jsx>{`
+        .page {
+             margin: 20px;
+        }
+
         .main {
             display: block;
             position: relative;
             margin-bottom: 20px;
             width: 100%;
+        }
+
+        .search {
+            cursor: pointer;
         }
 
         .tiny {
