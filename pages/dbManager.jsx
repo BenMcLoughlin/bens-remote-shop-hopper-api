@@ -11,7 +11,7 @@ const ExtractTransformLoad = () => {
     const shopsList = shopsLists[city];
 
     const [siteHost, setSelectedSiteHost] = useState('shopify');
-    const [businessName, setSelectedBusinessName] = useState('bigSun');
+    const [businessName, setSelectedBusinessName] = useState('');
     const [domain, setSelectedDomain] = useState('');
 
     useEffect(() => {
@@ -55,7 +55,6 @@ const ExtractTransformLoad = () => {
                 .row {
                     display: flex;
                     justify-content: center;
-                   
                 }
                 .title {
                     width: 100%;

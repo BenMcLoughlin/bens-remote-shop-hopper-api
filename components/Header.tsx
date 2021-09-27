@@ -13,7 +13,7 @@ const Header: React.FC = () => {
         <div className="left">
             <Link href="/">
                 <a className="bold" data-active={isActive('/')}>
-                    <h1>Welcome to ShopHopper</h1>
+                    <h1>ShopHopper</h1>
                 </a>
             </Link>
             <style jsx>{`
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
             <div className="left">
                 <Link href="/">
                     <a className="bold" data-active={isActive('/')}>
-                        <h1>Welcome to ShopHopper</h1>
+                        <h1>ShopHopper</h1>
                     </a>
                 </Link>
                 <style jsx>{`
@@ -119,7 +119,7 @@ const Header: React.FC = () => {
             <div className="left">
                 <Link href="/">
                     <a className="bold" data-active={isActive('/')}>
-                        <h1>Welcome to ShopHopper</h1>
+                        <h1>ShopHopper</h1>
                     </a>
                 </Link>
                 <style jsx>{`

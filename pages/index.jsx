@@ -169,9 +169,6 @@ const Home = (props) => {
                 {
                     isLoggedIn ?
                         <>
-                            {/* <button onClick={_getProducts}>
-                                <a>Fetch Directly from Shopify, display below</a>
-                            </button> */}
                             <button className="send hov" onClick={_sendProducts}>
                                 {loading === 'sendProducts'
                                     ? "Loading..."

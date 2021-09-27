@@ -16,6 +16,19 @@ model hotItems {
   value    Int?
 }
 
+model shops {
+  id           Int      @id @default(autoincrement())
+  businessName String   @unique
+  domain       String   @unique
+  vertical     String?
+  siteHost     String
+  city         String?
+  province     String?
+  postalCode   String?
+  country      String?
+  created_at   DateTime @default(now())
+}
+
 model Product {
   id           Int      @id @default(autoincrement())
   title        String   @unique

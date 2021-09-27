@@ -32,7 +32,7 @@ const Display = (props) => {
                             }}
                         />
                     </div>
-                    <div className="metricsControl">
+                    {/* <div className="metricsControl">
                         <Metrics header={selected.businessName} {...props} />
                         <Button
                             text={`Load Only ${selected.businessName}`}
@@ -41,7 +41,7 @@ const Display = (props) => {
                                 updateProducts();
                             }}
                         />
-                    </div>
+                    </div> */}
                 </div>
 
                 <SelectShop shopsList={shopsList} set={set} selected={selected} />
@@ -50,18 +50,17 @@ const Display = (props) => {
                 .wrapper {
                     padding: 3rem;
                     display: flex;
-                    height: 40rem;
                     width: 85%;
                     align-items: center;
                     display: flex;
                     flex-direction: column;
                     gap: 1rem;
-                    height: 120rem;
+                    // height: 120rem;
                 }
                 .spinner {
                 }
                 .top {
-                    height: 35rem;
+                    // height: 35rem;
                     width: 100%;
                 }
                 .metricsControl {

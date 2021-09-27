@@ -9,14 +9,18 @@ const SideNav = ({ shopsList, selected, set }) => {
         <div className="wrapper">
             <div className="city">Kelowna</div>
             <ul className="list">
-                {siteHostList.map((siteHost) => (
-                    <div
-                        className={`listItem ${camelCase(siteHost)}`}
-                        onClick={() => set.selectedSiteHost(camelCase(siteHost))}
-                    >
-                        {startCase(siteHost)}
-                    </div>
-                ))}
+                {siteHostList.map((siteHost) => {
+                    if (startCase(siteHost) === "Shopify") {
+                        return (
+                            <div
+                                className={`listItem ${camelCase(siteHost)}`}
+                                onClick={() => set.selectedSiteHost(camelCase(siteHost))}
+                            >
+                                {startCase(siteHost)}
+                            </div>
+                        )
+                    }
+                })}
                 <div className="pill" />
             </ul>
 
@@ -37,13 +41,12 @@ const SideNav = ({ shopsList, selected, set }) => {
                 }
                 .city {
                     width: 100%;
-
                     height: 5rem;
                     font-size: 2rem;
                     font-weight: bold;
                     display: flex;
                     align-items: center;
-                    justify-content: center;
+                    justify-content: left;
                     border-bottom: 1px solid white;
                 }
                 .list {

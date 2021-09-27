@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { camelCase } from '../../utils/strings';
+import addNewShop from "../../lib/requests/addNewShop";
+import CreateShopModal from "../../components/CreateShopModal";
 
 const SelectShop = ({ set, selected, shopsList }) => {
     const [list, setList] = useState([]);
+    const [addShopModal, toggleAddShopModal] = useState(false);
 
     useEffect(() => {
         const shopList = shopsList.filter(
@@ -13,10 +16,32 @@ const SelectShop = ({ set, selected, shopsList }) => {
         setList(businessNames);
     }, [selected.siteHost]);
 
+    const _toggleAddShopModal = () => {
+        toggleAddShopModal(!addShopModal);
+    };
+
+    const _addShop = async () => {
+        const json = await addNewShop();
+        set_Raw_Products(json.products);
+    };
+
     return (
         <>
             <div className="wrapper">
-                <div className="header">Available Stores</div>
+
+                {
+                    addShopModal &&
+                    <CreateShopModal
+                        addShop={_addShop}
+                        close={_toggleAddShopModal}
+                    />
+                }
+
+                <div className="header">
+                    <h2>Available Stores</h2>
+                    <h2 className="button" onClick={_toggleAddShopModal}>Add</h2>
+                </div>
+
                 <div className="row">
                     {list.map((businessName) => (
                         <div
@@ -39,8 +64,10 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     
                 }
                 .header {
-                    height: 5rem;
-                    width: 24rem;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
                     font-size: 3rem;
                     padding: 1rem;
                     text-align: center;
