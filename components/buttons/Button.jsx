@@ -2,9 +2,11 @@ import React from 'react';
 import { startCase } from '../../utils/strings';
 
 
-const Button = ({ text, onClick }) => {
+const Button = ({ text, onClick, disabled }) => {
     return (
-        <button onClick={() => onClick()}>
+        <button
+            disabled={disabled}
+            onClick={() => onClick()}>
             {startCase(text)}
             <style jsx>{`
                 button {

@@ -27,8 +27,8 @@ const ExtractTransformLoad = () => {
             domain,
         },
         set: {
-            selectedSiteHost: (v) => setSelectedSiteHost(v),
-            selectedBusinessName: (v) => setSelectedBusinessName(v),
+            selectedSiteHost: (v) => setSelectedSiteHost(v === siteHost ? '' : v),
+            selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v),
         },
     };
 

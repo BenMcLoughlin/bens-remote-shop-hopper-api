@@ -1,6 +1,43 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
+import array from '../../../mock/shopsLists/kelowna.json';
+
+async function createAllShops() {
+    let result = {};
+    let shopArray = [];
+
+    array.map(shop => {
+        if (shop.site_host === "Shopify") {
+
+            const data = {
+                businessName: shop.business_name,
+                domain: shop.domain,
+                vertical: shop.vertical,
+                siteHost: "Shopify",
+                city: shop.City,
+                province: shop.State,
+                postalCode: shop.Zip,
+                country: shop.Country
+            };
+
+            shopArray.push(data);
+        }
+    })
+
+    await Promise.all(shopArray.map(async (item) => {
+        result = await prisma.shops.createMany({
+            data: item
+        });
+    })).catch((e) => {
+        console.log('e:', e);
+        throw e;
+    }).finally(async () => {
+        await prisma.$disconnect();
+    });
+
+    return result;
+}
 
 async function createNewShop(shopData) {
     let result = {};
@@ -12,7 +49,7 @@ async function createNewShop(shopData) {
     }
 
     result = await prisma.shops.create({
-        data: shopData
+        data: item
     }).catch((e) => {
         console.log('e:', e);
         throw e;
@@ -32,8 +69,9 @@ export default async (req, res) => {
 
     if (req.method === 'POST') {
         try {
-            const shopData = req.body
-            result = await createNewShop(shopData);
+            const shopData = req.body;
+
+            result = shopData === 'all' ? await createAllShops() : await createNewShop(shopData);
 
             return res.status(200).json({ result });
         } catch (error) {

@@ -56,7 +56,7 @@
         "site_host": "Lightspeed",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -66,7 +66,7 @@
         "site_host": "Lightspeed",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -76,7 +76,7 @@
         "site_host": "Lightspeed",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -86,7 +86,7 @@
         "site_host": "Lightspeed",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -96,7 +96,7 @@
         "site_host": "Lightspeed",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -116,7 +116,7 @@
         "site_host": "Moneris",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -126,7 +126,7 @@
         "site_host": "Salesforce",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -506,7 +506,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -516,7 +516,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -526,7 +526,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -546,7 +546,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -576,7 +576,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -585,8 +585,8 @@
         "vertical": "",
         "site_host": "Shopify",
         "City": "",
-        "State": "[{\"body\": \"Is UPF 30 rating enough?\n\nUPF is the rating system used for clothes. UPF gauges a fabric's effectiveness against both UVA and UVB. UPF ratings of 30 provide very good levels of sun protection from UV rays, whereas UPF rating of 50+ are considered to provide excellent levels of sun protection. Therefore, look for a higher UPF rating number in order to get better sun protection. Visit our website for UPF 50+ clothing. \", \"timestamp\": 1612531690}]",
-        "Zip": "1",
+        "State": "",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -596,7 +596,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -606,7 +606,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -616,7 +616,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -626,7 +626,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -636,7 +636,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -646,7 +646,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -656,7 +656,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -666,7 +666,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -676,7 +676,7 @@
         "site_host": "Shopify",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -726,7 +726,7 @@
         "site_host": "Square",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -746,7 +746,7 @@
         "site_host": "Squarespace",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -756,7 +756,7 @@
         "site_host": "Squarespace",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -766,7 +766,7 @@
         "site_host": "Weebly",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -776,7 +776,7 @@
         "site_host": "Weebly",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -786,7 +786,7 @@
         "site_host": "Wix",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -796,7 +796,7 @@
         "site_host": "Wix",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -846,7 +846,7 @@
         "site_host": "WooCommerce",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -856,7 +856,7 @@
         "site_host": "WooCommerce",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -876,7 +876,7 @@
         "site_host": "WooCommerce",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -886,7 +886,7 @@
         "site_host": "WooCommerce",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     },
     {
@@ -1196,7 +1196,7 @@
         "site_host": "",
         "City": "",
         "State": "",
-        "Zip": "1",
+        "Zip": "",
         "Country": ""
     }
 ]

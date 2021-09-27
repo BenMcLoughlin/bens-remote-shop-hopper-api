@@ -30,18 +30,22 @@ const Display = (props) => {
                                 set.selectedBusinessName('');
                                 updateProducts();
                             }}
+                            disabled={selected.businessName}
                         />
                     </div>
-                    {/* <div className="metricsControl">
-                        <Metrics header={selected.businessName} {...props} />
-                        <Button
-                            text={`Load Only ${selected.businessName}`}
-                            onClick={() => {
-                                set.selectedSiteHost('');
-                                updateProducts();
-                            }}
-                        />
-                    </div> */}
+                    {
+                        selected.businessName &&
+                        <div className="metricsControl">
+                            <Metrics header={selected.businessName} {...props} />
+                            <Button
+                                text={`Load Only ${selected.businessName}`}
+                                onClick={() => {
+                                    set.selectedSiteHost('');
+                                    updateProducts();
+                                }}
+                            />
+                        </div>
+                    }
                 </div>
 
                 <SelectShop shopsList={shopsList} set={set} selected={selected} />

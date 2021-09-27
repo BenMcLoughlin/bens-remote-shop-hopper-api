@@ -1,6 +1,5 @@
-import React, { useState, useReducer, useCallback } from 'react';
-import { fetchStore } from "../pages/api/fetch";
-import addNewShop from "../lib/requests/addNewShop"
+import React, { useReducer, useCallback } from 'react';
+// import { fetchStore } from "../pages/api/fetch";
 import produce from "immer";
 import { set, has } from "lodash";
 
@@ -100,16 +99,7 @@ const CreateShopModal = ({ addShop, close }) => {
 
     const _addShop = async (e) => {
         e.preventDefault();
-        try {
-            console.log('state:', state)
-            const result = await addNewShop(state);
-
-            if (result.error) {
-                alert(result.error)
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        addShop(state);
     };
 
     return (
@@ -195,8 +185,6 @@ const CreateShopModal = ({ addShop, close }) => {
                     );
                     padding-bottom: 2rem;
                     display: flex;
-                    // justify-content: center;
-                    // align-items: center;
                 }
                 .row {
                     display: flex;
@@ -205,21 +193,18 @@ const CreateShopModal = ({ addShop, close }) => {
                 .form {
                     margin-bottom: 1rem;
                 }
-                input[type='text'],
-                textarea {
+                input[type='text'] {
                     width: 100%;
                     padding: 0.5rem;
                     margin: 0.5rem 0;
                     border-radius: 0.25rem;
                     border: 0.125rem solid rgba(0, 0, 0, 0.2);
                 }
-
                 input[type='submit'] {
                     background: #ececec;
                     border: 0;
                     padding: 1rem 2rem;
                 }
-
                 .back {
                     margin-left: 1rem;
                 }

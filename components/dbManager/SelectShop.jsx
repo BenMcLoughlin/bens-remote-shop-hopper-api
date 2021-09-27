@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { camelCase } from '../../utils/strings';
 import addNewShop from "../../lib/requests/addNewShop";
+import fetchShops from "../../lib/requests/fetchShops";
 import CreateShopModal from "../../components/CreateShopModal";
 
 const SelectShop = ({ set, selected, shopsList }) => {
@@ -8,21 +9,29 @@ const SelectShop = ({ set, selected, shopsList }) => {
     const [addShopModal, toggleAddShopModal] = useState(false);
 
     useEffect(() => {
-        const shopList = shopsList.filter(
-            (d) => d.site_host.toLowerCase() === selected.siteHost.toLowerCase()
-        );
+        const _getAllShops = async () => {
+            const uniqueShops = await fetchShops();
+            if (uniqueShops) {
+                const businessNames = uniqueShops.map((d) => d.businessName);
+                setList(businessNames);
+            }
+        };
 
-        const businessNames = shopList.map((d) => d.business_name);
-        setList(businessNames);
-    }, [selected.siteHost]);
+        _getAllShops();
+    }, [addShopModal]);
 
     const _toggleAddShopModal = () => {
         toggleAddShopModal(!addShopModal);
     };
 
-    const _addShop = async () => {
-        const json = await addNewShop();
-        set_Raw_Products(json.products);
+    const _addShop = async (shopData) => {
+        const result = await addNewShop(shopData);
+
+        if (result.error) {
+            return alert(result.error)
+        }
+
+        _toggleAddShopModal();
     };
 
     return (
