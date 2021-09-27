@@ -4,7 +4,7 @@ import prisma from '../../../prisma/prisma.js';
 
 export async function getRows() {
     const result = await prisma.$queryRaw`
-        SELECT tags FROM products
+        SELECT tags FROM product
   `.catch((e) => {
             console.log('e:', e);
             throw e;
@@ -35,6 +35,8 @@ export default async (req, res) => {
 
                 return true;
             }));
+
+            console.log('uniqueTags:', uniqueTags)
 
             return res.status(200).json({ uniqueTags });
         } catch (error) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { camelCase, startCase } from '../../utils/strings';
 
 const SideNav = ({ shopsList, selected, set }) => {
@@ -9,18 +9,14 @@ const SideNav = ({ shopsList, selected, set }) => {
         <div className="wrapper">
             <div className="city">Kelowna</div>
             <ul className="list">
-                {siteHostList.map((siteHost) => {
-                    if (startCase(siteHost) === "Shopify") {
-                        return (
-                            <div
-                                className={`listItem ${camelCase(siteHost)}`}
-                                onClick={() => set.selectedSiteHost(camelCase(siteHost))}
-                            >
-                                {startCase(siteHost)}
-                            </div>
-                        )
-                    }
-                })}
+                {siteHostList.map((siteHost) => (
+                    <div
+                        className={`listItem ${camelCase(siteHost)}`}
+                        onClick={() => set.selectedSiteHost(camelCase("shopify"))} //todo
+                    >
+                        {startCase(siteHost)}
+                    </div>
+                ))}
                 <div className="pill" />
             </ul>
 
