@@ -1,39 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { startCase } from '../../utils/strings';
+import { formatDate } from '../../utils/dates/forDisplay';
 
-const Metrics = ({ header, selected, shopsList }) => {
-    const metrics = [
-        { value: 32, title: 'localStores' },
-        { value: 32, title: 'localStores' },
-        { value: 32, title: 'localStores' },
-        { value: 32, title: 'localStores' },
-        ,
-    ];
 
-    const updateMetrics = async () => {
-        const metrics = await fetch('/api/dbMetrics', {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        });
-        console.log(metrics);
-    };
+
+
+const Metrics = ({ header, selected, shopsList, isShopify }) => {
+    const now = new Date();
+    const [totalItems, setTotalItems] = useState(0);
+    const [date, setDate] = useState(now);
+
+    useEffect(() => {
+        const updateMetrics = async () => {
+            const res = await fetch('/api/dbMetrics', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(isShopify ? 'all' : header)
+            });
+            const data = await res.json();
+            console.log(`GET NUMBER OF PRODUCTS:`, data);
+
+            console.log(data);
+            setTotalItems(data.result);
+            setDate(now);
+        };
+
+        updateMetrics();
+    }, []);
 
     return (
         <div className="wrapper">
-            <div className="header" onClick={() => updateMetrics()}>
+            <div className="header">
                 {startCase(header)}
             </div>
             <div className="row">
-                <div className="left">
-                    <div className="date">21 Sept 2021</div>
-                    <span>Last Update</span>
+                <div className="right">
+                    <div className="value">{totalItems}</div>
+                    <div className="title">{startCase(header)}</div>
                 </div>
-                {metrics.map(({ value, title }, i) => (
-                    <div key={title + i} className="metric">
-                        <div className="value">{value}</div>
-                        <div className="title">{title}</div>
-                    </div>
-                ))}
+
+                <div className="right">
+                    <div className="value">{formatDate(date)}</div>
+                    <div className="title">Last Update</div>
+                </div>
             </div>
             <style jsx>{`
                 .wrapper {
@@ -43,7 +52,6 @@ const Metrics = ({ header, selected, shopsList }) => {
                     align-content: center;
                     align-items: left;
                     width: 80rem;
-                    display: flex;
                     flex-direction: column;
                 }
                 .header {
@@ -54,37 +62,23 @@ const Metrics = ({ header, selected, shopsList }) => {
                     text-align: left;
                 }
                 .row {
-                    padding: 2rem;
-                    height: 7rem;
-                    display: flex;
-                    align-content: center;
-                    align-items: center;
-                    width: 80rem;
                     display: flex;
                     flex-direction: row;
                     flex-wrap: wrap;
-                    justify-content: space-around;
+                    justify-content: flex-start;
+                    padding: 2rem;
+                    height: 7rem;
+                    align-content: center;
+                    width: 80rem;
                 }
-                .left {
-                    height: 6rem;
-                    width: 14rem;
+                .right {
+                    min-width: 30rem;
                     display: flex;
                     flex-direction: column;
-                    align-items: center;
+                    align-items: flex-end;
                     justify-content: center;
+                    padding: 1rem;
                     border-right: 1px solid #d5d5d5;
-                }
-                .date {
-                    font-size: 1.2rem;
-                    border-bottom: 1px solid #d5d5d5;
-                    height: 3rem;
-                    padding: 1rem;
-                }
-
-                span {
-                    font-size: 0.8rem;
-                    height: 3rem;
-                    padding: 1rem;
                 }
                 .highlight {
                     height: 5rem;
@@ -96,15 +90,14 @@ const Metrics = ({ header, selected, shopsList }) => {
                 .value {
                     height: 3.5rem;
                     font-size: 2rem;
-                    width: 10rem;
+                    // width: 10rem;
                     text-align: center;
                     font-weight: bold;
                     padding: 0.3rem;
                     border-bottom: 1px solid #d5d5d5;
                 }
                 .title {
-                    height: 3rem;
-                    width: 10rem;
+                    padding: 1rem;
                     font-size: 1.2rem;
                     display: flex;
                     align-items: center;

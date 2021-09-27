@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://ncmoseley:password@localhost:5432/template1"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -31,7 +31,7 @@ model shops {
 
 model product {
   id           Int      @id @default(autoincrement())
-  businessName String   
+  businessName String?   
   title        String   @unique
   handle       String?
   body_html    String?  @unique

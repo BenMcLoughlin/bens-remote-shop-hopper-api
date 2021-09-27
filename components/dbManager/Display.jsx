@@ -23,7 +23,7 @@ const Display = (props) => {
             <div className="wrapper">
                 <div className="top">
                     <div className="metricsControl">
-                        <Metrics header={selected.siteHost} {...props} />
+                        <Metrics header={selected.siteHost} isShopify {...props} />
                         <Button
                             text={`Load All ${selected.siteHost} Shops`}
                             onClick={() => {
@@ -36,11 +36,11 @@ const Display = (props) => {
                     {
                         selected.businessName &&
                         <div className="metricsControl">
-                            <Metrics header={selected.businessName} {...props} />
+                            <Metrics header={selected.businessName} isShopify={false} {...props} />
                             <Button
                                 text={`Load Only ${selected.businessName}`}
                                 onClick={() => {
-                                    set.selectedSiteHost('');
+                                    // set.selectedSiteHost(''); todo
                                     updateProducts();
                                 }}
                             />
