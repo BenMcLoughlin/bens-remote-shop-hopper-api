@@ -28,8 +28,8 @@ const Metrics = ({ header, selected, shopsList }) => {
                     <div className="date">21 Sept 2021</div>
                     <span>Last Update</span>
                 </div>
-                {metrics.map(({ value, title }) => (
-                    <div className="metric">
+                {metrics.map(({ value, title }, i) => (
+                    <div key={title + i} className="metric">
                         <div className="value">{value}</div>
                         <div className="title">{title}</div>
                     </div>

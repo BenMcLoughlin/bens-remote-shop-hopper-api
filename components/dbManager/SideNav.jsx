@@ -11,6 +11,7 @@ const SideNav = ({ shopsList, selected, set }) => {
             <ul className="list">
                 {siteHostList.map((siteHost) => (
                     <div
+                        key={siteHost}
                         className={`listItem ${camelCase(siteHost)}`}
                         onClick={() => set.selectedSiteHost(camelCase("shopify"))} //todo
                     >

@@ -54,6 +54,7 @@ const SelectShop = ({ set, selected, shopsList }) => {
                 <div className="row">
                     {list.map((businessName) => (
                         <div
+                            key={businessName}
                             className={`businessName ${camelCase(businessName)}`}
                             onClick={() => set.selectedBusinessName(camelCase(businessName))}
                         >
