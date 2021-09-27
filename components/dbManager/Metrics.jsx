@@ -8,7 +8,7 @@ import { formatDate } from '../../utils/dates/forDisplay';
 const Metrics = ({ header, selected, shopsList, isShopify }) => {
     const now = new Date();
     const [totalItems, setTotalItems] = useState(0);
-    const [date, setDate] = useState(now);
+    const [date, setDate] = useState(now); // todo
 
     useEffect(() => {
         const updateMetrics = async () => {

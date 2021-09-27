@@ -19,6 +19,7 @@ const Button = ({ text, onClick, disabled }) => {
                     height: 5rem;
                     width: 25rem;
                     gap: 1rem;
+                    padding: .5rem;
                     padding-left: 2rem;
                     border-radius: 5px;
                     position: relative;
