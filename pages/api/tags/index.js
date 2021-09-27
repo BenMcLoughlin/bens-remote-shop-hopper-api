@@ -36,8 +36,6 @@ export default async (req, res) => {
                 return true;
             }));
 
-            console.log('uniqueTags:', uniqueTags)
-
             return res.status(200).json({ uniqueTags });
         } catch (error) {
             return res.status(422).json(error);

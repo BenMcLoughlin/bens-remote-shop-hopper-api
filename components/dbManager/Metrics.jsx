@@ -26,7 +26,7 @@ const Metrics = ({ header, selected, shopsList, isShopify }) => {
         };
 
         updateMetrics();
-    }, []);
+    }, [header]);
 
     return (
         <div className="wrapper">
