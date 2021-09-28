@@ -49,7 +49,7 @@ async function createNewShop(shopData) {
     }
 
     result = await prisma.shops.create({
-        data: item
+        data: shopData
     }).catch((e) => {
         console.log('e:', e);
         throw e;
@@ -72,6 +72,8 @@ export default async (req, res) => {
             const shopData = req.body;
 
             result = shopData === 'all' ? await createAllShops() : await createNewShop(shopData);
+
+            console.log('result:', result)
 
             return res.status(200).json({ result });
         } catch (error) {

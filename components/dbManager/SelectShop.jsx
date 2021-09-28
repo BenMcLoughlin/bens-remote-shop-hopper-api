@@ -46,9 +46,16 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     />
                 }
 
+                {
+                    addShopModal &&
+                    <button onClick={() => _addShop('all')}>
+                        Testing only, Add all
+                    </button>
+                }
+
                 <div className="header">
-                    <h2>Available Stores</h2>
-                    <h2 className="button" onClick={_toggleAddShopModal}>Add</h2>
+                    <h4>Available Stores</h4>
+                    <h4 className="button" onClick={_toggleAddShopModal}>Add</h4>
                 </div>
 
                 <div className="row">
@@ -78,7 +85,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
-                    font-size: 3rem;
                     padding: 1rem;
                     text-align: center;
                     margin-bottom: 1rem;

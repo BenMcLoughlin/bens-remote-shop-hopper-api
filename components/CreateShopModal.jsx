@@ -183,7 +183,7 @@ const CreateShopModal = ({ addShop, close }) => {
                         rgba(252, 252, 252, 0.3211659663865546) 38%,
                         rgba(242, 239, 239, 0.6797093837535014) 100%
                     );
-                    padding-bottom: 2rem;
+                    padding: 2rem;
                     display: flex;
                 }
                 .row {

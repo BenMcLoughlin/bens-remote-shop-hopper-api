@@ -34,29 +34,27 @@ const Metrics = ({ header, selected, shopsList, isShopify }) => {
                 {startCase(header)}
             </div>
             <div className="row">
-                <div className="right">
-                    <div className="value">{totalItems}</div>
-                    <div className="title">{startCase(header)}</div>
+                <div className="column">
+                    <p className="value">{totalItems}</p>
+                    <p className="title">{startCase(header)}</p>
                 </div>
 
-                <div className="right">
-                    <div className="value">{formatDate(date)}</div>
-                    <div className="title">Last Update</div>
+                <div className="column">
+                    <p className="value">{formatDate(date)}</p>
+                    <p className="title">Last Update</p>
                 </div>
             </div>
             <style jsx>{`
                 .wrapper {
                     padding: 2rem;
-                    height: 15rem;
                     display: flex;
                     align-content: center;
                     align-items: left;
-                    width: 80rem;
                     flex-direction: column;
                 }
                 .header {
                     height: 5rem;
-                    width: 38rem;
+                    width: 20rem;
                     font-size: 2.4rem;
                     padding: 1rem;
                     text-align: left;
@@ -64,15 +62,14 @@ const Metrics = ({ header, selected, shopsList, isShopify }) => {
                 .row {
                     display: flex;
                     flex-direction: row;
-                    flex-wrap: wrap;
+                    // flex-wrap: wrap;
                     justify-content: flex-start;
                     padding: 2rem;
-                    height: 7rem;
+                    // height: 7rem;
                     align-content: center;
-                    width: 80rem;
                 }
-                .right {
-                    min-width: 30rem;
+                .column {
+                    min-width: 5rem;
                     display: flex;
                     flex-direction: column;
                     align-items: flex-end;
@@ -89,7 +86,7 @@ const Metrics = ({ header, selected, shopsList, isShopify }) => {
                 }
                 .value {
                     height: 3.5rem;
-                    font-size: 2rem;
+                    font-size: 1rem;
                     // width: 10rem;
                     text-align: center;
                     font-weight: bold;
@@ -98,7 +95,7 @@ const Metrics = ({ header, selected, shopsList, isShopify }) => {
                 }
                 .title {
                     padding: 1rem;
-                    font-size: 1.2rem;
+                    font-size: 1rem;
                     display: flex;
                     align-items: center;
                     justify-content: center;
