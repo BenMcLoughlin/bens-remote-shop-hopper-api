@@ -30,6 +30,9 @@ const Button = ({ text, onClick, disabled }) => {
                     box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
                     border: none;
                 }
+                button:hover {
+                    box-shadow: 1px 1px 3px #aaa;
+                }
             `}</style>
         </button>
     );

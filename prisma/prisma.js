@@ -11,10 +11,10 @@ if (typeof window === "undefined") {
     }
 
     if (process.env.NODE_ENV === "production") {
-        prisma = new PrismaClient({ log: ["warn"] });
+        prisma = new PrismaClient({ log: ["query", "info", "warn"] });
     } else {
         if (!global.prisma) {
-            global.prisma = new PrismaClient({ log: ["warn"] });
+            global.prisma = new PrismaClient({ log: ["query", "info", "warn"] });
         }
 
         prisma = global.prisma;

@@ -25,13 +25,10 @@ const SideNav = ({ shopsList, selected, set }) => {
                 .wrapper {
                     background: #485056;
                     padding: 1rem;
-
                     height: 90rem;
                     width: 20%;
-
                     margin-top: -2.3rem;
                     border-radius: 5px;
-                    font-size: 1.6rem;
                     color: white;
                     display: flex;
                     flex-direction: column;
@@ -39,11 +36,10 @@ const SideNav = ({ shopsList, selected, set }) => {
                 .city {
                     width: 100%;
                     height: 5rem;
-                    font-size: 2rem;
                     font-weight: bold;
                     display: flex;
                     align-items: center;
-                    justify-content: left;
+                    justify-content: center;
                     border-bottom: 1px solid white;
                 }
                 .list {

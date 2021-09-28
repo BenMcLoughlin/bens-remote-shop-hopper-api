@@ -46,9 +46,16 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     />
                 }
 
+                {
+                    addShopModal &&
+                    <button onClick={() => _addShop('all')}>
+                        Testing only, Add all
+                    </button>
+                }
+
                 <div className="header">
-                    <h2>Available Stores</h2>
-                    <h2 className="button" onClick={_toggleAddShopModal}>Add</h2>
+                    <h4>Available Stores</h4>
+                    <h4 className="button" onClick={_toggleAddShopModal}>Add</h4>
                 </div>
 
                 <div className="row">
@@ -59,7 +66,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
                             onClick={() => set.selectedBusinessName(camelCase(businessName))}
                         >
                             <div className="title">{businessName}</div>
-                            <div className="value">32</div>
                         </div>
                     ))}
                 </div>
@@ -78,7 +84,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
-                    font-size: 3rem;
                     padding: 1rem;
                     text-align: center;
                     margin-bottom: 1rem;
@@ -122,14 +127,7 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     font-size: 1.2rem;
                     width: 11rem;
                     text-align: left;
-                    border-right: 1px solid grey;
-                }
-                .value {
-                    font-weight: light;
-                    font-size: 1.2rem;
-                    width: 4rem;
-                    text-align: center;
-                    font-weight: bold;
+                    white-space: nowrap;
                 }
             `}</style>
         </>

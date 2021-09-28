@@ -2,7 +2,7 @@ import * as extract from './extract';
 import * as format from './format';
 import * as load from './load';
 
-const updateDatabase = async (req, res) => {
+export default async (req, res) => {
     const { siteHost, businessName, domain } = JSON.parse(req.body);
 
     let rawData = [];
@@ -20,5 +20,3 @@ const updateDatabase = async (req, res) => {
         message: 'products loaded',
     });
 };
-
-export default updateDatabase;
