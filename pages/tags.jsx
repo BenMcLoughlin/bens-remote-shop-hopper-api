@@ -44,8 +44,8 @@ const Tags = () => {
         const result = await searchRequest(query);
         if (result) {
             console.log('result:', result);
-            refreshData();
             set_search_products(result);
+            refreshData();
             setLoading(false);
         }
     }
@@ -65,18 +65,18 @@ const Tags = () => {
                             options={raw_Tags}
                         />
 
-                        {
-                            search_products.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.title)}>
-                                <img className="image" src={product.images[0].src} />
-                                <button className="hov">
-                                    {product.rating > 10 && <p className="star">⭐️</p>}
-                                    {<a className="blue">
-                                        {product.title}
-                                        <span className="red">{product.rating}</span>
-                                    </a>}
-                                </button>
-                            </div>)
-                        }
+                        <div className="cards">
+
+                            {
+                                loading ?
+                                    <h3>Loading....</h3>
+                                    :
+                                    search_products.map((product) => <div className="card hov" key={product.id}>
+                                        <img className="image" src={product.images[0].src} />
+                                    <p>{product.title}</p>
+                                </div>)
+                            }
+                        </div>
                     </div>
                 }
                 <main className="main">
