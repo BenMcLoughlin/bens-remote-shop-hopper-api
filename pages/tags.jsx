@@ -4,16 +4,26 @@ import React, { useState } from "react";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Layout from "../components/Layout";
+import Autocomplete from "../components/Autocomplete";
 import { useSession } from "next-auth/client";
 import fetchTags from "../lib/requests/fetchTags";
 import incrementItem from "../lib/requests/incrementItem";
+import searchRequest from "../lib/requests/search";
+
 
 const Tags = () => {
     const session = useSession();
     const [ raw_Tags, set_Raw_Tags ] = useState([]);
+    const [search_products, set_search_products] = useState([]);
+    const [query, setQuery] = useState('');
     const [ loading, setLoading ] = useState(false || "");
+
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
+
+    const refreshData = () => {
+        router.replace(router.asPath);
+    };
 
     const _getAllTags = async () => {
         setLoading('getAllTags');
@@ -32,6 +42,18 @@ const Tags = () => {
         }
     };
 
+    const _search = async (value) => {
+        setQuery(value);
+        setLoading('search');
+        const result = await searchRequest(query);
+        if (result) {
+            console.log('result:', result);
+            refreshData();
+            set_search_products(result);
+            setLoading(false);
+        }
+    }
+
     const isLoggedIn = session[0]?.user;
 
     return (
@@ -40,13 +62,41 @@ const Tags = () => {
                 {
                     isLoggedIn ?
                         <React.Fragment>
+                            {
+                                raw_Tags.length &&
+                                <div className="notice">
+                                    <div>
+                                        <p>See we can search by existing tags</p>
+                                    </div>
+
+                                    <Autocomplete
+                                        onSubmit={_search}
+                                        options={raw_Tags}
+                                    />
+
+                                    {
+                                        search_products.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.title)}>
+                                            <img className="image" src={product.images[0].src} />
+                                            <button className="hov">
+                                                {product.rating > 10 && <p className="star">⭐️</p>}
+                                                {<a className="blue">
+                                                    {product.title}
+                                                    <span className="red">{product.rating}</span>
+                                                </a>}
+                                            </button>
+                                        </div>)
+                                    }
+                                </div>
+                            }
                             <main className="main">
                                 <div className="notice hov" onClick={() => set_search_products([])}>
                                     <p>When clicking on a Tag, it is added to a list in the DB of &quot;Hot Items&quot;. If you click it again it gets a better score</p>
                                 </div>
-                                <button className="hov" onClick={() => _getAllTags()}>
-                                    {loading === 'getAllTags' ? "Loading..." : <a className="red">Get Tags</a>}
-                                </button>
+                                <div className="notice hov" >
+                                    <button onClick={() => _getAllTags()}>
+                                        {loading === 'getAllTags' ? "Loading..." : <a className="red">Get Tags</a>}
+                                    </button>
+                                </div>
                                 {raw_Tags.map((tag) => <button key={tag} onClick={() => _incrementItem(tag)}>
                                     {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
                                 </button>)}
@@ -59,12 +109,13 @@ const Tags = () => {
                             </div>
                         </Link>
                 }
+
             </div>
             <style jsx>{`
         .main {
             display: block;
             position: relative;
-            margin-bottom: 20px;
+            margin: 2rem;
             width: 100%;
         }
 
