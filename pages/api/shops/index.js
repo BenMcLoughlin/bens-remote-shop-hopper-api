@@ -4,13 +4,13 @@ import prisma from '../../../prisma/prisma.js';
 
 export async function getRows() {
     const result = await prisma.$queryRaw`
-        SELECT tags FROM product
+        SELECT * FROM shops
   `.catch((e) => {
-            console.log('e:', e);
-            throw e;
-        }).finally(async () => {
-            await prisma.$disconnect();
-        });
+        console.log('e:', e);
+        throw e;
+    }).finally(async () => {
+        await prisma.$disconnect();
+    });
 
     return result;
 }
@@ -26,17 +26,17 @@ export default async (req, res) => {
         try {
             const result = await getRows();
 
-            let uniqueTags = [];
+            let uniqueShops = [];
 
-            result.map((obj) => obj.tags.map((tag) => {
-                if (!uniqueTags.includes(tag)) {
-                    uniqueTags.push(tag);
+            result.map((shop) => {
+                if (!uniqueShops.includes(shop)) {
+                    uniqueShops.push(shop);
                 }
 
                 return true;
-            }));
+            });
 
-            return res.status(200).json({ uniqueTags });
+            return res.status(200).json({ uniqueShops });
         } catch (error) {
             return res.status(422).json(error);
         }

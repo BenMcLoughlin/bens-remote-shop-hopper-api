@@ -168,10 +168,7 @@ const Home = (props) => {
             <div className="page">
                 {
                     isLoggedIn ?
-                        <React.Fragment>
-                            {/* <button className="send hov" onClick={_getProducts}>
-                                <a>Fetch Directly from Shopify, display below</a>
-                            </button> */}
+                        <>
                             <button className="send hov" onClick={_sendProducts}>
                                 {loading === 'sendProducts'
                                     ? "Loading..."
@@ -202,7 +199,7 @@ const Home = (props) => {
                                     :
                                     search ? 
                                         <form onSubmit={_search}>
-                                            <h2 className="hov" onClick={() => toggleSearch(false)}>New Search</h2>
+                                            <h2 className="search hov" onClick={() => toggleSearch(false)}>New Search</h2>
                                             {
                                                 query ? 
                                                     <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${ query }?`} />
@@ -218,7 +215,7 @@ const Home = (props) => {
                                             </button>
                                         </form>
                                         :
-                                        <h2 className="hov" onClick={() => toggleSearch(true)}>New Search?</h2>
+                                        <h2 className="search hov" onClick={() => toggleSearch(true)}>New Search?</h2>
                                 }
 
                                 { 
@@ -251,17 +248,8 @@ const Home = (props) => {
                                 <button className="send hov" onClick={_wipeDatabase}>
                                     {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
                                 </button>
-
-                                <div></div>
-
-                                {/* {raw_products.map((item) => (
-                                    <div key={item.id} className="post hov">
-                                        <p>{raw_products.length}</p>
-                                        <p>{JSON.stringify(item)}</p>
-                                    </div>
-                                ))} */}
                             </main>
-                        </React.Fragment>
+                        </>
                         :
                         <Link href="/api/auth/signin">
                             <div className="notice hov">
@@ -271,11 +259,19 @@ const Home = (props) => {
                 }
             </div>
             <style jsx>{`
+        .page {
+             margin: 20px;
+        }
+
         .main {
             display: block;
             position: relative;
             margin-bottom: 20px;
             width: 100%;
+        }
+
+        .search {
+            cursor: pointer;
         }
 
         .tiny {

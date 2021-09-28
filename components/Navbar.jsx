@@ -8,6 +8,9 @@ const Navbar = () => (
         <Link href="/">
             <a>Home</a>
         </Link>
+        <Link href="/DB Manager">
+            <a>DB Manager</a>
+        </Link>
         <Link href="/tags">
             <a>Tags</a>
         </Link>
@@ -16,21 +19,23 @@ const Navbar = () => (
       </Link> */}
         <style jsx>
             {`
-        nav {
-          margin: 10px auto 80px;
-          padding: 10px 0;
-          display: flex;
-          justify-content: flex-end;
-          align-items: flex-end;
-          border-bottom: 1px solid #ddd;
-          padding-right: 3rem;
-        }
-        nav a {
-          margin-left: 12px;
-          text-decoration: none;
-          color: grey;
-        }
-      `}
+                nav {
+                    margin: 10px auto 80px;
+                    padding: 10px 0;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: flex-end;
+                    border-bottom: 1px solid #ddd;
+                    padding-right: 3rem;
+                    background: white;
+                }
+                nav a {
+                    margin-left: 12px;
+                    text-decoration: none;
+                    color: grey;
+                    font-size: 1.4rem;
+                }
+            `}
         </style>
     </nav>
 );
