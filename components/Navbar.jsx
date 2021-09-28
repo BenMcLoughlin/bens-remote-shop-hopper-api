@@ -14,9 +14,6 @@ const Navbar = () => (
         <Link href="/tags">
             <a>Tags</a>
         </Link>
-        {/* <Link href="/drafts/">
-        <a>Drafts</a>
-      </Link> */}
         <style jsx>
             {`
                 nav {

@@ -13,19 +13,10 @@ import incrementProduct from "../lib/requests/incrementProduct";
 import searchRequest from "../lib/requests/search";
 import fetchTags from "../lib/requests/fetchTags";
 
-const DB_Param = "jewellry";
+const DB_Param = "jewelry";
 
 // We might use this to do user fetching .....
 export const getServerSideProps = async () => {
-    const feed = await prisma.post.findMany({
-        where: { published: true },
-        include: {
-            author: {
-                select: { name: true }
-            }
-        }
-    });
-
     const allUsers = await prisma.user.findMany({
         include: { posts: true }
     });
