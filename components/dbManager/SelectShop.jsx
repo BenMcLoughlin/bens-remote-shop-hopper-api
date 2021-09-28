@@ -127,7 +127,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     font-size: 1.2rem;
                     width: 11rem;
                     text-align: left;
-                    white-space: nowrap;
                 }
             `}</style>
         </>

@@ -35,7 +35,7 @@ export const getServerSideProps = async () => {
     });
     const products = dateStripped(productsFeed);
 
-    return { props: { feed, users, products } };
+    return { props: { users, products } };
 };
 
 // This is gross, we will see if there is a better solution to this problem
@@ -151,7 +151,6 @@ const Home = (props) => {
     };
 
     console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
-    console.log('Feed:', Object.keys(props.feed).length > 1 ? 'This is production DB' : props.feed);
     console.log('Products:', props.products);
 
     return (
@@ -367,8 +366,7 @@ const Home = (props) => {
 
 Home.propTypes = {
     products: PropTypes.object,
-    users: PropTypes.object,
-    feed: PropTypes.array
+    users: PropTypes.object
 };
 
 export default Home;

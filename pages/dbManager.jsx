@@ -82,6 +82,7 @@ const ExtractTransformLoad = () => {
                     justify-content: center;
                     color: white;
                     background: #485056;
+                    white-space: nowrap;
                 }
                 .notice {
                     background: white;
