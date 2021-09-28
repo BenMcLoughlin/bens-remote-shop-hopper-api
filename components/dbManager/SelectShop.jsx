@@ -66,7 +66,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
                             onClick={() => set.selectedBusinessName(camelCase(businessName))}
                         >
                             <div className="title">{businessName}</div>
-                            <div className="value">32</div>
                         </div>
                     ))}
                 </div>
@@ -128,14 +127,7 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     font-size: 1.2rem;
                     width: 11rem;
                     text-align: left;
-                    border-right: 1px solid grey;
-                }
-                .value {
-                    font-weight: light;
-                    font-size: 1.2rem;
-                    width: 4rem;
-                    text-align: center;
-                    font-weight: bold;
+                    white-space: nowrap;
                 }
             `}</style>
         </>
