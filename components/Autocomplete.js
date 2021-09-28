@@ -105,7 +105,7 @@ export class Autocomplete extends Component {
                         value={userInput}
                     />
                     <button className="search-btn" onClick={() => this.props.onSubmit(this.state.userInput)}>
-                        Search
+
                     </button>
                 </div>
                 {optionList}
