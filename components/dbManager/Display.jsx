@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Metrics from './Metrics';
 import Button from '../buttons/Button';
 import SelectShop from './SelectShop';
+import { updateMetrics } from './Metrics';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;
@@ -29,6 +30,7 @@ const Display = (props) => {
                             onClick={() => {
                                 set.selectedBusinessName('');
                                 updateProducts();
+                                updateMetrics(true, selected.siteHost);
                             }}
                             disabled={selected.businessName}
                         />
@@ -42,6 +44,7 @@ const Display = (props) => {
                                 onClick={() => {
                                     // set.selectedSiteHost(''); todo
                                     updateProducts();
+                                    updateMetrics(false, selected.businessName);
                                 }}
                             />
                         </div>

@@ -46,7 +46,7 @@ const ExtractTransformLoad = () => {
                 isLoggedIn ?
                     <div className="wrapper">
                         <div className="column">
-                            <div className="title">Database Manager</div>
+                            <h1 className="title">Database Manager</h1>
                             <div className="row">
                                 <SideNav  {...props} />
                                 <Display {...props} />
@@ -76,11 +76,10 @@ const ExtractTransformLoad = () => {
                 .title {
                     width: 100%;
                     height: 7rem;
-                    font-size: 4rem;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    color: white;
+                    color: #14e2a4;
                     background: #485056;
                     white-space: nowrap;
                 }

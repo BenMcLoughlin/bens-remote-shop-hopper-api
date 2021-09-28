@@ -64,7 +64,7 @@ const SideNav = ({ shopsList, selected, set }) => {
                 }
                 .${selected.siteHost} {
                     background: #f7f7f7;
-                    color: grey;
+                    color: #1469eb;
                     transition: all 0.5s ease;
                 }
 

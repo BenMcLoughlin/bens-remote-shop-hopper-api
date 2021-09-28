@@ -2,8 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { startCase } from '../../utils/strings';
 import { formatDate } from '../../utils/dates/forDisplay';
 
+export const updateMetrics = async (isShopify, header) => {
+    const res = await fetch('/api/dbMetrics', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(isShopify ? 'all' : header)
+    });
+    const data = await res.json();
+    console.log(`GET NUMBER OF PRODUCTS:`, data);
 
-
+    return data;
+};
 
 const Metrics = ({ header, selected, shopsList, isShopify }) => {
     const now = new Date();
@@ -11,21 +20,11 @@ const Metrics = ({ header, selected, shopsList, isShopify }) => {
     const [date, setDate] = useState(now); // todo
 
     useEffect(() => {
-        const updateMetrics = async () => {
-            const res = await fetch('/api/dbMetrics', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(isShopify ? 'all' : header)
-            });
-            const data = await res.json();
-            console.log(`GET NUMBER OF PRODUCTS:`, data);
-
-            console.log(data);
+        updateMetrics(isShopify, header).then((data) => {
             setTotalItems(data.result);
             setDate(now);
-        };
+        })
 
-        updateMetrics();
     }, [header]);
 
     return (

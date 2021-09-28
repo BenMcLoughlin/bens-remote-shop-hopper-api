@@ -17,9 +17,7 @@ const DB_Param = "jewelry";
 
 // We might use this to do user fetching .....
 export const getServerSideProps = async () => {
-    const allUsers = await prisma.user.findMany({
-        include: { posts: true }
-    });
+    const allUsers = await prisma.user.findMany({});
     const users = dateStripped(allUsers);
 
     // Example Query
