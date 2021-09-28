@@ -7,13 +7,17 @@ import CreateShopModal from "../../components/CreateShopModal";
 const SelectShop = ({ set, selected, shopsList }) => {
     const [list, setList] = useState([]);
     const [addShopModal, toggleAddShopModal] = useState(false);
+    const [loading, setLoading] = useState(false || "");
 
     useEffect(() => {
         const _getAllShops = async () => {
             const uniqueShops = await fetchShops();
+            setLoading(true);
+
             if (uniqueShops) {
                 const businessNames = uniqueShops.map((d) => d.businessName);
                 setList(businessNames);
+                setLoading(false);
             }
         };
 
@@ -53,22 +57,29 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     </button>
                 }
 
-                <div className="header">
-                    <h4>Available Stores</h4>
-                    <h4 className="button" onClick={_toggleAddShopModal}>Add</h4>
-                </div>
+                {
+                    loading ?
+                        <h3>Loading....</h3>
+                        :
+                        <React.Fragment>
+                            <div className="header">
+                                <h4>Available Stores</h4>
+                                <h4 className="button" onClick={_toggleAddShopModal}>Add</h4>
+                            </div>
 
-                <div className="row">
-                    {list.map((businessName) => (
-                        <div
-                            key={businessName}
-                            className={`businessName ${camelCase(businessName)}`}
-                            onClick={() => set.selectedBusinessName(camelCase(businessName))}
-                        >
-                            <div className="title">{businessName}</div>
-                        </div>
-                    ))}
-                </div>
+                            <div className="row">
+                                {list.map((businessName) => (
+                                    <div
+                                        key={businessName}
+                                        className={`businessName ${camelCase(businessName)}`}
+                                        onClick={() => set.selectedBusinessName(camelCase(businessName))}
+                                    >
+                                        <div className="title">{businessName}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </React.Fragment>
+                }
             </div>
             <style jsx>{`
                 .wrapper {
