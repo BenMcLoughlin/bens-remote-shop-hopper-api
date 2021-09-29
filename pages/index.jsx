@@ -66,11 +66,11 @@ const dateStripped = (obj) => {
 const Home = (props) => {
     const session = useSession();
     // const [ raw_products, set_Raw_Products ] = useState([]);
-    const [ search_products, set_search_products ] = useState([]);
-    const [ raw_Tags, set_Raw_Tags ] = useState([]);
-    const [ loading, setLoading ] = useState(false);
-    const [ query, setQuery ] = useState(false);
-    const [ search, toggleSearch ] = useState(false);
+    const [search_products, set_search_products] = useState([]);
+    const [raw_Tags, set_Raw_Tags] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [query, setQuery] = useState(false);
+    const [search, toggleSearch] = useState(false);
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
 
@@ -155,11 +155,11 @@ const Home = (props) => {
                             <button className="send hov" onClick={_sendProducts}>
                                 {loading === 'sendProducts'
                                     ? "Loading..."
-                                    : <a>Fetch Products, and send to DB, also, they will be listed below when this component pulls them in and it re-renders.</a>} 
+                                    : <a>Fetch Products, and send to DB, also, they will be listed below when this component pulls them in and it re-renders.</a>}
                             </button>
                             {/* } */}
                             <main className="main">
-                                { search_products.length ? 
+                                {search_products.length ?
                                     <React.Fragment>
                                         <div className="notice hov" onClick={() => set_search_products([])}>
                                             <p>Currently  <span className="blue">{search_products.length}</span> unique Products matching this criteria: <a className="blue">{query}</a> in the Database</p><span className="tiny">  Again?</span>
@@ -180,12 +180,12 @@ const Home = (props) => {
                                         </div>
                                     </React.Fragment>
                                     :
-                                    search ? 
+                                    search ?
                                         <form onSubmit={_search}>
                                             <h2 className="search hov" onClick={() => toggleSearch(false)}>New Search</h2>
                                             {
-                                                query ? 
-                                                    <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${ query }?`} />
+                                                query ?
+                                                    <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${query}?`} />
                                                     :
                                                     raw_Tags.map((tag) => <button key={tag} onClick={() => setQuery(tag)}>
                                                         {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
@@ -201,8 +201,8 @@ const Home = (props) => {
                                         <h2 className="search hov" onClick={() => toggleSearch(true)}>New Search?</h2>
                                 }
 
-                                { 
-                                    !search_products.length && !search ? 
+                                {
+                                    !search_products.length && !search ?
                                         <React.Fragment>
                                             <div className="notice hov">
                                                 <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique products that have this tag <a className="blue">{DB_Param}</a>with a rating higher than <span className="blue">10</span> in the Database. <a className="link" onClick={() => toggleSearch(true)}>Search</a> to see more.</p>
