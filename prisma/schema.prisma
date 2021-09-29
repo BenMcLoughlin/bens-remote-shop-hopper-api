@@ -4,6 +4,7 @@
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 generator client {
@@ -38,7 +39,7 @@ model product {
   businessName String?  
   title        String
   handle       String?
-  body_html    String?  
+  body_html    String?  @unique
   vendor       String?
   product_type String?
   created_at   DateTime?
