@@ -2,12 +2,12 @@ import React from 'react';
 import { startCase } from '../../utils/strings';
 
 
-const Button = ({ text, onClick, disabled }) => {
+const Button = ({ text, onClick, disabled, loading }) => {
     return (
         <button
-            disabled={disabled}
+            disabled={disabled || loading}
             onClick={() => onClick()}>
-            {startCase(text)}
+            {loading ? 'Loading...' : startCase(text)}
             <style jsx>{`
                 button {
                     flex-wrap: wrap;

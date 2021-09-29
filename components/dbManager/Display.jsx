@@ -26,11 +26,13 @@ const Display = (props) => {
                     <div className="metricsControl">
                         <Metrics header={selected.siteHost} isShopify {...props} />
                         <Button
+                            loading={isLoading}
                             text={`Load All ${selected.siteHost} Shops`}
                             onClick={() => {
                                 set.selectedBusinessName('');
-                                updateProducts();
-                                updateMetrics(true, selected.siteHost);
+                                updateProducts().then(() => {
+                                    updateMetrics(true, selected.siteHost);
+                                })
                             }}
                             disabled={selected.businessName}
                         />
@@ -40,11 +42,13 @@ const Display = (props) => {
                         <div className="metricsControl">
                             <Metrics header={selected.businessName} isShopify={false} {...props} />
                             <Button
+                                loading={isLoading}
                                 text={`Load Only ${selected.businessName}`}
                                 onClick={() => {
                                     // set.selectedSiteHost(''); todo
-                                    updateProducts();
-                                    updateMetrics(false, selected.businessName);
+                                    updateProducts().then(() => {
+                                        updateMetrics(false, selected.businessName);
+                                    })
                                 }}
                             />
                         </div>
