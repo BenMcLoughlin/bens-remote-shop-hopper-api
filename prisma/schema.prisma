@@ -11,6 +11,8 @@ generator client {
   provider = "prisma-client-js"
 }
 
+
+
 model hotItem {
   id       Int     @id @default(autoincrement())
   name     String  @unique
