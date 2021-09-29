@@ -26,7 +26,7 @@ async function createAllShops() {
     })
 
     await Promise.all(shopArray.map(async (item) => {
-        result = await prisma.shops.createMany({
+        result = await prisma.shop.createMany({
             data: item
         });
     })).catch((e) => {
@@ -48,7 +48,7 @@ async function createNewShop(shopData) {
         shopData.domain = "https://" + shopData.domain;
     }
 
-    result = await prisma.shops.create({
+    result = await prisma.shop.create({
         data: shopData
     }).catch((e) => {
         console.log('e:', e);
