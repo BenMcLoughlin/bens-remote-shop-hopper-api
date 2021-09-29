@@ -1,10 +1,10 @@
 import prisma from '../../../prisma/prisma.js';
 
 const dbMetrics = async function (req, res, next) {
+    const data = { hi: 'ben' };
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json({
-        status: 'success',
-        message: 'Token sent to email address',
+    return res.status(200).send({
+        body: JSON.stringify(data),
     });
 };
 

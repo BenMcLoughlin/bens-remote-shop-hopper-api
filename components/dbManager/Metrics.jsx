@@ -11,11 +11,12 @@ const Metrics = ({ header, selected, shopsList }) => {
     ];
 
     const updateMetrics = async () => {
-        const metrics = await fetch('/api/dbMetrics', {
+        const res = await fetch('/api/dbMetrics', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         });
-        console.log(metrics);
+        const result = await res.json();
+        console.log(result);
     };
 
     return (
