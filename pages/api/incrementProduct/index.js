@@ -2,10 +2,10 @@
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
-async function addPointToProduct(title) {
+async function addPointToProduct(id) {
     const result = await prisma.product.update({
         where: {
-            title: title
+            id: id
         },
         data: {
             rating: { increment: 1 }

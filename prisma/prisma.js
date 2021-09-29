@@ -5,11 +5,16 @@ import { PrismaClient } from '@prisma/client';
 let prisma = {};
 
 if (typeof window === "undefined") {
+    // Ensure that previous prisma instance is disconnected. todo
+    if ("prisma" in globalThis && "$disconnect" in globalThis.prisma) {
+        globalThis.prisma.$disconnect();
+    }
+
     if (process.env.NODE_ENV === "production") {
-        prisma = new PrismaClient({ log: [ "query", "info", "warn" ] });
+        prisma = new PrismaClient({ log: ["query", "info", "warn"] });
     } else {
         if (!global.prisma) {
-            global.prisma = new PrismaClient({ log: [ "query", "info", "warn" ] });
+            global.prisma = new PrismaClient({ log: ["query", "info", "warn"] });
         }
 
         prisma = global.prisma;

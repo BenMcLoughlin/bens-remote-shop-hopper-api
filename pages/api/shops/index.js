@@ -2,12 +2,10 @@
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
-async function addPointToItem(tag) {
-    const result = await prisma.hotItem.upsert({
-        where: { name: tag },
-        create: { name: tag, value: 1 },
-        update: { name: tag, value: { increment: 1 } }
-    }).catch((e) => {
+export async function getRows() {
+    const result = await prisma.$queryRaw`
+        SELECT * FROM shops
+  `.catch((e) => {
         console.log('e:', e);
         throw e;
     }).finally(async () => {
@@ -24,12 +22,21 @@ export default async (req, res) => {
         return res.status(401).json({ reason: 'Unauthorized' });
     }
 
-    if (req.method === 'POST') {
+    if (req.method === 'GET') {
         try {
-            const { body } = req;
-            const result = await addPointToItem(body);
+            const result = await getRows();
 
-            return res.status(200).json({ result });
+            let uniqueShops = [];
+
+            result.map((shop) => {
+                if (!uniqueShops.includes(shop)) {
+                    uniqueShops.push(shop);
+                }
+
+                return true;
+            });
+
+            return res.status(200).json({ uniqueShops });
         } catch (error) {
             return res.status(422).json(error);
         }

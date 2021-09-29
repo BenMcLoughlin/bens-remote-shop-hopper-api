@@ -13,23 +13,12 @@ import incrementProduct from "../lib/requests/incrementProduct";
 import searchRequest from "../lib/requests/search";
 import fetchTags from "../lib/requests/fetchTags";
 
-const DB_Param = "jewellry";
+const DB_Param = "jewelry";
 
 // We might use this to do user fetching .....
 export const getServerSideProps = async () => {
-    const feed = await prisma.post.findMany({
-        where: { published: true },
-        include: {
-            author: {
-                select: { name: true }
-            }
-        }
-    });
-
-    const allUsers = await prisma.user.findMany({
-        include: { posts: true }
-    });
-    const users = dateStripped(allUsers);
+    // const allUsers = await prisma.user.findMany({});
+    // const users = dateStripped(allUsers);
 
     // Example Query
     const productsFeed = await prisma.product.findMany({
@@ -44,7 +33,7 @@ export const getServerSideProps = async () => {
     });
     const products = dateStripped(productsFeed);
 
-    return { props: { feed, users, products } };
+    return { props: { products } };
 };
 
 // This is gross, we will see if there is a better solution to this problem
@@ -112,9 +101,9 @@ const Home = (props) => {
         setQuery(false);
     };
 
-    const _incrementProduct = async (title) => {
+    const _incrementProduct = async (id) => {
         setLoading('incrementProduct');
-        const result = await incrementProduct(title);
+        const result = await incrementProduct(id);
         if (result) {
             refreshData();
             setLoading(false);
@@ -154,13 +143,7 @@ const Home = (props) => {
 
     const isLoggedIn = session[0]?.user;
 
-    const order = (a, b) => {
-        console.log('a, b:', a.rating, b.rating);
-        Number(a.rating) < Number(b.rating) ? -1 : (Number(a.rating) < Number(b.rating) ? 1 : 0);
-    };
-
     console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
-    console.log('Feed:', Object.keys(props.feed).length > 1 ? 'This is production DB' : props.feed);
     console.log('Products:', props.products);
 
     return (
@@ -168,10 +151,7 @@ const Home = (props) => {
             <div className="page">
                 {
                     isLoggedIn ?
-                        <React.Fragment>
-                            {/* <button className="send hov" onClick={_getProducts}>
-                                <a>Fetch Directly from Shopify, display below</a>
-                            </button> */}
+                        <>
                             <button className="send hov" onClick={_sendProducts}>
                                 {loading === 'sendProducts'
                                     ? "Loading..."
@@ -186,7 +166,7 @@ const Home = (props) => {
                                         </div>
                                         <div className="cards">
                                             {
-                                                search_products.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.title)}>
+                                                search_products.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.id)}>
                                                     <img className="image" src={product.images[0].src} />
                                                     <button className="hov">
                                                         {product.rating > 10 && <p className="star">⭐️</p>}
@@ -195,14 +175,14 @@ const Home = (props) => {
                                                             <span className="red">{product.rating}</span>
                                                         </a>}
                                                     </button>
-                                                </div>).sort(order)
+                                                </div>)
                                             }
                                         </div>
                                     </React.Fragment>
                                     :
                                     search ? 
                                         <form onSubmit={_search}>
-                                            <h2 className="hov" onClick={() => toggleSearch(false)}>New Search</h2>
+                                            <h2 className="search hov" onClick={() => toggleSearch(false)}>New Search</h2>
                                             {
                                                 query ? 
                                                     <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${ query }?`} />
@@ -218,7 +198,7 @@ const Home = (props) => {
                                             </button>
                                         </form>
                                         :
-                                        <h2 className="hov" onClick={() => toggleSearch(true)}>New Search?</h2>
+                                        <h2 className="search hov" onClick={() => toggleSearch(true)}>New Search?</h2>
                                 }
 
                                 { 
@@ -231,7 +211,7 @@ const Home = (props) => {
                                             </div>
 
                                             <div className="cards">
-                                                {Object.keys(props.products).map((key) => <div className="card hov" key={key} onClick={() => _incrementProduct(props.products[key].title)}>
+                                                {Object.keys(props.products).map((key) => <div className="card hov" key={key} onClick={() => _incrementProduct(props.products[key].id)}>
                                                     <img className="image" src={props.products[key].images[0].src} />
                                                     <button className="hov">
                                                         {props.products[key].rating > 10 && <p className="star">⭐️</p>}
@@ -240,7 +220,7 @@ const Home = (props) => {
                                                             <span className="red">{props.products[key].rating}</span>
                                                         </a>}
                                                     </button>
-                                                </div>).sort(order)}
+                                                </div>)}
                                             </div>
                                         </React.Fragment>
                                         :
@@ -251,17 +231,8 @@ const Home = (props) => {
                                 <button className="send hov" onClick={_wipeDatabase}>
                                     {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
                                 </button>
-
-                                <div></div>
-
-                                {/* {raw_products.map((item) => (
-                                    <div key={item.id} className="post hov">
-                                        <p>{raw_products.length}</p>
-                                        <p>{JSON.stringify(item)}</p>
-                                    </div>
-                                ))} */}
                             </main>
-                        </React.Fragment>
+                        </>
                         :
                         <Link href="/api/auth/signin">
                             <div className="notice hov">
@@ -271,11 +242,19 @@ const Home = (props) => {
                 }
             </div>
             <style jsx>{`
+        .page {
+             margin: 20px;
+        }
+
         .main {
             display: block;
             position: relative;
             margin-bottom: 20px;
             width: 100%;
+        }
+
+        .search {
+            cursor: pointer;
         }
 
         .tiny {
@@ -380,8 +359,7 @@ const Home = (props) => {
 
 Home.propTypes = {
     products: PropTypes.object,
-    users: PropTypes.object,
-    feed: PropTypes.array
+    users: PropTypes.object
 };
 
 export default Home;
