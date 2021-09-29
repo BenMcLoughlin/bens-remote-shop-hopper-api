@@ -17,8 +17,8 @@ const DB_Param = "jewelry";
 
 // We might use this to do user fetching .....
 export const getServerSideProps = async () => {
-    const allUsers = await prisma.user.findMany({});
-    const users = dateStripped(allUsers);
+    // const allUsers = await prisma.user.findMany({});
+    // const users = dateStripped(allUsers);
 
     // Example Query
     const productsFeed = await prisma.product.findMany({
@@ -33,7 +33,7 @@ export const getServerSideProps = async () => {
     });
     const products = dateStripped(productsFeed);
 
-    return { props: { users, products } };
+    return { props: { products } };
 };
 
 // This is gross, we will see if there is a better solution to this problem

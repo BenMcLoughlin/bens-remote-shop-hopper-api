@@ -32,8 +32,6 @@ export default async (req, res) => {
             const { body } = req;
             const result = await addPointToProduct(body);
 
-            console.log('result:', result)
-
             return res.status(200).json({ result });
         } catch (error) {
             return res.status(422).json(error);
