@@ -3,20 +3,22 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgres://pbhobvqzdqhynn:851e5b405a1a19910e2c97ec56f3a39cd65f996b5bb843cdc24df5e8dcbbc4c9@ec2-52-203-74-38.compute-1.amazonaws.com:5432/d9nqq75iaso1k4"
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
-model hotItems {
+model hotItem {
   id       Int     @id @default(autoincrement())
   name     String  @unique
   value    Int?
+
+  @@map(name: "hotItems")
 }
 
-model shops {
+model shop {
   id           Int      @id @default(autoincrement())
   businessName String
   domain       String   @unique
@@ -27,6 +29,8 @@ model shops {
   postalCode   String?
   country      String?
   created_at   DateTime @default(now())
+
+  @@map(name: "shops")
 }
 
 model product {
@@ -34,7 +38,7 @@ model product {
   businessName String?  
   title        String
   handle       String?
-  body_html    String?  @unique
+  body_html    String?  
   vendor       String?
   product_type String?
   created_at   DateTime?
@@ -45,6 +49,8 @@ model product {
   images       Json?
   options      Json?
   rating       Int?     @default(0)
+
+  @@map(name: "products")
 }
 
 model User {

@@ -101,9 +101,9 @@ const Home = (props) => {
         setQuery(false);
     };
 
-    const _incrementProduct = async (title) => {
+    const _incrementProduct = async (id) => {
         setLoading('incrementProduct');
-        const result = await incrementProduct(title);
+        const result = await incrementProduct(id);
         if (result) {
             refreshData();
             setLoading(false);
@@ -143,11 +143,6 @@ const Home = (props) => {
 
     const isLoggedIn = session[0]?.user;
 
-    const order = (a, b) => {
-        console.log('a, b:', a.rating, b.rating);
-        Number(a.rating) < Number(b.rating) ? -1 : (Number(a.rating) < Number(b.rating) ? 1 : 0);
-    };
-
     console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
     console.log('Products:', props.products);
 
@@ -171,7 +166,7 @@ const Home = (props) => {
                                         </div>
                                         <div className="cards">
                                             {
-                                                search_products.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.title)}>
+                                                search_products.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.id)}>
                                                     <img className="image" src={product.images[0].src} />
                                                     <button className="hov">
                                                         {product.rating > 10 && <p className="star">⭐️</p>}
@@ -180,7 +175,7 @@ const Home = (props) => {
                                                             <span className="red">{product.rating}</span>
                                                         </a>}
                                                     </button>
-                                                </div>).sort(order)
+                                                </div>)
                                             }
                                         </div>
                                     </React.Fragment>
@@ -216,7 +211,7 @@ const Home = (props) => {
                                             </div>
 
                                             <div className="cards">
-                                                {Object.keys(props.products).map((key) => <div className="card hov" key={key} onClick={() => _incrementProduct(props.products[key].title)}>
+                                                {Object.keys(props.products).map((key) => <div className="card hov" key={key} onClick={() => _incrementProduct(props.products[key].id)}>
                                                     <img className="image" src={props.products[key].images[0].src} />
                                                     <button className="hov">
                                                         {props.products[key].rating > 10 && <p className="star">⭐️</p>}
@@ -225,7 +220,7 @@ const Home = (props) => {
                                                             <span className="red">{props.products[key].rating}</span>
                                                         </a>}
                                                     </button>
-                                                </div>).sort(order)}
+                                                </div>)}
                                             </div>
                                         </React.Fragment>
                                         :
