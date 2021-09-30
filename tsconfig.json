@@ -26,7 +26,5 @@
         "pages/index.jsx",
         "script.js",
         "prisma/prisma.js",
-        "pages/dbManager.jsx",
-        "components/dbManager/Display.jsx"
     ]
 }

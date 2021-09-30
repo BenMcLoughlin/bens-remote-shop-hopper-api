@@ -19,35 +19,39 @@ async function createRows(data) {
 }
 
 export async function products(data) {
-    console.log('formatted data:', data.length);
+    let set = [...new Set(data)]
+    console.log('formatted set:', set.length);
     let result = false;
     let traunch = 50;
     let start = 0;
+    let results = [];
 
     // hey don't judge : P
     let iterate = async () => {
         let arr = [];
 
-        data.map((item, i) => {
+        set.map((item, i) => {
             if ((i + start) < traunch) {
                 arr.push(item);
             }
         })
 
         result = await createRows(arr);
-        if (result && (start < data.length)) {
+        if (result && (traunch < set.length)) {
+            results.push(result);
             traunch += 50;
             start += 50;
             iterate();
             return console.log('ITERATE LOAD FUNCTION: ', result, start);
         }
+        results.push(result);
 
         return { done: true }
     }
 
     iterate();
 
-    console.log('IN LOAD FUNCTION: ', result); // toda
+    console.log('IN LOAD FUNCTION: ', results); // toda
 
     return result;
 }
