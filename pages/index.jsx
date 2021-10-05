@@ -157,7 +157,6 @@ const Home = (props) => {
                                     ? "Loading..."
                                     : <a>Fetch Products, and send to DB, also, they will be listed below when this component pulls them in and it re-renders.</a>}
                             </button>
-                            {/* } */}
                             <main className="main">
                                 {search_products.length ?
                                     <React.Fragment>
@@ -227,7 +226,6 @@ const Home = (props) => {
                                         null
                                 }
 
-                                {/* { process.env.NODE_ENV === 'development' && */}
                                 <button className="send hov" onClick={_wipeDatabase}>
                                     {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
                                 </button>
@@ -243,7 +241,7 @@ const Home = (props) => {
             </div>
             <style jsx>{`
         .page {
-             margin: 20px;
+            margin: 20px;
         }
 
         .main {

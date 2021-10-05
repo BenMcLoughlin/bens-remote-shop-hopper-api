@@ -159,10 +159,13 @@ const Header: React.FC = () => {
                     <a>Home</a>
                 </Link>
                 <Link href="/tags">
-                    <a>See All Tags</a>
+                    <a>Tags</a>
                 </Link>
-                <Link href="/dbManager">
-                    <a>DB Manager</a>
+                <Link href="/manager">
+                    <a>Manager</a>
+                </Link>
+                <Link href="/analytics">
+                    <a>Analytics</a>
                 </Link>
                 
                 <style jsx>{`

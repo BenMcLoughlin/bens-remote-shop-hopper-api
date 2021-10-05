@@ -1,7 +1,8 @@
 export async function products(data, businessName) {
     let formatted = [];
+
     if (businessName) {
-        formatted = await data.products.map((product) => {
+        formatted = await data.map((product) => {
             const {
                 title,
                 handle,
@@ -36,7 +37,7 @@ export async function products(data, businessName) {
             return output;
         });
     }
-    console.log('IN FORMAT FUNCTION: ', formatted[0]);
+    console.log('IN FORMAT FUNCTION: ', formatted.length);
 
     return formatted;
 }
