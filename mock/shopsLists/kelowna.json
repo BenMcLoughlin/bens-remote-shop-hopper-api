@@ -20,7 +20,7 @@
         "Country": "CA"
     },
     {
-        "domain": "https://www.theartfulhandstores.com/",
+        "domain": "https://www.theartfulhandstores.com",
         "business_name": "The Artful Hand",
         "vertical": "",
         "site_host": "Lightspeed",
@@ -30,7 +30,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.oneboardshop.com/",
+        "domain": "https://www.oneboardshop.com",
         "business_name": "ONE Boardshop",
         "vertical": "",
         "site_host": "Lightspeed",
@@ -50,7 +50,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.honestboutique.ca/",
+        "domain": "https://www.honestboutique.ca",
         "business_name": "Honest Boutique",
         "vertical": "",
         "site_host": "Lightspeed",
@@ -60,7 +60,7 @@
         "Country": ""
     },
     {
-        "domain": "https://envyapparelfit.com/",
+        "domain": "https://envyapparelfit.com",
         "business_name": "Envy Apparel",
         "vertical": "",
         "site_host": "Lightspeed",
@@ -70,7 +70,7 @@
         "Country": ""
     },
     {
-        "domain": "https://red-top-footwear.shoplightspeed.com/",
+        "domain": "https://red-top-footwear.shoplightspeed.com",
         "business_name": "Red Top Footwear",
         "vertical": "",
         "site_host": "Lightspeed",
@@ -80,7 +80,7 @@
         "Country": ""
     },
     {
-        "domain": "http://attridge.ca/",
+        "domain": "http://attridge.ca",
         "business_name": "Attridge Snow Ski Wake",
         "vertical": "",
         "site_host": "Lightspeed",
@@ -90,7 +90,7 @@
         "Country": ""
     },
     {
-        "domain": "http://fossellos.com/",
+        "domain": "http://fossellos.com",
         "business_name": "Fossellos",
         "vertical": "",
         "site_host": "Lightspeed",
@@ -100,7 +100,7 @@
         "Country": ""
     },
     {
-        "domain": "http://www.tjskids.com/",
+        "domain": "http://www.tjskids.com",
         "business_name": "TJ's The Kiddies Store",
         "vertical": "",
         "site_host": "Magento",
@@ -110,7 +110,7 @@
         "Country": ""
     },
     {
-        "domain": "https://redbagstyle.getpayd.com/",
+        "domain": "https://redbagstyle.getpayd.com",
         "business_name": "Red Bag",
         "vertical": "",
         "site_host": "Moneris",
@@ -120,7 +120,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.merlenorman.com/",
+        "domain": "https://www.merlenorman.com",
         "business_name": "Merle Norman Cosmetic Studio",
         "vertical": "",
         "site_host": "Salesforce",
@@ -400,7 +400,7 @@
         "Country": ""
     },
     {
-        "domain": "caposhie.com/",
+        "domain": "caposhie.com",
         "business_name": "Caposhie",
         "vertical": "",
         "site_host": "Shopify",
@@ -410,7 +410,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.okanaganlifestyle.ca/",
+        "domain": "okanaganlifestyle.ca",
         "business_name": "Okanagan Lifestyle",
         "vertical": "",
         "site_host": "Shopify",
@@ -420,7 +420,7 @@
         "Country": ""
     },
     {
-        "domain": "https://loxandfox.ca/",
+        "domain": "loxandfox.ca",
         "business_name": "Lox and Fox Baby Boutique",
         "vertical": "",
         "site_host": "Shopify",
@@ -440,7 +440,7 @@
         "Country": ""
     },
     {
-        "domain": "https://beachave.ca/",
+        "domain": "beachave.ca",
         "business_name": "Beach Ave",
         "vertical": "",
         "site_host": "Shopify",
@@ -450,7 +450,7 @@
         "Country": ""
     },
     {
-        "domain": "https://resfeber.ca/",
+        "domain": "resfeber.ca",
         "business_name": "Resfeber Lifestyle Apparel",
         "vertical": "",
         "site_host": "Shopify",
@@ -460,7 +460,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.peddlerscottage.com/",
+        "domain": "www.peddlerscottage.com",
         "business_name": "Peddler's Cottage",
         "vertical": "",
         "site_host": "Shopify",
@@ -470,7 +470,7 @@
         "Country": ""
     },
     {
-        "domain": "https://simsjewelry.com/",
+        "domain": "simsjewelry.com",
         "business_name": "SIMS Jewelry Co.",
         "vertical": "",
         "site_host": "Shopify",
@@ -480,7 +480,7 @@
         "Country": ""
     },
     {
-        "domain": "https://losttogether.ca/",
+        "domain": "losttogether.ca",
         "business_name": "Lost Together",
         "vertical": "",
         "site_host": "Shopify",
@@ -490,7 +490,7 @@
         "Country": ""
     },
     {
-        "domain": "https://thehandmadeshoppe.com/",
+        "domain": "thehandmadeshoppe.com",
         "business_name": "The Handmade Shoppe",
         "vertical": "",
         "site_host": "Shopify",
@@ -500,7 +500,7 @@
         "Country": ""
     },
     {
-        "domain": "https://blueskyclothingco.com/",
+        "domain": "blueskyclothingco.com",
         "business_name": "Blue Sky Clothing: Kelowna",
         "vertical": "",
         "site_host": "Shopify",
@@ -510,7 +510,7 @@
         "Country": ""
     },
     {
-        "domain": "https://textileapparel.ca/",
+        "domain": "textileapparel.ca",
         "business_name": "Textile Apparel",
         "vertical": "",
         "site_host": "Shopify",
@@ -520,7 +520,7 @@
         "Country": ""
     },
     {
-        "domain": "http://biaboro.ca/",
+        "domain": "http://biaboro.ca",
         "business_name": "BIA BORO KELOWNA",
         "vertical": "",
         "site_host": "Shopify",
@@ -530,7 +530,7 @@
         "Country": ""
     },
     {
-        "domain": "https://aldilaboutique.com/",
+        "domain": "aldilaboutique.com",
         "business_name": "Aldila Boutique",
         "vertical": "",
         "site_host": "Shopify",
@@ -540,7 +540,7 @@
         "Country": ""
     },
     {
-        "domain": "https://shop.unhingedboutique.ca/",
+        "domain": "shop.unhingedboutique.ca",
         "business_name": "Unhinged Gift & Lifestyle Boutique",
         "vertical": "",
         "site_host": "Shopify",
@@ -550,7 +550,7 @@
         "Country": ""
     },
     {
-        "domain": "https://castanetapparel.com/",
+        "domain": "castanetapparel.com",
         "business_name": "Castanet Apparel",
         "vertical": "",
         "site_host": "Shopify",
@@ -560,7 +560,7 @@
         "Country": ""
     },
     {
-        "domain": "https://sweetlegs.ca/",
+        "domain": "sweetlegs.ca",
         "business_name": "Sweetlegs Clothing Inc.",
         "vertical": "",
         "site_host": "Shopify",
@@ -570,7 +570,7 @@
         "Country": ""
     },
     {
-        "domain": "aucanadaapparel.com/",
+        "domain": "aucanadaapparel.com",
         "business_name": "Au Canada Apparel",
         "vertical": "",
         "site_host": "Shopify",
@@ -580,7 +580,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.uvwise.ca/",
+        "domain": "www.uvwise.ca",
         "business_name": "UvWise - Online Sun Protection Clothing Store in Canada",
         "vertical": "",
         "site_host": "Shopify",
@@ -590,7 +590,7 @@
         "Country": ""
     },
     {
-        "domain": "https://thegreenvanity.ca/",
+        "domain": "thegreenvanity.ca",
         "business_name": "The Green Vanity",
         "vertical": "",
         "site_host": "Shopify",
@@ -600,7 +600,7 @@
         "Country": ""
     },
     {
-        "domain": "shopdellago.com/",
+        "domain": "shopdellago.com",
         "business_name": "Del Lago",
         "vertical": "",
         "site_host": "Shopify",
@@ -610,7 +610,7 @@
         "Country": ""
     },
     {
-        "domain": "foursightsupplyco.com/",
+        "domain": "foursightsupplyco.com",
         "business_name": "Foursight Supply Co.",
         "vertical": "",
         "site_host": "Shopify",
@@ -620,7 +620,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.ogopogogiftland.com/",
+        "domain": "www.ogopogogiftland.com",
         "business_name": "OGOPOGO GIFTLAND KELOWNA",
         "vertical": "",
         "site_host": "Shopify",
@@ -630,7 +630,7 @@
         "Country": ""
     },
     {
-        "domain": "cruzwear.com/",
+        "domain": "cruzwear.com",
         "business_name": "Cruzwear Unlimited",
         "vertical": "",
         "site_host": "Shopify",
@@ -640,7 +640,7 @@
         "Country": ""
     },
     {
-        "domain": "greyheartsdenim.ca/",
+        "domain": "greyheartsdenim.ca",
         "business_name": "Grey Hearts Denim",
         "vertical": "",
         "site_host": "Shopify",
@@ -650,7 +650,7 @@
         "Country": ""
     },
     {
-        "domain": "https://thebumwrap.com/",
+        "domain": "thebumwrap.com",
         "business_name": "The Bumwrap",
         "vertical": "",
         "site_host": "Shopify",
@@ -660,7 +660,7 @@
         "Country": ""
     },
     {
-        "domain": "bubbaandbluedesign.com/",
+        "domain": "bubbaandbluedesign.com",
         "business_name": "Bubba and Blue",
         "vertical": "",
         "site_host": "Shopify",
@@ -670,7 +670,7 @@
         "Country": ""
     },
     {
-        "domain": "https://daisyandjaneclothiers.com/",
+        "domain": "daisyandjaneclothiers.com",
         "business_name": "Daisy & Jane Clothiers",
         "vertical": "",
         "site_host": "Shopify",
@@ -680,7 +680,7 @@
         "Country": ""
     },
     {
-        "domain": "https://shopmogano.com/",
+        "domain": "shopmogano.com",
         "business_name": "MOGANO",
         "vertical": "",
         "site_host": "Shopify",
@@ -690,7 +690,7 @@
         "Country": ""
     },
     {
-        "domain": "https://loloandspence.com/",
+        "domain": "loloandspence.com",
         "business_name": "lolo and spence ",
         "vertical": "",
         "site_host": "Shopify",
@@ -740,7 +740,7 @@
         "Country": "2019-08-20"
     },
     {
-        "domain": "souleyewear.com/",
+        "domain": "souleyewear.com",
         "business_name": "SOUL eyewear",
         "vertical": "",
         "site_host": "Squarespace",
@@ -750,7 +750,7 @@
         "Country": ""
     },
     {
-        "domain": "http://pentagonboardshop.com/",
+        "domain": "http://pentagonboardshop.com",
         "business_name": "Pentagon Boardshop",
         "vertical": "",
         "site_host": "Squarespace",
@@ -760,7 +760,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.kaleco.ca/",
+        "domain": "https://www.kaleco.ca",
         "business_name": "Kaleco Sustainable Lifestyle",
         "vertical": "",
         "site_host": "Weebly",
@@ -770,7 +770,7 @@
         "Country": ""
     },
     {
-        "domain": "okanaganskate.com/",
+        "domain": "okanaganskate.com",
         "business_name": "Okanagan Skate Co.",
         "vertical": "",
         "site_host": "Weebly",
@@ -780,7 +780,7 @@
         "Country": ""
     },
     {
-        "domain": "mostwantedresale.com/",
+        "domain": "mostwantedresale.com",
         "business_name": "MOST WANTED LUXURY RESALE",
         "vertical": "",
         "site_host": "Wix",
@@ -790,7 +790,7 @@
         "Country": ""
     },
     {
-        "domain": "stonefoxclothing.com/",
+        "domain": "stonefoxclothing.com",
         "business_name": "Stone Fox Clothing Collective",
         "vertical": "",
         "site_host": "Wix",
@@ -800,7 +800,7 @@
         "Country": ""
     },
     {
-        "domain": "kelownacandlefactory.com/",
+        "domain": "kelownacandlefactory.com",
         "business_name": "The Kelowna Candle Factory",
         "vertical": "",
         "site_host": "WooCommerce",
@@ -810,7 +810,7 @@
         "Country": ""
     },
     {
-        "domain": "premiumlabel.ca/",
+        "domain": "premiumlabel.ca",
         "business_name": "Premium Label Outlet",
         "vertical": "",
         "site_host": "WooCommerce",
@@ -820,7 +820,7 @@
         "Country": ""
     },
     {
-        "domain": "https://amniapparel.com/",
+        "domain": "https://amniapparel.com",
         "business_name": "Amni Apparel",
         "vertical": "",
         "site_host": "WooCommerce",
@@ -830,7 +830,7 @@
         "Country": ""
     },
     {
-        "domain": "https://gotstylz.com/",
+        "domain": "https://gotstylz.com",
         "business_name": "GotStylz",
         "vertical": "",
         "site_host": "WooCommerce",
@@ -840,7 +840,7 @@
         "Country": ""
     },
     {
-        "domain": "littlebachco.com/",
+        "domain": "littlebachco.com",
         "business_name": "Little Bach Company Baby & Gifts",
         "vertical": "",
         "site_host": "WooCommerce",
@@ -850,7 +850,7 @@
         "Country": ""
     },
     {
-        "domain": "cadenceshoes.com/",
+        "domain": "cadenceshoes.com",
         "business_name": "Cadence Shoes",
         "vertical": "",
         "site_host": "WooCommerce",
@@ -860,7 +860,7 @@
         "Country": ""
     },
     {
-        "domain": "linenladder.com/",
+        "domain": "linenladder.com",
         "business_name": "Linen Ladder",
         "vertical": "",
         "site_host": "WooCommerce",
@@ -870,7 +870,7 @@
         "Country": ""
     },
     {
-        "domain": "https://wearabouts.ca/",
+        "domain": "https://wearabouts.ca",
         "business_name": "Wearabouts",
         "vertical": "",
         "site_host": "WooCommerce",
@@ -880,7 +880,7 @@
         "Country": ""
     },
     {
-        "domain": "soledoc.ca/",
+        "domain": "soledoc.ca",
         "business_name": "Sole Doc",
         "vertical": "",
         "site_host": "WooCommerce",
@@ -890,7 +890,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.ae.com/ca/en",
+        "domain": "https://www.ae.comcaen",
         "business_name": "American Eagle Outfitters",
         "vertical": "",
         "site_host": "",
@@ -900,7 +900,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.ardene.com/",
+        "domain": "https://www.ardene.com",
         "business_name": "Ardene",
         "vertical": "",
         "site_host": "",
@@ -910,7 +910,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.aritzia.com/en/home",
+        "domain": "https://www.aritzia.comen/home",
         "business_name": "Aritzia",
         "vertical": "",
         "site_host": "",
@@ -920,7 +920,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.bellissimafashions.com/",
+        "domain": "https://www.bellissimafashions.com",
         "business_name": "Bellissima",
         "vertical": "",
         "site_host": "",
@@ -930,7 +930,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.belowthebelt.com/",
+        "domain": "https://www.belowthebelt.com",
         "business_name": "Below the Belt",
         "vertical": "",
         "site_host": "",
@@ -940,7 +940,7 @@
         "Country": ""
     },
     {
-        "domain": "https://blnts.com/",
+        "domain": "https://blnts.com",
         "business_name": "Bluenotes",
         "vertical": "",
         "site_host": "",
@@ -950,7 +950,7 @@
         "Country": ""
     },
     {
-        "domain": "https://boathousestores.com/",
+        "domain": "https://boathousestores.com",
         "business_name": "Boathouse",
         "vertical": "",
         "site_host": "",
@@ -960,7 +960,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.bootlegger.com/",
+        "domain": "https://www.bootlegger.com",
         "business_name": "Bootlegger",
         "vertical": "",
         "site_host": "",
@@ -970,7 +970,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.caposhie.com/",
+        "domain": "https://www.caposhie.com",
         "business_name": "Caposhie",
         "vertical": "",
         "site_host": "",
@@ -980,7 +980,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.cleo.ca/",
+        "domain": "https://www.cleo.ca",
         "business_name": "Cleo",
         "vertical": "",
         "site_host": "",
@@ -990,7 +990,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.dynamiteclothing.com/ca",
+        "domain": "https://www.dynamiteclothing.comca",
         "business_name": "Dynamite Stores Inc.",
         "vertical": "",
         "site_host": "",
@@ -1000,7 +1000,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.eclipsestores.com/en-US/",
+        "domain": "https://www.eclipsestores.comen-US/",
         "business_name": "Eclipse",
         "vertical": "",
         "site_host": "",
@@ -1010,7 +1010,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.fairweatherclothing.com/",
+        "domain": "https://www.fairweatherclothing.com",
         "business_name": "Fairweather",
         "vertical": "",
         "site_host": "",
@@ -1020,7 +1020,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.gapcanada.ca/",
+        "domain": "https://www.gapcanada.ca",
         "business_name": "Gap",
         "vertical": "",
         "site_host": "",
@@ -1030,7 +1030,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.garageclothing.com/",
+        "domain": "https://www.garageclothing.com",
         "business_name": "Garage",
         "vertical": "",
         "site_host": "",
@@ -1040,7 +1040,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.guess.com/ca/en/home",
+        "domain": "https://www.guess.comcaen/home",
         "business_name": "Guess?",
         "vertical": "",
         "site_host": "",
@@ -1050,7 +1050,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.hottopic.com/",
+        "domain": "https://www.hottopic.com",
         "business_name": "Hot Topic",
         "vertical": "",
         "site_host": "",
@@ -1060,7 +1060,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.journeys.ca/",
+        "domain": "https://www.journeys.ca",
         "business_name": "Journeys",
         "vertical": "",
         "site_host": "",
@@ -1070,7 +1070,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.northernreflections.com/",
+        "domain": "https://www.northernreflections.com",
         "business_name": "Northern Reflections",
         "vertical": "",
         "site_host": "",
@@ -1080,7 +1080,7 @@
         "Country": ""
     },
     {
-        "domain": "https://oldnavy.gapcanada.ca/",
+        "domain": "https://oldnavy.gapcanada.ca",
         "business_name": "Old Navy",
         "vertical": "",
         "site_host": "",
@@ -1090,7 +1090,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.reitmans.com/",
+        "domain": "https://www.reitmans.com",
         "business_name": "Reitmans",
         "vertical": "",
         "site_host": "",
@@ -1100,7 +1100,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.rickis.com/",
+        "domain": "https://www.rickis.com",
         "business_name": "Ricki's",
         "vertical": "",
         "site_host": "",
@@ -1110,7 +1110,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.ripcurl.com/",
+        "domain": "https://www.ripcurl.com",
         "business_name": "Rip Curl",
         "vertical": "",
         "site_host": "",
@@ -1120,7 +1120,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.roots.com/ca/en/homepage",
+        "domain": "https://www.roots.comcaen/homepage",
         "business_name": "Roots Canada",
         "vertical": "",
         "site_host": "",
@@ -1130,7 +1130,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.rw-co.com/",
+        "domain": "https://www.rw-co.com",
         "business_name": "RW & Co.",
         "vertical": "",
         "site_host": "",
@@ -1140,7 +1140,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.sportchek.ca/",
+        "domain": "https://www.sportchek.ca",
         "business_name": "Sport Chek",
         "vertical": "",
         "site_host": "",
@@ -1150,7 +1150,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.torrid.com/",
+        "domain": "https://www.torrid.com",
         "business_name": "Torrid",
         "vertical": "",
         "site_host": "",
@@ -1160,7 +1160,7 @@
         "Country": ""
     },
     {
-        "domain": "https://urban-planet.com/",
+        "domain": "https://urban-planet.com",
         "business_name": "Urban Planet",
         "vertical": "",
         "site_host": "",
@@ -1170,7 +1170,7 @@
         "Country": ""
     },
     {
-        "domain": "https://west49.com/",
+        "domain": "https://west49.com",
         "business_name": "West 49",
         "vertical": "",
         "site_host": "",
@@ -1180,7 +1180,7 @@
         "Country": ""
     },
     {
-        "domain": "https://www.zumiez.com/",
+        "domain": "https://www.zumiez.com",
         "business_name": "Zumiez",
         "vertical": "",
         "site_host": "",
@@ -1190,7 +1190,7 @@
         "Country": ""
     },
     {
-        "domain": "vpo.ca/",
+        "domain": "vpo.ca",
         "business_name": "Valhalla Pure Outfitters",
         "vertical": "2814 48 Ave, Vernon, BC V1T 3R4",
         "site_host": "",
