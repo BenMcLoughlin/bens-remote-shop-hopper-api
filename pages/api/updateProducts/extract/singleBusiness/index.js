@@ -1,8 +1,9 @@
 import * as sanitize from '../../sanitize';
 import * as load from '../../load';
+import * as metrics from '../../metrics';
 
 export async function singleBusiness(businessName, domain) {
-    let result = { productsUploaded: 0, }
+    let productsUploaded = 0;
 
     try {
         for (let page = 1; page <= 3; page++) {
@@ -15,11 +16,23 @@ export async function singleBusiness(businessName, domain) {
 
             if (data.products.length === 0) continue;
 
-            result.productsUploaded += successfulUploads.count;
+            productsUploaded += successfulUploads.count;
         }
     } catch (error) {
         console.log(error);
     }
 
-    return result;
+    let metric = {};
+
+    if (productsUploaded > 0) {
+        metric = await metrics.shops(productsUploaded, businessName)
+    }
+
+    let data = {
+        metric,
+        businessName,
+        productsUploaded
+    };
+
+    return data;
 }

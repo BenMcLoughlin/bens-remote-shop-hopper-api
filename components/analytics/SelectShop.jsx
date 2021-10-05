@@ -10,7 +10,7 @@ const SelectShop = ({ set, selected, shopsList }) => {
     const [loading, setLoading] = useState(false || "");
 
     useEffect(() => {
-        const _getAllShops = async () => {
+        const _ = async () => {
             const uniqueShops = await fetchShops();
             setLoading(true);
 
@@ -21,7 +21,7 @@ const SelectShop = ({ set, selected, shopsList }) => {
             }
         };
 
-        _getAllShops();
+        _();
     }, [addShopModal]);
 
     const _toggleAddShopModal = () => {

@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { camelCase } from '../../utils/strings';
 import addNewShop from "../../lib/requests/addNewShop";
 import fetchShops from "../../lib/requests/fetchShops";
+import fetchShopStatus from "../../lib/requests/fetchShopStatus";
 import CreateShopModal from "../../components/CreateShopModal";
 
-const SelectShop = ({ set, selected, shopsList }) => {
+const SelectShop = ({ set, selected, shopsList, refresh }) => {
     const [list, setList] = useState([]);
+    const [statuses, setStatuses] = useState({});
     const [addShopModal, toggleAddShopModal] = useState(false);
     const [loading, setLoading] = useState(false || "");
 
     useEffect(() => {
-        const _getAllShops = async () => {
-            const uniqueShops = await fetchShops();
+        const _getShopList = async () => {
             setLoading(true);
+            const uniqueShops = await fetchShops();
 
             if (uniqueShops) {
                 const businessNames = uniqueShops.map((d) => d.businessName);
@@ -21,8 +23,30 @@ const SelectShop = ({ set, selected, shopsList }) => {
             }
         };
 
-        _getAllShops();
+        _getShopList();
     }, [addShopModal]);
+
+    useEffect(() => {
+        const _getShopStatus = async () => {
+            setLoading(true);
+            const eachShop = await fetchShopStatus();
+
+            let businessStatus = {};
+
+            if (eachShop.length) {
+                eachShop.map((d) => (
+                    businessStatus[d.businessName] = {
+                        products: d.products,
+                        updatedAt: d.updated_at
+                    }
+                ));
+                setStatuses(businessStatus);
+                setLoading(false);
+            }
+        };
+
+        _getShopStatus();
+    }, [refresh]);
 
     const _toggleAddShopModal = () => {
         toggleAddShopModal(!addShopModal);
@@ -69,12 +93,18 @@ const SelectShop = ({ set, selected, shopsList }) => {
                             <div className="row">
                                 {list.map((businessName) => (
                                     <div
+
                                         key={businessName}
                                         className={`businessName ${camelCase(businessName)}`}
                                         onClick={() => set.selectedBusinessName(camelCase(businessName))}
                                     >
                                         <div className="title">{businessName}</div>
-                                        {/* <div className="title">{businessName}</div> */}
+                                        {statuses[camelCase(businessName)] &&
+                                            <div className="updateColumn">
+                                                <div>Most Recent: <span className="update">{statuses[camelCase(businessName)]?.products}</span></div>
+                                                <div className="time">{statuses[camelCase(businessName)]?.updatedAt.substring(0, 19)}</div>
+                                            </div>
+                                        }
                                     </div>
                                 ))}
                             </div>
@@ -109,18 +139,14 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     gap: 2rem;
                     justify-content: start;
                 }
-
                 .businessName {
-                    flex-wrap: wrap;
-                    justify-content: space-around;
-                    align-content: center;
                     display: flex;
                     justify-content: left;
                     align-items: center;
-                    height: 3.5rem;
+                    justify-content: space-around;
                     width: 44%;
                     gap: 1rem;
-                    padding-left: 2rem;
+                    padding: 2rem;
                     border-radius: 5px;
                     position: relative;
                     cursor: pointer;
@@ -138,6 +164,23 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     font-size: 1.2rem;
                     width: 11rem;
                     text-align: left;
+                }
+                .updateColumn {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: left;
+                    align-items: center;
+                    justify-content: space-between;
+                    background-color: #e7e7e7a6;
+                    padding: .2rem;
+                    width: 100%;
+                }
+                .time {
+                    font-size: .8rem;
+                }
+                .update {
+                    font-size: .8rem;
+                    color: green;
                 }
             `}</style>
         </>
