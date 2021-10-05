@@ -13,10 +13,11 @@ export default async (req, res) => {
 
     const formattedData = await format.products(rawData, businessName);
 
-    await load.products(formattedData);
+    const result = await load.products(formattedData);
 
     res.status(200).json({
         status: 'success',
         message: 'products loaded',
+        result: result
     });
 };

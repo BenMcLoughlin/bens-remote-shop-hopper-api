@@ -19,10 +19,10 @@ body {
 
 /*  calculation to make 1rem be10px at 1400 font-size: calc(0.038em + 0.665vw); */
 @media screen and (min-width: 100px) {
-    html {
-        /* this number makes 1 rem = 10px when screen is 1400 wide and 880 tall - please don't change*/
-        /* font-size: calc(0.03em + 0.66vw); Boom changed. Lets discuss further */
-    }
+    /* html {
+        /* this number makes 1 rem = 10px when screen is 1400 wide and 880 tall - please don't change
+        font-size: calc(0.03em + 0.66vw); Boom changed. Lets discuss further
+    } */
 }
 
 /* h1 {

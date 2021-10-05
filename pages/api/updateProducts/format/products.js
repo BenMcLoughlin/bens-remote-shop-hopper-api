@@ -36,7 +36,7 @@ export async function products(data, businessName) {
             return output;
         });
     }
-    console.log('IN FORMAT FUNCTION: ', formatted[0]);
+    console.log('IN FORMAT FUNCTION: ', formatted.length);
 
     return formatted;
 }
