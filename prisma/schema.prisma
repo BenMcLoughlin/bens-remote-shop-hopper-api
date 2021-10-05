@@ -19,15 +19,6 @@ model hotItem {
   @@map(name: "hotItems")
 }
 
-model status {
-  id           Int      @id @default(autoincrement())
-  businessName String   @unique
-  updated_at   DateTime @default(now())
-  products     Int
-
-  @@map(name: "statuses")
-}
-
 model shop {
   id           Int      @id @default(autoincrement())
   businessName String

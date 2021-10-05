@@ -54,7 +54,7 @@ const Tags = () => {
         <Layout>
             <div className="page">
                 {
-                    raw_Tags.length &&
+                    raw_Tags.length ?
                     <div className="notice">
                         <div>
                             <p>See we can search by existing tags</p>
@@ -65,19 +65,20 @@ const Tags = () => {
                             options={raw_Tags}
                         />
 
-                        <div className="cards">
-
+                            <div className="cards">
                             {
                                 loading ?
                                     <h3>Loading....</h3>
                                     :
                                     search_products.map((product) => <div className="card hov" key={product.id}>
-                                        <img className="image" src={product.images[0].src} />
+                                        <img className="image" src={product.images[0]?.src} />
                                     <p>{product.title}</p>
                                 </div>)
                             }
                         </div>
                     </div>
+                        :
+                        null
                 }
                 <main className="main">
                     <div className="notice hov" onClick={() => set_search_products([])}>

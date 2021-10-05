@@ -67,17 +67,17 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
             <div className="wrapper">
                 {
                     addShopModal &&
-                    <CreateShopModal
-                        addShop={_addShop}
-                        close={_toggleAddShopModal}
-                    />
+                    <button className="send" onClick={() => _addShop('all')}>
+                        Add All Shops from local file
+                    </button>
                 }
 
                 {
                     addShopModal &&
-                    <button className="send" onClick={() => _addShop('all')}>
-                        Add All Shops from local file
-                    </button>
+                    <CreateShopModal
+                        addShop={_addShop}
+                        close={_toggleAddShopModal}
+                    />
                 }
 
                 {
@@ -102,6 +102,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                                         {statuses[camelCase(businessName)] &&
                                             <div className="updateColumn">
                                                 <div>Most Recent: <span className="update">{statuses[camelCase(businessName)]?.products}</span></div>
+                                            {/* todo: Date format */}
                                                 <div className="time">{statuses[camelCase(businessName)]?.updatedAt.substring(0, 19)}</div>
                                             </div>
                                         }

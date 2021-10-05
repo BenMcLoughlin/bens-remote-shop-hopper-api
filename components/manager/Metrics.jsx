@@ -57,7 +57,7 @@ const Metrics = ({ header, selected, refresh, shopsList, isShopify }) => {
                     align-content: center;
                 }
                 .column {
-                    min-width: 5rem;
+                    min-width: 13rem;
                     display: flex;
                     flex-direction: column;
                     align-items: flex-end;
