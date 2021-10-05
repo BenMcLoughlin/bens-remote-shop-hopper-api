@@ -33,7 +33,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
 
             let businessStatus = {};
 
-            if (eachShop.length) {
+            if (eachShop) {
                 eachShop.map((d) => (
                     businessStatus[d.businessName] = {
                         products: d.products,
