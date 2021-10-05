@@ -9,7 +9,6 @@ async function createAllShops() {
 
     array.map(shop => {
         if (shop.site_host === "Shopify") {
-
             const data = {
                 businessName: shop.business_name,
                 domain: shop.domain,
@@ -25,11 +24,11 @@ async function createAllShops() {
         }
     })
 
-    await Promise.all(shopArray.map(async (item) => {
-        result = await prisma.shop.createMany({
-            data: item
-        });
-    })).catch((e) => {
+    // todo: is this broken?
+    result = await prisma.shop.createMany({
+        data: shopArray,
+        skipDuplicates: true
+    }).catch((e) => {
         console.log('e:', e);
         throw e;
     }).finally(async () => {
@@ -41,12 +40,12 @@ async function createAllShops() {
 
 async function createNewShop(shopData) {
     let result = {};
-    var pattern = /^((http|https):\/\/)/;
+    // let pattern = /^((http|https):\/\/)/;
 
-    // if it doesn't already start with http, then add it
-    if (!pattern.test(shopData.domain)) {
-        shopData.domain = "https://" + shopData.domain;
-    }
+    // // if it doesn't already start with http, then add it
+    // if (!pattern.test(shopData.domain)) {
+    //     shopData.domain = "https://" + shopData.domain;
+    // }
 
     result = await prisma.shop.create({
         data: shopData

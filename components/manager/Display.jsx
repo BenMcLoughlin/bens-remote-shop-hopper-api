@@ -74,6 +74,7 @@ const Display = (props) => {
                     shopsList={shopsList}
                     set={set}
                     selected={selected}
+                    refresh={uploadedSuccess}
                 />
             </div>
             <style jsx>{`

@@ -21,16 +21,6 @@ export const getServerSideProps = async () => {
 const Display = ({ hotItems }) => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const updateProducts = async () => {
-        setIsLoading(true);
-        const uploaded = await fetch('/api/updateProducts', {
-            method: 'POST',
-            body: JSON.stringify(props.selected),
-        });
-        uploaded && setIsLoading(false);
-        console.log(uploaded);
-    };
-
     return (
         <>
             <div className="wrapper">
