@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://ncmoseley:password@localhost:5432/template1"
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
