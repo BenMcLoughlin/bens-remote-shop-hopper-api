@@ -19,6 +19,15 @@ model hotItem {
   @@map(name: "hotItems")
 }
 
+model status {
+  id           Int      @id @default(autoincrement())
+  businessName String   @unique
+  updated_at   DateTime @default(now())
+  products     Int
+
+  @@map(name: "statuses")
+}
+
 model shop {
   id           Int      @id @default(autoincrement())
   businessName String
@@ -37,14 +46,14 @@ model shop {
 model product {
   id           Int      @id @default(autoincrement())
   businessName String?  
-  title        String
+  title        String   @unique
   handle       String?
-  body_html    String?  @unique
+  body_html    String?  
   vendor       String?
   product_type String?
   created_at   DateTime?
   published_at DateTime @default(now())
-  updated_at   DateTime
+  updated_at   DateTime?
   tags         String[]
   variants     Json?
   images       Json?

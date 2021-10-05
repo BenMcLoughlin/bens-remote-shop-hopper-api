@@ -2,29 +2,39 @@ import React, { useState } from 'react';
 import Metrics from './Metrics';
 import Button from '../buttons/Button';
 import SelectShop from './SelectShop';
-import { updateMetrics } from './Metrics';
+import { updateMetrics } from '../../lib/requests/updateMetrics';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;
-
+    const [uploadedSuccess, setUpLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const updateProducts = async () => {
         setIsLoading(true);
-        const uploaded = await fetch('/api/updateProducts', {
+        const res = await fetch('/api/updateProducts', {
             method: 'POST',
             body: JSON.stringify(props.selected),
         });
-        uploaded && setIsLoading(false);
-        console.log(uploaded);
+
+        if (res) {
+            const uploaded = await res.json();
+            console.log('uploaded:', uploaded.result.productsUploaded)
+            setUpLoaded(uploaded.result.productsUploaded);
+            setIsLoading(false);
+        }
     };
-    console.log('selected: ', selected);
+
     return (
         <>
             <div className="wrapper">
                 <div className="top">
                     <div className="metricsControl">
-                        <Metrics header={selected.siteHost} isShopify {...props} />
+                        <Metrics
+                            header={selected.siteHost}
+                            refresh={uploadedSuccess}
+                            isShopify
+                            {...props}
+                        />
                         <Button
                             loading={isLoading}
                             text={`Load All ${selected.siteHost} Shops`}
@@ -40,14 +50,19 @@ const Display = (props) => {
                     {
                         selected.businessName &&
                         <div className="metricsControl">
-                            <Metrics header={selected.businessName} isShopify={false} {...props} />
+                            <Metrics
+                                header={selected.businessName}
+                                refresh={uploadedSuccess}
+                                isShopify={false}
+                                {...props}
+                            />
                             <Button
                                 loading={isLoading}
                                 text={`Load Only ${selected.businessName}`}
                                 onClick={() => {
                                     // set.selectedSiteHost(''); todo
                                     updateProducts().then(() => {
-                                        updateMetrics(false, selected.businessName);
+                                        updateMetrics(true, selected.siteHost)
                                     })
                                 }}
                             />
@@ -55,7 +70,12 @@ const Display = (props) => {
                     }
                 </div>
 
-                <SelectShop shopsList={shopsList} set={set} selected={selected} />
+                <SelectShop
+                    shopsList={shopsList}
+                    set={set}
+                    selected={selected}
+                    refresh={uploadedSuccess}
+                />
             </div>
             <style jsx>{`
                 .wrapper {

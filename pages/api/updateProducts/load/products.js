@@ -3,51 +3,64 @@ import prisma from '../../../../prisma/prisma.js';
 async function createRows(data) {
     let result = {};
 
-    await Promise.all(data.map(async (item) => {
-        result = await prisma.product.createMany({
-            data: item,
-            skipDuplicates: true
-        });
-    })).catch((e) => {
+    result = await prisma.product.createMany({
+        data,
+        skipDuplicates: true
+    }).catch((e) => {
         console.log('e:', e);
         throw e;
     }).finally(async () => {
         await prisma.$disconnect();
     });
 
+    // await Promise.all(data.map(async (item) => {
+    //     result = await prisma.product.createMany({
+    //         data: item,
+    //         skipDuplicates: true
+    //     });
+    // })).catch((e) => {
+    //     console.log('e:', e);
+    //     throw e;
+    // }).finally(async () => {
+    //     await prisma.$disconnect();
+    // });
+
     return result;
 }
 
 export async function products(data) {
-    console.log('formatted data:', data.length);
     let result = false;
     let traunch = 50;
     let start = 0;
+    let results = [];
 
-    // hey don't judge : P
-    let iterate = async () => {
-        let arr = [];
+    results = await createRows(data);
 
-        data.map((item, i) => {
-            if ((i + start) < traunch) {
-                arr.push(item);
-            }
-        })
+    // let iterate = async () => {
+    //     let arr = [];
 
-        result = await createRows(arr);
-        if (result && (start < data.length)) {
-            traunch += 50;
-            start += 50;
-            iterate();
-            return console.log('ITERATE LOAD FUNCTION: ', result, start);
-        }
+    //     data.map((item, i) => {
+    //         if ((i + start) < traunch) {
+    //             arr.push(item);
+    //         }
+    //     })
 
-        return { done: true }
-    }
+    //     result = await createRows(arr);
+    //     if (result && (start < data.length)) {
+    //         results.push(result);
+    //         traunch += 50;
+    //         start += 50;
+    //         iterate();
+    //         return console.log('ITERATE LOAD: ', result, start);
+    //     }
+    //     results.push(result);
 
-    iterate();
+    //     return { done: true, start, traunch }
+    // }
 
-    console.log('IN LOAD FUNCTION: ', result); // toda
+    // await iterate();
 
-    return result;
+    console.log('IN LOAD FUNCTION: ', results);
+
+    return results
 }

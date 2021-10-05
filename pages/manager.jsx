@@ -3,12 +3,12 @@ import { useSession } from "next-auth/client";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
-import SideNav from '../components/dbManager/SideNav';
-import Display from '../components/dbManager/Display';
+import SideNav from '../components/manager/SideNav';
+import Display from '../components/manager/Display';
 import * as shopsLists from '../mock/shopsLists';
 import { camelCase } from '../utils/strings';
 
-const ExtractTransformLoad = () => {
+const manager = () => {
     const session = useSession();
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
@@ -96,4 +96,4 @@ const ExtractTransformLoad = () => {
     );
 };
 
-export default ExtractTransformLoad;
+export default manager;

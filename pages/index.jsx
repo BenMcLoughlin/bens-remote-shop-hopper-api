@@ -121,16 +121,6 @@ const Home = (props) => {
         }
     };
 
-    const _sendProducts = async () => {
-        setLoading('sendProducts');
-        const result = await hydrateRequest({ request: 'SEND' });
-        if (result) {
-            console.log('result:', result);
-            refreshData();
-            setLoading(false);
-        }
-    };
-
     const _wipeDatabase = async () => {
         setLoading('wipeDatabase');
         const result = await hydrateRequest({ request: 'DESTROY' });
@@ -152,12 +142,6 @@ const Home = (props) => {
                 {
                     isLoggedIn ?
                         <>
-                            <button className="send hov" onClick={_sendProducts}>
-                                {loading === 'sendProducts'
-                                    ? "Loading..."
-                                    : <a>Fetch Products, and send to DB, also, they will be listed below when this component pulls them in and it re-renders.</a>}
-                            </button>
-                            {/* } */}
                             <main className="main">
                                 {search_products.length ?
                                     <React.Fragment>
@@ -227,7 +211,6 @@ const Home = (props) => {
                                         null
                                 }
 
-                                {/* { process.env.NODE_ENV === 'development' && */}
                                 <button className="send hov" onClick={_wipeDatabase}>
                                     {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
                                 </button>
@@ -243,7 +226,7 @@ const Home = (props) => {
             </div>
             <style jsx>{`
         .page {
-             margin: 20px;
+            margin: 20px;
         }
 
         .main {

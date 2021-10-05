@@ -1,5 +1,4 @@
 import React, { useReducer, useCallback } from 'react';
-// import { fetchStore } from "../pages/api/fetch";
 import produce from "immer";
 import { set, has } from "lodash";
 
@@ -82,20 +81,6 @@ const CreateShopModal = ({ addShop, close }) => {
             });
         }
     }, []);
-
-    // todo
-    // const _findStore = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         const body = { domain, content };
-
-    //         const json = await fetchStore();
-
-    //         console.log('json:', json.body)
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
 
     const _addShop = async (e) => {
         e.preventDefault();
