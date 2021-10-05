@@ -2,32 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { camelCase } from '../../utils/strings';
 import addNewShop from "../../lib/requests/addNewShop";
 import fetchShops from "../../lib/requests/fetchShops";
-<<<<<<< HEAD
 import fetchShopStatus from "../../lib/requests/fetchShopStatus";
 import CreateShopModal from "../../components/CreateShopModal";
 
 const SelectShop = ({ set, selected, shopsList, refresh }) => {
     const [list, setList] = useState([]);
     const [statuses, setStatuses] = useState({});
-=======
-import CreateShopModal from "../../components/CreateShopModal";
-
-const SelectShop = ({ set, selected, shopsList }) => {
-    const [list, setList] = useState([]);
->>>>>>> 29f69a55049789ea3b0766a7378488c5bf06b6d9
     const [addShopModal, toggleAddShopModal] = useState(false);
     const [loading, setLoading] = useState(false || "");
 
     useEffect(() => {
-<<<<<<< HEAD
         const _getShopList = async () => {
             setLoading(true);
             const uniqueShops = await fetchShops();
-=======
-        const _getAllShops = async () => {
-            const uniqueShops = await fetchShops();
-            setLoading(true);
->>>>>>> 29f69a55049789ea3b0766a7378488c5bf06b6d9
 
             if (uniqueShops) {
                 const businessNames = uniqueShops.map((d) => d.businessName);
@@ -36,7 +23,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
             }
         };
 
-<<<<<<< HEAD
         _getShopList();
     }, [addShopModal]);
 
@@ -62,11 +48,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
         _getShopStatus();
     }, [refresh]);
 
-=======
-        _getAllShops();
-    }, [addShopModal]);
-
->>>>>>> 29f69a55049789ea3b0766a7378488c5bf06b6d9
     const _toggleAddShopModal = () => {
         toggleAddShopModal(!addShopModal);
     };
@@ -86,7 +67,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
             <div className="wrapper">
                 {
                     addShopModal &&
-<<<<<<< HEAD
                     <button className="send" onClick={() => _addShop('all')}>
                         Add All Shops from local file
                     </button>
@@ -94,8 +74,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
 
                 {
                     addShopModal &&
-=======
->>>>>>> 29f69a55049789ea3b0766a7378488c5bf06b6d9
                     <CreateShopModal
                         addShop={_addShop}
                         close={_toggleAddShopModal}
@@ -103,16 +81,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
                 }
 
                 {
-<<<<<<< HEAD
-=======
-                    addShopModal &&
-                    <button className="send" onClick={() => _addShop('all')}>
-                        Add All Shops from local file
-                    </button>
-                }
-
-                {
->>>>>>> 29f69a55049789ea3b0766a7378488c5bf06b6d9
                     loading ?
                         <h3>Loading....</h3>
                         :
@@ -125,16 +93,11 @@ const SelectShop = ({ set, selected, shopsList }) => {
                             <div className="row">
                                 {list.map((businessName) => (
                                     <div
-<<<<<<< HEAD
-
-=======
->>>>>>> 29f69a55049789ea3b0766a7378488c5bf06b6d9
                                         key={businessName}
                                         className={`businessName ${camelCase(businessName)}`}
                                         onClick={() => set.selectedBusinessName(camelCase(businessName))}
                                     >
                                         <div className="title">{businessName}</div>
-<<<<<<< HEAD
                                         {statuses[camelCase(businessName)] &&
                                             <div className="updateColumn">
                                                 <div>Most Recent: <span className="update">{statuses[camelCase(businessName)]?.products}</span></div>
@@ -142,9 +105,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
                                                 <div className="time">{statuses[camelCase(businessName)]?.updatedAt.substring(0, 19)}</div>
                                             </div>
                                         }
-=======
-                                        {/* <div className="title">{businessName}</div> */}
->>>>>>> 29f69a55049789ea3b0766a7378488c5bf06b6d9
                                     </div>
                                 ))}
                             </div>
@@ -179,7 +139,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     gap: 2rem;
                     justify-content: start;
                 }
-<<<<<<< HEAD
                 .businessName {
                     display: flex;
                     justify-content: left;
@@ -188,20 +147,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     width: 44%;
                     gap: 1rem;
                     padding: 2rem;
-=======
-
-                .businessName {
-                    flex-wrap: wrap;
-                    justify-content: space-around;
-                    align-content: center;
-                    display: flex;
-                    justify-content: left;
-                    align-items: center;
-                    height: 3.5rem;
-                    width: 44%;
-                    gap: 1rem;
-                    padding-left: 2rem;
->>>>>>> 29f69a55049789ea3b0766a7378488c5bf06b6d9
                     border-radius: 5px;
                     position: relative;
                     cursor: pointer;
@@ -220,7 +165,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     width: 11rem;
                     text-align: left;
                 }
-<<<<<<< HEAD
                 .updateColumn {
                     display: flex;
                     flex-direction: column;
@@ -238,8 +182,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     font-size: .8rem;
                     color: green;
                 }
-=======
->>>>>>> 29f69a55049789ea3b0766a7378488c5bf06b6d9
             `}</style>
         </>
     );

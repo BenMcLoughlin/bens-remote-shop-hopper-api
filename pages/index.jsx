@@ -142,14 +142,6 @@ const Home = (props) => {
                 {
                     isLoggedIn ?
                         <>
-<<<<<<< HEAD
-=======
-                            <button className="send hov" onClick={_sendProducts}>
-                                {loading === 'sendProducts'
-                                    ? "Loading..."
-                                    : <a>Fetch Products, and send to DB, also, they will be listed below when this component pulls them in and it re-renders.</a>}
-                            </button>
->>>>>>> 29f69a55049789ea3b0766a7378488c5bf06b6d9
                             <main className="main">
                                 {search_products.length ?
                                     <React.Fragment>

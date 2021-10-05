@@ -74,10 +74,7 @@ const Display = (props) => {
                     shopsList={shopsList}
                     set={set}
                     selected={selected}
-<<<<<<< HEAD:components/manager/Display.jsx
                     refresh={uploadedSuccess}
-=======
->>>>>>> 29f69a55049789ea3b0766a7378488c5bf06b6d9:components/dbManager/Display.jsx
                 />
             </div>
             <style jsx>{`
