@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Metrics from './Metrics';
 import Button from '../buttons/Button';
 import SelectShop from './SelectShop';
-import { updateMetrics } from './Metrics';
+import { updateMetrics } from '../../lib/requests/updateMetrics';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;
@@ -31,7 +31,7 @@ const Display = (props) => {
                     <div className="metricsControl">
                         <Metrics
                             header={selected.siteHost}
-                            total={uploadedSuccess}
+                            refresh={uploadedSuccess}
                             isShopify
                             {...props}
                         />
@@ -52,7 +52,7 @@ const Display = (props) => {
                         <div className="metricsControl">
                             <Metrics
                                 header={selected.businessName}
-                                total={uploadedSuccess}
+                                refresh={uploadedSuccess}
                                 isShopify={false}
                                 {...props}
                             />
@@ -70,7 +70,11 @@ const Display = (props) => {
                     }
                 </div>
 
-                <SelectShop shopsList={shopsList} set={set} selected={selected} />
+                <SelectShop
+                    shopsList={shopsList}
+                    set={set}
+                    selected={selected}
+                />
             </div>
             <style jsx>{`
                 .wrapper {

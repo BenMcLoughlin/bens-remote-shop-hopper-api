@@ -41,7 +41,6 @@ const SelectShop = ({ set, selected, shopsList }) => {
     return (
         <>
             <div className="wrapper">
-
                 {
                     addShopModal &&
                     <CreateShopModal
@@ -52,8 +51,8 @@ const SelectShop = ({ set, selected, shopsList }) => {
 
                 {
                     addShopModal &&
-                    <button onClick={() => _addShop('all')}>
-                        Testing only, Add all
+                    <button className="send" onClick={() => _addShop('all')}>
+                        Add All Shops from local file
                     </button>
                 }
 
@@ -75,6 +74,7 @@ const SelectShop = ({ set, selected, shopsList }) => {
                                         onClick={() => set.selectedBusinessName(camelCase(businessName))}
                                     >
                                         <div className="title">{businessName}</div>
+                                        {/* <div className="title">{businessName}</div> */}
                                     </div>
                                 ))}
                             </div>
@@ -118,7 +118,7 @@ const SelectShop = ({ set, selected, shopsList }) => {
                     justify-content: left;
                     align-items: center;
                     height: 3.5rem;
-                    width: 18.5rem;
+                    width: 44%;
                     gap: 1rem;
                     padding-left: 2rem;
                     border-radius: 5px;

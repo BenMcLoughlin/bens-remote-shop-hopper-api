@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { startCase } from '../../utils/strings';
 import { formatDate } from '../../utils/dates/forDisplay';
+import { updateMetrics } from '../../lib/requests/updateMetrics'
 
-export const updateMetrics = async (isShopify, header) => {
-    const res = await fetch('/api/dbMetrics', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(isShopify ? 'all' : header)
-    });
-    const data = await res.json();
-    console.log(`GET NUMBER OF PRODUCTS:`, data);
-
-    return data;
-};
-
-const Metrics = ({ header, selected, total, shopsList, isShopify }) => {
+const Metrics = ({ header, selected, refresh, shopsList, isShopify }) => {
     const now = new Date();
     const [totalItems, setTotalItems] = useState(0);
     const [date, setDate] = useState(now); // todo
@@ -25,7 +14,7 @@ const Metrics = ({ header, selected, total, shopsList, isShopify }) => {
             setDate(now);
         })
 
-    }, [header, total]);
+    }, [header, refresh]);
 
     return (
         <div className="wrapper">
