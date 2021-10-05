@@ -1,7 +1,8 @@
 export async function products(data, businessName) {
     let formatted = [];
+
     if (businessName) {
-        formatted = await data.products.map((product) => {
+        formatted = await data.map((product) => {
             const {
                 title,
                 handle,

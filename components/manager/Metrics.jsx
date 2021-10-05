@@ -14,7 +14,7 @@ export const updateMetrics = async (isShopify, header) => {
     return data;
 };
 
-const Metrics = ({ header, selected, shopsList, isShopify }) => {
+const Metrics = ({ header, selected, total, shopsList, isShopify }) => {
     const now = new Date();
     const [totalItems, setTotalItems] = useState(0);
     const [date, setDate] = useState(now); // todo
@@ -25,7 +25,7 @@ const Metrics = ({ header, selected, shopsList, isShopify }) => {
             setDate(now);
         })
 
-    }, [header]);
+    }, [header, total]);
 
     return (
         <div className="wrapper">

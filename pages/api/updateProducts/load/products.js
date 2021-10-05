@@ -30,37 +30,37 @@ async function createRows(data) {
 
 export async function products(data) {
     let result = false;
-
-    // console.log('formatted set:', JSON.stringify(set));
     let traunch = 50;
     let start = 0;
     let results = [];
 
-    let iterate = async () => {
-        let arr = [];
+    results = await createRows(data);
 
-        data.map((item, i) => {
-            if ((i + start) < traunch) {
-                arr.push(item);
-            }
-        })
+    // let iterate = async () => {
+    //     let arr = [];
 
-        result = await createRows(arr);
-        if (result && (start < data.length)) {
-            results.push(result);
-            traunch += 50;
-            start += 50;
-            iterate();
-            return console.log('ITERATE LOAD: ', result, start);
-        }
-        results.push(result);
+    //     data.map((item, i) => {
+    //         if ((i + start) < traunch) {
+    //             arr.push(item);
+    //         }
+    //     })
 
-        return { done: true, start, traunch }
-    }
+    //     result = await createRows(arr);
+    //     if (result && (start < data.length)) {
+    //         results.push(result);
+    //         traunch += 50;
+    //         start += 50;
+    //         iterate();
+    //         return console.log('ITERATE LOAD: ', result, start);
+    //     }
+    //     results.push(result);
 
-    await iterate();
+    //     return { done: true, start, traunch }
+    // }
+
+    // await iterate();
 
     console.log('IN LOAD FUNCTION: ', results);
 
-    return { results }
+    return results
 }

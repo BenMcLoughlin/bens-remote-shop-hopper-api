@@ -42,3 +42,10 @@ To clear Products table (take it easy this deletes everything)
 
 use in function
  `await prisma.product.deleteMany({})`
+
+
+## TBA
+
+`To configure seeding in your project you need to add a "prisma.seed" property in your package.json with the command to execute it:`
+
+https://www.prisma.io/docs/guides/database/seed-database
