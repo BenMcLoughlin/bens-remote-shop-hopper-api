@@ -11,10 +11,18 @@ const Display = (props) => {
 
     const _updateProducts = async (params) => {
         setIsLoading(true);
-        const result = await updateProducts(params);
+        const success = await updateProducts(params);
 
-        setUpLoaded(result);
+        if (success) {
+            setUpLoaded(success.result);
+            setIsLoading(false);
+
+            return true;
+        }
+
+        setUpLoaded('failed');
         setIsLoading(false);
+        return alert("Product acquisition failed, please try again.")
     }
 
     return (
@@ -27,6 +35,7 @@ const Display = (props) => {
                             header={selected.siteHost}
                             refresh={uploadedSuccess}
                             isShopify
+                            isLoading={isLoading}
                             buttonTitle={`Load All ${selected.siteHost} Shops`}
                             buttonClick={() => {
                                 set.selectedBusinessName('');
@@ -42,6 +51,10 @@ const Display = (props) => {
                         />
                     </div>
                     {
+                        uploadedSuccess === 'failed' &&
+                        <p className="red">Product acquisition failed.</p>
+                    }
+                    {
                         selected.businessName &&
                         <div>
                             <Metrics
@@ -49,6 +62,7 @@ const Display = (props) => {
                                 header={selected.businessName}
                                 refresh={uploadedSuccess}
                                 isShopify={false}
+                                isLoading={isLoading}
                                 buttonTitle={`Load ${selected.businessName}`}
                                 buttonClick={() => {
                                     // set.selectedSiteHost(''); todo

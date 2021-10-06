@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import Metrics from './Analytics';
-import Button from '../buttons/Button';
-import SelectShop from './SelectShop';
 
 // We might use this to do user fetching .....
 export const getServerSideProps = async () => {

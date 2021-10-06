@@ -5,8 +5,6 @@ import * as metrics from '../../metrics';
 export async function singleBusiness(businessName, domain) {
     let productsUploaded = 0;
 
-    console.log('domain:', domain)
-
     try {
         for (let page = 1; page <= 3; page++) {
             const url = `https://${domain}/products.json?limit=250&page=${page}`;
