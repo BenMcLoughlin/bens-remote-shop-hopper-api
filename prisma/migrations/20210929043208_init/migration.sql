@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "hotItems" (
+CREATE TABLE "hot_items" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "value" INTEGER,
@@ -88,7 +88,7 @@ CREATE TABLE "sessions" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "hotItems.name_unique" ON "hotItems"("name");
+CREATE UNIQUE INDEX "hot_items.name_unique" ON "hot_items"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "shops.domain_unique" ON "shops"("domain");

@@ -2,7 +2,7 @@
 ALTER INDEX "accounts.compound_id_unique" RENAME TO "accounts_compound_id_key";
 
 -- RenameIndex
-ALTER INDEX "hotItems.name_unique" RENAME TO "hotItems_name_key";
+ALTER INDEX "hot_items.name_unique" RENAME TO "hotItems_name_key";
 
 -- RenameIndex
 ALTER INDEX "sessions.access_token_unique" RENAME TO "sessions_access_token_key";

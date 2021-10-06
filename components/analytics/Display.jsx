@@ -13,12 +13,12 @@ export const getServerSideProps = async () => {
             }
         }
     });
-    // const hotItems = dateStripped(hotItemsFeed);
+    // const hot_items = dateStripped(hotItemsFeed);
 
     return { props: { hotItemsFeed } };
 };
 
-const Display = ({ hotItems }) => {
+const Display = ({ hot_items }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     return (
@@ -26,10 +26,10 @@ const Display = ({ hotItems }) => {
             <div className="wrapper">
                 <div className="top">
                     {
-                        hotItems?.length &&
+                        hot_items?.length &&
                         <div className="cards">
                             {
-                                hotItems.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.id)}>
+                                hot_items.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.id)}>
                                     <img className="image" src={product.images[0].src} />
                                     <button className="hov">
                                         {product.rating > 10 && <p className="star">⭐️</p>}
