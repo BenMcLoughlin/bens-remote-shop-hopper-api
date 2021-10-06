@@ -32,10 +32,16 @@ To Generate the client after making schema changes
 npx prisma generate
 ```
 
-To run migrations making schema changes
+To run migrations after making schema changes: 
 
 ```
 prisma migrate dev --name <migration name>
+```
+
+To run migrations after making schema changes for deployment
+
+```
+prisma migrate deploy
 ```
 
 To clear Products table (take it easy this deletes everything)
@@ -49,3 +55,7 @@ use in function
 `To configure seeding in your project you need to add a "prisma.seed" property in your package.json with the command to execute it:`
 
 https://www.prisma.io/docs/guides/database/seed-database
+
+## Build Step Spare
+
+`next dev --port $PORT`
