@@ -1,7 +1,7 @@
 export async function single(businessName, domain) {
     let productList = [];
     try {
-        for (let page = 1; page <= 2; page++) {
+        for (let page = 1; page <= 30; page++) {
             const url = `https://${domain}/products.json?limit=250&page=${page}`;
             const response = await fetch(url);
             const data = await response.json();
@@ -13,6 +13,6 @@ export async function single(businessName, domain) {
     } catch (error) {
         console.log(error);
     }
-    console.log('IN SINGLE BUSINESS FUNCTION: ', productList);
+    // console.log('IN SINGLE BUSINESS FUNCTION: ', JSON.stringify(productList, null, 4));
     return productList;
 }

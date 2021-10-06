@@ -17,7 +17,7 @@ const Display = (props) => {
         uploaded && setIsLoading(false);
         console.log(uploaded);
     };
-    console.log('selected: ', selected);
+
     return (
         <>
             <div className="wrapper">

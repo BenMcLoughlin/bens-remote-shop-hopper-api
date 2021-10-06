@@ -202,8 +202,8 @@ const Header: React.FC = () => {
 
     return (
         <nav>
-            {left}
-            {right}
+            {/* {left}
+            {right} */}
             <style jsx>{`
                 nav {
                     display: flex;

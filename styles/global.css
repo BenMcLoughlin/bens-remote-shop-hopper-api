@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 body {
-    font-family: 'Mulish', sans-serif;
-    color: #707070;
+    font-family: 'Poppins', sans-serif;
+    color: black;
     letter-spacing: 0.5px;
     background: rgb(252, 252, 252);
     background: linear-gradient(
@@ -17,42 +17,17 @@ body {
 }
 
 /*  calculation to make 1rem be10px at 1400 font-size: calc(0.038em + 0.665vw); */
-@media screen and (min-width: 100px) {
+@media screen and (min-width: 400px) {
     html {
         /* this number makes 1 rem = 10px when screen is 1400 wide and 880 tall - please don't change*/
         font-size: calc(0.03em + 0.66vw);
     }
 }
-
-h1 {
-    padding: 1rem;
-    font-size: 8rem;
-    font-weight: 600;
-    width: 100%;
-    line-height: 10rem;
-}
-h2 {
-    font-size: 1.8rem;
-    line-height: 4.5rem;
-    font-weight: 400;
-}
-h3 {
-    font-size: 1.6rem;
-    font-weight: 200;
-    line-height: 2.8rem;
-    width: 100%;
-}
-h4 {
-    font-size: 1.4rem;
-    font-weight: 200;
-    line-height: 2.2rem;
-}
-h5 {
-    font-size: 1rem;
-    font-weight: 200;
-    line-height: 3.2rem;
-    text-align: left;
-    margin-top: -1.5rem;
+@media screen and (max-width: 400px) {
+    html {
+        /* this number makes 1 rem = 10px when screen is 1400 wide and 880 tall - please don't change*/
+        font-size: 3px;
+    }
 }
 
 b {
