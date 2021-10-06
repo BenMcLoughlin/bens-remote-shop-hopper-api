@@ -31,7 +31,7 @@ const Tags = () => {
     };
 
     const _incrementItem = async (tag) => {
-        setLoading('incrementItem');
+        setLoading(tag);
         const result = await incrementItem(tag);
         if (result) {
             setLoading(false);
@@ -66,15 +66,14 @@ const Tags = () => {
                         />
 
                             <div className="cards">
-                            {
-                                loading ?
-                                    <h3>Loading....</h3>
-                                    :
-                                    search_products.map((product) => <div className="card hov" key={product.id}>
-                                        <img className="image" src={product.images[0]?.src} />
-                                    <p>{product.title}</p>
-                                </div>)
-                            }
+                                {
+                                    search_products.map((product) =>
+                                        <div className="card hov" key={product.id}>
+                                            <img className="image" src={product.images[0]?.src} />
+                                            <p>{product.title}</p>
+                                        </div>
+                                    )
+                                }
                         </div>
                     </div>
                         :
@@ -84,14 +83,18 @@ const Tags = () => {
                     <div className="notice hov" onClick={() => set_search_products([])}>
                         <p>When clicking on a Tag, it is added to a list in the DB of &quot;Hot Items&quot;. If you click it again it gets a better score</p>
                     </div>
-                    <div className="notice hov" >
-                        <button onClick={() => _getAllTags()}>
-                            {loading === 'getAllTags' ? "Loading..." : <a className="red">Get Tags</a>}
-                        </button>
-                    </div>
-                    {raw_Tags.map((tag) => <button key={tag} onClick={() => _incrementItem(tag)}>
-                        {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
-                    </button>)}
+                    {
+                        raw_Tags.length < 0 ?
+                            <div className="notice hov" >
+                                <button onClick={() => _getAllTags()}>
+                                    {loading === 'getAllTags' ? "Loading..." : <a className="red">Get Tags</a>}
+                                </button>
+                            </div>
+                            :
+                            raw_Tags.map((tag) => <button className="blue" key={tag} onClick={() => _incrementItem(tag)}>
+                                {loading === tag ? "Loading..." : <a>{tag}</a>}
+                            </button>)
+                    }
                 </main>
             </div>
             <style jsx>{`
@@ -160,7 +163,8 @@ const Tags = () => {
 
         .blue {
             color: blue;
-            margin: 1rem;
+            margin: 2px;
+            width: 200px;
         }
 
         .red {

@@ -16,7 +16,7 @@ const Button = ({ text, onClick, disabled, loading }) => {
                     display: flex;
                     justify-content: left;
                     align-items: center;
-                    height: 5rem;
+                    height: 3rem;
                     width: 25rem;
                     gap: 1rem;
                     padding: .5rem;

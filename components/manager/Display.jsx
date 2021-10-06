@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Metrics from './Metrics';
-import Button from '../buttons/Button';
 import SelectShop from './SelectShop';
 import { updateMetrics } from '../../lib/requests/updateMetrics';
 import { updateProducts } from '../../lib/requests/updateProducts';
@@ -12,29 +11,33 @@ const Display = (props) => {
 
     const _updateProducts = async (params) => {
         setIsLoading(true);
-        const result = await updateProducts(params);
+        const success = await updateProducts(params);
 
-        setUpLoaded(result);
+        if (success) {
+            setUpLoaded(success.result);
+            setIsLoading(false);
+
+            return true;
+        }
+
+        setUpLoaded('failed');
         setIsLoading(false);
+        return alert("Product acquisition failed, please try again.")
     }
-
-    console.log('props.selected:', props.selected)
 
     return (
         <>
             <div className="wrapper">
                 <div className="top">
-                    <div className="metricsControl">
+                    <div>
                         <Metrics
+                            {...props}
                             header={selected.siteHost}
                             refresh={uploadedSuccess}
                             isShopify
-                            {...props}
-                        />
-                        <Button
-                            loading={isLoading}
-                            text={`Load All ${selected.siteHost} Shops`}
-                            onClick={() => {
+                            isLoading={isLoading}
+                            buttonTitle={`Load All ${selected.siteHost} Shops`}
+                            buttonClick={() => {
                                 set.selectedBusinessName('');
                                 _updateProducts({
                                     siteHost: selected.siteHost,
@@ -48,23 +51,26 @@ const Display = (props) => {
                         />
                     </div>
                     {
+                        uploadedSuccess === 'failed' &&
+                        <p className="red">Product acquisition failed.</p>
+                    }
+                    {
                         selected.businessName &&
-                        <div className="metricsControl">
+                        <div>
                             <Metrics
+                                {...props}
                                 header={selected.businessName}
                                 refresh={uploadedSuccess}
                                 isShopify={false}
-                                {...props}
-                            />
-                            <Button
-                                loading={isLoading}
-                                text={`Load Only ${selected.businessName}`}
-                                onClick={() => {
+                                isLoading={isLoading}
+                                buttonTitle={`Load ${selected.businessName}`}
+                                buttonClick={() => {
                                     // set.selectedSiteHost(''); todo
                                     _updateProducts(props.selected).then(() => {
-                                        updateMetrics(true, selected.siteHost)
+                                        updateMetrics(true, selected.businessName)
                                     })
                                 }}
+                                disabled={false}
                             />
                         </div>
                     }
@@ -91,13 +97,7 @@ const Display = (props) => {
                 .spinner {
                 }
                 .top {
-                    // height: 35rem;
                     width: 100%;
-                }
-                .metricsControl {
-                    height: 15rem;
-                    display: flex;
-                    align-items: center;
                 }
             `}</style>
         </>

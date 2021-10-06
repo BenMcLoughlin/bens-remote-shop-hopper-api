@@ -12,21 +12,6 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
     const [loading, setLoading] = useState(false || "");
 
     useEffect(() => {
-        const _getShopList = async () => {
-            setLoading(true);
-            const uniqueShops = await fetchShops();
-
-            if (uniqueShops) {
-                const businessNames = uniqueShops.map((d) => d.businessName);
-                setList(businessNames);
-                setLoading(false);
-            }
-        };
-
-        _getShopList();
-    }, [addShopModal]);
-
-    useEffect(() => {
         const _getShopStatus = async () => {
             setLoading(true);
             const eachShop = await fetchShopStatus();
@@ -34,11 +19,10 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
             let businessStatus = {};
 
             if (eachShop) {
-                console.log('eachShop:', eachShop)
                 eachShop.map((d) => (
-                    businessStatus[d.businessName] = {
+                    businessStatus[d.business_name] = {
                         products: d.products,
-                        updatedAt: d.updatedAt
+                        updatedAt: d.updated_at
                     }
                 ));
                 setStatuses(businessStatus);
@@ -47,7 +31,22 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
         };
 
         _getShopStatus();
-    }, [refresh]);
+    }, []);
+
+    useEffect(() => {
+        const _getShopList = async () => {
+            setLoading(true);
+            const uniqueShops = await fetchShops();
+
+            if (uniqueShops) {
+                const businessNames = uniqueShops.map((d) => d.business_name);
+                setList(businessNames);
+                setLoading(false);
+            }
+        };
+
+        _getShopList();
+    }, [addShopModal]);
 
     const _toggleAddShopModal = () => {
         toggleAddShopModal(!addShopModal);
@@ -96,13 +95,13 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                                     <div
                                         key={businessName}
                                         className={`businessName ${camelCase(businessName)}`}
-                                        onClick={() => set.selectedBusinessName(camelCase(businessName))}
+                                        onClick={() => set.selectedBusinessName(businessName)}
                                     >
                                         <div className="title">{businessName}</div>
-                                        {statuses[camelCase(businessName)] &&  // todo: Date format
+                                        {statuses[businessName] &&  // todo: Date format
                                             <div className="updateColumn">
-                                            <div>Most Recent: <span className="update">{statuses[camelCase(businessName)]?.products}</span></div>
-                                                <div className="time">{statuses[camelCase(businessName)]?.updatedAt.substring(0, 19)}</div>
+                                            <div>Most Recent: <span className="update">{statuses[businessName]?.products}</span></div>
+                                            <div className="time">{statuses[businessName]?.updatedAt.substring(0, 19)}</div>
                                             </div>
                                         }
                                     </div>
@@ -155,7 +154,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                     background: #f7f7f7;
                     box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
                 }
-                .${selected.businessName} {
+                .${camelCase(selected.businessName)} {
                     background: #485056;
                     color: white;
                 }
