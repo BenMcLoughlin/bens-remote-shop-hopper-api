@@ -29,7 +29,7 @@ const manager = () => {
         shopsList,
         selected: {
             siteHost: camelCase(siteHost),
-            businessName: camelCase(businessName),
+            businessName: businessName,
             domain,
         },
         set: {

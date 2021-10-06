@@ -60,7 +60,7 @@ const Display = (props) => {
                                 onClick={() => {
                                     // set.selectedSiteHost(''); todo
                                     _updateProducts(props.selected).then(() => {
-                                        updateMetrics(true, selected.siteHost)
+                                        updateMetrics(true, selected.businessName)
                                     })
                                 }}
                             />

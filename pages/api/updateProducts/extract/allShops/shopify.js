@@ -1,5 +1,6 @@
 import prisma from '../../../../../prisma/prisma.js';
 import * as extract from '../../extract';
+import { realtimeUpdates } from '../../metrics/realtime';
 
 async function getShopsDomains() {
     const result = await prisma.$queryRaw`
@@ -21,6 +22,10 @@ export const shopify = async () => {
 
         for (const shop of shops) {
             result = await extract.singleBusiness(shop.business_name, shop.domain);
+
+            if (result) {
+                realtimeUpdates(result)
+            }
         }
 
         return result;
