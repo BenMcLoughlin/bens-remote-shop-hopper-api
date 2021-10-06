@@ -3,7 +3,7 @@ import * as extract from '../../extract';
 
 async function getShopsDomains() {
     const result = await prisma.$queryRaw`
-        SELECT domain, businessName FROM shops
+        SELECT domain, business_name FROM shops
     `.catch((e) => {
         console.log('e:', e);
         throw e;
@@ -17,12 +17,11 @@ async function getShopsDomains() {
 export const shopify = async () => {
     try {
         const shops = await getShopsDomains();
-        let result = {};
+        let result = [];
 
-        shops.map(shop => {
-            console.log('shop:', shop)
-            // result = await extract.singleBusiness(businessName, domain);
-        })
+        for (const shop of shops) {
+            result = await extract.singleBusiness(shop.business_name, shop.domain);
+        }
 
         return result;
     } catch (error) {

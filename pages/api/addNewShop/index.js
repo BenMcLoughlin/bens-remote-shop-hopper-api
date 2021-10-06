@@ -72,8 +72,6 @@ export default async (req, res) => {
 
             result = shopData === 'all' ? await createAllShops() : await createNewShop(shopData);
 
-            console.log('result:', result)
-
             return res.status(200).json({ result });
         } catch (error) {
             return res.status(422).json(error);
