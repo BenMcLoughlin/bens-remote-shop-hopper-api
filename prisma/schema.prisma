@@ -21,8 +21,8 @@ model hot_item {
 
 model status {
   id            Int      @id @default(autoincrement())
-  business_name  String   @unique @map(name: "businessName")
-  updated_at     DateTime @default(now()) @map(name: "updatedAt")
+  business_name String   @unique
+  updated_at    DateTime @default(now())
   products      Int
 
   @@map(name: "statuses")
@@ -30,15 +30,15 @@ model status {
 
 model shop {
   id            Int      @id @default(autoincrement())
-  business_name  String   @map(name: "businessName")
+  business_name String   
   domain        String   @unique
   vertical      String?
-  site_host      String   @map(name: "siteHost")
+  site_host     String  
   city          String?
   province      String?
-  postal_code    String?  @map(name: "postalCode")
+  postal_code   String?  
   country       String?
-  created_at    DateTime  @default(now()) @map(name: "createdAt")
+  created_at    DateTime  @default(now())
 
   @@map(name: "shops")
 }

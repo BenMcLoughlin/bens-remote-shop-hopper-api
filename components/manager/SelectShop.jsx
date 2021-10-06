@@ -17,7 +17,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
             const uniqueShops = await fetchShops();
 
             if (uniqueShops) {
-                const businessNames = uniqueShops.map((d) => d.businessName);
+                const businessNames = uniqueShops.map((d) => d.business_name);
                 setList(businessNames);
                 setLoading(false);
             }
@@ -34,7 +34,6 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
             let businessStatus = {};
 
             if (eachShop) {
-                console.log('eachShop:', eachShop)
                 eachShop.map((d) => (
                     businessStatus[d.businessName] = {
                         products: d.products,

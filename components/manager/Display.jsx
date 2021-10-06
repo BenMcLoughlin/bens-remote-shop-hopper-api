@@ -18,8 +18,6 @@ const Display = (props) => {
         setIsLoading(false);
     }
 
-    console.log('props.selected:', props.selected)
-
     return (
         <>
             <div className="wrapper">

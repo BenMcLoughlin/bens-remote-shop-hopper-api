@@ -3,7 +3,7 @@ import * as extract from '../../extract';
 
 async function getShopsDomains() {
     const result = await prisma.$queryRaw`
-        SELECT domain, business_name FROM shops
+        SELECT domain, businessName FROM shops
     `.catch((e) => {
         console.log('e:', e);
         throw e;
