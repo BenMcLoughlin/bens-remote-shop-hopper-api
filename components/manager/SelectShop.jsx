@@ -34,10 +34,11 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
             let businessStatus = {};
 
             if (eachShop) {
+                console.log('eachShop:', eachShop)
                 eachShop.map((d) => (
                     businessStatus[d.businessName] = {
                         products: d.products,
-                        updatedAt: d.updated_at
+                        updatedAt: d.updatedAt
                     }
                 ));
                 setStatuses(businessStatus);
@@ -98,10 +99,9 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                                         onClick={() => set.selectedBusinessName(camelCase(businessName))}
                                     >
                                         <div className="title">{businessName}</div>
-                                        {statuses[camelCase(businessName)] &&
+                                        {statuses[camelCase(businessName)] &&  // todo: Date format
                                             <div className="updateColumn">
-                                                <div>Most Recent: <span className="update">{statuses[camelCase(businessName)]?.products}</span></div>
-                                            {/* todo: Date format */}
+                                            <div>Most Recent: <span className="update">{statuses[camelCase(businessName)]?.products}</span></div>
                                                 <div className="time">{statuses[camelCase(businessName)]?.updatedAt.substring(0, 19)}</div>
                                             </div>
                                         }

@@ -5,9 +5,11 @@ export default async (req, res) => {
 
     let result = {};
 
-    result = businessName
-        ? await extract.singleBusiness(businessName, domain)
-        : await extract.allShops[siteHost]();
+    if (!businessName && !domain) {
+        result = await extract.allShops[siteHost]();
+    } else {
+        result = await extract.singleBusiness(businessName, domain);
+    }
 
     res.status(200).json({
         status: 'success',

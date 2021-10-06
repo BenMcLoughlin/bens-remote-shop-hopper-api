@@ -15,10 +15,10 @@ async function createRow(data) {
     return result;
 }
 
-export async function shops(number, businessName) {
+export async function shops(number, business_name) {
     let result = {};
     let data = {
-        businessName,
+        business_name,
         products: number
     };
 

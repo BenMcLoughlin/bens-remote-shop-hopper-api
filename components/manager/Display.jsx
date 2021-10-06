@@ -3,26 +3,22 @@ import Metrics from './Metrics';
 import Button from '../buttons/Button';
 import SelectShop from './SelectShop';
 import { updateMetrics } from '../../lib/requests/updateMetrics';
+import { updateProducts } from '../../lib/requests/updateProducts';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;
     const [uploadedSuccess, setUpLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const updateProducts = async () => {
+    const _updateProducts = async (params) => {
         setIsLoading(true);
-        const res = await fetch('/api/updateProducts', {
-            method: 'POST',
-            body: JSON.stringify(props.selected),
-        });
+        const result = await updateProducts(params);
 
-        if (res) {
-            const uploaded = await res.json();
-            console.log('uploaded:', uploaded.result.productsUploaded)
-            setUpLoaded(uploaded.result.productsUploaded);
-            setIsLoading(false);
-        }
-    };
+        setUpLoaded(result);
+        setIsLoading(false);
+    }
+
+    console.log('props.selected:', props.selected)
 
     return (
         <>
@@ -40,7 +36,11 @@ const Display = (props) => {
                             text={`Load All ${selected.siteHost} Shops`}
                             onClick={() => {
                                 set.selectedBusinessName('');
-                                updateProducts().then(() => {
+                                _updateProducts({
+                                    siteHost: selected.siteHost,
+                                    businessName: null,
+                                    domain: null,
+                                }).then(() => {
                                     updateMetrics(true, selected.siteHost);
                                 })
                             }}
@@ -61,7 +61,7 @@ const Display = (props) => {
                                 text={`Load Only ${selected.businessName}`}
                                 onClick={() => {
                                     // set.selectedSiteHost(''); todo
-                                    updateProducts().then(() => {
+                                    _updateProducts(props.selected).then(() => {
                                         updateMetrics(true, selected.siteHost)
                                     })
                                 }}
