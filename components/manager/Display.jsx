@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Metrics from './Metrics';
-import Button from '../buttons/Button';
 import SelectShop from './SelectShop';
 import { updateMetrics } from '../../lib/requests/updateMetrics';
 import { updateProducts } from '../../lib/requests/updateProducts';
@@ -22,17 +21,14 @@ const Display = (props) => {
         <>
             <div className="wrapper">
                 <div className="top">
-                    <div className="metricsControl">
+                    <div>
                         <Metrics
+                            {...props}
                             header={selected.siteHost}
                             refresh={uploadedSuccess}
                             isShopify
-                            {...props}
-                        />
-                        <Button
-                            loading={isLoading}
-                            text={`Load All ${selected.siteHost} Shops`}
-                            onClick={() => {
+                            buttonTitle={`Load All ${selected.siteHost} Shops`}
+                            buttonClick={() => {
                                 set.selectedBusinessName('');
                                 _updateProducts({
                                     siteHost: selected.siteHost,
@@ -47,22 +43,20 @@ const Display = (props) => {
                     </div>
                     {
                         selected.businessName &&
-                        <div className="metricsControl">
+                        <div>
                             <Metrics
+                                {...props}
                                 header={selected.businessName}
                                 refresh={uploadedSuccess}
                                 isShopify={false}
-                                {...props}
-                            />
-                            <Button
-                                loading={isLoading}
-                                text={`Load Only ${selected.businessName}`}
-                                onClick={() => {
+                                buttonTitle={`Load ${selected.businessName}`}
+                                buttonClick={() => {
                                     // set.selectedSiteHost(''); todo
                                     _updateProducts(props.selected).then(() => {
                                         updateMetrics(true, selected.businessName)
                                     })
                                 }}
+                                disabled={false}
                             />
                         </div>
                     }
@@ -89,13 +83,7 @@ const Display = (props) => {
                 .spinner {
                 }
                 .top {
-                    // height: 35rem;
                     width: 100%;
-                }
-                .metricsControl {
-                    height: 15rem;
-                    display: flex;
-                    align-items: center;
                 }
             `}</style>
         </>

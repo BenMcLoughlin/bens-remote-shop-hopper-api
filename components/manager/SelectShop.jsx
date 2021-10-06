@@ -154,7 +154,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                     background: #f7f7f7;
                     box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
                 }
-                .${selected.businessName} {
+                .${camelCase(selected.businessName)} {
                     background: #485056;
                     color: white;
                 }

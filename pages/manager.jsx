@@ -21,7 +21,7 @@ const manager = () => {
     const [domain, setSelectedDomain] = useState('');
 
     useEffect(() => {
-        const selectedShop = shopsList.find((d) => camelCase(d.business_name) === businessName);
+        const selectedShop = shopsList.find((d) => d.business_name === businessName);
         selectedShop && setSelectedDomain(selectedShop.domain);
     }, [businessName]);
 
