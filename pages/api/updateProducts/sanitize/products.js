@@ -1,7 +1,7 @@
-export async function products(data, businessName) {
+export async function products(data, business_name) {
     let formatted = [];
 
-    if (businessName) {
+    if (business_name) {
         formatted = await data.map((product) => {
             const {
                 title,
@@ -19,7 +19,7 @@ export async function products(data, businessName) {
             } = product;
 
             const output = {
-                businessName,
+                business_name,
                 title,
                 handle,
                 body_html,

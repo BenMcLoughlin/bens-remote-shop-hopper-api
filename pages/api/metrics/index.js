@@ -5,7 +5,7 @@ async function getNumberOfProducts(body) {
     if (body === 'all') {
         result = await prisma.product.aggregate({
             _count: {
-                businessName: true,
+                business_name: true,
             },
         }).catch((e) => {
             console.log('e:', e);
@@ -14,14 +14,14 @@ async function getNumberOfProducts(body) {
             await prisma.$disconnect();
         });
 
-        return result._count.businessName;
+        return result._count.business_name;
     } else {
         result = await prisma.product.aggregate({
             where: {
-                businessName: body
+                business_name: body
             },
             _count: {
-                businessName: true,
+                business_name: true,
             },
         }).catch((e) => {
             console.log('e:', e);
@@ -31,7 +31,7 @@ async function getNumberOfProducts(body) {
         });
     }
 
-    return result._count.businessName;
+    return result._count.business_name;
 }
 
 export default async function (req, res) {

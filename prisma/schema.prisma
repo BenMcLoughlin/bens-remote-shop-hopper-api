@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = "postgres://ecbkgjykhvnpsr:476026aa4ca7a07040c4f754d8c903907efd3d8a81825169429a55a9bc9e1525@ec2-54-145-188-92.compute-1.amazonaws.com:5432/dads1efmqn8d0h"
+  url      = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
@@ -11,54 +11,54 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model hotItem {
+model hot_item {
   id       Int     @id @default(autoincrement())
   name     String  @unique
   value    Int?
 
-  @@map(name: "hotItems")
+  @@map(name: "hot_items")
 }
 
 model status {
-  id           Int      @id @default(autoincrement())
-  businessName String   @unique
-  updated_at   DateTime @default(now())
-  products     Int
+  id            Int      @id @default(autoincrement())
+  business_name String   @unique
+  updated_at    DateTime @default(now())
+  products      Int
 
   @@map(name: "statuses")
 }
 
 model shop {
-  id           Int      @id @default(autoincrement())
-  businessName String
-  domain       String   @unique
-  vertical     String?
-  siteHost     String
-  city         String?
-  province     String?
-  postalCode   String?
-  country      String?
-  created_at   DateTime @default(now())
+  id            Int      @id @default(autoincrement())
+  business_name String   
+  domain        String   @unique
+  vertical      String?
+  site_host     String  
+  city          String?
+  province      String?
+  postal_code   String?  
+  country       String?
+  created_at    DateTime  @default(now())
 
   @@map(name: "shops")
 }
 
 model product {
-  id           Int      @id @default(autoincrement())
-  businessName String?  
-  title        String   @unique
+  id           Int       @id @default(autoincrement())
+  business_name String?   @map(name: "businessName")
+  title        String    @unique
   handle       String?
-  body_html    String?  
+  body_html     String?   @map(name: "bodyHtml")
   vendor       String?
-  product_type String?
-  created_at   DateTime?
-  published_at DateTime @default(now())
-  updated_at   DateTime?
+  product_type  String?   @map(name: "productType")
+  created_at    DateTime  @default(now()) @map(name: "createdAt")
+  published_at  DateTime  @default(now()) @map(name: "publishedAt")
+  updated_at    DateTime  @default(now()) @map(name: "updatedAt")
   tags         String[]
   variants     Json?
   images       Json?
   options      Json?
-  rating       Int?     @default(0)
+  rating       Int?      @default(0)
 
   @@map(name: "products")
 }

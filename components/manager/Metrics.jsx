@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { startCase } from '../../utils/strings';
+import Button from '../buttons/Button';
 import { formatDate } from '../../utils/dates/forDisplay';
 import { updateMetrics } from '../../lib/requests/updateMetrics'
 
-const Metrics = ({ header, selected, refresh, shopsList, isShopify }) => {
+const Metrics = ({ header, selected, refresh, buttonClick, isShopify, isLoading, buttonTitle, disabled }) => {
     const now = new Date();
     const [totalItems, setTotalItems] = useState(0);
     const [date, setDate] = useState(now); // todo
@@ -18,13 +19,23 @@ const Metrics = ({ header, selected, refresh, shopsList, isShopify }) => {
 
     return (
         <div className="wrapper">
-            <div className="header">
-                {startCase(header)}
+            <div className="header-row">
+                <div className="header">
+                    {startCase(header)}
+                </div>
+                {!disabled &&
+                    <Button
+                        loading={isLoading}
+                        text={buttonTitle}
+                        onClick={buttonClick}
+                        disabled={disabled}
+                    />
+                }
             </div>
             <div className="row">
                 <div className="column">
                     <p className="value">{totalItems}</p>
-                    <p className="title">{startCase(header)}</p>
+                    <p className="title">{startCase(header)} items in the database</p>
                 </div>
 
                 <div className="column">
@@ -34,34 +45,34 @@ const Metrics = ({ header, selected, refresh, shopsList, isShopify }) => {
             </div>
             <style jsx>{`
                 .wrapper {
-                    padding: 2rem;
                     display: flex;
                     align-content: center;
                     align-items: left;
                     flex-direction: column;
                 }
                 .header {
-                    height: 5rem;
-                    width: 20rem;
-                    font-size: 2.4rem;
+                    font-size: 2.0rem;
                     padding: 1rem;
                     text-align: left;
+                }
+                .header-row {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
                 }
                 .row {
                     display: flex;
                     flex-direction: row;
-                    // flex-wrap: wrap;
-                    justify-content: flex-start;
-                    padding: 2rem;
-                    // height: 7rem;
-                    align-content: center;
+                    align-items: center;
                 }
                 .column {
-                    min-width: 13rem;
                     display: flex;
                     flex-direction: column;
                     align-items: flex-end;
                     justify-content: center;
+                    width: 40rem;
                     padding: 1rem;
                     border-right: 1px solid #d5d5d5;
                 }

@@ -1,46 +1,49 @@
 import React, { useState } from 'react';
 import Metrics from './Metrics';
-import Button from '../buttons/Button';
 import SelectShop from './SelectShop';
 import { updateMetrics } from '../../lib/requests/updateMetrics';
+import { updateProducts } from '../../lib/requests/updateProducts';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;
     const [uploadedSuccess, setUpLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const updateProducts = async () => {
+    const _updateProducts = async (params) => {
         setIsLoading(true);
-        const res = await fetch('/api/updateProducts', {
-            method: 'POST',
-            body: JSON.stringify(props.selected),
-        });
+        const success = await updateProducts(params);
 
-        if (res) {
-            const uploaded = await res.json();
-            console.log('uploaded:', uploaded.result.productsUploaded)
-            setUpLoaded(uploaded.result.productsUploaded);
+        if (success) {
+            setUpLoaded(success.result);
             setIsLoading(false);
+
+            return true;
         }
-    };
+
+        setUpLoaded('failed');
+        setIsLoading(false);
+        return alert("Product acquisition failed, please try again.")
+    }
 
     return (
         <>
             <div className="wrapper">
                 <div className="top">
-                    <div className="metricsControl">
+                    <div>
                         <Metrics
+                            {...props}
                             header={selected.siteHost}
                             refresh={uploadedSuccess}
                             isShopify
-                            {...props}
-                        />
-                        <Button
-                            loading={isLoading}
-                            text={`Load All ${selected.siteHost} Shops`}
-                            onClick={() => {
+                            isLoading={isLoading}
+                            buttonTitle={`Load All ${selected.siteHost} Shops`}
+                            buttonClick={() => {
                                 set.selectedBusinessName('');
-                                updateProducts().then(() => {
+                                _updateProducts({
+                                    siteHost: selected.siteHost,
+                                    businessName: null,
+                                    domain: null,
+                                }).then(() => {
                                     updateMetrics(true, selected.siteHost);
                                 })
                             }}
@@ -48,23 +51,26 @@ const Display = (props) => {
                         />
                     </div>
                     {
+                        uploadedSuccess === 'failed' &&
+                        <p className="red">Product acquisition failed.</p>
+                    }
+                    {
                         selected.businessName &&
-                        <div className="metricsControl">
+                        <div>
                             <Metrics
+                                {...props}
                                 header={selected.businessName}
                                 refresh={uploadedSuccess}
                                 isShopify={false}
-                                {...props}
-                            />
-                            <Button
-                                loading={isLoading}
-                                text={`Load Only ${selected.businessName}`}
-                                onClick={() => {
+                                isLoading={isLoading}
+                                buttonTitle={`Load ${selected.businessName}`}
+                                buttonClick={() => {
                                     // set.selectedSiteHost(''); todo
-                                    updateProducts().then(() => {
-                                        updateMetrics(true, selected.siteHost)
+                                    _updateProducts(props.selected).then(() => {
+                                        updateMetrics(true, selected.businessName)
                                     })
                                 }}
+                                disabled={false}
                             />
                         </div>
                     }
@@ -91,13 +97,7 @@ const Display = (props) => {
                 .spinner {
                 }
                 .top {
-                    // height: 35rem;
                     width: 100%;
-                }
-                .metricsControl {
-                    height: 15rem;
-                    display: flex;
-                    align-items: center;
                 }
             `}</style>
         </>

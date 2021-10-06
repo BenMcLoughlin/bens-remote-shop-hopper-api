@@ -20,6 +20,7 @@ export async function singleBusiness(businessName, domain) {
         }
     } catch (error) {
         console.log(error);
+        throw error;
     }
 
     let metric = {};

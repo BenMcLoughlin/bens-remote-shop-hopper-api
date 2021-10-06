@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
 async function addPointToItem(tag) {
-    const result = await prisma.hotItem.upsert({
+    const result = await prisma.hot_item.upsert({
         where: { name: tag },
         create: { name: tag, value: 1 },
         update: { name: tag, value: { increment: 1 } }
