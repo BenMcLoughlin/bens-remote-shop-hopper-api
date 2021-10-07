@@ -11,11 +11,11 @@ import searchRequest from "../lib/requests/search";
 
 const Tags = () => {
     const [ raw_Tags, set_Raw_Tags ] = useState([]);
-    const [search_products, set_search_products] = useState([]);
-    const [query, setQuery] = useState('');
+    const [ search_products, set_search_products ] = useState([]);
+    const [ query, setQuery ] = useState('');
     const [ loading, setLoading ] = useState(false || "");
 
-    const router = useRouter()
+    const router = useRouter();
 
     const refreshData = () => {
         router.replace(router.asPath);
@@ -25,6 +25,7 @@ const Tags = () => {
         setLoading('getAllTags');
         const tags = await fetchTags();
         if (tags) {
+            console.log('tags:', tags);
             set_Raw_Tags(tags.uniqueTags);
             setLoading(false);
         }
@@ -48,34 +49,32 @@ const Tags = () => {
             refreshData();
             setLoading(false);
         }
-    }
+    };
 
     return (
         <Layout>
             <div className="page">
                 {
                     raw_Tags.length ?
-                    <div className="notice">
-                        <div>
-                            <p>See we can search by existing tags</p>
-                        </div>
+                        <div className="notice">
+                            <div>
+                                <p>See we can search by existing tags</p>
+                            </div>
 
-                        <Autocomplete
-                            onSubmit={_search}
-                            options={raw_Tags}
-                        />
+                            <Autocomplete
+                                onSubmit={_search}
+                                options={raw_Tags}
+                            />
 
                             <div className="cards">
                                 {
-                                    search_products.map((product) =>
-                                        <div className="card hov" key={product.id}>
-                                            <img className="image" src={product.images[0]?.src} />
-                                            <p>{product.title}</p>
-                                        </div>
-                                    )
+                                    search_products.map((product) => <div className="card hov" key={product.id}>
+                                        <img className="image" src={product.images[0]?.src} />
+                                        <p>{product.title}</p>
+                                    </div>)
                                 }
+                            </div>
                         </div>
-                    </div>
                         :
                         null
                 }

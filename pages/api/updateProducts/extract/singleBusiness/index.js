@@ -7,14 +7,16 @@ export async function singleBusiness(businessName, domain) {
 
     try {
         for (let page = 1; page <= 3; page++) {
-            const url = `https://${domain}/products.json?limit=250&page=${page}`;
+            const url = `https://${ domain }/products.json?limit=250&page=${ page }`;
             const response = await fetch(url);
             const data = await response.json();
 
-            const sanitizedData = await sanitize.products([...data.products], businessName);
+            const sanitizedData = await sanitize.products([ ...data.products ], businessName);
             const successfulUploads = await load.products(sanitizedData);
 
-            if (data.products.length === 0) continue;
+            if (data.products.length === 0) {
+                continue;
+            }
 
             productsUploaded += successfulUploads.count;
         }
@@ -26,7 +28,7 @@ export async function singleBusiness(businessName, domain) {
     let metric = {};
 
     if (productsUploaded > 0) {
-        metric = await metrics.shops(productsUploaded, businessName)
+        metric = await metrics.shops(productsUploaded, businessName);
     }
 
     let data = {

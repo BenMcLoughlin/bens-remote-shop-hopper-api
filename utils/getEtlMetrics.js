@@ -1,3 +1,1 @@
-export const getMetrics = (shopsList) => {
-
-};
+export const getMetrics = (shopsList) => {};

@@ -1,36 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Explainer } from '../../components';
 import Image from 'next/image';
 import heels from '../../public/assets/shutterstock/heel.jpg';
 import blotch1 from '../../public/assets/paintBlobs/basketball4all_graphic3-2.png';
 import blotch2 from '../../public/assets/paintBlobs/basketball4all_graphic1-2.png';
 import { SquareButton } from '../../components';
 
-export const Callout = ({ title, subTitle, text }) => {
-    return (
-        <Wrapper>
-            <BackgroundImage>
-                <Image src={heels} className="image" width={3000} height={2000} />
-            </BackgroundImage>
-            <Title>{title}</Title>
-            <SubTitle>{subTitle}</SubTitle>
-            <ButtonWrapper>
-                <SquareButton title={'Sign up!'} />
-            </ButtonWrapper>
-            <Blotch1>
-                <Image src={blotch1} className="image" width={200} height={200} />
-            </Blotch1>
-            <Blotch2>
-                <Image src={blotch2} className="image" width={500} height={400} />
-            </Blotch2>
-        </Wrapper>
-    );
-};
+export const Callout = ({ title, subTitle, text }) => (
+    <Wrapper>
+        <BackgroundImage>
+            <Image src={heels} className="image" width={3000} height={2000} />
+        </BackgroundImage>
+        <Title>{title}</Title>
+        <SubTitle>{subTitle}</SubTitle>
+        <ButtonWrapper>
+            <SquareButton title={'Sign up!'} />
+        </ButtonWrapper>
+        <Blotch1>
+            <Image src={blotch1} className="image" width={200} height={200} />
+        </Blotch1>
+        <Blotch2>
+            <Image src={blotch2} className="image" width={500} height={400} />
+        </Blotch2>
+    </Wrapper>
+);
 
 export default Callout;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     height: 63rem;
@@ -38,7 +35,7 @@ const Wrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    opacity: ${(p) => p.theme.opacity};
+    opacity: ${ (p) => p.theme.opacity };
     position: relative;
     font-family: 'Yanone Kaffeesatz', Sans-serif;
 `;
@@ -52,8 +49,8 @@ const BackgroundImage = styled.div`
     height: 53rem;
 `;
 const Title = styled.div`
-    font-size: ${(p) => p.theme.font.large2};
-    ${(props) => props.theme.flex.vertical.center};
+    font-size: ${ (p) => p.theme.font.large2 };
+    ${ (props) => props.theme.flex.vertical.center };
     color: black;
     width: 70%;
     height: 12rem;
@@ -65,10 +62,10 @@ const Title = styled.div`
     z-index: 2;
 `;
 const SubTitle = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-weight: bold;
     text-transform: uppercase;
-    ${(props) => props.theme.flex.vertical.center};
+    ${ (props) => props.theme.flex.vertical.center };
     width: 70%;
     text-align: center;
     line-height: 5rem;

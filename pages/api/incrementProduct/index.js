@@ -3,19 +3,22 @@ import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
 async function addPointToProduct(id) {
-    const result = await prisma.product.update({
-        where: {
-            id: id
-        },
-        data: {
-            rating: { increment: 1 }
-        }
-    }).catch((e) => {
-        console.log('e:', e);
-        throw e;
-    }).finally(async () => {
-        await prisma.$disconnect();
-    });
+    const result = await prisma.product
+        .update({
+            where: {
+                id: id
+            },
+            data: {
+                rating: { increment: 1 }
+            }
+        })
+        .catch((e) => {
+            console.log('e:', e);
+            throw e;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
 
     return result;
 }

@@ -5,5 +5,5 @@ import actionStep3 from './actionStep3.jpeg';
 export const images = {
     actionStep1,
     actionStep2,
-    actionStep3,
+    actionStep3
 };

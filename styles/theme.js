@@ -10,9 +10,9 @@ export const theme = {
         greenDark: '#14C691',
         blueLight: '#4D8AF0',
         blueDark: '#2771EC',
-        white: '#FFFFFF',
+        white: '#FFFFFF'
     },
-    opacity:1,
+    opacity: 1,
     font: {
         tiny: '0.8rem',
         smallest: '1rem',
@@ -22,7 +22,7 @@ export const theme = {
         mediumLarge: '3.5rem',
         large: '4rem',
         large2: '6.5rem',
-        largest: '17rem',
+        largest: '17rem'
     },
     gradient: {
         primary: `background: #67DCA8;
@@ -34,28 +34,28 @@ export const theme = {
                 background: -webkit-linear-gradient(top left, #2771EC, #4D8AF0);
                 background: -moz-linear-gradient(top left, #2771EC, #4D8AF0);
                 background: linear-gradient(to bottom right, #2771EC, #4D8AF0);
-                `,
+                `
     },
     shadow: {
         primary: `    -webkit-box-shadow: 1px 19px 77px -34px rgba(0, 0, 0, 0.75);
                      -moz-box-shadow: 1px 19px 77px -34px rgba(0, 0, 0, 0.75);
                    box-shadow: 1px 19px 77px -34px rgba(0, 0, 0, 0.75);
-`,
+`
     },
     border: {
-        primary: '1px solid #DCDCDC',
+        primary: '1px solid #DCDCDC'
     },
     flex: {
         vertical: {
             center: `
              display: flex;
              align-items: center;
-            `,
+            `
         },
         center: `
              display: flex;
              justify-content: center;
              align-items: center;
-            `,
-    },
+            `
+    }
 };

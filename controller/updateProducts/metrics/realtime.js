@@ -1,8 +1,7 @@
 import prisma from '../../../prisma/prisma.js';
 
-export async function realtimeUpdates(result) {
-
+export function realtimeUpdates(result) {
     console.log('IN METRICS.REALTIME FUNCTION: ', result);
 
-    return result
+    return result;
 }

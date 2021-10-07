@@ -7,5 +7,5 @@ export const explainerSvgs = {
     computer,
     heart,
     tShirts,
-    map,
+    map
 };

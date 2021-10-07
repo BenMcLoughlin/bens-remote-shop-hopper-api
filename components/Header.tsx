@@ -7,7 +7,7 @@ const Header: React.FC = () => {
     const router = useRouter();
     const isActive: (pathname: string) => boolean = (pathname) => router.pathname === pathname;
 
-    const [session, loading] = useSession();
+    const [ session, loading ] = useSession();
 
     let left = (
         <div className="left">
@@ -29,7 +29,6 @@ const Header: React.FC = () => {
 
                 .left a[data-active='true'] {
                     color: gray;
-                    
                 }
 
                 a + a {
@@ -148,12 +147,14 @@ const Header: React.FC = () => {
         right = (
             <div className="right">
                 <div>
-                    <p>{session.user.name} ({session.user.email})</p>
+                    <p>
+                        {session.user.name} ({session.user.email})
+                    </p>
 
                     <button onClick={() => signOut()}>
                         <a>Log out</a>
                     </button>
-                </div>                  
+                </div>
                 <Link href="/">
                     <a>Home</a>
                 </Link>
@@ -166,7 +167,7 @@ const Header: React.FC = () => {
                 <Link href="/analytics">
                     <a>Analytics</a>
                 </Link>
-                
+
                 <style jsx>{`
                     a {
                         text-decoration: none;

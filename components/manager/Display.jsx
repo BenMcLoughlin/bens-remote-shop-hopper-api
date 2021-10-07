@@ -6,8 +6,8 @@ import { updateProducts } from '../../lib/requests/updateProducts';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;
-    const [uploadedSuccess, setUpLoaded] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [ uploadedSuccess, setUpLoaded ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false);
 
     const _updateProducts = async (params) => {
         setIsLoading(true);
@@ -22,8 +22,8 @@ const Display = (props) => {
 
         setUpLoaded('failed');
         setIsLoading(false);
-        return alert("Product acquisition failed, please try again.")
-    }
+        return alert("Product acquisition failed, please try again.");
+    };
 
     return (
         <>
@@ -36,16 +36,17 @@ const Display = (props) => {
                             refresh={uploadedSuccess}
                             isShopify
                             isLoading={isLoading}
-                            buttonTitle={`Load All ${selected.siteHost} Shops`}
+                            buttonTitle={`Load All ${ selected.siteHost } Shops`}
                             buttonClick={() => {
                                 set.selectedBusinessName('');
+
                                 _updateProducts({
                                     siteHost: selected.siteHost,
                                     businessName: null,
-                                    domain: null,
+                                    domain: null
                                 }).then(() => {
                                     updateMetrics(true, selected.siteHost);
-                                })
+                                });
                             }}
                             disabled={selected.businessName}
                         />
@@ -63,12 +64,12 @@ const Display = (props) => {
                                 refresh={uploadedSuccess}
                                 isShopify={false}
                                 isLoading={isLoading}
-                                buttonTitle={`Load ${selected.businessName}`}
+                                buttonTitle={`Load ${ selected.businessName }`}
                                 buttonClick={() => {
                                     // set.selectedSiteHost(''); todo
                                     _updateProducts(props.selected).then(() => {
-                                        updateMetrics(true, selected.businessName)
-                                    })
+                                        updateMetrics(true, selected.businessName);
+                                    });
                                 }}
                                 disabled={false}
                             />
