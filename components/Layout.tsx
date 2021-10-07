@@ -3,10 +3,11 @@ import { useSession } from "next-auth/client";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Header from "./Header";
-import Navbar from "./Navbar";
+import Head from 'next/head';
 
 type Props = {
-  children: ReactNode;
+    children: ReactNode;
+    isMain?: Boolean;
 };
 
 const Layout: React.FC<Props> = (props) => {
@@ -18,9 +19,22 @@ const Layout: React.FC<Props> = (props) => {
 
 return (
     <div>
-        <Header />
+        <Head>
+            <link
+                href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;500&display=swap"
+                rel="stylesheet"
+            />
+            <link
+                href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,800;1,200&display=swap"
+                rel="stylesheet"
+            />
+        </Head>
         {
-            isLoggedIn ?
+            !props.isMain &&
+                <Header />
+        }
+        {
+            isLoggedIn || props.isMain ?
                 <div className="layout">{props.children}</div>
                 :
                 <Link href="/api/auth/signin">
@@ -33,7 +47,6 @@ return (
             html {
                 box-sizing: border-box;
             }
-
             *,
             *:before,
             *:after {
@@ -42,27 +55,17 @@ return (
             body {
                 margin: 0;
                 padding: 0;
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
-                    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
                 background: rgb(252, 252, 252);
-                background: linear-gradient(
-                    14deg,
-                    rgba(252, 252, 252, 1) 0%,
-                    rgba(252, 252, 252, 0.3211659663865546) 38%,
-                    rgba(242, 239, 239, 0.6797093837535014) 100%
-                );
             }
             button {
                 cursor: pointer;
             }
-
             .notice {
                 background: white;
                 transition: box-shadow 0.1s ease-in;
                 padding: 20px;
                 margin: 1rem;
             }
-
             .hov:hover {
                 box-shadow: 1px 1px 3px #aaa;
             }

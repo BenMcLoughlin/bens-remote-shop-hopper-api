@@ -23,8 +23,8 @@
         "**/*.ts",
         "**/*.tsx",
         "lib/script.ts",
-        "pages/index.jsx",
+        "pages/features.jsx",
         "script.js",
-        "prisma/prisma.js",
+        "prisma/prisma.js"
     ]
 }

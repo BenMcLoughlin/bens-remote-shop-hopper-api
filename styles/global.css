@@ -3,26 +3,29 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
+    font-family: 'Poppins', sans-serif;
+    color: black;
     font-family: Geneva,
-    sans-serif;
+        sans-serif;
     color: #707070;
     letter-spacing: 0.5px;
     background: rgb(252, 252, 252);
-    background: linear-gradient(
-        14deg,
-        rgba(252, 252, 252, 1) 0%,
-        rgba(252, 252, 252, 0.3211659663865546) 38%,
-        rgba(242, 239, 239, 0.6797093837535014) 100%
-    );
+    background: linear-gradient(14deg,
+            rgba(252, 252, 252, 1) 0%,
+            rgba(252, 252, 252, 0.3211659663865546) 38%,
+            rgba(242, 239, 239, 0.6797093837535014) 100%);
 }
 
 /*  calculation to make 1rem be10px at 1400 font-size: calc(0.038em + 0.665vw); */
-@media screen and (min-width: 100px) {
-    /* html {
-        /* this number makes 1 rem = 10px when screen is 1400 wide and 880 tall - please don't change
-        font-size: calc(0.03em + 0.66vw); Boom changed. Lets discuss further
-    } */
+@media screen and (min-width: 400px) {
+     /* Can you do me a favour, can yuo apply this where you need, but I don't know if this is the way forward, as it breaks all my styles. I think we have to wrap/flexbox, its industry standard and its the quick/reliable way in my mind. */
+
+     /* this number makes 1 rem = 10px when screen is 1400 wide and 880 tall - please don't change*/
+    html {
+        font-size: calc(0.03em + 0.66vw);
+    }
 }
 
 /* h1 {
@@ -75,6 +78,7 @@ p {
         opacity: 0;
         transform: translate3d(20%, 0, 0);
     }
+
     100% {
         opacity: 1;
         transform: translate3d(0, 0, 0);
@@ -91,6 +95,7 @@ p {
         opacity: 0;
         transform: translate3d(-20%, 0, 0);
     }
+
     100% {
         opacity: 1;
         transform: translate3d(0, 0, 0);
@@ -105,6 +110,7 @@ p {
     30% {
         opacity: 0;
     }
+
     100% {
         opacity: 0;
     }
@@ -133,6 +139,7 @@ input[type='number']::-webkit-outer-spin-button {
     opacity: 0;
     transition: all 800ms;
 }
+
 .shared-position-enter {
     opacity: 0;
 }
@@ -156,20 +163,24 @@ input[type='number']::-webkit-outer-spin-button {
     margin-left: 5rem;
     transform: translate(0, -10px);
 }
+
 .transition-enter-active {
     opacity: 1;
     transform: translate(0, 0);
     transition: all 300ms ease-in;
 }
+
 .transition-exit {
     opacity: 1;
     transform: translate(0, 0);
 }
+
 .transition-exit-active {
     opacity: 0.01;
     transform: translate(0, 10px);
     transition: all 300ms ease-in;
 }
+
 .button {
     cursor: pointer;
 }
@@ -263,6 +274,7 @@ ul.options li.option-active {
 .no-options {
     color: white;
 }
+
 .page {
     margin: 20px;
 }
