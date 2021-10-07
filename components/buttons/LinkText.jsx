@@ -5,7 +5,7 @@ import Link from 'next/link';
 export const LinkText = ({ title, accent }) => {
     return (
         <Wrapper>
-            <Link href="/">
+            <Link href={`/${title.toLowerCase()}`}>
                 <Title accent={accent}>{title}</Title>
             </Link>
         </Wrapper>

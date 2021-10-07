@@ -16,6 +16,8 @@ export const Header = ({ title, subTitle }) => {
             <Right>
                 <LinkText title={'About'} />
                 <LinkText title={'Features'} />
+                <LinkText title={'Tags'} />
+                <LinkText title={'Manager'} />
             </Right>
         </Wrapper>
     );

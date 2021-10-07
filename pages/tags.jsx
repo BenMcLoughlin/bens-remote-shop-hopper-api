@@ -84,7 +84,7 @@ const Tags = () => {
                         <p>When clicking on a Tag, it is added to a list in the DB of &quot;Hot Items&quot;. If you click it again it gets a better score</p>
                     </div>
                     {
-                        raw_Tags.length < 0 ?
+                        raw_Tags.length === 0 ?
                             <div className="notice hov" >
                                 <button onClick={() => _getAllTags()}>
                                     {loading === 'getAllTags' ? "Loading..." : <a className="red">Get Tags</a>}

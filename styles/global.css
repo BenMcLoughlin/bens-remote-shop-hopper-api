@@ -20,10 +20,12 @@ body {
 
 /*  calculation to make 1rem be10px at 1400 font-size: calc(0.038em + 0.665vw); */
 @media screen and (min-width: 400px) {
-    html {
-        /* this number makes 1 rem = 10px when screen is 1400 wide and 880 tall - please don't change*/
-        /* font-size: calc(0.03em + 0.66vw); */
-    }
+     /* Can you do me a favour, can yuo apply this where you need, but I don't know if this is the way forward, as it breaks all my styles. I think we have to wrap/flexbox, its industry standard and its the quick/reliable way in my mind. */
+
+     /* this number makes 1 rem = 10px when screen is 1400 wide and 880 tall - please don't change*/
+    /* html {
+        font-size: calc(0.03em + 0.66vw);
+    } */
 }
 
 /* h1 {
