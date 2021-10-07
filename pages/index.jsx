@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import { landingProps } from '../controller/landingProps';
-import Image from 'next/image';
-import { Link, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 import {
     Header,
     HowItWorks,
