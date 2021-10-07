@@ -1,4 +1,7 @@
 import React, { ReactNode } from "react";
+import { useSession } from "next-auth/client";
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Header from "./Header";
 import Navbar from "./Navbar";
 import Head from 'next/head';
@@ -7,7 +10,14 @@ type Props = {
     children: ReactNode;
 };
 
-const Layout: React.FC<Props> = (props) => (
+const Layout: React.FC<Props> = (props) => {
+    const session = useSession();
+    const router = useRouter();
+
+    const isLoggedIn = session[0]?.user;
+    const isActive = (pathname) => router.pathname === pathname;
+
+return (
     <div>
         <Head>
             <link
@@ -20,7 +30,16 @@ const Layout: React.FC<Props> = (props) => (
             />
         </Head>
         <Header />
-        <div className="layout">{props.children}</div>
+        {
+            isLoggedIn ?
+                <div className="layout">{props.children}</div>
+                :
+                <Link href="/api/auth/signin">
+                    <div className="notice hov">
+                        <a data-active={isActive('/signup')}>Might as well Log in</a>
+                    </div>
+                </Link>
+        }
         <style jsx global>{`
             html {
                 box-sizing: border-box;
@@ -39,6 +58,17 @@ const Layout: React.FC<Props> = (props) => (
             button {
                 cursor: pointer;
             }
+
+            .notice {
+                background: white;
+                transition: box-shadow 0.1s ease-in;
+                padding: 20px;
+                margin: 1rem;
+            }
+
+            .hov:hover {
+                box-shadow: 1px 1px 3px #aaa;
+            }
         `}</style>
         <style jsx>{`
             .layout {
@@ -49,5 +79,6 @@ const Layout: React.FC<Props> = (props) => (
         `}</style>
     </div>
 );
+}
 
 export default Layout;

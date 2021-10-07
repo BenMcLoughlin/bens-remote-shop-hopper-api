@@ -1,19 +1,25 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-undef */
 import React, { useState } from "react";
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Layout from "../components/Layout";
-import { useSession } from "next-auth/client";
+import Autocomplete from "../components/Autocomplete";
 import fetchTags from "../lib/requests/fetchTags";
 import incrementItem from "../lib/requests/incrementItem";
+import searchRequest from "../lib/requests/search";
+
 
 const Tags = () => {
-    const session = useSession();
     const [ raw_Tags, set_Raw_Tags ] = useState([]);
+    const [search_products, set_search_products] = useState([]);
+    const [query, setQuery] = useState('');
     const [ loading, setLoading ] = useState(false || "");
-    const router = useRouter();
-    const isActive = (pathname) => router.pathname === pathname;
+
+    const router = useRouter()
+
+    const refreshData = () => {
+        router.replace(router.asPath);
+    };
 
     const _getAllTags = async () => {
         setLoading('getAllTags');
@@ -25,46 +31,77 @@ const Tags = () => {
     };
 
     const _incrementItem = async (tag) => {
-        setLoading('incrementItem');
+        setLoading(tag);
         const result = await incrementItem(tag);
         if (result) {
             setLoading(false);
         }
     };
 
-    const isLoggedIn = session[0]?.user;
+    const _search = async (value) => {
+        setQuery(value);
+        setLoading('search');
+        const result = await searchRequest(query);
+        if (result) {
+            console.log('result:', result);
+            set_search_products(result);
+            refreshData();
+            setLoading(false);
+        }
+    }
 
     return (
         <Layout>
             <div className="page">
                 {
-                    isLoggedIn ?
-                        <React.Fragment>
-                            <main className="main">
-                                <div className="notice hov" onClick={() => set_search_products([])}>
-                                    <p>When clicking on a Tag, it is added to a list in the DB of &quot;Hot Items&quot;. If you click it again it gets a better score</p>
-                                </div>
-                                <button className="hov" onClick={() => _getAllTags()}>
+                    raw_Tags.length ?
+                    <div className="notice">
+                        <div>
+                            <p>See we can search by existing tags</p>
+                        </div>
+
+                        <Autocomplete
+                            onSubmit={_search}
+                            options={raw_Tags}
+                        />
+
+                            <div className="cards">
+                                {
+                                    search_products.map((product) =>
+                                        <div className="card hov" key={product.id}>
+                                            <img className="image" src={product.images[0]?.src} />
+                                            <p>{product.title}</p>
+                                        </div>
+                                    )
+                                }
+                        </div>
+                    </div>
+                        :
+                        null
+                }
+                <main className="main">
+                    <div className="notice hov" onClick={() => set_search_products([])}>
+                        <p>When clicking on a Tag, it is added to a list in the DB of &quot;Hot Items&quot;. If you click it again it gets a better score</p>
+                    </div>
+                    {
+                        raw_Tags.length < 0 ?
+                            <div className="notice hov" >
+                                <button onClick={() => _getAllTags()}>
                                     {loading === 'getAllTags' ? "Loading..." : <a className="red">Get Tags</a>}
                                 </button>
-                                {raw_Tags.map((tag) => <button key={tag} onClick={() => _incrementItem(tag)}>
-                                    {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
-                                </button>)}
-                            </main>
-                        </React.Fragment>
-                        :
-                        <Link href="/api/auth/signin">
-                            <div className="notice hov">
-                                <a data-active={isActive('/signup')}>Might as well Log in</a>
                             </div>
-                        </Link>
-                }
+                            :
+                            raw_Tags.map((tag) => <button className="blue" key={tag} onClick={() => _incrementItem(tag)}>
+                                {loading === tag ? "Loading..." : <a>{tag}</a>}
+                            </button>)
+                    }
+                </main>
             </div>
             <style jsx>{`
         .main {
             display: block;
             position: relative;
-            margin-bottom: 20px;
+            margin: 2rem;
             width: 100%;
         }
 
@@ -126,7 +163,8 @@ const Tags = () => {
 
         .blue {
             color: blue;
-            margin: 1rem;
+            margin: 2px;
+            width: 200px;
         }
 
         .red {

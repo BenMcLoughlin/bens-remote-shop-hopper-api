@@ -1,8 +1,27 @@
 import prisma from '../../../../prisma/prisma.js';
 
-export function products(data) {
-    console.log('IN LOAD FUNCTION: ', JSON.stringify(data[0].products[0], null, 4));
-    console.log('IN LOAD FUNCTION: ', JSON.stringify(data[1].products[0], null, 4));
-    //  console.log(prisma);
-    return data;
+async function createRows(data) {
+    let result = {};
+
+    result = await prisma.product.createMany({
+        data,
+        skipDuplicates: true
+    }).catch((e) => {
+        console.log('e:', e);
+        throw e;
+    }).finally(async () => {
+        await prisma.$disconnect();
+    });
+
+    return result;
+}
+
+export async function products(data) {
+    let results = [];
+
+    results = await createRows(data);
+
+    console.log('IN LOAD FUNCTION: ', results);
+
+    return results
 }

@@ -1,24 +1,18 @@
 import * as extract from './extract';
-import * as format from './format';
-import * as load from './load';
 
-const updateDatabase = async (req, res) => {
+export default async (req, res) => {
     const { siteHost, businessName, domain } = JSON.parse(req.body);
+    let result = {};
 
-    let rawData = [];
+    try {
+        if (!businessName && !domain) {
+            result = await extract.allShops[siteHost]();
+        } else {
+            result = await extract.singleBusiness(businessName, domain);
+        }
 
-    rawData = businessName
-        ? await extract.single(businessName, domain)
-        : await extract.allShops[siteHost]();
-
-    const formatedData = format.products(rawData);
-
-    load.products(formatedData);
-
-    res.status(200).json({
-        status: 'success',
-        message: 'products loaded',
-    });
+        return res.status(200).json({ result: result.productsUploaded });
+    } catch (error) {
+        return res.status(422).json(error);
+    }
 };
-
-export default updateDatabase;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { camelCase, startCase } from '../../utils/strings';
 
 const SideNav = ({ shopsList, selected, set }) => {
@@ -11,8 +11,9 @@ const SideNav = ({ shopsList, selected, set }) => {
             <ul className="list">
                 {siteHostList.map((siteHost) => (
                     <div
+                        key={siteHost}
                         className={`listItem ${camelCase(siteHost)}`}
-                        onClick={() => set.selectedSiteHost(camelCase(siteHost))}
+                        onClick={() => set.selectedSiteHost(camelCase("shopify"))} //todo
                     >
                         {startCase(siteHost)}
                     </div>
@@ -24,22 +25,17 @@ const SideNav = ({ shopsList, selected, set }) => {
                 .wrapper {
                     background: #485056;
                     padding: 1rem;
-
                     height: 90rem;
                     width: 20%;
-
                     margin-top: -2.3rem;
                     border-radius: 5px;
-                    font-size: 1.6rem;
                     color: white;
                     display: flex;
                     flex-direction: column;
                 }
                 .city {
                     width: 100%;
-
                     height: 5rem;
-                    font-size: 2rem;
                     font-weight: bold;
                     display: flex;
                     align-items: center;
@@ -68,7 +64,7 @@ const SideNav = ({ shopsList, selected, set }) => {
                 }
                 .${selected.siteHost} {
                     background: #f7f7f7;
-                    color: grey;
+                    color: #1469eb;
                     transition: all 0.5s ease;
                 }
 

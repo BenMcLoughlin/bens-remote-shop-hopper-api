@@ -13,22 +13,11 @@ import incrementProduct from "../lib/requests/incrementProduct";
 import searchRequest from "../lib/requests/search";
 import fetchTags from "../lib/requests/fetchTags";
 
-const DB_Param = "jewellry";
+const DB_Param = "jewelry";
 
 // We might use this to do user fetching .....
 export const getServerSideProps = async () => {
-    const feed = await prisma.post.findMany({
-        where: { published: true },
-        include: {
-            author: {
-                select: { name: true }
-            }
-        }
-    });
-
-    const allUsers = await prisma.user.findMany({
-        include: { posts: true }
-    });
+    const allUsers = await prisma.user.findMany({});
     const users = dateStripped(allUsers);
 
     // Example Query
@@ -44,7 +33,7 @@ export const getServerSideProps = async () => {
     });
     const products = dateStripped(productsFeed);
 
-    return { props: { feed, users, products } };
+    return { props: { users, products } };
 };
 
 // This is gross, we will see if there is a better solution to this problem
@@ -77,11 +66,11 @@ const dateStripped = (obj) => {
 const Home = (props) => {
     const session = useSession();
     // const [ raw_products, set_Raw_Products ] = useState([]);
-    const [ search_products, set_search_products ] = useState([]);
-    const [ raw_Tags, set_Raw_Tags ] = useState([]);
-    const [ loading, setLoading ] = useState(false);
-    const [ query, setQuery ] = useState(false);
-    const [ search, toggleSearch ] = useState(false);
+    const [search_products, set_search_products] = useState([]);
+    const [raw_Tags, set_Raw_Tags] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [query, setQuery] = useState(false);
+    const [search, toggleSearch] = useState(false);
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
 
@@ -112,9 +101,9 @@ const Home = (props) => {
         setQuery(false);
     };
 
-    const _incrementProduct = async (title) => {
+    const _incrementProduct = async (id) => {
         setLoading('incrementProduct');
-        const result = await incrementProduct(title);
+        const result = await incrementProduct(id);
         if (result) {
             refreshData();
             setLoading(false);
@@ -132,16 +121,6 @@ const Home = (props) => {
         }
     };
 
-    const _sendProducts = async () => {
-        setLoading('sendProducts');
-        const result = await hydrateRequest({ request: 'SEND' });
-        if (result) {
-            console.log('result:', result);
-            refreshData();
-            setLoading(false);
-        }
-    };
-
     const _wipeDatabase = async () => {
         setLoading('wipeDatabase');
         const result = await hydrateRequest({ request: 'DESTROY' });
@@ -154,61 +133,25 @@ const Home = (props) => {
 
     const isLoggedIn = session[0]?.user;
 
-    const order = (a, b) => {
-        console.log('a, b:', a.rating, b.rating);
-        Number(a.rating) < Number(b.rating) ? -1 : (Number(a.rating) < Number(b.rating) ? 1 : 0);
-    };
-
     console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
-    console.log('Feed:', Object.keys(props.feed).length > 1 ? 'This is production DB' : props.feed);
     console.log('Products:', props.products);
 
     return (
         <Layout>
             <div className="page">
-                {isLoggedIn ? (
-                    <React.Fragment>
-                        {/* <button className="send hov" onClick={_getProducts}>
-                                <a>Fetch Directly from Shopify, display below</a>
-                            </button> */}
-                        <button className="send hov" onClick={_sendProducts}>
-                            {loading === 'sendProducts' ? (
-                                'Loading...'
-                            ) : (
-                                <a>
-                                    Fetch Products, and send to DB, also, they will be listed below
-                                    when this component pulls them in and it re-renders.
-                                </a>
-                            )}
-                        </button>
-                        {/* } */}
-                        <main className="main">
-                            {search_products.length ? (
-                                <React.Fragment>
-                                    <div
-                                        className="notice hov"
-                                        onClick={() => set_search_products([])}
-                                    >
-                                        <p>
-                                            Currently{' '}
-                                            <span className="blue">{search_products.length}</span>{' '}
-                                            unique Products matching this criteria:{' '}
-                                            <a className="blue">{query}</a> in the Database
-                                        </p>
-                                        <span className="tiny"> Again?</span>
-                                    </div>
-                                    <div className="cards">
-                                        {search_products
-                                            .map((product) => (
-                                                <div
-                                                    className="card hov"
-                                                    key={product.id}
-                                                    onClick={() => _incrementProduct(product.title)}
-                                                >
-                                                    <img
-                                                        className="image"
-                                                        src={product.images[0].src}
-                                                    />
+                {
+                    isLoggedIn ?
+                        <>
+                            <main className="main">
+                                {search_products.length ?
+                                    <React.Fragment>
+                                        <div className="notice hov" onClick={() => set_search_products([])}>
+                                            <p>Currently  <span className="blue">{search_products.length}</span> unique Products matching this criteria: <a className="blue">{query}</a> in the Database</p><span className="tiny">  Again?</span>
+                                        </div>
+                                        <div className="cards">
+                                            {
+                                                search_products.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.id)}>
+                                                    <img className="image" src={product.images[0].src} />
                                                     <button className="hov">
                                                         {product.rating > 10 && (
                                                             <p className="star">⭐️</p>
@@ -222,83 +165,44 @@ const Home = (props) => {
                                                             </a>
                                                         }
                                                     </button>
-                                                </div>
-                                            ))
-                                            .sort(order)}
-                                    </div>
-                                </React.Fragment>
-                            ) : search ? (
-                                <form onSubmit={_search}>
-                                    <h2 className="hov" onClick={() => toggleSearch(false)}>
-                                        New Search
-                                    </h2>
-                                    {query ? (
-                                        <input
-                                            className="send blue hov"
-                                            disabled={!query}
-                                            type="submit"
-                                            value={`Search for Products Matching ${query}?`}
-                                        />
-                                    ) : (
-                                        raw_Tags.map((tag) => (
-                                            <button key={tag} onClick={() => setQuery(tag)}>
-                                                {loading === 'incrementItem' ? (
-                                                    'Loading...'
-                                                ) : (
-                                                    <a className="blue">{tag}</a>
-                                                )}
+                                                </div>)
+                                            }
+                                        </div>
+                                    </React.Fragment>
+                                    :
+                                    search ?
+                                        <form onSubmit={_search}>
+                                            <h2 className="search hov" onClick={() => toggleSearch(false)}>New Search</h2>
+                                            {
+                                                query ?
+                                                    <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${query}?`} />
+                                                    :
+                                                    raw_Tags.map((tag) => <button key={tag} onClick={() => setQuery(tag)}>
+                                                        {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
+                                                    </button>)
+                                            }
+                                            <button className="red hov">
+                                                <a onClick={() => _noSearch()}>
+                                                    Cancel
+                                                </a>
                                             </button>
-                                        ))
-                                    )}
-                                    <button className="red hov">
-                                        <a onClick={() => _noSearch()}>Cancel</a>
-                                    </button>
-                                </form>
-                            ) : (
-                                <h2 className="hov" onClick={() => toggleSearch(true)}>
-                                    New Search?
-                                </h2>
-                            )}
+                                        </form>
+                                        :
+                                        <h2 className="search hov" onClick={() => toggleSearch(true)}>New Search?</h2>
+                                }
 
-                            {!search_products.length && !search ? (
-                                <React.Fragment>
-                                    <div className="notice hov">
-                                        <p>
-                                            Currently{' '}
-                                            <span className="blue">
-                                                {Object.keys(props.products).length}
-                                            </span>{' '}
-                                            unique products that have this tag{' '}
-                                            <a className="blue">{DB_Param}</a>with a rating higher
-                                            than <span className="blue">10</span> in the Database.{' '}
-                                            <a className="link" onClick={() => toggleSearch(true)}>
-                                                Search
-                                            </a>{' '}
-                                            to see more.
-                                        </p>
+                                {
+                                    !search_products.length && !search ?
+                                        <React.Fragment>
+                                            <div className="notice hov">
+                                                <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique products that have this tag <a className="blue">{DB_Param}</a>with a rating higher than <span className="blue">10</span> in the Database. <a className="link" onClick={() => toggleSearch(true)}>Search</a> to see more.</p>
 
-                                        <p className="tiny">
-                                            *Note* Some data doesn&apos;t update in real time like
-                                            state data, so the counters don&apos;t seem like the are
-                                            working but, they are. Thank you for coming to my Ted
-                                            Talk
-                                        </p>
-                                    </div>
+                                                <p className="tiny">*Note* Some data doesn&apos;t update in real time like state data, so the counters don&apos;t seem like the are working but, they are. Thank you for coming to my Ted Talk</p>
+                                            </div>
 
-                                    <div className="cards">
-                                        {Object.keys(props.products)
-                                            .map((key) => (
-                                                <div
-                                                    className="card hov"
-                                                    key={key}
-                                                    onClick={() =>
-                                                        _incrementProduct(props.products[key].title)
-                                                    }
-                                                >
-                                                    <img
-                                                        className="image"
-                                                        src={props.products[key].images[0].src}
-                                                    />
+                                            <div className="cards">
+                                                {Object.keys(props.products).map((key) => <div className="card hov" key={key} onClick={() => _incrementProduct(props.products[key].id)}>
+                                                    <img className="image" src={props.products[key].images[0].src} />
                                                     <button className="hov">
                                                         {props.products[key].rating > 10 && (
                                                             <p className="star">⭐️</p>
@@ -312,152 +216,145 @@ const Home = (props) => {
                                                             </a>
                                                         }
                                                     </button>
-                                                </div>
-                                            ))
-                                            .sort(order)}
-                                    </div>
-                                </React.Fragment>
-                            ) : null}
+                                                </div>)}
+                                            </div>
+                                        </React.Fragment>
+                                        :
+                                        null
+                                }
 
-                            {/* { process.env.NODE_ENV === 'development' && */}
-                            <button className="send hov" onClick={_wipeDatabase}>
-                                {loading === 'wipeDatabase' ? (
-                                    'Loading...'
-                                ) : (
-                                    <a className="red">Permanently Wipe DB (testing only)</a>
-                                )}
-                            </button>
-
-                            <div></div>
-
-                            {/* {raw_products.map((item) => (
-                                    <div key={item.id} className="post hov">
-                                        <p>{raw_products.length}</p>
-                                        <p>{JSON.stringify(item)}</p>
-                                    </div>
-                                ))} */}
-                        </main>
-                    </React.Fragment>
-                ) : (
-                    <Link href="/api/auth/signin">
-                        <div className="notice hov">
-                            <a data-active={isActive('/signup')}>Might as well Log in</a>
-                        </div>
-                    </Link>
-                )}
+                                <button className="send hov" onClick={_wipeDatabase}>
+                                    {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
+                                </button>
+                            </main>
+                        </>
+                        :
+                        <Link href="/api/auth/signin">
+                            <div className="notice hov">
+                                <a data-active={isActive('/signup')}>Might as well Log in</a>
+                            </div>
+                        </Link>
+                }
             </div>
             <style jsx>{`
-                .main {
-                    display: block;
-                    position: relative;
-                    margin-bottom: 20px;
-                    width: 100%;
+        .page {
+            margin: 20px;
+        }
+
+        .main {
+            display: block;
+        position: relative;
+        margin-bottom: 20px;
+        width: 100%;
+        }
+
+        .search {
+            cursor: pointer;
+        }
+
+        .tiny {
+            font - size: 10px;
+        }
+
+        .link {
+            text - decoration: underline;
+        cursor: pointer;
                 }
 
-                .tiny {
-                    font-size: 10px;
+        .send {
+            background: lightGrey;
+        border-radius: 50px;
+        border: none;
+        padding: 10px;
+        transition: box-shadow 0.1s ease-in;
+        margin: 1rem;
                 }
 
-                .link {
-                    text-decoration: underline;
-                    cursor: pointer;
+        .cards {
+            display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
                 }
 
-                .send {
-                    background: lightGrey;
-                    border-radius: 50px;
-                    border: none;
-                    padding: 10px;
-                    transition: box-shadow 0.1s ease-in;
-                    margin: 1rem;
+        .card {
+            margin: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background: white;
+        transition: box-shadow 0.1s ease-in;
+        width: 275px;
+        height: 300px;
+        padding: 1rem;
                 }
 
-                .cards {
-                    display: flex;
-                    flex-direction: row;
-                    flex-wrap: wrap;
-                    justify-content: space-around;
-                    align-items: center;
+        .send {
+            background: lightGrey;
+        border-radius: 50px;
+        border: none;
+        padding: 10px;
+        transition: box-shadow 0.1s ease-in;
+        margin-bottom: 20px;
                 }
 
-                .card {
-                    margin: 1rem;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    align-items: center;
-                    background: white;
-                    transition: box-shadow 0.1s ease-in;
-                    width: 275px;
-                    height: 300px;
-                    padding: 1rem;
+        .post {
+            background: white;
+        transition: box-shadow 0.1s ease-in;
                 }
 
-                .send {
-                    background: lightGrey;
-                    border-radius: 50px;
-                    border: none;
-                    padding: 10px;
-                    transition: box-shadow 0.1s ease-in;
-                    margin-bottom: 20px;
+        .post + .post {
+            margin - top: 2rem;
                 }
 
-                .post {
-                    background: white;
-                    transition: box-shadow 0.1s ease-in;
+        .notice {
+            background: white;
+        transition: box-shadow 0.1s ease-in;
+        padding: 20px;
                 }
 
-                .post + .post {
-                    margin-top: 2rem;
+        .notice + .notice {
+            margin - top: 1rem;
                 }
 
-                .notice {
-                    background: white;
-                    transition: box-shadow 0.1s ease-in;
-                    padding: 20px;
+        .image {
+            width: 200px;
+        height: auto;
+        object-fit: contain;
                 }
 
-                .notice + .notice {
-                    margin-top: 1rem;
+        .blue {
+            color: blue;
+        margin: 1rem;
                 }
 
-                .image {
-                    width: 200px;
-                    height: auto;
-                    object-fit: contain;
+        .red {
+            color: red;
                 }
 
-                .blue {
-                    color: blue;
-                    margin: 1rem;
+        .hov:hover {
+            box - shadow: 1px 1px 3px #aaa;
                 }
 
-                .red {
-                    color: red;
+        .star {
+            position: absolute;
+        transform: scale(3, 3) translate(-5px, -10px);
                 }
 
-                .hov:hover {
-                    box-shadow: 1px 1px 3px #aaa;
-                }
-
-                .star {
-                    position: absolute;
-                    transform: scale(3, 3) translate(-5px, -10px);
-                }
-
-                .star:hover {
-                    transform: scale(5, 5);
-                    transition: all 1s;
+        .star:hover {
+            transform: scale(5, 5);
+        transition: all 1s;
                 }
             `}</style>
-        </Layout>
+        </Layout >
     );
 };
 
 Home.propTypes = {
     products: PropTypes.object,
-    users: PropTypes.object,
-    feed: PropTypes.array
+    users: PropTypes.object
 };
 
 export default Home;

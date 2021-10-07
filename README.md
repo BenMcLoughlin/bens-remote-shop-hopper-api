@@ -14,12 +14,6 @@ npm run dev
 
 ## Prisma
 
-It may be necessary to run the following upon installation
-
-```
-prisma generate
-```
-
 To set schema according to schema.prisma for new db
 
 ```
@@ -38,15 +32,22 @@ To Generate the client after making schema changes
 npx prisma generate
 ```
 
+To run migrations after making schema changes:
+
+```
+prisma migrate dev --name <migration name>
+```
+
+To run migrations after making schema changes for deployment
+
+```
+prisma migrate deploy
+```
+
 To clear Products table (take it easy this deletes everything)
 
 use in function
- `await prisma.product.deleteMany({})`
-
-## Migration Docs
-
-https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/add-prisma-migrate-to-a-project#baseline-your-production-environment
-
+`await prisma.product.deleteMany({})`
 
 ## TBA
 
@@ -57,4 +58,3 @@ https://www.prisma.io/docs/guides/database/seed-database
 ## Build Step Spare
 
 `next dev --port $PORT`
-
