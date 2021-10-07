@@ -32,7 +32,7 @@ To Generate the client after making schema changes
 npx prisma generate
 ```
 
-To run migrations after making schema changes: 
+To run migrations after making schema changes:
 
 ```
 prisma migrate dev --name <migration name>
@@ -47,8 +47,7 @@ prisma migrate deploy
 To clear Products table (take it easy this deletes everything)
 
 use in function
- `await prisma.product.deleteMany({})`
-
+`await prisma.product.deleteMany({})`
 
 ## TBA
 

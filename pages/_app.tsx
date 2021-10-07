@@ -6,6 +6,8 @@ import { Router } from 'next/dist/client/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import '../styles/global.css';
+import styled, { ThemeProvider } from 'styled-components';
+import { theme } from '../styles/theme';
 
 NProgress.configure({ showSpinner: true, trickleRate: 0.1, trickleSpeed: 300 });
 
@@ -23,7 +25,9 @@ Router.events.on('routeChangeError', () => {
 
 const App = ({ Component, pageProps }: AppProps) => (
     <Provider session={pageProps.session}>
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+        </ThemeProvider>
     </Provider>
 );
 

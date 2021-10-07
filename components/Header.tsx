@@ -136,7 +136,6 @@ const Header: React.FC = () => {
                     .left a[data-active='true'] {
                         color: gray;
                         font-size: 1.4rem;
-                  
                     }
 
                     a + a {

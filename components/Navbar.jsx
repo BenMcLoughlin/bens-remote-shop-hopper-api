@@ -8,9 +8,6 @@ const Navbar = () => (
         <Link href="/">
             <a>Home</a>
         </Link>
-        <Link href="/DB Manager">
-            <a>DB Manager</a>
-        </Link>
         <Link href="/tags">
             <a>Tags</a>
         </Link>
