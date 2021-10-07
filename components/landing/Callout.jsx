@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Explainer } from '../../components';
 import Image from 'next/image';
-import heels from '../../public/assets/shutterstock/heels.jpg';
+import heels from '../../public/assets/shutterstock/heel.jpg';
 import blotch1 from '../../public/assets/paintBlobs/basketball4all_graphic3-2.png';
 import blotch2 from '../../public/assets/paintBlobs/basketball4all_graphic1-2.png';
 import { SquareButton } from '../../components';
