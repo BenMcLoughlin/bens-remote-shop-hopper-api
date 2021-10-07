@@ -51,6 +51,6 @@ const FixedPosition = styled.div`
     height: 10rem;
     position: absolute;
     width: 100%;
-
+    font-size: calc(0.03em + 0.66vw);
     height: 100%;
 `;

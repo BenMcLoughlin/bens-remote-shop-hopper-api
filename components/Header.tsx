@@ -136,7 +136,6 @@ const Header: React.FC = () => {
                     .left a[data-active='true'] {
                         color: gray;
                         font-size: 1.4rem;
-                  
                     }
 
                     a + a {
@@ -205,8 +204,8 @@ const Header: React.FC = () => {
 
     return (
         <nav>
-            {/* {left}
-            {right} */}
+            {left}
+            {right}
             <style jsx>{`
                 nav {
                     display: flex;

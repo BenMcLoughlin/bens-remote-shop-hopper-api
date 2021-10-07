@@ -22,7 +22,7 @@ body {
 @media screen and (min-width: 400px) {
     html {
         /* this number makes 1 rem = 10px when screen is 1400 wide and 880 tall - please don't change*/
-        font-size: calc(0.03em + 0.66vw);
+        /* font-size: calc(0.03em + 0.66vw); */
     }
 }
 

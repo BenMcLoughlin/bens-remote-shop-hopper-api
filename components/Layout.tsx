@@ -74,7 +74,6 @@ return (
             .layout {
                 width: 100vw;
                 height: 100%;
-                background: yellow;
             }
         `}</style>
     </div>
