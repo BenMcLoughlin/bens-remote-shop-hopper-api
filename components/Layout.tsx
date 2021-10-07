@@ -34,7 +34,7 @@ return (
                 <Header />
         }
         {
-            isLoggedIn ?
+            isLoggedIn || props.isMain ?
                 <div className="layout">{props.children}</div>
                 :
                 <Link href="/api/auth/signin">
