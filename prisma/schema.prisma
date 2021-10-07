@@ -1,93 +1,104 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider = "postgresql"
-  url      = "postgresql://benmcloughlin:23firetruck23@localhost:5432/postgres"
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-model hotItems {
-  id       Int     @id @default(autoincrement())
-  name     String  @unique
-  value    Int?
+datasource db {
+  provider          = "postgresql"
+  url               = "postgres://pbhobvqzdqhynn:851e5b405a1a19910e2c97ec56f3a39cd65f996b5bb843cdc24df5e8dcbbc4c9@ec2-52-203-74-38.compute-1.amazonaws.com:5432/d9nqq75iaso1k4"
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model Product {
-  id           Int      @id @default(autoincrement())
-  title        String   @unique
-  handle       String?
-  body_html    String?  @unique
-  vendor       String?
-  product_type String?
-  created_at   DateTime?
-  published_at DateTime @default(now())
-  updated_at   DateTime
-  tags         String[]
-  variants     Json?
-  images       Json?
-  options      Json?
-  rating       Int?     @default(0)
+model hot_item {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  value Int?
 
-  @@map(name: "products")
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  @@map("hot_items")
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  Int?
+model status {
+  id            Int      @id @default(autoincrement())
+  business_name String   @unique
+  updated_at    DateTime @default(now())
+  products      Int
+
+  @@map("statuses")
+}
+
+model shop {
+  id            Int      @id @default(autoincrement())
+  business_name String
+  domain        String   @unique
+  vertical      String?
+  site_host     String
+  city          String?
+  province      String?
+  postal_code   String?
+  country       String?
+  created_at    DateTime @default(now())
+
+  @@map("shops")
+}
+
+model product {
+  id            Int      @id @default(autoincrement())
+  business_name String?  @map("businessName")
+  title         String   @unique
+  handle        String?
+  body_html     String?  @map("bodyHtml")
+  vendor        String?
+  product_type  String?  @map("productType")
+  created_at    DateTime @default(now()) @map("createdAt")
+  published_at  DateTime @default(now()) @map("publishedAt")
+  updated_at    DateTime @default(now()) @map("updatedAt")
+  tags          String[]
+  variants      Json?
+  images        Json?
+  options       Json?
+  rating        Int?     @default(0)
+
+  @@map("products")
 }
 
 model User {
   id            Int       @id @default(autoincrement())
   name          String?
   email         String?   @unique
-  emailVerified DateTime? @map(name: "email_verified")
+  emailVerified DateTime? @map("email_verified")
   image         String?
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  posts         Post[]
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
 
-  Product Product[]
-  @@map(name: "users")
+  @@map("users")
 }
 
 model Account {
   id                 Int       @id @default(autoincrement())
-  compoundId         String    @unique @map(name: "compound_id")
-  userId             Int       @map(name: "user_id")
-  providerType       String    @map(name: "provider_type")
-  providerId         String    @map(name: "provider_id")
-  providerAccountId  String    @map(name: "provider_account_id")
-  refreshToken       String?   @map(name: "refresh_token")
-  accessToken        String?   @map(name: "access_token")
-  accessTokenExpires DateTime? @map(name: "access_token_expires")
-  createdAt          DateTime  @default(now()) @map(name: "created_at")
-  updatedAt          DateTime  @default(now()) @map(name: "updated_at")
+  compoundId         String    @unique @map("compound_id")
+  userId             Int       @map("user_id")
+  providerType       String    @map("provider_type")
+  providerId         String    @map("provider_id")
+  providerAccountId  String    @map("provider_account_id")
+  refreshToken       String?   @map("refresh_token")
+  accessToken        String?   @map("access_token")
+  accessTokenExpires DateTime? @map("access_token_expires")
+  createdAt          DateTime  @default(now()) @map("created_at")
+  updatedAt          DateTime  @default(now()) @map("updated_at")
 
-
-  @@index([providerAccountId], name: "providerAccountId")
-  @@index([providerId], name: "providerId")
-  @@index([userId], name: "userId")
-  @@map(name: "accounts")
+  @@index([providerAccountId], map: "providerAccountId")
+  @@index([providerId], map: "providerId")
+  @@index([userId], map: "userId")
+  @@map("accounts")
 }
 
 model Session {
   id           Int      @id @default(autoincrement())
-  userId       Int      @map(name: "user_id")
+  userId       Int      @map("user_id")
   expires      DateTime
-  sessionToken String   @unique @map(name: "session_token")
-  accessToken  String   @unique @map(name: "access_token")
-  createdAt    DateTime @default(now()) @map(name: "created_at")
-  updatedAt    DateTime @default(now()) @map(name: "updated_at")
+  sessionToken String   @unique @map("session_token")
+  accessToken  String   @unique @map("access_token")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @default(now()) @map("updated_at")
 
-  @@map(name: "sessions")
+  @@map("sessions")
 }
