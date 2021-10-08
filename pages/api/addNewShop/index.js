@@ -22,6 +22,8 @@ async function createAllShops() {
 
             shopArray.push(data);
         }
+
+        return true;
     });
 
     result = await prisma.shop

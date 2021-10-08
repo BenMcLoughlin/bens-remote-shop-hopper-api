@@ -63,14 +63,14 @@ const dateStripped = (obj) => {
     return newObj;
 };
 
-const Home = (props) => {
+const Features = (props) => {
     const session = useSession();
     // const [ raw_products, set_Raw_Products ] = useState([]);
-    const [search_products, set_search_products] = useState([]);
-    const [raw_Tags, set_Raw_Tags] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [query, setQuery] = useState(false);
-    const [search, toggleSearch] = useState(false);
+    const [ search_products, set_search_products ] = useState([]);
+    const [ raw_Tags, set_Raw_Tags ] = useState([]);
+    const [ loading, setLoading ] = useState(false);
+    const [ query, setQuery ] = useState(false);
+    const [ search, toggleSearch ] = useState(false);
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
 
@@ -175,7 +175,7 @@ const Home = (props) => {
                                             <h2 className="search hov" onClick={() => toggleSearch(false)}>New Search</h2>
                                             {
                                                 query ?
-                                                    <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${query}?`} />
+                                                    <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${ query }?`} />
                                                     :
                                                     raw_Tags.map((tag) => <button key={tag} onClick={() => setQuery(tag)}>
                                                         {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
@@ -352,9 +352,9 @@ const Home = (props) => {
     );
 };
 
-Home.propTypes = {
+Features.propTypes = {
     products: PropTypes.object,
     users: PropTypes.object
 };
 
-export default Home;
+export default Features;

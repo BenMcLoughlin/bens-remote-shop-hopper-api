@@ -118,4 +118,9 @@ export class Autocomplete extends Component {
     }
 }
 
+Autocomplete.propTypes = {
+    onSubmit: PropTypes.func,
+    options: PropTypes.array
+};
+
 export default Autocomplete;

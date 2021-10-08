@@ -760,6 +760,8 @@ ht.map((item) => {
     } else {
         iterate++;
     }
+
+    return true;
 });
 
 console.log('uniqueItems:', uniqueItems.length, iterate);
