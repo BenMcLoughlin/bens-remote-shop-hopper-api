@@ -38,7 +38,7 @@ const Header: React.FC = () => {
         );
 
         right = (
-            <Right className="right">
+            <Right>
                 <p>Validating session ...</p>
             </Right>
         );

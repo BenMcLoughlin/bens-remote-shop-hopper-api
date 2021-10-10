@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSession } from "next-auth/client";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
 
 import Layout from '../../components/Layout';
 import SideNav from '../../components/manager/SideNav';
@@ -46,8 +47,10 @@ const manager = () => {
             {
                 isLoggedIn ?
                     <div className="wrapper">
+                        <Title>
+                            <h1>Database Manager</h1>
+                        </Title>
                         <div className="column">
-                            <h1 className="title">Database Manager</h1>
                             <div className="row">
                                 <SideNav {...props} />
                                 <Display {...props} />
@@ -96,5 +99,16 @@ const manager = () => {
         </Layout>
     );
 };
+
+const Title = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 2rem;
+    color: #14e2a4;
+    background: #485056;
+    white-space: nowrap;
+`;
 
 export default manager;
