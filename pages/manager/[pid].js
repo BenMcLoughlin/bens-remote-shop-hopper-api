@@ -54,7 +54,7 @@ const Sitehost = () => {
     const _updateAll = async (params) => {
         console.log('globalState:', globalState);
         setIsLoading(true);
-        const success = await globalActions.extract.all(params, globalState.shops);
+        const success = await globalActions.extract.all(globalState.shops);
 
         if (success) {
             setUpLoaded(success.result);

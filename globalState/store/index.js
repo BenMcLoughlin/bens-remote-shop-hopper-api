@@ -14,7 +14,6 @@ const initialState = {
     shops: []
 };
 
-// const useGlobal = useGlobalHook(React, initialState, actions); todo
 const useGlobal = useGlobalHook(initialState, actions);
 
 export default useGlobal;
