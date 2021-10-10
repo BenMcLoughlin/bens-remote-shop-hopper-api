@@ -44,12 +44,6 @@ async function createAllShops() {
 
 async function createNewShop(shopData) {
     let result = {};
-    // let pattern = /^((http|https):\/\/)/; todo
-
-    // // if it doesn't already start with http, then add it
-    // if (!pattern.test(shopData.domain)) {
-    //     shopData.domain = "https://" + shopData.domain;
-    // }
 
     result = await prisma.shop
         .create({

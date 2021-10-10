@@ -1,5 +1,5 @@
-import prisma from '../../../../../prisma/prisma.js';
-import * as extract from '../../extract';
+import prisma from '../../../../prisma/prisma.js';
+import * as extract from '..';
 import { realtimeUpdates } from '../../metrics/realtime';
 
 async function getShopsDomains() {
@@ -23,6 +23,7 @@ export const shopify = async () => {
         let result = [];
 
         for (const shop of shops) {
+            // eslint-disable-next-line no-await-in-loop
             result = await extract.singleBusiness(shop.business_name, shop.domain);
 
             if (result) {

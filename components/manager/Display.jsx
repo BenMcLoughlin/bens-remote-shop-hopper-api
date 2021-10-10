@@ -1,34 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
+
+import Counters from "../../components/Counters";
+import SearchForm from "../../components/SearchForm";
+import Products from "../Products";
+
+import useGlobal from "../../controller/store";
 import Metrics from './Metrics';
 import SelectShop from './SelectShop';
 import { updateMetrics } from '../../lib/requests/updateMetrics';
-import { updateProducts } from '../../lib/requests/updateProducts';
+// import { updateProducts } from '../../controller/updateProducts';
+import { updateAll } from '../../controller/updateAll';
+
+import { updateProducts } from '../../lib/requests/updateProducts.js';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;
     const [ uploadedSuccess, setUpLoaded ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
+    const [ globalState, globalActions ] = useGlobal();
+
+    // const searchSubmit = (e) => {
+    //     e.preventDefault();
+    //     // const username = e.target.username.value;
+    //     globalActions.extract.extractSingle(businessName, domain);
+    // };
 
     const _updateProducts = async (params) => {
         setIsLoading(true);
-        const success = await updateProducts(params);
+        // const success = await updateProducts(params);
+        const success = await globalActions.extractSingle(params);
 
-        if (success) {
-            setUpLoaded(success.result);
-            setIsLoading(false);
+        console.log('globalActions:', globalActions);
 
-            return true;
-        }
+        // if (success) {
+        //     setUpLoaded(success.result);
+        //     setIsLoading(false);
 
-        setUpLoaded('failed');
-        setIsLoading(false);
-        return alert("Product acquisition failed, please try again.");
+        //     return true;
+        // }
     };
 
     return (
         <>
             <div className="wrapper">
                 <div className="top">
+                    <SearchForm />
+                    <Counters />
+                    <Products />
                     <div>
                         <Metrics
                             {...props}
@@ -103,6 +122,12 @@ const Display = (props) => {
             `}</style>
         </>
     );
+};
+
+Display.propTypes = {
+    shopsList: PropTypes.array,
+    set: PropTypes.object,
+    selected: PropTypes.object
 };
 
 export default Display;

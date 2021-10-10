@@ -14,10 +14,11 @@ export async function singleBusiness(businessName, domain) {
             const sanitizedData = await sanitize.products([ ...data.products ], businessName);
             const successfulUploads = await load.products(sanitizedData);
 
-            // see if this works in place of the < continue >
             if (data.products.length === 0) {
-                productsUploaded += successfulUploads.count;
+                continue;
             }
+
+            productsUploaded += successfulUploads.count;
         }
     } catch (error) {
         console.log(error);

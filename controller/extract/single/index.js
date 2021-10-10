@@ -7,6 +7,7 @@ export async function single(businessName, domain) {
             const data = await response.json();
 
             if (data.products.length === 0) {
+                // eslint-disable-next-line no-continue
                 continue;
             }
 

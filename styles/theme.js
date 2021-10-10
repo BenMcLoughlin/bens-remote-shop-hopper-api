@@ -37,10 +37,9 @@ export const theme = {
                 `
     },
     shadow: {
-        primary: `    -webkit-box-shadow: 1px 19px 77px -34px rgba(0, 0, 0, 0.75);
-                     -moz-box-shadow: 1px 19px 77px -34px rgba(0, 0, 0, 0.75);
-                   box-shadow: 1px 19px 77px -34px rgba(0, 0, 0, 0.75);
-`
+        primary: `-webkit-box-shadow: 1px 19px 77px -34px rgba(0, 0, 0, 0.75);
+                -moz-box-shadow: 1px 19px 77px -34px rgba(0, 0, 0, 0.75);
+                box-shadow: 1px 19px 77px -34px rgba(0, 0, 0, 0.75);`
     },
     border: {
         primary: '1px solid #DCDCDC'
@@ -48,14 +47,12 @@ export const theme = {
     flex: {
         vertical: {
             center: `
-             display: flex;
-             align-items: center;
-            `
+            display: flex;
+            align-items: center;`
         },
         center: `
-             display: flex;
-             justify-content: center;
-             align-items: center;
-            `
+            display: flex;
+            justify-content: center;
+            align-items: center;`
     }
 };

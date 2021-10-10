@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSession } from "next-auth/client";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
 import Layout from '../components/Layout';
 import SideNav from '../components/manager/SideNav';
 import Display from '../components/manager/Display';
@@ -16,26 +17,26 @@ const manager = () => {
     const city = 'kelowna';
     const shopsList = shopsLists[city];
 
-    const [siteHost, setSelectedSiteHost] = useState('shopify');
-    const [businessName, setSelectedBusinessName] = useState('');
-    const [domain, setSelectedDomain] = useState('');
+    const [ siteHost, setSelectedSiteHost ] = useState('shopify');
+    const [ businessName, setSelectedBusinessName ] = useState('');
+    const [ domain, setSelectedDomain ] = useState('');
 
     useEffect(() => {
         const selectedShop = shopsList.find((d) => d.business_name === businessName);
         selectedShop && setSelectedDomain(selectedShop.domain);
-    }, [businessName]);
+    }, [ businessName ]);
 
     const props = {
         shopsList,
         selected: {
             siteHost: camelCase(siteHost),
             businessName: businessName,
-            domain,
+            domain
         },
         set: {
             selectedSiteHost: (v) => setSelectedSiteHost(v),
-            selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v),
-        },
+            selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v)
+        }
     };
 
     const isLoggedIn = session[0]?.user;
@@ -48,7 +49,7 @@ const manager = () => {
                         <div className="column">
                             <h1 className="title">Database Manager</h1>
                             <div className="row">
-                                <SideNav  {...props} />
+                                <SideNav {...props} />
                                 <Display {...props} />
                             </div>
                         </div>

@@ -24,7 +24,7 @@ body {
 
      /* this number makes 1 rem = 10px when screen is 1400 wide and 880 tall - please don't change*/
     html {
-        font-size: calc(0.03em + 0.66vw);
+        /* font-size: calc(0.03em + 0.66vw); */
     }
 }
 
