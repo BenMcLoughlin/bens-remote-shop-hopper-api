@@ -19,20 +19,19 @@ import { updateMetrics } from '../../requests/updateMetrics';
 const Sitehost = () => {
     const session = useSession();
     const router = useRouter();
+    const [ globalState, globalActions ] = useGlobal();
+    const isActive = (pathname) => router.pathname === pathname;
+    const { pid } = router.query;
+
     const [ uploadedSuccess, setUpLoaded ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
-    const [ globalState, globalActions ] = useGlobal();
-    const { pid } = router.query;
-    console.log('pid:', pid);
-
-    const isActive = (pathname) => router.pathname === pathname;
+    const [ siteHost, setSelectedSiteHost ] = useState('shopify');
+    const [ businessName, setSelectedBusinessName ] = useState('');
+    const [ domain, setSelectedDomain ] = useState('');
 
     const city = 'kelowna';
     const shopsList = shopsLists[city];
 
-    const [ siteHost, setSelectedSiteHost ] = useState('shopify');
-    const [ businessName, setSelectedBusinessName ] = useState('');
-    const [ domain, setSelectedDomain ] = useState('');
 
     useEffect(() => {
         const selectedShop = shopsList.find((d) => d.business_name === businessName);
@@ -52,8 +51,20 @@ const Sitehost = () => {
         }
     };
 
+    const _updateAll = async (params) => {
+        console.log('globalState:', globalState);
+        setIsLoading(true);
+        const success = await globalActions.extract.all(params, globalState.shops);
 
-    const _updateProducts = async (params) => {
+        if (success) {
+            setUpLoaded(success.result);
+            setIsLoading(false);
+
+            return true;
+        }
+    };
+
+    const _updateSingle = async (params) => {
         setIsLoading(true);
         // const success = await updateProducts(params);
         const success = await globalActions.extract.single(params);
@@ -90,7 +101,7 @@ const Sitehost = () => {
                                 buttonClick={() => {
                                     shops.set.selectedBusinessName('');
 
-                                    _updateProducts({
+                                    _updateAll({
                                         siteHost: shops.selected.siteHost,
                                         businessName: null,
                                         domain: null
@@ -115,7 +126,7 @@ const Sitehost = () => {
                                         buttonTitle={`Load ${ shops.selected.businessName }`}
                                         buttonClick={() => {
                                             // set.selectedSiteHost(''); todo
-                                            _updateProducts(shops.selected).then(() => {
+                                            _updateSingle(shops.selected).then(() => {
                                                 updateMetrics(true, shops.selected.businessName);
                                             });
                                         }}

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
-import { landingProps } from '../controller/landingProps';
+import { landingProps } from '../content/landingProps';
 import {
     Header,
     HowItWorks,

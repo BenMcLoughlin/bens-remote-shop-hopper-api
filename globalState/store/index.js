@@ -10,7 +10,8 @@ const initialState = {
         fail: 0
     },
     status: "INITIAL",
-    products: []
+    products: [],
+    shops: []
 };
 
 // const useGlobal = useGlobalHook(React, initialState, actions); todo

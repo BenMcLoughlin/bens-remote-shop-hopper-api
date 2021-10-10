@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import useGlobal from "../../globalState/store";
 import Metrics from './Metrics';
-import SelectShop from './SelectShop';
 import { updateMetrics } from '../../requests/updateMetrics';
 
 const Display = (props) => {
@@ -78,13 +77,6 @@ const Display = (props) => {
                         </div>
                     }  */}
                 </div>
-
-                <SelectShop
-                    shopsList={shopsList}
-                    set={set}
-                    selected={selected}
-                    refresh={uploadedSuccess}
-                />
             </div>
             <style jsx>{`
                 .wrapper {

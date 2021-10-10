@@ -68,14 +68,13 @@ const Header: React.FC = () => {
         right = (
             <Right>
                 <Row>
+                    <LinkText title={'Features'} accent="" />
                     <LinkText title={'Manager'} accent="" />
                     <LinkText title={'Tags'} accent="" />
                     <LinkText title={'Analytics'} accent="" />
                 </Row>
                 <Row>
-                    <p>
-                        {session.user.name} ({session.user.email})
-                    </p>
+                    <p>{session.user.name} ({session.user.email})</p>
 
                     <button onClick={() => signOut()}>
                         <a>Log out</a>
