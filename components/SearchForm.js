@@ -1,6 +1,6 @@
 import React from "react";
 
-import useGlobal from "../controller/store";
+import useGlobal from "../globalState/store";
 
 const businessName = "1000 palms swimwear";
 const domain = "1000palmsswimwear.com";
@@ -10,7 +10,7 @@ const SearchForm = () => {
     const searchSubmit = (e) => {
         e.preventDefault();
         // const username = e.target.username.value;
-        globalActions.extract.extract(businessName, domain);
+        globalActions.extract.single(businessName, domain);
     };
 
     return (

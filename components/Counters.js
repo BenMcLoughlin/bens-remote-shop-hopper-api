@@ -1,6 +1,6 @@
 import React from "react";
 
-import useGlobal from "../controller/store";
+import useGlobal from "../globalState/store";
 
 const Counters = () => {
     const [ globalState, globalActions ] = useGlobal();

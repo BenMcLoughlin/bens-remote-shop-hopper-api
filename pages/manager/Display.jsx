@@ -6,7 +6,7 @@ import SearchForm from "../../components/SearchForm";
 import Products from "../Products";
 
 import useGlobal from "../../globalState/store";
-import Metrics from './Metrics';
+import Metrics from './MetricsDisplay';
 import SelectShop from './SelectShop';
 import { updateMetrics } from '../../lib/requests/updateMetrics';
 

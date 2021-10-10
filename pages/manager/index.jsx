@@ -3,11 +3,11 @@ import { useSession } from "next-auth/client";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import Layout from '../components/Layout';
-import SideNav from '../components/manager/SideNav';
-import Display from '../components/manager/Display';
-import * as shopsLists from '../mock/shopsLists';
-import { camelCase } from '../utils/strings';
+import Layout from '../../components/Layout';
+import SideNav from '../../components/manager/SideNav';
+import Display from '../../components/manager/Display';
+import * as shopsLists from '../../mock/shopsLists';
+import { camelCase } from '../../utils/strings';
 
 const manager = () => {
     const session = useSession();
@@ -48,6 +48,9 @@ const manager = () => {
                     <div className="wrapper">
                         <div className="column">
                             <h1 className="title">Database Manager</h1>
+                            <Link href="/manager/shopify">
+                                <a>Go to pages/post/[pid].js</a>
+                            </Link>
                             <div className="row">
                                 <SideNav {...props} />
                                 <Display {...props} />

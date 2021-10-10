@@ -2,13 +2,12 @@ import React from 'react';
 import { startCase } from '../../utils/strings';
 
 
-const Button = ({ text, onClick, disabled, loading }) => {
-    return (
-        <button
-            disabled={disabled || loading}
-            onClick={() => onClick()}>
-            {loading ? 'Loading...' : startCase(text)}
-            <style jsx>{`
+const Button = ({ text, onClick, disabled, loading }) => (
+    <button
+        disabled={disabled || loading}
+        onClick={() => onClick()}>
+        {loading ? 'Loading...' : startCase(text)}
+        <style jsx>{`
                 button {
                     flex-wrap: wrap;
                     justify-content: space-around;
@@ -17,7 +16,7 @@ const Button = ({ text, onClick, disabled, loading }) => {
                     justify-content: left;
                     align-items: center;
                     height: 3rem;
-                    width: 25rem;
+                    // width: 25rem;
                     gap: 1rem;
                     padding: .5rem;
                     padding-left: 2rem;
@@ -27,15 +26,14 @@ const Button = ({ text, onClick, disabled, loading }) => {
                     transition: all 0.7s ease;
                     justify-content: left;
                     background: #f7f7f7;
-                    box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
+                    // box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
                     border: none;
                 }
                 button:hover {
                     box-shadow: 1px 1px 3px #aaa;
                 }
             `}</style>
-        </button>
-    );
-};
+    </button>
+);
 
 export default Button;

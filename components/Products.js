@@ -1,6 +1,6 @@
 import React from "react";
 
-import useGlobal from "../controller/store";
+import useGlobal from "../globalState/store";
 
 const mapProducts = (products) => products.map((product) => (
     <a
