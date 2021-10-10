@@ -74,11 +74,13 @@ const SideNav = ({ shopsList, selected, set }) => {
                     cursor: pointer;
                     align-items: center;
                     border-radius: .5rem;
+                    font-size: 10px;
                 }
                 .${ selected.siteHost } {
                     background: #f7f7f7;
                     color: #1469eb;
                     transition: all 0.5s ease;
+                    font-size: 14px;
                 }
                 .${ selected.siteHost }:hover {
                     box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
