@@ -4,28 +4,26 @@ import { RadialButton, LinkText } from '../../components';
 import logo from '../../public/assets/logos/shophopper-logo.svg';
 import Image from 'next/image';
 
-export const Header = ({ title, subTitle }) => {
-    return (
-        <Wrapper>
-            <Left>
-                <RadialButton title={'Sign up'} />
-            </Left>
-            <Logo>
-                <Image src={logo} width={200} height={100} />
-            </Logo>
-            <Right>
-                <LinkText title={'About'} />
-                <LinkText title={'Features'} />
-                <LinkText title={'Tags'} />
-                <LinkText title={'Manager'} />
-            </Right>
-        </Wrapper>
-    );
-};
+export const Header = ({ title, subTitle }) => (
+    <Wrapper>
+        <Left>
+            <RadialButton title={'Sign up'} />
+        </Left>
+        <Logo>
+            <Image src={logo} width={200} height={100} />
+        </Logo>
+        <Right>
+            <LinkText title={'About'} />
+            <LinkText title={'Features'} />
+            <LinkText title={'Tags'} />
+            <LinkText title={'Manager'} />
+        </Right>
+    </Wrapper>
+);
 
 export default Header;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     height: 15rem;
@@ -33,8 +31,8 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-around;
     padding-bottom: 2rem;
-    opacity: ${(p) => p.theme.opacity};
-    font-size: ${(p) => p.theme.font.small};
+    opacity: ${ (p) => p.theme.opacity };
+    font-size: ${ (p) => p.theme.font.small };
 `;
 
 const Left = styled.div`

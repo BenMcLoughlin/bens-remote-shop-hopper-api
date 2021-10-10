@@ -1,7 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { signOut, useSession } from 'next-auth/client';
+
+import { LinkText } from '../components';
+import logo from '../public/assets/logos/shophopper-logo.svg';
 
 const Header: React.FC = () => {
     const router = useRouter();
@@ -12,29 +17,10 @@ const Header: React.FC = () => {
     let left = (
         <div className="left">
             <Link href="/">
-                <a className="bold" data-active={isActive('/')}>
-                    <h1>ShopHopper</h1>
-                </a>
+                <Logo>
+                    <Image src={logo} width={200} height={100} />
+                </Logo>
             </Link>
-            <style jsx>{`
-                .bold {
-                    font-weight: bold;
-                }
-
-                a {
-                    text-decoration: none;
-                    color: var(--geist-foreground);
-                    display: inline-block;
-                }
-
-                .left a[data-active='true'] {
-                    color: gray;
-                }
-
-                a + a {
-                    margin-left: 1rem;
-                }
-            `}</style>
         </div>
     );
 
@@ -44,72 +30,27 @@ const Header: React.FC = () => {
         left = (
             <div className="left">
                 <Link href="/">
-                    <a className="bold" data-active={isActive('/')}>
-                        <h1>ShopHopper</h1>
-                    </a>
+                    <Logo>
+                        <Image src={logo} width={200} height={100} />
+                    </Logo>
                 </Link>
-                <style jsx>{`
-                    .bold {
-                        font-weight: bold;
-                    }
-
-                    a {
-                        text-decoration: none;
-                        color: var(--geist-foreground);
-                        display: inline-block;
-                    }
-
-                    .left a[data-active='true'] {
-                        color: gray;
-                    }
-
-                    a + a {
-                        margin-left: 1rem;
-                    }
-                `}</style>
             </div>
         );
 
         right = (
-            <div className="right">
+            <Right className="right">
                 <p>Validating session ...</p>
-                <style jsx>{`
-                    .right {
-                        margin-left: auto;
-                    }
-                `}</style>
-            </div>
+            </Right>
         );
     }
 
     if (!session) {
         right = (
-            <div className="right">
+            <Right>
                 <Link href="/api/auth/signin">
                     <a data-active={isActive('/signup')}>Log in</a>
                 </Link>
-                <style jsx>{`
-                    a {
-                        text-decoration: none;
-                        color: var(--geist-foreground);
-                        display: inline-block;
-                    }
-
-                    a + a {
-                        margin-left: 1rem;
-                    }
-
-                    .right {
-                        margin-left: auto;
-                    }
-
-                    .right a {
-                        border: 1px solid var(--geist-foreground);
-                        padding: 0.5rem 1rem;
-                        border-radius: 3px;
-                    }
-                `}</style>
-            </div>
+            </Right>
         );
     }
 
@@ -117,36 +58,22 @@ const Header: React.FC = () => {
         left = (
             <div className="left">
                 <Link href="/">
-                    <a className="bold" data-active={isActive('/')}>
-                        <h1>ShopHopper</h1>
-                    </a>
+                    <Logo>
+                        <Image src={logo} width={200} height={100} />
+                    </Logo>
                 </Link>
-                <style jsx>{`
-                    .bold {
-                        font-weight: bold;
-                    }
-
-                    a {
-                        text-decoration: none;
-                        color: var(--geist-foreground);
-                        display: inline-block;
-                    }
-
-                    .left a[data-active='true'] {
-                        color: gray;
-                        font-size: 1.4rem;
-                    }
-
-                    a + a {
-                        margin-left: 1rem;
-                    }
-                `}</style>
             </div>
         );
 
         right = (
-            <div className="right">
-                <div>
+            <Right>
+                <Row>
+                    <LinkText title={'Home'} accent="" />
+                    <LinkText title={'Manager'} accent="" />
+                    <LinkText title={'Tags'} accent="" />
+                    <LinkText title={'Analytics'} accent="" />
+                </Row>
+                <Row>
                     <p>
                         {session.user.name} ({session.user.email})
                     </p>
@@ -154,69 +81,36 @@ const Header: React.FC = () => {
                     <button onClick={() => signOut()}>
                         <a>Log out</a>
                     </button>
-                </div>
-                <Link href="/">
-                    <a>Home</a>
-                </Link>
-                <Link href="/tags">
-                    <a>Tags</a>
-                </Link>
-                <Link href="/manager">
-                    <a>Manager</a>
-                </Link>
-                <Link href="/analytics">
-                    <a>Analytics</a>
-                </Link>
-
-                <style jsx>{`
-                    a {
-                        text-decoration: none;
-                        color: var(--geist-foreground);
-                        display: inline-block;
-                    }
-
-                    p {
-                        display: inline-block;
-                        font-size: 13px;
-                        padding-right: 1rem;
-                    }
-
-                    a + a {
-                        margin-left: 1rem;
-                    }
-
-                    .right {
-                        margin-left: auto;
-                    }
-
-                    .right a {
-                        border: 1px solid var(--geist-foreground);
-                        padding: 0.5rem 1rem;
-                        border-radius: 3px;
-                    }
-
-                    button {
-                        border: none;
-                    }
-                `}</style>
-            </div>
+                </Row>
+            </Right>
         );
     }
 
     return (
-        <nav>
+        <Nav>
             {left}
             {right}
-            <style jsx>{`
-                nav {
-                    display: flex;
-                    padding: 2rem;
-                    align-items: center;
-                    background: white;
-                }
-            `}</style>
-        </nav>
+        </Nav>
     );
 };
+
+const Nav = styled.div`
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+    background: white;
+`;
+const Logo = styled.div`
+    height: 5rem;
+    cursor: pointer;
+`;
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+`;
+const Right = styled.div`
+     margin-left: auto;
+`;
 
 export default Header;

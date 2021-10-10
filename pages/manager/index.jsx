@@ -48,9 +48,6 @@ const manager = () => {
                     <div className="wrapper">
                         <div className="column">
                             <h1 className="title">Database Manager</h1>
-                            <Link href="/manager/shopify">
-                                <a>Go to pages/post/[pid].js</a>
-                            </Link>
                             <div className="row">
                                 <SideNav {...props} />
                                 <Display {...props} />

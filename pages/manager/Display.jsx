@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import Counters from "../../components/Counters";
 import SearchForm from "../../components/SearchForm";
-import Products from "../Products";
 
 import useGlobal from "../../globalState/store";
 import Metrics from './MetricsDisplay';
@@ -55,8 +53,6 @@ const Display = (props) => {
                             disabled={selected.businessName}
                         />
                     </div>
-                    <Counters />
-                    <Products />
 
                     {
                         uploadedSuccess === 'failed' &&

@@ -8,21 +8,13 @@ import styled from 'styled-components';
 import useGlobal from "../../globalState/store";
 
 import Layout from '../../components/Layout';
-import Counters from "../../components/Counters";
-import Products from "../../components/Products";
+import Counter from "../../components/Counter";
 import * as shopsLists from '../../mock/shopsLists';
 
 import { camelCase, capitalize } from '../../utils/strings';
 import MetricsDisplay from './MetricsDisplay';
 import SelectShop from './SelectShop';
 import { updateMetrics } from '../../lib/requests/updateMetrics';
-
-
-import Image from 'next/image';
-import greenCircles from '../../public/assets/footer/greenCircles.png';
-import phone from '../../public/assets/footer/phone.png';
-import { RadialButton } from '../../components';
-import { useOnScreen } from '../../hooks/useOnScreen';
 
 const Sitehost = () => {
     const session = useSession();
@@ -81,11 +73,10 @@ const Sitehost = () => {
             {
                 isLoggedIn ?
                     <>
-                        <div className="title">
-                            <h2>{`${ capitalize(pid) } Database Manager`} </h2>
-                            <Counters />
-                            <Products />
-                        </div>
+                        <Title>
+                            <h2 style={{ color: '#fff' }}>{`${ capitalize(pid) } Database Manager`} </h2>
+                            <Counter />
+                        </Title>
                         <Top>
                             {/* <Background>
                                 <Image src={greenCircles} width={2000} height={300} />
@@ -132,6 +123,7 @@ const Sitehost = () => {
                                     />
                             }
                         </Bottom>
+
                         <div className="wrapper">
                             <SelectShop
                                 shopsList={shops.shopsList}
@@ -149,16 +141,6 @@ const Sitehost = () => {
                     </Link>
             }
             <style jsx>{`
-                .title {
-                    width: 100%;
-                    height: 4rem;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-around;
-                    color: #14e2a4;
-                    background: #485056;
-                    white-space: nowrap;
-                }
                 .wrapper {
                     display: flex;
                     flex-direction: column;
@@ -178,19 +160,19 @@ const Sitehost = () => {
     );
 };
 
-const Wrapper = styled.div`
-    background: yellow;
-    height: 8rem;
+const Title = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    background: green;
-    margin-top: 30rem;
-    color: white;
+    padding: 2rem;
+    color: #14e2a4;
+    background: #485056;
+    white-space: nowrap;
 `;
 const Top = styled.div`
     display: flex;
     justify-content: flex-end;
-    // align-items: center;
-    // flex-direction: column;
     background: #14c792;
     background: -webkit-linear-gradient(bottom left, #14c792, #14e2a4);
     background: -moz-linear-gradient(bottom left, #14c792, #14e2a4);
@@ -199,10 +181,10 @@ const Top = styled.div`
 const Bottom = styled.div`
     display: flex;
     justify-content: flex-end;
+    min-height: 4rem;
     // align-items: center;
     // flex-direction: column;
-    // ${ (props) => props.theme.flex.center };
-    ${ (p) => p.theme.gradient.secondary };
+    // ${ (p) => p.theme.gradient.secondary };
 `;
 const Right = styled.div`
     z-index: 2;
@@ -213,10 +195,6 @@ const Right = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-`;
-const Title = styled.div`
-    font-size: ${ (props) => props.theme.font.mediumLarge };
-    font-weight: 600;
 `;
 const SubTitle = styled.div`
     font-size: ${ (props) => props.theme.font.small };

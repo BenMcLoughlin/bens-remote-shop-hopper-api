@@ -22,18 +22,19 @@ const MetricsDisplay = ({ header, selected, refresh, buttonClick, isHost, isLoad
     return (
         <div className="wrapper">
             <div className="header-row">
+                {!isHost &&
+                    <div className="header">
+                        {startCase(header)}
+                    </div>
+                }
                 {!disabled &&
                     <Button
                         loading={isLoading}
                         text={buttonTitle}
                         onClick={buttonClick}
                         disabled={disabled}
+                        backgroundColor={isHost ? '#1469eb' : '#25E9AF'}
                     />
-                }
-                {!isHost &&
-                    <div className="header">
-                        {startCase(header)}
-                    </div>
                 }
             </div>
             <div className="row">
@@ -51,6 +52,7 @@ const MetricsDisplay = ({ header, selected, refresh, buttonClick, isHost, isLoad
                 .wrapper {
                     display: flex;
                     flex-direction: column;
+                    align-items: flex-end;
                 }
                 .header {
                     font-size: 2.0rem;
