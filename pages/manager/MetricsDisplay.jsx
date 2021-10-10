@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { startCase } from '../../utils/strings';
 import { formatDate } from '../../utils/dates/forDisplay';
 import Button from '../../components/buttons/Button';
-import { updateMetrics } from '../../lib/requests/updateMetrics';
+import { updateMetrics } from '../../requests/updateMetrics';
 
 const MetricsDisplay = ({ header, selected, refresh, buttonClick, isHost, isLoading, buttonTitle, disabled }) => {
     const now = new Date();
@@ -117,7 +117,7 @@ const MetricsDisplay = ({ header, selected, refresh, buttonClick, isHost, isLoad
 MetricsDisplay.propTypes = {
     header: PropTypes.string,
     selected: PropTypes.string,
-    refresh: PropTypes.function,
+    refresh: PropTypes.boolean,
     buttonClick: PropTypes.function,
     isHost: PropTypes.boolean,
     isLoading: PropTypes.boolean,

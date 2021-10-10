@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { startCase } from '../../utils/strings';
 import Button from '../buttons/Button';
 import { formatDate } from '../../utils/dates/forDisplay';
-import { updateMetrics } from '../../lib/requests/updateMetrics'
+import { updateMetrics } from '../../requests/updateMetrics';
 
 const Metrics = ({ header, selected, refresh, buttonClick, isShopify, isLoading, buttonTitle, disabled }) => {
     const now = new Date();
-    const [totalItems, setTotalItems] = useState(0);
-    const [date, setDate] = useState(now); // todo
+    const [ totalItems, setTotalItems ] = useState(0);
+    const [ date, setDate ] = useState(now); // todo
 
     useEffect(() => {
         updateMetrics(isShopify, header).then((data) => {
             setTotalItems(data.result);
             setDate(now);
-        })
+        });
 
-    }, [header, refresh]);
+    }, [ header, refresh ]);
 
     return (
         <div className="wrapper">

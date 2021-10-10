@@ -8,10 +8,10 @@ import Layout from "../components/Layout";
 import { useSession } from "next-auth/client";
 import prisma from '../prisma/prisma';
 // import { fetchProducts } from "./api/fetch";
-import hydrateRequest from "../lib/requests/hydrateRequest";
-import incrementProduct from "../lib/requests/incrementProduct";
-import searchRequest from "../lib/requests/search";
-import fetchTags from "../lib/requests/fetchTags";
+import hydrateRequest from "../requests/hydrateRequest";
+import incrementProduct from "../requests/incrementProduct";
+import searchRequest from "../requests/search";
+import fetchTags from "../requests/fetchTags";
 
 const DB_Param = "jewelry";
 

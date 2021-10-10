@@ -14,7 +14,7 @@ import * as shopsLists from '../../mock/shopsLists';
 import { camelCase, capitalize } from '../../utils/strings';
 import MetricsDisplay from './MetricsDisplay';
 import SelectShop from './SelectShop';
-import { updateMetrics } from '../../lib/requests/updateMetrics';
+import { updateMetrics } from '../../requests/updateMetrics';
 
 const Sitehost = () => {
     const session = useSession();
@@ -83,7 +83,7 @@ const Sitehost = () => {
                             </Background> */}
                             <MetricsDisplay
                                 header={shops.selected.siteHost}
-                                refresh={uploadedSuccess}
+                                refresh={Boolean(uploadedSuccess)}
                                 isHost
                                 isLoading={isLoading}
                                 buttonTitle={`Load All ${ shops.selected.siteHost } Shops`}
@@ -110,7 +110,7 @@ const Sitehost = () => {
                                 shops.selected.businessName &&
                                     <MetricsDisplay
                                         header={shops.selected.businessName}
-                                        refresh={uploadedSuccess}
+                                        refresh={Boolean(uploadedSuccess)}
                                         isLoading={isLoading}
                                         buttonTitle={`Load ${ shops.selected.businessName }`}
                                         buttonClick={() => {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { camelCase } from '../../utils/strings';
-import addNewShop from "../../lib/requests/addNewShop";
-import fetchShops from "../../lib/requests/fetchShops";
-import fetchShopStatus from "../../lib/requests/fetchShopStatus";
+import addNewShop from "../../requests/addNewShop";
+import fetchShops from "../../requests/fetchShops";
+import fetchShopStatus from "../../requests/fetchShopStatus";
 import CreateShopModal from "../../components/CreateShopModal";
 
 const SelectShop = ({ set, selected, shopsList, refresh }) => {

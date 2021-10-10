@@ -6,7 +6,7 @@ import SearchForm from "../../components/SearchForm";
 import useGlobal from "../../globalState/store";
 import Metrics from './MetricsDisplay';
 import SelectShop from './SelectShop';
-import { updateMetrics } from '../../lib/requests/updateMetrics';
+import { updateMetrics } from '../../requests/updateMetrics';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;

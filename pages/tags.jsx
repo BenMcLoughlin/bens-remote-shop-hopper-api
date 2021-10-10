@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { useRouter } from 'next/router';
 import Layout from "../components/Layout";
 import Autocomplete from "../components/Autocomplete";
-import fetchTags from "../lib/requests/fetchTags";
-import incrementItem from "../lib/requests/incrementItem";
-import searchRequest from "../lib/requests/search";
+import fetchTags from "../requests/fetchTags";
+import incrementItem from "../requests/incrementItem";
+import searchRequest from "../requests/search";
 
 
 const Tags = () => {

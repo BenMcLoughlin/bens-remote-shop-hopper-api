@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import useGlobal from "../../globalState/store";
 import Metrics from './Metrics';
 import SelectShop from './SelectShop';
-import { updateMetrics } from '../../lib/requests/updateMetrics';
+import { updateMetrics } from '../../requests/updateMetrics';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;

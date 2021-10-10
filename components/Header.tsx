@@ -68,7 +68,6 @@ const Header: React.FC = () => {
         right = (
             <Right>
                 <Row>
-                    <LinkText title={'Home'} accent="" />
                     <LinkText title={'Manager'} accent="" />
                     <LinkText title={'Tags'} accent="" />
                     <LinkText title={'Analytics'} accent="" />
@@ -110,7 +109,7 @@ const Row = styled.div`
     justify-content: space-around;
 `;
 const Right = styled.div`
-     margin-left: auto;
+    margin-left: auto;
 `;
 
 export default Header;
