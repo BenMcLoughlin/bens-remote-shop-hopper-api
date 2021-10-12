@@ -2,12 +2,12 @@ import React from 'react';
 import { camelCase, startCase } from '../../utils/strings';
 
 const SideNav = ({ shopsList, selected, set }) => {
-    const siteHostList = [...new Set(shopsList.map((d) => d.site_host))].filter((d) => d);
+    const siteHostList = [ ...new Set(shopsList.map((d) => d.site_host)) ].filter((d) => d);
     const selectedIndex = siteHostList.findIndex((d) => camelCase(d) == selected.siteHost);
 
-    console.log('set:', [...new Set(shopsList.map((d) => d.site_host))].filter((d) => d));
+    console.log('set:', [ ...new Set(shopsList.map((d) => d.site_host)) ].filter((d) => d));
     console.log('map:', shopsList.map((d) => d.site_host));
-    console.log('sort:', [...new Set(shopsList.map((d) => d.site_host))].sort());
+    console.log('sort:', [ ...new Set(shopsList.map((d) => d.site_host)) ].sort());
 
     return (
         <div className="wrapper">
@@ -16,8 +16,8 @@ const SideNav = ({ shopsList, selected, set }) => {
                 {siteHostList.map((siteHost) => (
                     <div
                         key={siteHost}
-                        className={`listItem ${camelCase(siteHost)}`}
-                        onClick={() => set.selectedSiteHost(camelCase("shopify"))} //todo
+                        className={`listItem ${ camelCase(siteHost) }`}
+                        onClick={() => set.selectedSiteHost(camelCase("shopify"))} // todo
                     >
                         {startCase(siteHost)}
                     </div>
@@ -50,7 +50,7 @@ const SideNav = ({ shopsList, selected, set }) => {
                     justify-content: left;
                     align-items: center;
                     display: flex;
-                    height: ${siteHostList.length * 6}rem;
+                    height: ${ siteHostList.length * 6 }rem;
                     flex-direction: column;
                     position: relative;
                     gap: 1rem;
@@ -66,7 +66,7 @@ const SideNav = ({ shopsList, selected, set }) => {
                     text-align: left;
                     align-items: center;
                 }
-                .${selected.siteHost} {
+                .${ selected.siteHost } {
                     background: #f7f7f7;
                     color: #1469eb;
                     transition: all 0.5s ease;
@@ -80,7 +80,7 @@ const SideNav = ({ shopsList, selected, set }) => {
                     left: -0.3rem;
                     z-index: 501;
                     background: white;
-                    transform: translate(0, ${selectedIndex > 0 ? selectedIndex * 7 : 0}rem);
+                    transform: translate(0, ${ selectedIndex > 0 ? selectedIndex * 7 : 0 }rem);
                     transition: all 0.3s ease;
                     border-radius: 5px;
                     animation: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s 1 normal forwards

@@ -1,22 +1,36 @@
 import React from 'react';
 import { camelCase, startCase } from '../../utils/strings';
 
+import Link from 'next/link';
+
 const SideNav = ({ shopsList, selected, set }) => {
-    const siteHostList = [...new Set(shopsList.map((d) => d.site_host))].filter((d) => d);
+    const siteHostList = [ ...new Set(shopsList.map((d) => d.site_host)) ].filter((d) => d);
     const selectedIndex = siteHostList.findIndex((d) => camelCase(d) == selected.siteHost);
 
     return (
         <div className="wrapper">
             <div className="city">Kelowna</div>
+            <Link href={`/manager/shopify`}>
+                <div
+                    className={`listItem shopify`}
+                >
+                    <p>{startCase('shopify')}</p>
+                </div>
+            </Link>
+
             <ul className="list">
                 {siteHostList.map((siteHost) => (
-                    <div
+                    <Link 
                         key={siteHost}
-                        className={`listItem ${camelCase(siteHost)}`}
-                        onClick={() => set.selectedSiteHost(camelCase("shopify"))} //todo
+                        href={`/manager/${ siteHost }`}
                     >
-                        {startCase(siteHost)}
-                    </div>
+                        <div
+                            // className={`listItem ${ camelCase(siteHost) }`} todo
+                            className={`listItem`}
+                        >
+                            <p>{startCase(siteHost)}</p>
+                        </div>
+                    </Link>
                 ))}
                 <div className="pill" />
             </ul>
@@ -41,12 +55,13 @@ const SideNav = ({ shopsList, selected, set }) => {
                     align-items: center;
                     justify-content: center;
                     border-bottom: 1px solid white;
+                    margin-bottom: 1rem;
                 }
                 .list {
                     justify-content: left;
                     align-items: center;
                     display: flex;
-                    height: ${siteHostList.length * 6}rem;
+                    height: ${ siteHostList.length * 6 }rem;
                     flex-direction: column;
                     position: relative;
                     gap: 1rem;
@@ -54,20 +69,22 @@ const SideNav = ({ shopsList, selected, set }) => {
                     flex-wrap: wrap;
                 }
                 .listItem {
-                    padding: 3rem;
+                    padding: 1rem;
                     display: flex;
-                    height: 1rem;
                     cursor: pointer;
-                    width: 95%;
-                    text-align: left;
                     align-items: center;
+                    border-radius: .5rem;
+                    font-size: 10px;
                 }
-                .${selected.siteHost} {
+                .${ selected.siteHost } {
                     background: #f7f7f7;
                     color: #1469eb;
                     transition: all 0.5s ease;
+                    font-size: 14px;
                 }
-
+                .${ selected.siteHost }:hover {
+                    box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
+                }
                 .pill {
                     position: absolute;
                     min-width: 0.3rem;
@@ -76,7 +93,7 @@ const SideNav = ({ shopsList, selected, set }) => {
                     left: -0.3rem;
                     z-index: 501;
                     background: white;
-                    transform: translate(0, ${selectedIndex > 0 ? selectedIndex * 7 : 0}rem);
+                    transform: translate(0, ${ selectedIndex > 0 ? selectedIndex * 7 : 0 }rem);
                     transition: all 0.3s ease;
                     border-radius: 5px;
                     animation: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s 1 normal forwards

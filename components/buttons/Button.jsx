@@ -1,41 +1,47 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { startCase } from '../../utils/strings';
 
 
-const Button = ({ text, onClick, disabled, loading }) => {
-    return (
-        <button
-            disabled={disabled || loading}
-            onClick={() => onClick()}>
-            {loading ? 'Loading...' : startCase(text)}
-            <style jsx>{`
+const Button = ({ text, onClick, disabled, loading, backgroundColor }) => (
+    <button
+        disabled={disabled || loading}
+        onClick={onClick}>
+        {loading ? 'Loading...' : startCase(text)}
+        <style jsx>
+            {`
                 button {
+                    display: flex;
                     flex-wrap: wrap;
                     justify-content: space-around;
-                    align-content: center;
-                    display: flex;
-                    justify-content: left;
                     align-items: center;
                     height: 3rem;
-                    width: 25rem;
+                    min-width: 16rem;
                     gap: 1rem;
                     padding: .5rem;
-                    padding-left: 2rem;
                     border-radius: 5px;
                     position: relative;
-                    cursor: pointer;
                     transition: all 0.7s ease;
-                    justify-content: left;
-                    background: #f7f7f7;
-                    box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
-                    border: none;
+                    background: ${ backgroundColor };
+                    color: #ffffff;
+                    border: 1px solid #25E9AF;
                 }
                 button:hover {
                     box-shadow: 1px 1px 3px #aaa;
+                    box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
                 }
-            `}</style>
-        </button>
-    );
+            `}
+        </style>
+    </button>
+);
+
+Button.propTypes = {
+    text: PropTypes.string,
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool,
+    loading: PropTypes.bool,
+    backgroundColor: PropTypes.string
 };
 
 export default Button;

@@ -15,12 +15,13 @@ function enhancedReducer(state, updateArg) {
         if (has(updateArg, "_path") && has(updateArg, "_value")) {
             const { _path, _value } = updateArg;
 
-            return produce(state, draft => {
+            return produce(state, (draft) => {
                 set(draft, _path, _value);
             });
-        } else {
-            return { ...state, ...updateArg };
         }
+ 
+        return { ...state, ...updateArg };
+        
     }
 }
 
@@ -47,10 +48,10 @@ const initialState = {
 };
 
 const CreateShopModal = ({ addShop, close }) => {
-    const [state, updateState] = useReducer(enhancedReducer, initialState);
+    const [ state, updateState ] = useReducer(enhancedReducer, initialState);
 
     const updateForm = useCallback(({ target: { value, name, type } }) => {
-        console.log('{ value, name, type } :', { value, name, type })
+        console.log('{ value, name, type } :', { value, name, type });
         const updatePath = name.split(".");
 
         // if the input is a checkbox then use callback function to update
@@ -58,14 +59,14 @@ const CreateShopModal = ({ addShop, close }) => {
         if (type === 'checkbox') {
             updateState((prevState) => ({
                 [name]: !prevState[name]
-            }))
+            }));
 
-            return
+            return;
         }
 
         // if we have to update the root level nodes in the form
         if (updatePath.length === 1) {
-            const [key] = updatePath;
+            const [ key ] = updatePath;
 
             updateState({
                 [key]: value

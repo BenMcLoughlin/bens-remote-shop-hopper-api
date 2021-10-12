@@ -5,5 +5,5 @@ import brushNumber3 from './brushNumber3.png';
 export const brushNumber = {
     1: brushNumber1,
     2: brushNumber2,
-    3: brushNumber3,
+    3: brushNumber3
 };

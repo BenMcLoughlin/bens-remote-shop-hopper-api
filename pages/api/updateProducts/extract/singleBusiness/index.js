@@ -6,17 +6,20 @@ export async function singleBusiness(businessName, domain) {
     let productsUploaded = 0;
 
     try {
-        for (let page = 1; page <= 3; page++) {
-            const url = `https://${domain}/products.json?limit=250&page=${page}`;
+        for (let page = 1; page <= 50; page++) {
+            const url = `https://${ domain }/products.json?limit=250&page=${ page }`;
             const response = await fetch(url);
             const data = await response.json();
 
-            const sanitizedData = await sanitize.products([...data.products], businessName);
+            if (data.products.length === 0) {
+                // Pages are often blank, if so jump to the next loop without doing anything
+                continue;
+            }
+
+            const sanitizedData = await sanitize.products([ ...data.products ], businessName);
             const successfulUploads = await load.products(sanitizedData);
 
-            if (data.products.length === 0) continue;
-
-            productsUploaded += successfulUploads.count;
+            productsUploaded += successfulUploads;
         }
     } catch (error) {
         console.log(error);
@@ -26,7 +29,7 @@ export async function singleBusiness(businessName, domain) {
     let metric = {};
 
     if (productsUploaded > 0) {
-        metric = await metrics.shops(productsUploaded, businessName)
+        metric = await metrics.shops(productsUploaded, businessName);
     }
 
     let data = {

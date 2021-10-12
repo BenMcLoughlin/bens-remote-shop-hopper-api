@@ -1,12 +1,32 @@
 import prisma from '../../../../prisma/prisma.js';
 
+// async function createRows(data) { todo
+//     let result = {};
+
+//     result = await prisma.product
+//         .createMany({
+//             data
+//             // skipDuplicates: true
+//         })
+//         .catch((e) => {
+//             console.log('e:', e);
+//             throw e;
+//         })
+//         .finally(async () => {
+//             await prisma.$disconnect();
+//         });
+
+//     return result;
+// }
+
 async function createRows(data) {
     let result = {};
 
-    result = await prisma.product.createMany({
-        data,
-        skipDuplicates: true
-    }).catch((e) => {
+    result = await prisma.$transaction(data.map((item) => prisma.product.upsert({
+        where: { title: item.title },
+        update: item,
+        create: item
+    }))).catch((e) => {
         console.log('e:', e);
         throw e;
     }).finally(async () => {
@@ -16,12 +36,13 @@ async function createRows(data) {
     return result;
 }
 
+
 export async function products(data) {
-    let results = [];
+    let productsUploaded = [];
 
-    results = await createRows(data);
+    productsUploaded = await createRows(data);
 
-    console.log('IN LOAD FUNCTION: ', results);
+    console.log('IN LOAD FUNCTION: ', productsUploaded.length);
 
-    return results
+    return productsUploaded;
 }

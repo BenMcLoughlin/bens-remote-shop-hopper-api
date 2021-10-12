@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+import useGlobal from '../../globalState/store';
 import { camelCase } from '../../utils/strings';
-import addNewShop from "../../lib/requests/addNewShop";
-import fetchShops from "../../lib/requests/fetchShops";
-import fetchShopStatus from "../../lib/requests/fetchShopStatus";
-import CreateShopModal from "../../components/CreateShopModal";
+import addNewShop from "../../requests/addNewShop";
+import fetchShops from "../../requests/fetchShops";
+import fetchShopStatus from "../../requests/fetchShopStatus";
+import CreateShopModal from "../CreateShopModal";
 
 const SelectShop = ({ set, selected, shopsList, refresh }) => {
-    const [list, setList] = useState([]);
-    const [statuses, setStatuses] = useState({});
-    const [addShopModal, toggleAddShopModal] = useState(false);
-    const [loading, setLoading] = useState(false || "");
+    const [ globalState, globalActions ] = useGlobal();
+    const [ list, setList ] = useState([]);
+    const [ statuses, setStatuses ] = useState({});
+    const [ addShopModal, toggleAddShopModal ] = useState(false);
+    const [ loading, setLoading ] = useState(false || "");
 
     useEffect(() => {
         const _getShopStatus = async () => {
@@ -25,6 +29,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                         updatedAt: d.updated_at
                     }
                 ));
+
                 setStatuses(businessStatus);
                 setLoading(false);
             }
@@ -37,16 +42,18 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
         const _getShopList = async () => {
             setLoading(true);
             const uniqueShops = await fetchShops();
+            globalActions.shops.addShops(uniqueShops);
 
             if (uniqueShops) {
                 const businessNames = uniqueShops.map((d) => d.business_name);
+
                 setList(businessNames);
                 setLoading(false);
             }
         };
 
         _getShopList();
-    }, [addShopModal]);
+    }, [ addShopModal ]);
 
     const _toggleAddShopModal = () => {
         toggleAddShopModal(!addShopModal);
@@ -56,7 +63,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
         const result = await addNewShop(shopData);
 
         if (result.error) {
-            return alert(result.error)
+            return alert(result.error);
         }
 
         _toggleAddShopModal();
@@ -94,14 +101,14 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                                 {list.map((businessName) => (
                                     <div
                                         key={businessName}
-                                        className={`businessName ${camelCase(businessName)}`}
+                                        className={`businessName ${ camelCase(businessName) }`}
                                         onClick={() => set.selectedBusinessName(businessName)}
                                     >
                                         <div className="title">{businessName}</div>
-                                        {statuses[businessName] &&  // todo: Date format
+                                        {statuses[businessName] && // todo: Date format
                                             <div className="updateColumn">
-                                            <div>Most Recent: <span className="update">{statuses[businessName]?.products}</span></div>
-                                            <div className="time">{statuses[businessName]?.updatedAt.substring(0, 19)}</div>
+                                                <div>Most Recent: <span className="update">{statuses[businessName]?.products}</span></div>
+                                                <div className="time">{statuses[businessName]?.updatedAt.substring(0, 19)}</div>
                                             </div>
                                         }
                                     </div>
@@ -112,12 +119,13 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
             </div>
             <style jsx>{`
                 .wrapper {
-                    width: 100%;
-                    min-height: 70rem;
                     display: flex;
                     flex-direction: column;
+                    align-items: center;
+                    padding: 1rem;
+                    width: 100%;
+                    min-height: 70rem;
                     border-top: 1px solid grey;
-                    
                 }
                 .header {
                     width: 100%;
@@ -154,7 +162,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                     background: #f7f7f7;
                     box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
                 }
-                .${camelCase(selected.businessName)} {
+                .${ camelCase(selected.businessName) } {
                     background: #485056;
                     color: white;
                 }
@@ -184,6 +192,14 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
             `}</style>
         </>
     );
+};
+
+SelectShop.propTypes = {
+    set: PropTypes.object,
+    selected: PropTypes.object,
+    shopsList: PropTypes.array,
+    refresh: PropTypes.bool
+
 };
 
 export default SelectShop;

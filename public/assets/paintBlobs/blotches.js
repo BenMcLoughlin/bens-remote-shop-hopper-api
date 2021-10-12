@@ -5,5 +5,5 @@ import blotch3 from './private-group-graphic-2.png';
 export const blotches = {
     1: blotch1,
     2: blotch2,
-    3: blotch3,
+    3: blotch3
 };

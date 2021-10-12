@@ -5,12 +5,14 @@ import prisma from '../../../prisma/prisma.js';
 export async function getRows() {
     const result = await prisma.$queryRaw`
         SELECT * FROM statuses
-  `.catch((e) => {
-        console.log('e:', e);
-        throw e;
-    }).finally(async () => {
-        await prisma.$disconnect();
-    });
+  `
+        .catch((e) => {
+            console.log('e:', e);
+            throw e;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
 
     return result;
 }

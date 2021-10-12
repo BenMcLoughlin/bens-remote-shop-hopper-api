@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
-import { landingProps } from '../controller/landingProps';
+import { landingProps } from '../content/landingProps';
 import {
     Header,
     HowItWorks,
@@ -10,37 +10,35 @@ import {
     Callout,
     Welcome,
     WhoWeAre,
-    Footer,
+    Footer
 } from '../components/landing';
 import { ScrollUp } from '../components';
 
 export async function getStaticProps(context) {
     return {
-        props: landingProps,
+        props: landingProps
     };
 }
 
-const Landing = ({ welcome, whoWeAre, howItWorks, callout, testimonials, news, footer }) => {
-    return (
-        <Layout isMain>
-            <FixedPosition>
-                <Header to="test1" />
-                <Welcome {...welcome} />
-                <WhoWeAre {...whoWeAre} />
-                <HowItWorks {...howItWorks} />
-                <Callout {...callout} />
-                <Testimonials {...testimonials} />
-                <News {...news} />
-                <Footer {...footer} />
-                <ScrollUp />
-            </FixedPosition>
-        </Layout>
-    );
-};
+const Landing = ({ welcome, whoWeAre, howItWorks, callout, testimonials, news, footer }) => (
+    <Layout isMain>
+        <FixedPosition>
+            <Header to="test1" />
+            <Welcome {...welcome} />
+            <WhoWeAre {...whoWeAre} />
+            <HowItWorks {...howItWorks} />
+            <Callout {...callout} />
+            <Testimonials {...testimonials} />
+            <News {...news} />
+            <Footer {...footer} />
+            <ScrollUp />
+        </FixedPosition>
+    </Layout>
+);
 
 export default Landing;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const FixedPosition = styled.div`
     height: 10rem;

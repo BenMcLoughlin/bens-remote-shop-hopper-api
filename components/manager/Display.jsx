@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import Metrics from './Metrics';
-import SelectShop from './SelectShop';
-import { updateMetrics } from '../../lib/requests/updateMetrics';
-import { updateProducts } from '../../lib/requests/updateProducts';
+import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
+
+import useGlobal from "../../globalState/store";
+import { updateMetrics } from '../../requests/updateMetrics';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;
-    const [uploadedSuccess, setUpLoaded] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [ uploadedSuccess, setUpLoaded ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false);
+    const [ globalState, globalActions ] = useGlobal();
 
     const _updateProducts = async (params) => {
         setIsLoading(true);
-        const success = await updateProducts(params);
+        // const success = await updateProducts(params);
+        const success = await globalActions.products.single(params);
 
         if (success) {
             setUpLoaded(success.result);
@@ -19,38 +21,37 @@ const Display = (props) => {
 
             return true;
         }
-
-        setUpLoaded('failed');
-        setIsLoading(false);
-        return alert("Product acquisition failed, please try again.")
-    }
+    };
 
     return (
         <>
             <div className="wrapper">
                 <div className="top">
                     <div>
-                        <Metrics
+                        <h1>TBA......</h1>
+                        {/* <Metrics
                             {...props}
                             header={selected.siteHost}
                             refresh={uploadedSuccess}
                             isShopify
                             isLoading={isLoading}
-                            buttonTitle={`Load All ${selected.siteHost} Shops`}
+                            buttonTitle={`Load All ${ selected.siteHost } Shops`}
                             buttonClick={() => {
                                 set.selectedBusinessName('');
+
                                 _updateProducts({
                                     siteHost: selected.siteHost,
                                     businessName: null,
-                                    domain: null,
+                                    domain: null
                                 }).then(() => {
                                     updateMetrics(true, selected.siteHost);
-                                })
+                                });
                             }}
                             disabled={selected.businessName}
-                        />
+                        /> */}
                     </div>
-                    {
+
+                    {/* {
                         uploadedSuccess === 'failed' &&
                         <p className="red">Product acquisition failed.</p>
                     }
@@ -63,25 +64,18 @@ const Display = (props) => {
                                 refresh={uploadedSuccess}
                                 isShopify={false}
                                 isLoading={isLoading}
-                                buttonTitle={`Load ${selected.businessName}`}
+                                buttonTitle={`Load ${ selected.businessName }`}
                                 buttonClick={() => {
-                                    // set.selectedSiteHost(''); todo
+                                    // set.selectedSiteHost('');
                                     _updateProducts(props.selected).then(() => {
-                                        updateMetrics(true, selected.businessName)
-                                    })
+                                        updateMetrics(true, selected.businessName);
+                                    });
                                 }}
                                 disabled={false}
                             />
                         </div>
-                    }
+                    }  */}
                 </div>
-
-                <SelectShop
-                    shopsList={shopsList}
-                    set={set}
-                    selected={selected}
-                    refresh={uploadedSuccess}
-                />
             </div>
             <style jsx>{`
                 .wrapper {
@@ -102,6 +96,12 @@ const Display = (props) => {
             `}</style>
         </>
     );
+};
+
+Display.propTypes = {
+    shopsList: PropTypes.array,
+    set: PropTypes.object,
+    selected: PropTypes.object
 };
 
 export default Display;

@@ -17,5 +17,5 @@ export const images = [
     testimonials,
     news,
     news2,
-    signUp,
+    signUp
 ];

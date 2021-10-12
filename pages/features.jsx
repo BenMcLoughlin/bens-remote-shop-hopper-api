@@ -8,10 +8,10 @@ import Layout from "../components/Layout";
 import { useSession } from "next-auth/client";
 import prisma from '../prisma/prisma';
 // import { fetchProducts } from "./api/fetch";
-import hydrateRequest from "../lib/requests/hydrateRequest";
-import incrementProduct from "../lib/requests/incrementProduct";
-import searchRequest from "../lib/requests/search";
-import fetchTags from "../lib/requests/fetchTags";
+import hydrateRequest from "../requests/hydrateRequest";
+import incrementProduct from "../requests/incrementProduct";
+import searchRequest from "../requests/search";
+import fetchTags from "../requests/fetchTags";
 
 const DB_Param = "jewelry";
 
@@ -63,14 +63,14 @@ const dateStripped = (obj) => {
     return newObj;
 };
 
-const Home = (props) => {
+const Features = (props) => {
     const session = useSession();
     // const [ raw_products, set_Raw_Products ] = useState([]);
-    const [search_products, set_search_products] = useState([]);
-    const [raw_Tags, set_Raw_Tags] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [query, setQuery] = useState(false);
-    const [search, toggleSearch] = useState(false);
+    const [ search_products, set_search_products ] = useState([]);
+    const [ raw_Tags, set_Raw_Tags ] = useState([]);
+    const [ loading, setLoading ] = useState(false);
+    const [ query, setQuery ] = useState(false);
+    const [ search, toggleSearch ] = useState(false);
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
 
@@ -175,7 +175,7 @@ const Home = (props) => {
                                             <h2 className="search hov" onClick={() => toggleSearch(false)}>New Search</h2>
                                             {
                                                 query ?
-                                                    <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${query}?`} />
+                                                    <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${ query }?`} />
                                                     :
                                                     raw_Tags.map((tag) => <button key={tag} onClick={() => setQuery(tag)}>
                                                         {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
@@ -352,9 +352,9 @@ const Home = (props) => {
     );
 };
 
-Home.propTypes = {
+Features.propTypes = {
     products: PropTypes.object,
     users: PropTypes.object
 };
 
-export default Home;
+export default Features;

@@ -5,12 +5,14 @@ import { realtimeUpdates } from '../../metrics/realtime';
 async function getShopsDomains() {
     const result = await prisma.$queryRaw`
         SELECT domain, business_name FROM shops
-    `.catch((e) => {
-        console.log('e:', e);
-        throw e;
-    }).finally(async () => {
-        await prisma.$disconnect();
-    });
+    `
+        .catch((e) => {
+            console.log('e:', e);
+            throw e;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
 
     return result;
 }
@@ -24,7 +26,7 @@ export const shopify = async () => {
             result = await extract.singleBusiness(shop.business_name, shop.domain);
 
             if (result) {
-                realtimeUpdates(result)
+                realtimeUpdates(result);
             }
         }
 

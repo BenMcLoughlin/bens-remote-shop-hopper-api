@@ -16,26 +16,26 @@ const analytics = () => {
     const city = 'kelowna';
     const shopsList = shopsLists[city];
 
-    const [siteHost, setSelectedSiteHost] = useState('shopify');
-    const [businessName, setSelectedBusinessName] = useState('');
-    const [domain, setSelectedDomain] = useState('');
+    const [ siteHost, setSelectedSiteHost ] = useState('shopify');
+    const [ businessName, setSelectedBusinessName ] = useState('');
+    const [ domain, setSelectedDomain ] = useState('');
 
     useEffect(() => {
         const selectedShop = shopsList.find((d) => camelCase(d.business_name) === businessName);
         selectedShop && setSelectedDomain(selectedShop.domain);
-    }, [businessName]);
+    }, [ businessName ]);
 
     const props = {
         shopsList,
         selected: {
             siteHost: camelCase(siteHost),
             businessName: camelCase(businessName),
-            domain,
+            domain
         },
         set: {
             selectedSiteHost: (v) => setSelectedSiteHost(v),
-            selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v),
-        },
+            selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v)
+        }
     };
 
     const isLoggedIn = session[0]?.user;
@@ -48,8 +48,7 @@ const analytics = () => {
                         <div className="column">
                             <h1 className="title">Analytics</h1>
                             <div className="row">
-                                <SideNav  {...props} />
-                                <Display {...props} />
+                                <SideNav {...props} />
                             </div>
                         </div>
                     </div>

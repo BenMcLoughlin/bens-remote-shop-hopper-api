@@ -11,12 +11,14 @@ async function createRows(productArray) {
             data: item,
             skipDuplicates: true
         });
-    })).catch((e) => {
-        console.log('e:', e);
-        throw e;
-    }).finally(async () => {
-        await prisma.$disconnect();
-    });
+    }))
+        .catch((e) => {
+            console.log('e:', e);
+            throw e;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
 
     return result;
 }
@@ -30,18 +32,20 @@ export default async (req, res) => {
 
     if (req.method === 'POST') {
         if (req.body.request === 'DESTROY') {
-            console.log("DESTROY");
+            console.log('DESTROY');
 
             // be careful this wipes the DB
-            const result = await prisma.product.deleteMany({}) 
+            const result = await prisma.product
+                .deleteMany({})
                 .catch((e) => {
                     console.log('e:', e);
                     throw e;
-                }).finally(async () => {
+                })
+                .finally(async () => {
                     await prisma.$disconnect();
                 });
 
-            return res.status(200).json({ removed: result, action: "DESTROYED" }); 
+            return res.status(200).json({ removed: result, action: 'DESTROYED' });
         }
 
         try {
@@ -85,7 +89,7 @@ export default async (req, res) => {
                     options
                 };
 
-                return data; 
+                return data;
             });
 
             const result = createRows(productArray);
