@@ -16,12 +16,18 @@ export const addFail = (store) => {
     store.setState({ counter: counter });
 };
 
+export const addResult = (store, result) => {
+    const counter = { ...store.state.counter };
+    counter.result = result;
+    store.setState({ counter: counter });
+};
+
 export const clearRequests = (store) => {
     const counter = { ...store.state.counter };
-    counter.loading = false;
     counter.fail = 0;
     counter.success = 0;
     counter.requests = 0;
+    counter.result = false;
     store.setState({ counter: counter });
 };
 
@@ -29,11 +35,4 @@ export const setLoading = (store, state) => {
     const counter = { ...store.state.counter };
     counter.loading = state;
     store.setState({ counter: counter });
-
-    // store.setState({ 
-    //     counter: {
-    //         ...store.state.counter,
-    //         loading: state
-    //     }
-    // });
 };

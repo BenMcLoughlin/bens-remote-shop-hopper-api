@@ -11,11 +11,12 @@ export const single = async (store, params) => {
 
     if (res) {
         const uploaded = await res.json();
+        store.actions.counter.setLoading(false);
 
         if (res.status === 200) {
             status = "SUCCESS";
             store.setState({ status });
-            console.log(`SUCCESSFULLY UPDATED ${ uploaded.result } PRODUCTS`);
+            console.log(`SUCCESSFULLY UPDATED ${ uploaded.count } PRODUCTS`);
             store.actions.counter.addSuccess();
 
             return res;
@@ -31,10 +32,12 @@ export const single = async (store, params) => {
 };
 
 export const all = (store, shops) => {
-    store.actions.counter.setLoading(true);
     store.actions.counter.clearRequests();
+    store.actions.counter.setLoading(true);
 
-    shops.forEach(async (shop, i) => {
+    // let result = [];
+
+    let promises = shops.map(async (shop, i) => {
         if (i < 2 && shop.domain) {
             let params = { 
                 domain: shop.domain,
@@ -42,14 +45,23 @@ export const all = (store, shops) => {
                 siteHost: ''
             };
 
-            let result = await single(store, params);
+            let res = await single(store, params);
 
-            console.log('all:', result);
-            store.actions.counter.setLoading(false);
+            // result = [ ...result, res ];
 
-            return result;
+            // return result;
+            return { result: `${ shop.business_name } SUCCESS`, status: 200 };
         }
+
+        // todo: add sweet error handling
+        return { result: `${ shop.business_name } FAILED`, status: 422 };
     });
+
+    Promise.all(promises)
+        .then((results) => {
+            store.actions.counter.setLoading(false);
+            store.actions.counter.addResult(results);
+        });
 
     return true;
 };

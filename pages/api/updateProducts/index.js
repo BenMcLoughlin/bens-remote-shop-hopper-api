@@ -13,8 +13,6 @@ export default async (req, res) => {
 
         data = await extract.singleBusiness(businessName, domain);
 
-        console.log('data.productsUploaded.length ???:', data.productsUploaded.length);
-
         return res.status(200).json({ count: data.productsUploaded.length });
     } catch (error) {
         return res.status(422).json(error);

@@ -14,7 +14,7 @@ const Display = (props) => {
     const _updateProducts = async (params) => {
         setIsLoading(true);
         // const success = await updateProducts(params);
-        const success = await globalActions.extract.single(params);
+        const success = await globalActions.products.single(params);
 
         if (success) {
             setUpLoaded(success.result);

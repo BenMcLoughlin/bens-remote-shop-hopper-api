@@ -11,12 +11,12 @@ export async function singleBusiness(businessName, domain) {
             const response = await fetch(url);
             const data = await response.json();
 
-            const sanitizedData = await sanitize.products([ ...data.products ], businessName);
-            const successfulUploads = await load.products(sanitizedData);
-
             if (data.products.length === 0) {
                 continue;
             }
+
+            const sanitizedData = await sanitize.products([ ...data.products ], businessName);
+            const successfulUploads = await load.products(sanitizedData);
 
             productsUploaded += successfulUploads;
         }

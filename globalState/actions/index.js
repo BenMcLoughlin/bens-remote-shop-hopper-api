@@ -1,5 +1,5 @@
 import * as counter from './counter';
-import * as extract from './extract';
+import * as products from './products';
 import * as shops from './shops';
 
-export { counter, extract, shops };
+export { counter, products, shops };

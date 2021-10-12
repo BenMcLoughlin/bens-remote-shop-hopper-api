@@ -18,12 +18,13 @@ import { updateMetrics } from '../../requests/updateMetrics';
 
 const Sitehost = () => {
     const session = useSession();
+    const isLoggedIn = session[0]?.user;
     const router = useRouter();
     const [ globalState, globalActions ] = useGlobal();
     const isActive = (pathname) => router.pathname === pathname;
     const { pid } = router.query;
 
-    const [ uploadedSuccess, setUpLoaded ] = useState(false);
+    const [ uploadedResult, setUpLoaded ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
     const [ siteHost, setSelectedSiteHost ] = useState('shopify');
     const [ businessName, setSelectedBusinessName ] = useState('');
@@ -32,6 +33,9 @@ const Sitehost = () => {
     const city = 'kelowna';
     const shopsList = shopsLists[city];
 
+    useEffect(() => {
+        setUpLoaded(globalState.counter.result);
+    }, [ globalState.counter.result ]);
 
     useEffect(() => {
         const selectedShop = shopsList.find((d) => d.business_name === businessName);
@@ -51,33 +55,23 @@ const Sitehost = () => {
         }
     };
 
-    const _updateAll = async (params) => {
-        console.log('globalState:', globalState);
-        setIsLoading(true);
-        const success = await globalActions.extract.all(globalState.shops);
-
-        if (success) {
-            setUpLoaded(success.result);
-            setIsLoading(false);
-
-            return true;
-        }
+    const _updateAll = async () => {
+        await globalActions.products.all(globalState.shops);
     };
 
     const _updateSingle = async (params) => {
         setIsLoading(true);
-        // const success = await updateProducts(params);
-        const success = await globalActions.extract.single(params);
+        globalActions.counter.setLoading(true);
+        const success = await globalActions.products.single(params);
 
         if (success) {
             setUpLoaded(success.result);
             setIsLoading(false);
+            globalActions.counter.setLoading(false);
 
             return true;
         }
     };
-
-    const isLoggedIn = session[0]?.user;
 
     return (
         <Layout>
@@ -88,15 +82,19 @@ const Sitehost = () => {
                             <h2 style={{ color: '#fff' }}>{`${ capitalize(pid) } Database Manager`} </h2>
                             <Counter />
                         </Title>
-                        <Top>
-                            {/* <Background>
-                                <Image src={greenCircles} width={2000} height={300} />
-                            </Background> */}
+                        {
+                            uploadedResult && 
+                                    <Results>
+                                        {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
+                                        }
+                                    </Results>
+                        }
+                        <SitehostSection>
                             <MetricsDisplay
                                 header={shops.selected.siteHost}
-                                refresh={Boolean(uploadedSuccess)}
+                                refresh={Boolean(uploadedResult)}
                                 isHost
-                                isLoading={isLoading}
+                                isLoading={globalState.counter.loading}
                                 buttonTitle={`Load All ${ shops.selected.siteHost } Shops`}
                                 buttonClick={() => {
                                     shops.set.selectedBusinessName('');
@@ -111,18 +109,19 @@ const Sitehost = () => {
                                 }}
                                 disabled={Boolean(shops.selected.businessName)}
                             />
-                        </Top>
-                        <Bottom>
+                        </SitehostSection>
+
+                        <ShopSection>
                             {
-                                uploadedSuccess === 'failed' &&
+                                uploadedResult === 'failed' &&
                                 <p className="red">Product acquisition failed.</p>
                             }
                             {
                                 shops.selected.businessName &&
                                     <MetricsDisplay
                                         header={shops.selected.businessName}
-                                        refresh={Boolean(uploadedSuccess)}
-                                        isLoading={isLoading}
+                                        refresh={Boolean(uploadedResult)}
+                                        isLoading={globalState.counter.loading}
                                         buttonTitle={`Load ${ shops.selected.businessName }`}
                                         buttonClick={() => {
                                             // set.selectedSiteHost(''); todo
@@ -133,16 +132,14 @@ const Sitehost = () => {
                                         disabled={false}
                                     />
                             }
-                        </Bottom>
+                        </ShopSection>
 
-                        <div className="wrapper">
-                            <SelectShop
-                                shopsList={shops.shopsList}
-                                set={shops.set}
-                                selected={shops.selected}
-                                refresh={uploadedSuccess}
-                            />
-                        </div>
+                        <SelectShop
+                            shopsList={shops.shopsList}
+                            set={shops.set}
+                            selected={shops.selected}
+                            refresh={uploadedResult}
+                        />
                     </>
                     :
                     <Link href="/api/auth/signin">
@@ -152,12 +149,6 @@ const Sitehost = () => {
                     </Link>
             }
             <style jsx>{`
-                .wrapper {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    padding: 1rem;
-                }
                 .notice {
                     background: white;
                     transition: box-shadow 0.1s ease-in;
@@ -181,7 +172,7 @@ const Title = styled.div`
     background: #485056;
     white-space: nowrap;
 `;
-const Top = styled.div`
+const SitehostSection = styled.div`
     display: flex;
     justify-content: flex-end;
     background: #14c792;
@@ -189,68 +180,21 @@ const Top = styled.div`
     background: -moz-linear-gradient(bottom left, #14c792, #14e2a4);
     background: linear-gradient(to top right, #14c792, #14e2a4);
 `;
-const Bottom = styled.div`
+const ShopSection = styled.div`
     display: flex;
     justify-content: flex-end;
     min-height: 4rem;
-    // align-items: center;
-    // flex-direction: column;
-    // ${ (p) => p.theme.gradient.secondary };
+    ${ (p) => p.theme.gradient.secondary };
 `;
-const Right = styled.div`
-    z-index: 2;
-    right: 4rem;
+const Results = styled.div`
     display: flex;
-    width: 40%;
-    height: 50%;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-`;
-const SubTitle = styled.div`
-    font-size: ${ (props) => props.theme.font.small };
-    font-weight: 200;
-`;
-const Background = styled.div`
-    position: absolute;
-    top: 0rem;
-    left: 0rem;
-    height: 4rem;
+    justify-content: flex-end;
     width: 100%;
-`;
-const Buttons = styled.div`
-    width: 40rem;
-    display: flex;
-    justify-content: space-around;
-`;
-const Social = styled.div`
-    width: 80rem;
-    display: flex;
-    justify-content: space-around;
-`;
-const SocialLink = styled.div`
-    border-bottom: 1px solid white;
-    font-size: ${ (props) => props.theme.font.small };
-    height: 2.5rem;
-    font-weight: 200;
-    opacity: 0.6;
-`;
-const Copyright = styled.div`
-    width: 80rem;
-    display: flex;
-    justify-content: space-around;
-    display: flex;
-    align-items: center;
-    opacity: 0.6;
-`;
-const CopyrightText = styled.div`
-    font-size: ${ (props) => props.theme.font.small };
-    height: 2.5rem;
-    font-weight: 200;
-`;
-const Vr = styled.div`
-    border-right: 1px solid white;
-    height: 3.5rem;
+    padding-right: 3rem;
+    padding-bottom: 2rem;
+    background: #485056;
+    white-space: nowrap;
 `;
 
 Sitehost.propTypes = {
