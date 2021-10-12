@@ -5,8 +5,6 @@ import { useRouter } from 'next/router';
 import { useSession } from "next-auth/client";
 import styled from 'styled-components';
 
-import useGlobal from "../../globalState/store";
-
 import Layout from '../../components/Layout';
 import Counter from "../../components/Counter";
 import MetricsDisplay from '../../components/manager/MetricsDisplay';
@@ -15,6 +13,7 @@ import * as shopsLists from '../../mock/shopsLists';
 
 import { camelCase, capitalize } from '../../utils/strings';
 import { updateMetrics } from '../../requests/updateMetrics';
+import useGlobal from "../../globalState/store";
 
 const Sitehost = () => {
     const session = useSession();
@@ -25,6 +24,7 @@ const Sitehost = () => {
     const { pid } = router.query;
 
     const [ uploadedResult, setUpLoaded ] = useState(false);
+    // we may not use this component loading...
     const [ isLoading, setIsLoading ] = useState(false);
     const [ siteHost, setSelectedSiteHost ] = useState('shopify');
     const [ businessName, setSelectedBusinessName ] = useState('');
@@ -82,13 +82,6 @@ const Sitehost = () => {
                             <h2 style={{ color: '#fff' }}>{`${ capitalize(pid) } Database Manager`} </h2>
                             <Counter />
                         </Title>
-                        {
-                            uploadedResult && 
-                                    <Results>
-                                        {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
-                                        }
-                                    </Results>
-                        }
                         <SitehostSection>
                             <MetricsDisplay
                                 header={shops.selected.siteHost}
@@ -110,6 +103,13 @@ const Sitehost = () => {
                                 disabled={Boolean(shops.selected.businessName)}
                             />
                         </SitehostSection>
+                        {
+                            uploadedResult && 
+                                <Results>
+                                    {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
+                                    }
+                                </Results>
+                        }
 
                         <ShopSection>
                             {
@@ -138,26 +138,14 @@ const Sitehost = () => {
                             shopsList={shops.shopsList}
                             set={shops.set}
                             selected={shops.selected}
-                            refresh={uploadedResult}
+                            refresh={Boolean(uploadedResult)}
                         />
                     </>
                     :
                     <Link href="/api/auth/signin">
-                        <div className="notice hov">
-                            <a data-active={isActive('/signup')}>Might as well Log in</a>
-                        </div>
+                        <h1 data-active={isActive('/signup')}>Might as well Log in</h1>
                     </Link>
             }
-            <style jsx>{`
-                .notice {
-                    background: white;
-                    transition: box-shadow 0.1s ease-in;
-                    padding: 20px;
-                }
-                .hov:hover {
-                    box-shadow: 1px 1px 3px #aaa;
-                }
-            `}</style>
         </Layout>
     );
 };
@@ -191,8 +179,8 @@ const Results = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
+    padding: 2rem;
     padding-right: 3rem;
-    padding-bottom: 2rem;
     background: #485056;
     white-space: nowrap;
 `;

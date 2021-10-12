@@ -35,10 +35,8 @@ export const all = (store, shops) => {
     store.actions.counter.clearRequests();
     store.actions.counter.setLoading(true);
 
-    // let result = [];
-
     let promises = shops.map(async (shop, i) => {
-        if (i < 2 && shop.domain) {
+        if (shop.domain) {
             let params = { 
                 domain: shop.domain,
                 businessName: shop.business_name,
@@ -47,9 +45,6 @@ export const all = (store, shops) => {
 
             let res = await single(store, params);
 
-            // result = [ ...result, res ];
-
-            // return result;
             return { result: `${ shop.business_name } SUCCESS`, status: 200 };
         }
 

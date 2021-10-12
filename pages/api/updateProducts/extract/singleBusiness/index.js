@@ -6,12 +6,13 @@ export async function singleBusiness(businessName, domain) {
     let productsUploaded = 0;
 
     try {
-        for (let page = 1; page <= 3; page++) {
+        for (let page = 1; page <= 50; page++) {
             const url = `https://${ domain }/products.json?limit=250&page=${ page }`;
             const response = await fetch(url);
             const data = await response.json();
 
             if (data.products.length === 0) {
+                // Pages are often blank, if so jump to the next loop without doing anything
                 continue;
             }
 
