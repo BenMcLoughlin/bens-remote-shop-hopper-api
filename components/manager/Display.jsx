@@ -66,7 +66,7 @@ const Display = (props) => {
                                 isLoading={isLoading}
                                 buttonTitle={`Load ${ selected.businessName }`}
                                 buttonClick={() => {
-                                    // set.selectedSiteHost(''); todo
+                                    // set.selectedSiteHost('');
                                     _updateProducts(props.selected).then(() => {
                                         updateMetrics(true, selected.businessName);
                                     });

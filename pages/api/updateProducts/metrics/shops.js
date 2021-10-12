@@ -6,7 +6,6 @@ async function createRow(data) {
     result = await prisma.status
         .create({
             data,
-            // todo
             skipDuplicates: true
         })
         .catch((e) => {

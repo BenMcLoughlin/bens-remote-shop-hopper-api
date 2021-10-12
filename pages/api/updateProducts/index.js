@@ -5,12 +5,6 @@ export default async (req, res) => {
     let data = {};
 
     try {
-        // if (!businessName && !domain) { todo
-        //     result = await extract.allShops[siteHost]();
-        // } else {
-        //     result = await extract.singleBusiness(businessName, domain);
-        // }
-
         data = await extract.singleBusiness(businessName, domain);
 
         return res.status(200).json({ count: data.productsUploaded.length });

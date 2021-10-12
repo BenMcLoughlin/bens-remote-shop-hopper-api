@@ -32,7 +32,7 @@ const SideNav = ({ shopsList, selected, set }) => {
                         </div>
                     </Link>
                 ))}
-                <div className="pill" /> todo
+                <div className="pill" />
             </ul>
 
             <style jsx>{`

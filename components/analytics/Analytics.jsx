@@ -16,16 +16,16 @@ export const updateAnalytics = async (isShopify, header) => {
 
 const Analytics = ({ header, selected, shopsList, isShopify }) => {
     const now = new Date();
-    const [totalItems, setTotalItems] = useState(0);
-    const [date, setDate] = useState(now); // todo
+    const [ totalItems, setTotalItems ] = useState(0);
+    const [ date, setDate ] = useState(now); // todo
 
     useEffect(() => {
         updateAnalytics(isShopify, header).then((data) => {
             setTotalItems(data.result);
             setDate(now);
-        })
+        });
 
-    }, [header]);
+    }, [ header ]);
 
     return (
         <div className="wrapper">
