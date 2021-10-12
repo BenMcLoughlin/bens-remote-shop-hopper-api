@@ -117,12 +117,12 @@ const MetricsDisplay = ({ header, selected, refresh, buttonClick, isHost, isLoad
 MetricsDisplay.propTypes = {
     header: PropTypes.string,
     selected: PropTypes.string,
-    refresh: PropTypes.boolean,
-    buttonClick: PropTypes.function,
-    isHost: PropTypes.boolean,
-    isLoading: PropTypes.boolean,
+    refresh: PropTypes.bool,
+    buttonClick: PropTypes.func,
+    isHost: PropTypes.bool,
+    isLoading: PropTypes.bool,
     buttonTitle: PropTypes.string,
-    disabled: PropTypes.boolean
+    disabled: PropTypes.bool
 };
 
 export default MetricsDisplay;

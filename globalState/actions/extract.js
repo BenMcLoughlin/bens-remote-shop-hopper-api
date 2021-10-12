@@ -1,58 +1,55 @@
-
+import singleBusiness from '../../controller/extract';
+import * as load from '../../controller/load';
+import * as metrics from '../../controller/metrics';
 
 export const single = async (store, params) => {
     store.actions.counter.addRequest();
     let status = "LOADING";
     store.setState({ status });
 
-    let productsExtracted = 0;
+    const res = await fetch('/api/updateProducts', {
+        method: 'POST',
+        body: JSON.stringify(params)
+    });
 
-    try {
-        for (let page = 1; page <= 3; page++) {
-            const url = `https://${ params.domain }/products.json?limit=250&page=${ page }`;
-            const response = await fetch(url);
-            const data = await response.json();
+    if (res) {
+        const uploaded = await res.json();
 
-            productsExtracted = [ ...data.products ];
+        if (res.status === 200) {
+            status = "SUCCESS";
+            store.setState({ status });
+            console.log(`SUCCESSFULLY UPDATED ${ uploaded.result } PRODUCTS`);
+            store.actions.counter.addResult(uploaded.result);
+            store.actions.counter.addSuccess();
+
+            return res;
         }
 
-        status = productsExtracted ? "EMPTY" : "SUCCESS";
-        store.setState({ products: productsExtracted, status });
-        store.actions.counter.addSuccess();
-    } catch (error) {
-        const isError404 = error.response && error.response.status === 404;
-        status = isError404 ? "NOT_FOUND" : "ERROR";
+        status = "FAILED";
         store.setState({ status });
-        store.actions.counter.addFail();
-        console.log(error);
-        throw error;
+        console.log(`FAILED TO UPDATE ${ params.businessName }`);
+        store.actions.counter.addFailure();
+
+        return res;
     }
-
-    console.log('productsExtracted:', productsExtracted.length);
-
-    // add status update and run other functions
-
-    return productsExtracted;
 };
 
-export const all = async (store, shops) => {
-    let status = "LOADING";
-    store.setState({ status });
-    store.actions.counter.addRequest();
+export const all = (store, shops) => {
 
-    // let productsExtracted = 0;
-   
+    shops.forEach(async (shop, i) => {
+        if (shop.domain) {
+            let params = { 
+                domain: shop.domain,
+                businessName: shop.business_name,
+                siteHost: ''
+            };
 
-    shops.map((shop) => {
-        let params = { 
-            domain: shop.domain,
-            businessName: shop.business_name,
-            siteHost: ''
-        };
+            let result = await single(store, params);
 
-        let items = await single(store, params);
-        // add status update
-      
+            console.log('all:', result);
+
+            return result;
+        }
     });
 
     return true;

@@ -38,7 +38,7 @@ export async function products(data, business_name) {
         });
     }
 
-    console.log('IN FORMAT FUNCTION: ', formatted.length);
+    // console.log('IN FORMAT FUNCTION: ', formatted.length);
 
     return formatted;
 }

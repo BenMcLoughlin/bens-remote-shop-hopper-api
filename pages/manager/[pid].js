@@ -109,7 +109,7 @@ const Sitehost = () => {
                                         updateMetrics(true, pid);
                                     });
                                 }}
-                                disabled={shops.selected.businessName}
+                                disabled={Boolean(shops.selected.businessName)}
                             />
                         </Top>
                         <Bottom>

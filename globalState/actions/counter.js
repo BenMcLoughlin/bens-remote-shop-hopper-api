@@ -15,3 +15,9 @@ export const addFail = (store) => {
     newCounters.fail++;
     store.setState({ counters: newCounters });
 };
+
+export const addResult = (store, result) => {
+    const newCounters = { ...store.state.counters };
+    newCounters.result = result;
+    store.setState({ counters: newCounters });
+};

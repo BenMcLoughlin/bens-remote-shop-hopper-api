@@ -18,7 +18,7 @@ export async function singleBusiness(businessName, domain) {
                 continue;
             }
 
-            productsUploaded += successfulUploads.count;
+            productsUploaded += successfulUploads;
         }
     } catch (error) {
         console.log(error);

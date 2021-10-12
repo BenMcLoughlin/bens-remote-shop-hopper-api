@@ -38,9 +38,9 @@ const Button = ({ text, onClick, disabled, loading, backgroundColor }) => (
 
 Button.propTypes = {
     text: PropTypes.string,
-    onClick: PropTypes.function,
-    disabled: PropTypes.boolean,
-    loading: PropTypes.boolean,
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool,
+    loading: PropTypes.bool,
     backgroundColor: PropTypes.string
 };
 

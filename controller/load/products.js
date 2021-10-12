@@ -1,30 +1,13 @@
-import prisma from '../../../prisma/prisma.js';
+export const products = async (params) => {
+    const res = await fetch('/api/load/products', {
+        method: 'POST',
+        body: JSON.stringify(params)
+    });
 
-async function createRows(data) {
-    let result = {};
+    if (res) {
+        const uploaded = await res.json();
+        console.log(`SUCCESSFULLY UPDATED ${ uploaded.result } PRODUCTS`);
 
-    result = await prisma.product
-        .createMany({
-            data,
-            skipDuplicates: true
-        })
-        .catch((e) => {
-            console.log('e:', e);
-            throw e;
-        })
-        .finally(async () => {
-            await prisma.$disconnect();
-        });
-
-    return result;
-}
-
-export async function products(data) {
-    let results = [];
-
-    results = await createRows(data);
-
-    console.log('IN LOAD FUNCTION: ', results);
-
-    return results;
-}
+        return uploaded;
+    }
+};

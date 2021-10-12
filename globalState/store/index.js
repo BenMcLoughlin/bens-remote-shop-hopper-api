@@ -6,6 +6,7 @@ import * as actions from "../actions";
 const initialState = {
     counters: {
         requests: 0,
+        result: {},
         success: 0,
         fail: 0
     },

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { signOut, useSession } from 'next-auth/client';
 
 import { LinkText } from '../components';
-import logo from '../public/assets/logos/shophopper-logo.svg';
+import logoSrc from '../public/assets/logos/shophopper-logo.svg';
 
 const Header: React.FC = () => {
     const router = useRouter();
@@ -15,10 +15,10 @@ const Header: React.FC = () => {
     const [ session, loading ] = useSession();
 
     let left = (
-        <div className="left">
+        <div>
             <Link href="/">
                 <Logo>
-                    <Image src={logo} width={200} height={100} />
+                    <Image src={logoSrc} width={200} height={100} />
                 </Logo>
             </Link>
         </div>
@@ -28,10 +28,10 @@ const Header: React.FC = () => {
 
     if (loading) {
         left = (
-            <div className="left">
+            <div>
                 <Link href="/">
                     <Logo>
-                        <Image src={logo} width={200} height={100} />
+                        <Image src={logoSrc} width={200} height={100} />
                     </Logo>
                 </Link>
             </div>
@@ -56,10 +56,10 @@ const Header: React.FC = () => {
 
     if (session) {
         left = (
-            <div className="left">
+            <div>
                 <Link href="/">
                     <Logo>
-                        <Image src={logo} width={200} height={100} />
+                        <Image src={logoSrc} width={200} height={100} />
                     </Logo>
                 </Link>
             </div>
