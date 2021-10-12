@@ -56,7 +56,12 @@ const Sitehost = () => {
     };
 
     const _updateAll = async () => {
-        await globalActions.products.all(globalState.shops);
+        const success = await globalActions.products.all(globalState.shops);
+
+        if (success) {
+
+            return true;
+        }
     };
 
     const _updateSingle = async (params) => {
@@ -96,8 +101,6 @@ const Sitehost = () => {
                                         siteHost: shops.selected.siteHost,
                                         businessName: null,
                                         domain: null
-                                    }).then(() => {
-                                        updateMetrics(true, pid);
                                     });
                                 }}
                                 disabled={Boolean(shops.selected.businessName)}

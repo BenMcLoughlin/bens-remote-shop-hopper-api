@@ -195,8 +195,8 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
 };
 
 SelectShop.propTypes = {
-    set: PropTypes.func,
-    selected: PropTypes.func,
+    set: PropTypes.object,
+    selected: PropTypes.object,
     shopsList: PropTypes.array,
     refresh: PropTypes.bool
 
