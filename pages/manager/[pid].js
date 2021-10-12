@@ -59,13 +59,13 @@ const Sitehost = () => {
         const success = await globalActions.products.all(globalState.shops);
 
         if (success) {
-
             return true;
         }
     };
 
     const _updateSingle = async (params) => {
         setIsLoading(true);
+        globalActions.counter.clearRequests();
         globalActions.counter.setLoading(true);
         const success = await globalActions.products.single(params);
 

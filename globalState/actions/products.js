@@ -2,7 +2,6 @@ export const single = async (store, params) => {
     store.actions.counter.addRequest();
     let status = "REQUESTED";
     store.setState({ status });
-    // store.actions.counter.setLoading(true);
 
     const res = await fetch('/api/updateProducts', {
         method: 'POST',
@@ -11,13 +10,12 @@ export const single = async (store, params) => {
 
     if (res) {
         const uploaded = await res.json();
-        // store.actions.counter.setLoading(false);
 
         if (res.status === 200) {
             console.log(`SUCCESSFULLY UPDATED ${ uploaded.count } PRODUCTS`);
+            store.actions.counter.addSuccess();
             status = `SUCCESSFULLY UPDATED ${ uploaded.count } PRODUCTS`;
             store.setState({ status });
-            store.actions.counter.addSuccess();
 
             return res;
         }

@@ -5,7 +5,7 @@ export const updateMetrics = async (isShopify, header) => {
         body: JSON.stringify(isShopify ? 'all' : header)
     });
     const data = await res.json();
-    console.log(`GET NUMBER OF PRODUCTS:`, data);
+    console.log(`GET NUMBER OF PRODUCTS:`, data.result);
 
     return data;
 };
