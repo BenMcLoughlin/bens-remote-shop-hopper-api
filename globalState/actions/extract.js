@@ -1,7 +1,3 @@
-import singleBusiness from '../../controller/extract';
-import * as load from '../../controller/load';
-import * as metrics from '../../controller/metrics';
-
 export const single = async (store, params) => {
     store.actions.counter.addRequest();
     let status = "REQUESTED";
@@ -17,7 +13,6 @@ export const single = async (store, params) => {
         const uploaded = await res.json();
 
         if (res.status === 200) {
-            store.actions.counter.setLoading(false);
             status = "SUCCESS";
             store.setState({ status });
             console.log(`SUCCESSFULLY UPDATED ${ uploaded.result } PRODUCTS`);
@@ -26,7 +21,6 @@ export const single = async (store, params) => {
             return res;
         }
 
-        store.actions.counter.setLoading(false);
         status = "FAILED";
         store.setState({ status });
         console.log(`FAILED TO UPDATE ${ params.businessName }`);
@@ -37,9 +31,11 @@ export const single = async (store, params) => {
 };
 
 export const all = (store, shops) => {
+    store.actions.counter.setLoading(true);
+    store.actions.counter.clearRequests();
 
     shops.forEach(async (shop, i) => {
-        if (shop.domain) {
+        if (i < 2 && shop.domain) {
             let params = { 
                 domain: shop.domain,
                 businessName: shop.business_name,
@@ -49,6 +45,7 @@ export const all = (store, shops) => {
             let result = await single(store, params);
 
             console.log('all:', result);
+            store.actions.counter.setLoading(false);
 
             return result;
         }

@@ -4,7 +4,7 @@ import useGlobalHook from "use-global-hook";
 import * as actions from "../actions";
 
 const initialState = {
-    counters: {
+    counter: {
         requests: 0,
         result: {},
         success: 0,

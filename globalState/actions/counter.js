@@ -1,27 +1,39 @@
 export const addRequest = (store) => {
-    const newCounters = { ...store.state.counters };
-    newCounters.requests++;
-    store.setState({ counters: newCounters });
+    const counter = { ...store.state.counter };
+    counter.requests++;
+    store.setState({ counter: counter });
 };
 
 export const addSuccess = (store) => {
-    const newCounters = { ...store.state.counters };
-    newCounters.success++;
-    store.setState({ counters: newCounters });
+    const counter = { ...store.state.counter };
+    counter.success++;
+    store.setState({ counter: counter });
 };
 
 export const addFail = (store) => {
-    const newCounters = { ...store.state.counters };
-    newCounters.fail++;
-    store.setState({ counters: newCounters });
+    const counter = { ...store.state.counter };
+    counter.fail++;
+    store.setState({ counter: counter });
 };
 
-export const addResult = (store, result) => {
-    const newCounters = { ...store.state.counters };
-    newCounters.result = result;
-    store.setState({ counters: newCounters });
+export const clearRequests = (store) => {
+    const counter = { ...store.state.counter };
+    counter.loading = false;
+    counter.fail = 0;
+    counter.success = 0;
+    counter.requests = 0;
+    store.setState({ counter: counter });
 };
 
 export const setLoading = (store, state) => {
-    store.setState({ counters: state });
+    const counter = { ...store.state.counter };
+    counter.loading = state;
+    store.setState({ counter: counter });
+
+    // store.setState({ 
+    //     counter: {
+    //         ...store.state.counter,
+    //         loading: state
+    //     }
+    // });
 };
