@@ -9,11 +9,11 @@ import useGlobal from "../../globalState/store";
 
 import Layout from '../../components/Layout';
 import Counter from "../../components/Counter";
+import MetricsDisplay from '../../components/manager/MetricsDisplay';
+import SelectShop from '../../components/manager/SelectShop';
 import * as shopsLists from '../../mock/shopsLists';
 
 import { camelCase, capitalize } from '../../utils/strings';
-import MetricsDisplay from './MetricsDisplay';
-import SelectShop from './SelectShop';
 import { updateMetrics } from '../../requests/updateMetrics';
 
 const Sitehost = () => {

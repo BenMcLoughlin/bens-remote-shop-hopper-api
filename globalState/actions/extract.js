@@ -4,8 +4,9 @@ import * as metrics from '../../controller/metrics';
 
 export const single = async (store, params) => {
     store.actions.counter.addRequest();
-    let status = "LOADING";
+    let status = "REQUESTED";
     store.setState({ status });
+    store.actions.counter.setLoading(true);
 
     const res = await fetch('/api/updateProducts', {
         method: 'POST',
@@ -16,15 +17,16 @@ export const single = async (store, params) => {
         const uploaded = await res.json();
 
         if (res.status === 200) {
+            store.actions.counter.setLoading(false);
             status = "SUCCESS";
             store.setState({ status });
             console.log(`SUCCESSFULLY UPDATED ${ uploaded.result } PRODUCTS`);
-            store.actions.counter.addResult(uploaded.result);
             store.actions.counter.addSuccess();
 
             return res;
         }
 
+        store.actions.counter.setLoading(false);
         status = "FAILED";
         store.setState({ status });
         console.log(`FAILED TO UPDATE ${ params.businessName }`);

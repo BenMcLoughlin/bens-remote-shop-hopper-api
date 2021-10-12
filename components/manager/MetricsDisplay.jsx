@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { startCase } from '../../utils/strings';
 import { formatDate } from '../../utils/dates/forDisplay';
-import Button from '../buttons/Button';
+import Button from '../../components/buttons/Button';
 import { updateMetrics } from '../../requests/updateMetrics';
 
 const MetricsDisplay = ({ header, selected, refresh, buttonClick, isHost, isLoading, buttonTitle, disabled }) => {

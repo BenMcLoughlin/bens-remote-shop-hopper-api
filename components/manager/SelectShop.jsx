@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import useGlobal from '../../globalState/store';
 import { camelCase } from '../../utils/strings';
 import addNewShop from "../../requests/addNewShop";
 import fetchShops from "../../requests/fetchShops";
 import fetchShopStatus from "../../requests/fetchShopStatus";
-import CreateShopModal from "../CreateShopModal";
+import CreateShopModal from "../../components/CreateShopModal";
 
 const SelectShop = ({ set, selected, shopsList, refresh }) => {
     const [ globalState, globalActions ] = useGlobal();
@@ -191,13 +190,6 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
             `}</style>
         </>
     );
-};
-
-SelectShop.propTypes = {
-    set: PropTypes.func,
-    selected: PropTypes.func,
-    shopsList: PropTypes.array,
-    refresh: PropTypes.bool
 };
 
 export default SelectShop;

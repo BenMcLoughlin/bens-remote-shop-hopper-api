@@ -8,11 +8,13 @@ const initialState = {
         requests: 0,
         result: {},
         success: 0,
-        fail: 0
+        fail: 0,
+        loading: false
     },
     status: "INITIAL",
     products: [],
-    shops: []
+    shops: [],
+    loading: false
 };
 
 const useGlobal = useGlobalHook(initialState, actions);

@@ -21,3 +21,7 @@ export const addResult = (store, result) => {
     newCounters.result = result;
     store.setState({ counters: newCounters });
 };
+
+export const setLoading = (store, state) => {
+    store.setState({ counters: state });
+};
