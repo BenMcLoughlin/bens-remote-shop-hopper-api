@@ -44,5 +44,5 @@ export async function products(data) {
 
     console.log('IN LOAD FUNCTION: ', productsUploaded.length);
 
-    return productsUploaded;
+    return productsUploaded.length;
 }

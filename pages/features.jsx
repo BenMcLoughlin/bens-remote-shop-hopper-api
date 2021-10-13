@@ -13,7 +13,7 @@ import incrementProduct from "../requests/incrementProduct";
 import searchRequest from "../requests/search";
 import fetchTags from "../requests/fetchTags";
 
-const DB_Param = "jewelry";
+const DB_Param = "Multi";
 
 // We might use this to do user fetching .....
 export const getServerSideProps = async () => {
@@ -134,7 +134,7 @@ const Features = (props) => {
     const isLoggedIn = session[0]?.user;
 
     console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
-    console.log('Products:', props.products);
+    // console.log('Products:', props.products);
 
     return (
         <Layout>

@@ -19,7 +19,7 @@ export async function singleBusiness(businessName, domain) {
             const sanitizedData = await sanitize.products([ ...data.products ], businessName);
             const successfulUploads = await load.products(sanitizedData);
 
-            productsUploaded += successfulUploads;
+            productsUploaded += Number(successfulUploads);
         }
     } catch (error) {
         console.log(error);

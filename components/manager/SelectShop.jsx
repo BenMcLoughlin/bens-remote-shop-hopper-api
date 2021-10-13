@@ -36,7 +36,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
         };
 
         _getShopStatus();
-    }, []);
+    }, [ globalState.status ]);
 
     useEffect(() => {
         const _getShopList = async () => {

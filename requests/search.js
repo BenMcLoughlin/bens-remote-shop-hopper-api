@@ -7,7 +7,7 @@ const search = async (body) => {
         body: JSON.stringify(body)
     });
     const data = await res.json();
-    console.log(`SUCCESSFUL SEARCH:`, data.result);
+    console.log(`SUCCESSFUL SEARCH:`, JSON.stringify(data.result[3]));
 
     return data.result;
 };

@@ -59,6 +59,7 @@ const Sitehost = () => {
         const success = await globalActions.products.all(globalState.shops);
 
         if (success) {
+            updateMetrics(true, 'all');
             return true;
         }
     };
@@ -71,6 +72,7 @@ const Sitehost = () => {
 
         if (success) {
             setUpLoaded(success.result);
+            updateMetrics(true, params.business_name);
             setIsLoading(false);
             globalActions.counter.setLoading(false);
 
@@ -128,9 +130,7 @@ const Sitehost = () => {
                                         buttonTitle={`Load ${ shops.selected.businessName }`}
                                         buttonClick={() => {
                                             // set.selectedSiteHost(''); todo
-                                            _updateSingle(shops.selected).then(() => {
-                                                updateMetrics(true, shops.selected.businessName);
-                                            });
+                                            _updateSingle(shops.selected);
                                         }}
                                         disabled={false}
                                     />

@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider          = "postgresql"
-  url               = env("DATABASE_URL")
+  url               = "postgresql://ncmoseley:password@localhost:5432/template1"
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
@@ -43,6 +43,7 @@ model shop {
 model product {
   id            Int      @id @default(autoincrement())
   business_name String?  @map(name: "businessName")
+  bucket        String?
   title         String   @unique
   handle        String?
   body_html     String?  @map(name: "bodyHtml")
@@ -56,6 +57,10 @@ model product {
   images        Json?
   options       Json?
   rating        Int?     @default(0)
+  original_price Int?    @map(name: "originalPrice")
+  compare_at_price Int?  @map(name: "compareAtPrice")
+  sizes         String[]
+  colors        String[]
 
   @@map(name: "products")
 }

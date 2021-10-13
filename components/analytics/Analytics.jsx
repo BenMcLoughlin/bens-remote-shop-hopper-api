@@ -2,18 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { startCase } from '../../utils/strings';
 import { formatDate } from '../../utils/dates/forDisplay';
 
-export const updateAnalytics = async (isShopify, header) => {
-    const res = await fetch('/api/dbAnalytics', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(isShopify ? 'all' : header)
-    });
-    const data = await res.json();
-    console.log(`data:`, data);
-
-    return data;
-};
-
 const Analytics = () => {
     const now = new Date();
     const [ totalItems, setTotalItems ] = useState(0);
