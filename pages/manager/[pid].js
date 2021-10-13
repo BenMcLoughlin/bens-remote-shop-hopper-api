@@ -20,6 +20,7 @@ const Sitehost = () => {
     const isLoggedIn = session[0]?.user;
     const router = useRouter();
     const [ globalState, globalActions ] = useGlobal();
+    const { status } = globalState;
     const isActive = (pathname) => router.pathname === pathname;
     const { pid } = router.query;
 
@@ -92,6 +93,7 @@ const Sitehost = () => {
                         {
                             uploadedResult && 
                                 <Results>
+                                    {(status && globalState.counter.loading) && <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>}
                                     {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
                                     }
                                 </Results>
@@ -175,6 +177,7 @@ const Results = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    align-items: flex-end;
     width: 100%;
     padding: 1rem;
     padding-right: 3rem;
