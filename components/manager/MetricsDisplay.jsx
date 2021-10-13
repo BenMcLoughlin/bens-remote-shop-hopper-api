@@ -6,19 +6,39 @@ import { startCase } from '../../utils/strings';
 import { formatDate } from '../../utils/dates/forDisplay';
 import Button from '../../components/buttons/Button';
 import { updateMetrics } from '../../requests/updateMetrics';
+import fetchShopStatus from "../../requests/fetchShopStatus";
 
 const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, buttonTitle, disabled }) => {
     const now = new Date();
-    const [ globalState, globalActions ] = useGlobal();
+    const [ globalState ] = useGlobal();
     const [ totalItems, setTotalItems ] = useState(0);
-    const [ date, setDate ] = useState(now); // todo
+    const [ date, setDate ] = useState('TBA');
 
     useEffect(() => {
         updateMetrics(isHost, header).then((data) => {
             setTotalItems(data.result);
-            setDate(now);
         });
 
+    }, [ header, globalState.status ]);
+
+    useEffect(() => {
+        const _getShopStatus = async () => {
+            const eachShop = await fetchShopStatus();
+
+            if (eachShop) {
+                eachShop.map((d) => {
+                    if (d.business_name === header || isHost) {
+                        return (
+                            setDate(d.updated_at)
+                        );
+                    }
+
+                    return true;
+                });
+            }
+        };
+
+        _getShopStatus();
     }, [ header, globalState.status ]);
 
     return (
@@ -46,7 +66,8 @@ const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, butt
                 </div>
 
                 <div className="column">
-                    <p className="value">{formatDate(date)}</p>
+                    {/* todo date format */}
+                    <p className="value">{formatDate(date).substring(5, 10)} {formatDate(date).substring(11, 19)}</p>
                     <p className="title">Last Update</p>
                 </div>
             </div>
