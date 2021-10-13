@@ -1,4 +1,8 @@
 export const formatDate = (date) => {
+    if (typeof date === 'string') {
+        return date;
+    }
+
     let month = [];
     month[0] = 'Jan';
     month[1] = 'Feb';

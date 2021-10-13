@@ -1,23 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 
+import useGlobal from '../../globalState/store';
 import { startCase } from '../../utils/strings';
 import { formatDate } from '../../utils/dates/forDisplay';
 import Button from '../../components/buttons/Button';
 import { updateMetrics } from '../../requests/updateMetrics';
+import fetchShopStatus from "../../requests/fetchShopStatus";
 
-const MetricsDisplay = ({ header, selected, refresh, buttonClick, isHost, isLoading, buttonTitle, disabled }) => {
+const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, buttonTitle, disabled }) => {
     const now = new Date();
+    const [ globalState ] = useGlobal();
     const [ totalItems, setTotalItems ] = useState(0);
-    const [ date, setDate ] = useState(now); // todo
+    const [ date, setDate ] = useState('TBA');
 
     useEffect(() => {
         updateMetrics(isHost, header).then((data) => {
             setTotalItems(data.result);
-            setDate(now);
         });
 
-    }, [ header, refresh ]);
+    }, [ header, globalState.status ]);
+
+    useEffect(() => {
+        const _getShopStatus = async () => {
+            const eachShop = await fetchShopStatus();
+
+            if (eachShop) {
+                eachShop.map((d) => {
+                    if (d.business_name === header || isHost) {
+                        return (
+                            setDate(d.updated_at)
+                        );
+                    }
+
+                    return true;
+                });
+            }
+        };
+
+        _getShopStatus();
+    }, [ header, globalState.status ]);
 
     return (
         <div className="wrapper">
@@ -44,7 +67,9 @@ const MetricsDisplay = ({ header, selected, refresh, buttonClick, isHost, isLoad
                 </div>
 
                 <div className="column">
-                    <p className="value">{formatDate(date)}</p>
+                    <p className="value">
+                        <Moment format="MM/DD hh:ssa">{date}</Moment>
+                    </p>
                     <p className="title">Last Update</p>
                 </div>
             </div>

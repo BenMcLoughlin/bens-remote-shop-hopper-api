@@ -4,9 +4,10 @@ async function createRow(data) {
     let result = {};
 
     result = await prisma.status
-        .create({
-            data,
-            skipDuplicates: true
+        .upsert({
+            where: { business_name: data.business_name },
+            update: data,
+            create: data
         })
         .catch((e) => {
             console.log('e:', e);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 
 import useGlobal from '../../globalState/store';
 import { camelCase } from '../../utils/strings';
@@ -36,7 +37,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
         };
 
         _getShopStatus();
-    }, []);
+    }, [ globalState.status ]);
 
     useEffect(() => {
         const _getShopList = async () => {
@@ -108,7 +109,9 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                                         {statuses[businessName] && // todo: Date format
                                             <div className="updateColumn">
                                                 <div>Most Recent: <span className="update">{statuses[businessName]?.products}</span></div>
-                                                <div className="time">{statuses[businessName]?.updatedAt.substring(0, 19)}</div>
+                                                <div className="time">
+                                                    <Moment format="MM/DD hh:ssa">{statuses[businessName]?.updatedAt}</Moment>
+                                                </div>
                                             </div>
                                         }
                                     </div>

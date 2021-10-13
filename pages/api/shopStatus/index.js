@@ -5,7 +5,7 @@ import prisma from '../../../prisma/prisma.js';
 export async function getRows() {
     const result = await prisma.$queryRaw`
         SELECT * FROM statuses
-  `
+    `
         .catch((e) => {
             console.log('e:', e);
             throw e;

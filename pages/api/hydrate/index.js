@@ -92,6 +92,8 @@ export default async (req, res) => {
                 return data;
             });
 
+            console.log('productArray:', productArray[3]);
+
             const result = createRows(productArray);
 
             return res.status(200).json({ result });
