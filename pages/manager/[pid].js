@@ -42,6 +42,7 @@ const Sitehost = () => {
         selectedShop && setSelectedDomain(selectedShop.domain);
     }, [ businessName ]);
 
+    // todo: Convert to GlobalState
     const shops = {
         shopsList,
         selected: {
@@ -71,7 +72,6 @@ const Sitehost = () => {
         const success = await globalActions.products.single(params);
 
         if (success) {
-            setUpLoaded(success.result);
             updateMetrics(true, params.business_name);
             setIsLoading(false);
             globalActions.counter.setLoading(false);
@@ -89,10 +89,16 @@ const Sitehost = () => {
                             <h2 style={{ color: '#fff' }}>{`${ capitalize(pid) } Database Manager`} </h2>
                             <Counter />
                         </Title>
+                        {
+                            uploadedResult && 
+                                <Results>
+                                    {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
+                                    }
+                                </Results>
+                        }
                         <SitehostSection>
                             <MetricsDisplay
                                 header={shops.selected.siteHost}
-                                refresh={Boolean(uploadedResult)}
                                 isHost
                                 isLoading={globalState.counter.loading}
                                 buttonTitle={`Load All ${ shops.selected.siteHost } Shops`}
@@ -108,24 +114,12 @@ const Sitehost = () => {
                                 disabled={Boolean(shops.selected.businessName)}
                             />
                         </SitehostSection>
-                        {
-                            uploadedResult && 
-                                <Results>
-                                    {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
-                                    }
-                                </Results>
-                        }
 
                         <ShopSection>
-                            {
-                                uploadedResult === 'failed' &&
-                                <p className="red">Product acquisition failed.</p>
-                            }
                             {
                                 shops.selected.businessName &&
                                     <MetricsDisplay
                                         header={shops.selected.businessName}
-                                        refresh={Boolean(uploadedResult)}
                                         isLoading={globalState.counter.loading}
                                         buttonTitle={`Load ${ shops.selected.businessName }`}
                                         buttonClick={() => {
@@ -182,7 +176,7 @@ const Results = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
-    padding: 2rem;
+    padding: 1rem;
     padding-right: 3rem;
     background: #485056;
     white-space: nowrap;

@@ -9,8 +9,6 @@ const Counter = () => {
     const { requests, success, fail, loading, result } = globalState.counter;
     const { status } = globalState;
 
-    console.log('loading in Counter:', loading, result);
-
     return (
         <div style={{ display: 'flex', flexDirection: 'row', marginLeft: 20 }}>
             {status && <span style={{ marginRight: 20, fontSize: 8, color: '#fff' }}>{status}</span>}

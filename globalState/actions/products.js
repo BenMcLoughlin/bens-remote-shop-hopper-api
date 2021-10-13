@@ -14,6 +14,7 @@ export const single = async (store, params) => {
         if (res.status === 200) {
             console.log(`SUCCESSFULLY UPDATED ${ uploaded.count } PRODUCTS`);
             store.actions.counter.addSuccess();
+            store.actions.counter.addResult([{ result: `${ params.businessName } SUCCESS`, status: 200 }]);
             status = `SUCCESSFULLY UPDATED ${ uploaded.count } PRODUCTS`;
             store.setState({ status });
 
@@ -23,6 +24,7 @@ export const single = async (store, params) => {
         status = "FAILED";
         store.setState({ status });
         console.log(`FAILED TO UPDATE ${ params.businessName }`);
+        store.actions.counter.addResult([{ result: `${ params.businessName } FAILED`, status: 422 }]);
         store.actions.counter.addFail();
 
         return res;

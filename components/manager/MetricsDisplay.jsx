@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import useGlobal from '../../globalState/store';
 import { startCase } from '../../utils/strings';
 import { formatDate } from '../../utils/dates/forDisplay';
 import Button from '../../components/buttons/Button';
 import { updateMetrics } from '../../requests/updateMetrics';
 
-const MetricsDisplay = ({ header, selected, refresh, buttonClick, isHost, isLoading, buttonTitle, disabled }) => {
+const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, buttonTitle, disabled }) => {
     const now = new Date();
+    const [ globalState, globalActions ] = useGlobal();
     const [ totalItems, setTotalItems ] = useState(0);
     const [ date, setDate ] = useState(now); // todo
 
@@ -17,7 +19,7 @@ const MetricsDisplay = ({ header, selected, refresh, buttonClick, isHost, isLoad
             setDate(now);
         });
 
-    }, [ header, refresh ]);
+    }, [ header, globalState.status ]);
 
     return (
         <div className="wrapper">
