@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 
 import useGlobal from '../../globalState/store';
 import { startCase } from '../../utils/strings';
@@ -66,8 +67,9 @@ const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, butt
                 </div>
 
                 <div className="column">
-                    {/* todo date format */}
-                    <p className="value">{formatDate(date).substring(5, 10)} {formatDate(date).substring(11, 19)}</p>
+                    <p className="value">
+                        <Moment format="MM/DD hh:ssa">{date}</Moment>
+                    </p>
                     <p className="title">Last Update</p>
                 </div>
             </div>

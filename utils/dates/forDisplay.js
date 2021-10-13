@@ -1,5 +1,4 @@
 export const formatDate = (date) => {
-    console.log('date:', date);
     if (typeof date === 'string') {
         return date;
     }
