@@ -1,4 +1,5 @@
 import React from 'react';
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { Explainer } from '../../components';
 import Image from 'next/image';
@@ -6,39 +7,37 @@ import womanChoosing from '../../public/assets/shutterstock/womanChoosing.jpg';
 import blotch1 from '../../public/assets/paintBlobs/hero-bg-2.png';
 import blotch2 from '../../public/assets/paintBlobs/basketball4all_graphic1-2.png';
 
-export const WhoWeAre = ({ title, subTitles, cards }) => {
-    return (
-        <Wrapper>
-            <Section>
-                <BackgroundImage>
-                    <Image src={womanChoosing} width={3000} height={2000} />
-                </BackgroundImage>
+export const WhoWeAre = ({ title, subTitles, cards }) => (
+    <Wrapper>
+        <Section>
+            <BackgroundImage>
+                <Image src={womanChoosing} width={3000} height={2000} />
+            </BackgroundImage>
 
-                <Title>{title}</Title>
-            </Section>
-            <SubTitles>
-                {subTitles.map((subTitle, i) => (
-                    <SubTitle i={i}>{subTitle}</SubTitle>
-                ))}
-            </SubTitles>
-            <Cards>
-                {cards.map((card) => (
-                    <Explainer {...card} />
-                ))}
-            </Cards>
-            <Blotch1>
-                <Image src={blotch1} width={300} height={200} />
-            </Blotch1>
-            <Blotch2>
-                <Image src={blotch2} width={200} height={200} />
-            </Blotch2>
-        </Wrapper>
-    );
-};
+            <Title>{title}</Title>
+        </Section>
+        <SubTitles>
+            {subTitles.map((subTitle, i) => (
+                <SubTitle key={subTitle} i={i}>{subTitle}</SubTitle>
+            ))}
+        </SubTitles>
+        <Cards>
+            {cards.map((card) => (
+                <Explainer key={card} {...card} />
+            ))}
+        </Cards>
+        <Blotch1>
+            <Image src={blotch1} width={300} height={200} />
+        </Blotch1>
+        <Blotch2>
+            <Image src={blotch2} width={200} height={200} />
+        </Blotch2>
+    </Wrapper>
+);
 
 export default WhoWeAre;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     margin-top: 15rem;
@@ -62,8 +61,8 @@ const BackgroundImage = styled.div`
 `;
 const Title = styled.div`
     font-family: 'Yanone Kaffeesatz', Sans-serif;
-    font-size: ${(p) => p.theme.font.large};
-    ${(props) => props.theme.flex.vertical.center};
+    font-size: ${ (p) => p.theme.font.large };
+    ${ (props) => props.theme.flex.vertical.center };
     color: black;
     width: 60rem;
     height: 37rem;
@@ -75,7 +74,7 @@ const Title = styled.div`
     
 `;
 const SubTitles = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-weight: bold;
     text-transform: uppercase;
     display: flex;
@@ -88,15 +87,15 @@ const SubTitles = styled.div`
 const SubTitle = styled.div`
     font-weight: bold;
     text-transform: none;
-    ${(props) => props.theme.flex.vertical.center};
+    ${ (props) => props.theme.flex.vertical.center };
     width: 70rem;
     text-align: center;
     height: 20rem;
     line-height: 5rem;
-    font-weight: ${(props) => (props.i > 0 ? 300 : 800)};
+    font-weight: ${ (props) => (props.i > 0 ? 300 : 800) };
 `;
 const Cards = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-weight: bold;
     text-transform: uppercase;
     display: flex;

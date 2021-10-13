@@ -1,27 +1,26 @@
 import React from 'react';
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { Testimonial } from '../../components';
 
-export const Testimonials = ({ title, subTitle, cards }) => {
-    return (
-        <Wrapper>
-            <Top>
-                <Title>{title}</Title>
-                <SubTitle>{subTitle}</SubTitle>
-            </Top>
+export const Testimonials = ({ title, subTitle, cards }) => (
+    <Wrapper>
+        <Top>
+            <Title>{title}</Title>
+            <SubTitle>{subTitle}</SubTitle>
+        </Top>
 
-            <Cards>
-                {cards.map((card) => (
-                    <Testimonial {...card} />
-                ))}
-            </Cards>
-        </Wrapper>
-    );
-};
+        <Cards>
+            {cards.map((card) => (
+                <Testimonial key={card} {...card} />
+            ))}
+        </Cards>
+    </Wrapper>
+);
 
 export default Testimonials;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     margin-top: 5rem;
@@ -36,8 +35,8 @@ const Top = styled.div`
     padding: 2rem;
 `;
 const Title = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
-    ${(props) => props.theme.flex.vertical.center};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
+    ${ (props) => props.theme.flex.vertical.center };
     color: black;
     line-height: 5rem;
     text-align: center;
@@ -46,15 +45,15 @@ const Title = styled.div`
 `;
 
 const SubTitle = styled.div`
-    font-size: ${(p) => p.theme.font.medium};
-    ${(props) => props.theme.flex.vertical.center};
+    font-size: ${ (p) => p.theme.font.medium };
+    ${ (props) => props.theme.flex.vertical.center };
     line-height: 5rem;
 
   text-transform: uppercase;
 `;
 
 const Cards = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-weight: bold;
     text-transform: uppercase;
     display: flex;

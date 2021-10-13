@@ -1,6 +1,4 @@
-import prisma from '../../../../prisma/prisma.js';
-
-console.log('prisma.product:', prisma.product);
+import prisma from '../../../prisma/prisma.js';
 
 async function createRows(data) {
     let result = {};

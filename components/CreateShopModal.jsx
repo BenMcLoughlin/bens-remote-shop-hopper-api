@@ -1,4 +1,5 @@
 import React, { useReducer, useCallback } from 'react';
+/* eslint-disable react/prop-types */
 import produce from "immer";
 import { set, has } from "lodash";
 
@@ -83,7 +84,7 @@ const CreateShopModal = ({ addShop, close }) => {
         }
     }, []);
 
-    const _addShop = async (e) => {
+    const _addShop = (e) => {
         e.preventDefault();
         addShop(state);
     };

@@ -1,23 +1,22 @@
 import React from 'react';
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import Image from 'next/image';
 import { explainerSvgs } from 'public/assets/svgs/explainers/explainerSvgs.js';
 
-export const Explainer = ({ icon, title, subTitle }) => {
-    return (
-        <Wrapper>
-            <Icon>
-                <Image src={explainerSvgs[icon]} className="image" width={80} height={80} />
-            </Icon>
-            <Title>{title}</Title>
-            <SubTitle>{subTitle}</SubTitle>
-        </Wrapper>
-    );
-};
+export const Explainer = ({ icon, title, subTitle }) => (
+    <Wrapper>
+        <Icon>
+            <Image src={explainerSvgs[icon]} className="image" width={80} height={80} />
+        </Icon>
+        <Title>{title}</Title>
+        <SubTitle>{subTitle}</SubTitle>
+    </Wrapper>
+);
 
 export default Explainer;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     height: 45rem;
@@ -28,7 +27,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     border-radius: 3rem;
     &:hover {
-        background: ${(p) => p.theme.color.blueLight};
+        background: ${ (p) => p.theme.color.blueLight };
         color: white;
     }
     transition: all 0.5s ease;
@@ -43,16 +42,16 @@ const Icon = styled.div`
 `;
 const Title = styled.div`
     height: 30%;
-    font-size: ${(p) => p.theme.font.smallMedium};
+    font-size: ${ (p) => p.theme.font.smallMedium };
     font-weight: bold;
     padding: 2rem;
 `;
 const SubTitle = styled.div`
     height: 40%;
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     padding: 2rem;
     font-weight: 200;
     text-transform: none;
 `;
 
-//class="svg-5"
+// class="svg-5"

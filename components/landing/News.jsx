@@ -1,25 +1,24 @@
 import React from 'react';
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { Article } from '..';
 import { SquareButton } from '../../components';
 
-export const News = ({ title, cards }) => {
-    return (
-        <Wrapper>
-            <Title>{title}</Title>
-            <Cards>
-                {cards.map((card) => (
-                    <Article {...card} />
-                ))}
-            </Cards>
-            <SquareButton title={'All Posts'} gradient="tertiary" />
-        </Wrapper>
-    );
-};
+export const News = ({ title, cards }) => (
+    <Wrapper>
+        <Title>{title}</Title>
+        <Cards>
+            {cards.map((card) => (
+                <Article key={card} {...card} />
+            ))}
+        </Cards>
+        <SquareButton title={'All Posts'} gradient="tertiary" />
+    </Wrapper>
+);
 
 export default News;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     display: flex;
@@ -29,16 +28,16 @@ const Wrapper = styled.div`
 `;
 const Title = styled.div`
     font-family: 'Yanone Kaffeesatz', Sans-serif;
-    font-size: ${(p) => p.theme.font.large};
-    ${(props) => props.theme.flex.vertical.center};
+    font-size: ${ (p) => p.theme.font.large };
+    ${ (props) => props.theme.flex.vertical.center };
     line-height: 5rem;
     text-transform: uppercase;
     margin-top: 2.8rem;
     justify-content: center;
-    opacity: ${(p) => p.theme.opacity};
+    opacity: ${ (p) => p.theme.opacity };
 `;
 const Cards = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-weight: bold;
     text-transform: uppercase;
     display: flex;
@@ -48,5 +47,5 @@ const Cards = styled.div`
     gap: 3rem;
     justify-content: space-around;
     padding-top: 2rem;
-    opacity: ${(p) => p.theme.opacity};
+    opacity: ${ (p) => p.theme.opacity };
 `;

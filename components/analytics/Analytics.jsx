@@ -14,32 +14,22 @@ export const updateAnalytics = async (isShopify, header) => {
     return data;
 };
 
-const Analytics = ({ header, selected, shopsList, isShopify }) => {
+const Analytics = () => {
     const now = new Date();
     const [ totalItems, setTotalItems ] = useState(0);
-    const [ date, setDate ] = useState(now); // todo
-
-    useEffect(() => {
-        updateAnalytics(isShopify, header).then((data) => {
-            setTotalItems(data.result);
-            setDate(now);
-        });
-
-    }, [ header ]);
 
     return (
         <div className="wrapper">
             <div className="header">
-                {startCase(header)}
+                {startCase('header')}
             </div>
             <div className="row">
                 <div className="column">
                     <p className="value">{totalItems}</p>
-                    <p className="title">{startCase(header)}</p>
+                    <p className="title">{startCase('hjh')}</p>
                 </div>
 
                 <div className="column">
-                    <p className="value">{formatDate(date)}</p>
                     <p className="title">Last Update</p>
                 </div>
             </div>

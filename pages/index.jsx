@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import { landingProps } from '../content/landingProps';
@@ -14,7 +15,7 @@ import {
 } from '../components/landing';
 import { ScrollUp } from '../components';
 
-export async function getStaticProps(context) {
+export function getStaticProps(context) {
     return {
         props: landingProps
     };
@@ -35,6 +36,16 @@ const Landing = ({ welcome, whoWeAre, howItWorks, callout, testimonials, news, f
         </FixedPosition>
     </Layout>
 );
+
+Landing.propTypes = {
+    welcome: PropTypes.string,
+    whoWeAre: PropTypes.string,
+    howItWorks: PropTypes.string,
+    callout: PropTypes.string,
+    testimonials: PropTypes.string,
+    news: PropTypes.string,
+    footer: PropTypes.string
+};
 
 export default Landing;
 
