@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { SquareButton } from '../../components';
 import women from '../../public/assets/shutterstock/twoWomen.png';
@@ -8,15 +9,16 @@ import { useOnScreen } from '../../hooks/useOnScreen';
 import Image from 'next/image';
 
 export const Welcome = ({ title, subTitle }) => {
-    const [setEntered, enteredScreen] = useOnScreen({ rootMargin: '-30%', threshold: 0 });
-    const [MousePosition, setMousePosition] = useState({
+    const [ setEntered, enteredScreen ] = useOnScreen({ rootMargin: '-30%', threshold: 0 });
+    const [ MousePosition, setMousePosition ] = useState({
         left: 0,
-        top: 0,
+        top: 0
     });
 
     function handleMouseMove(ev) {
         setMousePosition({ left: ev.pageX, top: ev.pageY });
     }
+
     return (
         <Wrapper>
             <Left>
@@ -40,20 +42,20 @@ export const Welcome = ({ title, subTitle }) => {
 
 export default Welcome;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     width: 90%;
     margin: 0 auto;
     display: flex;
     position: relative;
-    opacity: ${(props) => props.theme.opacity};
+    opacity: ${ (props) => props.theme.opacity };
 `;
 
 const Title = styled.h1`
     font-family: 'Yanone Kaffeesatz', Sans-serif;
-    font-size: ${(p) => p.theme.font.largest};
-    color: ${(p) => p.theme.color.text};
+    font-size: ${ (p) => p.theme.font.largest };
+    color: ${ (p) => p.theme.color.text };
     font-weight: bold;
     text-transform: uppercase;
     line-height: 15rem;
@@ -64,7 +66,7 @@ const Title = styled.h1`
 `;
 const SubTitle = styled.h2`
     line-height: 3rem;
-    font-size: ${(p) => p.theme.font.smallMedium};
+    font-size: ${ (p) => p.theme.font.smallMedium };
     margin-top: 1rem;
     margin-left: 2rem;
     width: 60rem;
@@ -85,7 +87,7 @@ const Right = styled.div`
 const ImageWrapper = styled.div`
     position: absolute;
     top: -5rem;
-    left: ${(p) => (p.visible ? '-5rem' : '10rem')};
+    left: ${ (p) => (p.visible ? '-5rem' : '10rem') };
     width: 55rem;
     transition: all 0.4s ease;
 `;
@@ -101,6 +103,7 @@ const ButtonWrapper = styled.div`
     margin-top: 8rem;
     margin-left: 3rem;
 `;
+
 /*
 const Blotch1 = styled.div`
     position: absolute;

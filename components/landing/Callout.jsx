@@ -1,4 +1,5 @@
 import React from 'react';
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import Image from 'next/image';
 import heels from '../../public/assets/shutterstock/heel.jpg';

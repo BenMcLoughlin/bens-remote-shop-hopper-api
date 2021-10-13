@@ -3,8 +3,6 @@ import { useSession } from "next-auth/client";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
-import SideNav from '../components/analytics/SideNav';
-import Display from '../components/analytics/Display';
 import * as shopsLists from '../mock/shopsLists';
 import { camelCase } from '../utils/strings';
 
@@ -48,7 +46,6 @@ const analytics = () => {
                         <div className="column">
                             <h1 className="title">Analytics</h1>
                             <div className="row">
-                                <SideNav {...props} />
                             </div>
                         </div>
                     </div>

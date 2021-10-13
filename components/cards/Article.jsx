@@ -1,4 +1,5 @@
 import React from 'react';
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { LinkText } from '..';
 import Image from 'next/image';
@@ -8,7 +9,7 @@ import vrHeadset from '../../public/assets/shutterstock/wearingGoggles.jpeg';
 export const Article = ({ icon, title, subTitle, content, number, flexDirection, image }) => {
     const images = {
         guysTalking,
-        vrHeadset,
+        vrHeadset
     };
     return (
         <Wrapper flexDirection={flexDirection}>
@@ -25,14 +26,14 @@ export const Article = ({ icon, title, subTitle, content, number, flexDirection,
     );
 };
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     height: 60rem;
     width: 100%;
     display: flex;
-    flex-direction: ${(p) => p.flexDirection};
-    opacity: ${(props) => props.theme.opacity};
+    flex-direction: ${ (p) => p.flexDirection };
+    opacity: ${ (props) => props.theme.opacity };
 `;
 const Left = styled.div`
     display: flex;
@@ -55,7 +56,7 @@ const Text = styled.div`
 `;
 
 const Title = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-family: 'Yanone Kaffeesatz', Sans-serif;
     height: 10rem;
 
@@ -66,7 +67,7 @@ const Title = styled.div`
     line-height: 5.5rem;
 `;
 const SubTitle = styled.div`
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     height: 2rem;
     text-transform: none;
     font-weight: 400;
@@ -74,7 +75,7 @@ const SubTitle = styled.div`
 
 `;
 const Content = styled.div`
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     height: 8rem;
     text-transform: none;
     font-weight: 400;

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import Image from 'next/image';
 import greenCircles from '../../public/assets/footer/greenCircles.png';
@@ -38,7 +39,7 @@ export const Footer = ({ top, bottom, options }) => {
                 </Buttons>
                 <Social>
                     {options.social.map((d) => (
-                        <SocialLink>{d}</SocialLink>
+                        <SocialLink key={d}>{d}</SocialLink>
                     ))}
                 </Social>
                 <Copyright>

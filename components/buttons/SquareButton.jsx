@@ -1,19 +1,17 @@
 import React from 'react';
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 
-export const SquareButton = ({ title, gradient = 'primary' }) => {
-    return (
-        <Wrapper gradient={gradient}>
-            <Title>{title}</Title>
-        </Wrapper>
-    );
-};
+export const SquareButton = ({ title, gradient = 'primary' }) => (
+    <Wrapper gradient={gradient}>
+        <Title>{title}</Title>
+    </Wrapper>
+);
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
-    background: ${(p) =>
-        p.gradient === 'primary' ? p.theme.color.greenDark : p.theme.color.accent};
+    background: ${ (p) => p.gradient === 'primary' ? p.theme.color.greenDark : p.theme.color.accent };
     height: 6rem;
     width: 20rem;
     cursor: pointer;
@@ -27,10 +25,10 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-    font-size: ${(p) => p.theme.font.smallMedium};
+    font-size: ${ (p) => p.theme.font.smallMedium };
     color: white;
     font-weight: bold;
     text-transform: uppercase;
-    ${(props) => props.theme.flex.vertical.center};
+    ${ (props) => props.theme.flex.vertical.center };
     font-weight: 400;
 `;

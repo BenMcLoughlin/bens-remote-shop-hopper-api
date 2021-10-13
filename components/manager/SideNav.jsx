@@ -1,11 +1,12 @@
 import React from 'react';
+/* eslint-disable react/prop-types */
 import { camelCase, startCase } from '../../utils/strings';
 
 import Link from 'next/link';
 
 const SideNav = ({ shopsList, selected, set }) => {
     const siteHostList = [ ...new Set(shopsList.map((d) => d.site_host)) ].filter((d) => d);
-    const selectedIndex = siteHostList.findIndex((d) => camelCase(d) == selected.siteHost);
+    const selectedIndex = siteHostList.findIndex((d) => camelCase(d) === selected.siteHost);
 
     return (
         <div className="wrapper">

@@ -1,31 +1,30 @@
 import React from 'react';
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import Image from 'next/image';
 import { profile, star } from '../../public/assets/testimonials/profile.js';
 
-export const Testimonial = ({ name, role, content, rating, image }) => {
-    return (
-        <Wrapper>
-            <ProfilePhoto>
-                <Image src={profile[image]} width={200} height={200} />
-            </ProfilePhoto>
-            <About>
-                <Name>{name}</Name>
-                <Role>{role}</Role>
-                <Content>"{content}"</Content>
-                <Stars>
-                    {[1, 2, 3, 4, 5].map((d) => (
-                        <Image src={star} width={15} height={15} />
-                    ))}
-                </Stars>
-            </About>
-        </Wrapper>
-    );
-};
+export const Testimonial = ({ name, role, content, rating, image }) => (
+    <Wrapper>
+        <ProfilePhoto>
+            <Image src={profile[image]} width={200} height={200} />
+        </ProfilePhoto>
+        <About>
+            <Name>{name}</Name>
+            <Role>{role}</Role>
+            <Content>{`"${ content }"`}</Content>
+            <Stars>
+                {[ 1, 2, 3, 4, 5 ].map((d) => (
+                    <Image key={d} src={star} width={15} height={15} />
+                ))}
+            </Stars>
+        </About>
+    </Wrapper>
+);
 
 export default Testimonial;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     height: 60rem;
@@ -47,17 +46,17 @@ const ProfilePhoto = styled.div`
     box-shadow: 2px 39px 48px -16px rgba(0, 0, 0, 0.27);
 `;
 const Name = styled.div`
-    font-size: ${(p) => p.theme.font.smallMedium};
+    font-size: ${ (p) => p.theme.font.smallMedium };
     font-weight: 800;
     height: 3rem;
 `;
 const Role = styled.div`
-    font-size: ${(p) => p.theme.font.smallMedium};
+    font-size: ${ (p) => p.theme.font.smallMedium };
     height: 4rem;
     font-weight: 300;
 `;
 const Content = styled.div`
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     height: 17rem;
     font-style: italic;
     font-weight: 200;
@@ -65,7 +64,7 @@ const Content = styled.div`
     text-align: center;
 `;
 const About = styled.div`
-    font-size: ${(p) => p.theme.font.medium};
+    font-size: ${ (p) => p.theme.font.medium };
     height: 45rem;
     width: 40rem;
     padding: 2rem;
@@ -83,7 +82,7 @@ const About = styled.div`
     transition: all 0.3s ease;
 `;
 const Stars = styled.div`
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     height: 2rem;
     width: 20rem;
     gap: 1rem;
@@ -94,7 +93,7 @@ const Stars = styled.div`
     color: red;
 `;
 const Star = styled(Image)`
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     height: 2rem;
     width: 20rem;
     gap: 1rem;

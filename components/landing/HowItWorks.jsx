@@ -1,24 +1,23 @@
 import React from 'react';
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { ActionStep } from '../../components';
 
 
-export const HowItWorks = ({ title, cards }) => {
-    return (
-        <Wrapper>
-            <Title>{title}</Title>
-            <Cards>
-                {cards.map((card) => (
-                    <ActionStep {...card} />
-                ))}
-            </Cards>
-        </Wrapper>
-    );
-};
+export const HowItWorks = ({ title, cards }) => (
+    <Wrapper>
+        <Title>{title}</Title>
+        <Cards>
+            {cards.map((card) => (
+                <ActionStep key={card} {...card} />
+            ))}
+        </Cards>
+    </Wrapper>
+);
 
 export default HowItWorks;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     padding-top: 12rem;
@@ -27,16 +26,16 @@ const Wrapper = styled.div`
 `;
 const Title = styled.div`
     font-family: 'Yanone Kaffeesatz', Sans-serif;
-    font-size: ${(p) => p.theme.font.large};
-    ${(props) => props.theme.flex.vertical.center};
+    font-size: ${ (p) => p.theme.font.large };
+    ${ (props) => props.theme.flex.vertical.center };
     line-height: 5rem;
     margin-top: 2.8rem;
     justify-content: center;
-    opacity: ${(p) => p.theme.opacity};
+    opacity: ${ (p) => p.theme.opacity };
     
 `;
 const Cards = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-weight: bold;
     text-transform: uppercase;
     display: flex;
@@ -47,5 +46,5 @@ const Cards = styled.div`
     justify-content: space-around;
     padding-top: 5rem;
     margin: 0 auto;
-    opacity: ${(p) => p.theme.opacity};
+    opacity: ${ (p) => p.theme.opacity };
 `;
