@@ -23,6 +23,42 @@ async function addPointToProduct(id) {
     return result;
 }
 
+export async function findProduct(id) {
+    const result = await prisma.product
+        .findUnique({
+            where: {
+                id
+            }
+        })
+        .catch((e) => {
+            console.log('e:', e);
+            throw e;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
+
+    return result;
+}
+
+async function addItemToHotList(item) {
+    const result = await prisma.hot_item
+        .upsert({
+            where: { title: item.title },
+            create: item,
+            update: item
+        })
+        .catch((e) => {
+            console.log('e:', e);
+            throw e;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
+
+    return result;
+}
+
 export default async (req, res) => {
     const session = await getSession({ req });
 
@@ -34,6 +70,8 @@ export default async (req, res) => {
         try {
             const { body } = req;
             const result = await addPointToProduct(body);
+            const item = await findProduct(body);
+            const added = await addItemToHotList(item);
 
             return res.status(200).json({ result });
         } catch (error) {

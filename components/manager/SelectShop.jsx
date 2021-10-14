@@ -4,7 +4,7 @@ import Moment from 'react-moment';
 
 import useGlobal from '../../globalState/store';
 import { camelCase } from '../../utils/strings';
-import addNewShop from "../../requests/addNewShop";
+import addShops from "../../requests/addShops";
 import fetchShops from "../../requests/fetchShops";
 import fetchShopStatus from "../../requests/fetchShopStatus";
 import CreateShopModal from "../CreateShopModal";
@@ -61,7 +61,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
     };
 
     const _addShop = async (shopData) => {
-        const result = await addNewShop(shopData);
+        const result = await addShops(shopData);
 
         if (result.error) {
             return alert(result.error);
@@ -140,14 +140,15 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                     margin-bottom: 1rem;
                 }
                 .row {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: start;
+                    flex-direction: row;
                     text-align: right;
                     min-height: 17rem;
                     width: 90%;
-                    display: flex;
                     width: 100%;
-                    flex-wrap: wrap;
                     gap: 2rem;
-                    justify-content: start;
                 }
                 .businessName {
                     display: flex;

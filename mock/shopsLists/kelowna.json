@@ -1,135 +1,5 @@
 [
     {
-        "domain": "naughtygirlessentials.com",
-        "business_name": "Naughty Girl Essentials Lingerie",
-        "vertical": "Style And Fashion",
-        "site_host": "BigCommerce",
-        "City": "Kelowna",
-        "State": "BC",
-        "Zip": "V1Y",
-        "Country": "CA"
-    },
-    {
-        "domain": "alpacashop.ca",
-        "business_name": "Alpaca Clothing Canada",
-        "vertical": "Style And Fashion",
-        "site_host": "BigCommerce",
-        "City": "Vernon",
-        "State": "BC",
-        "Zip": "V1H",
-        "Country": "CA"
-    },
-    {
-        "domain": "theartfulhandstores.com",
-        "business_name": "The Artful Hand",
-        "vertical": "",
-        "site_host": "Lightspeed",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "oneboardshop.com",
-        "business_name": "ONE Boardshop",
-        "vertical": "",
-        "site_host": "Lightspeed",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "strutfootwear.com",
-        "business_name": "Strut Footwear & Apparel",
-        "vertical": "",
-        "site_host": "Lightspeed",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "honestboutique.ca",
-        "business_name": "Honest Boutique",
-        "vertical": "",
-        "site_host": "Lightspeed",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "envyapparelfit.com",
-        "business_name": "Envy Apparel",
-        "vertical": "",
-        "site_host": "Lightspeed",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "red-top-footwear.shoplightspeed.com",
-        "business_name": "Red Top Footwear",
-        "vertical": "",
-        "site_host": "Lightspeed",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "attridge.ca",
-        "business_name": "Attridge Snow Ski Wake",
-        "vertical": "",
-        "site_host": "Lightspeed",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "fossellos.com",
-        "business_name": "Fossellos",
-        "vertical": "",
-        "site_host": "Lightspeed",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "tjskids.com",
-        "business_name": "TJ's The Kiddies Store",
-        "vertical": "",
-        "site_host": "Magento",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "redbagstyle.getpayd.com",
-        "business_name": "Red Bag",
-        "vertical": "",
-        "site_host": "Moneris",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "merlenorman.com",
-        "business_name": "Merle Norman Cosmetic Studio",
-        "vertical": "",
-        "site_host": "Salesforce",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
         "domain": "healinghollow.com",
         "business_name": "Healing Hollow",
         "vertical": "Health And Fitness",
@@ -137,7 +7,9 @@
         "City": "Cranbrook",
         "State": "BC",
         "Zip": "V1C",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Beauty"
+        ]
     },
     {
         "domain": "babyandme.ca",
@@ -147,7 +19,8 @@
         "City": "Kelowna",
         "State": "BC",
         "Zip": "V1Y",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Baby & Kids" ]
     },
     {
         "domain": "funktional.ca",
@@ -157,7 +30,8 @@
         "City": "Kelowna",
         "State": "BC",
         "Zip": "V1Y",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Omit this shop" ]
     },
     {
         "domain": "saltandsage.ca",
@@ -167,7 +41,8 @@
         "City": "Kelowna",
         "State": "BC",
         "Zip": "V1Y",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Bohemian" ]
     },
     {
         "domain": "galibellecanada.com",
@@ -177,7 +52,8 @@
         "City": "Kelowna",
         "State": "BC",
         "Zip": "V1Y",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Trendy" ]
     },
     {
         "domain": "bohemecollective.ca",
@@ -187,17 +63,19 @@
         "City": "Kelowna",
         "State": "BC",
         "Zip": "V1Y",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Bohemian" ]
     },
     {
-        "domain": "pelavision.com",
-        "business_name": "Pela Vision",
+        "domain": "getswway.com",
+        "business_name": "SWWAY",
         "vertical": "Business And Industrial",
         "site_host": "Shopify",
         "City": "Kelowna",
         "State": "BC",
         "Zip": "V1Y",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Casual" ]
     },
     {
         "domain": "louiseestelle.com",
@@ -207,7 +85,10 @@
         "City": "Kelowna",
         "State": "BC",
         "Zip": "V1Y",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Accessories"
+
+        ]
     },
     {
         "domain": "playstores.ca",
@@ -217,7 +98,9 @@
         "City": "Kelowna",
         "State": "BC",
         "Zip": "V1Y",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Athletic"
+        ]
     },
     {
         "domain": "manwomanhome.com",
@@ -227,7 +110,9 @@
         "City": "Kelowna",
         "State": "BC",
         "Zip": "V1Y",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Trendy"
+        ]
     },
     {
         "domain": "portia-ella.ca",
@@ -237,7 +122,9 @@
         "City": "Kelowna",
         "State": "BC",
         "Zip": "V1Y",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Beauty"
+        ]
     },
     {
         "domain": "loyalhair.com",
@@ -247,7 +134,9 @@
         "City": "Kelowna",
         "State": "BC",
         "Zip": "V1Y",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Beauty"
+        ]
     },
     {
         "domain": "set4lyfe.com",
@@ -257,7 +146,9 @@
         "City": "Kelowna East Central",
         "State": "BC",
         "Zip": "V1X",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Music Festival"
+        ]
     },
     {
         "domain": "scopey.ca",
@@ -267,7 +158,9 @@
         "City": "Kelowna Southwest",
         "State": "BC",
         "Zip": "V1W",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Casual"
+        ]
     },
     {
         "domain": "leoella.com",
@@ -277,7 +170,9 @@
         "City": "Kelowna Southwest",
         "State": "BC",
         "Zip": "V1W",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Omit this shop"
+        ]
     },
     {
         "domain": "6amworkshirts.com",
@@ -287,7 +182,9 @@
         "City": "Penticton",
         "State": "BC",
         "Zip": "V2A",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Omit this shop"
+        ]
     },
     {
         "domain": "freerideboardshop.com",
@@ -297,7 +194,9 @@
         "City": "Penticton",
         "State": "BC",
         "Zip": "V2A",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Casual"
+        ]
     },
     {
         "domain": "elizabethovintage.com",
@@ -307,7 +206,9 @@
         "City": "Penticton",
         "State": "BC",
         "Zip": "V2A",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Vintage"
+        ]
     },
     {
         "domain": "elliottrow.com",
@@ -317,7 +218,9 @@
         "City": "Penticton",
         "State": "BC",
         "Zip": "V2A",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Chic"
+        ]
     },
     {
         "domain": "shopsomethingpretty.com",
@@ -327,7 +230,9 @@
         "City": "Penticton",
         "State": "BC",
         "Zip": "V2A",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Casual"
+        ]
     },
     {
         "domain": "shopadhoc.com",
@@ -337,7 +242,9 @@
         "City": "Penticton",
         "State": "BC",
         "Zip": "V2A",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Trendy"
+        ]
     },
     {
         "domain": "withoutadoubtdayspa.ca",
@@ -347,7 +254,9 @@
         "City": "Penticton",
         "State": "BC",
         "Zip": "V2A",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Beauty"
+        ]
     },
     {
         "domain": "homemadeorganicscompany.com",
@@ -357,7 +266,9 @@
         "City": "Vernon",
         "State": "BC",
         "Zip": "V1T",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Beauty"
+        ]
     },
     {
         "domain": "bigsun.ca",
@@ -367,7 +278,9 @@
         "City": "Vernon",
         "State": "BC",
         "Zip": "V1T",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Casual"
+        ]
     },
     {
         "domain": "birchhillstudio.com",
@@ -377,7 +290,9 @@
         "City": "Vernon",
         "State": "BC",
         "Zip": "V1T",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Casual"
+        ]
     },
     {
         "domain": "getbacktoearth.com",
@@ -387,7 +302,9 @@
         "City": "Vernon East",
         "State": "BC",
         "Zip": "V1B",
-        "Country": "CA"
+        "Country": "CA",
+        "buckets": [ "Beauty"
+        ]
     },
     {
         "domain": "1000palmsswimwear.com",
@@ -397,7 +314,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Bohemian"
+        ]
     },
     {
         "domain": "okanaganlifestyle.ca",
@@ -407,7 +326,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Casual"
+        ]
     },
     {
         "domain": "loxandfox.ca",
@@ -417,7 +338,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Baby & Kids"
+        ]
     },
     {
         "domain": "frakas.ca",
@@ -427,7 +350,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Chic"
+        ]
     },
     {
         "domain": "beachave.ca",
@@ -437,7 +362,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Trendy"
+        ]
     },
     {
         "domain": "resfeber.ca",
@@ -447,7 +374,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Casual"
+        ]
     },
     {
         "domain": "simsjewelry.com",
@@ -457,7 +386,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Accessories"
+        ]
     },
     {
         "domain": "losttogether.ca",
@@ -467,7 +398,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Vintage"
+        ]
     },
     {
         "domain": "thehandmadeshoppe.com",
@@ -477,7 +410,8 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Casual", "Accessories", "Beauty" ]
     },
     {
         "domain": "blueskyclothingco.com",
@@ -487,7 +421,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Casual"
+        ]
     },
     {
         "domain": "aldilaboutique.com",
@@ -497,7 +433,9 @@
         "City": "",
         "State": "",
         "Zip": "0",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Chic"
+        ]
     },
     {
         "domain": "shop.unhingedboutique.ca",
@@ -507,7 +445,8 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Casual", "Accessories", "Beauty" ]
     },
     {
         "domain": "castanetapparel.com",
@@ -517,7 +456,8 @@
         "City": "",
         "State": "",
         "Zip": "0",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Omit this shop" ]
     },
     {
         "domain": "sweetlegs.ca",
@@ -527,7 +467,8 @@
         "City": "",
         "State": "",
         "Zip": "0",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Athletic" ]
     },
     {
         "domain": "aucanadaapparel.com",
@@ -537,7 +478,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Casual"
+        ]
     },
     {
         "domain": "shopdellago.com",
@@ -547,7 +490,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Trendy"
+        ]
     },
     {
         "domain": "foursightsupplyco.com",
@@ -557,7 +502,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Casual", "Accessories"
+        ]
     },
     {
         "domain": "cruzwear.com",
@@ -567,7 +514,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Casual"
+        ]
     },
     {
         "domain": "greyheartsdenim.ca",
@@ -577,7 +526,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Casual", "Accessories"
+        ]
     },
     {
         "domain": "thebumwrap.com",
@@ -587,7 +538,9 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Casual", "Accessories"
+        ]
     },
     {
         "domain": "bubbaandbluedesign.com",
@@ -597,7 +550,8 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Baby & Kids" ]
     },
     {
         "domain": "daisyandjaneclothiers.com",
@@ -607,7 +561,8 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Vintage" ]
     },
     {
         "domain": "shopmogano.com",
@@ -617,7 +572,8 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Accessories" ]
     },
     {
         "domain": "loloandspence.com",
@@ -627,496 +583,7 @@
         "City": "",
         "State": "",
         "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "morganekelowna.square.site/s/shop",
-        "business_name": "Morgane",
-        "vertical": "",
-        "site_host": "Square",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "shoptigerlilyclothing.square.site/",
-        "business_name": "Tigerlily Fashions Clothing",
-        "vertical": "",
-        "site_host": "Square",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "sassy-shoes.square.site/s/shop",
-        "business_name": "Sassy Shoes",
-        "vertical": "",
-        "site_host": "Square",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "mikalajewelry.com",
-        "business_name": "Mikala Jewelry",
-        "vertical": "",
-        "site_host": "Squarespace",
-        "City": "BC",
-        "State": "V1Y",
-        "Zip": "CA",
-        "Country": "2019-08-20"
-    },
-    {
-        "domain": "souleyewear.com",
-        "business_name": "SOUL eyewear",
-        "vertical": "",
-        "site_host": "Squarespace",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "pentagonboardshop.com",
-        "business_name": "Pentagon Boardshop",
-        "vertical": "",
-        "site_host": "Squarespace",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "kaleco.ca",
-        "business_name": "Kaleco Sustainable Lifestyle",
-        "vertical": "",
-        "site_host": "Weebly",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "okanaganskate.com",
-        "business_name": "Okanagan Skate Co.",
-        "vertical": "",
-        "site_host": "Weebly",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "mostwantedresale.com",
-        "business_name": "MOST WANTED LUXURY RESALE",
-        "vertical": "",
-        "site_host": "Wix",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "stonefoxclothing.com",
-        "business_name": "Stone Fox Clothing Collective",
-        "vertical": "",
-        "site_host": "Wix",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "kelownacandlefactory.com",
-        "business_name": "The Kelowna Candle Factory",
-        "vertical": "",
-        "site_host": "WooCommerce",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "premiumlabel.ca",
-        "business_name": "Premium Label Outlet",
-        "vertical": "",
-        "site_host": "WooCommerce",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "amniapparel.com",
-        "business_name": "Amni Apparel",
-        "vertical": "",
-        "site_host": "WooCommerce",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "gotstylz.com",
-        "business_name": "GotStylz",
-        "vertical": "",
-        "site_host": "WooCommerce",
-        "City": "",
-        "State": "",
-        "Zip": "0",
-        "Country": ""
-    },
-    {
-        "domain": "littlebachco.com",
-        "business_name": "Little Bach Company Baby & Gifts",
-        "vertical": "",
-        "site_host": "WooCommerce",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "cadenceshoes.com",
-        "business_name": "Cadence Shoes",
-        "vertical": "",
-        "site_host": "WooCommerce",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "linenladder.com",
-        "business_name": "Linen Ladder",
-        "vertical": "",
-        "site_host": "WooCommerce",
-        "City": "",
-        "State": "",
-        "Zip": "0",
-        "Country": ""
-    },
-    {
-        "domain": "wearabouts.ca",
-        "business_name": "Wearabouts",
-        "vertical": "",
-        "site_host": "WooCommerce",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "soledoc.ca",
-        "business_name": "Sole Doc",
-        "vertical": "",
-        "site_host": "WooCommerce",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "ae.comcaen",
-        "business_name": "American Eagle Outfitters",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "ardene.com",
-        "business_name": "Ardene",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "aritzia.comen/home",
-        "business_name": "Aritzia",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "bellissimafashions.com",
-        "business_name": "Bellissima",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "belowthebelt.com",
-        "business_name": "Below the Belt",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "blnts.com",
-        "business_name": "Bluenotes",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "boathousestores.com",
-        "business_name": "Boathouse",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "bootlegger.com",
-        "business_name": "Bootlegger",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "cleo.ca",
-        "business_name": "Cleo",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "dynamiteclothing.comca",
-        "business_name": "Dynamite Stores Inc.",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "eclipsestores.comen-US/",
-        "business_name": "Eclipse",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "fairweatherclothing.com",
-        "business_name": "Fairweather",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "gapcanada.ca",
-        "business_name": "Gap",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "garageclothing.com",
-        "business_name": "Garage",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "guess.comcaen/home",
-        "business_name": "Guess?",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "hottopic.com",
-        "business_name": "Hot Topic",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "journeys.ca",
-        "business_name": "Journeys",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "northernreflections.com",
-        "business_name": "Northern Reflections",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "oldnavy.gapcanada.ca",
-        "business_name": "Old Navy",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "reitmans.com",
-        "business_name": "Reitmans",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "rickis.com",
-        "business_name": "Ricki's",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "ripcurl.com",
-        "business_name": "Rip Curl",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "roots.comcaen/homepage",
-        "business_name": "Roots Canada",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "rw-co.com",
-        "business_name": "RW & Co.",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "sportchek.ca",
-        "business_name": "Sport Chek",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "torrid.com",
-        "business_name": "Torrid",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "urban-planet.com",
-        "business_name": "Urban Planet",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "west49.com",
-        "business_name": "West 49",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "zumiez.com",
-        "business_name": "Zumiez",
-        "vertical": "",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
-    },
-    {
-        "domain": "vpo.ca",
-        "business_name": "Valhalla Pure Outfitters",
-        "vertical": "2814 48 Ave, Vernon, BC V1T 3R4",
-        "site_host": "",
-        "City": "",
-        "State": "",
-        "Zip": "",
-        "Country": ""
+        "Country": "",
+        "buckets": [ "Baby & Kids" ]
     }
 ]

@@ -1,104 +1,78 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
+import Image from 'next/image';
+import Chips from 'react-chips';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import PropTypes from "prop-types";
 import Layout from "../components/Layout";
 import { useSession } from "next-auth/client";
-import prisma from '../prisma/prisma';
-// import { fetchProducts } from "./api/fetch";
+
 import hydrateRequest from "../requests/hydrateRequest";
 import incrementProduct from "../requests/incrementProduct";
-import searchRequest from "../requests/search";
-import fetchTags from "../requests/fetchTags";
+import searchTwoParams from "../requests/searchTwoParams";
+import loaderGif from '../public/assets/loader/octo_loader.gif';
 
-const DB_Param = "Multi";
+const columns = [
+    "business_name",
+    "buckets",
+    "title",
+    "handle",
+    "body_html",
+    "vendor",
+    "product_type",
+    "created_at",
+    "published_at",
+    "updated_at",
+    "tags",
+    "variants",
+    "images",
+    "options",
+    "original_price",
+    "compare_at_price",
+    "sizes",
+    "colors"
+];
 
-// We might use this to do user fetching .....
-export const getServerSideProps = async () => {
-    const allUsers = await prisma.user.findMany({});
-    const users = dateStripped(allUsers);
+const buckets = [
+    "Athletic",
+    "Bohemian",
+    "Chic",
+    "Trendy",
+    "Casual",
+    "Vintage",
+    "Music Festival",
+    "Baby & Kids",
+    "Accessories",
+    "Beauty",
+    "Streetwear",
+    "Hip Hop",
+    "Rock",
+    "Punk",
+    "Elegant",
+    "Formal",
+    "Maternity"
+];
 
-    // Example Query
-    const productsFeed = await prisma.product.findMany({
-        where: {
-            tags: {
-                has: DB_Param
-            }
-            // rating: {
-            //     gt: 10
-            // }
-        }
-    });
-    const products = dateStripped(productsFeed);
+const DB_Param = buckets[0];
 
-    return { props: { users, products } };
-};
-
-// This is gross, we will see if there is a better solution to this problem
-const dateStripped = (obj) => {
-    let newObj = {};
-
-    Object.keys(obj).forEach((key) => {
-        let value = obj[key];
-        if (value !== null) {
-            // If array, loop...
-            if (Array.isArray(value)) {
-                value = value.map((item) => dateStripped(item));
-            }
-            // ...if property is date/time, stringify/parse...
-            else if (typeof value === "object" && typeof value.getMonth === "function") {
-                value = JSON.parse(JSON.stringify(value));
-            }
-            // ...and if a deep object, loop.
-            else if (typeof value === "object") {
-                value = dateStripped(value);
-            }
-        }
-
-        newObj[key] = value;
-    });
-
-    return newObj;
-};
-
-const Features = (props) => {
+const Features = () => {
     const session = useSession();
-    // const [ raw_products, set_Raw_Products ] = useState([]);
     const [ search_products, set_search_products ] = useState([]);
-    const [ raw_Tags, set_Raw_Tags ] = useState([]);
     const [ loading, setLoading ] = useState(false);
-    const [ query, setQuery ] = useState(false);
-    const [ search, toggleSearch ] = useState(false);
+    const [ queryStrings, setQueryStrings ] = useState({
+        column: 'buckets', 
+        metric: DB_Param
+    });
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
 
     useEffect(() => {
-        const _getAllTags = async () => {
-            setLoading('getAllTags');
-            const tags = await fetchTags();
-            if (tags) {
-                set_Raw_Tags(tags.uniqueTags);
-                setLoading(false);
-            }
-        };
-
-        _getAllTags();
-    }, []);
+        _searchTwoParams(queryStrings);
+    }, [ ]);
 
     const refreshData = () => {
         router.replace(router.asPath);
-    };
-
-    // const _getProducts = async () => {
-    //     const json = await fetchProducts();
-    //     set_Raw_Products(json.products);
-    // };
-
-    const _noSearch = () => {
-        toggleSearch(false);
-        setQuery(false);
     };
 
     const _incrementProduct = async (id) => {
@@ -110,13 +84,25 @@ const Features = (props) => {
         }
     };
 
-    const _search = async (e) => {
-        e.preventDefault();
+    const _searchTwoParams = async () => {
         setLoading('search');
-        const result = await searchRequest(query);
+        const result = await searchTwoParams(queryStrings);
         if (result) {
-            set_search_products(result);
-            // refreshData();
+            let sorted = result.splice(0, 88);
+
+            sorted.sort((a, b) => {
+                if (a.rating < b.rating) { 
+                    return 1; 
+                }
+
+                if (a.rating > b.rating) { 
+                    return -1; 
+                }
+
+                return 0;
+            });
+
+            set_search_products(sorted);
             setLoading(false);
         }
     };
@@ -133,8 +119,6 @@ const Features = (props) => {
 
     const isLoggedIn = session[0]?.user;
 
-    console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
-    // console.log('Products:', props.products);
 
     return (
         <Layout>
@@ -143,15 +127,50 @@ const Features = (props) => {
                     isLoggedIn ?
                         <>
                             <main className="main">
+                                <div className="row form">
+                                    <Chips
+                                        value={[ queryStrings.column ]}
+                                        onChange={(v) => setQueryStrings({
+                                            column: v[1], 
+                                            metric: queryStrings.metric
+                                        })}
+                                        suggestions={columns}
+                                        placeholder="Add a column to search on"
+                                    />
+                                </div>
+                                <div className="row form">
+                                    <Chips
+                                        value={[ queryStrings.metric ]}
+                                        onChange={(v) => setQueryStrings({
+                                            column: queryStrings.column, 
+                                            metric: v[1]
+                                        })}
+                                        suggestions={buckets}
+                                        placeholder="Add a Metric to search for"
+                                    />
+                                </div>
+
+                                <div>
+                                    <button className="send hov" onClick={_searchTwoParams}>
+                                        {loading === 'wipeDatabase' ? "Loading..." : <a className="blue">Search using these 2 params</a>}
+                                    </button>
+
+                                    <button className="send hov" onClick={_wipeDatabase}>
+                                        {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
+                                    </button>
+                                </div>
+
                                 {search_products.length ?
                                     <React.Fragment>
                                         <div className="notice hov" onClick={() => set_search_products([])}>
-                                            <p>Currently  <span className="blue">{search_products.length}</span> unique Products matching this criteria: <a className="blue">{query}</a> in the Database</p><span className="tiny">  Again?</span>
+                                            <p>Currently showing <span className="blue">{search_products.length}</span> unique Products matching this criteria: <a className="blue">{DB_Param}</a></p>
+
+                                            <p className="tiny">*Note* Some data doesn&apos;t update in real time like state data, so the counters don&apos;t seem like the are working but, they are. Thank you for coming to my Ted Talk</p>
                                         </div>
                                         <div className="cards">
                                             {
                                                 search_products.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.id)}>
-                                                    <img className="image" src={product.images[0].src} />
+                                                    <img className="image" src={product.images[0]?.src} />
                                                     <button className="hov">
                                                         {product.rating > 10 && (
                                                             <p className="star">⭐️</p>
@@ -170,62 +189,11 @@ const Features = (props) => {
                                         </div>
                                     </React.Fragment>
                                     :
-                                    search ?
-                                        <form onSubmit={_search}>
-                                            <h2 className="search hov" onClick={() => toggleSearch(false)}>New Search</h2>
-                                            {
-                                                query ?
-                                                    <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${ query }?`} />
-                                                    :
-                                                    raw_Tags.map((tag) => <button key={tag} onClick={() => setQuery(tag)}>
-                                                        {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
-                                                    </button>)
-                                            }
-                                            <button className="red hov">
-                                                <a onClick={() => _noSearch()}>
-                                                    Cancel
-                                                </a>
-                                            </button>
-                                        </form>
-                                        :
-                                        <h2 className="search hov" onClick={() => toggleSearch(true)}>New Search?</h2>
+                                    <div className="cards">
+                                        <p className="">You might have to try a different set of params</p>
+                                        <Image src={loaderGif} className="loading" width={800} height={600} />
+                                    </div>
                                 }
-
-                                {
-                                    !search_products.length && !search ?
-                                        <React.Fragment>
-                                            <div className="notice hov">
-                                                <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique products that have this tag <a className="blue">{DB_Param}</a>with a rating higher than <span className="blue">10</span> in the Database. <a className="link" onClick={() => toggleSearch(true)}>Search</a> to see more.</p>
-
-                                                <p className="tiny">*Note* Some data doesn&apos;t update in real time like state data, so the counters don&apos;t seem like the are working but, they are. Thank you for coming to my Ted Talk</p>
-                                            </div>
-
-                                            <div className="cards">
-                                                {Object.keys(props.products).map((key) => <div className="card hov" key={key} onClick={() => _incrementProduct(props.products[key].id)}>
-                                                    <img className="image" src={props.products[key].images[0].src} />
-                                                    <button className="hov">
-                                                        {props.products[key].rating > 10 && (
-                                                            <p className="star">⭐️</p>
-                                                        )}
-                                                        {
-                                                            <a className="blue">
-                                                                {props.products[key].title}
-                                                                <span className="red">
-                                                                    {props.products[key].rating}
-                                                                </span>
-                                                            </a>
-                                                        }
-                                                    </button>
-                                                </div>)}
-                                            </div>
-                                        </React.Fragment>
-                                        :
-                                        null
-                                }
-
-                                <button className="send hov" onClick={_wipeDatabase}>
-                                    {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
-                                </button>
                             </main>
                         </>
                         :
@@ -350,11 +318,6 @@ const Features = (props) => {
             `}</style>
         </Layout >
     );
-};
-
-Features.propTypes = {
-    products: PropTypes.object,
-    users: PropTypes.object
 };
 
 export default Features;

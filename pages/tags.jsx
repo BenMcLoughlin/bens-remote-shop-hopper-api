@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 import Autocomplete from "../components/Autocomplete";
 import fetchTags from "../requests/fetchTags";
 import incrementItem from "../requests/incrementItem";
-import searchRequest from "../requests/search";
+import searchTags from "../requests/searchTags";
 
 
 const Tags = () => {
@@ -42,7 +42,7 @@ const Tags = () => {
     const _search = async (value) => {
         setQuery(value);
         setLoading('search');
-        const result = await searchRequest(query);
+        const result = await searchTags(query);
         if (result) {
             console.log('result:', result);
             set_search_products(result);
@@ -62,7 +62,7 @@ const Tags = () => {
                             </div>
 
                             <Autocomplete
-                                onSubmit={_search}
+                                onClickIcon={_search}
                                 options={raw_Tags}
                             />
 

@@ -1,18 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
-import array from '../../../mock/shopsLists/kelowna.json';
+import shopifySHopArray from '../../../mock/shopsLists/kelowna.json';
 
 async function createAllShops() {
     let result = {};
     let shopArray = [];
 
-    array.map((shop) => {
-        if (shop.site_host.toLowerCase() === 'shopify') {
+    shopifySHopArray.map((shop) => {
+        if (shop.site_host.toLowerCase() === 'shopify' && shop.buckets[0] !== 'Omit this shop') {
             const data = {
                 business_name: shop.business_name,
                 domain: shop.domain,
                 vertical: shop.vertical,
+                buckets: shop.buckets,
                 site_host: 'Shopify',
                 city: shop.City,
                 province: shop.State,

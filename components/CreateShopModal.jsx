@@ -1,4 +1,5 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer, useCallback, useState } from 'react';
+import Chips from 'react-chips';
 /* eslint-disable react/prop-types */
 import produce from "immer";
 import { set, has } from "lodash";
@@ -26,17 +27,6 @@ function enhancedReducer(state, updateArg) {
     }
 }
 
-//  {
-//     "business_name": "Healing Hollow",
-//     "domain": "healinghollow.com",
-//     "vertical": "Health And Fitness",
-//     "site_host": "Shopify",
-//     "City": "Cranbrook",
-//     "State": "BC",
-//     "Zip": "V1C",
-//     "Country": "CA"
-// }
-
 const initialState = {
     businessName: "",
     domain: "",
@@ -45,8 +35,29 @@ const initialState = {
     city: "",
     province: "",
     postalCode: "",
-    country: "Canada"
+    country: "Canada",
+    buckets: []
 };
+
+const buckets = [
+    "Bohemian",
+    "Chic",
+    "Trendy",
+    "Athletic",
+    "Casual",
+    "Vintage",
+    "Music Festival",
+    "Baby & Kids",
+    "Accessories",
+    "Beauty",
+    "Streetwear",
+    "Hip Hop",
+    "Rock",
+    "Punk",
+    "Elegant",
+    "Formal",
+    "Maternity"
+];
 
 const CreateShopModal = ({ addShop, close }) => {
     const [ state, updateState ] = useReducer(enhancedReducer, initialState);
@@ -86,7 +97,14 @@ const CreateShopModal = ({ addShop, close }) => {
 
     const _addShop = (e) => {
         e.preventDefault();
+
         addShop(state);
+    };
+
+    const _addBuckets = (chips) => {
+        updateState({
+            buckets: chips
+        });
     };
 
     return (
@@ -154,6 +172,14 @@ const CreateShopModal = ({ addShop, close }) => {
                         onChange={updateForm}
                         name="country"
                         value={state.country}
+                    />
+                </div>
+                <div className="row form">
+                    <Chips
+                        value={state.buckets}
+                        onChange={_addBuckets}
+                        suggestions={buckets}
+                        placeholder="Start typing..."
                     />
                 </div>
                 <input className="button" disabled={!state.domain} type="submit" value="Add" />
