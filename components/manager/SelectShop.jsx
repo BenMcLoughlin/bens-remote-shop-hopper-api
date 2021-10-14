@@ -140,14 +140,15 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                     margin-bottom: 1rem;
                 }
                 .row {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: start;
+                    flex-direction: row;
                     text-align: right;
                     min-height: 17rem;
                     width: 90%;
-                    display: flex;
                     width: 100%;
-                    flex-wrap: wrap;
                     gap: 2rem;
-                    justify-content: start;
                 }
                 .businessName {
                     display: flex;

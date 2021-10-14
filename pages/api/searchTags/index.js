@@ -2,7 +2,7 @@
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
-export async function search(tag) {
+export async function searchTags(tag) {
     const result = await prisma.product
         .findMany({
             where: {
@@ -32,7 +32,7 @@ export default async (req, res) => {
     if (req.method === 'POST') {
         try {
             const { body } = req;
-            const result = await search(body);
+            const result = await searchTags(body);
 
             console.log('POST SEARCH:', result);
 

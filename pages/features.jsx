@@ -7,69 +7,26 @@ import PropTypes from "prop-types";
 import Layout from "../components/Layout";
 import { useSession } from "next-auth/client";
 import prisma from '../prisma/prisma';
-// import { fetchProducts } from "./api/fetch";
 import hydrateRequest from "../requests/hydrateRequest";
 import incrementProduct from "../requests/incrementProduct";
-import searchRequest from "../requests/search";
+import searchTags from "../requests/searchTags";
+import searchTwoParams from "../requests/searchTwoParams";
 import fetchTags from "../requests/fetchTags";
+// import useGlobal from "../../globalState/store";
 
 const DB_Param = "Multi";
 
-// We might use this to do user fetching .....
-export const getServerSideProps = async () => {
-    const allUsers = await prisma.user.findMany({});
-    const users = dateStripped(allUsers);
-
-    // Example Query
-    const productsFeed = await prisma.product.findMany({
-        where: {
-            tags: {
-                has: DB_Param
-            }
-            // rating: {
-            //     gt: 10
-            // }
-        }
-    });
-    const products = dateStripped(productsFeed);
-
-    return { props: { users, products } };
-};
-
-// This is gross, we will see if there is a better solution to this problem
-const dateStripped = (obj) => {
-    let newObj = {};
-
-    Object.keys(obj).forEach((key) => {
-        let value = obj[key];
-        if (value !== null) {
-            // If array, loop...
-            if (Array.isArray(value)) {
-                value = value.map((item) => dateStripped(item));
-            }
-            // ...if property is date/time, stringify/parse...
-            else if (typeof value === "object" && typeof value.getMonth === "function") {
-                value = JSON.parse(JSON.stringify(value));
-            }
-            // ...and if a deep object, loop.
-            else if (typeof value === "object") {
-                value = dateStripped(value);
-            }
-        }
-
-        newObj[key] = value;
-    });
-
-    return newObj;
-};
-
 const Features = (props) => {
     const session = useSession();
-    // const [ raw_products, set_Raw_Products ] = useState([]);
+    // const [ globalState, globalActions ] = useGlobal();
     const [ search_products, set_search_products ] = useState([]);
     const [ raw_Tags, set_Raw_Tags ] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const [ query, setQuery ] = useState(false);
+    const [ queryStrings, setQueryStrings ] = useState({
+        column: 'tags', 
+        metric: DB_Param
+    });
     const [ search, toggleSearch ] = useState(false);
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
@@ -78,6 +35,7 @@ const Features = (props) => {
         const _getAllTags = async () => {
             setLoading('getAllTags');
             const tags = await fetchTags();
+
             if (tags) {
                 set_Raw_Tags(tags.uniqueTags);
                 setLoading(false);
@@ -87,14 +45,13 @@ const Features = (props) => {
         _getAllTags();
     }, []);
 
+    useEffect(() => {
+        _searchTwoParams(queryStrings);
+    }, [ raw_Tags ]);
+
     const refreshData = () => {
         router.replace(router.asPath);
     };
-
-    // const _getProducts = async () => {
-    //     const json = await fetchProducts();
-    //     set_Raw_Products(json.products);
-    // };
 
     const _noSearch = () => {
         toggleSearch(false);
@@ -110,10 +67,19 @@ const Features = (props) => {
         }
     };
 
-    const _search = async (e) => {
+    const _searchTwoParams = async () => {
+        setLoading('search');
+        const result = await searchTwoParams(queryStrings);
+        if (result) {
+            set_search_products(result);
+            setLoading(false);
+        }
+    };
+
+    const _searchTags = async (e) => {
         e.preventDefault();
         setLoading('search');
-        const result = await searchRequest(query);
+        const result = await searchTags(query);
         if (result) {
             set_search_products(result);
             // refreshData();
@@ -132,9 +98,6 @@ const Features = (props) => {
     };
 
     const isLoggedIn = session[0]?.user;
-
-    console.log('Users:', Object.keys(props.users).length > 1 ? 'This is production DB' : props.users);
-    // console.log('Products:', props.products);
 
     return (
         <Layout>
@@ -171,8 +134,8 @@ const Features = (props) => {
                                     </React.Fragment>
                                     :
                                     search ?
-                                        <form onSubmit={_search}>
-                                            <h2 className="search hov" onClick={() => toggleSearch(false)}>New Search</h2>
+                                        <form onSubmit={_searchTags}>
+                                            <h2 className="search hov" onClick={() => toggleSearch(false)}>New Tag Search</h2>
                                             {
                                                 query ?
                                                     <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${ query }?`} />
@@ -195,23 +158,23 @@ const Features = (props) => {
                                     !search_products.length && !search ?
                                         <React.Fragment>
                                             <div className="notice hov">
-                                                <p>Currently  <span className="blue">{Object.keys(props.products).length}</span> unique products that have this tag <a className="blue">{DB_Param}</a>with a rating higher than <span className="blue">10</span> in the Database. <a className="link" onClick={() => toggleSearch(true)}>Search</a> to see more.</p>
+                                                <p>Currently  <span className="blue">{Object.keys(search_products).length}</span> unique products that have this tag <a className="blue">{DB_Param}</a>with a rating higher than <span className="blue">10</span> in the Database. <a className="link" onClick={() => toggleSearch(true)}>Search</a> to see more.</p>
 
                                                 <p className="tiny">*Note* Some data doesn&apos;t update in real time like state data, so the counters don&apos;t seem like the are working but, they are. Thank you for coming to my Ted Talk</p>
                                             </div>
 
                                             <div className="cards">
-                                                {Object.keys(props.products).map((key) => <div className="card hov" key={key} onClick={() => _incrementProduct(props.products[key].id)}>
-                                                    <img className="image" src={props.products[key].images[0].src} />
+                                                {Object.keys(search_products).map((key) => <div className="card hov" key={key} onClick={() => _incrementProduct(search_products[key].id)}>
+                                                    <img className="image" src={search_products[key].images[0].src} />
                                                     <button className="hov">
-                                                        {props.products[key].rating > 10 && (
+                                                        {search_products[key].rating > 10 && (
                                                             <p className="star">⭐️</p>
                                                         )}
                                                         {
                                                             <a className="blue">
-                                                                {props.products[key].title}
+                                                                {search_products[key].title}
                                                                 <span className="red">
-                                                                    {props.products[key].rating}
+                                                                    {search_products[key].rating}
                                                                 </span>
                                                             </a>
                                                         }
