@@ -1,30 +1,69 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
+import Chips from 'react-chips';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import PropTypes from "prop-types";
 import Layout from "../components/Layout";
 import { useSession } from "next-auth/client";
-import prisma from '../prisma/prisma';
+
 import hydrateRequest from "../requests/hydrateRequest";
 import incrementProduct from "../requests/incrementProduct";
-import searchTags from "../requests/searchTags";
 import searchTwoParams from "../requests/searchTwoParams";
-import fetchTags from "../requests/fetchTags";
 // import useGlobal from "../../globalState/store";
 
-const DB_Param = "Multi";
+const columns = [
+    "business_name",
+    "buckets",
+    "title",
+    "handle",
+    "body_html",
+    "vendor",
+    "product_type",
+    "created_at",
+    "published_at",
+    "updated_at",
+    "tags",
+    "variants",
+    "images",
+    "options",
+    "original_price",
+    "compare_at_price",
+    "sizes",
+    "colors"
+];
 
-const Features = (props) => {
+const buckets = [
+    "Bohemian",
+    "Chic",
+    "Trendy",
+    "Athletic",
+    "Casual",
+    "Vintage",
+    "Music Festival",
+    "Baby & Kids",
+    "Accessories",
+    "Beauty",
+    "Streetwear",
+    "Hip Hop",
+    "Rock",
+    "Punk",
+    "Elegant",
+    "Formal",
+    "Maternity",
+    // Bonus
+    "Man + Woman"
+];
+
+const DB_Param = buckets[0];
+
+const Features = () => {
     const session = useSession();
     // const [ globalState, globalActions ] = useGlobal();
     const [ search_products, set_search_products ] = useState([]);
-    const [ raw_Tags, set_Raw_Tags ] = useState([]);
     const [ loading, setLoading ] = useState(false);
-    const [ query, setQuery ] = useState(false);
     const [ queryStrings, setQueryStrings ] = useState({
-        column: 'tags', 
+        column: 'buckets', 
         metric: DB_Param
     });
     const [ search, toggleSearch ] = useState(false);
@@ -32,30 +71,11 @@ const Features = (props) => {
     const isActive = (pathname) => router.pathname === pathname;
 
     useEffect(() => {
-        const _getAllTags = async () => {
-            setLoading('getAllTags');
-            const tags = await fetchTags();
-
-            if (tags) {
-                set_Raw_Tags(tags.uniqueTags);
-                setLoading(false);
-            }
-        };
-
-        _getAllTags();
-    }, []);
-
-    useEffect(() => {
         _searchTwoParams(queryStrings);
-    }, [ raw_Tags ]);
+    }, [ ]);
 
     const refreshData = () => {
         router.replace(router.asPath);
-    };
-
-    const _noSearch = () => {
-        toggleSearch(false);
-        setQuery(false);
     };
 
     const _incrementProduct = async (id) => {
@@ -71,18 +91,7 @@ const Features = (props) => {
         setLoading('search');
         const result = await searchTwoParams(queryStrings);
         if (result) {
-            set_search_products(result);
-            setLoading(false);
-        }
-    };
-
-    const _searchTags = async (e) => {
-        e.preventDefault();
-        setLoading('search');
-        const result = await searchTags(query);
-        if (result) {
-            set_search_products(result);
-            // refreshData();
+            set_search_products(result.splice(0, 88));
             setLoading(false);
         }
     };
@@ -99,6 +108,7 @@ const Features = (props) => {
 
     const isLoggedIn = session[0]?.user;
 
+
     return (
         <Layout>
             <div className="page">
@@ -106,15 +116,41 @@ const Features = (props) => {
                     isLoggedIn ?
                         <>
                             <main className="main">
+                                <div className="row form">
+                                    <Chips
+                                        value={[ queryStrings.column ]}
+                                        onChange={(v) => setQueryStrings({
+                                            column: v[1], 
+                                            metric: queryStrings.metric
+                                        })}
+                                        suggestions={columns}
+                                        placeholder="Add a column to search on"
+                                    />
+                                </div>
+                                <div className="row form">
+                                    <Chips
+                                        value={[ queryStrings.metric ]}
+                                        onChange={(v) => setQueryStrings({
+                                            column: queryStrings.column, 
+                                            metric: v[1]
+                                        })}
+                                        suggestions={buckets}
+                                        placeholder="Add a Metric to search for"
+                                    />
+                                </div>
+                                <button className="send hov" onClick={_searchTwoParams}>
+                                    {loading === 'wipeDatabase' ? "Loading..." : <a className="blue">Search using these 2 params</a>}
+                                </button>
+
                                 {search_products.length ?
                                     <React.Fragment>
                                         <div className="notice hov" onClick={() => set_search_products([])}>
-                                            <p>Currently  <span className="blue">{search_products.length}</span> unique Products matching this criteria: <a className="blue">{query}</a> in the Database</p><span className="tiny">  Again?</span>
+                                            <p>Currently showing <span className="blue">{search_products.length}</span> unique Products matching this criteria: <a className="blue">{DB_Param}</a></p>
                                         </div>
                                         <div className="cards">
                                             {
                                                 search_products.map((product) => <div className="card hov" key={product.id} onClick={() => _incrementProduct(product.id)}>
-                                                    <img className="image" src={product.images[0].src} />
+                                                    <img className="image" src={product.images[0]?.src} />
                                                     <button className="hov">
                                                         {product.rating > 10 && (
                                                             <p className="star">⭐️</p>
@@ -133,25 +169,7 @@ const Features = (props) => {
                                         </div>
                                     </React.Fragment>
                                     :
-                                    search ?
-                                        <form onSubmit={_searchTags}>
-                                            <h2 className="search hov" onClick={() => toggleSearch(false)}>New Tag Search</h2>
-                                            {
-                                                query ?
-                                                    <input className="send blue hov" disabled={!query} type="submit" value={`Search for Products Matching ${ query }?`} />
-                                                    :
-                                                    raw_Tags.map((tag) => <button key={tag} onClick={() => setQuery(tag)}>
-                                                        {loading === 'incrementItem' ? "Loading..." : <a className="blue">{tag}</a>}
-                                                    </button>)
-                                            }
-                                            <button className="red hov">
-                                                <a onClick={() => _noSearch()}>
-                                                    Cancel
-                                                </a>
-                                            </button>
-                                        </form>
-                                        :
-                                        <h2 className="search hov" onClick={() => toggleSearch(true)}>New Search?</h2>
+                                    null
                                 }
 
                                 {
@@ -313,11 +331,6 @@ const Features = (props) => {
             `}</style>
         </Layout >
     );
-};
-
-Features.propTypes = {
-    products: PropTypes.object,
-    users: PropTypes.object
 };
 
 export default Features;

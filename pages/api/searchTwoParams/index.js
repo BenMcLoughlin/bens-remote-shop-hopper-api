@@ -2,12 +2,15 @@
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
-export async function searchTags(tag) {
+export async function searchTwoParams(params) {
+    let column = params.column;
+    let metric = params.metric;
+
     const result = await prisma.product
         .findMany({
             where: {
-                tags: {
-                    has: tag
+                [column]: {
+                    has: metric
                 }
             }
         })
@@ -32,7 +35,7 @@ export default async (req, res) => {
     if (req.method === 'POST') {
         try {
             const { body } = req;
-            const result = await searchTags(body);
+            const result = await searchTwoParams(body);
 
             console.log('POST SEARCH:', result);
 

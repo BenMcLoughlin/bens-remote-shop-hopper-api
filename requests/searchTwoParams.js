@@ -7,7 +7,7 @@ const searchTwoParams = async (body) => {
         body: JSON.stringify(body)
     });
     const data = await res.json();
-    console.log(`SUCCESSFUL SEARCH:`, data.result?.length);
+    console.log(`SUCCESSFUL SEARCH: ${ data.result?.length } Items found`);
 
     return data.result;
 };

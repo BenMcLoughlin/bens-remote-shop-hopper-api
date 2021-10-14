@@ -1,5 +1,5 @@
 import React, { useReducer, useCallback, useState } from 'react';
-import Chips, { Chip } from 'react-chips';
+import Chips from 'react-chips';
 /* eslint-disable react/prop-types */
 import produce from "immer";
 import { set, has } from "lodash";
