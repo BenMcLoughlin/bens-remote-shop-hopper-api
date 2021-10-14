@@ -34,10 +34,10 @@ const columns = [
 ];
 
 const buckets = [
+    "Athletic",
     "Bohemian",
     "Chic",
     "Trendy",
-    "Athletic",
     "Casual",
     "Vintage",
     "Music Festival",
@@ -50,9 +50,7 @@ const buckets = [
     "Punk",
     "Elegant",
     "Formal",
-    "Maternity",
-    // Bonus
-    "Man + Woman"
+    "Maternity"
 ];
 
 const DB_Param = buckets[0];
@@ -91,7 +89,21 @@ const Features = () => {
         setLoading('search');
         const result = await searchTwoParams(queryStrings);
         if (result) {
-            set_search_products(result.splice(0, 88));
+            let sorted = result.splice(0, 88);
+
+            sorted.sort((a, b) => {
+                if (a.rating < b.rating) { 
+                    return 1; 
+                }
+
+                if (a.rating > b.rating) { 
+                    return -1; 
+                }
+
+                return 0;
+            });
+
+            set_search_products(sorted);
             setLoading(false);
         }
     };
@@ -146,6 +158,8 @@ const Features = () => {
                                     <React.Fragment>
                                         <div className="notice hov" onClick={() => set_search_products([])}>
                                             <p>Currently showing <span className="blue">{search_products.length}</span> unique Products matching this criteria: <a className="blue">{DB_Param}</a></p>
+
+                                            <p className="tiny">*Note* Some data doesn&apos;t update in real time like state data, so the counters don&apos;t seem like the are working but, they are. Thank you for coming to my Ted Talk</p>
                                         </div>
                                         <div className="cards">
                                             {
@@ -170,38 +184,6 @@ const Features = () => {
                                     </React.Fragment>
                                     :
                                     null
-                                }
-
-                                {
-                                    !search_products.length && !search ?
-                                        <React.Fragment>
-                                            <div className="notice hov">
-                                                <p>Currently  <span className="blue">{Object.keys(search_products).length}</span> unique products that have this tag <a className="blue">{DB_Param}</a>with a rating higher than <span className="blue">10</span> in the Database. <a className="link" onClick={() => toggleSearch(true)}>Search</a> to see more.</p>
-
-                                                <p className="tiny">*Note* Some data doesn&apos;t update in real time like state data, so the counters don&apos;t seem like the are working but, they are. Thank you for coming to my Ted Talk</p>
-                                            </div>
-
-                                            <div className="cards">
-                                                {Object.keys(search_products).map((key) => <div className="card hov" key={key} onClick={() => _incrementProduct(search_products[key].id)}>
-                                                    <img className="image" src={search_products[key].images[0].src} />
-                                                    <button className="hov">
-                                                        {search_products[key].rating > 10 && (
-                                                            <p className="star">⭐️</p>
-                                                        )}
-                                                        {
-                                                            <a className="blue">
-                                                                {search_products[key].title}
-                                                                <span className="red">
-                                                                    {search_products[key].rating}
-                                                                </span>
-                                                            </a>
-                                                        }
-                                                    </button>
-                                                </div>)}
-                                            </div>
-                                        </React.Fragment>
-                                        :
-                                        null
                                 }
 
                                 <button className="send hov" onClick={_wipeDatabase}>

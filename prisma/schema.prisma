@@ -9,9 +9,26 @@ datasource db {
 }
 
 model hot_item {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  value Int?
+  id            Int      @id @default(autoincrement())
+  business_name String?  @map(name: "businessName")
+  buckets       String[]
+  title         String   @unique
+  handle        String?
+  body_html     String?  @map(name: "bodyHtml")
+  vendor        String?
+  product_type  String?  @map(name: "productType")
+  created_at    DateTime @default(now()) @map(name: "createdAt")
+  published_at  DateTime @default(now()) @map(name: "publishedAt")
+  updated_at    DateTime @default(now()) @map(name: "updatedAt")
+  tags          String[]
+  variants      Json?
+  images        Json?
+  options       Json?
+  rating        Int?     @default(0)
+  original_price Int?    @map(name: "originalPrice")
+  compare_at_price Int?  @map(name: "compareAtPrice")
+  sizes         String[]
+  colors        String[]
 
   @@map(name: "hot_items")
 }
