@@ -2,7 +2,7 @@ import buckets from '../../../../services/buckets';
 
 export async function products(data, business_name) {
     let formatted = [];
-    let bucket = buckets[business_name];
+    let appliedBuckets = buckets[business_name];
 
     const getReference = (variants, options) => {
         let reference = {};
@@ -60,7 +60,7 @@ export async function products(data, business_name) {
 
             const output = {
                 business_name,
-                bucket,
+                buckets: appliedBuckets,
                 title,
                 handle,
                 body_html,
