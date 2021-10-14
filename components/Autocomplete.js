@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 
 export class Autocomplete extends Component {
     static propTypes = {
-        options: PropTypes.instanceOf(Array).isRequired
+        options: PropTypes.instanceOf(Array).isRequired,
+        showDropDown: PropTypes.bool
     };
 
     state = {
         activeOption: 0,
         filteredOptions: [],
         showOptions: false,
+        isFocused: false,
         userInput: ''
     };
 
@@ -61,20 +63,56 @@ export class Autocomplete extends Component {
         }
     };
 
+    setIsFocused = () => {
+        this.setState({
+            isFocused: true
+        });
+    }
+
     render() {
         const {
             onChange,
             onClick,
             onKeyDown,
-
-            state: { activeOption, filteredOptions, showOptions, userInput }
+            setIsFocused,
+            state: { activeOption, filteredOptions, showOptions, userInput, isFocused }
         } = this;
+        const { showDropDown, options } = this.props;
+
         let optionList = [];
+
         if (showOptions && userInput) {
             if (filteredOptions.length) {
                 optionList = (
                     <ul className="options">
                         {filteredOptions.map((optionName, index) => {
+                            let className = '';
+                            if (index === activeOption) {
+                                className = 'option-active';
+                            }
+
+                            return (
+                                <li className={className} key={optionName} onClick={onClick}>
+                                    {optionName}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                );
+            } else {
+                optionList = (
+                    <div className="no-options">
+                        <em>No Option!</em>
+                    </div>
+                );
+            }
+        }
+
+        if (showDropDown && isFocused) {
+            if (options.length) {
+                optionList = (
+                    <ul className="options">
+                        {options.map((optionName, index) => {
                             let className = '';
                             if (index === activeOption) {
                                 className = 'option-active';
@@ -106,10 +144,11 @@ export class Autocomplete extends Component {
                         onChange={onChange}
                         onKeyDown={onKeyDown}
                         value={userInput}
+                        onFocus={setIsFocused}
                     />
                     <button
                         className="search-btn"
-                        onClick={() => this.props.onSubmit(this.state.userInput)}
+                        onClick={() => this.props.onClickIcon(this.state.userInput)}
                     ></button>
                 </div>
                 {optionList}
@@ -119,7 +158,7 @@ export class Autocomplete extends Component {
 }
 
 Autocomplete.propTypes = {
-    onSubmit: PropTypes.func,
+    onClickIcon: PropTypes.func,
     options: PropTypes.array
 };
 

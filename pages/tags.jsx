@@ -62,7 +62,7 @@ const Tags = () => {
                             </div>
 
                             <Autocomplete
-                                onSubmit={_search}
+                                onClickIcon={_search}
                                 options={raw_Tags}
                             />
 
