@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
+import Image from 'next/image';
 import Chips from 'react-chips';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -10,7 +11,7 @@ import { useSession } from "next-auth/client";
 import hydrateRequest from "../requests/hydrateRequest";
 import incrementProduct from "../requests/incrementProduct";
 import searchTwoParams from "../requests/searchTwoParams";
-// import useGlobal from "../../globalState/store";
+import loaderGif from '../public/assets/loader/octo_loader.gif';
 
 const columns = [
     "business_name",
@@ -57,14 +58,12 @@ const DB_Param = buckets[0];
 
 const Features = () => {
     const session = useSession();
-    // const [ globalState, globalActions ] = useGlobal();
     const [ search_products, set_search_products ] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const [ queryStrings, setQueryStrings ] = useState({
         column: 'buckets', 
         metric: DB_Param
     });
-    const [ search, toggleSearch ] = useState(false);
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
 
@@ -150,9 +149,16 @@ const Features = () => {
                                         placeholder="Add a Metric to search for"
                                     />
                                 </div>
-                                <button className="send hov" onClick={_searchTwoParams}>
-                                    {loading === 'wipeDatabase' ? "Loading..." : <a className="blue">Search using these 2 params</a>}
-                                </button>
+
+                                <div>
+                                    <button className="send hov" onClick={_searchTwoParams}>
+                                        {loading === 'wipeDatabase' ? "Loading..." : <a className="blue">Search using these 2 params</a>}
+                                    </button>
+
+                                    <button className="send hov" onClick={_wipeDatabase}>
+                                        {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
+                                    </button>
+                                </div>
 
                                 {search_products.length ?
                                     <React.Fragment>
@@ -183,12 +189,11 @@ const Features = () => {
                                         </div>
                                     </React.Fragment>
                                     :
-                                    null
+                                    <div className="cards">
+                                        <p className="">You might have to try a different set of params</p>
+                                        <Image src={loaderGif} className="loading" width={800} height={600} />
+                                    </div>
                                 }
-
-                                <button className="send hov" onClick={_wipeDatabase}>
-                                    {loading === 'wipeDatabase' ? "Loading..." : <a className="red">Permanently Wipe DB (testing only)</a>}
-                                </button>
                             </main>
                         </>
                         :

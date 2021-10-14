@@ -2,7 +2,7 @@ import React from "react";
 import Image from 'next/image';
 
 import useGlobal from "../globalState/store";
-import logoSrc from '../public/assets/loader/loading-buffering-grey.gif';
+import loaderGif from '../public/assets/loader/loading-buffering-grey.gif';
 
 const Counter = () => {
     const [ globalState ] = useGlobal();
@@ -14,7 +14,7 @@ const Counter = () => {
                 <span className="success">{success} Success</span> and{" "}
                 <span className="fail">{fail} Fails</span> <br />
             </p>
-            {loading && <Image src={logoSrc} className="loading" width={40} height={40} />} 
+            {loading && <Image src={loaderGif} className="loading" width={40} height={40} />} 
         </div>
     );
 };

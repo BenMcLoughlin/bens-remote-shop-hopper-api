@@ -8,6 +8,7 @@ export async function searchTwoParams(params) {
 
     const result = await prisma.product
         .findMany({
+            take: 88,
             where: {
                 [column]: {
                     has: metric
@@ -37,7 +38,7 @@ export default async (req, res) => {
             const { body } = req;
             const result = await searchTwoParams(body);
 
-            console.log('POST SEARCH:', result);
+            console.log('TWO PARAM SEARCH:', result.length);
 
             return res.status(200).json({ result });
         } catch (error) {
