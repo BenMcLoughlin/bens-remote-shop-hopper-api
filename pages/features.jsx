@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
 import Image from 'next/image';

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 const searchTwoParams = async (body) => {
     const url = `/api/searchTwoParams`;
     const res = await fetch(url, {

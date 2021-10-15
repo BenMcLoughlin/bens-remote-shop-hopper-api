@@ -2,13 +2,14 @@
 module.exports = {
     env: {
         browser: true,
+        node: true,
+        es6: true,
         es2021: true
     },
     extends: [
         'eslint:recommended',
         'plugin:react/recommended'
     ],
-    parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaFeatures: {
             jsx: true
@@ -16,7 +17,7 @@ module.exports = {
         ecmaVersion: 12,
         sourceType: 'module'
     },
-    plugins: [ 'react', '@typescript-eslint', 'prettier' ],
+    plugins: [ 'react', 'prettier' ],
     rules: {
         'accessor-pairs': 'error',
         'array-bracket-newline': 'off',
@@ -71,7 +72,7 @@ module.exports = {
         'id-length': 'off',
         'id-match': 'error',
         'implicit-arrow-linebreak': 'error',
-        indent: [ 2, 4, { SwitchCase: 1 }],
+        'indent': [ "error", 4 ],
         'indent-legacy': 'off',
         'init-declarations': 'error',
         'jsx-quotes': 'error',

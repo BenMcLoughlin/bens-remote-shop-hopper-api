@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 const searchTags = async (body) => {
     const url = `/api/searchTags`;
     const res = await fetch(url, {

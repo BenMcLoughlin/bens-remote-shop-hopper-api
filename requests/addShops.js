@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 const search = async (body) => {
     const url = `/api/addShops`;
     const res = await fetch(url, {

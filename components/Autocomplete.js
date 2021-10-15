@@ -1,12 +1,8 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export class Autocomplete extends Component {
-    static propTypes = {
-        options: PropTypes.instanceOf(Array).isRequired,
-        showDropDown: PropTypes.bool
-    };
-
     state = {
         activeOption: 0,
         filteredOptions: [],

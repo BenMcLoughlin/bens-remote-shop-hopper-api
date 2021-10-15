@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 /* eslint-disable no-undef */
 import React, { useState } from "react";
 import { useRouter } from 'next/router';

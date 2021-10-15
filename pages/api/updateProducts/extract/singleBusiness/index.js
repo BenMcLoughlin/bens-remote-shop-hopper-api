@@ -6,7 +6,7 @@ export async function singleBusiness(businessName, domain) {
     let productsUploaded = 0;
 
     try {
-        for (let page = 1; page <= 50; page++) {
+        for (let page = 1; page <= 100; page++) {
             const url = `https://${ domain }/products.json?limit=250&page=${ page }`;
             const response = await fetch(url);
             const data = await response.json();

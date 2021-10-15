@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import React from 'react';
 import { Provider } from 'next-auth/client';
 import { AppProps } from 'next/app';
