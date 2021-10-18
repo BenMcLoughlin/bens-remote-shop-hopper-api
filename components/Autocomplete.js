@@ -1,85 +1,85 @@
 /* eslint-disable */
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export class Autocomplete extends Component {
-    constructor(props) {
-        state = {
-            activeOption: 0,
-            filteredOptions: [],
-            showOptions: false,
-            isFocused: false,
-            userInput: ''
-        };
-    }
+const Autocomplete = (props) => {
+    const [ activeOption, setActiveOption  ] = useState(0);
+    const [ filteredOptions, setFilteredOptions  ] = useState([]);
+    const [ showOptions, setShowOptions  ] = useState(false);
+    const [ isFocused, setIsFocused  ] = useState(false);
+    const [ userInput, setUserInput] = useState('');
+    // state = {
+    //     activeOption: 0,
+    //     filteredOptions: [],
+    //     showOptions: false,
+    //     isFocused: false,
+    //     userInput: ''
+    // };
+    let optionList = [];
+    const { showDropDown, options } = props;
 
-    onChange = (e) => {
-        const { options } = this.props;
+    const onChange = (e) => {
+        const { options } = props;
         const userInput = e.currentTarget.value;
 
         const filteredOptions = options.filter((optionName) => optionName.toLowerCase().indexOf(userInput.toLowerCase()) > -1);
 
-        this.setState({
-            activeOption: 0,
-            filteredOptions,
-            showOptions: true,
-            userInput: e.currentTarget.value
-        });
+        setActiveOption(0);
+        setFilteredOptions(filteredOptions);
+        setShowOptions(true);
+        setUserInput(e.currentTarget.value);
+
+        // this.setState({
+        //     activeOption: 0,
+        //     filteredOptions,
+        //     showOptions: true,
+        //     userInput: e.currentTarget.value
+        // });
     };
 
-    onClick = (e) => {
-        this.setState({
-            activeOption: 0,
-            filteredOptions: [],
-            showOptions: false,
-            userInput: e.currentTarget.innerText
-        });
+    const onClick = (e) => {
+        setActiveOption(0);
+        setFilteredOptions([]);
+        setShowOptions(false);
+        setUserInput(e.currentTarget.innerText);
+
+        // this.setState({
+        //     activeOption: 0,
+        //     filteredOptions: [],
+        //     showOptions: false,
+        //     userInput: e.currentTarget.innerText
+        // });
     };
 
-    onKeyDown = (e) => {
-        const { activeOption, filteredOptions } = this.state;
-
+    const onKeyDown = (e) => {
         if (e.keyCode === 13) {
-            this.setState({
-                activeOption: 0,
-                showOptions: false,
-                userInput: filteredOptions[activeOption]
-            });
+            setActiveOption(0);
+            setShowOptions(false);
+            setUserInput(filteredOptions[activeOption]);
+            // this.setState({
+            //     activeOption: 0,
+            //     showOptions: false,
+            //     userInput: filteredOptions[activeOption]
+            // });
         } else if (e.keyCode === 38) {
             if (activeOption === 0) {
                 return;
             }
 
-            this.setState({ activeOption: activeOption - 1 });
+            setActiveOption(activeOption - 1);
+            // this.setState({ activeOption: activeOption - 1 });
         } else if (e.keyCode === 40) {
             if (activeOption === filteredOptions.length - 1) {
                 console.log(activeOption);
                 return;
             }
 
-            this.setState({ activeOption: activeOption + 1 });
+            setActiveOption(activeOption + 1);
+            // this.setState({ activeOption: activeOption + 1 });
         }
     };
 
-    setIsFocused = () => {
-        this.setState({
-            isFocused: true
-        });
-    }
-
-    render() {
-        const {
-            onChange,
-            onClick,
-            onKeyDown,
-            setIsFocused,
-            state: { activeOption, filteredOptions, showOptions, userInput, isFocused }
-        } = this;
-        const { showDropDown, options } = this.props;
-
-        let optionList = [];
-
-        if (showOptions && userInput) {
+    if (showOptions && userInput) {
             if (filteredOptions.length) {
                 optionList = (
                     <ul className="options">
@@ -146,13 +146,12 @@ export class Autocomplete extends Component {
                     />
                     <button
                         className="search-btn"
-                        onClick={() => this.props.onClickIcon(this.state.userInput)}
+                        onClick={() => props.onClickIcon(userInput)}
                     ></button>
                 </div>
                 {optionList}
             </React.Fragment>
         );
-    }
 }
 
 Autocomplete.propTypes = {

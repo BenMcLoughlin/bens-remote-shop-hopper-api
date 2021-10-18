@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { ReactNode } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
