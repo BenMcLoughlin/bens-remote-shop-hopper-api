@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable */
 import React from 'react';
 import { Provider } from 'next-auth/client';
 import { AppProps } from 'next/app';
@@ -23,7 +23,7 @@ Router.events.on('routeChangeError', () => {
     NProgress.done();
 });
 
-const App = ({ Component, pageProps }: AppProps) => (
+const App = ({ Component, pageProps }) => (
     <Provider session={pageProps.session}>
         <ThemeProvider theme={theme}>
             <Component {...pageProps} />

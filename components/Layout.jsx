@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { ReactNode } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
@@ -5,12 +6,7 @@ import Link from 'next/link';
 import Header from './Header';
 import Head from 'next/head';
 
-type Props = {
-    children: ReactNode;
-    isMain?: boolean;
-};
-
-const Layout: React.FC<Props> = (props) => {
+const Layout = (props) => {
     const session = useSession();
     const router = useRouter();
 

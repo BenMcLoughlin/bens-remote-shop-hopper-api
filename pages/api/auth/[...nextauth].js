@@ -1,11 +1,10 @@
 /* eslint-disable no-undef */
-import { NextApiHandler } from 'next';
 import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
 import Adapters from 'next-auth/adapters';
 import prisma from '../../../prisma/prisma';
 
-const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
+const authHandler = (req, res) => NextAuth(req, res, options);
 export default authHandler;
 
 console.log('DATABASE_URL from Server:', process.env.DATABASE_URL);
@@ -19,4 +18,5 @@ const options = {
     ],
     adapter: Adapters.Prisma.Adapter({ prisma }),
     secret: process.env.SECRET
+    // debug: true
 };

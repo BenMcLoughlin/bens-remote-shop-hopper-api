@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
@@ -34,7 +34,7 @@ export default async (req, res) => {
             const { body } = req;
             const result = await searchTags(body);
 
-            console.log('POST SEARCH:', result);
+            console.log('POST SEARCH:', result.length);
 
             return res.status(200).json({ result });
         } catch (error) {

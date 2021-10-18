@@ -1,14 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
 export async function searchTwoParams(params) {
+    console.log('params.column:', params.column);
+
     let column = params.column;
     let metric = params.metric;
 
     const result = await prisma.product
         .findMany({
-            take: 88,
+            take: 10,
             where: {
                 [column]: {
                     has: metric
@@ -27,15 +28,22 @@ export async function searchTwoParams(params) {
 }
 
 export default async (req, res) => {
-    const session = await getSession({ req });
+    // const session = await getSession({ req });
 
-    if (!session) {
-        return res.status(401).json({ reason: 'Unauthorized' });
-    }
+    // todo
+    // if (!session) {
+    //     return res.status(401).json({ reason: 'Unauthorized' });
+    // }
 
     if (req.method === 'POST') {
         try {
-            const { body } = req;
+            let { body } = req;
+
+            // Postman (Ben Heeeeeelp!)
+            if (!body) {
+                body = req.query;
+            }
+
             const result = await searchTwoParams(body);
 
             console.log('TWO PARAM SEARCH:', result.length);

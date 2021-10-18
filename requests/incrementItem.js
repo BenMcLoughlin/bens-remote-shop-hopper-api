@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 const incrementItem = async (body) => {
     const url = `/api/incrementItem`;
     const res = await fetch(url, {

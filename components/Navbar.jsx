@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 /* eslint-disable react/react-in-jsx-scope */
 import Link from 'next/link';
 
