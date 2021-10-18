@@ -34,7 +34,7 @@ export default async (req, res) => {
             const { body } = req;
             const result = await searchTags(body);
 
-            console.log('POST SEARCH:', result);
+            console.log('POST SEARCH:', result.length);
 
             return res.status(200).json({ result });
         } catch (error) {

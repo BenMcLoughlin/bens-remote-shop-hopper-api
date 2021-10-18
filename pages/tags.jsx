@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import Layout from "../components/Layout";
 import Autocomplete from "../components/Autocomplete";
 import fetchTags from "../requests/fetchTags";
-import incrementItem from "../requests/incrementItem";
 import searchTags from "../requests/searchTags";
 
 
@@ -27,14 +26,6 @@ const Tags = () => {
         if (tags) {
             console.log('tags:', tags);
             set_Raw_Tags(tags.uniqueTags);
-            setLoading(false);
-        }
-    };
-
-    const _incrementItem = async (tag) => {
-        setLoading(tag);
-        const result = await incrementItem(tag);
-        if (result) {
             setLoading(false);
         }
     };
@@ -79,9 +70,6 @@ const Tags = () => {
                         null
                 }
                 <main className="main">
-                    <div className="notice hov" onClick={() => set_search_products([])}>
-                        <p>When clicking on a Tag, it is added to a list in the DB of &quot;Hot Items&quot;. If you click it again it gets a better score</p>
-                    </div>
                     {
                         raw_Tags.length === 0 ?
                             <div className="notice hov" >
@@ -90,8 +78,8 @@ const Tags = () => {
                                 </button>
                             </div>
                             :
-                            raw_Tags.map((tag) => <button className="blue" key={tag} onClick={() => _incrementItem(tag)}>
-                                {loading === tag ? "Loading..." : <a>{tag}</a>}
+                            raw_Tags.map((tag) => <button className="blue" key={tag}>
+                                <a>{tag}</a>
                             </button>)
                     }
                 </main>
