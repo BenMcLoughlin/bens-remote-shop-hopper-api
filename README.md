@@ -14,12 +14,6 @@ npm run dev
 
 ## Prisma
 
-To set schema according to schema.prisma for new db
-
-```
-npx prisma db push
-```
-
 To run studio
 
 ```
@@ -30,6 +24,12 @@ To Generate the client after making schema changes
 
 ```
 npx prisma generate
+```
+
+To set schema according to schema.prisma for new db
+
+```
+npx prisma db push
 ```
 
 To run migrations after making schema changes:
@@ -48,6 +48,37 @@ To clear Products table (take it easy this deletes everything)
 
 use in function
 `await prisma.product.deleteMany({})`
+
+## Postgres Commands
+
+Connect to server, from a terminal:
+```
+psql postgres
+```
+
+Describe Users
+
+```
+\du
+```
+
+List Dbs
+
+```
+\list
+```
+
+If you are logged into the same computer that Postgres is running on you can use the following psql login command, specifying the database (mydb) and username (myuser):
+
+```
+psql -d mydb -U myuser -W
+```
+
+Connection Info
+```
+\conninfo
+```
+
 
 ## TBA
 
