@@ -23,7 +23,7 @@ Router.events.on('routeChangeError', () => {
     NProgress.done();
 });
 
-const App = ({ Component, pageProps }: AppProps) => (
+const App = ({ Component, pageProps }) => (
     <Provider session={pageProps.session}>
         <ThemeProvider theme={theme}>
             <Component {...pageProps} />

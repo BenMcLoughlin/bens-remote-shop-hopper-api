@@ -8,9 +8,9 @@ import { signOut, useSession } from 'next-auth/client';
 import { LinkText } from '../components';
 import logoSrc from '../public/assets/logos/shophopper-logo.svg';
 
-const Header: React.FC = () => {
+const Header = () => {
     const router = useRouter();
-    const isActive: (pathname: string) => boolean = (pathname) => router.pathname === pathname;
+    const isActive = (pathname) => router.pathname === pathname;
 
     const [ session, loading ] = useSession();
 
