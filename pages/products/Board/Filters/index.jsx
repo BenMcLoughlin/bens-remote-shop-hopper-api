@@ -14,12 +14,13 @@ import {
 
 const propTypes = {
     products: PropTypes.array.isRequired,
+    users: PropTypes.array,
     defaultFilters: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
     mergeFilters: PropTypes.func.isRequired
 };
 
-const ProjectBoardFilters = ({ products, defaultFilters, filters, mergeFilters }) => {
+const ProjectBoardFilters = ({ products, users, defaultFilters, filters, mergeFilters }) => {
     const { searchTerm, userIds, myOnly, recent } = filters;
 
     const areFiltersCleared = !searchTerm && userIds.length === 0 && !myOnly && !recent;
@@ -32,7 +33,7 @@ const ProjectBoardFilters = ({ products, defaultFilters, filters, mergeFilters }
                 onChange={(value) => mergeFilters({ searchTerm: value })}
             />
             <Avatars>
-                {products.map((user) => (
+                {users.map((user) => (
                     <AvatarIsActiveBorder key={user.id} isActive={userIds.includes(user.id)}>
                         <StyledAvatar
                             avatarUrl={user.avatarUrl}

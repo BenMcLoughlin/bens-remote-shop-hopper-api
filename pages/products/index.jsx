@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import Layout from '../../components/Layout';
+// import incrementProduct from "../../requests/incrementProduct";
+import searchTwoParams from "../../requests/searchTwoParams";
 
 import NavbarLeft from './NavbarLeft';
 import Sidebar from './Sidebar';
@@ -13,17 +15,51 @@ import { ProjectPage } from './Styles';
 
 import { startData } from './mocks';
 
-const products = () => {
+const ProductReviewSystem = () => {
     const session = useSession();
+    const isLoggedIn = session[0]?.user;
     const router = useRouter();
     const isActive = (pathname) => router.pathname === pathname;
 
+    const [ loading, setLoading ] = useState(false);
+    const [ products, setProducts ] = useState([]);
+    const [ queryStrings, setQueryStrings ] = useState({
+        column: 'buckets', 
+        metric: "Athletic"
+    });
+
+    useEffect(() => {
+        _searchTwoParams(queryStrings);
+    }, []);
+
+    const _searchTwoParams = async () => {
+        setLoading('search');
+        const result = await searchTwoParams(queryStrings);
+        if (result) {
+            let sorted = result.splice(0, 88);
+
+            sorted.sort((a, b) => {
+                if (a.rating < b.rating) { 
+                    return 1; 
+                }
+
+                if (a.rating > b.rating) { 
+                    return -1; 
+                }
+
+                return 0;
+            });
+
+            setProducts(sorted);
+            setLoading(false);
+        }
+    };
+
     const project = startData.project;
 
-    const isLoggedIn = session[0]?.user;
 
     return (
-        <div>
+        <Layout>
             {
                 !isLoggedIn ? // todo
                     <ProjectPage>
@@ -35,6 +71,7 @@ const products = () => {
                         <Sidebar project={project} />
 
                         <Board
+                            users={project.users}
                             products={products}
                         />
                     </ProjectPage>
@@ -77,7 +114,7 @@ const products = () => {
                     box-shadow: 1px 1px 3px #aaa;
                 }
             `}</style>
-        </div>
+        </Layout>
     );
 };
 
@@ -92,4 +129,4 @@ const Title = styled.div`
     white-space: nowrap;
 `;
 
-export default products;
+export default ProductReviewSystem;

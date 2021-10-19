@@ -4,11 +4,11 @@ import Button from 'components/Button';
 
 import { Header, BoardName } from './Styles';
 
-const ProjectBoardHeader = () => (
+const ProjectBoardHeader = ({ title }) => (
     <Header>
-        <BoardName>Kanban board</BoardName>
-        <a href="https://github.com/oldboyxx/jira_clone" target="_blank" rel="noreferrer noopener">
-            <Button icon="github">Github Repo</Button>
+        <BoardName>{ title }</BoardName>
+        <a href="https://clone" target="_blank" rel="noreferrer noopener">
+            <Button icon="github">Spare</Button>
         </a>
     </Header>
 );

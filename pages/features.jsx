@@ -69,7 +69,7 @@ const Features = () => {
 
     useEffect(() => {
         _searchTwoParams(queryStrings);
-    }, [ ]);
+    }, []);
 
     const refreshData = () => {
         router.replace(router.asPath);

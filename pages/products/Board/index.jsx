@@ -10,6 +10,7 @@ import Lists from './Lists';
 
 const propTypes = {
     products: PropTypes.array.isRequired,
+    users: PropTypes.array.isRequired,
     updateLocalProjectIssues: PropTypes.func
 };
 
@@ -20,14 +21,15 @@ const defaultFilters = {
     recent: false
 };
 
-const ProjectBoard = ({ products, updateLocalProjectIssues }) => {
+const ProjectBoard = ({ products, users, updateLocalProjectIssues }) => {
     const [ filters, mergeFilters ] = useMergeState(defaultFilters);
 
     return (
         <Fragment>
-            <Breadcrumbs items={[ 'Projects', 'project.name', 'Kanban Board' ]} />
+            <Breadcrumbs items={[ 'Projects', 'project.name', 'Add' ]} />
             <Header />
             <Filters
+                users={users}
                 products={products}
                 defaultFilters={defaultFilters}
                 filters={filters}
