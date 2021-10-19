@@ -74,7 +74,7 @@ export const color = {
     textLight: '#8993a4',
     textLink: '#0052cc',
 
-    backgroundDarkPrimary: '#0747A6',
+    backgroundDarkPrimary: '#14C691',
     backgroundMedium: '#dfe1e6',
     backgroundLight: '#ebecf0',
     backgroundLightest: '#F4F5F7',

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Button from 'components/Button';
 
@@ -12,5 +13,9 @@ const ProjectBoardHeader = ({ title }) => (
         </a>
     </Header>
 );
+
+ProjectBoardHeader.propTypes = {
+    title: PropTypes.string.isRequired
+};
 
 export default ProjectBoardHeader;

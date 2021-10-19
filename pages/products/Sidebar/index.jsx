@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
+import Image from 'next/image';
 
 import Icon from 'components/Icon';
-import Avatar from 'components/Avatar';
+// import Avatar from 'components/Avatar';
+import logoSrc from '../../../public/assets/logos/shophopper-logo.svg';
 
 import {
     Sidebar,
@@ -13,7 +16,8 @@ import {
     Divider,
     LinkItem,
     LinkText,
-    NotImplemented
+    NotImplemented,
+    Logo
 } from './Styles';
 
 const propTypes = {
@@ -21,16 +25,21 @@ const propTypes = {
 };
 
 const ProjectSidebar = () => {
-    console.log('const match = useRouteMatch();:');
+    console.log(':', Link);
 
     return (
         <Sidebar>
             <ProjectInfo>
-                <Avatar />
-                <ProjectTexts>
+                <Link href="/">
+                    <Logo>
+                        <Image src={logoSrc} width={200} height={100} />
+                    </Logo>
+                </Link>
+
+                {/* <ProjectTexts>
                     <ProjectName>Product Review System</ProjectName>
                     <ProjectCategory>{"ProjectCategoryCopy[project.category]"} project</ProjectCategory>
-                </ProjectTexts>
+                </ProjectTexts> */}
             </ProjectInfo>
 
             {renderLinkItem("match", 'Kanban Board', 'board', '/board')}

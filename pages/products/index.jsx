@@ -61,7 +61,7 @@ const ProductReviewSystem = () => {
     return (
         <Layout>
             {
-                !isLoggedIn ? // todo
+                isLoggedIn ?
                     <ProjectPage>
                         <NavbarLeft
                             issueSearchModalOpen={false}

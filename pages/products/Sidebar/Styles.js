@@ -22,6 +22,11 @@ export const Sidebar = styled.div`
   }
 `;
 
+export const Logo = styled.div`
+    height: 5rem;
+    cursor: pointer;
+`;
+
 export const ProjectInfo = styled.div`
   display: flex;
   padding: 24px 4px;
