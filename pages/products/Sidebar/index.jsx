@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 
-import { Icon, Avatar } from 'components';
+import Icon from 'components/Icon';
+import Avatar from 'components/Avatar';
 
 import {
     Sidebar,
@@ -20,7 +20,7 @@ const propTypes = {
     project: PropTypes.object.isRequired
 };
 
-const ProjectSidebar = ({ project }) => {
+const ProjectSidebar = () => {
     console.log('const match = useRouteMatch();:');
 
     return (
@@ -28,7 +28,7 @@ const ProjectSidebar = ({ project }) => {
             <ProjectInfo>
                 <Avatar />
                 <ProjectTexts>
-                    <ProjectName>{project.name}</ProjectName>
+                    <ProjectName>Product Review System</ProjectName>
                     <ProjectCategory>{"ProjectCategoryCopy[project.category]"} project</ProjectCategory>
                 </ProjectTexts>
             </ProjectInfo>
@@ -48,12 +48,13 @@ const ProjectSidebar = ({ project }) => {
 const renderLinkItem = (match, text, iconType, path) => {
     const isImplemented = Boolean(path);
 
-    const linkItemProps = isImplemented
-        ? { as: Link, exact: true, to: `${ match.path }${ path }` }
-        : { as: 'div' };
+    // const linkItemProps = isImplemented
+    //     ? { as: Link, exact: true, to: `${ match.path }${ path }` }
+    //     : { as: 'div' };
 
     return (
-        <LinkItem {...linkItemProps}>
+        // <LinkItem {...linkItemProps}>
+        <LinkItem>
             <Icon type={iconType} />
             <LinkText>{text}</LinkText>
             {!isImplemented && <NotImplemented>Not implemented</NotImplemented>}

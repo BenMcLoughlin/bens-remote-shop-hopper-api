@@ -2,14 +2,14 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import useMergeState from '../../../hooks/mergeState';
-import { Breadcrumbs } from '../../../components/breadcrumbs';
+import Breadcrumbs from '../../../components/breadcrumbs';
 
 import Header from './Header';
 import Filters from './Filters';
 import Lists from './Lists';
 
 const propTypes = {
-    project: PropTypes.object.isRequired,
+    products: PropTypes.array.isRequired,
     updateLocalProjectIssues: PropTypes.func
 };
 
@@ -20,7 +20,7 @@ const defaultFilters = {
     recent: false
 };
 
-const ProjectBoard = ({ project, updateLocalProjectIssues }) => {
+const ProjectBoard = ({ products, updateLocalProjectIssues }) => {
     const [ filters, mergeFilters ] = useMergeState(defaultFilters);
 
     return (
@@ -28,13 +28,13 @@ const ProjectBoard = ({ project, updateLocalProjectIssues }) => {
             <Breadcrumbs items={[ 'Projects', 'project.name', 'Kanban Board' ]} />
             <Header />
             <Filters
-                projectUsers={project.users}
+                products={products}
                 defaultFilters={defaultFilters}
                 filters={filters}
                 mergeFilters={mergeFilters}
             />
             <Lists
-                project={project}
+                products={products}
                 filters={filters}
                 updateLocalProjectIssues={updateLocalProjectIssues}
             />

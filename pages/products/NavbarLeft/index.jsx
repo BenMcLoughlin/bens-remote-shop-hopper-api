@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Icon } from 'components';
+import Icon from 'components/Icon';
 
 // import { NavLeft, LogoLink, StyledLogo, Bottom, Item, ItemText } from './Styles';
 import { NavLeft, LogoLink, Bottom, Item, ItemText } from './Styles';
 
 const propTypes = {
-    issueSearchModalOpen: PropTypes.func,
-    issueCreateModalOpen: PropTypes.func
+    issueSearchModalOpen: PropTypes.boolean,
+    issueCreateModalOpen: PropTypes.boolean
 };
 
 const ProjectNavbarLeft = ({ issueSearchModalOpen, issueCreateModalOpen }) => (

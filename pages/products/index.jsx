@@ -9,6 +9,7 @@ import Layout from '../../components/Layout';
 import NavbarLeft from './NavbarLeft';
 import Sidebar from './Sidebar';
 import Board from './Board';
+import { ProjectPage } from './Styles';
 
 import { startData } from './mocks';
 
@@ -22,10 +23,10 @@ const products = () => {
     const isLoggedIn = session[0]?.user;
 
     return (
-        <Layout>
+        <div>
             {
                 !isLoggedIn ? // todo
-                    <div className="wrapper">
+                    <ProjectPage>
                         <NavbarLeft
                             issueSearchModalOpen={false}
                             issueCreateModalOpen={false}
@@ -34,9 +35,9 @@ const products = () => {
                         <Sidebar project={project} />
 
                         <Board
-                            project={project}
+                            products={products}
                         />
-                    </div>
+                    </ProjectPage>
                     :
                     <Link href="/api/auth/signin">
                         <div className="notice hov">
@@ -76,7 +77,7 @@ const products = () => {
                     box-shadow: 1px 1px 3px #aaa;
                 }
             `}</style>
-        </Layout >
+        </div>
     );
 };
 
