@@ -8,6 +8,7 @@ import { sizes } from 'styles/theme';
 import Layout from '../../components/Layout';
 // import incrementProduct from "../../requests/incrementProduct";
 import searchTwoParams from "../../requests/searchTwoParams";
+import useGlobal from "../../globalState/store";
 
 import NavbarLeft from './NavbarLeft';
 import Sidebar from './Sidebar';
@@ -18,6 +19,7 @@ import { startData } from './mocks';
 const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
 
 const ProductReviewSystem = () => {
+    const [ globalState, globalActions ] = useGlobal();
     const session = useSession();
     const isLoggedIn = session[0]?.user;
     const router = useRouter();
@@ -27,32 +29,27 @@ const ProductReviewSystem = () => {
     const [ products, setProducts ] = useState([]);
     const [ queryStrings, setQueryStrings ] = useState({
         column: 'buckets', 
-        metric: "Athletic"
+        metric: "Casual"
     });
 
     useEffect(() => {
         _searchTwoParams(queryStrings);
     }, []);
 
+    useEffect(() => {
+        setProducts(globalState.products.data);
+    }, [ globalState.products.data ]);
+
     const _searchTwoParams = async () => {
         setLoading('search');
         const result = await searchTwoParams(queryStrings);
+
         if (result) {
-            let sorted = result.splice(0, 88);
+            globalActions.products.setQuery(queryStrings);
+            globalActions.products.setCursor(result.length);
 
-            sorted.sort((a, b) => {
-                if (a.rating < b.rating) { 
-                    return 1; 
-                }
-
-                if (a.rating > b.rating) { 
-                    return -1; 
-                }
-
-                return 0;
-            });
-
-            setProducts(sorted);
+            globalActions.products.setData(result);
+            // setProducts(sorted);
             setLoading(false);
         }
     };

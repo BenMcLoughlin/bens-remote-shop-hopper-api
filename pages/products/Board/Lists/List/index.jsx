@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { intersection } from 'lodash';
@@ -6,7 +6,9 @@ import styled from 'styled-components';
 
 import Product from './Product';
 import { color, font, mixin } from 'styles/theme';
-import incrementProduct from "../../../../../requests/incrementProduct";
+import incrementProduct from "requests/incrementProduct";
+import useGlobal from "globalState/store";
+import { startCase } from 'utils/strings';
 
 const propTypes = {
     status: PropTypes.string,
@@ -20,11 +22,16 @@ const defaultProps = {
 };
 
 const ProjectBoardList = ({ status, products, filters, currentUserId }) => {
+    const [ globalState, globalActions ] = useGlobal();
     const [ loading, setLoading ] = useState(false);
+    const [ currentQuery, setCurrentQuery ] = useState('');
     const filteredProducts = filterProducts(products, filters, currentUserId);
     const filteredListProducts = getSortedListProducts(filteredProducts, status);
     const allListProducts = getSortedListProducts(products, status);
 
+    useEffect(() => {
+        setCurrentQuery(`${ globalState.products.query.column } : ${ globalState.products.query.metric }`);
+    }, [ globalState.products.query ]);
 
     const _incrementProduct = async (id) => {
         setLoading('incrementProduct');
@@ -34,22 +41,38 @@ const ProjectBoardList = ({ status, products, filters, currentUserId }) => {
         }
     };
 
+    const _nextPage = async () => {
+        setLoading('nextPage');
+        await globalActions.products.nextPage(products.length);
+        const result = await globalActions.products.nextPage(products.length);
+        if (result) {
+            // setProducts(sorted);
+            setLoading(false);
+        }
+    };
+
+    console.log('globalState:', globalState);
+
     return (
         <>
             <Title>
-                {/* todo */}
-                {"Insert query params here"}  
-                <ProductsCount>{formatProductsCount(allListProducts, filteredListProducts)}</ProductsCount>
+                {currentQuery}  
+                <ProductsCount>: {formatProductsCount(allListProducts, filteredListProducts)} Items</ProductsCount>
             </Title>
             <List>
                 {filteredListProducts.map((product, index) => (
-                    <Product 
+                    <Product
                         key={product.id} 
+                        id={product.id}
+                        businessName={product.business_name}
                         index={index}
                         src={product.images[0].src}
                         title={product.title}
                         rating={product.rating}
-                        id={product.id}
+                        price={(product.original_price / 100).toFixed(2)}
+                        compareAtPrice={(product.original_price / 100).toFixed(2)}
+                        tags={product.tags}
+                        buckets={product.buckets}
                         incrementProduct={_incrementProduct}
                     />
                 ))}
@@ -96,16 +119,6 @@ ProjectBoardList.defaultProps = defaultProps;
 
 export default ProjectBoardList;
 
-// export const List = styled.div`
-//     display: flex;
-//     flex-direction: column;
-//     margin: 0 5px;
-//     min-height: 400px;
-//     width: 25%;
-//     border-radius: 3px;
-//     background: ${ color.backgroundLightest };
-// `;
-
 export const List = styled.div`
     display: flex;
     flex-direction: row;
@@ -115,7 +128,7 @@ export const List = styled.div`
     margin: 0 5px;
     min-height: 400px;
     overflow-y: auto;
-    max-height: 100vh;
+    height: 100vh;
     width: 100%;
     border-radius: 3px;
     background: ${ color.backgroundLightest };

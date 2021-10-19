@@ -48,7 +48,7 @@ const ProjectBoardFilters = ({ products, users, defaultFilters, filters, mergeFi
                     isActive={myOnly}
                     onClick={() => mergeFilters({ myOnly: !myOnly })}
                 >
-                  Only My Issues
+                  Only My Items todo
                 </StyledButton>
                 <StyledButton
                     variant="empty"

@@ -1,19 +1,25 @@
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
-export async function searchTwoParams(params) {
-    console.log('params.column:', params.column);
+export async function searchTwoParams(query) {
+    console.log('query.column:', query.column);
 
-    let column = params.column;
-    let metric = params.metric;
+    let column = query.column;
+    let metric = query.metric;
+    let cursor = query.cursor || 10;
+    let startCursor = query.startCursor || 0;
 
     const result = await prisma.product
         .findMany({
-            take: 10,
+            take: cursor,
+            skip: startCursor,
             where: {
                 [column]: {
                     has: metric
                 }
+            },
+            orderBy: {
+                rating: 'desc'
             }
         })
         .catch((e) => {
@@ -39,7 +45,6 @@ export default async (req, res) => {
         try {
             let { body } = req;
 
-            // Postman (Ben Heeeeeelp!)
             if (!body) {
                 body = req.query;
             }

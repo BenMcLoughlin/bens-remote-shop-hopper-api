@@ -1,4 +1,3 @@
-import React from "react";
 import useGlobalHook from "use-global-hook";
 
 import * as actions from "../actions";
@@ -12,7 +11,14 @@ const initialState = {
         loading: false
     },
     status: "INITIAL",
-    products: [],
+    products: {
+        data: [],
+        result: false,
+        query: {},
+        cursor: 0,
+        status: 'INITIAL',
+        loading: false
+    },
     shops: [],
     loading: false
 };
