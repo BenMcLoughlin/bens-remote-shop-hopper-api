@@ -1,7 +1,5 @@
 export const addRequest = (store) => {
     const counter = { ...store.state.counter };
-    console.log('store:', store);
-
     counter.requests++;
     store.setState({ counter: counter });
 };

@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 import useMergeState from '../../../hooks/mergeState';
 import Breadcrumbs from '../../../components/breadcrumbs';
+import styled from 'styled-components';
 
-import Header from './Header';
+import List from './Lists/List';
 import Filters from './Filters';
-import Lists from './Lists';
+// import Lists from './Lists';
 
 const propTypes = {
     products: PropTypes.array.isRequired,
@@ -26,8 +27,7 @@ const ProjectBoard = ({ products, users, updateLocalProjectIssues }) => {
 
     return (
         <Fragment>
-            <Breadcrumbs items={[ 'Projects', 'project.name', 'Add' ]} />
-            <Header />
+            {/* <Breadcrumbs items={[ 'Projects', 'project.name', 'Add' ]} /> */}
             <Filters
                 users={users}
                 products={products}
@@ -35,10 +35,14 @@ const ProjectBoard = ({ products, users, updateLocalProjectIssues }) => {
                 filters={filters}
                 mergeFilters={mergeFilters}
             />
-            <Lists
+            {/* <Lists
                 products={products}
                 filters={filters}
                 updateLocalProjectIssues={updateLocalProjectIssues}
+            /> */}
+            <List
+                products={products}
+                filters={filters}
             />
         </Fragment>
     );
@@ -47,3 +51,7 @@ const ProjectBoard = ({ products, users, updateLocalProjectIssues }) => {
 ProjectBoard.propTypes = propTypes;
 
 export default ProjectBoard;
+
+export const Board = styled.div`
+    overflow: hidden;
+`;

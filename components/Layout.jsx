@@ -3,8 +3,10 @@ import React, { ReactNode } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Header from './Header';
 import Head from 'next/head';
+import styled from 'styled-components';
+
+import Header from './Header';
 
 const Layout = (props) => {
     const session = useSession();
@@ -14,7 +16,7 @@ const Layout = (props) => {
     const isActive = (pathname) => router.pathname === pathname;
 
     return (
-        <div>
+        <Main>
             <Head>
                 <link
                     href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;500&display=swap"
@@ -70,8 +72,11 @@ const Layout = (props) => {
                     height: 100%;
                 }
             `}</style>
-        </div>
+        </Main>
     );
 };
 
 export default Layout;
+
+export const Main = styled.div`
+`;

@@ -36,7 +36,6 @@ const Sitehost = () => {
 
     useEffect(() => {
         setUpLoaded(globalState.counter.result);
-        console.log('globalActions:', globalActions);
     }, [ globalState.counter.result ]);
 
     useEffect(() => {

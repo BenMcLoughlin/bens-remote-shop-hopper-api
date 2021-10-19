@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 import Icon from 'components/Icon';
-// import Avatar from 'components/Avatar';
 import logoSrc from '../../../public/assets/logos/shophopper-logo.svg';
 
 import {
     Sidebar,
     ProjectInfo,
-    ProjectTexts,
-    ProjectName,
-    ProjectCategory,
     Divider,
     LinkItem,
     LinkText,
@@ -24,35 +21,26 @@ const propTypes = {
     project: PropTypes.object.isRequired
 };
 
-const ProjectSidebar = () => {
-    console.log(':', Link);
+const ProjectSidebar = () => (
+    <Sidebar>
+        <ProjectInfo>
+            <Link href="/">
+                <Logo>
+                    <Image src={logoSrc} width={200} height={100} />
+                </Logo>
+            </Link>
+        </ProjectInfo>
 
-    return (
-        <Sidebar>
-            <ProjectInfo>
-                <Link href="/">
-                    <Logo>
-                        <Image src={logoSrc} width={200} height={100} />
-                    </Logo>
-                </Link>
-
-                {/* <ProjectTexts>
-                    <ProjectName>Product Review System</ProjectName>
-                    <ProjectCategory>{"ProjectCategoryCopy[project.category]"} project</ProjectCategory>
-                </ProjectTexts> */}
-            </ProjectInfo>
-
-            {renderLinkItem("match", 'Kanban Board', 'board', '/board')}
-            {renderLinkItem("match", 'Project settings', 'settings', '/settings')}
-            <Divider />
-            {renderLinkItem('match', 'Releases', 'shipping')}
+        {renderLinkItem("match", 'Add presets', 'board', '/board')}
+        {renderLinkItem("match", 'Project settings', 'settings', '/settings')}
+        <Divider />
+        {/* {renderLinkItem('match', 'Releases', 'shipping')}
             {renderLinkItem('match', 'Issues and filters', 'issues')}
             {renderLinkItem('match', 'Pages', 'page')}
             {renderLinkItem('match', 'Reports', 'reports')}
-            {renderLinkItem('match', 'Components', 'component')}
-        </Sidebar>
-    );
-};
+            {renderLinkItem('match', 'Components', 'component')} */}
+    </Sidebar>
+);
 
 const renderLinkItem = (match, text, iconType, path) => {
     const isImplemented = Boolean(path);

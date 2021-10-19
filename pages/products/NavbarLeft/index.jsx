@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { signOut } from 'next-auth/client';
 
-import Icon from 'components/Icon';
+import styled from 'styled-components';
+import Icon from 'components/icon';
 
 // import { NavLeft, LogoLink, StyledLogo, Bottom, Item, ItemText } from './Styles';
 import { NavLeft, LogoLink, Bottom, Item, ItemText } from './Styles';
@@ -38,10 +40,21 @@ const ProjectNavbarLeft = ({ issueSearchModalOpen, issueCreateModalOpen }) => (
                     </Item>
                 )}
             /> */}
+            <LogOut onClick={() => signOut()}>
+                <a>Log out</a>
+                <Icon type="settings" size={27} />
+            </LogOut>
         </Bottom>
     </NavLeft>
 );
 
 ProjectNavbarLeft.propTypes = propTypes;
+
+const LogOut = styled.button`
+    max-width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
 
 export default ProjectNavbarLeft;

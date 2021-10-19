@@ -1,75 +1,146 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { intersection } from 'lodash';
+import styled from 'styled-components';
 
 import Product from './Product';
-
-import { List, Title, IssuesCount, Issues } from './Styles';
+import { color, font, mixin } from 'styles/theme';
+import incrementProduct from "../../../../../requests/incrementProduct";
 
 const propTypes = {
-    status: PropTypes.string.isRequired,
-    project: PropTypes.object.isRequired,
+    status: PropTypes.string,
+    products: PropTypes.array.isRequired,
     filters: PropTypes.object.isRequired,
     currentUserId: PropTypes.number
 };
 
 const defaultProps = {
-    currentUserId: null
+    products: []
 };
 
-const ProjectBoardList = ({ status, project, filters, currentUserId }) => {
-    const filteredIssues = filterIssues(project.issues, filters, currentUserId);
-    const filteredListIssues = getSortedListIssues(filteredIssues, status);
-    const allListIssues = getSortedListIssues(project.issues, status);
+const ProjectBoardList = ({ status, products, filters, currentUserId }) => {
+    const [ loading, setLoading ] = useState(false);
+    const filteredProducts = filterProducts(products, filters, currentUserId);
+    const filteredListProducts = getSortedListProducts(filteredProducts, status);
+    const allListProducts = getSortedListProducts(products, status);
+
+
+    const _incrementProduct = async (id) => {
+        setLoading('incrementProduct');
+        const result = await incrementProduct(id);
+        if (result) {
+            setLoading(false);
+        }
+    };
 
     return (
-        <List>
+        <>
             <Title>
-                {`${ "IssueStatusCopy[status]" } `}
-                <IssuesCount>{formatIssuesCount(allListIssues, filteredListIssues)}</IssuesCount>
+                {/* todo */}
+                {"Insert query params here"}  
+                <ProductsCount>{formatProductsCount(allListProducts, filteredListProducts)}</ProductsCount>
             </Title>
-            {filteredListIssues.map((issue, index) => (
-                <Product key={issue.id} projectUsers={project.users} issue={issue} index={index} />
-            ))}
-        </List>
+            <List>
+                {filteredListProducts.map((product, index) => (
+                    <Product 
+                        key={product.id} 
+                        index={index}
+                        src={product.images[0].src}
+                        title={product.title}
+                        rating={product.rating}
+                        id={product.id}
+                        incrementProduct={_incrementProduct}
+                    />
+                ))}
+            </List>
+        </>
     );
 };
 
-const filterIssues = (projectIssues, filters, currentUserId) => {
+const filterProducts = (projectProducts, filters, currentUserId) => {
     const { searchTerm, userIds, myOnly, recent } = filters;
-    let issues = projectIssues;
+    let products = projectProducts;
 
     if (searchTerm) {
-        issues = issues.filter((issue) => issue.title.toLowerCase().includes(searchTerm.toLowerCase()));
+        products = products.filter((product) => product.title.toLowerCase().includes(searchTerm.toLowerCase()));
     }
 
     if (userIds.length > 0) {
-        issues = issues.filter((issue) => intersection(issue.userIds, userIds).length > 0);
+        products = products.filter((product) => intersection(product.userIds, userIds).length > 0);
     }
 
     if (myOnly && currentUserId) {
-        issues = issues.filter((issue) => issue.userIds.includes(currentUserId));
+        products = products.filter((product) => product.userIds.includes(currentUserId));
     }
 
     if (recent) {
-        issues = issues.filter((issue) => moment(issue.updatedAt).isAfter(moment().subtract(3, 'days')));
+        products = products.filter((product) => moment(product.updatedAt).isAfter(moment().subtract(3, 'days')));
     }
 
-    return issues;
+    return products;
 };
 
-const getSortedListIssues = (issues, status) => issues.filter((issue) => issue.status === status).sort((a, b) => a.listPosition - b.listPosition);
+const getSortedListProducts = (products, status) => products.filter((product) => product.status === status).sort((a, b) => a.listPosition - b.listPosition);
 
-const formatIssuesCount = (allListIssues, filteredListIssues) => {
-    if (allListIssues.length !== filteredListIssues.length) {
-        return `${ filteredListIssues.length } of ${ allListIssues.length }`;
+const formatProductsCount = (allListProducts, filteredListProducts) => {
+    if (allListProducts.length !== filteredListProducts.length) {
+        return `${ filteredListProducts.length } of ${ allListProducts.length }`;
     }
 
-    return allListIssues.length;
+    return allListProducts.length;
 };
 
 ProjectBoardList.propTypes = propTypes;
 ProjectBoardList.defaultProps = defaultProps;
 
 export default ProjectBoardList;
+
+// export const List = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     margin: 0 5px;
+//     min-height: 400px;
+//     width: 25%;
+//     border-radius: 3px;
+//     background: ${ color.backgroundLightest };
+// `;
+
+export const List = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: 0 5px;
+    min-height: 400px;
+    overflow-y: auto;
+    max-height: 100vh;
+    width: 100%;
+    border-radius: 3px;
+    background: ${ color.backgroundLightest };
+    padding: 10px 8px 300px 8px;
+    @media (max-width: 1100px) {
+    }
+    // &:hover {
+    //     background: ${ color.backgroundLight };
+    // }
+`;
+
+export const Title = styled.div`
+    padding: 13px 10px 17px;
+    text-transform: uppercase;
+    color: ${ color.textMedium };
+    ${ font.size(12.5) };
+    ${ mixin.truncateText }
+`;
+
+export const ProductsCount = styled.span`
+    text-transform: lowercase;
+    ${ font.size(13) };
+`;
+
+export const Products = styled.div`
+    height: 100%;
+    padding: 0 5px;
+`;
