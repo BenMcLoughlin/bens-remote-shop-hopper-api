@@ -12,14 +12,20 @@ const propTypes = {
     index: PropTypes.number,
     title: PropTypes.string,
     rating: PropTypes.number,
-    price: PropTypes.number,
-    compareAtPrice: PropTypes.number,
+    price: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]),
+    compareAtPrice: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]),
     tags: PropTypes.array,
     buckets: PropTypes.array,
     incrementProduct: PropTypes.func
 };
 
-const ProjectBoardListProduct = ({ businessName, src, title, rating, id, price, compareAtPrice, tags, buckets, incrementProduct }) => {
+const BoardListProduct = ({ businessName, src, title, rating, id, price, compareAtPrice, tags, buckets, incrementProduct }) => {
     const [ globalState, globalActions ] = useGlobal();
     let [ localRating, setRating ] = useState(0);
 
@@ -77,10 +83,6 @@ const ProjectBoardListProduct = ({ businessName, src, title, rating, id, price, 
         </>
     );
 };
-
-ProjectBoardListProduct.propTypes = propTypes;
-
-export default ProjectBoardListProduct;
 
 export const ProductBlock = styled.div`
     display: flex;
@@ -151,3 +153,7 @@ export const Img = styled.img`
     max-height: 230px;
     object-fit: contain;
 `;
+
+BoardListProduct.propTypes = propTypes;
+
+export default BoardListProduct;

@@ -21,7 +21,7 @@ const defaultProps = {
     products: []
 };
 
-const ProjectBoardList = ({ status, products, filters, currentUserId }) => {
+const BoardList = ({ status, products, filters, currentUserId }) => {
     const [ globalState, globalActions ] = useGlobal();
     const [ loading, setLoading ] = useState(false);
     const [ currentQuery, setCurrentQuery ] = useState('');
@@ -43,15 +43,23 @@ const ProjectBoardList = ({ status, products, filters, currentUserId }) => {
 
     const _nextPage = async () => {
         setLoading('nextPage');
-        await globalActions.products.nextPage(products.length);
-        const result = await globalActions.products.nextPage(products.length);
+        const result = await globalActions.apiRequests.nextPage();
         if (result) {
             // setProducts(sorted);
             setLoading(false);
         }
     };
 
-    console.log('globalState:', globalState);
+    const _prevPage = async () => {
+        setLoading('prevPage');
+        const result = await globalActions.apiRequests.prevPage();
+        if (result) {
+            // setProducts(sorted);
+            setLoading(false);
+        }
+    };
+
+    // console.log('globalState:', globalState);
 
     return (
         <>
@@ -59,14 +67,18 @@ const ProjectBoardList = ({ status, products, filters, currentUserId }) => {
                 {currentQuery}  
                 <ProductsCount>: {formatProductsCount(allListProducts, filteredListProducts)} Items</ProductsCount>
             </Title>
+            <ButtonsWrapper>
+                <button onClick={_prevPage}>Last</button>
+                <button onClick={_nextPage}>Next</button>
+            </ButtonsWrapper>
             <List>
                 {filteredListProducts.map((product, index) => (
                     <Product
-                        key={product.id} 
+                        key={product.id}
                         id={product.id}
                         businessName={product.business_name}
                         index={index}
-                        src={product.images[0].src}
+                        src={product.images[0]?.src}
                         title={product.title}
                         rating={product.rating}
                         price={(product.original_price / 100).toFixed(2)}
@@ -114,10 +126,12 @@ const formatProductsCount = (allListProducts, filteredListProducts) => {
     return allListProducts.length;
 };
 
-ProjectBoardList.propTypes = propTypes;
-ProjectBoardList.defaultProps = defaultProps;
-
-export default ProjectBoardList;
+export const ButtonsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+`;
 
 export const List = styled.div`
     display: flex;
@@ -157,3 +171,8 @@ export const Products = styled.div`
     height: 100%;
     padding: 0 5px;
 `;
+
+BoardList.propTypes = propTypes;
+BoardList.defaultProps = defaultProps;
+
+export default BoardList;

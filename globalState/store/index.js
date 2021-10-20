@@ -16,6 +16,7 @@ const initialState = {
         result: false,
         query: {},
         cursor: 0,
+        amount: 12,
         status: 'INITIAL',
         loading: false
     },

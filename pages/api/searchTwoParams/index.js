@@ -2,17 +2,17 @@ import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
 export async function searchTwoParams(query) {
-    console.log('query.column:', query.column);
-
     let column = query.column;
     let metric = query.metric;
-    let cursor = query.cursor || 10;
-    let startCursor = query.startCursor || 0;
+    let cursor = query.cursor || 0;
+    let amount = query.amount || 12;
+
+    console.log('searchTwoParams:', column, metric, cursor, amount);
 
     const result = await prisma.product
         .findMany({
-            take: cursor,
-            skip: startCursor,
+            take: amount,
+            skip: cursor,
             where: {
                 [column]: {
                     has: metric

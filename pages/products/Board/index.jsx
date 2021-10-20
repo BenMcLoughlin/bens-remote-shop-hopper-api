@@ -21,11 +21,11 @@ const defaultFilters = {
     recent: false
 };
 
-const ProjectBoard = ({ products, users, updateLocalProjectIssues }) => {
+const Board = ({ products, users, updateLocalProjectIssues }) => {
     const [ filters, mergeFilters ] = useMergeState(defaultFilters);
 
     return (
-        <Fragment>
+        <BoardWrapper>
             {/* <Breadcrumbs items={[ 'Projects', 'project.name', 'Add' ]} /> */}
             <Filters
                 users={users}
@@ -38,14 +38,14 @@ const ProjectBoard = ({ products, users, updateLocalProjectIssues }) => {
                 products={products}
                 filters={filters}
             />
-        </Fragment>
+        </BoardWrapper>
     );
 };
 
-ProjectBoard.propTypes = propTypes;
+Board.propTypes = propTypes;
 
-export default ProjectBoard;
+export default Board;
 
-export const Board = styled.div`
+export const BoardWrapper = styled.div`
     overflow: hidden;
 `;

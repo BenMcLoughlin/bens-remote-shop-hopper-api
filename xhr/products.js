@@ -12,7 +12,7 @@ function getGeneric(body) {
     });
 }
 
-function userProducts(body) {
+function searchProducts(body) {
     const options = {
         endpoint: '/api/searchTwoParams',
         method: 'POST',
@@ -26,5 +26,5 @@ function userProducts(body) {
 
 export {
     getGeneric,
-    userProducts
+    searchProducts
 };

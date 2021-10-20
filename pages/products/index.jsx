@@ -60,28 +60,19 @@ const ProductReviewSystem = () => {
 
     return (
         <Layout>
-            {
-                isLoggedIn ?
-                    <ProjectPage>
-                        <NavbarLeft
-                            issueSearchModalOpen={false}
-                            issueCreateModalOpen={false}
-                        />
+            <ProjectPage>
+                <NavbarLeft
+                    issueSearchModalOpen={false}
+                    issueCreateModalOpen={false}
+                />
 
-                        <Sidebar project={project} />
+                <Sidebar project={project} />
 
-                        <Board
-                            users={project.users}
-                            products={products}
-                        />
-                    </ProjectPage>
-                    :
-                    <Link href="/api/auth/signin">
-                        <div className="notice hov">
-                            <a data-active={isActive('/signup')}>Might as well Log in</a>
-                        </div>
-                    </Link>
-            }
+                <Board
+                    users={project.users}
+                    products={products}
+                />
+            </ProjectPage>
         </Layout>
     );
 };
