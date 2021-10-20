@@ -5,12 +5,11 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { sizes } from 'styles/theme';
-import Layout from '../../components/Layout';
-import searchTwoParams from "../../requests/searchTwoParams";
-import useGlobal from "../../globalState/store";
-
-import NavbarLeft from './NavbarLeft';
-import Sidebar from './Sidebar';
+import searchTwoParams from "requests/searchTwoParams";
+import useGlobal from "globalState/store";
+import Layout from 'components/Layout';
+import NavbarLeft from 'components/NavbarLeft';
+import Sidebar from 'components/Sidebar';
 import Tags from './Tags';
 
 import { startData } from './mocks';

@@ -6,7 +6,7 @@ import { Shop } from '@styled-icons/entypo/Shop';
 import { Shopify } from '@styled-icons/fa-brands/Shopify';
 import styled from 'styled-components';
 
-import logoSrc from '../../../public/assets/logos/shophopper-logo.svg';
+import logoSrc from 'public/assets/logos/shophopper-logo.svg';
 import { color, sizes, font, mixin, zIndexValues } from 'styles/theme';
 
 const Sidebar = () => (
