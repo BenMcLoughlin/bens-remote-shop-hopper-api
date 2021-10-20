@@ -28,7 +28,7 @@ const BoardFilters = ({ users, defaultFilters, filters, mergeFilters }) => {
                     value={searchTerm}
                     onChange={(value) => mergeFilters({ searchTerm: value })}
                 />
-                <Avatars>
+                {/* <Avatars> todo
                     {users.map((user) => (
                         <AvatarIsActiveBorder key={user.id} isActive={userIds.includes(user.id)}>
                             <StyledAvatar
@@ -38,7 +38,7 @@ const BoardFilters = ({ users, defaultFilters, filters, mergeFilters }) => {
                             />
                         </AvatarIsActiveBorder>
                     ))}
-                </Avatars>
+                </Avatars> */}
             </Column>
 
             {/* Spare Buttons for later todo */}

@@ -42,8 +42,8 @@ const BoardListProduct = ({ businessName, src, title, rating, id, price, compare
     return (
         <>
             <ProductBlock onClick={_incrementProduct}>
+                <Details>{businessName}</Details>
                 <Card>
-                    <Details>{businessName}</Details>
                     <Title>{truncate(title)}</Title>
                     <Img src={src} />
                     <Bottom>

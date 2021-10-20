@@ -6,19 +6,18 @@ import styled from 'styled-components';
 
 import { sizes } from 'styles/theme';
 import Layout from '../../components/Layout';
-// import incrementProduct from "../../requests/incrementProduct";
 import searchTwoParams from "../../requests/searchTwoParams";
 import useGlobal from "../../globalState/store";
 
 import NavbarLeft from './NavbarLeft';
 import Sidebar from './Sidebar';
-import Board from './Board';
+import Tags from './Tags';
 
 import { startData } from './mocks';
 
 const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
 
-const ProductReviewSystem = () => {
+const TagReviewSystem = () => {
     const [ globalState, globalActions ] = useGlobal();
     const session = useSession();
     const isLoggedIn = session[0]?.user;
@@ -65,10 +64,7 @@ const ProductReviewSystem = () => {
 
                 <Sidebar project={project} />
 
-                <Board
-                    users={project.users}
-                    products={products}
-                />
+                <Tags />
             </ProjectPage>
         </Layout>
     );
@@ -84,15 +80,4 @@ export const ProjectPage = styled.div`
     }
 `;
 
-const Title = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    padding: 2rem;
-    color: #14e2a4;
-    background: #485056;
-    white-space: nowrap;
-`;
-
-export default ProductReviewSystem;
+export default TagReviewSystem;

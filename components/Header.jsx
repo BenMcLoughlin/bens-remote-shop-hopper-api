@@ -68,10 +68,9 @@ const Header = () => {
         right = (
             <Right>
                 <Row>
-                    <LinkText title={'Features'} accent="" />
-                    <LinkText title={'Manager'} accent="" />
-                    <LinkText title={'Tags'} accent="" />
                     <LinkText title={'Products'} accent="" />
+                    <LinkText title={'Manager'} accent="" />
+                    <LinkText title={'Features'} accent="" />
                 </Row>
                 <Row>
                     <User>{session.user.name} ({session.user.email})</User>
