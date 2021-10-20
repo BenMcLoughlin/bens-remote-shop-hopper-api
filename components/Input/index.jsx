@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import { MagnifyingGlass } from '@styled-icons/entypo/MagnifyingGlass';
 
 import { StyledInput, InputElement, StyledIcon } from './Styles';
 
@@ -31,7 +32,8 @@ const Input = forwardRef(({ icon, className, filter, onChange, ...inputProps }, 
 
     return (
         <StyledInput className={className}>
-            {icon && <StyledIcon type={icon} size={15} />}
+            {/* {icon && <StyledIcon type={icon} size={15} />} todo */}
+            <MagnifyingGlass size={20} style={{ position: 'absolute', margin: 5 }}/>
             <InputElement {...inputProps} onChange={handleChange} hasIcon={Boolean(icon)} ref={ref} />
         </StyledInput>
     );

@@ -9,14 +9,13 @@ import Avatar from 'components/Avatar';
 import Button from 'components/Button';
 
 const propTypes = {
-    products: PropTypes.array.isRequired,
     users: PropTypes.array,
     defaultFilters: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
     mergeFilters: PropTypes.func.isRequired
 };
 
-const ProjectBoardFilters = ({ products, users, defaultFilters, filters, mergeFilters }) => {
+const BoardFilters = ({ users, defaultFilters, filters, mergeFilters }) => {
     const { searchTerm, userIds, myOnly, recent } = filters;
 
     const areFiltersCleared = !searchTerm && userIds.length === 0 && !myOnly && !recent;
@@ -42,7 +41,8 @@ const ProjectBoardFilters = ({ products, users, defaultFilters, filters, mergeFi
                 </Avatars>
             </Column>
 
-            <Column>
+            {/* Spare Buttons for later todo */}
+            {/* <Column>
                 <StyledButton
                     variant="empty"
                     isActive={myOnly}
@@ -60,14 +60,10 @@ const ProjectBoardFilters = ({ products, users, defaultFilters, filters, mergeFi
                 {!areFiltersCleared && (
                     <ClearAll onClick={() => mergeFilters(defaultFilters)}>Clear all</ClearAll>
                 )}
-            </Column>
+            </Column> */}
         </Filters>
     );
 };
-
-ProjectBoardFilters.propTypes = propTypes;
-
-export default ProjectBoardFilters;
 
 export const Filters = styled.div`
   display: flex;
@@ -132,3 +128,7 @@ export const ClearAll = styled.div`
     color: ${ color.textMedium };
   }
 `;
+
+BoardFilters.propTypes = propTypes;
+
+export default BoardFilters;

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import useGlobal from "globalState/store";
 import { color, font, mixin } from 'styles/theme';
+import { truncate } from 'utils/strings';
 
 const propTypes = {
     id: PropTypes.number,
@@ -43,7 +44,7 @@ const BoardListProduct = ({ businessName, src, title, rating, id, price, compare
             <ProductBlock onClick={_incrementProduct}>
                 <Card>
                     <Details>{businessName}</Details>
-                    <Title>{title}</Title>
+                    <Title>{truncate(title)}</Title>
                     <Img src={src} />
                     <Bottom>
                         <Details>
@@ -63,7 +64,6 @@ const BoardListProduct = ({ businessName, src, title, rating, id, price, compare
                             <Details>
                                 Compare: {compareAtPrice}
                             </Details>
-                    
                             <Details>
                                 Savings Ratio: {(((compareAtPrice - price) / compareAtPrice) * 100).toFixed(2)}%
                             </Details>
