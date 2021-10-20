@@ -24,7 +24,20 @@ function searchProducts(body) {
     });
 }
 
+function getHotItems(body) {
+    const options = {
+        endpoint: '/api/getHotItems',
+        method: 'POST',
+        body
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
 export {
     getGeneric,
-    searchProducts
+    searchProducts,
+    getHotItems
 };

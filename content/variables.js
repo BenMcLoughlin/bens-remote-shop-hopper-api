@@ -1,0 +1,40 @@
+export const columns = [
+    "business_name",
+    "buckets",
+    "title",
+    "handle",
+    "body_html",
+    "vendor",
+    "product_type",
+    "created_at",
+    "published_at",
+    "updated_at",
+    "tags",
+    "variants",
+    "images",
+    "options",
+    "original_price",
+    "compare_at_price",
+    "sizes",
+    "colors"
+];
+
+export const buckets = [
+    "Athletic",
+    "Bohemian",
+    "Chic",
+    "Trendy",
+    "Casual",
+    "Vintage",
+    "Music Festival",
+    "Baby & Kids",
+    "Accessories",
+    "Beauty",
+    "Streetwear",
+    "Hip Hop",
+    "Rock",
+    "Punk",
+    "Elegant",
+    "Formal",
+    "Maternity"
+];

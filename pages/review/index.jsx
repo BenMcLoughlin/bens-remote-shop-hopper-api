@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useSession } from "next-auth/client";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -12,17 +11,10 @@ import NavbarLeft from 'components/NavbarLeft';
 import Sidebar from 'components/Sidebar';
 import Board from './Board';
 
-import { startData } from './mocks';
-
 const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
 
 const ProductReviewSystem = () => {
     const [ globalState, globalActions ] = useGlobal();
-    const session = useSession();
-    const isLoggedIn = session[0]?.user;
-    const router = useRouter();
-    const isActive = (pathname) => router.pathname === pathname;
-
     const [ loading, setLoading ] = useState(false);
     const [ products, setProducts ] = useState([]);
     const [ queryStrings, setQueryStrings ] = useState({
@@ -52,8 +44,6 @@ const ProductReviewSystem = () => {
         setLoading(false);
     };
 
-    const project = startData.project;
-
     console.log('products:', products);
 
     return (
@@ -61,10 +51,10 @@ const ProductReviewSystem = () => {
             <ProjectPage>
                 <NavbarLeft />
 
-                <Sidebar project={project} />
+                <Sidebar />
 
                 <Board
-                    users={project.users}
+                    // users={project.users}
                     products={products}
                 />
             </ProjectPage>

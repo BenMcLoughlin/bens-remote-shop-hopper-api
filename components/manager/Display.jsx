@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import useGlobal from "../../globalState/store";
-import { updateMetrics } from '../../requests/updateMetrics';
+import useGlobal from "globalState/store";
+import { updateMetrics } from 'requests/updateMetrics';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;

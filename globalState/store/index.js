@@ -13,6 +13,7 @@ const initialState = {
     status: "INITIAL",
     products: {
         data: [],
+        hotItems: [],
         result: false,
         query: {},
         cursor: 0,

@@ -5,28 +5,26 @@ import { useRouter } from 'next/router';
 import { useSession } from "next-auth/client";
 import styled from 'styled-components';
 
-import Layout from '../../components/Layout';
-import Counter from "../../components/Counter";
-import MetricsDisplay from '../../components/manager/MetricsDisplay';
-import SelectShop from '../../components/manager/SelectShop';
+import NavbarLeft from 'components/NavbarLeft';
+import Sidebar from './Sidebar';
+import Layout from 'components/Layout';
+import Counter from "components/Counter";
+import MetricsDisplay from 'components/manager/MetricsDisplay';
+import SelectShop from 'components/manager/SelectShop';
 import * as shopsLists from '../../mock/shopsLists';
 
-import { camelCase, capitalize } from '../../utils/strings';
-import { updateMetrics } from '../../requests/updateMetrics';
-import useGlobal from "../../globalState/store";
+import { camelCase, capitalize } from 'utils/strings';
+import { updateMetrics } from 'requests/updateMetrics';
+import useGlobal from "globalState/store";
 
 const Sitehost = () => {
-    const session = useSession();
-    const isLoggedIn = session[0]?.user;
     const router = useRouter();
     const [ globalState, globalActions ] = useGlobal();
     const { status } = globalState;
-    const isActive = (pathname) => router.pathname === pathname;
     const { pid } = router.query;
 
     const [ uploadedResult, setUpLoaded ] = useState(false);
-    // we may not use this component loading...
-    const [ isLoading, setIsLoading ] = useState(false);
+    const [ loading, setLoading ] = useState(false);
     const [ siteHost, setSelectedSiteHost ] = useState('shopify');
     const [ businessName, setSelectedBusinessName ] = useState('');
     const [ domain, setSelectedDomain ] = useState('');
@@ -67,14 +65,14 @@ const Sitehost = () => {
     };
 
     const _updateSingle = async (params) => {
-        setIsLoading(true);
+        setLoading(true);
         globalActions.counter.clearRequests();
         globalActions.counter.setLoading(true);
         const success = await globalActions.products.single(params);
 
         if (success) {
             updateMetrics(true, params.business_name);
-            setIsLoading(false);
+            setLoading(false);
             globalActions.counter.setLoading(false);
 
             return true;
@@ -82,47 +80,53 @@ const Sitehost = () => {
     };
 
     return (
-        <Layout>
+        <Layout isManager>
+            {/* <NavbarLeft /> */}
+
+            {/* <Sidebar WIP
+                            shopsList={shops.shopsList}
+                            set={shops.set}
+                            selected={shops.selected}
+                            refresh={Boolean(uploadedResult)}
+                        /> */}
+
+            <Title>
+                <h2 style={{ color: '#fff' }}>{`${ capitalize(pid) } Database Manager`} </h2>
+                <Counter />
+            </Title>
             {
-                isLoggedIn ?
-                    <>
-                        <Title>
-                            <h2 style={{ color: '#fff' }}>{`${ capitalize(pid) } Database Manager`} </h2>
-                            <Counter />
-                        </Title>
-                        {
-                            uploadedResult && 
+                uploadedResult && 
                                 <Results>
                                     {(status && globalState.counter.loading) && <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>}
                                     {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
                                     }
                                 </Results>
-                        }
-                        <SitehostSection>
-                            <MetricsDisplay
-                                header={shops.selected.siteHost}
-                                isHost
-                                isLoading={globalState.counter.loading}
-                                buttonTitle={`Load All ${ shops.selected.siteHost } Shops`}
-                                buttonClick={() => {
-                                    shops.set.selectedBusinessName('');
+            }
+            <SitehostSection>
+                <MetricsDisplay
+                    header={shops.selected.siteHost}
+                    isHost
+                    loading={globalState.counter.loading}
+                    buttonTitle={`Load All ${ shops.selected.siteHost } Shops`}
+                    buttonClick={() => {
+                        shops.set.selectedBusinessName('');
 
-                                    _updateAll({
-                                        siteHost: shops.selected.siteHost,
-                                        businessName: null,
-                                        domain: null
-                                    });
-                                }}
-                                disabled={Boolean(shops.selected.businessName)}
-                            />
-                        </SitehostSection>
+                        _updateAll({
+                            siteHost: shops.selected.siteHost,
+                            businessName: null,
+                            domain: null
+                        });
+                    }}
+                    disabled={Boolean(shops.selected.businessName)}
+                />
+            </SitehostSection>
 
-                        <ShopSection>
-                            {
-                                shops.selected.businessName &&
+            <ShopSection>
+                {
+                    shops.selected.businessName &&
                                     <MetricsDisplay
                                         header={shops.selected.businessName}
-                                        isLoading={globalState.counter.loading}
+                                        loading={globalState.counter.loading}
                                         buttonTitle={`Load ${ shops.selected.businessName }`}
                                         buttonClick={() => {
                                             // set.selectedSiteHost(''); todo
@@ -130,21 +134,15 @@ const Sitehost = () => {
                                         }}
                                         disabled={false}
                                     />
-                            }
-                        </ShopSection>
+                }
+            </ShopSection>
 
-                        <SelectShop
-                            shopsList={shops.shopsList}
-                            set={shops.set}
-                            selected={shops.selected}
-                            refresh={Boolean(uploadedResult)}
-                        />
-                    </>
-                    :
-                    <Link href="/api/auth/signin">
-                        <h1 data-active={isActive('/signup')}>Might as well Log in</h1>
-                    </Link>
-            }
+            <SelectShop
+                shopsList={shops.shopsList}
+                set={shops.set}
+                selected={shops.selected}
+                refresh={Boolean(uploadedResult)}
+            />
         </Layout>
     );
 };

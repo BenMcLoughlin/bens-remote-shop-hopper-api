@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Header from './Header';
 
@@ -16,7 +16,7 @@ const Layout = (props) => {
     const isActive = (pathname) => router.pathname === pathname;
 
     return (
-        <Main>
+        <Main isManager={props.isManager}>
             <Head>
                 <link
                     href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;500&display=swap"
@@ -79,4 +79,9 @@ const Layout = (props) => {
 export default Layout;
 
 export const Main = styled.div`
+    ${ (props) => props.isManager &&
+    css`
+        height: 100vh;
+        overflow-y: auto;
+    ` }
 `;

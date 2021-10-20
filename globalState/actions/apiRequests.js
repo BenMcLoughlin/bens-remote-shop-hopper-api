@@ -9,7 +9,7 @@ export const userProducts = (store, query) => {
     return products.searchProducts(query)
         .then((data) => {
             // store.actions.products.setData(data.result);
-            console.log('store.state.products:', store.state.products.data.length);
+            console.log('store.state.products:', store.state.products.data?.length);
 
             store.actions.products.setLoading(false);
 
@@ -28,7 +28,7 @@ export const nextPage = (store) => {
     const body = {
         column: store.state.products.query.column,
         metric: store.state.products.query.metric,
-        cursor: store.state.products.cursor + store.state.products.data.length,
+        cursor: store.state.products.cursor + store.state.products.data?.length,
         amount: store.state.products.amount
     }; 
     console.log('nextPage body:', body);
@@ -54,7 +54,7 @@ export const prevPage = (store) => {
     const body = {
         column: store.state.products.query.column,
         metric: store.state.products.query.metric,
-        cursor: store.state.products.cursor - store.state.products.data.length,
+        cursor: store.state.products.cursor - store.state.products.data?.length,
         amount: store.state.products.amount
     }; 
     console.log('prevPage body:', body);
@@ -63,6 +63,28 @@ export const prevPage = (store) => {
         .then((data) => {
             store.actions.products.setData(data.result);
             store.actions.products.setCursor(body.cursor);
+            store.actions.products.setLoading(false);
+
+            return data.result;
+        })
+        .catch((error) => {
+            store.actions.products.setLoading(false);
+            console.log('error:', error);
+            // notifier.displayError(error.verbiage); todo
+        });
+};
+
+export const getHotItems = (store, amount = 12) => {
+    store.actions.products.setLoading(true);
+
+    const body = {
+        amount: amount
+    }; 
+    console.log('getHotItems body:', body);
+
+    return products.getHotItems(body)
+        .then((data) => {
+            store.actions.products.setHotItems(data.result);
             store.actions.products.setLoading(false);
 
             return data.result;

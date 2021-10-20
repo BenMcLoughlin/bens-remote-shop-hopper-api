@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 import moment from 'moment';
 import { intersection } from 'lodash';
 import styled from 'styled-components';
 import { ArrowLeftShort } from '@styled-icons/bootstrap/ArrowLeftShort';
 import { ArrowRightShort } from '@styled-icons/bootstrap/ArrowRightShort';
 
-import Product from './Product';
+import Product from 'components/Product';
 import { color, font, mixin } from 'styles/theme';
 import incrementProduct from "requests/incrementProduct";
 import useGlobal from "globalState/store";
+import loaderGif from 'public/assets/loader/octo_loader.gif';
 
 const propTypes = {
     status: PropTypes.string,
@@ -46,7 +48,6 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
         setLoading('nextPage');
         const result = await globalActions.apiRequests.nextPage();
         if (result) {
-            // setProducts(sorted);
             setLoading(false);
         }
     };
@@ -55,7 +56,6 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
         setLoading('prevPage');
         const result = await globalActions.apiRequests.prevPage();
         if (result) {
-            // setProducts(sorted);
             setLoading(false);
         }
     };
@@ -77,30 +77,37 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
                 </Icon>
             </ButtonsWrapper>
             <List>
-                {filteredListProducts.map((product, index) => (
-                    <Product
-                        key={product.id}
-                        id={product.id}
-                        businessName={product.business_name}
-                        index={index}
-                        src={product.images[0]?.src}
-                        title={product.title}
-                        rating={product.rating}
-                        price={(product.original_price / 100).toFixed(2)}
-                        compareAtPrice={(product.original_price / 100).toFixed(2)}
-                        tags={product.tags}
-                        buckets={product.buckets}
-                        incrementProduct={_incrementProduct}
-                    />
-                ))}
-                <ButtonsWrapper>
-                    <Icon onClick={_prevPage}>
-                        <ArrowLeftShort />
-                    </Icon>
-                    <Icon onClick={_nextPage}>
-                        <ArrowRightShort /> 
-                    </Icon>
-                </ButtonsWrapper>
+                {
+                    loading ?
+                        <Image src={loaderGif} className="loading" width={800} height={600} />
+                        :
+                        <>
+                            {filteredListProducts.map((product, index) => (
+                                <Product
+                                    key={product.id}
+                                    id={product.id}
+                                    businessName={product.business_name}
+                                    index={index}
+                                    src={product.images[0]?.src}
+                                    title={product.title}
+                                    rating={product.rating}
+                                    price={(product.original_price / 100).toFixed(2)}
+                                    compareAtPrice={(product.original_price / 100).toFixed(2)}
+                                    tags={product.tags}
+                                    buckets={product.buckets}
+                                    incrementProduct={_incrementProduct}
+                                />
+                            ))}
+                            <ButtonsWrapper>
+                                <Icon onClick={_prevPage}>
+                                    <ArrowLeftShort />
+                                </Icon>
+                                <Icon onClick={_nextPage}>
+                                    <ArrowRightShort /> 
+                                </Icon>
+                            </ButtonsWrapper>
+                        </>
+                }
             </List>
         </>
     );

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
-import useGlobal from '../../globalState/store';
-import { camelCase } from '../../utils/strings';
-import addShops from "../../requests/addShops";
-import fetchShops from "../../requests/fetchShops";
-import fetchShopStatus from "../../requests/fetchShopStatus";
+import useGlobal from 'globalState/store';
+import { camelCase } from 'utils/strings';
+import addShops from "requests/addShops";
+import fetchShops from "requests/fetchShops";
+import fetchShopStatus from "requests/fetchShopStatus";
 import CreateShopModal from "../CreateShopModal";
 
 const SelectShop = ({ set, selected, shopsList, refresh }) => {
@@ -127,7 +127,8 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                     align-items: center;
                     padding: 1rem;
                     width: 100%;
-                    min-height: 70rem;
+                    height: 100vh;
+                    overflow-y: auto;
                     border-top: 1px solid grey;
                 }
                 .header {

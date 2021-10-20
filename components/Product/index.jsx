@@ -8,8 +8,8 @@ import { truncate } from 'utils/strings';
 
 const propTypes = {
     id: PropTypes.number,
-    src: PropTypes.string.isRequired,
-    businessName: PropTypes.string.isRequired,
+    src: PropTypes.string,
+    businessName: PropTypes.string,
     index: PropTypes.number,
     title: PropTypes.string,
     rating: PropTypes.number,

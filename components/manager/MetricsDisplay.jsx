@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
 import useGlobal from '../../globalState/store';
-import { startCase } from '../../utils/strings';
-import { formatDate } from '../../utils/dates/forDisplay';
+import { startCase } from 'utils/strings';
+import { formatDate } from 'utils/dates/forDisplay';
 import Button from '../../components/buttons/Button';
-import { updateMetrics } from '../../requests/updateMetrics';
+import { updateMetrics } from 'requests/updateMetrics';
 import fetchShopStatus from "../../requests/fetchShopStatus";
 
 const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, buttonTitle, disabled }) => {

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import useMergeState from '../../../hooks/mergeState';
@@ -10,7 +10,7 @@ import Filters from './Filters';
 
 const propTypes = {
     products: PropTypes.array.isRequired,
-    users: PropTypes.array.isRequired,
+    users: PropTypes.array,
     updateLocalProjectIssues: PropTypes.func
 };
 

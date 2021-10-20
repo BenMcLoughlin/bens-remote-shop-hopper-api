@@ -79,6 +79,12 @@ export const setData = (store, state) => {
     store.setState({ products: products });
 };
 
+export const setHotItems = (store, state) => {
+    const products = { ...store.state.products };
+    products.hotItems = state;
+    store.setState({ products: products });
+};
+
 export const setQuery = (store, state) => {
     const products = { ...store.state.products };
     products.query = state;
