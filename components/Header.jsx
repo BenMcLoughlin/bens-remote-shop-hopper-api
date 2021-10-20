@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import { signOut, useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/client';
 
 import { LinkText } from '../components';
 import logoSrc from '../public/assets/logos/shophopper-logo.svg';

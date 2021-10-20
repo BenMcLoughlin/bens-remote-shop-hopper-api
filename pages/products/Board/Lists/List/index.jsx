@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { intersection } from 'lodash';
 import styled from 'styled-components';
+import { ArrowLeftShort } from '@styled-icons/bootstrap/ArrowLeftShort';
+import { ArrowRightShort } from '@styled-icons/bootstrap/ArrowRightShort';
 
 import Product from './Product';
 import { color, font, mixin } from 'styles/theme';
 import incrementProduct from "requests/incrementProduct";
 import useGlobal from "globalState/store";
-import { startCase } from 'utils/strings';
 
 const propTypes = {
     status: PropTypes.string,
@@ -68,8 +69,12 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
                 <ProductsCount>: {formatProductsCount(allListProducts, filteredListProducts)} Items</ProductsCount>
             </Title>
             <ButtonsWrapper>
-                <button onClick={_prevPage}>Last</button>
-                <button onClick={_nextPage}>Next</button>
+                <Icon onClick={_prevPage}>
+                    <ArrowLeftShort />
+                </Icon>
+                <Icon onClick={_nextPage}>
+                    <ArrowRightShort /> 
+                </Icon>
             </ButtonsWrapper>
             <List>
                 {filteredListProducts.map((product, index) => (
@@ -88,6 +93,14 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
                         incrementProduct={_incrementProduct}
                     />
                 ))}
+                <ButtonsWrapper>
+                    <Icon onClick={_prevPage}>
+                        <ArrowLeftShort />
+                    </Icon>
+                    <Icon onClick={_nextPage}>
+                        <ArrowRightShort /> 
+                    </Icon>
+                </ButtonsWrapper>
             </List>
         </>
     );
@@ -126,6 +139,13 @@ const formatProductsCount = (allListProducts, filteredListProducts) => {
     return allListProducts.length;
 };
 
+const Icon = styled.div`
+    height: 2rem;
+    width: 2rem;
+    fill: white;
+    margin-right: 1.5rem;
+`;
+
 export const ButtonsWrapper = styled.div`
     display: flex;
     flex-direction: row;
@@ -147,11 +167,6 @@ export const List = styled.div`
     border-radius: 3px;
     background: ${ color.backgroundLightest };
     padding: 10px 8px 300px 8px;
-    @media (max-width: 1100px) {
-    }
-    // &:hover {
-    //     background: ${ color.backgroundLight };
-    // }
 `;
 
 export const Title = styled.div`
