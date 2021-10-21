@@ -37,18 +37,14 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
     }, [ globalState.products.query ]);
 
     const _incrementProduct = async (id) => {
-        setLoading('incrementProduct');
-        const result = await incrementProduct(id);
-        if (result) {
-            setLoading(false);
-        }
+        await incrementProduct(id);
     };
 
     const _nextPage = async () => {
-        setLoading('nextPage');
+        // setLoading('nextPage');
         const result = await globalActions.apiRequests.nextPage();
         if (result) {
-            setLoading(false);
+            // setLoading(false);
         }
     };
 
@@ -69,9 +65,14 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
                 <ProductsCount>: {formatProductsCount(allListProducts, filteredListProducts)} Items</ProductsCount>
             </Title>
             <ButtonsWrapper>
-                <Icon onClick={_prevPage}>
-                    <ArrowLeftShort />
-                </Icon>
+                {
+                    globalState.products.cursor > filteredListProducts.length ?
+                        <Icon onClick={_prevPage}>
+                            <ArrowLeftShort />
+                        </Icon>
+                        :
+                        <div></div>
+                }
                 <Icon onClick={_nextPage}>
                     <ArrowRightShort /> 
                 </Icon>
@@ -99,9 +100,14 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
                                 />
                             ))}
                             <ButtonsWrapper>
-                                <Icon onClick={_prevPage}>
-                                    <ArrowLeftShort />
-                                </Icon>
+                                {
+                                    globalState.products.cursor > filteredListProducts.length ?
+                                        <Icon onClick={_prevPage}>
+                                            <ArrowLeftShort />
+                                        </Icon>
+                                        :
+                                        <div></div>
+                                }
                                 <Icon onClick={_nextPage}>
                                     <ArrowRightShort /> 
                                 </Icon>

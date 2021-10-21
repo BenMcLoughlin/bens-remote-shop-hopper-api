@@ -28,15 +28,15 @@ const propTypes = {
 
 const BoardListProduct = ({ businessName, src, title, rating, id, price, compareAtPrice, tags, buckets, incrementProduct }) => {
     const [ globalState, globalActions ] = useGlobal();
-    let [ localRating, setRating ] = useState(0);
+    const [ localRating, setRating ] = useState(0);
 
     useEffect(() => { // todo
         setRating(rating);
     }, [ globalState.products.data ]);
 
     const _incrementProduct = () => {
-        incrementProduct(id);
         setRating(localRating + 1);
+        incrementProduct(id);
     };
 
     return (

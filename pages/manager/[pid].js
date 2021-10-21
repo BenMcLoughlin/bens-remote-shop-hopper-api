@@ -17,7 +17,10 @@ import { camelCase, capitalize } from 'utils/strings';
 import { updateMetrics } from 'requests/updateMetrics';
 import useGlobal from "globalState/store";
 
-const Sitehost = () => {
+import { sizes } from 'styles/theme';
+const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
+
+const SiteHost = () => {
     const router = useRouter();
     const [ globalState, globalActions ] = useGlobal();
     const { status } = globalState;
@@ -81,49 +84,45 @@ const Sitehost = () => {
 
     return (
         <Layout isManager>
-            {/* <NavbarLeft /> */}
+            <Page>
+                <NavbarLeft />
 
-            {/* <Sidebar WIP
-                            shopsList={shops.shopsList}
-                            set={shops.set}
-                            selected={shops.selected}
-                            refresh={Boolean(uploadedResult)}
-                        /> */}
+                <Sidebar />
 
-            <Title>
-                <h2 style={{ color: '#fff' }}>{`${ capitalize(pid) } Database Manager`} </h2>
-                <Counter />
-            </Title>
-            {
-                uploadedResult && 
+                <Title>
+                    <h2 style={{ color: '#fff' }}>{`${ capitalize(pid || "not working") } Database Manager`} </h2>
+                    <Counter />
+                </Title>
+                {
+                    uploadedResult && 
                                 <Results>
                                     {(status && globalState.counter.loading) && <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>}
                                     {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
                                     }
                                 </Results>
-            }
-            <SitehostSection>
-                <MetricsDisplay
-                    header={shops.selected.siteHost}
-                    isHost
-                    loading={globalState.counter.loading}
-                    buttonTitle={`Load All ${ shops.selected.siteHost } Shops`}
-                    buttonClick={() => {
-                        shops.set.selectedBusinessName('');
+                }
+                <SiteHostSection>
+                    <MetricsDisplay
+                        header={shops.selected.siteHost}
+                        isHost
+                        loading={globalState.counter.loading}
+                        buttonTitle={`Load All ${ shops.selected.siteHost } Shops`}
+                        buttonClick={() => {
+                            shops.set.selectedBusinessName('');
 
-                        _updateAll({
-                            siteHost: shops.selected.siteHost,
-                            businessName: null,
-                            domain: null
-                        });
-                    }}
-                    disabled={Boolean(shops.selected.businessName)}
-                />
-            </SitehostSection>
+                            _updateAll({
+                                siteHost: shops.selected.siteHost,
+                                businessName: null,
+                                domain: null
+                            });
+                        }}
+                        disabled={Boolean(shops.selected.businessName)}
+                    />
+                </SiteHostSection>
 
-            <ShopSection>
-                {
-                    shops.selected.businessName &&
+                <ShopSection>
+                    {
+                        shops.selected.businessName &&
                                     <MetricsDisplay
                                         header={shops.selected.businessName}
                                         loading={globalState.counter.loading}
@@ -134,18 +133,29 @@ const Sitehost = () => {
                                         }}
                                         disabled={false}
                                     />
-                }
-            </ShopSection>
+                    }
+                </ShopSection>
 
-            <SelectShop
-                shopsList={shops.shopsList}
-                set={shops.set}
-                selected={shops.selected}
-                refresh={Boolean(uploadedResult)}
-            />
+                <SelectShop
+                    shopsList={shops.shopsList}
+                    set={shops.set}
+                    selected={shops.selected}
+                    refresh={Boolean(uploadedResult)}
+                />
+            </Page>
         </Layout>
     );
 };
+
+export const Page = styled.div`
+    // padding: 25px 32px 50px ${ paddingLeft }px;
+    // @media (max-width: 1100px) {
+    //     padding: 25px 20px 50px ${ paddingLeft - 20 }px;
+    // }
+    // @media (max-width: 999px) {
+    //     padding-left: ${ paddingLeft - 20 - sizes.secondarySideBarWidth }px;
+    // }
+`;
 
 const Title = styled.div`
     display: flex;
@@ -157,7 +167,7 @@ const Title = styled.div`
     background: #485056;
     white-space: nowrap;
 `;
-const SitehostSection = styled.div`
+const SiteHostSection = styled.div`
     display: flex;
     justify-content: flex-end;
     background: #14c792;
@@ -183,10 +193,10 @@ const Results = styled.div`
     white-space: nowrap;
 `;
 
-Sitehost.propTypes = {
+SiteHost.propTypes = {
     shopsList: PropTypes.array,
     set: PropTypes.object,
     selected: PropTypes.object
 };
 
-export default Sitehost;
+export default SiteHost;

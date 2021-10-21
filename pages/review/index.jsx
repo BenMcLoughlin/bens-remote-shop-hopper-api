@@ -8,7 +8,7 @@ import searchTwoParams from "requests/searchTwoParams";
 import useGlobal from "globalState/store";
 import Layout from 'components/Layout';
 import NavbarLeft from 'components/NavbarLeft';
-import Sidebar from 'components/Sidebar';
+import Sidebar from './Sidebar';
 import Board from './Board';
 
 const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
@@ -48,7 +48,7 @@ const ProductReviewSystem = () => {
 
     return (
         <Layout>
-            <ProjectPage>
+            <Page>
                 <NavbarLeft />
 
                 <Sidebar />
@@ -57,12 +57,12 @@ const ProductReviewSystem = () => {
                     // users={project.users}
                     products={products}
                 />
-            </ProjectPage>
+            </Page>
         </Layout>
     );
 };
 
-export const ProjectPage = styled.div`
+export const Page = styled.div`
     padding: 25px 32px 50px ${ paddingLeft }px;
     @media (max-width: 1100px) {
         padding: 25px 20px 50px ${ paddingLeft - 20 }px;
@@ -70,17 +70,6 @@ export const ProjectPage = styled.div`
     @media (max-width: 999px) {
         padding-left: ${ paddingLeft - 20 - sizes.secondarySideBarWidth }px;
     }
-`;
-
-const Title = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    padding: 2rem;
-    color: #14e2a4;
-    background: #485056;
-    white-space: nowrap;
 `;
 
 export default ProductReviewSystem;

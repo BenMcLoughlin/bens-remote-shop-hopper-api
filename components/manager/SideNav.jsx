@@ -10,7 +10,6 @@ const SideNav = ({ shopsList, selected, set }) => {
 
     return (
         <div className="wrapper">
-            <div className="city">Kelowna</div>
             <Link href={`/manager/shopify`}>
                 <div
                     className={`listItem shopify`}

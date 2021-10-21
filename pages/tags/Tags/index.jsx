@@ -9,8 +9,8 @@ import searchTags from "requests/searchTags";
 const Tags = () => {
     const [ raw_Tags, set_Raw_Tags ] = useState([]);
     const [ search_products, set_search_products ] = useState([]);
-    const [ query, setQuery ] = useState('');
     const [ loading, setLoading ] = useState(false || "");
+    const [ query, setQuery ] = useState('');
 
     const router = useRouter();
 

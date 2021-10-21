@@ -10,7 +10,6 @@ const initialState = {
         fail: 0,
         loading: false
     },
-    status: "INITIAL",
     products: {
         data: [],
         hotItems: [],
@@ -21,6 +20,13 @@ const initialState = {
         status: 'INITIAL',
         loading: false
     },
+    city: '',
+    siteHosts: {
+        list: [],
+        status: 'INITIAL',
+        loading: false
+    },
+    status: 'INITIAL',
     shops: [],
     loading: false
 };

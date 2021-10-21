@@ -9,7 +9,7 @@ import searchTwoParams from "requests/searchTwoParams";
 import useGlobal from "globalState/store";
 import Layout from 'components/Layout';
 import NavbarLeft from 'components/NavbarLeft';
-import Sidebar from 'components/Sidebar';
+import Sidebar from './Sidebar';
 import Tags from './Tags';
 
 import { startData } from './mocks';
@@ -18,13 +18,8 @@ const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
 
 const TagReviewSystem = () => {
     const [ globalState, globalActions ] = useGlobal();
-    const session = useSession();
-    const isLoggedIn = session[0]?.user;
-    const router = useRouter();
-    const isActive = (pathname) => router.pathname === pathname;
 
     const [ loading, setLoading ] = useState(false);
-    const [ products, setProducts ] = useState([]);
     const [ queryStrings, setQueryStrings ] = useState({
         column: 'buckets', 
         metric: "Casual"
@@ -33,10 +28,6 @@ const TagReviewSystem = () => {
     useEffect(() => {
         _searchTwoParams(queryStrings);
     }, []);
-
-    useEffect(() => {
-        setProducts(globalState.products.data);
-    }, [ globalState.products.data ]);
 
     const _searchTwoParams = async () => {
         setLoading('search');
@@ -53,8 +44,6 @@ const TagReviewSystem = () => {
     };
 
     const project = startData.project;
-
-    console.log('products:', products);
 
     return (
         <Layout>

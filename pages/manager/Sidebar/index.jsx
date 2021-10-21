@@ -3,40 +3,37 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { Shop } from '@styled-icons/entypo/Shop';
+import { Web } from '@styled-icons/material/Web';
 import { Shopify } from '@styled-icons/fa-brands/Shopify';
+import { BuildingBankLink } from '@styled-icons/fluentui-system-regular/BuildingBankLink';
 import styled, { css } from 'styled-components';
+import * as shopsLists from 'mock/shopsLists';
 
+import { camelCase, startCase } from 'utils/strings';
 import useGlobal from 'globalState/store';
-import { camelCase } from 'utils/strings';
 import addShops from "requests/addShops";
 import fetchShops from "requests/fetchShops";
 import fetchShopStatus from "requests/fetchShopStatus";
 import logoSrc from 'public/assets/logos/shophopper-logo.svg';
 import { color, sizes, font, mixin, zIndexValues } from 'styles/theme';
 
-const renderLinkItem = (text, iconType, path) => {
-    let Icon = iconType;
-
-    return (
-        <Link href={path}>
-            <LinkItem>
-                <>
-                    <Icon size={30} />
-                    <LinkText>{text}</LinkText>
-                </>
-            </LinkItem>
-        </Link>
-    );
-};
-
-const ManagerSidebar = ({ set, selected, shopsList, refresh }) => { 
+const ManagerSidebar = () => { 
+    const router = useRouter();
     const [ globalState, globalActions ] = useGlobal();
     const [ list, setList ] = useState([]);
     const [ statuses, setStatuses ] = useState({});
     const [ addShopModal, toggleAddShopModal ] = useState(false);
     const [ loading, setLoading ] = useState(false || "");
+
+    const city = 'kelowna';
+    const shopsList = shopsLists[city];
+    const siteHostList = [ ...new Set(shopsList.map((d) => d.site_host)) ].filter((d) => d);
+    
+    useEffect(() => {
+        globalActions.siteHosts.setList(siteHostList);
+    }, [ ]);
 
     useEffect(() => {
         const _getShopStatus = async () => {
@@ -78,8 +75,19 @@ const ManagerSidebar = ({ set, selected, shopsList, refresh }) => {
         _getShopList();
     }, [ addShopModal ]);
 
-    const _toggleAddShopModal = () => {
-        toggleAddShopModal(!addShopModal);
+    const renderLinkItem = (text, iconType, path) => {
+        let Icon = iconType;
+
+        return (
+            <Link href={`/manager/${ path }`}>
+                <LinkItem isSelected={router.asPath.includes(path)}>
+                    <>
+                        <Icon size={30} />
+                        <LinkText>{text}</LinkText>
+                    </>
+                </LinkItem>
+            </Link>
+        );
     };
 
     return (
@@ -91,67 +99,25 @@ const ManagerSidebar = ({ set, selected, shopsList, refresh }) => {
                     </Logo>
                 </Link>
             </Info>
-
-            {renderLinkItem('Manage Shops', Shop, '/manager')}
-
+            <Header>
+                <BuildingBankLink size={30} />
+                <p>SiteHosts</p>
+            </Header>
             <Divider />
-
-            {renderLinkItem('Shopify', Shopify, '/manager')}
-
+            <ul className="list">
+                {siteHostList.map((siteHost) => (
+                    renderLinkItem(startCase(siteHost), Shopify, `${ siteHost.toLowerCase() }`)
+                ))}
+            </ul>
             <Divider />
-
-            {
-                loading ?
-                    <h3>Loading....</h3>
-                    :
-                    <React.Fragment>
-                        <div className="header">
-                            <h4>Available Stores</h4>
-                            <h4 className="button" onClick={_toggleAddShopModal}>Add</h4>
-                        </div>
-
-                        <Shops>
-                            {list.map((businessName) => (
-                                <div
-                                    key={businessName}
-                                    className={`businessName ${ camelCase(businessName) }`}
-                                    onClick={() => set.selectedBusinessName(businessName)}
-                                >
-                                    <div className="title">{businessName}</div>
-                                    {statuses[businessName] && // todo: Date format
-                                            <UpdateColumn>
-                                                <div>Most Recent: <Update>{statuses[businessName]?.products}</Update></div>
-                                                <Time>
-                                                    <Moment format="MM/DD hh:ssa">{statuses[businessName]?.updatedAt}</Moment>
-                                                </Time>
-                                            </UpdateColumn>
-                                    }
-                                </div>
-                            ))}
-                        </Shops>
-                    </React.Fragment>
-            }
-            <style jsx>{`
-                .businessName {
-                    display: flex;
-                    justify-content: left;
-                    align-items: center;
-                    justify-content: space-around;
-                    gap: 1rem;
-                    padding: 2rem;
-                    border-radius: 5px;
-                    position: relative;
-                    cursor: pointer;
-                    transition: all 0.7s ease;
-                    justify-content: left;
-                    background: #f7f7f7;
-                }
-                .${ camelCase(selected.businessName) } {
-                    background: #485056;
-                    color: white;
-                }
-                `}</style>
-
+            {renderLinkItem('Etc...', Web, 'etc')}
+            <Divider />
+            {renderLinkItem('Etc...', Web, 'etc')}
+            <Divider />
+            {renderLinkItem('Etc...', Web, 'etc')}
+            <Divider />
+            {renderLinkItem('Etc...', Web, 'etc')}
+            <Divider />
         </SidebarWrapper>
     );
 };
@@ -161,28 +127,33 @@ export const SidebarWrapper = styled.div`
     z-index: ${ zIndexValues.navLeft - 1 };
     top: 0;
     left: ${ sizes.appNavBarLeftWidth }px;
-    width: ${ sizes.secondarySideBarWidth * 2 }px;
-    // width: ${ (props) => props.show ? 400 : 20 }px;
+    height: 100vh;
+    width: ${ sizes.secondarySideBarWidth }px;
     padding: 0 16px 24px;
     background: ${ color.backgroundLightest };
     border-right: 1px solid ${ color.borderLightest };
     ${ mixin.scrollableY }
     ${ mixin.customScrollbar() }
     @media (max-width: 1100px) {
-        width: ${ (props) => props.show ? 400 : 20 }px;
-        // width: ${ sizes.secondarySideBarWidth - 10 }px;
+        width: ${ sizes.secondarySideBarWidth - 10 }px;
     }
     @media (max-width: 999px) {
-        // display: none;
+        display: none;
     }
 `;
 
-export const Shops = styled.div`
+export const Header = styled.div`
     display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100%;
-    overflow-y: auto;
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    padding: 8px 12px;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    p {
+        margin-left: 10px;
+    }
 `;
 
 export const Time = styled.div`
@@ -256,15 +227,16 @@ export const LinkItem = styled.div`
     cursor: pointer;
     i {
         margin-right: 15px;
-        font-size: 20px;
+        font-size: 20px; 
     }
-    &.active {
+    ${ (props) => props.isSelected &&
+    css`
         color: ${ color.primary };
         background: ${ color.backgroundLight };
         i {
         color: ${ color.primary };
         }
-    }
+    ` }
 `;
 
 export const LinkText = styled.div`

@@ -5,7 +5,7 @@ import useMergeState from '../../../hooks/mergeState';
 // import Breadcrumbs from '../../../components/breadcrumbs';
 import styled from 'styled-components';
 
-import List from './Lists/List';
+import List from './List';
 import Filters from './Filters';
 
 const propTypes = {
@@ -42,10 +42,10 @@ const Board = ({ products, users, updateLocalProjectIssues }) => {
     );
 };
 
-Board.propTypes = propTypes;
-
-export default Board;
-
 export const BoardWrapper = styled.div`
     overflow: hidden;
 `;
+
+Board.propTypes = propTypes;
+
+export default Board;
