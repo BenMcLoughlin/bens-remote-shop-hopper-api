@@ -49,13 +49,22 @@ const SiteHost = () => {
         shopsList,
         selected: {
             siteHost: camelCase(siteHost),
-            businessName: businessName,
-            domain
+            businessName: businessName
         },
         set: {
             selectedSiteHost: (v) => setSelectedSiteHost(v),
             selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v)
         }
+    };
+
+    const selected = {
+        siteHost: camelCase(siteHost),
+        businessName: businessName
+    };
+
+    const set = {
+        selectedSiteHost: (v) => setSelectedSiteHost(v),
+        selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v)
     };
 
     const _updateAll = async () => {
@@ -90,56 +99,56 @@ const SiteHost = () => {
                 <Sidebar />
 
                 <Title>
-                    <h2 style={{ color: '#fff' }}>{`${ capitalize(pid || "not working") } Database Manager`} </h2>
+                    <h2 style={{ color: '#fff', margin: 10 }}>{`${ capitalize(pid || "not working") } Database Manager`} </h2>
                     <Counter />
                 </Title>
                 {
                     uploadedResult && 
-                                <Results>
-                                    {(status && globalState.counter.loading) && <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>}
-                                    {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
-                                    }
-                                </Results>
+                        <Results>
+                            {(status && globalState.counter.loading) && <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>}
+                            {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
+                            }
+                        </Results>
                 }
                 <SiteHostSection>
                     <MetricsDisplay
-                        header={shops.selected.siteHost}
+                        header={selected.siteHost}
                         isHost
                         loading={globalState.counter.loading}
-                        buttonTitle={`Load All ${ shops.selected.siteHost } Shops`}
+                        buttonTitle={`Load All ${ selected.siteHost } Shops`}
                         buttonClick={() => {
-                            shops.set.selectedBusinessName('');
+                            set.selectedBusinessName('');
 
                             _updateAll({
-                                siteHost: shops.selected.siteHost,
+                                siteHost: selected.siteHost,
                                 businessName: null,
                                 domain: null
                             });
                         }}
-                        disabled={Boolean(shops.selected.businessName)}
+                        disabled={Boolean(selected.businessName)}
                     />
                 </SiteHostSection>
 
                 <ShopSection>
                     {
-                        shops.selected.businessName &&
-                                    <MetricsDisplay
-                                        header={shops.selected.businessName}
-                                        loading={globalState.counter.loading}
-                                        buttonTitle={`Load ${ shops.selected.businessName }`}
-                                        buttonClick={() => {
-                                            // set.selectedSiteHost(''); todo
-                                            _updateSingle(shops.selected);
-                                        }}
-                                        disabled={false}
-                                    />
+                        selected.businessName &&
+                            <MetricsDisplay
+                                header={selected.businessName}
+                                loading={globalState.counter.loading}
+                                buttonTitle={`Load ${ selected.businessName }`}
+                                buttonClick={() => {
+                                    // set.selectedSiteHost(''); todo
+                                    _updateSingle(selected);
+                                }}
+                                disabled={false}
+                            />
                     }
                 </ShopSection>
 
                 <SelectShop
                     shopsList={shops.shopsList}
-                    set={shops.set}
-                    selected={shops.selected}
+                    set={set}
+                    selected={selected}
                     refresh={Boolean(uploadedResult)}
                 />
             </Page>
@@ -148,13 +157,13 @@ const SiteHost = () => {
 };
 
 export const Page = styled.div`
-    // padding: 25px 32px 50px ${ paddingLeft }px;
-    // @media (max-width: 1100px) {
-    //     padding: 25px 20px 50px ${ paddingLeft - 20 }px;
-    // }
-    // @media (max-width: 999px) {
-    //     padding-left: ${ paddingLeft - 20 - sizes.secondarySideBarWidth }px;
-    // }
+    padding: 25px 32px 50px ${ paddingLeft }px;
+    @media (max-width: 1100px) {
+        padding: 25px 20px 50px ${ paddingLeft - 20 }px;
+    }
+    @media (max-width: 999px) {
+        padding-left: ${ paddingLeft - 20 - sizes.secondarySideBarWidth }px;
+    }
 `;
 
 const Title = styled.div`
@@ -162,10 +171,17 @@ const Title = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 2rem;
+    padding: 1.2rem;
     color: #14e2a4;
     background: #485056;
-    white-space: nowrap;
+    border-radius: 4px;
+    @media (max-width: 680px) {
+        padding: 5px;
+        width: unset;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+    }
 `;
 const SiteHostSection = styled.div`
     display: flex;
@@ -190,7 +206,6 @@ const Results = styled.div`
     padding: 1rem;
     padding-right: 3rem;
     background: #485056;
-    white-space: nowrap;
 `;
 
 SiteHost.propTypes = {

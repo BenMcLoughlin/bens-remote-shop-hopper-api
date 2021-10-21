@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 import Moment from 'react-moment';
+import styled from 'styled-components';
 
 import useGlobal from 'globalState/store';
 import { camelCase } from 'utils/strings';
@@ -8,6 +10,7 @@ import addShops from "requests/addShops";
 import fetchShops from "requests/fetchShops";
 import fetchShopStatus from "requests/fetchShopStatus";
 import CreateShopModal from "../CreateShopModal";
+import loaderGif from 'public/assets/loader/octo_loader.gif';
 
 const SelectShop = ({ set, selected, shopsList, refresh }) => {
     const [ globalState, globalActions ] = useGlobal();
@@ -72,11 +75,11 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
 
     return (
         <>
-            <div className="wrapper">
+            <Wrapper>
                 {
                     addShopModal &&
                     <button className="send" onClick={() => _addShop('all')}>
-                        Add All Shops from local file
+                        Add All Shops from local JSON file
                     </button>
                 }
 
@@ -90,7 +93,9 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
 
                 {
                     loading ?
-                        <h3>Loading....</h3>
+                        <div className="header">
+                            <Image src={loaderGif} className="loading" width={800} height={600} />
+                        </div>
                         :
                         <React.Fragment>
                             <div className="header">
@@ -98,7 +103,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                                 <h4 className="button" onClick={_toggleAddShopModal}>Add</h4>
                             </div>
 
-                            <div className="row">
+                            <Row>
                                 {list.map((businessName) => (
                                     <div
                                         key={businessName}
@@ -116,48 +121,28 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                                         }
                                     </div>
                                 ))}
-                            </div>
+                            </Row>
                         </React.Fragment>
                 }
-            </div>
+            </Wrapper>
             <style jsx>{`
-                .wrapper {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    padding: 1rem;
-                    width: 100%;
-                    height: 100vh;
-                    overflow-y: auto;
-                    border-top: 1px solid grey;
-                }
                 .header {
                     width: 100%;
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
+                    align-items: center;
                     padding: 1rem;
                     text-align: center;
-                    margin-bottom: 1rem;
-                }
-                .row {
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: start;
-                    flex-direction: row;
-                    text-align: right;
-                    min-height: 17rem;
-                    width: 90%;
-                    width: 100%;
-                    gap: 2rem;
                 }
                 .businessName {
                     display: flex;
                     justify-content: left;
                     align-items: center;
                     justify-content: space-around;
-                    width: 44%;
-                    gap: 1rem;
+                    width: 100%;
+                    max-width: 300px;
+                    margin: 1rem;
                     padding: 2rem;
                     border-radius: 5px;
                     position: relative;
@@ -198,6 +183,28 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
         </>
     );
 };
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    flex-direction: row;
+    text-align: right;
+    min-height: 17rem;
+    width: 100%;
+    gap: 2rem;
+`;
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+`;
 
 SelectShop.propTypes = {
     set: PropTypes.object,

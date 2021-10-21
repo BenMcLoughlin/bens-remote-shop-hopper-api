@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
+import styled from 'styled-components';
 
 import useGlobal from '../../globalState/store';
 import { startCase } from 'utils/strings';
@@ -44,7 +45,7 @@ const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, butt
 
     return (
         <div className="wrapper">
-            <div className="header-row">
+            <HeaderRow>
                 {!isHost &&
                     <div className="header">
                         {startCase(header)}
@@ -59,8 +60,8 @@ const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, butt
                         backgroundColor={isHost ? '#1469eb' : '#25E9AF'}
                     />
                 }
-            </div>
-            <div className="row">
+            </HeaderRow>
+            <Row>
                 <div className="column">
                     <p className="value">{totalItems}</p>
                     <p className="title">{startCase(header)} items in the database</p>
@@ -72,25 +73,18 @@ const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, butt
                     </p>
                     <p className="title">Last Update</p>
                 </div>
-            </div>
+            </Row>
             <style jsx>{`
                 .wrapper {
                     display: flex;
                     flex-direction: column;
                     align-items: flex-end;
+                    padding: 1rem;
                 }
                 .header {
                     font-size: 2.0rem;
                     padding: 1rem;
                     text-align: left;,
-                    color: white;
-                }
-                .header-row {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 1rem;
                     color: white;
                 }
                 .row {
@@ -106,8 +100,7 @@ const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, butt
                     flex-direction: column;
                     align-items: flex-end;
                     justify-content: center;
-                    width: 10rem;
-                    padding: 1rem;
+                    // width: 10rem;
                     border-right: 1px solid #d5d5d5;
                 }
                 .highlight {
@@ -118,26 +111,55 @@ const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, butt
                     flex-direction: column;
                 }
                 .value {
-                    height: 3.5rem;
+                    height: 2.5rem;
                     font-size: 1rem;
-                    // width: 10rem;
                     text-align: center;
                     font-weight: bold;
                     padding: 0.3rem;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
                     border-bottom: 1px solid #d5d5d5;
                 }
                 .title {
-                    padding: 1rem;
+                    padding: 20px;
                     font-size: 1rem;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    white-space: nowrap;
+                    text-align: right;
                 }
             `}</style>
         </div>
     );
 };
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem;
+    color: white;
+    @media (max-width: 680px) {
+        padding: 5px;
+        width: unset;
+        align-items: flex-end;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+`;
+
+const HeaderRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    @media (max-width: 680px) {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+`;
 
 MetricsDisplay.propTypes = {
     header: PropTypes.string,
