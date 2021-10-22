@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { sizes } from 'styles/theme';
@@ -44,7 +42,7 @@ const ProductReviewSystem = () => {
         setLoading(false);
     };
 
-    console.log('products:', products);
+    // console.log('products:', products);
 
     return (
         <Layout>
@@ -55,7 +53,7 @@ const ProductReviewSystem = () => {
 
                 <Board
                     // users={project.users}
-                    products={products}
+                    // products={products}
                 />
             </Page>
         </Layout>

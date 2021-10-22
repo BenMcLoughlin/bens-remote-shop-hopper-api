@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { color } from 'styles/theme';
-import Icon from 'components/Icon';
+import {Icon} from 'components/Icon';
 
 import { StyledButton, StyledSpinner, Text } from './Styles';
 

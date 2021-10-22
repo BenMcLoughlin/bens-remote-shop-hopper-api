@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useSession } from "next-auth/client";
 import styled from 'styled-components';
 
 import NavbarLeft from 'components/NavbarLeft';
@@ -27,7 +25,6 @@ const SiteHost = () => {
     const { pid } = router.query;
 
     const [ uploadedResult, setUpLoaded ] = useState(false);
-    const [ loading, setLoading ] = useState(false);
     const [ siteHost, setSelectedSiteHost ] = useState('shopify');
     const [ businessName, setSelectedBusinessName ] = useState('');
     const [ domain, setSelectedDomain ] = useState('');
@@ -44,22 +41,10 @@ const SiteHost = () => {
         selectedShop && setSelectedDomain(selectedShop.domain);
     }, [ businessName ]);
 
-    // todo: Convert to GlobalState
-    const shops = {
-        shopsList,
-        selected: {
-            siteHost: camelCase(siteHost),
-            businessName: businessName
-        },
-        set: {
-            selectedSiteHost: (v) => setSelectedSiteHost(v),
-            selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v)
-        }
-    };
-
     const selected = {
         siteHost: camelCase(siteHost),
-        businessName: businessName
+        businessName: businessName,
+        domain
     };
 
     const set = {
@@ -67,25 +52,29 @@ const SiteHost = () => {
         selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v)
     };
 
+    const _cancel = async () => {
+        // todo
+        await globalActions.products.all([], true);
+    };
+
     const _updateAll = async () => {
+        globalActions.counter.clearRequests();
+        globalActions.counter.setLoading(true);
         const success = await globalActions.products.all(globalState.shops);
 
         if (success) {
             updateMetrics(true, 'all');
+            globalActions.counter.setLoading(false);
+
             return true;
         }
     };
 
     const _updateSingle = async (params) => {
-        setLoading(true);
-        globalActions.counter.clearRequests();
-        globalActions.counter.setLoading(true);
         const success = await globalActions.products.single(params);
 
         if (success) {
             updateMetrics(true, params.business_name);
-            setLoading(false);
-            globalActions.counter.setLoading(false);
 
             return true;
         }
@@ -110,11 +99,13 @@ const SiteHost = () => {
                             }
                         </Results>
                 }
+
                 <SiteHostSection>
                     <MetricsDisplay
                         header={selected.siteHost}
                         isHost
                         loading={globalState.counter.loading}
+                        cancel={_cancel}
                         buttonTitle={`Load All ${ selected.siteHost } Shops`}
                         buttonClick={() => {
                             set.selectedBusinessName('');
@@ -135,9 +126,9 @@ const SiteHost = () => {
                             <MetricsDisplay
                                 header={selected.businessName}
                                 loading={globalState.counter.loading}
+                                cancel={_cancel}
                                 buttonTitle={`Load ${ selected.businessName }`}
                                 buttonClick={() => {
-                                    // set.selectedSiteHost(''); todo
                                     _updateSingle(selected);
                                 }}
                                 disabled={false}
@@ -146,7 +137,7 @@ const SiteHost = () => {
                 </ShopSection>
 
                 <SelectShop
-                    shopsList={shops.shopsList}
+                    shopsList={shopsList}
                     set={set}
                     selected={selected}
                     refresh={Boolean(uploadedResult)}

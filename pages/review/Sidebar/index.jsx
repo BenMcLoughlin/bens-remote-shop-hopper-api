@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Shop } from '@styled-icons/entypo/Shop';
 import { Shopify } from '@styled-icons/fa-brands/Shopify';
 import styled from 'styled-components';
 
@@ -19,9 +17,8 @@ const Sidebar = () => (
             </Link>
         </Info>
 
-        {renderLinkItem('Shopify Stores', Shopify, '/manager')}
+        {renderLinkItem('Shopify, Kelowna', Shopify, '/manager')}
         <Divider />
-        {renderLinkItem('Review Shops', Shop, '/manager')}
     </SidebarWrapper>
 );
 

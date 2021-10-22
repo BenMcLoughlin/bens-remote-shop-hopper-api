@@ -1,24 +1,44 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { xor } from 'lodash';
 
+import toast from 'utils/toast';
 import styled from 'styled-components';
 import { color, font, mixin } from 'styles/theme';
 import InputDebounced from 'components/InputDebounced';
 import Avatar from 'components/Avatar';
 import Button from 'components/Button';
+import Form from 'components/Form';
+import { bucketOptions, columnOptions } from 'content/variables';
+
+import {
+    FormHeading,
+    FormElement,
+    SelectItem,
+    SelectItemLabel,
+    Divider,
+    Actions,
+    ActionButton
+} from './Styles';
 
 const propTypes = {
-    users: PropTypes.array,
+    setFilters: PropTypes.func.isRequired,
     defaultFilters: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
     mergeFilters: PropTypes.func.isRequired
 };
 
-const BoardFilters = ({ users, defaultFilters, filters, mergeFilters }) => {
-    const { searchTerm, userIds, myOnly, recent } = filters;
+const BoardFilters = ({ setFilters, filters, defaultFilters }) => {
+    const [ modalOpen, setModalOpen ] = useState(false);
+    const [ searchTerm, setSearchTerm ] = useState('');
+    const [ columnName, setColumnName ] = useState('');
 
-    const areFiltersCleared = !searchTerm && userIds.length === 0 && !myOnly && !recent;
+    const renderList = ({ value }) => (
+        <SelectItem>
+            <option>{value}</option>
+        </SelectItem>
+    );
+
+    console.log('searchTerm:', searchTerm);
 
     return (
         <Filters>
@@ -26,20 +46,70 @@ const BoardFilters = ({ users, defaultFilters, filters, mergeFilters }) => {
                 <SearchInput
                     icon="search"
                     value={searchTerm}
-                    onChange={(value) => mergeFilters({ searchTerm: value })}
+                    onChange={(value) => setSearchTerm(value)}
                 />
-                {/* <Avatars> todo
-                    {users.map((user) => (
-                        <AvatarIsActiveBorder key={user.id} isActive={userIds.includes(user.id)}>
-                            <StyledAvatar
-                                avatarUrl={user.avatarUrl}
-                                name={user.name}
-                                onClick={() => mergeFilters({ userIds: xor(userIds, [ user.id ]) })}
-                            />
-                        </AvatarIsActiveBorder>
-                    ))}
-                </Avatars> */}
+                <button onClick={() => setModalOpen(true)}>Show modal</button>
             </Column>
+
+            {
+                modalOpen &&
+                <Form
+                    enableReinitialize
+                    initialValues={{
+                        column: '',
+                        secondary: '',
+                        tertiary: ''
+                    }}
+                    // validations={{
+                    //     column: Form.is.required(),
+                    //     title: [ Form.is.required(), Form.is.maxLength(200) ],
+                    //     metric: Form.is.required()
+                    // }}
+                    onSubmit={async (values, form) => {
+                        console.log('values, form:', values, form);
+                        try {
+                            await setColumnName(values);
+
+                            toast.success('Filter has been successfully created.');
+                        } catch (error) {
+                            Form.handleAPIError(error, form);
+                        }
+                    }}
+                >
+                    <FormElement>
+                        <FormHeading>Create Filter</FormHeading>
+                        <Form.Field.Select
+                            name="column"
+                            label="Database Column"
+                            tip="Start typing to get a list of possible matches."
+                            options={columnOptions}
+                            renderOption={renderList}
+                            renderValue={renderList}
+                        />
+                        <Divider />
+                        {/* <Form.Field.Select
+                            name={secondaryOptions[column].title}
+                            label={secondaryOptions.title}
+                            options={secondaryOptions}
+                            renderOption={renderList}
+                            renderValue={renderList}
+                        /> */}
+                        <Form.Field.Input
+                            name="Metric"
+                            label="Short Summary"
+                            tip="Concisely summarize the Filter in one or two sentences."
+                        />
+                        <Actions>
+                            <ActionButton type="submit" variant="primary" isWorking={false}>
+                                Create Filter
+                            </ActionButton>
+                            <ActionButton type="button" variant="empty" onClick={setFilters}>
+                                Cancel
+                            </ActionButton>
+                        </Actions>
+                    </FormElement>
+                </Form>
+            }
 
             {/* Spare Buttons for later todo */}
             {/* <Column>
@@ -48,14 +118,14 @@ const BoardFilters = ({ users, defaultFilters, filters, mergeFilters }) => {
                     isActive={myOnly}
                     onClick={() => mergeFilters({ myOnly: !myOnly })}
                 >
-                  Only My Items todo
+                    Only My Items todo
                 </StyledButton>
                 <StyledButton
                     variant="empty"
                     isActive={recent}
                     onClick={() => mergeFilters({ recent: !recent })}
                 >
-                  Recently Updated
+                    Recently Updated
                 </StyledButton>
                 {!areFiltersCleared && (
                     <ClearAll onClick={() => mergeFilters(defaultFilters)}>Clear all</ClearAll>

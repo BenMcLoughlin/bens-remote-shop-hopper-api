@@ -5,16 +5,14 @@ import styled from 'styled-components';
 
 import useGlobal from '../../globalState/store';
 import { startCase } from 'utils/strings';
-import { formatDate } from 'utils/dates/forDisplay';
 import Button from '../../components/buttons/Button';
 import { updateMetrics } from 'requests/updateMetrics';
 import fetchShopStatus from "../../requests/fetchShopStatus";
 
-const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, buttonTitle, disabled }) => {
-    const now = new Date();
+const MetricsDisplay = ({ header, buttonClick, cancel, isHost, loading, buttonTitle, disabled }) => {
     const [ globalState ] = useGlobal();
     const [ totalItems, setTotalItems ] = useState(0);
-    const [ date, setDate ] = useState('TBA');
+    const [ date, setDate ] = useState('');
 
     useEffect(() => {
         updateMetrics(isHost, header).then((data) => {
@@ -53,12 +51,15 @@ const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, butt
                 }
                 {!disabled &&
                     <Button
-                        loading={isLoading}
+                        loading={loading}
                         text={buttonTitle}
                         onClick={buttonClick}
                         disabled={disabled}
                         backgroundColor={isHost ? '#1469eb' : '#25E9AF'}
                     />
+                }
+                {loading &&
+                    <p onClick={cancel} className="cancel">Cancel</p>
                 }
             </HeaderRow>
             <Row>
@@ -128,6 +129,11 @@ const MetricsDisplay = ({ header, selected, buttonClick, isHost, isLoading, butt
                     justify-content: center;
                     text-align: right;
                 }
+                .cancel {
+                    padding: 5px;
+                    font-size: .8rem;
+                    color: red;
+                }       
             `}</style>
         </div>
     );
@@ -163,11 +169,11 @@ const HeaderRow = styled.div`
 
 MetricsDisplay.propTypes = {
     header: PropTypes.string,
-    selected: PropTypes.string,
+    loading: PropTypes.bool,
+    cancel: PropTypes.func,
     refresh: PropTypes.bool,
     buttonClick: PropTypes.func,
     isHost: PropTypes.bool,
-    isLoading: PropTypes.bool,
     buttonTitle: PropTypes.string,
     disabled: PropTypes.bool
 };

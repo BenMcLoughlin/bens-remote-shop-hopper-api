@@ -10,14 +10,14 @@ function setToken(token) {
 /**
  * @returns {string | null}
  */
-function getToken() {
+function getStoredAuthToken() {
     return localStorage.getItem('token') || null;
 }
 
 /**
  * @returns null
  */
-function removeToken() {
+function removeStoredAuthToken() {
     localStorage.removeItem('token');
 }
 
@@ -67,8 +67,8 @@ function removePasswordWasReset() {
 
 export {
     setToken,
-    getToken,
-    removeToken,
+    getStoredAuthToken,
+    removeStoredAuthToken,
     setUserType,
     getUserType,
     removeUserType,

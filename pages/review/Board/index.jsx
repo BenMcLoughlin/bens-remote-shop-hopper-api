@@ -1,38 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import useMergeState from '../../../hooks/mergeState';
+// import useMergeState from 'hooks/mergeState';
+import searchTwoParams from "requests/searchTwoParams";
 // import Breadcrumbs from '../../../components/breadcrumbs';
 import styled from 'styled-components';
+import useGlobal from "globalState/store";
 
 import List from './List';
 import Filters from './Filters';
 
-const propTypes = {
-    products: PropTypes.array.isRequired,
-    users: PropTypes.array,
-    updateLocalProjectIssues: PropTypes.func
-};
-
 const defaultFilters = {
-    searchTerm: '',
-    userIds: [],
-    myOnly: false,
-    recent: false
+    column: 'buckets', 
+    metric: "Casual"
 };
 
-const Board = ({ products, users, updateLocalProjectIssues }) => {
-    const [ filters, mergeFilters ] = useMergeState(defaultFilters);
+const Board = () => {
+    // const [ filters, mergeFilters ] = useMergeState(defaultFilters);
+    const [ globalState, globalActions ] = useGlobal();
+    const [ loading, setLoading ] = useState(false);
+    const [ products, setProducts ] = useState([]);
+    const [ filters, setFilters ] = useState(defaultFilters);
+
+    useEffect(() => {
+        _searchTwoParams(filters);
+    }, []);
+
+    useEffect(() => {
+        setProducts(globalState.products.data);
+    }, [ globalState.products.data ]);
+
+    const _searchTwoParams = async () => {
+        setLoading('search');
+        const result = await searchTwoParams(filters);
+
+        if (result) {
+            globalActions.products.setQuery(filters);
+            setFilters(filters);
+            globalActions.products.setCursor(result.length);
+            globalActions.products.setData(result);
+            setLoading(false);
+        }
+
+        setLoading(false);
+    };
 
     return (
         <BoardWrapper>
             {/* <Breadcrumbs items={[ 'Projects', 'project.name', 'Add' ]} /> */}
             <Filters
-                users={users}
-                products={products}
                 defaultFilters={defaultFilters}
                 filters={filters}
-                mergeFilters={mergeFilters}
+                setFilters={setFilters}
+                // mergeFilters={mergeFilters}
             />
             <List
                 products={products}
@@ -45,7 +65,5 @@ const Board = ({ products, users, updateLocalProjectIssues }) => {
 export const BoardWrapper = styled.div`
     overflow: hidden;
 `;
-
-Board.propTypes = propTypes;
 
 export default Board;

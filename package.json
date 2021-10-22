@@ -17,11 +17,13 @@
     "eslint-config-airbnb-typescript": "^14.0.0",
     "immer": "^9.0.6",
     "lodash": "^4.17.21",
+    "formik": "^2.1.1",
     "moment": "^2.29.1",
     "next": "^11.1.2",
     "color": "^3.1.2",
     "next-auth": "^3.29.0",
     "nprogress": "^0.2.0",
+    "query-string": "^6.9.0",
     "react": "16.14.0",
     "react-chips": "^0.8.0",
     "react-dom": "16.14.0",
@@ -33,7 +35,10 @@
     "styled-components": "^5.3.1",
     "styled-icons": "^10.44.0",
     "use-global-hook": "^0.3.0",
-    "xlsx": "^0.17.1"
+    "xlsx": "^0.17.1",
+    "react-textarea-autosize": "^7.1.2",
+    "react-transition-group": "^4.3.0",
+    "sweet-pubsub": "^1.1.2"
   },
   "devDependencies": {
     "@types/next-auth": "3.1.14",

@@ -15,22 +15,17 @@ import loaderGif from 'public/assets/loader/octo_loader.gif';
 
 const propTypes = {
     status: PropTypes.string,
-    products: PropTypes.array.isRequired,
-    filters: PropTypes.object.isRequired,
-    currentUserId: PropTypes.number
+    products: PropTypes.array.isRequired
 };
 
 const defaultProps = {
     products: []
 };
 
-const BoardList = ({ status, products, filters, currentUserId }) => {
+const BoardList = ({ status, products }) => {
     const [ globalState, globalActions ] = useGlobal();
     const [ loading, setLoading ] = useState(false);
     const [ currentQuery, setCurrentQuery ] = useState('');
-    const filteredProducts = filterProducts(products, filters, currentUserId);
-    const filteredListProducts = getSortedListProducts(filteredProducts, status);
-    const allListProducts = getSortedListProducts(products, status);
 
     useEffect(() => {
         setCurrentQuery(`${ globalState.products.query.column } : ${ globalState.products.query.metric }`);
@@ -62,11 +57,11 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
         <>
             <Title>
                 {currentQuery}  
-                <ProductsCount>: {formatProductsCount(allListProducts, filteredListProducts)} Items</ProductsCount>
+                <ProductsCount>: {formatProductsCount(products, [])} Items</ProductsCount>
             </Title>
             <ButtonsWrapper>
                 {
-                    globalState.products.cursor > filteredListProducts.length ?
+                    globalState.products.cursor > products.length ?
                         <Icon onClick={_prevPage}>
                             <ArrowLeftShort />
                         </Icon>
@@ -83,7 +78,7 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
                         <Image src={loaderGif} className="loading" width={800} height={600} />
                         :
                         <>
-                            {filteredListProducts.map((product, index) => (
+                            {products.map((product, index) => (
                                 <Product
                                     key={product.id}
                                     id={product.id}
@@ -101,7 +96,7 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
                             ))}
                             <ButtonsWrapper>
                                 {
-                                    globalState.products.cursor > filteredListProducts.length ?
+                                    globalState.products.cursor > products.length ?
                                         <Icon onClick={_prevPage}>
                                             <ArrowLeftShort />
                                         </Icon>
@@ -118,31 +113,6 @@ const BoardList = ({ status, products, filters, currentUserId }) => {
         </>
     );
 };
-
-const filterProducts = (projectProducts, filters, currentUserId) => {
-    const { searchTerm, userIds, myOnly, recent } = filters;
-    let products = projectProducts;
-
-    if (searchTerm) {
-        products = products.filter((product) => product.title.toLowerCase().includes(searchTerm.toLowerCase()));
-    }
-
-    if (userIds.length > 0) {
-        products = products.filter((product) => intersection(product.userIds, userIds).length > 0);
-    }
-
-    if (myOnly && currentUserId) {
-        products = products.filter((product) => product.userIds.includes(currentUserId));
-    }
-
-    if (recent) {
-        products = products.filter((product) => moment(product.updatedAt).isAfter(moment().subtract(3, 'days')));
-    }
-
-    return products;
-};
-
-const getSortedListProducts = (products, status) => products.filter((product) => product.status === status).sort((a, b) => a.listPosition - b.listPosition);
 
 const formatProductsCount = (allListProducts, filteredListProducts) => {
     if (allListProducts.length !== filteredListProducts.length) {

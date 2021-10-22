@@ -97,18 +97,6 @@ export const setCursor = (store, state) => {
     store.setState({ products: products });
 };
 
-// export const setNextPageQuery = (store, state) => {
-//     const products = { ...store.state.products };
-//     products.cursor += state;
-//     store.setState({ products: products });
-// };
-
-// export const setPrevPageQuery = (store, state) => {
-//     const products = { ...store.state.products };
-//     products.cursor -= state;
-//     store.setState({ products: products });
-// };
-
 export const setLoading = (store, state) => {
     const products = { ...store.state.products };
     products.loading = state;

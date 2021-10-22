@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { color, font } from 'styles/theme';
-import Icon from 'components/Icon';
+import { Icon } from 'components/Icon';
 
 export const StyledInput = styled.div`
   position: relative;
@@ -40,7 +40,7 @@ export const InputElement = styled.input`
     ` }
 `;
 
-export const StyledIcon = styled(Icon)`
+export const StyledIcon = styled.i`
   position: absolute;
   top: 8px;
   left: 8px;
