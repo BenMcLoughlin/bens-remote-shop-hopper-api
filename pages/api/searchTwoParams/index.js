@@ -13,7 +13,9 @@ export async function searchTwoParams(query) {
     if (column === 'business_name' || 
         column === 'handle' || 
         column === 'product_type' ||
-        column === 'vendor'
+        column === 'vendor' ||
+        column === 'original_price' ||
+        column === 'compare_at_price'
     ) {
         where = {
             [column]: metric

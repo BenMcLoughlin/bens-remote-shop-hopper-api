@@ -32,7 +32,7 @@ export const nextPage = (store) => {
     }; 
     console.log('nextPage body:', body);
 
-    return products.searchProducts(body)
+    return products.searchTwoParams(body)
         .then((data) => {
             store.actions.products.setData(data.result);
             store.actions.products.setCursor(body.cursor);
@@ -57,7 +57,7 @@ export const prevPage = (store) => {
     }; 
     console.log('prevPage body:', body);
 
-    return products.searchProducts(body)
+    return products.searchTwoParams(body)
         .then((data) => {
             store.actions.products.setData(data.result);
             store.actions.products.setCursor(body.cursor);
