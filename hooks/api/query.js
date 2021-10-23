@@ -18,7 +18,7 @@ const useQuery = (url, propsVariables = {}, options = {}) => {
     const [ state, mergeState ] = useMergeState({
         data: canUseCache ? cache[url].data : null,
         error: null,
-        isLoading: !lazy && !canUseCache,
+        loading: !lazy && !canUseCache,
         variables: {}
     });
 
@@ -30,7 +30,7 @@ const useQuery = (url, propsVariables = {}, options = {}) => {
             const skipLoading = canUseCache && cachePolicy === 'cache-first';
 
             if (!skipLoading) {
-                mergeState({ isLoading: true, variables });
+                mergeState({ loading: true, variables });
             } else if (newVariables) {
                 mergeState({ variables });
             }
@@ -38,10 +38,10 @@ const useQuery = (url, propsVariables = {}, options = {}) => {
             api.get(url, apiVariables).then(
                 (data) => {
                     cache[url] = { data, apiVariables };
-                    mergeState({ data, error: null, isLoading: false });
+                    mergeState({ data, error: null, loading: false });
                 },
                 (error) => {
-                    mergeState({ error, data: null, isLoading: false });
+                    mergeState({ error, data: null, loading: false });
                 }
             );
 

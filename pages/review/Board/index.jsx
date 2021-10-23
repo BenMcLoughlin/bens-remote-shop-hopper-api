@@ -52,7 +52,6 @@ const Board = () => {
                 defaultFilters={defaultFilters}
                 filters={filters}
                 setFilters={setFilters}
-                // mergeFilters={mergeFilters}
             />
             <List
                 products={products}

@@ -95,3 +95,23 @@ export const getHotItems = (store, amount = 12) => {
             // notifier.displayError(error.verbiage); todo
         });
 };
+
+export const getColumn = (store, body) => {
+    store.actions.products.setLoading(true);
+    console.log('getColumn body:', body);
+
+    return products.getColumn(body)
+        .then((data) => {
+            // store.actions.products.setHotItems(data.result);
+            store.actions.products.setLoading(false);
+            // const unique = [ ...new Set(data.result) ];
+            // const sanitized = unique.map((item) => ({ label: item, value: item }));
+
+            return data;
+        })
+        .catch((error) => {
+            store.actions.products.setLoading(false);
+            console.log('error:', error);
+            // notifier.displayError(error.verbiage); todo
+        });
+};

@@ -9,6 +9,7 @@ import Avatar from 'components/Avatar';
 import Button from 'components/Button';
 import Form from 'components/Form';
 import { bucketOptions, columnOptions } from 'content/variables';
+import useGlobal from "globalState/store";
 
 import {
     FormHeading,
@@ -23,14 +24,29 @@ import {
 const propTypes = {
     setFilters: PropTypes.func.isRequired,
     defaultFilters: PropTypes.object.isRequired,
-    filters: PropTypes.object.isRequired,
-    mergeFilters: PropTypes.func.isRequired
+    filters: PropTypes.object.isRequired
 };
 
 const BoardFilters = ({ setFilters, filters, defaultFilters }) => {
+    const [ globalState, globalActions ] = useGlobal();
+    const [ loading, setLoading ] = useState(false);
     const [ modalOpen, setModalOpen ] = useState(false);
-    const [ searchTerm, setSearchTerm ] = useState('');
     const [ columnName, setColumnName ] = useState('');
+    const [ columnData, setColumnData ] = useState([]);
+    const [ metric, setMetric ] = useState('');
+    const [ areFiltersCleared, setAreFiltersCleared ] = useState(true);
+
+    const _toggleModal = () => {
+        _clear();
+        setModalOpen(!modalOpen);
+    };
+
+    const _clear = () => {
+        setColumnData('');
+        setColumnName('');
+        setMetric('');
+        setAreFiltersCleared(true);
+    }; 
 
     const renderList = ({ value }) => (
         <SelectItem>
@@ -38,99 +54,150 @@ const BoardFilters = ({ setFilters, filters, defaultFilters }) => {
         </SelectItem>
     );
 
-    console.log('searchTerm:', searchTerm);
+    const _fetchColumn = async (column) => {
+        setLoading(true);
+        setColumnName(column);
+        const success = await globalActions.apiRequests.getColumn(column);
+
+        console.log('success.length:', JSON.stringify(success));
+
+        if (success) {
+            setColumnData(success.result);
+            setAreFiltersCleared(false);
+            setLoading(false);
+
+            return true;
+        }
+    };
+
+    console.log('metric:', metric);
 
     return (
         <Filters>
             <Column>
-                <SearchInput
-                    icon="search"
-                    value={searchTerm}
-                    onChange={(value) => setSearchTerm(value)}
-                />
-                <button onClick={() => setModalOpen(true)}>Show modal</button>
+                <StyledButton
+                    variant="empty"
+                    isActive={columnName}
+                    onClick={_toggleModal}
+                >
+                    Column:
+                </StyledButton>
+                {
+                    columnName &&
+                    <FilterText>{columnName}</FilterText>
+                }
             </Column>
-
+            <Column>
+                {
+                    columnName &&
+                        <StyledButton
+                            variant="empty"
+                            isActive={metric}
+                            onClick={() => setMetric('')}
+                        >
+                            Metric:
+                        </StyledButton>
+                }
+                {
+                    metric &&
+                    <FilterText>{metric}</FilterText>
+                }
+            </Column>
+            {!areFiltersCleared && (
+                <ClearAll onClick={_clear}>Clear all</ClearAll>
+            )}
             {
                 modalOpen &&
-                <Form
-                    enableReinitialize
-                    initialValues={{
-                        column: '',
-                        secondary: '',
-                        tertiary: ''
-                    }}
-                    // validations={{
-                    //     column: Form.is.required(),
-                    //     title: [ Form.is.required(), Form.is.maxLength(200) ],
-                    //     metric: Form.is.required()
-                    // }}
-                    onSubmit={async (values, form) => {
-                        console.log('values, form:', values, form);
-                        try {
-                            await setColumnName(values);
+                    metric ? 
+                    <Form
+                        enableReinitialize
+                        initialValues={{
+                            column: '',
+                            metric: ''
+                        }}
+                        onSubmit={async (values, form) => {
+                            console.log('values, form:', values, form);
 
-                            toast.success('Filter has been successfully created.');
-                        } catch (error) {
-                            Form.handleAPIError(error, form);
-                        }
-                    }}
-                >
-                    <FormElement>
-                        <FormHeading>Create Filter</FormHeading>
-                        <Form.Field.Select
-                            name="column"
-                            label="Database Column"
-                            tip="Start typing to get a list of possible matches."
-                            options={columnOptions}
-                            renderOption={renderList}
-                            renderValue={renderList}
-                        />
-                        <Divider />
-                        {/* <Form.Field.Select
-                            name={secondaryOptions[column].title}
-                            label={secondaryOptions.title}
-                            options={secondaryOptions}
-                            renderOption={renderList}
-                            renderValue={renderList}
-                        /> */}
-                        <Form.Field.Input
-                            name="Metric"
-                            label="Short Summary"
-                            tip="Concisely summarize the Filter in one or two sentences."
-                        />
-                        <Actions>
-                            <ActionButton type="submit" variant="primary" isWorking={false}>
-                                Create Filter
-                            </ActionButton>
-                            <ActionButton type="button" variant="empty" onClick={setFilters}>
-                                Cancel
-                            </ActionButton>
-                        </Actions>
-                    </FormElement>
-                </Form>
+                            try {
+                                await setFilters({ 
+                                    columnName,
+                                    metric
+                                });
+
+
+                                toast.success('Filter has been successfully created.');
+                            } catch (error) {
+                                Form.handleAPIError(error, form);
+                            }
+                        }}
+                    >
+                        <FormElement>
+                            <FormHeading>Create Filter</FormHeading>
+                            <Actions>
+                                <ActionButton type="submit" variant="primary" isWorking={loading}>
+                                    Search with this filter
+                                </ActionButton>
+                                <ActionButton type="button" variant="empty" onClick={() => _toggleModal(false)}>
+                                    Cancel
+                                </ActionButton>
+                            </Actions>
+                        </FormElement>
+                    </Form>
+                    :
+                    <Form
+                        enableReinitialize
+                        initialValues={{
+                            column: '',
+                            metric: ''
+                        }}
+                        onSubmit={async (values, form) => {
+                            try {
+                                if (values.column) {
+                                    await _fetchColumn(values.column);
+                                }
+
+                                if (values.metric) {
+                                    await setMetric(values.metric);
+                                }
+
+                                toast.success('Filter has been successfully created.');
+                            } catch (error) {
+                                Form.handleAPIError(error, form);
+                            }
+                        }}
+                    >
+                        <FormElement>
+                            <FormHeading>Create Filter</FormHeading>
+                            {columnData.length ?
+                                <Form.Field.Select
+                                    name="metric"
+                                    // label={`Options for: ${ columnName } `}
+                                    tip={`Now set the items in the ${ columnName } column to search for.`}
+                                    options={columnData}
+                                    renderOption={renderList}
+                                    renderValue={renderList}
+                                />
+                                :
+                                <Form.Field.Select
+                                    name="column"
+                                    // label="Database Column"
+                                    tip="First set the column we will search on."
+                                    options={columnOptions}
+                                    renderOption={renderList}
+                                    renderValue={renderList}
+                                />
+                            }
+                            <Actions>
+                                <ActionButton type="submit" variant="primary" isWorking={loading}>
+                                    {columnData.length ? 'Create Filter' : 'Next Step'}
+                                </ActionButton>
+                                <ActionButton type="button" variant="empty" onClick={() => _toggleModal(false)}>
+                                    Cancel
+                                </ActionButton>
+                            </Actions>
+                        </FormElement>
+                    </Form>
             }
-
-            {/* Spare Buttons for later todo */}
-            {/* <Column>
-                <StyledButton
-                    variant="empty"
-                    isActive={myOnly}
-                    onClick={() => mergeFilters({ myOnly: !myOnly })}
-                >
-                    Only My Items todo
-                </StyledButton>
-                <StyledButton
-                    variant="empty"
-                    isActive={recent}
-                    onClick={() => mergeFilters({ recent: !recent })}
-                >
-                    Recently Updated
-                </StyledButton>
-                {!areFiltersCleared && (
-                    <ClearAll onClick={() => mergeFilters(defaultFilters)}>Clear all</ClearAll>
-                )}
-            </Column> */}
         </Filters>
     );
 };
@@ -148,10 +215,15 @@ export const Filters = styled.div`
 export const Column = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   @media (max-width: 700px) {
       flex-direction: column;
   }
+`;
+
+export const FilterText = styled.p`
+    font-size: 18px;
+    font-weight: bold;
 `;
 
 export const SearchInput = styled(InputDebounced)`

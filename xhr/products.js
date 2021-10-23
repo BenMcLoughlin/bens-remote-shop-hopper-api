@@ -36,8 +36,21 @@ function getHotItems(body) {
     });
 }
 
+function getColumn(body) {
+    const options = {
+        endpoint: '/api/getColumn',
+        method: 'POST',
+        body
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
 export {
     getGeneric,
     searchProducts,
-    getHotItems
+    getHotItems,
+    getColumn
 };
