@@ -1,7 +1,7 @@
 export const columns = [
     "business_name",
     "buckets",
-    "title",
+    // "title",
     "handle",
     "body_html",
     "vendor",
@@ -10,16 +10,16 @@ export const columns = [
     "published_at",
     "updated_at",
     "tags",
-    "variants",
-    "images",
-    "options",
+    // "variants",
+    // "images",
+    // "options",
     "original_price",
     "compare_at_price",
     "sizes",
     "colors"
 ];
 
-export const columnOptions = [{ "label": "business_name", "value": "business_name" }, { "label": "buckets", "value": "buckets" }, { "label": "title", "value": "title" }, { "label": "handle", "value": "handle" }, { "label": "body_html", "value": "body_html" }, { "label": "vendor", "value": "vendor" }, { "label": "product_type", "value": "product_type" }, { "label": "created_at", "value": "created_at" }, { "label": "published_at", "value": "published_at" }, { "label": "updated_at", "value": "updated_at" }, { "label": "tags", "value": "tags" }, { "label": "variants", "value": "variants" }, { "label": "images", "value": "images" }, { "label": "options", "value": "options" }, { "label": "original_price", "value": "original_price" }, { "label": "compare_at_price", "value": "compare_at_price" }, { "label": "sizes", "value": "sizes" }, { "label": "colors", "value": "colors" }];
+export const columnOptions = [{ "label": "business_name", "value": "business_name" }, { "label": "buckets", "value": "buckets" }, { "label": "handle", "value": "handle" }, { "label": "body_html", "value": "body_html" }, { "label": "vendor", "value": "vendor" }, { "label": "product_type", "value": "product_type" }, { "label": "created_at", "value": "created_at" }, { "label": "published_at", "value": "published_at" }, { "label": "updated_at", "value": "updated_at" }, { "label": "tags", "value": "tags" }, { "label": "original_price", "value": "original_price" }, { "label": "compare_at_price", "value": "compare_at_price" }, { "label": "sizes", "value": "sizes" }, { "label": "colors", "value": "colors" }];
 
 export const buckets = [
     "Athletic",

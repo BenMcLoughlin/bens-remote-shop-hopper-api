@@ -38,13 +38,27 @@ export default async (req, res) => {
 
             let unique = [];
 
-            done.map((obj) => obj[body].map((t) => {
-                if (!unique.includes(t)) {
-                    unique.push(t);
-                }
+            if (body === 'sizes' ||
+                body === 'buckets' ||
+                body === 'colors' ||
+                body === 'tags'
+            ) {
+                done.map((obj) => obj[body].map((t) => {
+                    if (!unique.includes(t)) {
+                        unique.push(t);
+                    }
 
-                return true;
-            }));
+                    return true;
+                }));
+            } else {
+                done.map((obj) => {
+                    if (!unique.includes(obj[body])) {
+                        unique.push(obj[body]);
+                    }
+
+                    return true;
+                });
+            }
 
             const result = unique.map((item) => ({ label: item, value: item }));
 

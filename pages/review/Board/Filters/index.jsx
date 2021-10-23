@@ -1,24 +1,14 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import toast from 'utils/toast';
-import styled, { css } from 'styled-components';
+// import toast from 'utils/toast';
+import styled from 'styled-components';
 import { color, font, mixin } from 'styles/theme';
-import InputDebounced from 'components/InputDebounced';
-import Avatar from 'components/Avatar';
 import Button from 'components/Button';
 import Form from 'components/Form';
-import { bucketOptions, columnOptions } from 'content/variables';
+import { columnOptions } from 'content/variables';
 import useGlobal from "globalState/store";
 import { capitalize } from 'utils/strings/capitalize';
-
-import {
-    FormHeading,
-    FormElement,
-    SelectItem,
-    Actions,
-    ActionButton
-} from './Styles';
 
 const propTypes = {
     search: PropTypes.func,
@@ -41,10 +31,10 @@ const BoardFilters = ({ search, defaultFilters }) => {
     };
 
     const _clear = async () => {
-        setColumnData('');
-        setColumnName('');
-        setMetric('');
-        setFilters(defaultFilters);
+        await setColumnData([]);
+        await setColumnName('');
+        await setMetric('');
+        await setFilters(defaultFilters);
         await _applyFilters();
         setAreFiltersCleared(true);
     }; 
@@ -75,8 +65,6 @@ const BoardFilters = ({ search, defaultFilters }) => {
             <option>{value}</option>
         </SelectItem>
     );
-
-    console.log('filters:', filters, modalOpen);
 
     return (
         <Filters modalOpen={false}>
@@ -188,14 +176,20 @@ const BoardFilters = ({ search, defaultFilters }) => {
                                 <FormElement>
                                     <FormHeading>Create Filter</FormHeading>
                                     {columnData.length ?
-                                        <Form.Field.Select
-                                            name="metric"
-                                            // label={`Options for: ${ column } `}
-                                            tip={`Now set the items in the ${ column } column to search for.`}
-                                            options={columnData}
-                                            renderOption={renderList}
-                                            renderValue={renderList}
-                                        />
+                                        column === 'body_html' ? 
+                                            <Form.Field
+                                                name="metric"
+                                                tip={`Type a word or phrase to search for.`}
+                                            />
+                                            :
+                                            <Form.Field.Select
+                                                name="metric"
+                                                // label={`Options for: ${ column } `}
+                                                tip={`Now set the items in the ${ column } column to search for.`}
+                                                options={columnData}
+                                                renderOption={renderList}
+                                                renderValue={renderList}
+                                            />
                                         :
                                         <Form.Field.Select
                                             name="column"
@@ -239,7 +233,6 @@ export const Filters = styled.div`
     align-items: start;
     flex-direction: row;
     justify-content: space-between;
-    height: ${ (props) => props.modalOpen ? `240px` : `100px` };
     height: auto;
 `;
 
@@ -275,17 +268,39 @@ export const StyledButton = styled(Button)`
 `;
 
 export const ClearAll = styled.div`
-  height: 32px;
-  line-height: 32px;
-  margin-left: 15px;
-  padding-left: 12px;
-  border-left: 1px solid ${ color.borderLightest };
-  color: ${ color.textDark };
-  ${ font.size(14.5) }
-  ${ mixin.clickable }
-  &:hover {
+    height: 32px;
+    line-height: 32px;
+    margin-left: 15px;
+    padding-left: 12px;
+    border-left: 1px solid ${ color.borderLightest };
+    color: ${ color.textDark };
+    ${ font.size(14.5) }
+    ${ mixin.clickable }
+    &:hover {
     color: ${ color.textMedium };
-  }
+    }
+`;
+
+export const FormElement = styled(Form.Element)`
+    padding: 25px 40px 35px;
+`;
+
+export const FormHeading = styled.div`
+    padding-bottom: 15px;
+    ${ font.size(21) }
+`;
+
+export const SelectItem = styled.div`
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    ${ (props) => props.withBottomMargin && `margin-bottom: 5px;` }
+`;
+
+export const Actions = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 30px;
 `;
 
 BoardFilters.propTypes = propTypes;

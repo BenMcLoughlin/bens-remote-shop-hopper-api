@@ -8,16 +8,40 @@ export async function searchTwoParams(query) {
     let amount = query.amount || 12;
 
     console.log('searchTwoParams:', column, metric, cursor, amount);
+    let where = {};
+
+    if (column === 'business_name' || 
+        column === 'handle' || 
+        column === 'product_type' ||
+        column === 'vendor'
+    ) {
+        where = {
+            [column]: metric
+        };
+    } else if (column === 'body_html') {
+        where = {
+            body_html: {
+                search: metric
+            }
+        };
+    } else {
+        where = {
+            [column]: {
+                has: metric
+            }
+        };
+    }
 
     const result = await prisma.product
         .findMany({
             take: amount,
             skip: cursor,
-            where: {
-                [column]: {
-                    has: metric
-                }
-            },
+            where,
+            // where: {
+            //     [column]: {
+            //         has: metric
+            //     }
+            // },
             orderBy: {
                 rating: 'desc'
             }

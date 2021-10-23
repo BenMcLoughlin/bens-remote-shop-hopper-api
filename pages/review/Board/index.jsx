@@ -15,7 +15,6 @@ const defaultFilters = {
 
 const Board = () => {
     const [ globalState, globalActions ] = useGlobal();
-    // const [ loading, setLoading ] = useState(false);
     const [ products, setProducts ] = useState([]);
 
     useEffect(() => {

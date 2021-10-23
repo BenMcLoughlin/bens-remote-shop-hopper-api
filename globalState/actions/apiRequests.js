@@ -8,8 +8,8 @@ export const searchProducts = (store, query) => {
 
     return products.searchTwoParams(query)
         .then((data) => {
-            // store.actions.products.setData(data.result);
-            console.log('store.state.products:', store.state.products.data?.length);
+            // store.actions.products.setData(data.result); todo
+            console.log('SEARCH PRODUCTS:', data.result?.length);
 
             store.actions.products.setLoading(false);
 
@@ -18,7 +18,6 @@ export const searchProducts = (store, query) => {
         .catch((error) => {
             store.actions.products.setLoading(false);
             console.log('error:', error);
-            // notifier.displayError(error.verbiage); todo
         });
 };
 
@@ -28,12 +27,12 @@ export const nextPage = (store) => {
     const body = {
         column: store.state.products.query.column,
         metric: store.state.products.query.metric,
-        cursor: store.state.products.cursor + store.state.products.data?.length,
+        cursor: store.state.products.cursor + store.state.products.amount,
         amount: store.state.products.amount
     }; 
     console.log('nextPage body:', body);
 
-    return products.searchTwoParams(body)
+    return products.searchProducts(body)
         .then((data) => {
             store.actions.products.setData(data.result);
             store.actions.products.setCursor(body.cursor);
@@ -44,7 +43,6 @@ export const nextPage = (store) => {
         .catch((error) => {
             store.actions.products.setLoading(false);
             console.log('error:', error);
-            // notifier.displayError(error.verbiage); todo
         });
 };
 
@@ -54,12 +52,12 @@ export const prevPage = (store) => {
     const body = {
         column: store.state.products.query.column,
         metric: store.state.products.query.metric,
-        cursor: store.state.products.cursor - store.state.products.data?.length,
+        cursor: store.state.products.cursor - store.state.products.amount,
         amount: store.state.products.amount
     }; 
     console.log('prevPage body:', body);
 
-    return products.searchTwoParams(body)
+    return products.searchProducts(body)
         .then((data) => {
             store.actions.products.setData(data.result);
             store.actions.products.setCursor(body.cursor);
@@ -70,7 +68,6 @@ export const prevPage = (store) => {
         .catch((error) => {
             store.actions.products.setLoading(false);
             console.log('error:', error);
-            // notifier.displayError(error.verbiage); todo
         });
 };
 
@@ -92,7 +89,6 @@ export const getHotItems = (store, amount = 12) => {
         .catch((error) => {
             store.actions.products.setLoading(false);
             console.log('error:', error);
-            // notifier.displayError(error.verbiage); todo
         });
 };
 
@@ -102,16 +98,12 @@ export const getColumn = (store, body) => {
 
     return products.getColumn(body)
         .then((data) => {
-            // store.actions.products.setHotItems(data.result);
             store.actions.products.setLoading(false);
-            // const unique = [ ...new Set(data.result) ];
-            // const sanitized = unique.map((item) => ({ label: item, value: item }));
 
             return data;
         })
         .catch((error) => {
             store.actions.products.setLoading(false);
             console.log('error:', error);
-            // notifier.displayError(error.verbiage); todo
         });
 };
