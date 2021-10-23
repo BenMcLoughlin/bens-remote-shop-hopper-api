@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useSession } from "next-auth/client";
 import styled from 'styled-components';
 
-import Layout from '../../components/Layout';
-import Counter from "../../components/Counter";
-import MetricsDisplay from '../../components/manager/MetricsDisplay';
-import SelectShop from '../../components/manager/SelectShop';
+import NavbarLeft from 'components/NavbarLeft';
+import Sidebar from './Sidebar';
+import Layout from 'components/Layout';
+import Counter from "components/Counter";
+import MetricsDisplay from 'components/manager/MetricsDisplay';
+import SelectShop from 'components/manager/SelectShop';
 import * as shopsLists from '../../mock/shopsLists';
 
-import { camelCase, capitalize } from '../../utils/strings';
-import { updateMetrics } from '../../requests/updateMetrics';
-import useGlobal from "../../globalState/store";
+import { camelCase, capitalize } from 'utils/strings';
+import { updateMetrics } from 'requests/updateMetrics';
+import useGlobal from "globalState/store";
 
-const Sitehost = () => {
-    const session = useSession();
-    const isLoggedIn = session[0]?.user;
+import { sizes } from 'styles/theme';
+const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
+
+const SiteHost = () => {
     const router = useRouter();
     const [ globalState, globalActions ] = useGlobal();
     const { status } = globalState;
-    const isActive = (pathname) => router.pathname === pathname;
     const { pid } = router.query;
 
     const [ uploadedResult, setUpLoaded ] = useState(false);
-    // we may not use this component loading...
-    const [ isLoading, setIsLoading ] = useState(false);
     const [ siteHost, setSelectedSiteHost ] = useState('shopify');
     const [ businessName, setSelectedBusinessName ] = useState('');
     const [ domain, setSelectedDomain ] = useState('');
@@ -36,7 +34,6 @@ const Sitehost = () => {
 
     useEffect(() => {
         setUpLoaded(globalState.counter.result);
-        console.log('globalActions:', globalActions);
     }, [ globalState.counter.result ]);
 
     useEffect(() => {
@@ -44,123 +41,140 @@ const Sitehost = () => {
         selectedShop && setSelectedDomain(selectedShop.domain);
     }, [ businessName ]);
 
-    // todo: Convert to GlobalState
-    const shops = {
-        shopsList,
-        selected: {
-            siteHost: camelCase(siteHost),
-            businessName: businessName,
-            domain
-        },
-        set: {
-            selectedSiteHost: (v) => setSelectedSiteHost(v),
-            selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v)
-        }
+    const selected = {
+        siteHost: camelCase(siteHost),
+        businessName: businessName,
+        domain
+    };
+
+    const set = {
+        selectedSiteHost: (v) => setSelectedSiteHost(v),
+        selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v)
+    };
+
+    const _cancel = async () => {
+        // todo
+        await globalActions.products.all([], true);
     };
 
     const _updateAll = async () => {
+        globalActions.counter.clearRequests();
+        globalActions.counter.setLoading(true);
         const success = await globalActions.products.all(globalState.shops);
 
         if (success) {
             updateMetrics(true, 'all');
-            return true;
-        }
-    };
-
-    const _updateSingle = async (params) => {
-        setIsLoading(true);
-        globalActions.counter.clearRequests();
-        globalActions.counter.setLoading(true);
-        const success = await globalActions.products.single(params);
-
-        if (success) {
-            updateMetrics(true, params.business_name);
-            setIsLoading(false);
             globalActions.counter.setLoading(false);
 
             return true;
         }
     };
 
+    const _updateSingle = async (params) => {
+        const success = await globalActions.products.single(params);
+
+        if (success) {
+            updateMetrics(true, params.business_name);
+
+            return true;
+        }
+    };
+
     return (
-        <Layout>
-            {
-                isLoggedIn ?
-                    <>
-                        <Title>
-                            <h2 style={{ color: '#fff' }}>{`${ capitalize(pid) } Database Manager`} </h2>
-                            <Counter />
-                        </Title>
-                        {
-                            uploadedResult && 
-                                <Results>
-                                    {(status && globalState.counter.loading) && <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>}
-                                    {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
-                                    }
-                                </Results>
-                        }
-                        <SitehostSection>
-                            <MetricsDisplay
-                                header={shops.selected.siteHost}
-                                isHost
-                                isLoading={globalState.counter.loading}
-                                buttonTitle={`Load All ${ shops.selected.siteHost } Shops`}
-                                buttonClick={() => {
-                                    shops.set.selectedBusinessName('');
+        <Layout isManager>
+            <Page>
+                <NavbarLeft />
 
-                                    _updateAll({
-                                        siteHost: shops.selected.siteHost,
-                                        businessName: null,
-                                        domain: null
-                                    });
-                                }}
-                                disabled={Boolean(shops.selected.businessName)}
-                            />
-                        </SitehostSection>
+                <Sidebar />
 
-                        <ShopSection>
-                            {
-                                shops.selected.businessName &&
-                                    <MetricsDisplay
-                                        header={shops.selected.businessName}
-                                        isLoading={globalState.counter.loading}
-                                        buttonTitle={`Load ${ shops.selected.businessName }`}
-                                        buttonClick={() => {
-                                            // set.selectedSiteHost(''); todo
-                                            _updateSingle(shops.selected);
-                                        }}
-                                        disabled={false}
-                                    />
+                <Title>
+                    <h2 style={{ color: '#fff', margin: 10 }}>{`${ capitalize(pid || "not working") } Database Manager`} </h2>
+                    <Counter />
+                </Title>
+                {
+                    uploadedResult && 
+                        <Results>
+                            {(status && globalState.counter.loading) && <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>}
+                            {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
                             }
-                        </ShopSection>
+                        </Results>
+                }
 
-                        <SelectShop
-                            shopsList={shops.shopsList}
-                            set={shops.set}
-                            selected={shops.selected}
-                            refresh={Boolean(uploadedResult)}
-                        />
-                    </>
-                    :
-                    <Link href="/api/auth/signin">
-                        <h1 data-active={isActive('/signup')}>Might as well Log in</h1>
-                    </Link>
-            }
+                <SiteHostSection>
+                    <MetricsDisplay
+                        header={selected.siteHost}
+                        isHost
+                        loading={globalState.counter.loading}
+                        cancel={_cancel}
+                        buttonTitle={`Load All ${ selected.siteHost } Shops`}
+                        buttonClick={() => {
+                            set.selectedBusinessName('');
+
+                            _updateAll({
+                                siteHost: selected.siteHost,
+                                businessName: null,
+                                domain: null
+                            });
+                        }}
+                        disabled={Boolean(selected.businessName)}
+                    />
+                </SiteHostSection>
+
+                <ShopSection>
+                    {
+                        selected.businessName &&
+                            <MetricsDisplay
+                                header={selected.businessName}
+                                loading={globalState.counter.loading}
+                                cancel={_cancel}
+                                buttonTitle={`Load ${ selected.businessName }`}
+                                buttonClick={() => {
+                                    _updateSingle(selected);
+                                }}
+                                disabled={false}
+                            />
+                    }
+                </ShopSection>
+
+                <SelectShop
+                    shopsList={shopsList}
+                    set={set}
+                    selected={selected}
+                    refresh={Boolean(uploadedResult)}
+                />
+            </Page>
         </Layout>
     );
 };
+
+export const Page = styled.div`
+    padding: 25px 32px 50px ${ paddingLeft }px;
+    @media (max-width: 1100px) {
+        padding: 25px 20px 50px ${ paddingLeft - 20 }px;
+    }
+    @media (max-width: 999px) {
+        padding-left: ${ paddingLeft - 20 - sizes.secondarySideBarWidth }px;
+    }
+`;
 
 const Title = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 2rem;
+    padding: 1.2rem;
     color: #14e2a4;
     background: #485056;
-    white-space: nowrap;
+    border-radius: 4px;
+    @media (max-width: 680px) {
+        padding: 5px;
+        width: unset;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+    }
 `;
-const SitehostSection = styled.div`
+const SiteHostSection = styled.div`
     display: flex;
     justify-content: flex-end;
     background: #14c792;
@@ -183,13 +197,12 @@ const Results = styled.div`
     padding: 1rem;
     padding-right: 3rem;
     background: #485056;
-    white-space: nowrap;
 `;
 
-Sitehost.propTypes = {
+SiteHost.propTypes = {
     shopsList: PropTypes.array,
     set: PropTypes.object,
     selected: PropTypes.object
 };
 
-export default Sitehost;
+export default SiteHost;

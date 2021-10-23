@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { startCase } from '../../utils/strings';
+import { startCase } from 'utils/strings';
 
 
 const Button = ({ text, onClick, disabled, loading, backgroundColor }) => (

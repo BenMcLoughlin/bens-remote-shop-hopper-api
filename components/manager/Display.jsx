@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import useGlobal from "../../globalState/store";
-import { updateMetrics } from '../../requests/updateMetrics';
+import useGlobal from "globalState/store";
+import { updateMetrics } from 'requests/updateMetrics';
 
 const Display = (props) => {
     const { shopsList, set, selected } = props;
     const [ uploadedSuccess, setUpLoaded ] = useState(false);
-    const [ isLoading, setIsLoading ] = useState(false);
+    const [ loading, setLoading ] = useState(false);
     const [ globalState, globalActions ] = useGlobal();
 
     const _updateProducts = async (params) => {
-        setIsLoading(true);
+        setLoading(true);
         // const success = await updateProducts(params);
         const success = await globalActions.products.single(params);
 
         if (success) {
             setUpLoaded(success.result);
-            setIsLoading(false);
+            setLoading(false);
 
             return true;
         }
@@ -34,7 +34,7 @@ const Display = (props) => {
                             header={selected.siteHost}
                             refresh={uploadedSuccess}
                             isShopify
-                            isLoading={isLoading}
+                            loading={loading}
                             buttonTitle={`Load All ${ selected.siteHost } Shops`}
                             buttonClick={() => {
                                 set.selectedBusinessName('');
@@ -63,7 +63,7 @@ const Display = (props) => {
                                 header={selected.businessName}
                                 refresh={uploadedSuccess}
                                 isShopify={false}
-                                isLoading={isLoading}
+                                loading={loading}
                                 buttonTitle={`Load ${ selected.businessName }`}
                                 buttonClick={() => {
                                     // set.selectedSiteHost('');

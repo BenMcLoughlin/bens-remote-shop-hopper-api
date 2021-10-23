@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React from 'react';
 import { Provider } from 'next-auth/client';
-import { AppProps } from 'next/app';
 import { Router } from 'next/dist/client/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';

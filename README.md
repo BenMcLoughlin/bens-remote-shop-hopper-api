@@ -79,7 +79,6 @@ Connection Info
 \conninfo
 ```
 
-
 ## TBA
 
 `To configure seeding in your project you need to add a "prisma.seed" property in your package.json with the command to execute it:`
@@ -89,3 +88,7 @@ https://www.prisma.io/docs/guides/database/seed-database
 ## Build Step Spare
 
 `next dev --port $PORT`
+
+## References
+
+`https://styled-icons.dev/` Styled Icons

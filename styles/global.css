@@ -6,9 +6,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
+    font-family: Geneva, sans-serif;
     color: black;
-    font-family: Geneva,
-        sans-serif;
     color: #707070;
     letter-spacing: 0.5px;
     background: rgb(252, 252, 252);
@@ -16,6 +15,12 @@ body {
             rgba(252, 252, 252, 1) 0%,
             rgba(252, 252, 252, 0.3211659663865546) 38%,
             rgba(242, 239, 239, 0.6797093837535014) 100%);
+}
+@media screen and (min-width: 700px) {
+    body {
+        max-height: 100vh;
+        overflow: hidden;
+    }
 }
 
 /*  calculation to make 1rem be10px at 1400 font-size: calc(0.038em + 0.665vw); */
@@ -300,7 +305,7 @@ ul.options li.option-active {
 }
 
 .send {
-    background: lightGrey;
+    background: pink;
     border-radius: 50px;
     border: none;
     padding: 10px;
@@ -327,15 +332,6 @@ ul.options li.option-active {
     width: 275px;
     height: 300px;
     padding: 1rem;
-}
-
-.send {
-    background: lightGrey;
-    border-radius: 50px;
-    border: none;
-    padding: 10px;
-    transition: box-shadow 0.1s ease-in;
-    margin-bottom: 20px;
 }
 
 .post {

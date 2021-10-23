@@ -263,5 +263,13 @@ module.exports = {
         'wrap-regex': 'error',
         'yield-star-spacing': 'error',
         yoda: 'error'
+    },
+    "settings": {
+    // Allows us to lint absolute imports within codebase
+        "import/resolver": {
+            "node": {
+                "moduleDirectory": [ "node_modules", "/" ]
+            }
+        }
     }
 };

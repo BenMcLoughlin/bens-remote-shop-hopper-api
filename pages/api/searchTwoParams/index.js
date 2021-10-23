@@ -1,19 +1,51 @@
 import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 
-export async function searchTwoParams(params) {
-    console.log('params.column:', params.column);
+export async function searchTwoParams(query) {
+    let column = query.column;
+    let metric = query.metric;
+    let cursor = query.cursor || 0;
+    let amount = query.amount || 12;
 
-    let column = params.column;
-    let metric = params.metric;
+    console.log('searchTwoParams:', column, metric, cursor, amount);
+    let where = {};
+
+    if (column === 'business_name' || 
+        column === 'handle' || 
+        column === 'product_type' ||
+        column === 'vendor' ||
+        column === 'original_price' ||
+        column === 'compare_at_price'
+    ) {
+        where = {
+            [column]: metric
+        };
+    } else if (column === 'body_html') {
+        where = {
+            body_html: {
+                search: metric
+            }
+        };
+    } else {
+        where = {
+            [column]: {
+                has: metric
+            }
+        };
+    }
 
     const result = await prisma.product
         .findMany({
-            take: 10,
-            where: {
-                [column]: {
-                    has: metric
-                }
+            take: amount,
+            skip: cursor,
+            where,
+            // where: {
+            //     [column]: {
+            //         has: metric
+            //     }
+            // },
+            orderBy: {
+                rating: 'desc'
             }
         })
         .catch((e) => {
@@ -39,7 +71,6 @@ export default async (req, res) => {
         try {
             let { body } = req;
 
-            // Postman (Ben Heeeeeelp!)
             if (!body) {
                 body = req.query;
             }
