@@ -15,32 +15,25 @@ const defaultFilters = {
 
 const Board = () => {
     const [ globalState, globalActions ] = useGlobal();
-    const [ loading, setLoading ] = useState(false);
+    // const [ loading, setLoading ] = useState(false);
     const [ products, setProducts ] = useState([]);
-    // const [ filters, setFilters ] = useState(defaultFilters);
 
     useEffect(() => {
         _getProducts(defaultFilters);
-    }, [ ]);
+    }, []);
 
     useEffect(() => {
         setProducts(globalState.products.data);
     }, [ globalState.products.data ]);
 
     const _getProducts = async (filters = defaultFilters) => {
-        setLoading('search');
-        
         const result = await globalActions.apiRequests.searchProducts(filters); 
 
         if (result) {
             await globalActions.products.setQuery(filters);
-            // setFilters(filters);
             globalActions.products.setCursor(result.length);
             globalActions.products.setData(result);
-            setLoading(false);
         }
-
-        setLoading(false);
     };
 
     return (
@@ -48,9 +41,7 @@ const Board = () => {
             {/* <Breadcrumbs items={[ 'Projects', 'project.name', 'Add' ]} /> */}
             <Filters
                 defaultFilters={defaultFilters}
-                // filters={filters}
                 search={_getProducts}
-                // setFilters={setFilters}
             />
             <List
                 products={products}
@@ -60,7 +51,8 @@ const Board = () => {
 };
 
 export const BoardWrapper = styled.div`
-    overflow: hidden;
+    overflow-y: auto;
+    height: 100vh;
 `;
 
 export default Board;

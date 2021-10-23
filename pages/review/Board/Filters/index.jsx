@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import toast from 'utils/toast';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { color, font, mixin } from 'styles/theme';
 import InputDebounced from 'components/InputDebounced';
 import Avatar from 'components/Avatar';
@@ -10,6 +10,7 @@ import Button from 'components/Button';
 import Form from 'components/Form';
 import { bucketOptions, columnOptions } from 'content/variables';
 import useGlobal from "globalState/store";
+import { capitalize } from 'utils/strings/capitalize';
 
 import {
     FormHeading,
@@ -21,18 +22,17 @@ import {
 
 const propTypes = {
     search: PropTypes.func,
-    setFilters: PropTypes.func.isRequired,
-    defaultFilters: PropTypes.object,
-    filters: PropTypes.object.isRequired
+    defaultFilters: PropTypes.object
 };
 
-const BoardFilters = ({ search, setFilters, filters, defaultFilters }) => {
+const BoardFilters = ({ search, defaultFilters }) => {
     const [ globalState, globalActions ] = useGlobal();
     const [ loading, setLoading ] = useState(false);
     const [ modalOpen, setModalOpen ] = useState(false);
     const [ column, setColumnName ] = useState('');
     const [ columnData, setColumnData ] = useState([]);
     const [ metric, setMetric ] = useState('');
+    const [ filters, setFilters ] = useState(defaultFilters);
     const [ areFiltersCleared, setAreFiltersCleared ] = useState(true);
 
     const _toggleModal = () => {
@@ -40,18 +40,14 @@ const BoardFilters = ({ search, setFilters, filters, defaultFilters }) => {
         setModalOpen(!modalOpen);
     };
 
-    const _clear = () => {
+    const _clear = async () => {
         setColumnData('');
         setColumnName('');
         setMetric('');
+        setFilters(defaultFilters);
+        await _applyFilters();
         setAreFiltersCleared(true);
     }; 
-
-    const renderList = ({ value }) => (
-        <SelectItem>
-            <option>{value}</option>
-        </SelectItem>
-    );
 
     const _fetchColumn = async (columnName) => {
         setLoading(true);
@@ -69,59 +65,52 @@ const BoardFilters = ({ search, setFilters, filters, defaultFilters }) => {
         }
     };
 
-    const _applyFilters = async () => {
-        // await setFilters({
-        //     column,
-        //     metric
-        // });
-
-        // globalActions.products.setQuery({
-        //     column,
-        //     metric
-        // });
-
-        await search({
-            column,
-            metric
-        });
+    const _applyFilters = async (filterQuery = defaultFilters) => {
+        await search(filterQuery);
+        setAreFiltersCleared(false);
     };
 
-    console.log('metric:', metric, globalState.products.query);
+    const renderList = ({ value }) => (
+        <SelectItem>
+            <option>{value}</option>
+        </SelectItem>
+    );
+
+    console.log('filters:', filters, modalOpen);
 
     return (
-        <Filters>
+        <Filters modalOpen={false}>
             <Column>
-                <StyledButton
-                    variant="empty"
-                    isActive={column}
-                    onClick={_toggleModal}
-                >
-                    Column:
-                </StyledButton>
-                {
-                    column &&
-                    <FilterText>{column}</FilterText>
-                }
-            </Column>
-            <Column>
-                {
-                    column &&
+                <Row>
+                    <StyledButton
+                        variant="empty"
+                        isActive={column}
+                        onClick={_toggleModal}
+                    >
+                        {modalOpen ? 'Column' : 'Create Filters'}
+                    </StyledButton>
+                    {
+                        column &&
+                    <FilterText>{capitalize(column)}</FilterText>
+                    }
+                </Row>
+                <Row>
+                    {
+                        column &&
                         <StyledButton
                             variant="empty"
                             isActive={metric}
                             onClick={() => setMetric('')}
                         >
-                            Metric:
+                            Metric -
                         </StyledButton>
-                }
-                {
-                    metric &&
+                    }
+                    {
+                        metric &&
                     <FilterText>{metric}</FilterText>
-                }
+                    }
+                </Row>
             </Column>
-            {!areFiltersCleared && (
-                <ClearAll onClick={_clear}>Clear all</ClearAll>
-            )}
             {
                 modalOpen &&
                 <>
@@ -133,12 +122,17 @@ const BoardFilters = ({ search, setFilters, filters, defaultFilters }) => {
                                     column: '',
                                     metric: ''
                                 }}
-                                onSubmit={(values, form) => {
-                                    console.log('values, form:', values, form);
-
+                                onSubmit={async (values, form) => {
                                     try {
-                                        _applyFilters();
+                                        await setFilters({
+                                            column,
+                                            metric
+                                        });
 
+                                        _applyFilters({
+                                            column,
+                                            metric
+                                        });
                                         // toast.success('Filter has been successfully created.');
                                     } catch (error) {
                                         Form.handleAPIError(error, form);
@@ -148,20 +142,23 @@ const BoardFilters = ({ search, setFilters, filters, defaultFilters }) => {
                                 <FormElement>
                                     <FormHeading>Apply Filter</FormHeading>
                                     <Actions>
-                                        <ActionButton 
+                                        {!areFiltersCleared && (
+                                            <ClearAll onClick={_clear}>Clear all</ClearAll>
+                                        )}
+                                        <StyledButton 
                                             type="submit"
                                             variant="primary"
                                             isWorking={loading}
                                         >
-                                    Search with this filter
-                                        </ActionButton>
-                                        <ActionButton
+                                            Search with this filter
+                                        </StyledButton>
+                                        <StyledButton
                                             type="button"
                                             variant="empty"
                                             onClick={_toggleModal}
                                         >
-                                    Cancel
-                                        </ActionButton>
+                                            Cancel
+                                        </StyledButton>
                                     </Actions>
                                 </FormElement>
                             </Form>
@@ -210,20 +207,23 @@ const BoardFilters = ({ search, setFilters, filters, defaultFilters }) => {
                                         />
                                     }
                                     <Actions>
-                                        <ActionButton
+                                        {!areFiltersCleared && (
+                                            <ClearAll onClick={_clear}>Clear all</ClearAll>
+                                        )}
+                                        <StyledButton
                                             type="submit"
                                             variant="primary"
                                             isWorking={loading}
                                         >
                                             {columnData.length ? 'Create Filter' : 'Next Step'}
-                                        </ActionButton>
-                                        <ActionButton
+                                        </StyledButton>
+                                        <StyledButton
                                             type="button"
                                             variant="empty"
                                             onClick={_toggleModal}
                                         >
                                             Cancel
-                                        </ActionButton>
+                                        </StyledButton>
                                     </Actions>
                                 </FormElement>
                             </Form>
@@ -235,58 +235,43 @@ const BoardFilters = ({ search, setFilters, filters, defaultFilters }) => {
 };
 
 export const Filters = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  @media (max-width: 400px) {
-    flex-direction: column;
-  }
+    display: flex;
+    align-items: start;
+    flex-direction: row;
+    justify-content: space-between;
+    height: ${ (props) => props.modalOpen ? `240px` : `100px` };
+    height: auto;
 `;
 
 export const Column = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  @media (max-width: 700px) {
-      flex-direction: column;
-  }
+    display: flex;
+    flex-direction: column;
+    padding: 35px 0;
+    @media (max-width: 700px) {
+        flex-direction: column;
+    }
+`;
+
+export const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin: 10px;
 `;
 
 export const FilterText = styled.p`
     font-size: 18px;
     font-weight: bold;
-`;
-
-export const SearchInput = styled(InputDebounced)`
-  margin-right: 18px;
-  width: 160px;
-`;
-
-export const Avatars = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-  margin: 6px;
-`;
-
-export const AvatarIsActiveBorder = styled.div`
-  display: inline-flex;
-  margin-left: -2px;
-  border-radius: 50%;
-  transition: transform 0.1s;
-  ${ mixin.clickable };
-  ${ (props) => props.isActive && `box-shadow: 0 0 0 4px ${ color.primary }` }
-  &:hover {
-    transform: translateY(-5px);
-  }
-`;
-
-export const StyledAvatar = styled(Avatar)`
-  box-shadow: 0 0 0 2px #fff;
+    border: 2px solid orange;
+    padding: 2px;
+    color: red;
 `;
 
 export const StyledButton = styled(Button)`
-  margin: 6px;
+    border: none;
+    font-family: 'Yanone Kaffeesatz', Sans-serif;
+    font-size: 22px;
+    margin-left: 10px;
 `;
 
 export const ClearAll = styled.div`
