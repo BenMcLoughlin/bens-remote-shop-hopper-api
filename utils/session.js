@@ -22,6 +22,13 @@ function removeStoredAuthToken() {
 }
 
 /**
+ * @returns null
+ */
+function logout() {
+    localStorage.removeItem('token');
+}
+
+/**
  * @param type
  */
 function setUserType(type) {
@@ -74,5 +81,6 @@ export {
     removeUserType,
     setPasswordWasReset,
     PasswordWasReset,
-    removePasswordWasReset
+    removePasswordWasReset,
+    logout
 };

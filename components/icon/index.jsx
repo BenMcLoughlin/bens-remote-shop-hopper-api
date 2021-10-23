@@ -77,4 +77,4 @@ export const StyledIcon = styled.i`
 Icon.propTypes = propTypes;
 Icon.defaultProps = defaultProps;
 
-export default Icon;
+export { Icon };

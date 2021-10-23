@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-function */
 import React, { useLayoutEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 // import Quill from 'quill';

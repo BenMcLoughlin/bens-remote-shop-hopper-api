@@ -56,7 +56,9 @@ const DatePicker = ({ className, withTime, value, onChange, ...inputProps }) => 
 };
 
 const getFormattedInputValue = (value, withTime) => {
-    if (!value) { return ''; }
+    if (!value) { 
+        return '';
+    }
 
     return withTime ? formatDateTime(value) : formatDate(value);
 };

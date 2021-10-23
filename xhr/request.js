@@ -1,5 +1,5 @@
 import envUrl from '../config';
-import session from '../utils/session';
+import * as session from '../utils/session';
 
 /**
  * @param req

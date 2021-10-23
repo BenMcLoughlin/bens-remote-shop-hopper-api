@@ -12,8 +12,6 @@ import NavbarLeft from 'components/NavbarLeft';
 import Sidebar from './Sidebar';
 import Tags from './Tags';
 
-import { startData } from './mocks';
-
 const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
 
 const TagReviewSystem = () => {
@@ -43,14 +41,12 @@ const TagReviewSystem = () => {
         setLoading(false);
     };
 
-    const project = startData.project;
-
     return (
         <Layout>
             <ProjectPage>
                 <NavbarLeft />
 
-                <Sidebar project={project} />
+                <Sidebar />
 
                 <Tags />
             </ProjectPage>

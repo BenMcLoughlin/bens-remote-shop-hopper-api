@@ -54,10 +54,14 @@ const DatePickerTimeSection = ({ value, onChange, setDropdownOpen }) => {
 const formatTime = (value) => formatDate(value, 'HH:mm');
 
 const scrollToSelectedTime = ($scrollCont, value) => {
-    if (!$scrollCont) { return; }
+    if (!$scrollCont) { 
+        return;
+    }
 
     const $selectedTime = $scrollCont.querySelector(`[data-time="${ formatTime(value) }"]`);
-    if (!$selectedTime) { return; }
+    if (!$selectedTime) { 
+        return;
+    }
 
     $scrollCont.scrollTop = $selectedTime.offsetTop - 80;
 };
