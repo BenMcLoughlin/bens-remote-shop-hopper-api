@@ -22,7 +22,7 @@ const defaultProps = {
     products: []
 };
 
-const BoardList = ({ status, products }) => {
+const BoardList = ({ products }) => {
     const [ globalState, globalActions ] = useGlobal();
     const [ loading, setLoading ] = useState(false);
     const [ currentQuery, setCurrentQuery ] = useState('');
@@ -51,13 +51,21 @@ const BoardList = ({ status, products }) => {
         }
     };
 
+    const formatProductsCount = () => {
+        if (products.length !== globalState.products.cursor) {
+            return `${ products.length } of ${ globalState.products.cursor }`;
+        }
+
+        return products.length;
+    };
+
     // console.log('globalState:', globalState);
 
     return (
         <>
             <Title>
                 {currentQuery}  
-                <ProductsCount>: {formatProductsCount(products, [])} Items</ProductsCount>
+                <ProductsCount>: {formatProductsCount()} Items</ProductsCount>
             </Title>
             <ButtonsWrapper>
                 {
@@ -112,14 +120,6 @@ const BoardList = ({ status, products }) => {
             </List>
         </>
     );
-};
-
-const formatProductsCount = (allListProducts, filteredListProducts) => {
-    if (allListProducts.length !== filteredListProducts.length) {
-        return `${ filteredListProducts.length } of ${ allListProducts.length }`;
-    }
-
-    return allListProducts.length;
 };
 
 const Icon = styled.div`

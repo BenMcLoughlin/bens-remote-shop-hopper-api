@@ -1,12 +1,12 @@
 import * as products from '../../xhr/products';
 // import * as types from './types/products'; todo
 
-export const userProducts = (store, query) => {
+export const searchProducts = (store, query) => {
     store.actions.products.setLoading(true);
-    console.log('userProducts query:', query);
+    console.log('searchProducts query:', query);
     store.actions.products.setQuery(query);
 
-    return products.searchProducts(query)
+    return products.searchTwoParams(query)
         .then((data) => {
             // store.actions.products.setData(data.result);
             console.log('store.state.products:', store.state.products.data?.length);
@@ -33,7 +33,7 @@ export const nextPage = (store) => {
     }; 
     console.log('nextPage body:', body);
 
-    return products.searchProducts(body)
+    return products.searchTwoParams(body)
         .then((data) => {
             store.actions.products.setData(data.result);
             store.actions.products.setCursor(body.cursor);
@@ -59,7 +59,7 @@ export const prevPage = (store) => {
     }; 
     console.log('prevPage body:', body);
 
-    return products.searchProducts(body)
+    return products.searchTwoParams(body)
         .then((data) => {
             store.actions.products.setData(data.result);
             store.actions.products.setCursor(body.cursor);

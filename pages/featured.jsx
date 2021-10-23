@@ -3,21 +3,19 @@
 import React, { useState, useEffect } from "react";
 import Image from 'next/image';
 import Chips from 'react-chips';
-import { useRouter } from 'next/router';
 import Layout from "../components/Layout";
 import styled from 'styled-components';
-import { ArrowLeftShort } from '@styled-icons/bootstrap/ArrowLeftShort';
-import { ArrowRightShort } from '@styled-icons/bootstrap/ArrowRightShort';
+// import { ArrowLeftShort } from '@styled-icons/bootstrap/ArrowLeftShort';
+// import { ArrowRightShort } from '@styled-icons/bootstrap/ArrowRightShort';
 
 import { color, font, mixin } from 'styles/theme';
 import incrementProduct from "../requests/incrementProduct";
-import searchTwoParams from "../requests/searchTwoParams";
 import loaderGif from '../public/assets/loader/octo_loader.gif';
 import useGlobal from "../globalState/store";
 import Product from 'components/Product';
 import { columns, buckets } from "content/variables";
 
-const DB_Param = buckets[0];
+const DB_Param = buckets[5];
 
 const Features = () => {
     const [ globalState, globalActions ] = useGlobal();
@@ -33,13 +31,8 @@ const Features = () => {
     }, [ globalState.products.hotItems ]);
 
     useEffect(() => {
-        // _searchTwoParams(queryStrings);
         _getHotItems(40);
     }, []);
-
-    const refreshData = () => {
-        router.replace(router.asPath);
-    };
 
     const _incrementProduct = async (id) => {
         setLoading('incrementProduct');
@@ -59,28 +52,29 @@ const Features = () => {
 
     const _searchTwoParams = async () => {
         setLoading('search');
-        const result = await searchTwoParams(queryStrings);
+        const result = await globalActions.apiRequests.searchProducts(filters); 
+
         if (result) {
             setProducts(result);
             setLoading(false);
         }
     };
 
-    const _nextPage = async () => {
-        setLoading('nextPage');
-        const result = await globalActions.apiRequests.nextPage();
-        if (result) {
-            setLoading(false);
-        }
-    };
+    // const _nextPage = async () => {
+    //     setLoading('nextPage');
+    //     const result = await globalActions.apiRequests.nextPage();
+    //     if (result) {
+    //         setLoading(false);
+    //     }
+    // };
 
-    const _prevPage = async () => {
-        setLoading('prevPage');
-        const result = await globalActions.apiRequests.prevPage();
-        if (result) {
-            setLoading(false);
-        }
-    };
+    // const _prevPage = async () => {
+    //     setLoading('prevPage');
+    //     const result = await globalActions.apiRequests.prevPage();
+    //     if (result) {
+    //         setLoading(false);
+    //     }
+    // };
 
     return (
         <Layout>

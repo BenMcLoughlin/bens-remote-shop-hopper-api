@@ -22,7 +22,7 @@ const TagReviewSystem = () => {
     const [ loading, setLoading ] = useState(false);
     const [ queryStrings, setQueryStrings ] = useState({
         column: 'buckets', 
-        metric: "Casual"
+        metric: "Athletic"
     });
 
     useEffect(() => {
