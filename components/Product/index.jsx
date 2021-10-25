@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import useGlobal from "globalState/store";
 import { color, font, mixin } from 'styles/theme';
 import { truncate } from 'utils/strings';
 
@@ -26,13 +25,12 @@ const propTypes = {
     incrementProduct: PropTypes.func
 };
 
-const BoardListProduct = ({ businessName, src, title, rating, id, price, compareAtPrice, tags, buckets, incrementProduct }) => {
-    const [ globalState, globalActions ] = useGlobal();
+const Product = ({ businessName, src, title, rating, id, price, compareAtPrice, tags, buckets, incrementProduct }) => {
     const [ localRating, setRating ] = useState(0);
 
     useEffect(() => { // todo
         setRating(rating);
-    }, [ globalState.products.data ]);
+    }, []);
 
     const _incrementProduct = () => {
         setRating(localRating + 1);
@@ -50,7 +48,7 @@ const BoardListProduct = ({ businessName, src, title, rating, id, price, compare
                         <Details>
                             Rating: {localRating} 
                         </Details>
-                        {localRating > 10 && (
+                        {localRating > 0 && (
                             <Star>⭐️</Star>
                         )}
                         
@@ -154,6 +152,6 @@ export const Img = styled.img`
     object-fit: contain;
 `;
 
-BoardListProduct.propTypes = propTypes;
+Product.propTypes = propTypes;
 
-export default BoardListProduct;
+export default Product;

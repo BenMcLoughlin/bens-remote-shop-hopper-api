@@ -62,8 +62,6 @@ const BoardList = ({ products }) => {
         return products.length;
     };
 
-    // console.log('globalState:', globalState);
-
     return (
         <>
             <Title>
@@ -130,6 +128,7 @@ const Icon = styled.div`
     width: 2rem;
     fill: white;
     margin-right: 1.5rem;
+    cursor: pointer;
 `;
 
 export const ButtonsWrapper = styled.div`

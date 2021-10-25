@@ -17,13 +17,13 @@ const Featured = () => {
     const [ loading, setLoading ] = useState(false);
     const mountedRef = useRef(true);
 
-    useEffect(() => {
-        mountedRef.current && setProducts(globalState.products.hotItems);
+    // useEffect(() => {
+    //     mountedRef.current && setProducts(globalState.products.hotItems);
 
-        // return () => {
-        //     mountedRef.current = false;
-        // };
-    }, [ globalState.products.hotItems ]);
+    //     // return () => {
+    //     //     mountedRef.current = false;
+    //     // };
+    // }, [ globalState.products.hotItems ]);
 
     useEffect(() => {
         _getHotItems(40);
@@ -49,7 +49,7 @@ const Featured = () => {
         <Layout>
             <Main>
                 <Title>
-                    These are the {products.length} hottest items, or items that have the highest rating, according to predefined query parameters. In the future these will be specific to the viewer.
+                    These are the {globalState.products.hotItems.length} hottest items, or items that have the highest rating, according to predefined query parameters. In the future these will be specific to the viewer.
                 </Title>
                 <List>
                     {
@@ -57,7 +57,7 @@ const Featured = () => {
                             <Image src={loaderGif} width={800} height={600} />
                             :
                             <>
-                                {products.map((product, index) => (
+                                {globalState.products.hotItems.map((product, index) => (
                                     <Product
                                         key={product.id}
                                         id={product.id}

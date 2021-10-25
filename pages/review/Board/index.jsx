@@ -49,6 +49,7 @@ const Board = () => {
             />
             <List
                 products={products}
+                // products={globalState.products.data}
             />
         </BoardWrapper>
     );

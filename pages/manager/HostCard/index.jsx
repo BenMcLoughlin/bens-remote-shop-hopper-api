@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Shopify } from '@styled-icons/fa-brands/Shopify';
 import styled from 'styled-components';
 
-import useGlobal from "globalState/store";
 import { color, font, mixin } from 'styles/theme';
 
 const propTypes = {
@@ -11,28 +10,24 @@ const propTypes = {
     businessName: PropTypes.string
 };
 
-const HostCard = ({ businessName, id }) => {
-    const [ globalState, globalActions ] = useGlobal();
-
-    return (
-        <>
-            <Block>
-                <Shopify size={30} />
-                <Card>
-                    <Title>{businessName}</Title>
-                    <Bottom>
-                        <Details>
-                            We will add some metrics and interesting info about each host type here as time goes on
-                        </Details>
+const HostCard = ({ businessName }) => (
+    <>
+        <Block>
+            <Shopify size={30} />
+            <Card>
+                <Title>{businessName}</Title>
+                <Bottom>
+                    <Details>
+                        We will add some metrics and interesting info about each host type here as time goes on
+                    </Details>
                         
-                        <Border />
-                    </Bottom>
-                </Card>
-                <Details>{businessName}</Details>
-            </Block>
-        </>
-    );
-};
+                    <Border />
+                </Bottom>
+            </Card>
+            <Details>{businessName}</Details>
+        </Block>
+    </>
+);
 
 export const Block = styled.div`
     display: flex;

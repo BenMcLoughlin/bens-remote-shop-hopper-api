@@ -13,16 +13,16 @@ const SiteHostList = () => {
     const [ siteHosts, setSiteHosts ] = useState([]);
     const mountedRef = useRef(true);
 
-    useEffect(() => {
-        console.log('globalState.siteHosts.list:', globalState.siteHosts.list);
-        mountedRef.current && setSiteHosts(globalState.siteHosts.list);
+    // useEffect(() => {
+    //     console.log('globalState.siteHosts.list:', globalState.siteHosts.list);
+    //     mountedRef.current && setSiteHosts(globalState.siteHosts.list);
 
-        // return () => {
-        //     mountedRef.current = false;
-        // };
-    }, [ globalState.siteHosts.list ]);
+    //     return () => {
+    //         mountedRef.current = false;
+    //     };
+    // }, [ globalState.siteHosts.list ]);
 
-    if (!siteHosts.length) {
+    if (!globalState.siteHosts.list.length) {
         return <p>Loading ...</p>;
     }
 
@@ -37,7 +37,7 @@ const SiteHostList = () => {
                         <Image src={loaderGif} className="loading" width={800} height={600} />
                         :
                         <>
-                            {siteHosts.map((host, index) => (
+                            {globalState.siteHosts.list.map((host, index) => (
                                 <HostCard
                                     key={`${ host.id + index }`}
                                     id={host.id}

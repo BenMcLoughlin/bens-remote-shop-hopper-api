@@ -58,9 +58,9 @@ const ManagerSidebar = () => {
 
         _getShopStatus();
 
-        return () => {
-            mountedRef.current = false;
-        };
+        // return () => {
+        //     mountedRef.current = false;
+        // };
     }, [ globalState.status ]);
 
     useEffect(() => {
@@ -79,9 +79,9 @@ const ManagerSidebar = () => {
 
         _getShopList();
 
-        return () => {
-            mountedRef.current = false;
-        };
+        // return () => {
+        //     mountedRef.current = false;
+        // };
     }, [ addShopModal ]);
 
     const renderLinkItem = (text, iconType, path, index) => {
