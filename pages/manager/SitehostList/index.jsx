@@ -48,7 +48,7 @@ const SiteHostList = () => {
                                     key={`${ host.id + index }`}
                                     id={host.id}
                                     businessName={host}
-                                    openPage={() => _openPage(`/manager/${ host }`)}
+                                    openPage={() => _openPage(`/manager/${ host.toLowerCase() }`)}
                                 />
                             ))}
                             {Array.from('odfpinsdfpposndfpn').map((host, index) => (
@@ -57,7 +57,7 @@ const SiteHostList = () => {
                                     id={host.id}
                                     businessName={host}
                                     index={index}
-                                    openPage={() => _openPage(`/manager/${ host }`)}
+                                    openPage={() => _openPage(`/manager/${ host.toLowerCase() }`)}
                                 />
                             ))}
                         </>

@@ -30,7 +30,7 @@ export const single = async (store, params) => {
 export const all = (store, shops) => {
     store.actions.counter.clearRequests();
 
-    let promises = shops.map(async (shop, i) => {
+    let promises = shops.data.map(async (shop, i) => {
         if (shop.domain) {
             let params = { 
                 domain: shop.domain,

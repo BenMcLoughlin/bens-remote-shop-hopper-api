@@ -54,12 +54,14 @@ const SiteHost = () => {
 
     const _cancel = async () => {
         // todo
-        await globalActions.products.all([], true);
+        // await globalActions.products.all([], true);
     };
 
     const _updateAll = async () => {
         globalActions.counter.clearRequests();
         globalActions.counter.setLoading(true);
+        console.log('globalState:', globalState);
+
         const success = await globalActions.products.all(globalState.shops);
 
         if (success) {
@@ -71,6 +73,7 @@ const SiteHost = () => {
     };
 
     const _updateSingle = async (params) => {
+        globalActions.counter.clearRequests();
         globalActions.counter.setLoading(true);
         const success = await globalActions.products.single(params);
 
@@ -104,7 +107,7 @@ const SiteHost = () => {
 
                 <SiteHostSection>
                     <MetricsDisplay
-                        header={selected.siteHost}
+                        headerTitle={selected.siteHost}
                         isHost
                         loading={globalState.counter.loading}
                         cancel={_cancel}
@@ -126,7 +129,7 @@ const SiteHost = () => {
                     {
                         selected.businessName &&
                             <MetricsDisplay
-                                header={selected.businessName}
+                                headerTitle={selected.businessName}
                                 loading={globalState.counter.loading}
                                 cancel={_cancel}
                                 buttonTitle={`Load ${ selected.businessName }`}

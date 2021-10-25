@@ -20,9 +20,8 @@ const SelectShop = ({ set, selected }) => {
 
     useEffect(() => {
         const _getShopStatus = async () => {
-            // setLoading(true);
+            setLoading(true);
             console.time("_getShopStatus");
-            // const eachShop = await fetchShopStatus();
             const shops = await globalActions.shops.shopStatuses();
 
             let businessStatus = {};
@@ -36,7 +35,7 @@ const SelectShop = ({ set, selected }) => {
                 ));
 
                 setStatuses(businessStatus);
-                // setLoading(false);
+                setLoading(false);
                 console.timeEnd("_getShopStatus");
             }
         };
@@ -46,16 +45,16 @@ const SelectShop = ({ set, selected }) => {
 
     useEffect(() => {
         const _getShopList = async () => {
-            // setLoading(true);
+            setLoading(true);
             console.time("_getShopList");
             const uniqueShops = await fetchShops();
-            // globalActions.shops.addShops(uniqueShops);
 
             if (uniqueShops) {
+                globalActions.shops.setShops(uniqueShops);
                 const businessNames = uniqueShops.map((d) => d.business_name);
 
                 setList(businessNames);
-                // setLoading(false);
+                setLoading(false);
                 console.timeEnd("_getShopList");
             }
         };
@@ -68,12 +67,14 @@ const SelectShop = ({ set, selected }) => {
     };
 
     const _addShop = async (shopData) => {
+        setLoading(true);
         const result = await addShops(shopData);
 
         if (result.error) {
             return alert(result.error);
         }
 
+        setLoading(false);
         _toggleAddShopModal();
     };
 

@@ -1,8 +1,9 @@
 import * as shops from '../../xhr/shops';
 
-export const addShops = (store, shopsList) => {
-    const shopsState = [ ...store.state.shops, ...shopsList ];
-    store.setState({ shops: [ ...store.state.shops, ...shopsState ] });
+export const setShops = (store, state) => {
+    const shopsState = { ...store.state.shops };
+    shopsState.data = state;
+    store.setState({ shops: shopsState });
 };
 
 export const setLoading = (store, state) => {
