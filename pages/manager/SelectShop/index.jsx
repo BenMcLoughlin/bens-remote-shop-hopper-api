@@ -8,8 +8,8 @@ import useGlobal from 'globalState/store';
 import { camelCase } from 'utils/strings';
 import addShops from "requests/addShops";
 import fetchShops from "requests/fetchShops";
-import CreateShopModal from "../CreateShopModal";
 import loaderGif from 'public/assets/loader/octo_loader.gif';
+import CreateShopModal from "./CreateShopModal";
 
 const SelectShop = ({ set, selected }) => {
     const [ globalState, globalActions ] = useGlobal();

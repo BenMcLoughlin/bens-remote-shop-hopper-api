@@ -1,6 +1,6 @@
 
-const hydrateRequest = async (body) => {
-    const res = await fetch('/api/hydrate', {
+const wipeProducts = async (body) => {
+    const res = await fetch('/api/wipeProducts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -11,4 +11,4 @@ const hydrateRequest = async (body) => {
     return data;
 };
 
-export default hydrateRequest;
+export default wipeProducts;

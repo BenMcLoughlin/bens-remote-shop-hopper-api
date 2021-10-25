@@ -28,6 +28,11 @@ async function createRows(data) {
     result = await prisma.product.createMany({
         data: data,
         skipDuplicates: true
+    }).catch((e) => {
+        console.log('e:', e);
+        throw e;
+    }).finally(async () => {
+        await prisma.$disconnect();
     });
 
     return result;

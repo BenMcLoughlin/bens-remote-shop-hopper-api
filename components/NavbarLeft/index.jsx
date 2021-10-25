@@ -3,7 +3,7 @@ import { signOut } from 'next-auth/client';
 import styled from 'styled-components';
 import { TableDeleteRow } from '@styled-icons/fluentui-system-regular/TableDeleteRow';
 import { BoxArrowUpLeft } from '@styled-icons/bootstrap/BoxArrowUpLeft';
-import hydrateRequest from "requests/hydrateRequest";
+import wipeProducts from "requests/wipeProducts";
 
 import useGlobal from 'globalState/store';
 import { font, sizes, color, mixin, zIndexValues } from 'styles/theme';
@@ -15,8 +15,8 @@ const NavbarLeft = () => {
         let response = confirm("Are you sure you want to delete ALL products from this database?");
 
         if (response === true) {
-            await hydrateRequest({ request: 'DESTROY' });
-            await globalActions.shops.shopStatuses();
+            await wipeProducts({ request: 'DESTROY' });
+            await globalActions.status.set({ status: 'PRODUCTS WIPED' });
         }
 
         return null;
