@@ -19,6 +19,7 @@ export const shopStatuses = (store) => {
             console.log('SHOPS STATUSES:', data.result?.length);
 
             store.actions.shops.setLoading(false);
+            store.setState({ status: "SHOP STATUSES" });
 
             return data.result;
         })

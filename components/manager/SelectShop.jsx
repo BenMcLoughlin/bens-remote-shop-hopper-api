@@ -115,7 +115,7 @@ const SelectShop = ({ set, selected }) => {
                                         onClick={() => set.selectedBusinessName(businessName)}
                                     >
                                         <div className="title">{businessName}</div>
-                                        {statuses[businessName] && // todo: Date format
+                                        {statuses[businessName] &&
                                             <div className="updateColumn">
                                                 <div>Most Recent: <span className="update">{statuses[businessName]?.products}</span></div>
                                                 <div className="time">

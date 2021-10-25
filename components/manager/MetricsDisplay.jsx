@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
+import moment from 'moment';
 import styled from 'styled-components';
 
 import useGlobal from 'globalState/store';
@@ -23,9 +24,11 @@ const MetricsDisplay = ({ header, buttonClick, cancel, isHost, loading, buttonTi
     useEffect(() => {
         const _getShopStatus = async () => {
             const shops = await globalActions.shops.shopStatuses();
+            setDate("NULL");
 
             if (shops) {
                 shops.map((d) => {
+                    console.log('run:', header, d.business_name);
                     if (d.business_name === header || isHost) {
                         return (
                             setDate(d.updated_at)
@@ -69,7 +72,7 @@ const MetricsDisplay = ({ header, buttonClick, cancel, isHost, loading, buttonTi
 
                 <div className="column">
                     <p className="value">
-                        <Moment format="MM/DD hh:ssa">{date}</Moment>
+                        {moment(date).format("MM/DD hh:ssa") !== 'Invalid date' ? moment(date).format("MM/DD hh:ssa") : 'No record'}
                     </p>
                     <p className="title">Last Update</p>
                 </div>
