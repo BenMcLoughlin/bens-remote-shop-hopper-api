@@ -8,11 +8,10 @@ import useGlobal from 'globalState/store';
 import { camelCase } from 'utils/strings';
 import addShops from "requests/addShops";
 import fetchShops from "requests/fetchShops";
-import fetchShopStatus from "requests/fetchShopStatus";
 import CreateShopModal from "../CreateShopModal";
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 
-const SelectShop = ({ set, selected, shopsList, refresh }) => {
+const SelectShop = ({ set, selected }) => {
     const [ globalState, globalActions ] = useGlobal();
     const [ list, setList ] = useState([]);
     const [ statuses, setStatuses ] = useState({});
@@ -21,13 +20,15 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
 
     useEffect(() => {
         const _getShopStatus = async () => {
-            setLoading(true);
-            const eachShop = await fetchShopStatus();
+            // setLoading(true);
+            console.time("_getShopStatus");
+            // const eachShop = await fetchShopStatus();
+            const shops = await globalActions.shops.shopStatuses();
 
             let businessStatus = {};
 
-            if (eachShop) {
-                eachShop.map((d) => (
+            if (shops) {
+                shops.map((d) => (
                     businessStatus[d.business_name] = {
                         products: d.products,
                         updatedAt: d.updated_at
@@ -35,7 +36,8 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                 ));
 
                 setStatuses(businessStatus);
-                setLoading(false);
+                // setLoading(false);
+                console.timeEnd("_getShopStatus");
             }
         };
 
@@ -44,15 +46,17 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
 
     useEffect(() => {
         const _getShopList = async () => {
-            setLoading(true);
+            // setLoading(true);
+            console.time("_getShopList");
             const uniqueShops = await fetchShops();
-            globalActions.shops.addShops(uniqueShops);
+            // globalActions.shops.addShops(uniqueShops);
 
             if (uniqueShops) {
                 const businessNames = uniqueShops.map((d) => d.business_name);
 
                 setList(businessNames);
-                setLoading(false);
+                // setLoading(false);
+                console.timeEnd("_getShopList");
             }
         };
 
@@ -208,10 +212,7 @@ const Row = styled.div`
 
 SelectShop.propTypes = {
     set: PropTypes.object,
-    selected: PropTypes.object,
-    shopsList: PropTypes.array,
-    refresh: PropTypes.bool
-
+    selected: PropTypes.object
 };
 
 export default SelectShop;

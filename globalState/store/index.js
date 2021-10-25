@@ -30,7 +30,12 @@ const initialState = {
         loading: false
     },
     status: 'INITIAL',
-    shops: [],
+    shops: {
+        data: [],
+        result: false,
+        status: 'INITIAL',
+        loading: false
+    },
     loading: false
 };
 

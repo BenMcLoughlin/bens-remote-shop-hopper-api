@@ -6,27 +6,25 @@ import styled from 'styled-components';
 import { color, font, mixin } from 'styles/theme';
 
 const propTypes = {
-    id: PropTypes.number,
-    businessName: PropTypes.string
+    businessName: PropTypes.string,
+    openPage: PropTypes.func
 };
 
-const HostCard = ({ businessName }) => (
-    <>
-        <Block>
-            <Shopify size={30} />
-            <Card>
-                <Title>{businessName}</Title>
-                <Bottom>
-                    <Details>
+const HostCard = ({ businessName, openPage }) => (
+    <Block onClick={openPage}>
+        <Shopify size={30} />
+        <Card>
+            <Title>{businessName}</Title>
+            <Bottom>
+                <Details>
                         We will add some metrics and interesting info about each host type here as time goes on
-                    </Details>
+                </Details>
                         
-                    <Border />
-                </Bottom>
-            </Card>
-            <Details>{businessName}</Details>
-        </Block>
-    </>
+                <Border />
+            </Bottom>
+        </Card>
+        <Details>{businessName}</Details>
+    </Block>
 );
 
 export const Block = styled.div`

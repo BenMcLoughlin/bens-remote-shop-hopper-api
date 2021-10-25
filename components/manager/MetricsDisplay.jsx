@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import styled from 'styled-components';
 
-import useGlobal from '../../globalState/store';
+import useGlobal from 'globalState/store';
 import { startCase } from 'utils/strings';
-import Button from '../../components/buttons/Button';
+import Button from 'components/buttons/Button';
 import { updateMetrics } from 'requests/updateMetrics';
-import fetchShopStatus from "../../requests/fetchShopStatus";
 
 const MetricsDisplay = ({ header, buttonClick, cancel, isHost, loading, buttonTitle, disabled }) => {
-    const [ globalState ] = useGlobal();
+    const [ globalState, globalActions ] = useGlobal();
     const [ totalItems, setTotalItems ] = useState(0);
     const [ date, setDate ] = useState('');
 
@@ -23,10 +22,10 @@ const MetricsDisplay = ({ header, buttonClick, cancel, isHost, loading, buttonTi
 
     useEffect(() => {
         const _getShopStatus = async () => {
-            const eachShop = await fetchShopStatus();
+            const shops = await globalActions.shops.shopStatuses();
 
-            if (eachShop) {
-                eachShop.map((d) => {
+            if (shops) {
+                shops.map((d) => {
                     if (d.business_name === header || isHost) {
                         return (
                             setDate(d.updated_at)

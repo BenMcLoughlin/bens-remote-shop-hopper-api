@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-// import Link from 'next/link';
+import React from 'react';
 import { signOut } from 'next-auth/client';
 import styled from 'styled-components';
 import { TableDeleteRow } from '@styled-icons/fluentui-system-regular/TableDeleteRow';
 import { BoxArrowUpLeft } from '@styled-icons/bootstrap/BoxArrowUpLeft';
-// import { MagnifyingGlass } from '@styled-icons/entypo/MagnifyingGlass';
-// import { Create } from '@styled-icons/ionicons-sharp/Create';
 import hydrateRequest from "requests/hydrateRequest";
 
 import { font, sizes, color, mixin, zIndexValues } from 'styles/theme';
 
 const NavbarLeft = () => {
-    // const [ loading, setLoading ] = useState(false || "");
-
     const _wipeDatabase = async () => {
-        await hydrateRequest({ request: 'DESTROY' });
+        let response = confirm("Are you sure you want to delete ALL products from this database?");
+
+        if (response === true) {
+            await hydrateRequest({ request: 'DESTROY' });
+        }
+
+        return null;
     };
 
     return (

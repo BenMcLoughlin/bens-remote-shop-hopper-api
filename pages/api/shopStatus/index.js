@@ -28,17 +28,7 @@ export default async (req, res) => {
         try {
             const result = await getRows();
 
-            let eachShop = [];
-
-            result.map((shop) => {
-                if (!eachShop.includes(shop)) {
-                    eachShop.push(shop);
-                }
-
-                return true;
-            });
-
-            return res.status(200).json({ eachShop });
+            return res.status(200).json({ result });
         } catch (error) {
             return res.status(422).json(error);
         }

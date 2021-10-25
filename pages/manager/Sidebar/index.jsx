@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Moment from 'react-moment';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -11,22 +10,14 @@ import { BuildingBankLink } from '@styled-icons/fluentui-system-regular/Building
 import styled, { css } from 'styled-components';
 import * as shopsLists from 'mock/shopsLists';
 
-import { camelCase, startCase } from 'utils/strings';
+import { startCase } from 'utils/strings';
 import useGlobal from 'globalState/store';
-import addShops from "requests/addShops";
-import fetchShops from "requests/fetchShops";
-import fetchShopStatus from "requests/fetchShopStatus";
 import logoSrc from 'public/assets/logos/shophopper-logo.svg';
 import { color, sizes, font, mixin, zIndexValues } from 'styles/theme';
 
 const ManagerSidebar = () => { 
     const router = useRouter();
     const [ globalState, globalActions ] = useGlobal();
-    const [ list, setList ] = useState([]);
-    const [ statuses, setStatuses ] = useState({});
-    const [ addShopModal, toggleAddShopModal ] = useState(false);
-    const [ loading, setLoading ] = useState(false || "");
-    const mountedRef = useRef(true);
 
     const city = 'kelowna';
     const shopsList = shopsLists[city];
@@ -35,54 +26,6 @@ const ManagerSidebar = () => {
     useEffect(() => {
         globalActions.siteHosts.setList(siteHostList);
     }, []);
-
-    useEffect(() => {
-        const _getShopStatus = async () => {
-            mountedRef.current && setLoading(true);
-            const eachShop = await fetchShopStatus();
-
-            let businessStatus = {};
-
-            if (eachShop) {
-                eachShop.map((d) => (
-                    businessStatus[d.business_name] = {
-                        products: d.products,
-                        updatedAt: d.updated_at
-                    }
-                ));
-
-                setStatuses(businessStatus);
-                setLoading(false);
-            }
-        };
-
-        _getShopStatus();
-
-        // return () => {
-        //     mountedRef.current = false;
-        // };
-    }, [ globalState.status ]);
-
-    useEffect(() => {
-        const _getShopList = async () => {
-            mountedRef.current && setLoading(true);
-            const uniqueShops = await fetchShops();
-            globalActions.shops.addShops(uniqueShops);
-
-            if (uniqueShops) {
-                const businessNames = uniqueShops.map((d) => d.business_name);
-
-                setList(businessNames);
-                setLoading(false);
-            }
-        };
-
-        _getShopList();
-
-        // return () => {
-        //     mountedRef.current = false;
-        // };
-    }, [ addShopModal ]);
 
     const renderLinkItem = (text, iconType, path, index) => {
         let Icon = iconType;

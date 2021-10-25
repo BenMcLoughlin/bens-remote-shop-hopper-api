@@ -108,13 +108,6 @@ export const List = styled.div`
     padding: 10px 8px 300px 8px;
 `;
 
-const Icon = styled.div`
-    height: 2rem;
-    width: 2rem;
-    fill: white;
-    margin-right: 1.5rem;
-`;
-
 export const ButtonsWrapper = styled.div`
     display: flex;
     flex-direction: row;

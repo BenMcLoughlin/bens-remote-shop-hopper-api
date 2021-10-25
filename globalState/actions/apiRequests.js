@@ -1,3 +1,5 @@
+// We will split these up into concise containers
+
 import * as products from '../../xhr/products';
 // import * as types from './types/products'; todo
 

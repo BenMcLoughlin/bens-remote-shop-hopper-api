@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from 'styled-components';
 
@@ -8,6 +9,7 @@ import useGlobal from "globalState/store";
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 
 const SiteHostList = () => {
+    const router = useRouter();
     const [ globalState, globalActions ] = useGlobal();
     const [ loading, setLoading ] = useState(false);
     const [ siteHosts, setSiteHosts ] = useState([]);
@@ -21,6 +23,10 @@ const SiteHostList = () => {
     //         mountedRef.current = false;
     //     };
     // }, [ globalState.siteHosts.list ]);
+
+    const _openPage = (path) => {
+        router.replace(path);
+    };
 
     if (!globalState.siteHosts.list.length) {
         return <p>Loading ...</p>;
@@ -42,7 +48,7 @@ const SiteHostList = () => {
                                     key={`${ host.id + index }`}
                                     id={host.id}
                                     businessName={host}
-                                    index={index}
+                                    openPage={() => _openPage(`/manager/${ host }`)}
                                 />
                             ))}
                             {Array.from('odfpinsdfpposndfpn').map((host, index) => (
@@ -51,6 +57,7 @@ const SiteHostList = () => {
                                     id={host.id}
                                     businessName={host}
                                     index={index}
+                                    openPage={() => _openPage(`/manager/${ host }`)}
                                 />
                             ))}
                         </>

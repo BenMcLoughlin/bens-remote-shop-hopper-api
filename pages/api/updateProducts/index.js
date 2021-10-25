@@ -7,6 +7,8 @@ export default async (req, res) => {
     try {
         data = await extract.singleBusiness(businessName, domain);
 
+        console.log('data:', data);
+
         return res.status(200).json({ count: data.productsUploaded });
     } catch (error) {
         return res.status(422).json(error);

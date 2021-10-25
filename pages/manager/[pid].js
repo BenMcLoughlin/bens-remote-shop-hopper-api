@@ -71,10 +71,12 @@ const SiteHost = () => {
     };
 
     const _updateSingle = async (params) => {
+        globalActions.counter.setLoading(true);
         const success = await globalActions.products.single(params);
 
         if (success) {
             updateMetrics(true, params.business_name);
+            globalActions.counter.setLoading(false);
 
             return true;
         }
