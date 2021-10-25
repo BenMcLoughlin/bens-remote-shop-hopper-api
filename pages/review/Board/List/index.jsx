@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
-import moment from 'moment';
-import { intersection } from 'lodash';
 import styled from 'styled-components';
 import { ArrowLeftShort } from '@styled-icons/bootstrap/ArrowLeftShort';
 import { ArrowRightShort } from '@styled-icons/bootstrap/ArrowRightShort';
@@ -26,9 +24,14 @@ const BoardList = ({ products }) => {
     const [ globalState, globalActions ] = useGlobal();
     const [ loading, setLoading ] = useState(false);
     const [ currentQuery, setCurrentQuery ] = useState('');
+    const mountedRef = useRef(true);
 
     useEffect(() => {
-        setCurrentQuery(`${ globalState.products.query.column } : ${ globalState.products.query.metric }`);
+        mountedRef.current && setCurrentQuery(`${ globalState.products.query.column } : ${ globalState.products.query.metric }`);
+
+        return () => {
+            mountedRef.current = false;
+        };
     }, [ globalState.products.query ]);
 
     const _incrementProduct = async (id) => {

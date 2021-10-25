@@ -14,7 +14,10 @@ const initialState = {
         data: [],
         hotItems: [],
         result: false,
-        query: {},
+        query: {
+            column: 'buckets',
+            metric: 'Athletic'
+        },
         cursor: 0,
         amount: 12,
         status: 'INITIAL',

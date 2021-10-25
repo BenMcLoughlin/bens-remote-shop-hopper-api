@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import Link from 'next/link';
@@ -26,6 +26,7 @@ const ManagerSidebar = () => {
     const [ statuses, setStatuses ] = useState({});
     const [ addShopModal, toggleAddShopModal ] = useState(false);
     const [ loading, setLoading ] = useState(false || "");
+    const mountedRef = useRef(true);
 
     const city = 'kelowna';
     const shopsList = shopsLists[city];
@@ -33,11 +34,11 @@ const ManagerSidebar = () => {
     
     useEffect(() => {
         globalActions.siteHosts.setList(siteHostList);
-    }, [ ]);
+    }, []);
 
     useEffect(() => {
         const _getShopStatus = async () => {
-            setLoading(true);
+            mountedRef.current && setLoading(true);
             const eachShop = await fetchShopStatus();
 
             let businessStatus = {};
@@ -56,11 +57,15 @@ const ManagerSidebar = () => {
         };
 
         _getShopStatus();
+
+        return () => {
+            mountedRef.current = false;
+        };
     }, [ globalState.status ]);
 
     useEffect(() => {
         const _getShopList = async () => {
-            setLoading(true);
+            mountedRef.current && setLoading(true);
             const uniqueShops = await fetchShops();
             globalActions.shops.addShops(uniqueShops);
 
@@ -73,13 +78,17 @@ const ManagerSidebar = () => {
         };
 
         _getShopList();
+
+        return () => {
+            mountedRef.current = false;
+        };
     }, [ addShopModal ]);
 
-    const renderLinkItem = (text, iconType, path) => {
+    const renderLinkItem = (text, iconType, path, index) => {
         let Icon = iconType;
 
         return (
-            <Link href={`/manager/${ path }`}>
+            <Link key={index} href={`/manager/${ path }`}>
                 <LinkItem isSelected={router.asPath.includes(path)}>
                     <>
                         <Icon size={30} />
@@ -105,8 +114,8 @@ const ManagerSidebar = () => {
             </Header>
             <Divider />
             <ul className="list">
-                {siteHostList.map((siteHost) => (
-                    renderLinkItem(startCase(siteHost), Shopify, `${ siteHost.toLowerCase() }`)
+                {siteHostList.map((siteHost, index) => (
+                    renderLinkItem(startCase(siteHost), Shopify, `${ siteHost.toLowerCase() }`, index)
                 ))}
             </ul>
             <Divider />

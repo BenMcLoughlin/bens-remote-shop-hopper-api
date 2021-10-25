@@ -17,9 +17,9 @@ const Header = () => {
     let left = (
         <div>
             <Link href="/">
-                <Logo>
+                <LogoWrapper>
                     <Image src={logoSrc} width={200} height={100} />
-                </Logo>
+                </LogoWrapper>
             </Link>
         </div>
     );
@@ -30,9 +30,9 @@ const Header = () => {
         left = (
             <div>
                 <Link href="/">
-                    <Logo>
+                    <LogoWrapper>
                         <Image src={logoSrc} width={200} height={100} />
-                    </Logo>
+                    </LogoWrapper>
                 </Link>
             </div>
         );
@@ -58,9 +58,9 @@ const Header = () => {
         left = (
             <div>
                 <Link href="/">
-                    <Logo>
+                    <LogoWrapper>
                         <Image src={logoSrc} width={200} height={100} />
-                    </Logo>
+                    </LogoWrapper>
                 </Link>
             </div>
         );
@@ -101,7 +101,7 @@ const Nav = styled.div`
        margin-left: 40px;
     }
 `;
-const Logo = styled.div`
+const LogoWrapper = styled.div`
     height: 5rem;
     cursor: pointer;
     @media (max-width: 700px) {

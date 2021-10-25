@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
-import { ArrowLeftShort } from '@styled-icons/bootstrap/ArrowLeftShort';
-import { ArrowRightShort } from '@styled-icons/bootstrap/ArrowRightShort';
 
 import HostCard from '../HostCard';
 import { color, font, mixin } from 'styles/theme';
@@ -13,26 +11,16 @@ const SiteHostList = () => {
     const [ globalState, globalActions ] = useGlobal();
     const [ loading, setLoading ] = useState(false);
     const [ siteHosts, setSiteHosts ] = useState([]);
+    const mountedRef = useRef(true);
 
     useEffect(() => {
-        setSiteHosts(globalState.siteHosts.list);
+        console.log('globalState.siteHosts.list:', globalState.siteHosts.list);
+        mountedRef.current && setSiteHosts(globalState.siteHosts.list);
+
+        // return () => {
+        //     mountedRef.current = false;
+        // };
     }, [ globalState.siteHosts.list ]);
-
-    const _nextPage = async () => {
-        setLoading('nextPage');
-        const result = await globalActions.apiRequests.nextPage();
-        if (result) {
-            setLoading(false);
-        }
-    };
-
-    const _prevPage = async () => {
-        setLoading('prevPage');
-        const result = await globalActions.apiRequests.prevPage();
-        if (result) {
-            setLoading(false);
-        }
-    };
 
     if (!siteHosts.length) {
         return <p>Loading ...</p>;
@@ -41,16 +29,8 @@ const SiteHostList = () => {
     return (
         <>
             <Title>
-                <hostsCount>{siteHosts.length} Items</hostsCount>
+                <HostsCount>{siteHosts.length} Items</HostsCount>
             </Title>
-            {/* <ButtonsWrapper>
-                <Icon onClick={_prevPage}>
-                    <ArrowLeftShort />
-                </Icon>
-                <Icon onClick={_nextPage}>
-                    <ArrowRightShort /> 
-                </Icon>
-            </ButtonsWrapper> */}
             <List>
                 {
                     loading ?
@@ -59,7 +39,7 @@ const SiteHostList = () => {
                         <>
                             {siteHosts.map((host, index) => (
                                 <HostCard
-                                    key={host.id}
+                                    key={`${ host.id + index }`}
                                     id={host.id}
                                     businessName={host}
                                     index={index}
@@ -67,42 +47,18 @@ const SiteHostList = () => {
                             ))}
                             {Array.from('odfpinsdfpposndfpn').map((host, index) => (
                                 <HostCard
-                                    key={host.id}
+                                    key={`${ host + index }`}
                                     id={host.id}
                                     businessName={host}
                                     index={index}
                                 />
                             ))}
-                            <ButtonsWrapper>
-                                <Icon onClick={_prevPage}>
-                                    <ArrowLeftShort />
-                                </Icon>
-                                <Icon onClick={_nextPage}>
-                                    <ArrowRightShort /> 
-                                </Icon>
-                            </ButtonsWrapper>
                         </>
                 }
             </List>
         </>
     );
 };
-
-// export const Wrapper = styled.div`
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: space-between;
-//     width: 100%;
-//     min-height: 100vh;
-// `;
-
-const Icon = styled.div`
-    height: 2rem;
-    width: 2rem;
-    fill: white;
-    margin-right: 1.5rem;
-`;
 
 export const ButtonsWrapper = styled.div`
     display: flex;
@@ -135,7 +91,7 @@ export const Title = styled.div`
     ${ mixin.truncateText }
 `;
 
-export const hostsCount = styled.span`
+export const HostsCount = styled.span`
     text-transform: lowercase;
     ${ font.size(13) };
 `;

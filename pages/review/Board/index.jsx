@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 // import Breadcrumbs from '../../../components/breadcrumbs';
@@ -16,13 +16,18 @@ const defaultFilters = {
 const Board = () => {
     const [ globalState, globalActions ] = useGlobal();
     const [ products, setProducts ] = useState([]);
+    const mountedRef = useRef(true);
 
     useEffect(() => {
         _getProducts(defaultFilters);
     }, []);
 
     useEffect(() => {
-        setProducts(globalState.products.data);
+        mountedRef.current && setProducts(globalState.products.data);
+
+        // return () => {
+        //     mountedRef.current = false;
+        // };
     }, [ globalState.products.data ]);
 
     const _getProducts = async (filters = defaultFilters) => {
