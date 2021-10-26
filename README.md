@@ -92,3 +92,7 @@ https://www.prisma.io/docs/guides/database/seed-database
 ## References
 
 `https://styled-icons.dev/` Styled Icons
+
+## Dev Tips
+
+This is a bit basic, but if you ever have deployment issues with Vercel, specifically that your are getting a error that says: `Cannot find module ..//xxx`, but the code is present, try renaming the file. If there is/had been a case issue with the filename, it won't necessarily be updated in Git hub, and Vercel won't find it when building.
