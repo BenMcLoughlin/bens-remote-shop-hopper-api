@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-// import Link from 'next/link';
-import { signOut } from 'next-auth/client';
+import React from 'react';
+import { signOut } from 'next-auth/react';
 import styled from 'styled-components';
 import { TableDeleteRow } from '@styled-icons/fluentui-system-regular/TableDeleteRow';
 import { BoxArrowUpLeft } from '@styled-icons/bootstrap/BoxArrowUpLeft';
-// import { MagnifyingGlass } from '@styled-icons/entypo/MagnifyingGlass';
-// import { Create } from '@styled-icons/ionicons-sharp/Create';
-import hydrateRequest from "requests/hydrateRequest";
+import wipeProducts from "requests/wipeProducts";
 
+import useGlobal from 'globalState/store';
 import { font, sizes, color, mixin, zIndexValues } from 'styles/theme';
 
 const NavbarLeft = () => {
-    // const [ loading, setLoading ] = useState(false || "");
+    const [ globalState, globalActions ] = useGlobal();
 
     const _wipeDatabase = async () => {
-        await hydrateRequest({ request: 'DESTROY' });
+        let response = confirm("Are you sure you want to delete ALL products from this database?");
+
+        if (response === true) {
+            await wipeProducts({ request: 'DESTROY' });
+            await globalActions.status.set({ status: 'PRODUCTS WIPED' });
+        }
+
+        return null;
     };
 
     return (
@@ -71,7 +75,7 @@ export const NavLeft = styled.aside`
     overflow-x: hidden;
     height: 100vh;
     width: ${ sizes.appNavBarLeftWidth }px;
-    background: ${ color.backgroundDarkPrimary };
+    background: ${ color.backgroundThemeGreen };
     transition: all 0.1s;
     ${ mixin.hardwareAccelerate }
     &:hover {

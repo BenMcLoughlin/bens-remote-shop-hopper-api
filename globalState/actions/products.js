@@ -1,7 +1,6 @@
 export const single = async (store, params) => {
     store.actions.counter.addRequest();
-    let status = "REQUESTED";
-    store.setState({ status });
+    store.setState({ status: `UPLOADING ${ params.businessName }` });
 
     const res = await fetch('/api/updateProducts', {
         method: 'POST',
@@ -12,18 +11,16 @@ export const single = async (store, params) => {
         const uploaded = await res.json();
 
         if (res.status === 200) {
-            console.log(`SUCCESSFULLY UPDATED ${ uploaded.count } PRODUCTS`);
-            store.actions.counter.addSuccess();
             store.actions.counter.addResult([{ result: `${ params.businessName } SUCCESS`, status: 200 }]);
-            status = `SUCCESSFULLY UPDATED ${ uploaded.count } PRODUCTS`;
-            store.setState({ status });
+            console.log(`SUCCESSFULLY UPDATED ${ uploaded.count } PRODUCTS`);
+            store.setState({ result: `${ params.businessName } SUCCESS`, status: 200 });
+            store.actions.counter.addSuccess();
 
             return res;
         }
 
-        status = "FAILED";
-        store.setState({ status });
         console.log(`FAILED TO UPDATE ${ params.businessName }`);
+        store.setState({ result: `${ params.businessName } FAILED`, status: 422 });
         store.actions.counter.addResult([{ result: `${ params.businessName } FAILED`, status: 422 }]);
         store.actions.counter.addFail();
 
@@ -33,9 +30,8 @@ export const single = async (store, params) => {
 
 export const all = (store, shops) => {
     store.actions.counter.clearRequests();
-    store.actions.counter.setLoading(true);
 
-    let promises = shops.map(async (shop, i) => {
+    let promises = shops.data.map(async (shop, i) => {
         if (shop.domain) {
             let params = { 
                 domain: shop.domain,
@@ -54,7 +50,6 @@ export const all = (store, shops) => {
 
     Promise.all(promises)
         .then((results) => {
-            store.actions.counter.setLoading(false);
             store.actions.counter.addResult(results);
         });
 

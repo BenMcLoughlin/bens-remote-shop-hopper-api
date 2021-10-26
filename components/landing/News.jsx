@@ -1,18 +1,18 @@
-import React from 'react';
 /* eslint-disable react/prop-types */
+import React from 'react';
 import styled from 'styled-components';
-import { Article } from '..';
-import { SquareButton } from '../../components';
+
+import { Button } from '../../components';
 
 export const News = ({ title, cards }) => (
     <Wrapper>
-        <Title>{title}</Title>
-        <Cards>
-            {cards.map((card) => (
-                <Article key={card} {...card} />
-            ))}
-        </Cards>
-        <SquareButton title={'All Posts'} gradient="tertiary" />
+        {/* <Title>{title}</Title>
+            <Cards>
+                {cards.map((card) => (
+                    <Article {...card} />
+                ))}
+            </Cards>
+            <Button title={'All Posts'} gradient="tertiary" /> */}
     </Wrapper>
 );
 

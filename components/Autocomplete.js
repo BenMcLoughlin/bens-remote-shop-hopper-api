@@ -8,13 +8,6 @@ const Autocomplete = (props) => {
     const [ showOptions, setShowOptions  ] = useState(false);
     const [ isFocused, setIsFocused  ] = useState(false);
     const [ userInput, setUserInput] = useState('');
-    // state = {
-    //     activeOption: 0,
-    //     filteredOptions: [],
-    //     showOptions: false,
-    //     isFocused: false,
-    //     userInput: ''
-    // };
     let optionList = [];
     const { showDropDown, options } = props;
 
@@ -28,13 +21,6 @@ const Autocomplete = (props) => {
         setFilteredOptions(filteredOptions);
         setShowOptions(true);
         setUserInput(e.currentTarget.value);
-
-        // this.setState({
-        //     activeOption: 0,
-        //     filteredOptions,
-        //     showOptions: true,
-        //     userInput: e.currentTarget.value
-        // });
     };
 
     const onClick = (e) => {
@@ -42,13 +28,6 @@ const Autocomplete = (props) => {
         setFilteredOptions([]);
         setShowOptions(false);
         setUserInput(e.currentTarget.innerText);
-
-        // this.setState({
-        //     activeOption: 0,
-        //     filteredOptions: [],
-        //     showOptions: false,
-        //     userInput: e.currentTarget.innerText
-        // });
     };
 
     const onKeyDown = (e) => {
@@ -56,18 +35,12 @@ const Autocomplete = (props) => {
             setActiveOption(0);
             setShowOptions(false);
             setUserInput(filteredOptions[activeOption]);
-            // this.setState({
-            //     activeOption: 0,
-            //     showOptions: false,
-            //     userInput: filteredOptions[activeOption]
-            // });
         } else if (e.keyCode === 38) {
             if (activeOption === 0) {
                 return;
             }
 
             setActiveOption(activeOption - 1);
-            // this.setState({ activeOption: activeOption - 1 });
         } else if (e.keyCode === 40) {
             if (activeOption === filteredOptions.length - 1) {
                 console.log(activeOption);
@@ -75,7 +48,6 @@ const Autocomplete = (props) => {
             }
 
             setActiveOption(activeOption + 1);
-            // this.setState({ activeOption: activeOption + 1 });
         }
     };
 

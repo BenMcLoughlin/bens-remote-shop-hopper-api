@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import useOnOutsideClick from 'hooks/onOutsideClick';
 import { KeyCodes } from 'content/keyCodes';
-import { Icon } from 'components/Icon';
+import { Icon } from 'components/Icons';
 
 import Dropdown from './Dropdown';
 import {

@@ -14,7 +14,10 @@ const initialState = {
         data: [],
         hotItems: [],
         result: false,
-        query: {},
+        query: {
+            column: 'buckets',
+            metric: 'Athletic'
+        },
         cursor: 0,
         amount: 12,
         status: 'INITIAL',
@@ -27,7 +30,37 @@ const initialState = {
         loading: false
     },
     status: 'INITIAL',
-    shops: [],
+    shops: {
+        data: [],
+        result: false,
+        status: 'INITIAL',
+        loading: false
+    },
+    user: {
+        hasAccount: false,
+        birthdate: 1988,
+        gender: '',
+        location: {
+            lat: 49.8,
+            lng: -119.6,
+            address: ''
+        },
+        favourite: {
+            styles: [],
+            brands: [],
+            venders: []
+        },
+        size: {
+            top: 'General / US Size',
+            shoes: 'US Size / Size (MM)',
+            bottom: 'Waist (inches) / US Size'
+        },
+        styles: [],
+        brands: []
+    },
+    ui: {
+        onboardPageNum: 0
+    },
     loading: false
 };
 

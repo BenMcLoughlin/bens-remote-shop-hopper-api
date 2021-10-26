@@ -1,21 +1,17 @@
 export const formatDate = (date) => {
-    if (typeof date === 'string') {
-        return date;
-    }
-
     let month = [];
-    month[0] = 'Jan';
-    month[1] = 'Feb';
-    month[2] = 'Mar';
-    month[3] = 'Apr';
-    month[4] = 'May';
-    month[5] = 'Jun';
-    month[6] = 'Jul';
-    month[7] = 'Aug';
-    month[8] = 'Sep';
-    month[9] = 'Oct';
-    month[10] = 'Nov';
-    month[11] = 'Dec';
+    month[0] = "Jan";
+    month[1] = "Feb";
+    month[2] = "Mar";
+    month[3] = "Apr";
+    month[4] = "May";
+    month[5] = "Jun";
+    month[6] = "Jul";
+    month[7] = "Aug";
+    month[8] = "Sep";
+    month[9] = "Oct";
+    month[10] = "Nov";
+    month[11] = "Dec";
     let hours = date.getHours();
     let minutes = date.getMinutes();
     let ampm = hours >= 12 ? 'pm' : 'am';

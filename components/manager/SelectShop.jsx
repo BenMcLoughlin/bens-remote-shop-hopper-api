@@ -8,11 +8,10 @@ import useGlobal from 'globalState/store';
 import { camelCase } from 'utils/strings';
 import addShops from "requests/addShops";
 import fetchShops from "requests/fetchShops";
-import fetchShopStatus from "requests/fetchShopStatus";
-import CreateShopModal from "../CreateShopModal";
 import loaderGif from 'public/assets/loader/octo_loader.gif';
+import CreateShopModal from "./CreateShopModal";
 
-const SelectShop = ({ set, selected, shopsList, refresh }) => {
+const SelectShop = ({ set, selected }) => {
     const [ globalState, globalActions ] = useGlobal();
     const [ list, setList ] = useState([]);
     const [ statuses, setStatuses ] = useState({});
@@ -22,12 +21,13 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
     useEffect(() => {
         const _getShopStatus = async () => {
             setLoading(true);
-            const eachShop = await fetchShopStatus();
+            console.time("_getShopStatus");
+            const shops = await globalActions.shops.shopStatuses();
 
             let businessStatus = {};
 
-            if (eachShop) {
-                eachShop.map((d) => (
+            if (shops) {
+                shops.map((d) => (
                     businessStatus[d.business_name] = {
                         products: d.products,
                         updatedAt: d.updated_at
@@ -36,6 +36,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
 
                 setStatuses(businessStatus);
                 setLoading(false);
+                console.timeEnd("_getShopStatus");
             }
         };
 
@@ -45,14 +46,16 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
     useEffect(() => {
         const _getShopList = async () => {
             setLoading(true);
+            console.time("_getShopList");
             const uniqueShops = await fetchShops();
-            globalActions.shops.addShops(uniqueShops);
 
             if (uniqueShops) {
+                globalActions.shops.setShops(uniqueShops);
                 const businessNames = uniqueShops.map((d) => d.business_name);
 
                 setList(businessNames);
                 setLoading(false);
+                console.timeEnd("_getShopList");
             }
         };
 
@@ -64,12 +67,14 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
     };
 
     const _addShop = async (shopData) => {
+        setLoading(true);
         const result = await addShops(shopData);
 
         if (result.error) {
             return alert(result.error);
         }
 
+        setLoading(false);
         _toggleAddShopModal();
     };
 
@@ -111,7 +116,7 @@ const SelectShop = ({ set, selected, shopsList, refresh }) => {
                                         onClick={() => set.selectedBusinessName(businessName)}
                                     >
                                         <div className="title">{businessName}</div>
-                                        {statuses[businessName] && // todo: Date format
+                                        {statuses[businessName] &&
                                             <div className="updateColumn">
                                                 <div>Most Recent: <span className="update">{statuses[businessName]?.products}</span></div>
                                                 <div className="time">
@@ -208,10 +213,7 @@ const Row = styled.div`
 
 SelectShop.propTypes = {
     set: PropTypes.object,
-    selected: PropTypes.object,
-    shopsList: PropTypes.array,
-    refresh: PropTypes.bool
-
+    selected: PropTypes.object
 };
 
 export default SelectShop;

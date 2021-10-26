@@ -7,13 +7,13 @@ import NavbarLeft from 'components/NavbarLeft';
 import Sidebar from './Sidebar';
 import Layout from 'components/Layout';
 import Counter from "components/Counter";
-import MetricsDisplay from 'components/manager/MetricsDisplay';
-import SelectShop from 'components/manager/SelectShop';
-import * as shopsLists from '../../mock/shopsLists';
+import * as shopsLists from 'mock/shopsLists';
 
 import { camelCase, capitalize } from 'utils/strings';
 import { updateMetrics } from 'requests/updateMetrics';
 import useGlobal from "globalState/store";
+import SelectShop from 'components/manager/SelectShop';
+import MetricsDisplay from 'components/manager/MetricsDisplay';
 
 import { sizes } from 'styles/theme';
 const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
@@ -54,27 +54,30 @@ const SiteHost = () => {
 
     const _cancel = async () => {
         // todo
-        await globalActions.products.all([], true);
+        // await globalActions.products.all([], true);
     };
 
     const _updateAll = async () => {
         globalActions.counter.clearRequests();
-        globalActions.counter.setLoading(true);
+        await globalActions.counter.setLoading(true);
         const success = await globalActions.products.all(globalState.shops);
 
         if (success) {
             updateMetrics(true, 'all');
-            globalActions.counter.setLoading(false);
+            await globalActions.counter.setLoading(false);
 
             return true;
         }
     };
 
     const _updateSingle = async (params) => {
+        globalActions.counter.clearRequests();
+        await globalActions.counter.setLoading(true);
         const success = await globalActions.products.single(params);
 
         if (success) {
             updateMetrics(true, params.business_name);
+            await globalActions.counter.setLoading(false);
 
             return true;
         }
@@ -102,7 +105,7 @@ const SiteHost = () => {
 
                 <SiteHostSection>
                     <MetricsDisplay
-                        header={selected.siteHost}
+                        headerTitle={selected.siteHost}
                         isHost
                         loading={globalState.counter.loading}
                         cancel={_cancel}
@@ -124,7 +127,7 @@ const SiteHost = () => {
                     {
                         selected.businessName &&
                             <MetricsDisplay
-                                header={selected.businessName}
+                                headerTitle={selected.businessName}
                                 loading={globalState.counter.loading}
                                 cancel={_cancel}
                                 buttonTitle={`Load ${ selected.businessName }`}

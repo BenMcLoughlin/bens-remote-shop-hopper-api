@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import Autocomplete from "components/Autocomplete";
@@ -11,12 +10,6 @@ const Tags = () => {
     const [ search_products, set_search_products ] = useState([]);
     const [ loading, setLoading ] = useState(false || "");
     const [ query, setQuery ] = useState('');
-
-    const router = useRouter();
-
-    const refreshData = () => {
-        router.replace(router.asPath);
-    };
 
     const _getAllTags = async () => {
         setLoading('getAllTags');
@@ -32,10 +25,10 @@ const Tags = () => {
         setQuery(value);
         setLoading('search');
         const result = await searchTags(query);
+
         if (result) {
             console.log('result:', result);
             set_search_products(result);
-            refreshData();
             setLoading(false);
         }
     };

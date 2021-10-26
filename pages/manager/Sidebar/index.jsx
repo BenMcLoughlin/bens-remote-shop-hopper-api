@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Moment from 'react-moment';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -11,21 +10,14 @@ import { BuildingBankLink } from '@styled-icons/fluentui-system-regular/Building
 import styled, { css } from 'styled-components';
 import * as shopsLists from 'mock/shopsLists';
 
-import { camelCase, startCase } from 'utils/strings';
+import { startCase } from 'utils/strings';
 import useGlobal from 'globalState/store';
-import addShops from "requests/addShops";
-import fetchShops from "requests/fetchShops";
-import fetchShopStatus from "requests/fetchShopStatus";
 import logoSrc from 'public/assets/logos/shophopper-logo.svg';
 import { color, sizes, font, mixin, zIndexValues } from 'styles/theme';
 
 const ManagerSidebar = () => { 
     const router = useRouter();
     const [ globalState, globalActions ] = useGlobal();
-    const [ list, setList ] = useState([]);
-    const [ statuses, setStatuses ] = useState({});
-    const [ addShopModal, toggleAddShopModal ] = useState(false);
-    const [ loading, setLoading ] = useState(false || "");
 
     const city = 'kelowna';
     const shopsList = shopsLists[city];
@@ -33,53 +25,13 @@ const ManagerSidebar = () => {
     
     useEffect(() => {
         globalActions.siteHosts.setList(siteHostList);
-    }, [ ]);
+    }, []);
 
-    useEffect(() => {
-        const _getShopStatus = async () => {
-            setLoading(true);
-            const eachShop = await fetchShopStatus();
-
-            let businessStatus = {};
-
-            if (eachShop) {
-                eachShop.map((d) => (
-                    businessStatus[d.business_name] = {
-                        products: d.products,
-                        updatedAt: d.updated_at
-                    }
-                ));
-
-                setStatuses(businessStatus);
-                setLoading(false);
-            }
-        };
-
-        _getShopStatus();
-    }, [ globalState.status ]);
-
-    useEffect(() => {
-        const _getShopList = async () => {
-            setLoading(true);
-            const uniqueShops = await fetchShops();
-            globalActions.shops.addShops(uniqueShops);
-
-            if (uniqueShops) {
-                const businessNames = uniqueShops.map((d) => d.business_name);
-
-                setList(businessNames);
-                setLoading(false);
-            }
-        };
-
-        _getShopList();
-    }, [ addShopModal ]);
-
-    const renderLinkItem = (text, iconType, path) => {
+    const renderLinkItem = (text, iconType, path, index) => {
         let Icon = iconType;
 
         return (
-            <Link href={`/manager/${ path }`}>
+            <Link key={index} href={`/manager/${ path }`}>
                 <LinkItem isSelected={router.asPath.includes(path)}>
                     <>
                         <Icon size={30} />
@@ -105,8 +57,8 @@ const ManagerSidebar = () => {
             </Header>
             <Divider />
             <ul className="list">
-                {siteHostList.map((siteHost) => (
-                    renderLinkItem(startCase(siteHost), Shopify, `${ siteHost.toLowerCase() }`)
+                {siteHostList.map((siteHost, index) => (
+                    renderLinkItem(startCase(siteHost), Shopify, `${ siteHost.toLowerCase() }`, index)
                 ))}
             </ul>
             <Divider />

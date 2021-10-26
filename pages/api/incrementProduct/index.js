@@ -1,5 +1,5 @@
 
-import { getSession } from 'next-auth/client';
+// import { getSession } from 'next-auth/react';
 import prisma from '../../../prisma/prisma.js';
 
 async function addPointToProduct(id) {
@@ -60,11 +60,11 @@ async function addItemToHotList(item) {
 }
 
 export default async (req, res) => {
-    const session = await getSession({ req });
+    // const session = await getSession({ req });
 
-    if (!session) {
-        return res.status(401).json({ reason: 'Unauthorized' });
-    }
+    // if (!session) {
+    //     return res.status(401).json({ reason: 'Unauthorized' });
+    // }
 
     if (req.method === 'POST') {
         try {

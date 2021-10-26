@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Moment from 'react-moment';
+import moment from 'moment';
 import styled from 'styled-components';
 
-import useGlobal from '../../globalState/store';
+import useGlobal from 'globalState/store';
 import { startCase } from 'utils/strings';
-import Button from '../../components/buttons/Button';
+import { Button } from 'components/buttons/Button';
 import { updateMetrics } from 'requests/updateMetrics';
-import fetchShopStatus from "../../requests/fetchShopStatus";
 
-const MetricsDisplay = ({ header, buttonClick, cancel, isHost, loading, buttonTitle, disabled }) => {
-    const [ globalState ] = useGlobal();
+const MetricsDisplay = ({ headerTitle, buttonClick, cancel, isHost, loading, buttonTitle, disabled }) => {
+    const [ globalState, globalActions ] = useGlobal();
     const [ totalItems, setTotalItems ] = useState(0);
     const [ date, setDate ] = useState('');
 
     useEffect(() => {
-        updateMetrics(isHost, header).then((data) => {
+        updateMetrics(isHost, headerTitle).then((data) => {
             setTotalItems(data.result);
         });
 
-    }, [ header, globalState.status ]);
+    }, [ headerTitle, globalState.status ]);
 
     useEffect(() => {
         const _getShopStatus = async () => {
-            const eachShop = await fetchShopStatus();
+            const shops = await globalActions.shops.shopStatuses();
+            setDate("NULL");
 
-            if (eachShop) {
-                eachShop.map((d) => {
-                    if (d.business_name === header || isHost) {
+            if (shops) {
+                shops.map((d) => {
+                    if ((d.business_name === headerTitle) || isHost) {
                         return (
                             setDate(d.updated_at)
                         );
@@ -39,105 +39,75 @@ const MetricsDisplay = ({ header, buttonClick, cancel, isHost, loading, buttonTi
         };
 
         _getShopStatus();
-    }, [ header, globalState.status ]);
+    }, [ headerTitle, globalState.status ]);
 
     return (
-        <div className="wrapper">
+        <Wrapper>
             <HeaderRow>
                 {!isHost &&
-                    <div className="header">
-                        {startCase(header)}
-                    </div>
+                    <HeaderTitle>
+                        {startCase(headerTitle)}
+                    </HeaderTitle>
                 }
                 {!disabled &&
                     <Button
                         loading={loading}
-                        text={buttonTitle}
+                        title={buttonTitle}
                         onClick={buttonClick}
                         disabled={disabled}
                         backgroundColor={isHost ? '#1469eb' : '#25E9AF'}
                     />
                 }
-                {loading &&
-                    <p onClick={cancel} className="cancel">Cancel</p>
-                }
             </HeaderRow>
             <Row>
-                <div className="column">
-                    <p className="value">{totalItems}</p>
-                    <p className="title">{startCase(header)} items in the database</p>
-                </div>
+                <Column>
+                    <Value>{totalItems}</Value>
+                    <NoOfItems>{startCase(headerTitle)} items in the database</NoOfItems>
+                </Column>
 
-                <div className="column">
-                    <p className="value">
-                        <Moment format="MM/DD hh:ssa">{date}</Moment>
-                    </p>
-                    <p className="title">Last Update</p>
-                </div>
+                <Column>
+                    <Value>
+                        {moment(date).format("MM/DD hh:ssa") !== 'Invalid date' ? moment(date).format("MM/DD hh:ssa") : 'No record'}
+                    </Value>
+                    <NoOfItems>Last Update</NoOfItems>
+                </Column>
             </Row>
-            <style jsx>{`
-                .wrapper {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    padding: 1rem;
-                }
-                .header {
-                    font-size: 2.0rem;
-                    padding: 1rem;
-                    text-align: left;,
-                    color: white;
-                }
-                .row {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: flex-end;
-                    align-items: center;
-                    padding: 1rem;
-                    color: white;
-                }
-                .column {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    justify-content: center;
-                    // width: 10rem;
-                    border-right: 1px solid #d5d5d5;
-                }
-                .highlight {
-                    height: 5rem;
-                    width: 12rem;
-                    display: flex;
-                    align-items: center;
-                    flex-direction: column;
-                }
-                .value {
-                    height: 2.5rem;
-                    font-size: 1rem;
-                    text-align: center;
-                    font-weight: bold;
-                    padding: 0.3rem;
-                    padding-left: 1rem;
-                    padding-right: 1rem;
-                    border-bottom: 1px solid #d5d5d5;
-                }
-                .title {
-                    padding: 20px;
-                    font-size: 1rem;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    text-align: right;
-                }
-                .cancel {
-                    padding: 5px;
-                    font-size: .8rem;
-                    color: red;
-                }       
-            `}</style>
-        </div>
+        </Wrapper>
     );
 };
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 1rem;
+`;
+
+const HeaderTitle = styled.div`
+    font-size: 2.0rem;
+    padding: 1rem;
+    text-align: left;
+    color: white;
+`;
+
+const Column = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    border-right: 1px solid #d5d5d5;
+`;
+
+const Value = styled.div`
+    height: 2.5rem;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-bottom: 1px solid #d5d5d5;
+`;
 
 const Row = styled.div`
     display: flex;
@@ -155,6 +125,15 @@ const Row = styled.div`
     }
 `;
 
+const NoOfItems = styled.div`
+    padding: 20px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: right;
+`;
+
 const HeaderRow = styled.div`
     display: flex;
     flex-direction: row;
@@ -168,7 +147,7 @@ const HeaderRow = styled.div`
 `;
 
 MetricsDisplay.propTypes = {
-    header: PropTypes.string,
+    headerTitle: PropTypes.string,
     loading: PropTypes.bool,
     cancel: PropTypes.func,
     refresh: PropTypes.bool,

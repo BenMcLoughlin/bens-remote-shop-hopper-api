@@ -1,15 +1,47 @@
 export const landingProps = {
+    nameOfProps: 'landingProps',
     welcome: {
         title: "LET'S FIND YOUR PERFECT OUTFIT, LOCALLY",
         subTitle:
             'ShopHopper searches through all your favorite local independent retailers to bring you the best deals on perfect “for you” pieces.'
     },
+    callout1: {
+        image: 'womanChoosing',
+        fontColor: 'black',
+        blotch1: 'bigBlueLittleYellow',
+        blotch2: 'blueOrangeGrey',
+        title: '<p>discover amazing local deals on outfits selected <b>just for you!</b></p>',
+        clothingIcon: 'handbag'
+    },
+    howItWorks: {
+        about: 'ShopHopper is a 100% Free Service Focused On Making It Easier To Shop Locally',
+        title: 'how it works',
+        cards: [
+            {
+                number: 1,
+                title: 'sign up for free and choose your style',
+                image: 'actionStep1',
+                flexDirection: 'row',
+                brushImage: '/../../public/assets/landing/brushNumbers/brushNumber1.png'
+            },
+            {
+                number: 2,
+                title: "we'll hop through all the local shops",
+                image: 'actionStep2',
+                flexDirection: 'row-reverse',
+                brushImage: '/../../public/assets/landing/brushNumbers/brushNumber2.png'
+            },
+            {
+                number: 3,
+                title: 'delivering the best deals just for you',
+                image: 'actionStep3',
+                flexDirection: 'row',
+                brushImage: '/../../public/assets/landing/brushNumbers/brushNumber3.png'
+            }
+        ]
+    },
     whoWeAre: {
-        title: 'IMAGINE HAVING A PERSONAL STYLIST HUNTING FOR THE BEST LOCAL DEALS ON PERFECT OUTFITS JUST FOR YOU!',
-        subTitles: [
-            'ShopHopper is a 100% Free Service Focused On Making It Easier To Shop Locally',
-            'Simply Tell Us Your Style, And We’ll Search Through All Your Favorite Local Boutiques To Find The Best Deals                  Just For You'
-        ],
+        title: 'How ShopHopper Can Help You Shop Smarter',
         cards: [
             {
                 icon: 'computer',
@@ -37,46 +69,19 @@ export const landingProps = {
             }
         ]
     },
-    howItWorks: {
-        title: 'HOW IT WORKS',
-        cards: [
-            {
-                number: 1,
-                title: 'SIGN UP FOR FREE AND CHOOSE YOUR STYLE',
-                subTitle: 'Tell us what styles and sizes you want us to hunt for',
-                content:
-                    'We know it’s hard to find your size and style at the shops you love so rather than running around, we’ll bringing the best local deals and exciting new items directly to you!',
-                image: 'actionStep1',
-                flexDirection: 'row'
-            },
-            {
-                number: 2,
-                title: "WE'LL HOP THROUGH ALL YOUR LOCAL SHOPS",
-                subTitle: "No more running around town to find what's in stock near you",
-                content: 'Stop shopping like it’s the 90s',
-                image: 'actionStep2',
-                flexDirection: 'row-reverse'
-            },
-            {
-                number: 3,
-                title: 'DELIVERING THE BEST DEALS JUST FOR YOU',
-                subTitle: 'All Ages',
-                content:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris felis tellus, condimentum nec placerat.',
-                image: 'actionStep3',
-                flexDirection: 'row'
-            }
-        ]
-    },
-    callout: {
+
+    callout2: {
+        image: 'heel',
         title: 'QUIT RUNNING AROUND…',
-        subTitle:
-            "WE'RE BRINGING THE BEST LOCAL DEALS AND PERFECT 'FOR YOU' ITEMS RIGHT TO YOUR PHONE",
-        text: 'Signup and we’ll automatically find you the best deals, on perfect outfits, from your favorite local boutique retailers '
+        fontColor: 'white',
+        blotch1: 'blueRedSpackles',
+        blotch2: 'redOrangeBlue',
+        subTitle: `<p>we're bringing the best local deals and perfect <b>for you</b> items right to your phone</p>`,
+        clothingIcon: 'yellowShoes'
     },
     testimonials: {
         title: 'Testimonials',
-        subTitle: 'LOCAL BUSINESSES & LOCAL SHOPPERS LOVE SHOP HOPPER',
+        subTitle: 'LOCAL SHOPPERS LOVE SHOPHOPPER',
         cards: [
             {
                 name: 'Angel Kaushal',
@@ -95,11 +100,12 @@ export const landingProps = {
                 image: 'JustinaProfilePhoto'
             },
             {
-                name: 'Don Blevens',
-                role: 'BABY & ME - LOCAL BUSINESS OWNER',
-                content: 'This would be an incredible way to increase local traffic to my store.',
+                name: 'Julie Cook',
+                role: 'LOCAL SHOPPER',
+                content:
+                    "OMG… I can't believe you can show me what’s on sale in my size locally... This is amazing!",
                 rating: 5,
-                image: 'DonProfilePhoto'
+                image: 'JulieCook'
             }
         ]
     },

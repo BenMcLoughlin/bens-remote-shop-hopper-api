@@ -1,11 +1,11 @@
+/* eslint-disable func-style */
 import React, { useState, useEffect } from 'react';
-/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { ArrowUp } from '@styled-icons/bootstrap/ArrowUp';
 import { animateScroll as scroll } from 'react-scroll';
 
 export const ScrollUp = () => {
-    const scrollToTop = () => {
+    const scrollToTop = function () {
         scroll.scrollToTop();
     };
 
@@ -22,6 +22,7 @@ export const ScrollUp = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
+
     }, []);
 
     return (

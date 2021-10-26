@@ -15,6 +15,8 @@ export const LinkText = ({ title, accent }) => (
 
 const Wrapper = styled.div`
     cursor: pointer;
+    margin: 0 10px 0 10px;
+    transition: all 0.6s ease;
 `;
 
 const Title = styled.div`
