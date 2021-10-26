@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from 'styled-components';
 
-import HostCard from '../HostCard';
+import HostCard from './HostCard';
 import { color, font, mixin } from 'styles/theme';
 import useGlobal from "globalState/store";
 import loaderGif from 'public/assets/loader/octo_loader.gif';
