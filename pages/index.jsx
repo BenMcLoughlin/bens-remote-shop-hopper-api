@@ -1,18 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Layout from '../components/Layout';
 import { landingProps } from '../content/landingProps';
-import {
-    Header,
-    HowItWorks,
-    News,
-    Testimonials,
-    Callout,
-    Welcome,
-    WhoWeAre,
-    Footer
-} from '../components/landing';
+import { HowItWorks, Testimonials, Callout, Welcome, WhoWeAre } from '../components/landing';
+
 import { ScrollUp } from '../components';
 
 export function getStaticProps(context) {
@@ -21,20 +12,16 @@ export function getStaticProps(context) {
     };
 }
 
-const Landing = ({ welcome, whoWeAre, howItWorks, callout, testimonials, news, footer }) => (
-    <Layout isMain>
-        <FixedPosition>
-            <Header to="test1" />
-            <Welcome {...welcome} />
-            <WhoWeAre {...whoWeAre} />
-            <HowItWorks {...howItWorks} />
-            <Callout {...callout} />
-            <Testimonials {...testimonials} />
-            <News {...news} />
-            <Footer {...footer} />
-            <ScrollUp />
-        </FixedPosition>
-    </Layout>
+const Landing = ({ welcome, whoWeAre, howItWorks, callout1, callout2, testimonials }) => (
+    <Wrapper>
+        <Welcome {...welcome} />
+        <Callout {...callout1} />
+        <HowItWorks {...howItWorks} />
+        <WhoWeAre {...whoWeAre} />
+        <Callout {...callout2} />
+        <Testimonials {...testimonials} />
+        <ScrollUp />
+    </Wrapper>
 );
 
 Landing.propTypes = {
@@ -44,17 +31,17 @@ Landing.propTypes = {
     callout: PropTypes.string,
     testimonials: PropTypes.string,
     news: PropTypes.string,
-    footer: PropTypes.string
+    callout1: PropTypes.func,
+    callout2: PropTypes.func
 };
 
 export default Landing;
 
 // ---------------------------STYLES-------------------------------------------//
 
-const FixedPosition = styled.div`
-    height: 10rem;
-    position: absolute;
+const Wrapper = styled.div`
     width: 100%;
-    font-size: calc(0.03em + 0.66vw);
-    height: 100%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
 `;

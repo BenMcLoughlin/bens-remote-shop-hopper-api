@@ -4,11 +4,18 @@
     box-sizing: border-box;
 }
 
+button {
+    cursor: pointer;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
-    font-family: Geneva, sans-serif;
     color: black;
-    color: #707070;
+    font-family: Geneva,
+        sans-serif;
+    color: black;
+    margin: 0;
+    padding: 0;
     letter-spacing: 0.5px;
     background: rgb(252, 252, 252);
     background: linear-gradient(14deg,
@@ -16,63 +23,26 @@ body {
             rgba(252, 252, 252, 0.3211659663865546) 38%,
             rgba(242, 239, 239, 0.6797093837535014) 100%);
 }
-@media screen and (min-width: 700px) {
-    body {
-        max-height: 100vh;
-        overflow: hidden;
-    }
-}
 
 /*  calculation to make 1rem be10px at 1400 font-size: calc(0.038em + 0.665vw); */
-@media screen and (min-width: 400px) {
-     /* Can you do me a favour, can yuo apply this where you need, but I don't know if this is the way forward, as it breaks all my styles. I think we have to wrap/flexbox, its industry standard and its the quick/reliable way in my mind. */
+/*calc(0.03em + 0.66vw);*/
 
-     /* this number makes 1 rem = 10px when screen is 1400 wide and 880 tall - please don't change*/
+/* @media screen and (min-width: 1400px) {
     html {
-        /* font-size: calc(0.03em + 0.66vw); */
+        font-size: 62%;
     }
 }
+@media screen and (max-width: 1400px) {
+    html {
+        font-size: calc(0.03em + 0.66vw)
+    }
+}
+@media screen and (max-width: 950px) {
+    html {
+        font-size: 42.5%
+    }
+} */
 
-/* h1 {
-    padding: 1rem;
-    font-size: 8rem;
-    font-weight: 600;
-    width: 100%;
-    line-height: 10rem;
-}
-h2 {
-    font-size: 1.8rem;
-    line-height: 4.5rem;
-    font-weight: 400;
-}
-h3 {
-    font-size: 1.6rem;
-    font-weight: 200;
-    line-height: 2.8rem;
-    width: 100%;
-}
-h4 {
-    font-size: 1.4rem;
-    font-weight: 200;
-    line-height: 2.2rem;
-}
-h5 {
-    font-size: 1rem;
-    font-weight: 200;
-    line-height: 3.2rem;
-    text-align: left;
-    margin-top: -1.5rem;
-}
-
-b {
-    font-weight: 900;
-}
-
-p {
-    text-align: left;
-    font-size: 2rem;
-}
-*/
 @keyframes fadeInRight {
     0% {
         opacity: 0;
@@ -305,7 +275,7 @@ ul.options li.option-active {
 }
 
 .send {
-    background: pink;
+    background: lightGrey;
     border-radius: 50px;
     border: none;
     padding: 10px;
@@ -332,6 +302,15 @@ ul.options li.option-active {
     width: 275px;
     height: 300px;
     padding: 1rem;
+}
+
+.send {
+    background: lightGrey;
+    border-radius: 50px;
+    border: none;
+    padding: 10px;
+    transition: box-shadow 0.1s ease-in;
+    margin-bottom: 20px;
 }
 
 .post {

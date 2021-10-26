@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import useGlobal from 'globalState/store';
 import { startCase } from 'utils/strings';
-import Button from 'components/buttons/Button';
+import { Button } from 'components/buttons/Button';
 import { updateMetrics } from 'requests/updateMetrics';
 
 const MetricsDisplay = ({ headerTitle, buttonClick, cancel, isHost, loading, buttonTitle, disabled }) => {
@@ -52,7 +52,7 @@ const MetricsDisplay = ({ headerTitle, buttonClick, cancel, isHost, loading, but
                 {!disabled &&
                     <Button
                         loading={loading}
-                        text={buttonTitle}
+                        title={buttonTitle}
                         onClick={buttonClick}
                         disabled={disabled}
                         backgroundColor={isHost ? '#1469eb' : '#25E9AF'}

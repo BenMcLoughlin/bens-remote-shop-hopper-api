@@ -1,96 +1,122 @@
 import React from 'react';
-/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import Image from 'next/image';
-import heels from '../../public/assets/shutterstock/heel.jpg';
-import blotch1 from '../../public/assets/paintBlobs/basketball4all_graphic3-2.png';
-import blotch2 from '../../public/assets/paintBlobs/basketball4all_graphic1-2.png';
-import { SquareButton } from '../../components';
+import { blotches } from '../../public/assets/landing/paintBlobs/blotches.js';
+import { clothingIcons } from '../../public/assets/landing/clothingIcons/index.js';
+import { background } from '../../public/assets/landing/shutterstock/index.js';
 
-export const Callout = ({ title, subTitle, text }) => (
-    <Wrapper>
-        <BackgroundImage>
-            <Image src={heels} className="image" width={3000} height={2000} />
-        </BackgroundImage>
-        <Title>{title}</Title>
-        <SubTitle>{subTitle}</SubTitle>
-        <ButtonWrapper>
-            <SquareButton title={'Sign up!'} />
-        </ButtonWrapper>
-        <Blotch1>
-            <Image src={blotch1} className="image" width={200} height={200} />
-        </Blotch1>
-        <Blotch2>
-            <Image src={blotch2} className="image" width={500} height={400} />
-        </Blotch2>
-    </Wrapper>
-);
+export const Callout = ({ title, subTitle, image, blotch1, blotch2, clothingIcon }) => {
+    return (
+        <Wrapper>
+            <BackgroundImage>
+                <Image src={background[image]} width={3000} height={2000} />
+            </BackgroundImage>
+            <Title dangerouslySetInnerHTML={{ __html: title }} />
+            <SubTitle dangerouslySetInnerHTML={{ __html: subTitle }} />
+            <Blotch1>
+                <Image src={blotches[blotch2]} width={3000} height={2000} />
+            </Blotch1>
+            <Blotch2>
+                <Image src={blotches[blotch1]} width={200} height={200} />
+            </Blotch2>
+            <ClothingIcon>
+                <Image src={clothingIcons[clothingIcon]} width={200} height={200} />
+            </ClothingIcon>
+        </Wrapper>
+    );
+};
 
 export default Callout;
 
-// ---------------------------STYLES-------------------------------------------//
+//---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
-    height: 63rem;
+    margin-top: 10rem;
+    color: black;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
-    opacity: ${ (p) => p.theme.opacity };
+    align-items: left;
+    opacity: ${(p) => p.theme.opacity};
     position: relative;
     font-family: 'Yanone Kaffeesatz', Sans-serif;
+    position: relative;
+    padding: 3rem;
+    width: 100%;
+    height: 40rem;
 `;
 
 const BackgroundImage = styled.div`
     position: absolute;
-    top: 0,
+    top: 0;
     left: 0;
-    overflow: hidden;
-    clip-path: polygon(0 0, 100% 4.5%, 100% 93%, 0% 100%);
     height: 53rem;
+    width: 115%;
+    clip-path: polygon(0 0, 100% 4.5%, 100% 93%, 0% 100%);
+    overflow: hidden;
+    margin-left: -10%;
+    @media (max-width: 600px) {
+        opacity: 0.2;
+        margin-left: -5%;
+        width: 105%;
+    }
+    opacity: 0.6;
 `;
 const Title = styled.div`
-    font-size: ${ (p) => p.theme.font.large2 };
-    ${ (props) => props.theme.flex.vertical.center };
-    color: black;
-    width: 70%;
-    height: 12rem;
+    font-family: 'Yanone Kaffeesatz', Sans-serif;
+    font-size: ${(p) => p.theme.font.large};
+    ${(props) => props.theme.flex.vertical.center};
+    width: 80%;
     line-height: 5rem;
     text-transform: uppercase;
-    justify-content: center;
-    margin-top: 2.8rem;
-    color: white;
-    z-index: 2;
-`;
-const SubTitle = styled.div`
-    font-size: ${ (p) => p.theme.font.mediumLarge };
-    font-weight: bold;
-    text-transform: uppercase;
-    ${ (props) => props.theme.flex.vertical.center };
-    width: 70%;
     text-align: center;
-    line-height: 5rem;
+    z-index: 4;
+    margin-left: 7rem;
+    height: 20%;
+    margin-top: -10%;
+`;
+
+const SubTitle = styled.div`
+    font-size: ${(p) => p.theme.font.mediumLarge};
     font-weight: bold;
-    color: white;
-    z-index: 2;
+    text-transform: uppercase;
+    ${(props) => props.theme.flex.vertical.center};
+    font-weight: bold;
+    z-index: 4;
     font-weight: 500;
+    margin-top: 5rem;
 `;
-const ButtonWrapper = styled.div`
-    margin-top: 8rem;
-    margin-left: 3rem;
-    z-index: 2;
-`;
+
 const Blotch1 = styled.div`
     position: absolute;
-    top: -1rem;
-    left: -2rem;
-    height: 40rem;
-    width: 30rem;
+    width: 15%;
+    left: -10%;
+    top: -10%;
+    opacity: 0.7;
+    @media (max-width: 600px) {
+        top: -5%;
+    }
 `;
 const Blotch2 = styled.div`
     position: absolute;
-    top: 40rem;
-    right: 0rem;
-
-    width: 40rem;
+    bottom: -20%;
+    right: 0%;
+    height: 15%;
+    width: 15%;
+    opacity: 0.7;
+    @media (max-width: 600px) {
+        bottom: 5%;
+    }
+`;
+const ClothingIcon = styled.div`
+    position: absolute;
+    bottom: -20%;
+    right: 0%;
+    height: 10%;
+    width: 10%;
+    opacity: 0.7;
+    transform: rotate(-30deg);
+    @media (max-width: 600px) {
+        bottom: 5%;
+    }
 `;

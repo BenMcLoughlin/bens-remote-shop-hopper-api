@@ -1,5 +1,5 @@
 import React from 'react';
-import { signOut } from 'next-auth/client';
+import { signOut } from 'next-auth/react';
 import styled from 'styled-components';
 import { TableDeleteRow } from '@styled-icons/fluentui-system-regular/TableDeleteRow';
 import { BoxArrowUpLeft } from '@styled-icons/bootstrap/BoxArrowUpLeft';
@@ -75,7 +75,7 @@ export const NavLeft = styled.aside`
     overflow-x: hidden;
     height: 100vh;
     width: ${ sizes.appNavBarLeftWidth }px;
-    background: ${ color.backgroundDarkPrimary };
+    background: ${ color.backgroundThemeGreen };
     transition: all 0.1s;
     ${ mixin.hardwareAccelerate }
     &:hover {

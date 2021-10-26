@@ -1,12 +1,13 @@
 /* eslint-disable */
 import React from 'react';
-import { Provider } from 'next-auth/client';
+import { SessionProvider } from 'next-auth/react';
 import { Router } from 'next/dist/client/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import '../styles/global.css';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { theme } from '../styles/theme';
+import { Layout } from '../components/layout/Layout';
 
 NProgress.configure({ showSpinner: true, trickleRate: 0.1, trickleSpeed: 300 });
 
@@ -23,11 +24,15 @@ Router.events.on('routeChangeError', () => {
 });
 
 const App = ({ Component, pageProps }) => (
-    <Provider session={pageProps.session}>
+    <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
         <ThemeProvider theme={theme}>
-            <Component {...pageProps} />
+            {/* <Context.Provider value={{ state, setState }}> */}
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
+            {/* </Context.Provider> */}
         </ThemeProvider>
-    </Provider>
+    </SessionProvider>
 );
 
 export default App;

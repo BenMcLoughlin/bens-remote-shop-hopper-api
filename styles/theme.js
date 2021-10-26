@@ -1,6 +1,64 @@
 import { css } from 'styled-components';
 import Color from 'color';
 
+export const sizes = {
+    mobileS: '320px',
+    mobileM: '375px',
+    mobileL: '425px',
+    tablet: '768px',
+    laptop: '1024px',
+    laptopL: '1440px',
+    desktop: '2560px',
+    appNavBarLeftWidth: 64,
+    secondarySideBarWidth: 230,
+    minViewportWidth: 1000
+};
+
+export const devices = {
+    mobileS: `(min-width: ${ sizes.mobileS })`,
+    mobileM: `(min-width: ${ sizes.mobileM })`,
+    mobileL: `(min-width: ${ sizes.mobileL })`,
+    tablet: `(min-width: ${ sizes.tablet })`,
+    laptop: `(min-width: ${ sizes.laptop })`,
+    laptopL: `(min-width: ${ sizes.laptopL })`,
+    desktop: `(min-width: ${ sizes.desktop })`
+};
+
+export const color = {
+    primary: '#0052cc', // Blue
+    success: '#0B875B', // green
+    danger: '#E13C3C', // red
+    warning: '#F89C1C', // orange
+    secondary: '#F4F5F7', // light grey
+    text: {
+        darkest: '#000000',
+        dark: '#42526E',
+        medium: '#5E6C84',
+        light: '#8993a4',
+        link: '#0052cc'
+    },
+
+    backgroundThemeGreen: '#14e2a4',
+    backgroundMedium: '#dfe1e6',
+    backgroundLight: '#ebecf0',
+    backgroundLightest: '#F4F5F7',
+    backgroundLightPrimary: '#D2E5FE',
+    backgroundLightSuccess: '#E4FCEF',
+
+    borderLightest: '#dfe1e6',
+    borderLight: '#C1C7D0',
+    borderInputFocus: '#4c9aff'
+};
+
+export const font = {
+    regular: 'font-family: "CircularStdBook"; font-weight: normal;',
+    medium: 'font-family: "CircularStdMedium"; font-weight: normal;',
+    bold: 'font-family: "CircularStdBold"; font-weight: normal;',
+    black: 'font-family: "CircularStdBlack"; font-weight: normal;',
+    catchy: "Yanone Kaffeesatz",
+    size: (size) => `font-size: ${ size };`
+};
+
 export const theme = {
     color: {
         primary: '#000000',
@@ -13,7 +71,30 @@ export const theme = {
         greenDark: '#14C691',
         blueLight: '#4D8AF0',
         blueDark: '#2771EC',
-        white: '#FFFFFF'
+        blue: '#12142d',
+        white: '#FFFFFF',
+        background: '#f6f4f5',
+
+        success: '#0B875B', // green
+        danger: '#E13C3C', // red
+        warning: '#F89C1C', // orange
+
+        textDarkest: '#172b4d',
+        textDark: '#42526E',
+        textMedium: '#5E6C84',
+        textLight: '#8993a4',
+        textLink: '#0052cc',
+
+        backgroundThemeGreen: '#14C691',
+        backgroundMedium: '#dfe1e6',
+        backgroundLight: '#ebecf0',
+        backgroundLightest: '#F4F5F7',
+        backgroundLightPrimary: '#D2E5FE',
+        backgroundLightSuccess: '#E4FCEF',
+
+        borderLightest: '#dfe1e6',
+        borderLight: '#C1C7D0',
+        borderInputFocus: '#4c9aff'
     },
     opacity: 1,
     font: {
@@ -25,7 +106,7 @@ export const theme = {
         mediumLarge: '3.5rem',
         large: '4rem',
         large2: '6.5rem',
-        largest: '17rem'
+        largest: '14rem'
     },
     gradient: {
         primary: `background: #67DCA8;
@@ -56,54 +137,15 @@ export const theme = {
         center: `
             display: flex;
             justify-content: center;
-            align-items: center;`
+            align-items: center;
+            `
     }
-};
-
-// Bear with me 
-export const color = {
-    primary: '#0052cc', // Blue
-    success: '#0B875B', // green
-    danger: '#E13C3C', // red
-    warning: '#F89C1C', // orange
-    secondary: '#F4F5F7', // light grey
-
-    textDarkest: '#172b4d',
-    textDark: '#42526E',
-    textMedium: '#5E6C84',
-    textLight: '#8993a4',
-    textLink: '#0052cc',
-
-    backgroundDarkPrimary: '#14C691',
-    backgroundMedium: '#dfe1e6',
-    backgroundLight: '#ebecf0',
-    backgroundLightest: '#F4F5F7',
-    backgroundLightPrimary: '#D2E5FE',
-    backgroundLightSuccess: '#E4FCEF',
-
-    borderLightest: '#dfe1e6',
-    borderLight: '#C1C7D0',
-    borderInputFocus: '#4c9aff'
-};
-
-export const sizes = {
-    appNavBarLeftWidth: 64,
-    secondarySideBarWidth: 230,
-    minViewportWidth: 1000
 };
 
 export const zIndexValues = {
     modal: 1000,
     dropdown: 101,
     navLeft: 100
-};
-
-export const font = {
-    regular: 'font-family: "CircularStdBook"; font-weight: normal;',
-    medium: 'font-family: "CircularStdMedium"; font-weight: normal;',
-    bold: 'font-family: "CircularStdBold"; font-weight: normal;',
-    black: 'font-family: "CircularStdBlack"; font-weight: normal;',
-    size: (size) => `font-size: ${ size }px;`
 };
 
 export const mixin = {

@@ -1,4 +1,4 @@
-import { getSession } from 'next-auth/client';
+// import { getSession } from "next-auth/react";
 import prisma from '../../../prisma/prisma.js';
 
 export async function getColumn(column) {
@@ -19,9 +19,8 @@ export async function getColumn(column) {
 }
 
 export default async (req, res) => {
-    // const session = await getSession({ req });
+    // const session = await getSession({ req }); todo
 
-    // todo
     // if (!session) {
     //     return res.status(401).json({ reason: 'Unauthorized' });
     // }

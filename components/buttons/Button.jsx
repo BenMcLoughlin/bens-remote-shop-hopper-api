@@ -1,47 +1,67 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Rocket } from '@styled-icons/fa-solid/Rocket';
+import { PaperPlane } from '@styled-icons/entypo/PaperPlane';
+import Link from 'next/link';
+import { startCase } from '../../utils/strings';
 
-import { startCase } from 'utils/strings';
+export const Button = ({
+    title,
+    gradient = 'primary',
+    icon,
+    handleChange,
+    href = '/auth/signup',
+    radius = 'square'
+}) => {
+    const icons = {
+        rocket: <Rocket />,
+        plane: <PaperPlane />
+    };
 
-
-const Button = ({ text, onClick, disabled, loading, backgroundColor }) => (
-    <button
-        disabled={disabled || loading}
-        onClick={onClick}>
-        {loading ? 'Loading...' : startCase(text)}
-        <style jsx>
-            {`
-                button {
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: space-around;
-                    align-items: center;
-                    height: 3rem;
-                    min-width: 16rem;
-                    gap: 1rem;
-                    padding: .5rem;
-                    border-radius: 5px;
-                    position: relative;
-                    transition: all 0.7s ease;
-                    background: ${ backgroundColor };
-                    color: #ffffff;
-                    border: 1px solid #25E9AF;
-                }
-                button:hover {
-                    box-shadow: 1px 1px 3px #aaa;
-                    box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
-                }
-            `}
-        </style>
-    </button>
-);
-
-Button.propTypes = {
-    text: PropTypes.string,
-    onClick: PropTypes.func,
-    disabled: PropTypes.bool,
-    loading: PropTypes.bool,
-    backgroundColor: PropTypes.string
+    return (
+        <Wrapper gradient={gradient} onClick={handleChange} radius={radius} title={title}>
+            {icon && (
+                <Icon>
+                    {icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}
+                </Icon>
+            )}
+            <Link href={href}>
+                <Title>{startCase(title)}</Title>
+            </Link>
+        </Wrapper>
+    );
 };
 
-export default Button;
+// ---------------------------STYLES-------------------------------------------//
+
+const Wrapper = styled.div`
+    height: 5rem;
+    min-width: 11rem;
+    max-width: ${ (p) => `${ p.title.length * 2 }rem` };
+    cursor: pointer;
+    display: flex;
+    align-content: center;
+    border-radius: ${ (p) => (p.radius === 'square' ? '10px' : '40px') };
+    padding: 0 2rem 0 2rem;
+    justify-content: center;
+    align-items: center;
+    ${ (p) => p.theme.gradient[p.gradient] };
+    border: ${ (p) => p.gradient === 'none' && '1px solid white' };
+    opacity: 1;
+    &:hover {
+        background: ${ (props) => props.theme.color.dark };
+    }
+    transition: all 0.6s ease;
+`;
+
+const Title = styled.div`
+    font-size: 1.4rem;
+    color: white;
+    ${ (props) => props.theme.flex.vertical.center };
+`;
+const Icon = styled.div`
+    height: 2rem;
+    width: 2rem;
+    fill: white;
+    margin-right: 1.5rem;
+`;

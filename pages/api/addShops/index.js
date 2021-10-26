@@ -1,5 +1,4 @@
 
-import { getSession } from 'next-auth/client';
 import prisma from '../../../prisma/prisma.js';
 import shopifySHopArray from '../../../mock/shopsLists/kelowna.json';
 
@@ -62,11 +61,11 @@ async function createNewShop(shopData) {
 }
 
 export default async (req, res) => {
-    const session = await getSession({ req });
+    // const session = await getSession({ req }); todo
 
-    if (!session) {
-        return res.status(401).json({ reason: 'Unauthorized' });
-    }
+    // if (!session) {
+    //     return res.status(401).json({ reason: 'Unauthorized' });
+    // }
 
     if (req.method === 'POST') {
         try {
