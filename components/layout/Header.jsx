@@ -16,11 +16,13 @@ export const Header = () => {
 
     return (
         <Wrapper>
-            <Left>
-                <Logo>
-                    <Image src={logo} width={200} height={100} />
-                </Logo>
-            </Left>
+            <Link href="/">
+                <Left>
+                    <Logo>
+                        <Image src={logo} width={200} height={100} />
+                    </Logo>
+                </Left>
+            </Link>
             <Right>
                 <LinkText title={'Featured'} />
                 <LinkText title={'About'} />
@@ -34,9 +36,13 @@ export const Header = () => {
                 )}
                 {!session && (
                     <>
-                        <Button title={'Sign up'} href="/auth/signup" radius="round" />
+                        <Link href="/auth/signup">
+                            <HeaderButton href="/auth/signup">Sign up</HeaderButton>
+                        </Link>
 
-                        <Button title={'Log In'} href="/auth/login" radius="round" />
+                        <Link href="/auth/login">
+                            <HeaderButton href="/auth/login">Log In</HeaderButton>
+                        </Link>
                     </>
                 )}
                 {session && (
@@ -57,19 +63,16 @@ export default Header;
 // ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
-    height: 7rem;
-    margin: 0 auto;
     display: flex;
-    gap: 2rem;
-    width: 100%;
-    justify-content: space-around;
-
+    justify-content: space-between;
+    height: 7rem;
 `;
 
 const Left = styled.div`
-    width: 40%;
     display: flex;
     justify-content: left;
+    margin-left: 55px;
+    cursor: pointer;
     @media (max-width: 600px) {
         position: absolute;
         width: 0%;
@@ -81,11 +84,26 @@ const Logo = styled.div`
     margin-top: 1rem;
 `;
 const Right = styled.div`
-    width: 40%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    @media (max-width: 600px) {
-        width: 80%;
+    margin-right: 25px;
+    justify-content: flex-end;
+    flex-direction: row;
+`;
+const HeaderButton = styled.p`
+    cursor: pointer;
+    height: 2rem;
+    display: flex;
+    align-content: center;
+    border-radius: 2rem;
+    padding: 0 1rem 0 1rem;
+    justify-content: center;
+    align-items: center;
+    background: ${ (props) => props.theme.color.backgroundThemeGreen };
+    ${ (p) => p.theme.gradient[p.gradient] };
+    color: white;
+    &:hover {
+        background: ${ (props) => props.theme.color.dark };
     }
+    transition: all 0.6s ease;
 `;
