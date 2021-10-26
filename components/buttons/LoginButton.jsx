@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { FacebookSquare } from '@styled-icons/boxicons-logos/FacebookSquare';
@@ -8,22 +9,22 @@ export const LoginButton = ({ label, oAuth, handleChange, valid = true }) => {
     const affiliate = {
         none: {
             icon: '',
-            color: '#14C691',
+            color: '#14C691'
         },
         facebook: {
             icon: FacebookSquare,
-            color: '#3A5998',
+            color: '#3A5998'
         },
         google: {
             icon: Google,
             color: 'white',
-            border: true,
+            border: true
         },
         github: {
             icon: Github,
             color: '#25292E',
-            border: true,
-        },
+            border: true
+        }
     };
 
     const renderIcon = (query, props) => {
@@ -31,6 +32,7 @@ export const LoginButton = ({ label, oAuth, handleChange, valid = true }) => {
             const Component = affiliate[query].icon;
             return query && <Component {...props} />;
         }
+
         return <div className=""></div>;
     };
 
@@ -42,15 +44,15 @@ export const LoginButton = ({ label, oAuth, handleChange, valid = true }) => {
     );
 };
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
-    background: ${(p) => (p.valid ? p.oAuth.color : 'grey')};
-    color: ${(p) => (p.oAuth.color === 'white' ? 'black' : 'white')};
-    border: ${(p) => p.oAuth.border && '1px solid grey'};
+    background: ${ (p) => (p.valid ? p.oAuth.color : 'grey') };
+    color: ${ (p) => (p.oAuth.color === 'white' ? 'black' : 'white') };
+    border: ${ (p) => p.oAuth.border && '1px solid grey' };
     height: 5rem;
     width: 36rem;
-    cursor: ${(p) => p.valid && 'pointer'};
+    cursor: ${ (p) => p.valid && 'pointer' };
     display: flex;
     align-content: center;
     border-radius: 1rem;
@@ -58,7 +60,7 @@ const Wrapper = styled.div`
     gap: 1rem;
     align-items: center;
     &: hover {
-        background: ${(p) => p.valid && 'black'};
+        background: ${ (p) => p.valid && 'black' };
         color: white;
     }
     transition: all 0.2s ease;
@@ -66,7 +68,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     font-weight: bold;
     text-transform: uppercase;
     font-weight: 400;

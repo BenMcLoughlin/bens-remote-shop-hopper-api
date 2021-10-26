@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { ArrowIosForwardOutline } from '@styled-icons/evaicons-outline/ArrowIosForwardOutline';
@@ -13,21 +14,25 @@ export const Next = ({
     top,
     right,
     id = 'basic',
-    enablePressEnter,
+    enablePressEnter
 }) => {
- console.log('valid: ', valid);
- useEffect(() => {
-     const pressEnter = (event) => {
-         if (event.key === 'Enter') {
-             handleChange(valid);
-             if (onNext) onNext();
-         }
-     };
-     if (valid) {
-         window.addEventListener('keydown', pressEnter);
-         return () => window.removeEventListener('keydown', pressEnter);
-     }
- }, [handleChange, onNext, valid, enablePressEnter]);
+    console.log('valid: ', valid);
+
+    useEffect(() => {
+        const pressEnter = (event) => {
+            if (event.key === 'Enter') {
+                handleChange(valid);
+                if (onNext) {
+                    onNext();
+                }
+            }
+        };
+
+        if (valid) {
+            window.addEventListener('keydown', pressEnter);
+            return () => window.removeEventListener('keydown', pressEnter);
+        }
+    }, [ handleChange, onNext, valid, enablePressEnter ]);
 
     return (
         <Wrapper
@@ -42,12 +47,14 @@ export const Next = ({
             <CSSTransition in={valid} mountOnEnter unmountOnExit timeout={700} classNames="fade-in">
                 <Circle valid={valid}>
                     <ArrowRight
-                        id={`${id}_next`}
+                        id={`${ id }_next`}
                         valid={valid}
                         onClick={() => {
                             
                             handleChange(valid);
-                            if (onNext) onNext();
+                            if (onNext) { 
+                                onNext();
+                            }
                         }}
                     />
                     <Label>{label}</Label>
@@ -57,18 +64,18 @@ export const Next = ({
     );
 };
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled(Link)`
     z-index: 50000;
     position: absolute;
-    top: ${(props) => props.top};
-    right: ${(props) => props.right};
+    top: ${ (props) => props.top };
+    right: ${ (props) => props.right };
 `;
 
 const Circle = styled.div`
     border-radius: 50%;
-    ${(props) => props.theme.neomorph};
+    ${ (props) => props.theme.neomorph };
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,10 +84,10 @@ const Circle = styled.div`
 `;
 
 const ArrowRight = styled(ArrowIosForwardOutline)`
-    cursor: ${(props) => (props.valid ? 'pointer' : null)};
+    cursor: ${ (props) => (props.valid ? 'pointer' : null) };
     height: 3.2rem;
     width: 3.2rem;
-    color: ${(props) => props.theme.color.darkGrey};
+    color: ${ (props) => props.theme.color.darkGrey };
     z-index: 500;
 `;
 const Label = styled.label`
@@ -88,7 +95,7 @@ const Label = styled.label`
     margin-top: 9rem;
     left: 0.3rem;
     width: 12rem;
-    font-size: ${(props) => props.theme.font.smallest};
+    font-size: ${ (props) => props.theme.font.smallest };
     @media (max-width: 600px) {
         width: 0;
         overflow: hidden;

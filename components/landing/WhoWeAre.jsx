@@ -1,34 +1,34 @@
+/* eslint-disable react/prop-types */
+import React from 'react';
 import styled from 'styled-components';
 import { explainerSvgs } from 'public/assets/svgs/explainers/explainerSvgs.js';
 import Image from 'next/image';
 
-export const WhoWeAre = ({ title, cards }) => {
-    return (
-        <Wrapper>
-            <Title>{title}</Title>
-            <Cards>
-                {cards.map(({ icon, title, subTitle }) => (
-                    <Explainer>
-                        <Icon>
-                            <Image
-                                src={explainerSvgs[icon]}
-                                className="image"
-                                width={80}
-                                height={80}
-                            />
-                        </Icon>
-                        <CardTitle>{title}</CardTitle>
-                        <ExplainerSubTitle>{subTitle}</ExplainerSubTitle>
-                    </Explainer>
-                ))}
-            </Cards>
-        </Wrapper>
-    );
-};
+export const WhoWeAre = ({ title, cards }) => (
+    <Wrapper>
+        <Title>{title}</Title>
+        <Cards>
+            {cards.map(({ icon, titleText, subTitle }) => (
+                <Explainer key={titleText}>
+                    <Icon>
+                        <Image
+                            src={explainerSvgs[icon]}
+                            className="image"
+                            width={80}
+                            height={80}
+                        />
+                    </Icon>
+                    <CardTitle>{title}</CardTitle>
+                    <ExplainerSubTitle>{subTitle}</ExplainerSubTitle>
+                </Explainer>
+            ))}
+        </Cards>
+    </Wrapper>
+);
 
 export default WhoWeAre;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     margin-top: 15rem;
@@ -38,8 +38,8 @@ const Wrapper = styled.div`
 
 const Title = styled.div`
     font-family: 'Yanone Kaffeesatz', Sans-serif;
-    font-size: ${(p) => p.theme.font.large};
-    ${(props) => props.theme.flex.vertical.center};
+    font-size: ${ (p) => p.theme.font.large };
+    ${ (props) => props.theme.flex.vertical.center };
     line-height: 5rem;
     margin-top: 2.8rem;
     justify-content: center;
@@ -50,7 +50,7 @@ const Title = styled.div`
 `;
 
 const Cards = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-weight: bold;
     text-transform: uppercase;
     display: flex;
@@ -74,7 +74,7 @@ const Explainer = styled.div`
     flex-direction: column;
     border-radius: 3rem;
     &:hover {
-        background: ${(p) => p.theme.color.blueLight};
+        background: ${ (p) => p.theme.color.blueLight };
         color: white;
     }
     transition: all 0.5s ease;
@@ -95,13 +95,13 @@ const Icon = styled.div`
 `;
 const CardTitle = styled.div`
     height: 30%;
-    font-size: ${(p) => p.theme.font.smallMedium};
+    font-size: ${ (p) => p.theme.font.smallMedium };
     font-weight: bold;
     padding: 2rem;
 `;
 const ExplainerSubTitle = styled.div`
     height: 40%;
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     padding: 2rem;
     font-weight: 200;
     text-transform: none;

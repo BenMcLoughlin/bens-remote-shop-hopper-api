@@ -4,21 +4,22 @@ import styled from 'styled-components';
 
 export function getStaticProps(context) {
     return {
-        props: {},
+        props: {}
     };
 }
 
 const EmailManager = () => {
     const mockData = {
         name: 'Ben',
-        email: 'Benmcl@shaw.ca',
+        email: 'Benmcl@shaw.ca'
     };
-    const sendEmail = async () => {
+    const sendEmail = () => {
         fetch('/api/email/sendWelcome', {
             method: 'post',
-            body: JSON.stringify(mockData),
+            body: JSON.stringify(mockData)
         });
     };
+
     return (
         <Wrapper>
             <button onClick={() => sendEmail()}>Send Email</button>

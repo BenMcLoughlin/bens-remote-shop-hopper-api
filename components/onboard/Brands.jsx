@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -6,7 +7,7 @@ import { CheckCircle } from '@styled-icons/boxicons-solid/CheckCircle';
 
 export const Brands = ({ brands }) => {
     const { selectedValues, handleChange, options } = brands;
-    const [searchValue, setSearchValue] = useState('');
+    const [ searchValue, setSearchValue ] = useState('');
 
     let filteredOptions =
         searchValue.length > 2
@@ -31,6 +32,7 @@ export const Brands = ({ brands }) => {
             <Options>
                 {filteredOptions.slice(0, 10).map((option) => (
                     <Option
+                        key={option}
                         onClick={() => handleChange(option)}
                         selected={selectedValues.includes(option)}
                     >
@@ -47,7 +49,7 @@ export const Brands = ({ brands }) => {
     );
 };
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     width: 100%;
@@ -65,7 +67,7 @@ const Wrapper = styled.div`
 `;
 
 const Question = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-family: 'Poppins', sans-serif;
     color: #12142d;
     height: 8rem;
@@ -95,8 +97,8 @@ const Option = styled.div`
     cursor: pointer;
     transition: all 0.2s ease;
     border-radius: 5px;
-    background: ${(p) => (p.selected ? '#14C691' : '#e9ecef')};
-    font-size: ${(p) => p.theme.font.small};
+    background: ${ (p) => (p.selected ? '#14C691' : '#e9ecef') };
+    font-size: ${ (p) => p.theme.font.small };
     justify-content: center;
     text-align: center;
     align-items: center;

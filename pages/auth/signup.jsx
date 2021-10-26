@@ -1,24 +1,25 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FormText, CheckBox, LoginButton } from '../../components';
 import { useSignUpForm } from '../../hooks';
-import Link from 'next/link';
-import createUser from '../../lib/requests/createUser';
+import createUser from 'requests/createUser';
 import { getProviders, useSession, signOut, signIn } from 'next-auth/react';
 
 export async function getServerSideProps(context) {
     const providers = await getProviders();
     return {
-        props: { providers },
+        props: { providers }
     };
 }
 
 const SignUp = (props) => {
-    const [fields, setField] = useSignUpForm();
+    const [ fields, setField ] = useSignUpForm();
     const { providers } = props;
-    const [wantsEmails, setWantsEmails] = useState(false);
-    const [errors, setErrors] = useState({});
+    const [ wantsEmails, setWantsEmails ] = useState(false);
+    const [ errors, setErrors ] = useState({});
 
     const { data: session, status } = useSession();
     const loading = status === 'loading';
@@ -33,6 +34,7 @@ const SignUp = (props) => {
         if (result.error) {
             return alert(result.error);
         }
+
         console.log('IN SIGN UP CLIENT SIDE, result: ', result);
         await signIn('credentials', result);
     };
@@ -58,9 +60,11 @@ const SignUp = (props) => {
                     </Link>
                 </SubTitle>
                 <Inputs>
-                    {Object.values(fields).map((props) => (
+                    {Object.values(fields).map((field) => (
+                        // todo
                         <FormText
                             {...props}
+                            key={field}
                             handleChange={(e) => setField(e)}
                             errors={errors}
                             setErrors={setErrors}
@@ -79,11 +83,10 @@ const SignUp = (props) => {
                         oAuth={'none'}
                         label={'sign Up'}
                         valid={noErrors}
-                        handleChange={() =>
-                            onSubmit({
-                                email: fields.email.value,
-                                password: fields.password.value,
-                            })
+                        handleChange={() => onSubmit({
+                            email: fields.email.value,
+                            password: fields.password.value
+                        })
                         }
                     />
                     <Disclaimer>
@@ -106,7 +109,7 @@ const SignUp = (props) => {
 };
 
 export default SignUp;
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     display: flex;
@@ -134,7 +137,7 @@ const ImageWrapper = styled.div`
 `;
 const CalloutText = styled.div`
     z-index: 10;
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     margin-top: 1rem;
     @media (max-width: 600px) {
         opacity: 0;
@@ -155,12 +158,12 @@ const Form = styled.form`
 const Title = styled.div`
     height: 6rem;
     margin-top: -0.5rem;
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
 `;
 
 const SubTitle = styled.div`
     height: 5rem;
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     display: flex;
     justify-content: space-around;
     width: 25rem;
@@ -194,7 +197,7 @@ const Disclaimer = styled.div`
         height: 3rem;
         bottom: -2rem;
         border-radius: 3px;
-        background: ${(p) => p.theme.color.background};
-        font-size: ${(p) => p.theme.font.smallMedium};
+        background: ${ (p) => p.theme.color.background };
+        font-size: ${ (p) => p.theme.font.smallMedium };
     }
 `;

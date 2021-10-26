@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../../components';
@@ -6,39 +8,37 @@ import { brushNumber } from '../../public/assets/landing/brushNumbers/allNumbers
 import { images } from '../../public/assets/landing/actionStep/images.js';
 import { blotches } from '../../public/assets/landing/paintBlobs/blotches.js';
 
-export const HowItWorks = ({ title, cards, about }) => {
-    return (
-        <Wrapper>
-            <About>{about}</About>
-            <Title>{title}</Title>
-            <Cards>
-                {cards.map(({ title, number, flexDirection, image, brushImage }) => (
-                    <ActionStep flexDirection={flexDirection}>
-                        <Text>
-                            <Number>
-                                <Image src={brushNumber[number]} width={110} height={180} />
-                            </Number>
-                            <ActionTitle>{title}</ActionTitle>
-                        </Text>
-                        <Images>
-                            <Blotch number={number}>
-                                <Image src={blotches[number]} width={200} height={180} />
-                            </Blotch>
-                            <Photo>
-                                <Image src={images[image]} width={800} height={400} />
-                            </Photo>
-                        </Images>
-                    </ActionStep>
-                ))}
-            </Cards>
-            <Button title={'sign up'} />
-        </Wrapper>
-    );
-};
+export const HowItWorks = ({ title, cards, about }) => (
+    <Wrapper>
+        <About>{about}</About>
+        <Title>{title}</Title>
+        <Cards>
+            {cards.map(({ titleText, number, flexDirection, image, brushImage }) => (
+                <ActionStep flexDirection={flexDirection}>
+                    <Text>
+                        <Number>
+                            <Image src={brushNumber[number]} width={110} height={180} />
+                        </Number>
+                        <ActionTitle>{titleText}</ActionTitle>
+                    </Text>
+                    <Images>
+                        <Blotch number={number}>
+                            <Image src={blotches[number]} width={200} height={180} />
+                        </Blotch>
+                        <Photo>
+                            <Image src={images[image]} width={800} height={400} />
+                        </Photo>
+                    </Images>
+                </ActionStep>
+            ))}
+        </Cards>
+        <Button title={'sign up'} />
+    </Wrapper>
+);
 
 export default HowItWorks;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     padding-top: 12rem;
@@ -50,8 +50,8 @@ const Wrapper = styled.div`
 `;
 const Title = styled.div`
     font-family: 'Yanone Kaffeesatz', Sans-serif;
-    font-size: ${(p) => p.theme.font.large};
-    ${(props) => props.theme.flex.vertical.center};
+    font-size: ${ (p) => p.theme.font.large };
+    ${ (props) => props.theme.flex.vertical.center };
     line-height: 5rem;
     margin-top: 2.8rem;
     justify-content: center;
@@ -74,14 +74,14 @@ const Cards = styled.div`
 `;
 const About = styled.div`
     font-weight: bold;
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     text-transform: none;
     width: 80%;
-    ${(props) => props.theme.flex.vertical.center};
+    ${ (props) => props.theme.flex.vertical.center };
     text-align: center;
     margin-top: 10%;
     line-height: 5rem;
-    font-weight: ${(props) => (props.i > 0 ? 300 : 800)};
+    font-weight: ${ (props) => (props.i > 0 ? 300 : 800) };
 `;
 
 const ActionStep = styled.div`
@@ -113,7 +113,7 @@ const Number = styled.div`
 `;
 
 const ActionTitle = styled.div`
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     margin-left: 10%;
     width: 100%;
     text-align: left;
@@ -121,10 +121,10 @@ const ActionTitle = styled.div`
 
 const Blotch = styled.div`
     position: absolute;
-    top: ${(props) => (props.number < 3 ? '-2rem' : '7rem')};
-    right: ${(props) => (props.number < 3 ? '2rem' : '3rem')};
-    transform: scaleX(${(props) => (props.number === 3 ? '1' : '-1')});
-    width: ${(props) => (props.number === 1 ? '25rem' : '15rem')};
+    top: ${ (props) => (props.number < 3 ? '-2rem' : '7rem') };
+    right: ${ (props) => (props.number < 3 ? '2rem' : '3rem') };
+    transform: scaleX(${ (props) => (props.number === 3 ? '1' : '-1') });
+    width: ${ (props) => (props.number === 1 ? '25rem' : '15rem') };
     @media (max-width: 768px) {
         opacity: 0.2;
     }

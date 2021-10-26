@@ -3,24 +3,22 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { GoogleMap } from '../../components';
 
-export const Location = (props) => {
-    return (
-        <Wrapper>
-            <ImageWrapper>
-                <Image
-                    src={'/../public/assets/onboard/shutterstock/womanInEurope.jpg'}
-                    width={1000}
-                    height={1000}
-                />
-            </ImageWrapper>
-            <Left>
-                <GoogleMap />
-            </Left>
-        </Wrapper>
-    );
-};
+export const Location = (props) => (
+    <Wrapper>
+        <ImageWrapper>
+            <Image
+                src={'/../public/assets/onboard/shutterstock/womanInEurope.jpg'}
+                width={1000}
+                height={1000}
+            />
+        </ImageWrapper>
+        <Left>
+            <GoogleMap />
+        </Left>
+    </Wrapper>
+);
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     width: 100%;
@@ -46,4 +44,3 @@ const Left = styled.div`
     display: flex;
     padding: 20px;
 `;
-

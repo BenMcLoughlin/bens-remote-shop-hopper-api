@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -11,7 +12,7 @@ export const ProgressBar = ({ progress, length }) => {
     );
 };
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     height: 0.5rem;
@@ -24,7 +25,7 @@ const Wrapper = styled.div`
 
 const Square = styled.div`
     height: 0.5rem;
-    width: ${(props) => props.completed + '%'};
+    width: ${ (props) => `${ props.completed }%` };
     background: #14c691;
     transition: all 0.6s ease;
 `;

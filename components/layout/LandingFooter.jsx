@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -7,7 +8,7 @@ import { Button } from '..';
 import { useOnScreen } from '../../hooks/useOnScreen';
 
 export const LandingFooter = ({ top, bottom, options }) => {
-    const [setEntered, enteredScreen] = useOnScreen({ rootMargin: '-30%', threshold: 0 });
+    const [ setEntered, enteredScreen ] = useOnScreen({ rootMargin: '-30%', threshold: 0 });
 
     return (
         <Wrapper>
@@ -33,7 +34,7 @@ export const LandingFooter = ({ top, bottom, options }) => {
                 </Buttons>
                 <Social>
                     {options.social.map((d) => (
-                        <SocialLink>{d}</SocialLink>
+                        <SocialLink key={d}>{d}</SocialLink>
                     ))}
                 </Social>
                 {/*  <Copyright>
@@ -49,7 +50,7 @@ export const LandingFooter = ({ top, bottom, options }) => {
     );
 };
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     width: 100%;
@@ -77,17 +78,17 @@ const Right = styled.div`
     align-items: center;
 `;
 const Title = styled.div`
-    font-size: ${(props) => props.theme.font.mediumLarge};
+    font-size: ${ (props) => props.theme.font.mediumLarge };
     font-weight: 600;
 `;
 const SubTitle = styled.div`
-    font-size: ${(props) => props.theme.font.small};
+    font-size: ${ (props) => props.theme.font.small };
     font-weight: 200;
 `;
 
 const Phone = styled.div`
     position: absolute;
-    top: ${(p) => (p.visible ? '-25rem' : '-10rem')};
+    top: ${ (p) => (p.visible ? '-25rem' : '-10rem') };
     left: 5rem;
     height: 80rem;
     width: 50rem;
@@ -107,11 +108,11 @@ const Background = styled.div`
 const Bottom = styled.div`
     background: yellow;
     height: 60rem;
-    ${(props) => props.theme.flex.center};
+    ${ (props) => props.theme.flex.center };
     flex-direction: column;
     justify-content: space-around;
     padding: 5rem;
-    ${(p) => p.theme.gradient.secondary};
+    ${ (p) => p.theme.gradient.secondary };
 `;
 const Buttons = styled.div`
     width: 40rem;
@@ -125,7 +126,7 @@ const Social = styled.div`
 `;
 const SocialLink = styled.div`
     border-bottom: 1px solid white;
-    font-size: ${(props) => props.theme.font.small};
+    font-size: ${ (props) => props.theme.font.small };
     height: 2.5rem;
     font-weight: 200;
     opacity: 0.6;
@@ -139,7 +140,7 @@ const Copyright = styled.div`
     opacity: 0.6;
 `;
 const CopyrightText = styled.div`
-    font-size: ${(props) => props.theme.font.small};
+    font-size: ${ (props) => props.theme.font.small };
     height: 2.5rem;
     font-weight: 200;
 `;

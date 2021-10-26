@@ -1,41 +1,40 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { profile, star } from '../../public/assets/landing/testimonials/profile.js';
 
-export const Testimonials = ({ title, subTitle, cards, image }) => {
-    return (
-        <Wrapper>
-            <Top>
-                <Title>{title}</Title>
-                <SubTitle>{subTitle}</SubTitle>
-            </Top>
-            <Cards>
-                {cards.map(({ name, role, content, rating, image }) => (
-                    <Testimonial>
-                        <ProfilePhoto>
-                            <Image src={profile[image]} width={200} height={200} />
-                        </ProfilePhoto>
-                        <About>
-                            <Name>{name}</Name>
-                            <Role>{role}</Role>
-                            <Content>"{content}"</Content>
-                            <Stars>
-                                {[1, 2, 3, 4, 5].map((d) => (
-                                    <Image src={star} width={15} height={15} />
-                                ))}
-                            </Stars>
-                        </About>
-                    </Testimonial>
-                ))}
-            </Cards>
-        </Wrapper>
-    );
-};
+export const Testimonials = ({ title, subTitle, cards, image }) => (
+    <Wrapper>
+        <Top>
+            <Title>{title}</Title>
+            <SubTitle>{subTitle}</SubTitle>
+        </Top>
+        <Cards>
+            {cards.map(({ name, role, content, rating, img }) => (
+                <Testimonial key={name}>
+                    <ProfilePhoto>
+                        <Image src={profile[img]} width={200} height={200} />
+                    </ProfilePhoto>
+                    <About>
+                        <Name>{name}</Name>
+                        <Role>{role}</Role>
+                        <Content>{`"${ content }"`}</Content>
+                        <Stars>
+                            {[ 1, 2, 3, 4, 5 ].map((d) => (
+                                <Image key={d} src={star} width={15} height={15} />
+                            ))}
+                        </Stars>
+                    </About>
+                </Testimonial>
+            ))}
+        </Cards>
+    </Wrapper>
+);
 
 export default Testimonials;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     margin-top: 20rem;
@@ -50,8 +49,8 @@ const Top = styled.div`
     padding: 2rem;
 `;
 const Title = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
-    ${(props) => props.theme.flex.vertical.center};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
+    ${ (props) => props.theme.flex.vertical.center };
     color: black;
     line-height: 5rem;
     text-align: center;
@@ -60,15 +59,15 @@ const Title = styled.div`
 `;
 
 const SubTitle = styled.div`
-    font-size: ${(p) => p.theme.font.medium};
-    ${(props) => props.theme.flex.vertical.center};
+    font-size: ${ (p) => p.theme.font.medium };
+    ${ (props) => props.theme.flex.vertical.center };
     line-height: 5rem;
 
     text-transform: uppercase;
 `;
 
 const Cards = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-weight: bold;
     text-transform: uppercase;
     display: flex;
@@ -102,23 +101,23 @@ const ProfilePhoto = styled.div`
     box-shadow: 2px 39px 48px -16px rgba(0, 0, 0, 0.27);
 `;
 const Name = styled.div`
-    font-size: ${(p) => p.theme.font.smallMedium};
+    font-size: ${ (p) => p.theme.font.smallMedium };
     font-weight: 800;
     margin-top: 5rem;
 `;
 const Role = styled.div`
-    font-size: ${(p) => p.theme.font.smallMedium};
+    font-size: ${ (p) => p.theme.font.smallMedium };
     font-weight: 300;
 `;
 const Content = styled.div`
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     font-style: italic;
     font-weight: 200;
     text-transform: none;
     text-align: center;
 `;
 const About = styled.div`
-    font-size: ${(p) => p.theme.font.medium};
+    font-size: ${ (p) => p.theme.font.medium };
     flex: 2;
 
     padding: 2rem;
@@ -139,7 +138,7 @@ const About = styled.div`
     transition: all 0.3s ease;
 `;
 const Stars = styled.div`
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     gap: 1rem;
     display: flex;
     flex-direction: row;

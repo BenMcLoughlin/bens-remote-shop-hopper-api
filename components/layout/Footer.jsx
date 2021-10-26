@@ -30,14 +30,14 @@ export const Footer = () => {
         'Facebook',
         'Instagram',
         'Youtube',
-        'Twitter',
+        'Twitter'
     ];
     const policies = [
         'Product Listing Policy',
         'Intellectual Property Protection',
         ' Privacy Policy',
         ' Terms of Use',
-        'User Information Legal Enquiry Guide',
+        'User Information Legal Enquiry Guide'
     ];
 
     const copyright = '© 1999-2021 ShopHopper.ca. All rights reserved';
@@ -46,12 +46,12 @@ export const Footer = () => {
         <Wrapper>
             <Links>
                 {links?.map((link) => (
-                    <Link>{link}</Link>
+                    <Link key={link}>{link}</Link>
                 ))}
             </Links>
             <Policies>
                 {policies.map((policy) => (
-                    <Policy>- {policy} - </Policy>
+                    <Policy key={policy}>- {policy} - </Policy>
                 ))}
             </Policies>
             <Copyright>{copyright}</Copyright>
@@ -59,7 +59,7 @@ export const Footer = () => {
     );
 };
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     height: 30rem;

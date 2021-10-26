@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { Search, LinkText } from '../../components';
@@ -6,51 +7,48 @@ import Image from 'next/image';
 import { QuestionSquare } from '@styled-icons/bootstrap/QuestionSquare';
 
 
-export const Header = ({ categories, links }) => {
+export const Header = ({ categories, links }) => (
+    <Wrapper>
+        <Top>
+            <Logo>
+                <Image src={logo} width={100} height={50} />
+            </Logo>
+            <Search />
+            <Links>
+                {links.top.map(({ title, subTitle }) => (
+                    <Link key={title}>
+                        <Icon>
+                            <QuestionSquare />
+                        </Icon>
+                        <span>{title}</span>
+                        <span>{subTitle}</span>
+                    </Link>
+                ))}
+            </Links>
+        </Top>
+        <Bottom>
+            <Categories>
+                {categories.map((d) => (
+                    <div key={d}>{d}</div>
+                ))}
+            </Categories>
+            <Links>
+                {links.bottom.map(({ title, subTitle }) => (
+                    <Link key={title}>
+                        <Icon>
+                            <QuestionSquare />
+                        </Icon>
+                        <span>{title}</span>
+                    </Link>
+                ))}
+                <span>EN</span>
+                <span>CAD</span>
+            </Links>
+        </Bottom>
+    </Wrapper>
+);
 
-    return (
-        <Wrapper>
-            <Top>
-                <Logo>
-                    <Image src={logo} width={100} height={50} />
-                </Logo>
-                <Search />
-                <Links>
-                    {links.top.map(({ title, subTitle }) => (
-                        <Link>
-                            <Icon>
-                                <QuestionSquare />
-                            </Icon>
-                            <span>{title}</span>
-                            <span>{subTitle}</span>
-                        </Link>
-                    ))}
-                </Links>
-            </Top>
-            <Bottom>
-                <Categories>
-                    {categories.map((d) => (
-                        <div>{d}</div>
-                    ))}
-                </Categories>
-                <Links>
-                    {links.bottom.map(({ title, subTitle }) => (
-                        <Link>
-                            <Icon>
-                                <QuestionSquare />
-                            </Icon>
-                            <span>{title}</span>
-                        </Link>
-                    ))}
-                    <span>EN</span>
-                    <span>CAD</span>
-                </Links>
-            </Bottom>
-        </Wrapper>
-    );
-};
-
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     height: 12rem;
@@ -97,7 +95,7 @@ const Links = styled.div`
 const Link = styled.div`
     display: flex;
     flex-direction: column;
-    font-size: ${(p) => p.theme.font.smallest};
+    font-size: ${ (p) => p.theme.font.smallest };
     text-transform: uppercase;
     position: relative;
     padding-left: 3rem;

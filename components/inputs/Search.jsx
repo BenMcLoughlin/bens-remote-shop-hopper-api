@@ -2,21 +2,19 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { MagnifyingGlass } from '@styled-icons/entypo/MagnifyingGlass';
 
-export const Search = () => {
-    return (
-        <Wrapper>
-            <Input placeholder={'Search your item here...'} />
-            <SearchButton>
-                <Icon>
-                    <MagnifyingGlass />
-                </Icon>
+export const Search = () => (
+    <Wrapper>
+        <Input placeholder={'Search your item here...'} />
+        <SearchButton>
+            <Icon>
+                <MagnifyingGlass />
+            </Icon>
                 Search
-            </SearchButton>
-        </Wrapper>
-    );
-};
+        </SearchButton>
+    </Wrapper>
+);
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     height: 3.2rem;
@@ -31,12 +29,12 @@ const Input = styled.input`
     border-radius: 1rem;
     padding-left: 2rem;
     background: white;
-    font-size: ${(p) => p.theme.font.small};
-    border: 1px solid ${(props) => props.theme.color.lightGrey};
+    font-size: ${ (p) => p.theme.font.small };
+    border: 1px solid ${ (props) => props.theme.color.lightGrey };
     &:focus {
         outline: none;
-        border: 1px solid ${(props) => props.theme.color.greenLight};
-        color: ${(props) => props.theme.color.darkGrey};
+        border: 1px solid ${ (props) => props.theme.color.greenLight };
+        color: ${ (props) => props.theme.color.darkGrey };
     }
 `;
 const SearchButton = styled.button`
@@ -47,7 +45,7 @@ const SearchButton = styled.button`
     width: 15%;
     border-radius: 1rem;
     cursor: pointer;
-    background: ${(p) => p.theme.color.greenDark};
+    background: ${ (p) => p.theme.color.greenDark };
     color: white;
     border: none;
 `;

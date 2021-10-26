@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -16,7 +17,7 @@ export const Sizes = ({ sizes }) => {
             </ImageWrapper>
             <Right>
                 {sizeTypes.map((sizeType) => (
-                    <SizeSelector>
+                    <SizeSelector key={sizeType}>
                         <Question>{sizeType.question}</Question>
                         <Dropdown {...sizeType} handleChange={handleChange} />
                     </SizeSelector>
@@ -26,7 +27,7 @@ export const Sizes = ({ sizes }) => {
     );
 };
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     height: 100%;
@@ -56,7 +57,7 @@ const Right = styled.div`
 `;
 
 const Question = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-family: 'Poppins', sans-serif;
     color: #12142d;
     height: 8rem;

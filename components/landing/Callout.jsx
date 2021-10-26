@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -5,30 +6,28 @@ import { blotches } from '../../public/assets/landing/paintBlobs/blotches.js';
 import { clothingIcons } from '../../public/assets/landing/clothingIcons/index.js';
 import { background } from '../../public/assets/landing/shutterstock/index.js';
 
-export const Callout = ({ title, subTitle, image, blotch1, blotch2, clothingIcon }) => {
-    return (
-        <Wrapper>
-            <BackgroundImage>
-                <Image src={background[image]} width={3000} height={2000} />
-            </BackgroundImage>
-            <Title dangerouslySetInnerHTML={{ __html: title }} />
-            <SubTitle dangerouslySetInnerHTML={{ __html: subTitle }} />
-            <Blotch1>
-                <Image src={blotches[blotch2]} width={3000} height={2000} />
-            </Blotch1>
-            <Blotch2>
-                <Image src={blotches[blotch1]} width={200} height={200} />
-            </Blotch2>
-            <ClothingIcon>
-                <Image src={clothingIcons[clothingIcon]} width={200} height={200} />
-            </ClothingIcon>
-        </Wrapper>
-    );
-};
+export const Callout = ({ title, subTitle, image, blotch1, blotch2, clothingIcon }) => (
+    <Wrapper>
+        <BackgroundImage>
+            <Image src={background[image]} width={3000} height={2000} />
+        </BackgroundImage>
+        <Title dangerouslySetInnerHTML={{ __html: title }} />
+        <SubTitle dangerouslySetInnerHTML={{ __html: subTitle }} />
+        <Blotch1>
+            <Image src={blotches[blotch2]} width={3000} height={2000} />
+        </Blotch1>
+        <Blotch2>
+            <Image src={blotches[blotch1]} width={200} height={200} />
+        </Blotch2>
+        <ClothingIcon>
+            <Image src={clothingIcons[clothingIcon]} width={200} height={200} />
+        </ClothingIcon>
+    </Wrapper>
+);
 
 export default Callout;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     margin-top: 10rem;
@@ -37,7 +36,7 @@ const Wrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: left;
-    opacity: ${(p) => p.theme.opacity};
+    opacity: ${ (p) => p.theme.opacity };
     position: relative;
     font-family: 'Yanone Kaffeesatz', Sans-serif;
     position: relative;
@@ -64,8 +63,8 @@ const BackgroundImage = styled.div`
 `;
 const Title = styled.div`
     font-family: 'Yanone Kaffeesatz', Sans-serif;
-    font-size: ${(p) => p.theme.font.large};
-    ${(props) => props.theme.flex.vertical.center};
+    font-size: ${ (p) => p.theme.font.large };
+    ${ (props) => props.theme.flex.vertical.center };
     width: 80%;
     line-height: 5rem;
     text-transform: uppercase;
@@ -77,10 +76,10 @@ const Title = styled.div`
 `;
 
 const SubTitle = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-weight: bold;
     text-transform: uppercase;
-    ${(props) => props.theme.flex.vertical.center};
+    ${ (props) => props.theme.flex.vertical.center };
     font-weight: bold;
     z-index: 4;
     font-weight: 500;

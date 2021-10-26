@@ -15,7 +15,7 @@ const Onboard = () => {
 
     const { onboardPageNum: num } = globalState.ui;
 
-    const pages = ['location', 'styles', 'brands', 'sizes'];
+    const pages = [ 'location', 'styles', 'brands', 'sizes' ];
 
     let selectedPage = pages[num];
     console.log('globalState: ', JSON.stringify(globalState.user.size, null, 4));
@@ -40,10 +40,9 @@ const Onboard = () => {
             </NextWrapper>
             <BackWrapper>
                 <Back
-                    handleChange={() =>
-                        setGlobalState({
-                            ui: { onboardPageNum: num > 0 ? num - 1 : 0 },
-                        })
+                    handleChange={() => setGlobalState({
+                        ui: { onboardPageNum: num > 0 ? num - 1 : 0 }
+                    })
                     }
                 />
             </BackWrapper>
@@ -53,7 +52,7 @@ const Onboard = () => {
 
 export default Onboard;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 const Wrapper = styled.div`
     position: absolute;
     top: 10rem;
@@ -61,7 +60,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 80vh;
     z-index: 2;
-    opacity: ${(p) => p.theme.opacity};
+    opacity: ${ (p) => p.theme.opacity };
 `;
 const Content = styled.div`
     position: absolute;

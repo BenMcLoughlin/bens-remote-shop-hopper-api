@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -9,17 +10,17 @@ import { getProviders, useSession, signOut, signIn } from 'next-auth/react';
 export async function getServerSideProps(context) {
     const providers = await getProviders();
     return {
-        props: { providers },
+        props: { providers }
     };
 }
 
 const Login = (props) => {
-    const [fields, setField] = useSignUpForm();
+    const [ fields, setField ] = useSignUpForm();
     const { providers } = props;
-    const [wantsEmails, setWantsEmails] = useState(false);
+    const [ wantsEmails, setWantsEmails ] = useState(false);
 
     const { data: session, status } = useSession();
-    const [errors, setErrors] = useState({});
+    const [ errors, setErrors ] = useState({});
 
     const loading = status === 'loading';
     let errorsArray = Object.values(errors);
@@ -40,7 +41,7 @@ const Login = (props) => {
             <Form>
                 <Title>Log In</Title>
                 <SubTitle>
-                    Don't have an account?
+                        Don&apos;t have an account?
                     <Link href="/auth/signup" style={{ textDecoration: 'none' }}>
                         Sign Up
                     </Link>
@@ -64,11 +65,10 @@ const Login = (props) => {
                         oAuth={'none'}
                         label={'sign In'}
                         valid={true}
-                        handleChange={() =>
-                            signIn('credentials', {
-                                email: fields.email.value,
-                                password: fields.password.value,
-                            })
+                        handleChange={() => signIn('credentials', {
+                            email: fields.email.value,
+                            password: fields.password.value
+                        })
                         }
                     />
                     <Disclaimer>
@@ -91,7 +91,7 @@ const Login = (props) => {
 };
 
 export default Login;
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     display: flex;
@@ -132,11 +132,11 @@ const Form = styled.form`
 const Title = styled.div`
     height: 6rem;
     margin-top: 3rem;
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
 `;
 const CalloutText = styled.div`
     z-index: 10;
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     margin-top: 1rem;
     @media (max-width: 600px) {
         opacity: 0;
@@ -144,7 +144,7 @@ const CalloutText = styled.div`
 `;
 const SubTitle = styled.div`
     height: 5rem;
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${ (p) => p.theme.font.small };
     display: flex;
     justify-content: space-around;
     width: 25rem;
@@ -178,7 +178,7 @@ const Disclaimer = styled.div`
         height: 3rem;
         bottom: -2rem;
         border-radius: 3px;
-        background: ${(p) => p.theme.color.background};
-        font-size: ${(p) => p.theme.font.smallMedium};
+        background: ${ (p) => p.theme.color.background };
+        font-size: ${ (p) => p.theme.font.smallMedium };
     }
 `;

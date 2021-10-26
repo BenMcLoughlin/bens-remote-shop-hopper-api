@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -12,12 +13,13 @@ export const Styles = ({ styles }) => {
             <Options>
                 {styles.options.map((option) => (
                     <Option
+                        key={option}
                         onClick={() => handleChange(option)}
                         selected={selectedValues.includes(option)}
                     >
                         <OptionImage>
                             <Image
-                                src={`/../public/assets/onboard/styles/${option}.jpg`}
+                                src={`/../public/assets/onboard/styles/${ option }.jpg`}
                                 layout="fill"
                             />
                         </OptionImage>
@@ -29,7 +31,7 @@ export const Styles = ({ styles }) => {
     );
 };
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     width: 100%;
@@ -64,7 +66,7 @@ const Option = styled.div`
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    border: ${(p) => p.selected && '4px solid #14C691'};
+    border: ${ (p) => p.selected && '4px solid #14C691' };
     transition: all 0.2s ease;
     border-radius: 5px;
     @media (max-width: 600px) {
@@ -78,14 +80,14 @@ const OptionImage = styled.div`
 `;
 const OptionTitle = styled.div`
     height: 20%;
-    font-size: ${(p) => p.theme.font.medium};
+    font-size: ${ (p) => p.theme.font.medium };
     display: flex;
     justify-content: center;
     align-items: center;
 `;
 
 const Question = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-family: 'Poppins', sans-serif;
     color: #12142d;
     height: 8rem;

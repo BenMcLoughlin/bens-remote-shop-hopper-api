@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../../components';
@@ -6,37 +7,35 @@ import paint1 from '../../public/assets/landing/paintBlobs/hero-bg-3.png';
 import Image from 'next/image';
 import { font, color } from '../../styles/theme.js';
 
-export const Welcome = ({ title, subTitle }) => {
-    return (
-        <Wrapper>
-            <Left>
-                <Title>{title}</Title>
-                <SubTitle>{subTitle}</SubTitle>
-                <ButtonWrapper>
-                    <Button title={'Sign up'} href="/auth/signup" />
-                </ButtonWrapper>
-            </Left>
-            <Right>
-                <Blotch1>
-                    <Image src={paint1} width={1000} height={700} />
-                </Blotch1>
-                <ImageWrapper>
-                    <Image src={women} width={1000} height={1200} />
-                </ImageWrapper>
-            </Right>
-        </Wrapper>
-    );
-};
+export const Welcome = ({ title, subTitle }) => (
+    <Wrapper>
+        <Left>
+            <Title>{title}</Title>
+            <SubTitle>{subTitle}</SubTitle>
+            <ButtonWrapper>
+                <Button title={'Sign up'} href="/auth/signup" />
+            </ButtonWrapper>
+        </Left>
+        <Right>
+            <Blotch1>
+                <Image src={paint1} width={1000} height={700} />
+            </Blotch1>
+            <ImageWrapper>
+                <Image src={women} width={1000} height={1200} />
+            </ImageWrapper>
+        </Right>
+    </Wrapper>
+);
 
 export default Welcome;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     margin: 0 auto;
     display: flex;
     position: relative;
-    font-family: ${font.catchy};
+    font-family: ${ font.catchy };
     font-size: 8rem;
     line-height: 14rem;
     width: 90%;
@@ -50,7 +49,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-    color: ${color.text.darkest};
+    color: ${ color.text.darkest };
     font-weight: bold;
     text-transform: uppercase;
 `;
@@ -84,7 +83,7 @@ const Right = styled.div`
 const ImageWrapper = styled.div`
     position: absolute;
     top: -5rem;
-    right: ${(p) => (p.visible ? '2rem' : '-5rem')};
+    right: ${ (p) => (p.visible ? '2rem' : '-5rem') };
     width: 75rem;
     transition: all 0.4s ease;
     @media (max-width: 600px) {

@@ -1,35 +1,35 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { useWindowSize } from '../../../hooks';
 
 export const TransitionToSide = ({ children, array, position }) => {
-    const [direction, setDirection] = useState('forward');
-    const [lastValue, setLastValue] = useState(0);
-    const [timeout, setTimeout] = useState(1000);
+    const [ direction, setDirection ] = useState('forward');
+    const [ lastValue, setLastValue ] = useState(0);
+    const [ timeout, setTimeout ] = useState(1000);
 
-    const [width] = useWindowSize();
+    const [ width ] = useWindowSize();
 
     useEffect(() => {
         setDirection(lastValue < position ? 'forward' : 'back');
         setLastValue(position);
-        if (width < 600) setTimeout(0);
-    }, [lastValue, position, width]);
+        if (width < 600) { 
+            setTimeout(0);
+        }
+    }, [ lastValue, position, width ]);
 
     return (
         <TransitionGroup>
-            {array.map(
-                (d, i) =>
-                    i === position && (
-                        <Transition
-                            key={i}
-                            timeout={timeout}
-                            classNames={`transition-${direction}`}
-                        >
-                            {children}
-                        </Transition>
-                    )
-            )}
+            {array.map((d, i) => i === position && (
+                <Transition
+                    key={i}
+                    timeout={timeout}
+                    classNames={`transition-${ direction }`}
+                >
+                    {children}
+                </Transition>
+            ))}
         </TransitionGroup>
     );
 };
@@ -75,16 +75,16 @@ const Transition = styled(CSSTransition)`
     position: relative;
     height: 100%;
     &.transition-forward-enter-active {
-        animation-name: ${fadeInRight};
+        animation-name: ${ fadeInRight };
         animation-duration: 1s;
     }
     &.transition-back-enter-active {
-        animation-name: ${fadeInLeft};
+        animation-name: ${ fadeInLeft };
         animation-duration: 1s;
     }
     &.transition-forward-exit-active,
     &.transition-back-exit-active {
-        animation-name: ${fadeOut};
+        animation-name: ${ fadeOut };
         animation-duration: 1.1s;
     }
 `;

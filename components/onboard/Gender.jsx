@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -10,7 +11,7 @@ export const Gender = ({ gender }) => {
         <Wrapper>
             <Left>
                 {images.map(({ src, caption }) => (
-                    <ImageWrapper>
+                    <ImageWrapper key={caption}>
                         <Image src={src} layout="fill" />
                         <Caption>{caption}</Caption>
                     </ImageWrapper>
@@ -24,7 +25,7 @@ export const Gender = ({ gender }) => {
     );
 };
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     width: 100%;
@@ -62,12 +63,12 @@ const Caption = styled.div`
     top: 12rem;
     left: 5rem;
     text-transform: uppercase;
-    font-size: ${(p) => p.theme.font.medium};
+    font-size: ${ (p) => p.theme.font.medium };
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
 `;
 const Question = styled.div`
-    font-size: ${(p) => p.theme.font.mediumLarge};
+    font-size: ${ (p) => p.theme.font.mediumLarge };
     font-family: 'Poppins', sans-serif;
     color: #12142d;
 `;
