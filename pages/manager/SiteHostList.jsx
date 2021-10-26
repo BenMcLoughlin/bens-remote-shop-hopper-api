@@ -13,15 +13,11 @@ const SiteHostList = () => {
     const [ globalState, globalActions ] = useGlobal();
     const [ loading, setLoading ] = useState(false);
     const [ siteHosts, setSiteHosts ] = useState([]);
-    const mountedRef = useRef(true);
 
     // useEffect(() => {
     //     console.log('globalState.siteHosts.list:', globalState.siteHosts.list);
-    //     mountedRef.current && setSiteHosts(globalState.siteHosts.list);
+    //     setSiteHosts(globalState.siteHosts.list);
 
-    //     return () => {
-    //         mountedRef.current = false;
-    //     };
     // }, [ globalState.siteHosts.list ]);
 
     const _openPage = (path) => {
