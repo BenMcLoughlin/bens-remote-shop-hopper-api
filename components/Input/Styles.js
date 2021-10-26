@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 import { color, font } from 'styles/theme';
-import { Icon } from 'components/Icon';
 
 export const StyledInput = styled.div`
   position: relative;
