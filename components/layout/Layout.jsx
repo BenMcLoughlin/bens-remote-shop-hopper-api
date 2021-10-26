@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
@@ -43,13 +44,13 @@ const Center = styled.div`
     flex-direction: column;
     margin: 0 auto;
     min-height: 100vh;
-    @media (min-width: 0px) {
-        width: 100vw;
-    }
-    @media (min-width: 768px) {
-        width: 90vw;
-    }
-    @media (min-width: 1500px) {
-        width: 75vw;
-    }
+    // @media (min-width: 0px) {
+    //     width: 100vw;
+    // }
+    // @media (min-width: 768px) {
+    //     width: 90vw;
+    // }
+    // @media (min-width: 1500px) {
+    //     width: 75vw;
+    // }
 `;
