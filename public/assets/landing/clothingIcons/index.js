@@ -3,5 +3,5 @@ import yellowShoes from './yellowShoes.png';
 
 export const clothingIcons = {
     handbag,
-    yellowShoes,
+    yellowShoes
 };

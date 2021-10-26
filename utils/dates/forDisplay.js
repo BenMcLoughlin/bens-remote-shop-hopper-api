@@ -1,5 +1,5 @@
 export const formatDate = (date) => {
-    var month = new Array();
+    let month = [];
     month[0] = "Jan";
     month[1] = "Feb";
     month[2] = "Mar";
@@ -12,14 +12,14 @@ export const formatDate = (date) => {
     month[9] = "Oct";
     month[10] = "Nov";
     month[11] = "Dec";
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let ampm = hours >= 12 ? 'pm' : 'am';
+    hours %= 12;
     hours = hours ? hours : 12;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    var strTime = hours + ':' + minutes + ampm;
+    minutes = minutes < 10 ? `0${ minutes }` : minutes;
+    let strTime = `${ hours }:${ minutes }${ ampm }`;
     // e.g. "13 Nov 2016 11:00pm";
 
-    return date.getDate() + " " + month[date.getMonth()] + " " + date.getFullYear() + " " + strTime;
-}
+    return `${ date.getDate() } ${ month[date.getMonth()] } ${ date.getFullYear() } ${ strTime }`;
+};

@@ -3,5 +3,5 @@ import womanChoosing from './womanChoosing.png';
 
 export const background = {
     heel,
-    womanChoosing,
+    womanChoosing
 };

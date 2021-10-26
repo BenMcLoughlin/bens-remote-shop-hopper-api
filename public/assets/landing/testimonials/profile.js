@@ -6,6 +6,6 @@ import starSVG from './star.svg';
 export const profile = {
     AngelProfilePhoto,
     JulieCook,
-    JustinaProfilePhoto,
+    JustinaProfilePhoto
 };
 export const star = starSVG;

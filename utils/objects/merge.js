@@ -1,3 +1,4 @@
+/* eslint-disable guard-for-in */
 export const merge = (...sources) => {
     const target = {};
     for (const source of sources) {

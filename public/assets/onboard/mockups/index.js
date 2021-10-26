@@ -6,4 +6,4 @@ import size from './size.png';
 import stores from './stores.png';
 import style from './style.png';
 
-export const mockUps = [signUp, gender, brands, location, size, stores, style];
+export const mockUps = [ signUp, gender, brands, location, size, stores, style ];

@@ -1,3 +1,4 @@
+import React from 'react';
 import * as components from '../../components/onboard';
 import { startCase } from '../../utils/strings';
 

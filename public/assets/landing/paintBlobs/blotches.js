@@ -1,3 +1,4 @@
+/* eslint-disable no-duplicate-imports */
 import blotch1 from './whiteRed.png';
 import blotch2 from './bigBlueLittleYellow.png';
 import blotch3 from './bigBlueLittleYellow.png';
@@ -13,5 +14,5 @@ export const blotches = {
     blueOrangeGrey,
     bigBlueLittleYellow,
     redOrangeBlue,
-    blueRedSpackles,
+    blueRedSpackles
 };

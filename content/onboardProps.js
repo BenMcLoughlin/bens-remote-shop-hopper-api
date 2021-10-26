@@ -2,7 +2,7 @@ import useGlobal from '../globalState/store';
 import brandsList from '../content/data/onboardOptions/brands.json';
 
 export function onboardProps() {
-    const [globalState, globalActions] = useGlobal();
+    const [ globalState, globalActions ] = useGlobal();
 
     const { setGlobalState } = globalActions;
 
@@ -16,58 +16,58 @@ export function onboardProps() {
                         {
                             title: 'sign up',
                             subTitle: 'join free',
-                            link: '',
+                            link: ''
                         },
                         {
                             title: 'wish list',
                             subTitle: 'add fav',
-                            link: '',
-                        },
+                            link: ''
+                        }
                     ],
                     bottom: [
                         {
                             title: 'Get The App',
-                            link: '',
-                        },
-                    ],
+                            link: ''
+                        }
+                    ]
                 },
 
-                categories: ['Womenswear', 'Menswear', 'accessories', 'beauty', 'more'],
+                categories: [ 'Womenswear', 'Menswear', 'accessories', 'beauty', 'more' ]
             },
 
             location: {
                 images: [
                     {
                         src: '/../public/assets/onboard/shutterstock/womansWear.png',
-                        caption: 'Womanswear',
+                        caption: 'Womanswear'
                     },
                     {
                         src: '/../public/assets/onboard/shutterstock/mensWear.png',
-                        caption: 'Menswear',
-                    },
+                        caption: 'Menswear'
+                    }
                 ],
                 question: 'Which do you prefer to shop? ',
-                handleErrors: () => user.location.lat !== 49.8,
+                handleErrors: () => user.location.lat !== 49.8
             },
             gender: {
                 images: [
                     {
                         src: '/../public/assets/onboard/shutterstock/womanByBlueWall.jpg',
-                        caption: 'Womanswear',
+                        caption: 'Womanswear'
                     },
                     {
                         src: '/../public/assets/onboard/shutterstock/manByGreyWall.jpg',
-                        caption: 'Menswear',
-                    },
+                        caption: 'Menswear'
+                    }
                 ],
                 question: 'Which do you prefer to shop? ',
                 dropdown: {
                     title: 'choose your style',
-                    options: ['mens', 'womans'],
+                    options: [ 'mens', 'womans' ],
                     value: globalState.user.gender,
-                    handleChange: (value) => setGlobalState({ user: { gender: value } }),
+                    handleChange: (value) => setGlobalState({ user: { gender: value } })
                 },
-                handleErrors: () => user.gender.length > 0,
+                handleErrors: () => user.gender.length > 0
             },
             styles: {
                 options: [
@@ -78,7 +78,7 @@ export function onboardProps() {
                     'businessCasual',
                     'hipHop',
                     'skater',
-                    'punkRock',
+                    'punkRock'
                 ],
                 question: 'Choose at least 2 styles you like to wear',
                 selectedValues: globalState.user.styles,
@@ -86,10 +86,10 @@ export function onboardProps() {
                     const { styles } = globalState.user;
                     const newValues = styles.includes(value)
                         ? styles.filter((d) => d !== value)
-                        : [...styles, value];
+                        : [ ...styles, value ];
                     setGlobalState({ user: { styles: newValues } });
                 },
-                handleErrors: () => user.styles.length >= 2,
+                handleErrors: () => user.styles.length >= 2
             },
             brands: {
                 options: brandsList,
@@ -99,10 +99,10 @@ export function onboardProps() {
                     const { brands } = globalState.user;
                     const newValues = brands.includes(value)
                         ? brands.filter((d) => d !== value)
-                        : [...brands, value];
+                        : [ ...brands, value ];
                     setGlobalState({ user: { brands: newValues } });
                 },
-                handleErrors: () => user.brands.length >= 2,
+                handleErrors: () => user.brands.length >= 2
             },
             sizes: {
                 sizeTypes: [
@@ -121,10 +121,10 @@ export function onboardProps() {
                             'XL / 16',
                             'XL / 18',
                             'XXL / 22',
-                            'XXL / 24',
+                            'XXL / 24'
                         ],
                         value: globalState.user.size.top,
-                    name: 'top',
+                        name: 'top'
                     },
                     {
                         question: 'Whats your waist size?',
@@ -144,10 +144,10 @@ export function onboardProps() {
                             '47-49 / 3XL',
                             '50-52 / 3XL',
                             '53-55 / 4XL',
-                            '56-58 / 4XL',
+                            '56-58 / 4XL'
                         ],
                         value: globalState.user.size.bottom,
-                        name: 'bottom',
+                        name: 'bottom'
                     },
                     {
                         question: 'Whats your shoe size?',
@@ -159,20 +159,20 @@ export function onboardProps() {
                             '8 / 246',
                             '9 / 254',
                             '10 / 262',
-                            '11 / 270',
+                            '11 / 270'
                         ],
                         value: globalState.user.size.shoes,
-                        name: 'shoes',
-                    },
+                        name: 'shoes'
+                    }
                 ],
                 handleChange: (value, name) => {
                     console.log('Hello from onboardProps');
                     setGlobalState({ user: { size: { [name]: value } } });
                 },
-                handleErrors: () => true,
-            },
+                handleErrors: () => true
+            }
         },
         globalState,
-        setGlobalState,
+        setGlobalState
     };
 }
