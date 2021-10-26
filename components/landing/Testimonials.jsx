@@ -4,17 +4,17 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { profile, star } from '../../public/assets/landing/testimonials/profile.js';
 
-export const Testimonials = ({ title, subTitle, cards, image }) => (
+export const Testimonials = ({ title, subTitle, cards, i }) => (
     <Wrapper>
         <Top>
             <Title>{title}</Title>
             <SubTitle>{subTitle}</SubTitle>
         </Top>
         <Cards>
-            {cards.map(({ name, role, content, rating, img }) => (
+            {cards.map(({ name, role, content, rating, image }) => (
                 <Testimonial key={name}>
                     <ProfilePhoto>
-                        <Image src={profile[img]} width={200} height={200} />
+                        <Image src={profile[image]} width={200} height={200} />
                     </ProfilePhoto>
                     <About>
                         <Name>{name}</Name>
