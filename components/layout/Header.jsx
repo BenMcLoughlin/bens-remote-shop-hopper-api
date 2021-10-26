@@ -10,7 +10,7 @@ export const Header = () => {
     const { data: session, status } = useSession();
     const loading = status === 'loading';
 
-    const admins = ['Moseley', 'McLoughlin', 'Lancaster'];
+    const admins = [ 'Moseley', 'McLoughlin', 'Lancaster' ];
 
     const isAdmin = admins.some((d) => session?.user.name?.includes(d));
 
@@ -24,6 +24,8 @@ export const Header = () => {
             <Right>
                 <LinkText title={'Featured'} />
                 <LinkText title={'About'} />
+                <LinkText title={'Manager'} />
+                <LinkText title={'Review'} />
                 {isAdmin && (
                     <>
                         <LinkText title={'Manager'} />
@@ -52,7 +54,7 @@ export const Header = () => {
 
 export default Header;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
     height: 7rem;

@@ -25,12 +25,12 @@ const Landing = ({ welcome, whoWeAre, howItWorks, callout1, callout2, testimonia
 );
 
 Landing.propTypes = {
-    welcome: PropTypes.string,
-    whoWeAre: PropTypes.string,
-    howItWorks: PropTypes.string,
-    callout: PropTypes.string,
-    testimonials: PropTypes.string,
-    news: PropTypes.string,
+    welcome: PropTypes.object,
+    whoWeAre: PropTypes.object,
+    howItWorks: PropTypes.object,
+    callout: PropTypes.object,
+    testimonials: PropTypes.object,
+    news: PropTypes.object,
     callout1: PropTypes.func,
     callout2: PropTypes.func
 };

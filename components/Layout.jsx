@@ -9,7 +9,6 @@ import Header from '../components/layout/Header';
 
 const Layout = (props) => {
     const router = useRouter();
-
     const isActive = (pathname) => router.pathname === pathname;
 
     return (
@@ -40,7 +39,6 @@ const Layout = (props) => {
             <div className="layout">{props.children}</div>
             <style jsx>{`
                 .layout {
-                    width: 100vw;
                     height: 100%;
                 }
             `}</style>

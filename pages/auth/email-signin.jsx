@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { getCsrfToken } from 'next-auth/react';
 
 export default function SignIn({ csrfToken }) {
@@ -17,6 +19,6 @@ export default function SignIn({ csrfToken }) {
 export async function getServerSideProps(context) {
     const csrfToken = await getCsrfToken(context);
     return {
-        props: { csrfToken },
+        props: { csrfToken }
     };
 }
