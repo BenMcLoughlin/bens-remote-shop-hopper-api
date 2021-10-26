@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import Layout from 'components/Layout';
 import NavbarLeft from 'components/NavbarLeft';
-import Sidebar from './Sidebar';
 import SiteHostList from './SiteHostList';
+import Sidebar from './Sidebar';
 
 import { sizes } from 'styles/theme';
 const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
