@@ -17,7 +17,7 @@ const Board = () => {
     const [ columnData, setColumnData ] = useState([]);
     const [ defaultFilter, setDefaultFilter ] = useState({
         column: 'buckets', 
-        metric: 'Bohemian'
+        metric: 'Beauty'
     });
     const mountedRef = useRef(true);
 
@@ -26,14 +26,14 @@ const Board = () => {
         const _fetchDefault = async () => {
             const success = await globalActions.apiRequests.getColumn("buckets");
 
-            if (success) {
+            if (success.result) {
                 await setColumnData(success.result);
 
-                console.log('success.result:', success.result[1].value);
+                // console.log('success.result:', success.result[1].value); todo
                 
                 await setDefaultFilter({
                     column: 'buckets', 
-                    metric: columnData[1]?.value
+                    metric: columnData[0]?.value
                 });
 
                 setLoading(false);

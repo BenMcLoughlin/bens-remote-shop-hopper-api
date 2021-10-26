@@ -7,13 +7,13 @@ import NavbarLeft from 'components/NavbarLeft';
 import Sidebar from './Sidebar';
 import Layout from 'components/Layout';
 import Counter from "components/Counter";
-import SelectShop from './SelectShop';
 import * as shopsLists from 'mock/shopsLists';
 
 import { camelCase, capitalize } from 'utils/strings';
 import { updateMetrics } from 'requests/updateMetrics';
 import useGlobal from "globalState/store";
-import MetricsDisplay from './MetricsDisplay';
+import SelectShop from 'components/manager/SelectShop';
+import MetricsDisplay from 'components/manager/MetricsDisplay';
 
 import { sizes } from 'styles/theme';
 const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
