@@ -6,11 +6,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 
+
 export const Header = () => {
     const { data: session, status } = useSession();
     const loading = status === 'loading';
 
-    const admins = [ 'Moseley', 'McLoughlin', 'Lancaster' ];
+    const admins = ['Moseley', 'McLoughlin', 'Lancaster'];
 
     const isAdmin = admins.some((d) => session?.user.name?.includes(d));
 
@@ -36,13 +37,8 @@ export const Header = () => {
                 )}
                 {!session && (
                     <>
-                        <Link href="/auth/signup">
-                            <HeaderButton href="/auth/signup">Sign up</HeaderButton>
-                        </Link>
-
-                        <Link href="/auth/login">
-                            <HeaderButton href="/auth/login">Log In</HeaderButton>
-                        </Link>
+                        <Button href="/auth/signup" title="Sign up" radius="round" />
+                        <Button href="/auth/login" title="Log In" radius="round" />
                     </>
                 )}
                 {session && (
@@ -66,12 +62,13 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     height: 7rem;
+    width: 100%;
 `;
 
 const Left = styled.div`
     display: flex;
     justify-content: left;
-    margin-left: 55px;
+    margin-left: 10rem;
     cursor: pointer;
     @media (max-width: 600px) {
         position: absolute;
@@ -82,13 +79,17 @@ const Left = styled.div`
 const Logo = styled.div`
     width: 10rem;
     margin-top: 1rem;
+    display: flex;
+    justify-content: flex-start;
 `;
 const Right = styled.div`
     display: flex;
     align-items: center;
-    margin-right: 25px;
+    margin-right: 20.05rem;
     justify-content: flex-end;
     flex-direction: row;
+    width: 40%;
+    gap: 3rem;
 `;
 const HeaderButton = styled.p`
     cursor: pointer;
@@ -99,11 +100,11 @@ const HeaderButton = styled.p`
     padding: 0 1rem 0 1rem;
     justify-content: center;
     align-items: center;
-    background: ${ (props) => props.theme.color.backgroundThemeGreen };
-    ${ (p) => p.theme.gradient[p.gradient] };
+    background: ${(props) => props.theme.color.backgroundThemeGreen};
+    ${(p) => p.theme.gradient[p.gradient]};
     color: white;
     &:hover {
-        background: ${ (props) => props.theme.color.dark };
+        background: ${(props) => props.theme.color.dark};
     }
     transition: all 0.6s ease;
 `;

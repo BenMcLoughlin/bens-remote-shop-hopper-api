@@ -6,12 +6,12 @@ import styled from 'styled-components';
 import NavbarLeft from 'components/NavbarLeft';
 import Sidebar from './Sidebar';
 import Layout from 'components/Layout';
-import Counter from "components/Counter";
+import Counter from 'components/Counter';
 import * as shopsLists from 'mock/shopsLists';
 
 import { camelCase, capitalize } from 'utils/strings';
 import { updateMetrics } from 'requests/updateMetrics';
-import useGlobal from "globalState/store";
+import useGlobal from 'globalState/store';
 import SelectShop from 'components/manager/SelectShop';
 import MetricsDisplay from 'components/manager/MetricsDisplay';
 
@@ -20,36 +20,36 @@ const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
 
 const SiteHost = () => {
     const router = useRouter();
-    const [ globalState, globalActions ] = useGlobal();
+    const [globalState, globalActions] = useGlobal();
     const { status } = globalState;
     const { pid } = router.query;
 
-    const [ uploadedResult, setUpLoaded ] = useState(false);
-    const [ siteHost, setSelectedSiteHost ] = useState('shopify');
-    const [ businessName, setSelectedBusinessName ] = useState('');
-    const [ domain, setSelectedDomain ] = useState('');
+    const [uploadedResult, setUpLoaded] = useState(false);
+    const [siteHost, setSelectedSiteHost] = useState('shopify');
+    const [businessName, setSelectedBusinessName] = useState('');
+    const [domain, setSelectedDomain] = useState('');
 
     const city = 'kelowna';
     const shopsList = shopsLists[city];
 
     useEffect(() => {
         setUpLoaded(globalState.counter.result);
-    }, [ globalState.counter.result ]);
+    }, [globalState.counter.result]);
 
     useEffect(() => {
         const selectedShop = shopsList.find((d) => d.business_name === businessName);
         selectedShop && setSelectedDomain(selectedShop.domain);
-    }, [ businessName ]);
+    }, [businessName]);
 
     const selected = {
         siteHost: camelCase(siteHost),
         businessName: businessName,
-        domain
+        domain,
     };
 
     const set = {
         selectedSiteHost: (v) => setSelectedSiteHost(v),
-        selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v)
+        selectedBusinessName: (v) => setSelectedBusinessName(v === businessName ? '' : v),
     };
 
     const _cancel = async () => {
@@ -91,17 +91,30 @@ const SiteHost = () => {
                 <Sidebar />
 
                 <Title>
-                    <h2 style={{ color: '#fff', margin: 10 }}>{`${ capitalize(pid || "not working") } Database Manager`} </h2>
+                    <h2 style={{ color: '#fff', margin: 10 }}>
+                        {`${capitalize(pid || 'not working')} Database Manager`}{' '}
+                    </h2>
                     <Counter />
                 </Title>
-                {
-                    uploadedResult && 
-                        <Results>
-                            {(status && globalState.counter.loading) && <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>}
-                            {uploadedResult.map((result) => <p key={result.result} style={result.status === 422 ? { color: 'red', textAlign: 'right' } : { textAlign: 'right' }}>{result.result}</p>)
-                            }
-                        </Results>
-                }
+                {uploadedResult && (
+                    <Results>
+                        {status && globalState.counter.loading && (
+                            <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>
+                        )}
+                        {uploadedResult.map((result) => (
+                            <p
+                                key={result.result}
+                                style={
+                                    result.status === 422
+                                        ? { color: 'red', textAlign: 'right' }
+                                        : { textAlign: 'right' }
+                                }
+                            >
+                                {result.result}
+                            </p>
+                        ))}
+                    </Results>
+                )}
 
                 <SiteHostSection>
                     <MetricsDisplay
@@ -109,14 +122,14 @@ const SiteHost = () => {
                         isHost
                         loading={globalState.counter.loading}
                         cancel={_cancel}
-                        buttonTitle={`Load All ${ selected.siteHost } Shops`}
+                        buttonTitle={`Load All ${selected.siteHost} Shops`}
                         buttonClick={() => {
                             set.selectedBusinessName('');
 
                             _updateAll({
                                 siteHost: selected.siteHost,
                                 businessName: null,
-                                domain: null
+                                domain: null,
                             });
                         }}
                         disabled={Boolean(selected.businessName)}
@@ -124,19 +137,18 @@ const SiteHost = () => {
                 </SiteHostSection>
 
                 <ShopSection>
-                    {
-                        selected.businessName &&
-                            <MetricsDisplay
-                                headerTitle={selected.businessName}
-                                loading={globalState.counter.loading}
-                                cancel={_cancel}
-                                buttonTitle={`Load ${ selected.businessName }`}
-                                buttonClick={() => {
-                                    _updateSingle(selected);
-                                }}
-                                disabled={false}
-                            />
-                    }
+                    {selected.businessName && (
+                        <MetricsDisplay
+                            headerTitle={selected.businessName}
+                            loading={globalState.counter.loading}
+                            cancel={_cancel}
+                            buttonTitle={`Load ${selected.businessName}`}
+                            buttonClick={() => {
+                                _updateSingle(selected);
+                            }}
+                            disabled={false}
+                        />
+                    )}
                 </ShopSection>
 
                 <SelectShop
@@ -151,12 +163,12 @@ const SiteHost = () => {
 };
 
 export const Page = styled.div`
-    padding: 25px 32px 50px ${ paddingLeft }px;
+    padding: 20.05rem 32px 50px ${paddingLeft}px;
     @media (max-width: 1100px) {
-        padding: 25px 20px 50px ${ paddingLeft - 20 }px;
+        padding: 20.05rem 0.2rem 50px ${paddingLeft - 20}px;
     }
     @media (max-width: 999px) {
-        padding-left: ${ paddingLeft - 20 - sizes.secondarySideBarWidth }px;
+        padding-left: ${paddingLeft - 20 - sizes.secondarySideBarWidth}px;
     }
 `;
 
@@ -170,7 +182,7 @@ const Title = styled.div`
     background: #485056;
     border-radius: 4px;
     @media (max-width: 680px) {
-        padding: 5px;
+        padding: 0.05rem;
         width: unset;
         flex-direction: column;
         align-items: flex-end;
@@ -189,7 +201,7 @@ const ShopSection = styled.div`
     display: flex;
     justify-content: flex-end;
     min-height: 4rem;
-    ${ (p) => p.theme.gradient.secondary };
+    ${(p) => p.theme.gradient.secondary};
 `;
 const Results = styled.div`
     display: flex;
@@ -205,7 +217,7 @@ const Results = styled.div`
 SiteHost.propTypes = {
     shopsList: PropTypes.array,
     set: PropTypes.object,
-    selected: PropTypes.object
+    selected: PropTypes.object,
 };
 
 export default SiteHost;

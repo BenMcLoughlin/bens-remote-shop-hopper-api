@@ -42,5 +42,5 @@ const ImageWrapper = styled.div`
 const Left = styled.div`
     flex: 1;
     display: flex;
-    padding: 20px;
+    padding: 0.2rem;
 `;

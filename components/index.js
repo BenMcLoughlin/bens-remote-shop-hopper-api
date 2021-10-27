@@ -6,6 +6,9 @@ export { LinkText } from './buttons/LinkText';
 export { LoginButton } from './buttons/LoginButton';
 export { ScrollUp } from './buttons/ScrollUp';
 
+
+// developer
+export { DevTools } from 'components/devoloper';
 // cards
 
 // export { Article } from './cards/Article';

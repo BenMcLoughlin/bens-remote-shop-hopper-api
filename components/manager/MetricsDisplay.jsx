@@ -8,29 +8,34 @@ import { startCase } from 'utils/strings';
 import { Button } from 'components/buttons/Button';
 import { updateMetrics } from 'requests/updateMetrics';
 
-const MetricsDisplay = ({ headerTitle, buttonClick, cancel, isHost, loading, buttonTitle, disabled }) => {
-    const [ globalState, globalActions ] = useGlobal();
-    const [ totalItems, setTotalItems ] = useState(0);
-    const [ date, setDate ] = useState('');
+const MetricsDisplay = ({
+    headerTitle,
+    buttonClick,
+    cancel,
+    isHost,
+    loading,
+    buttonTitle,
+    disabled,
+}) => {
+    const [globalState, globalActions] = useGlobal();
+    const [totalItems, setTotalItems] = useState(0);
+    const [date, setDate] = useState('');
 
     useEffect(() => {
         updateMetrics(isHost, headerTitle).then((data) => {
             setTotalItems(data.result);
         });
-
-    }, [ headerTitle, globalState.status ]);
+    }, [headerTitle, globalState.status]);
 
     useEffect(() => {
         const _getShopStatus = async () => {
             const shops = await globalActions.shops.shopStatuses();
-            setDate("NULL");
+            setDate('NULL');
 
             if (shops) {
                 shops.map((d) => {
-                    if ((d.business_name === headerTitle) || isHost) {
-                        return (
-                            setDate(d.updated_at)
-                        );
+                    if (d.business_name === headerTitle || isHost) {
+                        return setDate(d.updated_at);
                     }
 
                     return true;
@@ -39,17 +44,13 @@ const MetricsDisplay = ({ headerTitle, buttonClick, cancel, isHost, loading, but
         };
 
         _getShopStatus();
-    }, [ headerTitle, globalState.status ]);
+    }, [headerTitle, globalState.status]);
 
     return (
         <Wrapper>
             <HeaderRow>
-                {!isHost &&
-                    <HeaderTitle>
-                        {startCase(headerTitle)}
-                    </HeaderTitle>
-                }
-                {!disabled &&
+                {!isHost && <HeaderTitle>{startCase(headerTitle)}</HeaderTitle>}
+                {!disabled && (
                     <Button
                         loading={loading}
                         title={buttonTitle}
@@ -57,7 +58,7 @@ const MetricsDisplay = ({ headerTitle, buttonClick, cancel, isHost, loading, but
                         disabled={disabled}
                         backgroundColor={isHost ? '#1469eb' : '#25E9AF'}
                     />
-                }
+                )}
             </HeaderRow>
             <Row>
                 <Column>
@@ -67,7 +68,9 @@ const MetricsDisplay = ({ headerTitle, buttonClick, cancel, isHost, loading, but
 
                 <Column>
                     <Value>
-                        {moment(date).format("MM/DD hh:ssa") !== 'Invalid date' ? moment(date).format("MM/DD hh:ssa") : 'No record'}
+                        {moment(date).format('MM/DD hh:ssa') !== 'Invalid date'
+                            ? moment(date).format('MM/DD hh:ssa')
+                            : 'No record'}
                     </Value>
                     <NoOfItems>Last Update</NoOfItems>
                 </Column>
@@ -84,7 +87,7 @@ const Wrapper = styled.div`
 `;
 
 const HeaderTitle = styled.div`
-    font-size: 2.0rem;
+    font-size: 2rem;
     padding: 1rem;
     text-align: left;
     color: white;
@@ -117,7 +120,7 @@ const Row = styled.div`
     padding: 1rem;
     color: white;
     @media (max-width: 680px) {
-        padding: 5px;
+        padding: 0.05rem;
         width: unset;
         align-items: flex-end;
         flex-direction: column;
@@ -126,7 +129,7 @@ const Row = styled.div`
 `;
 
 const NoOfItems = styled.div`
-    padding: 20px;
+    padding: 0.2rem;
     font-size: 1rem;
     display: flex;
     align-items: center;
@@ -154,7 +157,7 @@ MetricsDisplay.propTypes = {
     buttonClick: PropTypes.func,
     isHost: PropTypes.bool,
     buttonTitle: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
 };
 
 export default MetricsDisplay;

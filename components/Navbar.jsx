@@ -1,4 +1,3 @@
-
 /* eslint-disable react/react-in-jsx-scope */
 import Link from 'next/link';
 
@@ -14,8 +13,8 @@ const Navbar = () => (
         <style jsx>
             {`
                 nav {
-                    margin: 10px auto 80px;
-                    padding: 10px 0;
+                    margin: 0.1rem auto 80px;
+                    padding: 0.1rem 0;
                     display: flex;
                     justify-content: flex-end;
                     align-items: flex-end;

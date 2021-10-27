@@ -4,138 +4,142 @@ import { color, font, mixin, zIndexValues } from 'styles/theme';
 import { Icon } from 'components/Icons';
 
 export const StyledSelect = styled.div`
-  position: relative;
-  border-radius: 4px;
-  cursor: pointer;
-  ${ font.size(14) }
-  ${ (props) => props.variant === 'empty' && `display: inline-block;` }
-  ${ (props) => props.variant === 'normal' &&
-    css`
-      width: 100%;
-      border: 1px solid ${ color.borderLightest };
-      background: ${ color.backgroundLightest };
-      transition: background 0.1s;
-      &:hover {
-        background: ${ color.backgroundLight };
-      }
-    ` }
+    position: relative;
+    border-radius: 4px;
+    cursor: pointer;
+    ${font.size(14)}
+    ${(props) => props.variant === 'empty' && `display: inline-block;`}
+  ${(props) =>
+        props.variant === 'normal' &&
+        css`
+            width: 100%;
+            border: 1px solid ${color.borderLightest};
+            background: ${color.backgroundLightest};
+            transition: background 0.1s;
+            &:hover {
+                background: ${color.backgroundLight};
+            }
+        `}
   &:focus {
-    outline: none;
-    ${ (props) => props.variant === 'normal' &&
-      css`
-        border: 1px solid ${ color.borderInputFocus };
-        box-shadow: 0 0 0 1px ${ color.borderInputFocus };
+        outline: none;
+        ${(props) =>
+            props.variant === 'normal' &&
+            css`
+        border: 1px solid ${color.borderInputFocus};
+        box-shadow: 0 0 0 1px ${color.borderInputFocus};
         background: #fff;
       }
-    ` }
-  }
-  ${ (props) => props.invalid &&
-    css`
-      &,
-      &:focus {
-        border: 1px solid ${ color.danger };
-        box-shadow: none;
-      }
-    ` }
+    `}
+    }
+    ${(props) =>
+        props.invalid &&
+        css`
+            &,
+            &:focus {
+                border: 1px solid ${color.danger};
+                box-shadow: none;
+            }
+        `}
 `;
 
 export const ValueContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  ${ (props) => props.variant === 'normal' &&
-    css`
-      min-height: 32px;
-      padding: 5px 5px 5px 10px;
-    ` }
+    display: flex;
+    align-items: center;
+    width: 100%;
+    ${(props) =>
+        props.variant === 'normal' &&
+        css`
+            min-height: 32px;
+            padding: 0.05rem 0.05rem 0.05rem 0.1rem;
+        `}
 `;
 
 export const ChevronIcon = styled.i`
-  margin-left: auto;
-  font-size: 18px;
-  color: ${ color.textMedium };
+    margin-left: auto;
+    font-size: 18px;
+    color: ${color.textMedium};
 `;
 
 export const Placeholder = styled.div`
-  color: ${ color.textLight };
+    color: ${color.textLight};
 `;
 
 export const ValueMulti = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  ${ (props) => props.variant === 'normal' && `padding-top: 5px;` }
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    ${(props) => props.variant === 'normal' && `padding-top: 0.05rem;`}
 `;
 
 export const ValueMultiItem = styled.div`
-  margin: 0 5px 5px 0;
-  ${ mixin.tag() }
+    margin: 0 0.05rem 0.05rem 0;
+    ${mixin.tag()}
 `;
 
 export const AddMore = styled.div`
-  display: inline-block;
-  margin-bottom: 3px;
-  padding: 3px 0;
-  ${ font.size(12.5) }
-  ${ mixin.link() }
+    display: inline-block;
+    margin-bottom: 3px;
+    padding: 3px 0;
+    ${font.size(12.5)}
+    ${mixin.link()}
   i {
-    margin-right: 3px;
-    vertical-align: middle;
-    font-size: 14px;
-  }
+        margin-right: 3px;
+        vertical-align: middle;
+        font-size: 14px;
+    }
 `;
 
 export const Dropdown = styled.div`
-  z-index: ${ zIndexValues.dropdown };
-  position: absolute;
-  top: 100%;
-  left: 0;
-  border-radius: 0 0 4px 4px;
-  background: #fff;
-  ${ mixin.boxShadowDropdown }
-  ${ (props) => (props.width ? `width: ${ props.width }px;` : 'width: 100%;') }
+    z-index: ${zIndexValues.dropdown};
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-radius: 0 0 4px 4px;
+    background: #fff;
+    ${mixin.boxShadowDropdown}
+    ${(props) => (props.width ? `width: ${props.width}px;` : 'width: 100%;')}
 `;
 
 export const DropdownInput = styled.input`
-  padding: 10px 14px 8px;
-  width: 100%;
-  border: none;
-  color: ${ color.textDarkest };
-  background: none;
-  &:focus {
-    outline: none;
-  }
+    padding: 0.1rem 14px 8px;
+    width: 100%;
+    border: none;
+    color: ${color.textDarkest};
+    background: none;
+    &:focus {
+        outline: none;
+    }
 `;
 
 export const ClearIcon = styled.i`
-  position: absolute;
-  top: 4px;
-  right: 7px;
-  padding: 5px;
-  font-size: 16px;
-  color: ${ color.textMedium };
-  ${ mixin.clickable }
+    position: absolute;
+    top: 4px;
+    right: 7px;
+    padding: 0.05rem;
+    font-size: 16px;
+    color: ${color.textMedium};
+    ${mixin.clickable}
 `;
 
 export const Options = styled.div`
-  max-height: 200px;
-  ${ mixin.scrollableY };
-  ${ mixin.customScrollbar() };
+    max-height: 200px;
+    ${mixin.scrollableY};
+    ${mixin.customScrollbar()};
 `;
 
 export const Option = styled.div`
-  padding: 8px 14px;
-  word-break: break-word;
-  cursor: pointer;
-  &:last-of-type {
-    margin-bottom: 8px;
-  }
-  &.jira-select-option-is-active {
-    background: ${ color.backgroundLightPrimary };
-  }
+    padding: 8px 14px;
+    word-break: break-word;
+    cursor: pointer;
+    &:last-of-type {
+        margin-bottom: 8px;
+    }
+    &.jira-select-option-is-active {
+        background: ${color.backgroundLightPrimary};
+    }
 `;
 
 export const OptionsNoResults = styled.div`
-  padding: 5px 15px 15px;
-  color: ${ color.textLight };
+    padding: 0.05rem 10.05rem 10.05rem;
+    color: ${color.textLight};
 `;

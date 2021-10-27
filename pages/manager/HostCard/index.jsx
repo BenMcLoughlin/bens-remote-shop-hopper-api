@@ -7,7 +7,7 @@ import { color, font, mixin } from 'styles/theme';
 
 const propTypes = {
     businessName: PropTypes.string,
-    openPage: PropTypes.func
+    openPage: PropTypes.func,
 };
 
 const HostCard = ({ businessName, openPage }) => (
@@ -17,9 +17,10 @@ const HostCard = ({ businessName, openPage }) => (
             <Title>{businessName}</Title>
             <Bottom>
                 <Details>
-                        We will add some metrics and interesting info about each host type here as time goes on
+                    We will add some metrics and interesting info about each host type here as time
+                    goes on
                 </Details>
-                        
+
                 <Border />
             </Bottom>
         </Card>
@@ -33,23 +34,23 @@ export const Block = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 10px;
+    padding: 0.1rem;
     border-radius: 3px;
     background: #fff;
     box-shadow: 0px 1px 2px 0px rgba(9, 30, 66, 0.25);
     transition: background 0.1s;
-    ${ mixin.clickable }
-    margin: 5px;
+    ${mixin.clickable}
+    margin: 0.05rem;
     &:hover {
-        background: ${ color.backgroundLight };
+        background: ${color.backgroundLight};
     }
 `;
 
 export const Title = styled.p`
     padding-bottom: 11px;
-    ${ font.size(15) }
+    ${font.size(15)}
     @media (max-width: 1100px) {
-        ${ font.size(14.5) }
+        ${font.size(14.5)}
     }
 `;
 
@@ -62,18 +63,18 @@ export const Bottom = styled.div`
 `;
 
 export const Star = styled.p`
-    transform: scale(3, 3) translate(30px, -10px);
+    transform: scale(3, 3) translate(30px, -0.1rem);
 `;
 
 export const Details = styled.p`
-    ${ font.size(11) }
+    ${font.size(11)}
     display: flex;
     flex-wrap: wrap;
 `;
 
 export const Border = styled.div`
-    border-bottom: 1px solid ${ color.backgroundLight };
-    margin: 5px;
+    border-bottom: 1px solid ${color.backgroundLight};
+    margin: 0.05rem;
     width: 100%;
 `;
 

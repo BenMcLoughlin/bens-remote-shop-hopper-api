@@ -13,10 +13,11 @@ export const FormText = ({
     errors,
     fields
 }) => {
-    const [ blurred, setBlurred ] = useState(false);
-    const [ wasValid, setWasValid ] = useState(false);
-    const [ error, setError ] = useState(false);
-
+    const [blurred, setBlurred] = useState(false);
+    const [wasValid, setWasValid] = useState(false);
+    const [error, setError] = useState(false);
+    console.log('handleErrors: ', handleErrors);
+    
     useEffect(() => {
         if (blurred || wasValid) {
             const { isError, message } = handleErrors(value, fields);
@@ -26,7 +27,7 @@ export const FormText = ({
             setError(false);
             setWasValid(true);
         }
-    }, [ value, handleErrors, blurred, error, wasValid ]);
+    }, [value, handleErrors, blurred, error, wasValid]);
 
     return (
         <Wrapper>
@@ -61,19 +62,19 @@ const Input = styled.input`
     top: 0.5rem;
     height: 4.3rem;
     padding: 0.5rem 0 0.5rem 2rem;
-    font-size: ${ (props) => props.theme.font.small };
+    font-size: ${(props) => props.theme.font.small};
     position: relative;
     background: white;
     border: none;
-    color: ${ (props) => props.theme.color.darkGrey };
+    color: ${(props) => props.theme.color.darkGrey};
     font-weight: bold;
-    border-radius: 5px;
-    border: 1px solid ${ (props) => props.theme.color.contrast };
+    border-radius: 0.05rem;
+    border: 1px solid ${(props) => props.theme.color.contrast};
     z-index: 2;
     &:focus {
         outline: none;
-        border: 1px solid ${ (props) => props.theme.color.green };
-        color: ${ (props) => props.theme.color.darkGrey };
+        border: 1px solid ${(props) => props.theme.color.green};
+        color: ${(props) => props.theme.color.darkGrey};
     }
 `;
 
@@ -98,16 +99,16 @@ const Label = styled.label`
   left 3rem;
   cursor: text;
   display: flex;
-  font-size: ${ (props) => props.theme.font.small };
+  font-size: ${(props) => props.theme.font.small};
   justify-content: center;
         width: auto;
       padding: .5rem;
   align-items: center;
-    ${ Input }:focus ~ & {
-   ${ moveLabelUp }
+    ${Input}:focus ~ & {
+   ${moveLabelUp}
 
   };
-  ${ (props) => props.textValue.toString().length > 0 && moveLabelUp };
+  ${(props) => props.textValue.toString().length > 0 && moveLabelUp};
   transition: all .5s ease;
 `;
 
@@ -125,10 +126,10 @@ const Error = styled.div`
     margin-top: -0.2rem;
     padding: 1rem;
     text-align: center;
-    color: ${ (p) => (p.error ? '#F73D28' : 'none') };
+    color: ${(p) => (p.error ? '#F73D28' : 'none')};
     font-weight: bold;
     z-index: 3;
     position: relative;
-    font-size: ${ (p) => p.theme.font.smallest };
+    font-size: ${(p) => p.theme.font.smallest};
     transition: all 0.4s ease;
 `;

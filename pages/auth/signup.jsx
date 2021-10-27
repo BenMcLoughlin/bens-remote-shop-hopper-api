@@ -61,9 +61,8 @@ const SignUp = (props) => {
                 </SubTitle>
                 <Inputs>
                     {Object.values(fields).map((field) => (
-                        // todo
                         <FormText
-                            {...props}
+                            {...field}
                             key={field}
                             handleChange={(e) => setField(e)}
                             errors={errors}
@@ -83,10 +82,11 @@ const SignUp = (props) => {
                         oAuth={'none'}
                         label={'sign Up'}
                         valid={noErrors}
-                        handleChange={() => onSubmit({
-                            email: fields.email.value,
-                            password: fields.password.value
-                        })
+                        handleChange={() =>
+                            onSubmit({
+                                email: fields.email.value,
+                                password: fields.password.value
+                            })
                         }
                     />
                     <Disclaimer>

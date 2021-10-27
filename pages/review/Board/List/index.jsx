@@ -7,32 +7,35 @@ import { ArrowRightShort } from '@styled-icons/bootstrap/ArrowRightShort';
 
 import Product from 'components/Product';
 import { color, font, mixin } from 'styles/theme';
-import incrementProduct from "requests/incrementProduct";
-import useGlobal from "globalState/store";
+import incrementProduct from 'requests/incrementProduct';
+import useGlobal from 'globalState/store';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 
 const propTypes = {
     status: PropTypes.string,
-    products: PropTypes.array.isRequired
+    products: PropTypes.array.isRequired,
 };
 
 const defaultProps = {
-    products: []
+    products: [],
 };
 
 const BoardList = ({ products }) => {
-    const [ globalState, globalActions ] = useGlobal();
-    const [ loading, setLoading ] = useState(false);
-    const [ currentQuery, setCurrentQuery ] = useState('');
+    const [globalState, globalActions] = useGlobal();
+    const [loading, setLoading] = useState(false);
+    const [currentQuery, setCurrentQuery] = useState('');
     const mountedRef = useRef(true);
 
     useEffect(() => {
-        mountedRef.current && setCurrentQuery(`${ globalState.products.query.column } : ${ globalState.products.query.metric }`);
+        mountedRef.current &&
+            setCurrentQuery(
+                `${globalState.products.query.column} : ${globalState.products.query.metric}`
+            );
 
         return () => {
             mountedRef.current = false;
         };
-    }, [ globalState.products.query ]);
+    }, [globalState.products.query]);
 
     const _incrementProduct = async (id) => {
         await incrementProduct(id);
@@ -56,7 +59,7 @@ const BoardList = ({ products }) => {
 
     const formatProductsCount = () => {
         if (products.length !== globalState.products.cursor) {
-            return `${ products.length } of ${ globalState.products.cursor }`;
+            return `${products.length} of ${globalState.products.cursor}`;
         }
 
         return products.length;
@@ -65,59 +68,56 @@ const BoardList = ({ products }) => {
     return (
         <>
             <Title>
-                {currentQuery}  
+                {currentQuery}
                 <ProductsCount>: {formatProductsCount()} Items</ProductsCount>
             </Title>
             <ButtonsWrapper>
-                {
-                    globalState.products.cursor > products.length ?
-                        <Icon onClick={_prevPage}>
-                            <ArrowLeftShort />
-                        </Icon>
-                        :
-                        <div></div>
-                }
+                {globalState.products.cursor > products.length ? (
+                    <Icon onClick={_prevPage}>
+                        <ArrowLeftShort />
+                    </Icon>
+                ) : (
+                    <div></div>
+                )}
                 <Icon onClick={_nextPage}>
-                    <ArrowRightShort /> 
+                    <ArrowRightShort />
                 </Icon>
             </ButtonsWrapper>
             <List>
-                {
-                    loading ?
-                        <Image src={loaderGif} className="loading" width={800} height={600} />
-                        :
-                        <>
-                            {products.map((product, index) => (
-                                <Product
-                                    key={product.id}
-                                    id={product.id}
-                                    businessName={product.business_name}
-                                    index={index}
-                                    src={product.images[0]?.src}
-                                    title={product.title}
-                                    rating={product.rating}
-                                    price={(product.original_price / 100).toFixed(2)}
-                                    compareAtPrice={(product.original_price / 100).toFixed(2)}
-                                    tags={product.tags}
-                                    buckets={product.buckets}
-                                    incrementProduct={_incrementProduct}
-                                />
-                            ))}
-                            <ButtonsWrapper>
-                                {
-                                    globalState.products.cursor > products.length ?
-                                        <Icon onClick={_prevPage}>
-                                            <ArrowLeftShort />
-                                        </Icon>
-                                        :
-                                        <div></div>
-                                }
-                                <Icon onClick={_nextPage}>
-                                    <ArrowRightShort /> 
+                {loading ? (
+                    <Image src={loaderGif} className="loading" width={800} height={600} />
+                ) : (
+                    <>
+                        {products.map((product, index) => (
+                            <Product
+                                key={product.id}
+                                id={product.id}
+                                businessName={product.business_name}
+                                index={index}
+                                src={product.images[0]?.src}
+                                title={product.title}
+                                rating={product.rating}
+                                price={(product.original_price / 100).toFixed(2)}
+                                compareAtPrice={(product.original_price / 100).toFixed(2)}
+                                tags={product.tags}
+                                buckets={product.buckets}
+                                incrementProduct={_incrementProduct}
+                            />
+                        ))}
+                        <ButtonsWrapper>
+                            {globalState.products.cursor > products.length ? (
+                                <Icon onClick={_prevPage}>
+                                    <ArrowLeftShort />
                                 </Icon>
-                            </ButtonsWrapper>
-                        </>
-                }
+                            ) : (
+                                <div></div>
+                            )}
+                            <Icon onClick={_nextPage}>
+                                <ArrowRightShort />
+                            </Icon>
+                        </ButtonsWrapper>
+                    </>
+                )}
             </List>
         </>
     );
@@ -144,32 +144,32 @@ export const List = styled.div`
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    margin: 0 5px;
+    margin: 0 0.05rem;
     min-height: 400px;
     overflow-y: auto;
     height: 100vh;
     width: 100%;
     border-radius: 3px;
-    background: ${ color.backgroundLightest };
-    padding: 10px 8px 300px 8px;
+    background: ${color.backgroundLightest};
+    padding: 0.1rem 8px 300px 8px;
 `;
 
 export const Title = styled.div`
-    padding: 13px 10px 17px;
+    padding: 13px 0.1rem 17px;
     text-transform: uppercase;
-    color: ${ color.textMedium };
-    ${ font.size(12.5) };
-    ${ mixin.truncateText }
+    color: ${color.textMedium};
+    ${font.size(12.5)};
+    ${mixin.truncateText}
 `;
 
 export const ProductsCount = styled.span`
     text-transform: lowercase;
-    ${ font.size(13) };
+    ${font.size(13)};
 `;
 
 export const Products = styled.div`
     height: 100%;
-    padding: 0 5px;
+    padding: 0 0.05rem;
 `;
 
 BoardList.propTypes = propTypes;

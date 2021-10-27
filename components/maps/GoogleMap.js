@@ -4,7 +4,7 @@ import {
     withScriptjs,
     GoogleMap as _GoogleMap,
     Marker,
-    InfoWindow
+    InfoWindow,
 } from 'react-google-maps';
 import * as mockLocations from '../../mock/locations.json';
 import mapStyles from './mapStyles';
@@ -13,13 +13,13 @@ import useGlobal from '../../globalState/store';
 import styled from 'styled-components';
 
 export function GoogleMap() {
-    const [ globalState, globalActions ] = useGlobal();
+    const [globalState, globalActions] = useGlobal();
 
     const { address } = globalState.user.location;
 
     const { setGlobalState } = globalActions;
 
-    const [ error, setError ] = useState(false);
+    const [error, setError] = useState(false);
     console.log('error: ', error);
     const handleSelect = async (value) => {
         const results = await geocodeByAddress(value);
@@ -29,7 +29,7 @@ export function GoogleMap() {
         const tooFar = (min, max, distance) => Math.abs(max - min) >= distance;
         const kelownaLat = 49.8879519;
         const kelownaLng = -119.4960106;
-        if (tooFar(kelownaLat, lat, 0.6) || tooFar(kelownaLng, lng, 0.3)) { 
+        if (tooFar(kelownaLat, lat, 0.6) || tooFar(kelownaLng, lng, 0.3)) {
             setError(true);
         }
 
@@ -50,7 +50,7 @@ export function GoogleMap() {
                         <Input
                             onFocus={() => setError(false)}
                             {...getInputProps({
-                                placeholder: 'Search Places ...'
+                                placeholder: 'Search Places ...',
                             })}
                         />
                         <Error error={error}>
@@ -84,7 +84,7 @@ export function GoogleMap() {
 }
 
 function UnwrappedMap() {
-    const [ globalState, globalActions ] = useGlobal();
+    const [globalState, globalActions] = useGlobal();
 
     const { lat, lng } = globalState.user.location;
 
@@ -122,19 +122,19 @@ const Input = styled.input`
     width: 36rem;
     height: 4.3rem;
     padding: 0.5rem 0 0.5rem 2rem;
-    font-size: ${ (props) => props.theme.font.small };
+    font-size: ${(props) => props.theme.font.small};
     position: relative;
     background: white;
     border: none;
-    color: ${ (props) => props.theme.color.darkGrey };
+    color: ${(props) => props.theme.color.darkGrey};
     font-weight: bold;
-    border-radius: 5px;
-    border: 1px solid ${ (props) => props.theme.color.contrast };
+    border-radius: 0.05rem;
+    border: 1px solid ${(props) => props.theme.color.contrast};
     z-index: 2;
     &:focus {
         outline: none;
-        border: 1px solid ${ (props) => props.theme.color.green };
-        color: ${ (props) => props.theme.color.darkGrey };
+        border: 1px solid ${(props) => props.theme.color.green};
+        color: ${(props) => props.theme.color.darkGrey};
     }
 `;
 
@@ -142,12 +142,12 @@ const Label = styled.label`
     height: 4rem;
     width: 20rem;
     width: auto;
-    font-size: ${ (p) => p.theme.font.mediumLarge };
+    font-size: ${(p) => p.theme.font.mediumLarge};
     font-family: 'Poppins', sans-serif;
     color: #12142d;
     height: 8rem;
     align-items: center;
-    ${ Input }:focus ~ & {
+    ${Input}:focus ~ & {
     } ;
 `;
 
@@ -156,7 +156,7 @@ const MapWrapper = styled.div`
     flex: 1;
     border: 1px solid grey;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 0.05rem;
     overflow: hidden;
 `;
 const Options = styled.div`
@@ -174,7 +174,7 @@ const Option = styled.div`
     width: 100%;
     padding: 0.5rem;
     padding-left: 0.9rem;
-    font-size: ${ (p) => p.theme.font.smallest };
+    font-size: ${(p) => p.theme.font.smallest};
     &:hover {
         background: #354e57;
         color: white;
@@ -182,8 +182,8 @@ const Option = styled.div`
     transition: all 0.2s ease;
     text-align: center;
     cursor: pointer;
-    background: ${ (p) => p.active && '#354e57' };
-    color: ${ (p) => p.selected && 'white' };
+    background: ${(p) => p.active && '#354e57'};
+    color: ${(p) => p.selected && 'white'};
 `;
 const Error = styled.div`
     height: 3rem;
@@ -193,9 +193,9 @@ const Error = styled.div`
     top: 14rem;
     padding: 1rem;
     text-align: center;
-    color: ${ (p) => (p.error ? '#F73D28' : 'transparent') };
+    color: ${(p) => (p.error ? '#F73D28' : 'transparent')};
     font-weight: bold;
     position: absolute;
-    font-size: ${ (p) => p.theme.font.smallest };
+    font-size: ${(p) => p.theme.font.smallest};
     transition: all 0.4s ease;
 `;

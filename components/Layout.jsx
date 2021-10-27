@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import styled, { css } from 'styled-components';
 
+
 import Header from '../components/layout/Header';
 
 const Layout = (props) => {

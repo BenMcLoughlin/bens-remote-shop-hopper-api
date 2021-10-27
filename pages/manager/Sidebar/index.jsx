@@ -15,14 +15,14 @@ import useGlobal from 'globalState/store';
 import logoSrc from 'public/assets/logos/shophopper-logo.svg';
 import { color, sizes, font, mixin, zIndexValues } from 'styles/theme';
 
-const ManagerSidebar = () => { 
+const ManagerSidebar = () => {
     const router = useRouter();
-    const [ globalState, globalActions ] = useGlobal();
+    const [globalState, globalActions] = useGlobal();
 
     const city = 'kelowna';
     const shopsList = shopsLists[city];
-    const siteHostList = [ ...new Set(shopsList.map((d) => d.site_host)) ].filter((d) => d);
-    
+    const siteHostList = [...new Set(shopsList.map((d) => d.site_host))].filter((d) => d);
+
     useEffect(() => {
         globalActions.siteHosts.setList(siteHostList);
     }, []);
@@ -31,7 +31,7 @@ const ManagerSidebar = () => {
         let Icon = iconType;
 
         return (
-            <Link key={index} href={`/manager/${ path }`}>
+            <Link key={index} href={`/manager/${path}`}>
                 <LinkItem isSelected={router.asPath.includes(path)}>
                     <>
                         <Icon size={30} />
@@ -57,9 +57,9 @@ const ManagerSidebar = () => {
             </Header>
             <Divider />
             <ul className="list">
-                {siteHostList.map((siteHost, index) => (
-                    renderLinkItem(startCase(siteHost), Shopify, `${ siteHost.toLowerCase() }`, index)
-                ))}
+                {siteHostList.map((siteHost, index) =>
+                    renderLinkItem(startCase(siteHost), Shopify, `${siteHost.toLowerCase()}`, index)
+                )}
             </ul>
             <Divider />
             {renderLinkItem('Etc...', Web, 'etc')}
@@ -76,18 +76,18 @@ const ManagerSidebar = () => {
 
 export const SidebarWrapper = styled.div`
     position: fixed;
-    z-index: ${ zIndexValues.navLeft - 1 };
+    z-index: ${zIndexValues.navLeft - 1};
     top: 0;
-    left: ${ sizes.appNavBarLeftWidth }px;
+    left: ${sizes.appNavBarLeftWidth}px;
     height: 100vh;
-    width: ${ sizes.secondarySideBarWidth }px;
+    width: ${sizes.secondarySideBarWidth}px;
     padding: 0 16px 24px;
-    background: ${ color.backgroundLightest };
-    border-right: 1px solid ${ color.borderLightest };
-    ${ mixin.scrollableY }
-    ${ mixin.customScrollbar() }
+    background: ${color.backgroundLightest};
+    border-right: 1px solid ${color.borderLightest};
+    ${mixin.scrollableY}
+    ${mixin.customScrollbar()}
     @media (max-width: 1100px) {
-        width: ${ sizes.secondarySideBarWidth - 10 }px;
+        width: ${sizes.secondarySideBarWidth - 10}px;
     }
     @media (max-width: 999px) {
         display: none;
@@ -104,16 +104,16 @@ export const Header = styled.div`
     font-size: 1.2rem;
     font-weight: bold;
     p {
-        margin-left: 10px;
+        margin-left: 0.1rem;
     }
 `;
 
 export const Time = styled.div`
-    font-size: .8rem;
+    font-size: 0.8rem;
 `;
 
 export const Update = styled.span`
-    font-size: .8rem;
+    font-size: 0.8rem;
     color: green;
 `;
 
@@ -128,13 +128,13 @@ export const Row = styled.div`
 `;
 
 export const UpdateColumn = styled.div`
-    display: flex;            
+    display: flex;
     flex-direction: column;
     justify-content: left;
     align-items: center;
     justify-content: space-between;
     background-color: #e7e7e7a6;
-    padding: .2rem;
+    padding: 0.2rem;
     width: 100%;
 `;
 
@@ -149,24 +149,24 @@ export const Info = styled.div`
 `;
 
 export const Texts = styled.div`
-    padding: 3px 0 0 10px;
+    padding: 3px 0 0 0.1rem;
 `;
 
 export const Name = styled.div`
-    color: ${ color.textDark };
-    ${ font.size(15) };
-    ${ font.medium };
+    color: ${color.textDark};
+    ${font.size(15)};
+    ${font.medium};
 `;
 
 export const Category = styled.div`
-    color: ${ color.textMedium };
-    ${ font.size(13) };
+    color: ${color.textMedium};
+    ${font.size(13)};
 `;
 
 export const Divider = styled.div`
     margin-top: 17px;
     padding-top: 18px;
-    border-top: 1px solid ${ color.borderLight };
+    border-top: 1px solid ${color.borderLight};
 `;
 
 export const LinkItem = styled.div`
@@ -178,23 +178,24 @@ export const LinkItem = styled.div`
     border-radius: 3px;
     cursor: pointer;
     i {
-        margin-right: 15px;
-        font-size: 20px; 
+        margin-right: 10.05rem;
+        font-size: 0.2rem;
     }
-    ${ (props) => props.isSelected &&
-    css`
-        color: ${ color.primary };
-        background: ${ color.backgroundLight };
-        i {
-        color: ${ color.primary };
-        }
-    ` }
+    ${(props) =>
+        props.isSelected &&
+        css`
+            color: ${color.primary};
+            background: ${color.backgroundLight};
+            i {
+                color: ${color.primary};
+            }
+        `}
 `;
 
 export const LinkText = styled.div`
     padding-top: 2px;
-    margin-left: 15px;
-    ${ font.size(14.7) };
+    margin-left: 10.05rem;
+    ${font.size(14.7)};
 `;
 
 export default ManagerSidebar;

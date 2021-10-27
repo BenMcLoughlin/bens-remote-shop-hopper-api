@@ -28,6 +28,8 @@ export const useSignUpForm = () => {
             handleErrors: (value, fields) => isValid.confirmPassword(value, fields)
         }
     };
+    
+console.log('password.label: ', initialState.password.label);
 
     const [ fields, setValue ] = useState(initialState);
 

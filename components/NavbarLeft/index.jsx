@@ -3,16 +3,16 @@ import { signOut } from 'next-auth/react';
 import styled from 'styled-components';
 import { TableDeleteRow } from '@styled-icons/fluentui-system-regular/TableDeleteRow';
 import { BoxArrowUpLeft } from '@styled-icons/bootstrap/BoxArrowUpLeft';
-import wipeProducts from "requests/wipeProducts";
+import wipeProducts from 'requests/wipeProducts';
 
 import useGlobal from 'globalState/store';
 import { font, sizes, color, mixin, zIndexValues } from 'styles/theme';
 
 const NavbarLeft = () => {
-    const [ globalState, globalActions ] = useGlobal();
+    const [globalState, globalActions] = useGlobal();
 
     const _wipeDatabase = async () => {
-        let response = confirm("Are you sure you want to delete ALL products from this database?");
+        let response = confirm('Are you sure you want to delete ALL products from this database?');
 
         if (response === true) {
             await wipeProducts({ request: 'DESTROY' });
@@ -68,16 +68,16 @@ const DeleteDb = styled.div`
 `;
 
 export const NavLeft = styled.aside`
-    z-index: ${ zIndexValues.navLeft };
+    z-index: ${zIndexValues.navLeft};
     position: fixed;
     top: 0;
     left: 0;
     overflow-x: hidden;
     height: 100vh;
-    width: ${ sizes.appNavBarLeftWidth }px;
-    background: ${ color.backgroundThemeGreen };
+    width: ${sizes.appNavBarLeftWidth}px;
+    background: ${color.backgroundThemeGreen};
     transition: all 0.1s;
-    ${ mixin.hardwareAccelerate }
+    ${mixin.hardwareAccelerate}
     &:hover {
         width: 200px;
         box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.6);
@@ -89,7 +89,7 @@ export const Bottom = styled.div`
     flex-direction: column;
     align-items: flex-end;
     position: absolute;
-    bottom: 20px;
+    bottom: 0.2rem;
     left: 0;
     width: 100%;
 `;
@@ -105,7 +105,7 @@ export const Item = styled.div`
     padding-left: 64px;
     color: #deebff;
     transition: color 0.1s;
-    ${ mixin.clickable }
+    ${mixin.clickable}
     &:hover {
         background: rgba(255, 255, 255, 0.1);
     }
@@ -123,9 +123,9 @@ export const ItemText = styled.div`
     text-transform: uppercase;
     transition: all 0.1s;
     transition-property: right, visibility, opacity;
-    ${ font.bold }
-    ${ font.size(12) }
-    ${ NavLeft }:hover & {
+    ${font.bold}
+    ${font.size(12)}
+    ${NavLeft}:hover & {
         right: 0;
         visibility: visible;
         opacity: 1;

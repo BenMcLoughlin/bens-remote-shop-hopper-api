@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export const PickSingleOption = ({ handleChange, value, name, options }) => {
     console.log('value: ', value);
-    const [ selected, setSelected ] = useState(value);
+    const [selected, setSelected] = useState(value);
 
     const { length } = options;
     const positionIndex = options.findIndex((d) => d === selected);
@@ -33,7 +33,7 @@ export const PickSingleOption = ({ handleChange, value, name, options }) => {
 const Wrapper = styled.div`
     height: 3.5rem;
     display: flex;
-    width: ${ (props) => props.length * 7 }rem;
+    width: ${(props) => props.length * 7}rem;
     justify-content: left;
     align-items: center;
     position: relative;
@@ -47,10 +47,10 @@ const Number = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: ${ (props) => props.theme.font.medium };
+    font-size: ${(props) => props.theme.font.medium};
     font-weight: bold;
     cursor: pointer;
-    color: ${ (p) => (p.selected ? 'white' : p.theme.color.text) };
+    color: ${(p) => (p.selected ? 'white' : p.theme.color.text)};
     z-index: 1;
 `;
 
@@ -61,12 +61,12 @@ const Pill = styled.div`
         top: -4ren;
         left: .5rem;
         border-radius: 50%;
-        background: ${ (props) => props.theme.color.blue };
-          transform: ${ (props) => `translate(${ props.positionIndex * 7 }rem, 0)` };
+        background: ${(props) => props.theme.color.blue};
+          transform: ${(props) => `translate(${props.positionIndex * 7}rem, 0)`};
         transition: all .3s ease;
         animation: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s 1 normal forwards running fmdUjs;
-        -webkit-box-shadow: 10px 11px 42px -28px rgba(0,0,0,0.75);
--moz-box-shadow: 10px 11px 42px -28px rgba(0,0,0,0.75);
-box-shadow: 10px 11px 42px -28px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 0.1rem 11px 42px -28px rgba(0,0,0,0.75);
+-moz-box-shadow: 0.1rem 11px 42px -28px rgba(0,0,0,0.75);
+box-shadow: 0.1rem 11px 42px -28px rgba(0,0,0,0.75);
 }
 `;

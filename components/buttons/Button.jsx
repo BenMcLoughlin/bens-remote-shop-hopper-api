@@ -38,19 +38,19 @@ export const Button = ({
 const Wrapper = styled.div`
     height: 5rem;
     min-width: 11rem;
-    max-width: ${ (p) => `${ p.title.length * 2 }rem` };
+    max-width: ${(p) => `${p.title.length * 2}rem`};
     cursor: pointer;
     display: flex;
     align-content: center;
-    border-radius: ${ (p) => (p.radius === 'square' ? '10px' : '40px') };
+    border-radius: ${(p) => (p.radius === 'square' ? '0.1rem' : '40px')};
     padding: 0 2rem 0 2rem;
     justify-content: center;
     align-items: center;
-    ${ (p) => p.theme.gradient[p.gradient] };
-    border: ${ (p) => p.gradient === 'none' && '1px solid white' };
+    ${(p) => p.theme.gradient[p.gradient]};
+    border: ${(p) => p.gradient === 'none' && '1px solid white'};
     opacity: 1;
     &:hover {
-        background: ${ (props) => props.theme.color.dark };
+        background: ${(props) => props.theme.color.dark};
     }
     transition: all 0.6s ease;
 `;
@@ -58,7 +58,7 @@ const Wrapper = styled.div`
 const Title = styled.div`
     font-size: 1.4rem;
     color: white;
-    ${ (props) => props.theme.flex.vertical.center };
+    ${(props) => props.theme.flex.vertical.center};
 `;
 const Icon = styled.div`
     height: 2rem;

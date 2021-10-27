@@ -42,18 +42,18 @@ const renderLinkItem = (text, iconType, path) => {
 
 export const SidebarWrapper = styled.div`
     position: fixed;
-    z-index: ${ zIndexValues.navLeft - 1 };
+    z-index: ${zIndexValues.navLeft - 1};
     top: 0;
-    left: ${ sizes.appNavBarLeftWidth }px;
+    left: ${sizes.appNavBarLeftWidth}px;
     height: 100vh;
-    width: ${ sizes.secondarySideBarWidth }px;
+    width: ${sizes.secondarySideBarWidth}px;
     padding: 0 16px 24px;
-    background: ${ color.backgroundLightest };
-    border-right: 1px solid ${ color.borderLightest };
-    ${ mixin.scrollableY }
-    ${ mixin.customScrollbar() }
+    background: ${color.backgroundLightest};
+    border-right: 1px solid ${color.borderLightest};
+    ${mixin.scrollableY}
+    ${mixin.customScrollbar()}
     @media (max-width: 1100px) {
-        width: ${ sizes.secondarySideBarWidth - 10 }px;
+        width: ${sizes.secondarySideBarWidth - 10}px;
     }
     @media (max-width: 999px) {
         display: none;
@@ -71,24 +71,24 @@ export const Info = styled.div`
 `;
 
 export const Texts = styled.div`
-    padding: 3px 0 0 10px;
+    padding: 3px 0 0 0.1rem;
 `;
 
 export const Name = styled.div`
-    color: ${ color.textDark };
-    ${ font.size(15) };
-    ${ font.medium };
+    color: ${color.textDark};
+    ${font.size(15)};
+    ${font.medium};
 `;
 
 export const Category = styled.div`
-    color: ${ color.textMedium };
-    ${ font.size(13) };
+    color: ${color.textMedium};
+    ${font.size(13)};
 `;
 
 export const Divider = styled.div`
     margin-top: 17px;
     padding-top: 18px;
-    border-top: 1px solid ${ color.borderLight };
+    border-top: 1px solid ${color.borderLight};
 `;
 
 export const LinkItem = styled.div`
@@ -100,22 +100,22 @@ export const LinkItem = styled.div`
     border-radius: 3px;
     cursor: pointer;
     i {
-        margin-right: 15px;
-        font-size: 20px;
+        margin-right: 10.05rem;
+        font-size: 0.2rem;
     }
     &.active {
-        color: ${ color.primary };
-        background: ${ color.backgroundLight };
+        color: ${color.primary};
+        background: ${color.backgroundLight};
         i {
-        color: ${ color.primary };
+            color: ${color.primary};
         }
     }
 `;
 
 export const LinkText = styled.div`
     padding-top: 2px;
-    margin-left: 15px;
-    ${ font.size(14.7) };
+    margin-left: 10.05rem;
+    ${font.size(14.7)};
 `;
 
 export default Sidebar;

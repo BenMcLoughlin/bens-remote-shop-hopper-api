@@ -7,23 +7,23 @@ import { color, font, mixin } from 'styles/theme';
 import Button from 'components/Button';
 import Form from 'components/Form';
 import { columnOptions } from 'content/variables';
-import useGlobal from "globalState/store";
+import useGlobal from 'globalState/store';
 import { capitalize } from 'utils/strings/capitalize';
 
 const propTypes = {
     search: PropTypes.func,
-    defaultFilters: PropTypes.object
+    defaultFilters: PropTypes.object,
 };
 
 const BoardFilters = ({ search, defaultFilters }) => {
-    const [ globalState, globalActions ] = useGlobal();
-    const [ loading, setLoading ] = useState(false);
-    const [ modalOpen, setModalOpen ] = useState(false);
-    const [ column, setColumnName ] = useState('');
-    const [ columnData, setColumnData ] = useState([]);
-    const [ metric, setMetric ] = useState('');
-    const [ filters, setFilters ] = useState(defaultFilters);
-    const [ areFiltersCleared, setAreFiltersCleared ] = useState(true);
+    const [globalState, globalActions] = useGlobal();
+    const [loading, setLoading] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [column, setColumnName] = useState('');
+    const [columnData, setColumnData] = useState([]);
+    const [metric, setMetric] = useState('');
+    const [filters, setFilters] = useState(defaultFilters);
+    const [areFiltersCleared, setAreFiltersCleared] = useState(true);
 
     const _toggleModal = () => {
         _clear();
@@ -37,7 +37,7 @@ const BoardFilters = ({ search, defaultFilters }) => {
         await setFilters(defaultFilters);
         await _applyFilters();
         setAreFiltersCleared(true);
-    }; 
+    };
 
     const _fetchColumn = async (columnName) => {
         setLoading(true);
@@ -70,21 +70,13 @@ const BoardFilters = ({ search, defaultFilters }) => {
         <Filters modalOpen={false}>
             <Column>
                 <Row>
-                    <StyledButton
-                        variant="empty"
-                        isActive={column}
-                        onClick={_toggleModal}
-                    >
+                    <StyledButton variant="empty" isActive={column} onClick={_toggleModal}>
                         {modalOpen ? 'Column' : 'Create Filters'}
                     </StyledButton>
-                    {
-                        column &&
-                    <FilterText>{capitalize(column)}</FilterText>
-                    }
+                    {column && <FilterText>{capitalize(column)}</FilterText>}
                 </Row>
                 <Row>
-                    {
-                        column &&
+                    {column && (
                         <StyledButton
                             variant="empty"
                             isActive={metric}
@@ -92,138 +84,134 @@ const BoardFilters = ({ search, defaultFilters }) => {
                         >
                             Metric -
                         </StyledButton>
-                    }
-                    {
-                        metric &&
-                    <FilterText>{metric}</FilterText>
-                    }
+                    )}
+                    {metric && <FilterText>{metric}</FilterText>}
                 </Row>
             </Column>
-            {
-                modalOpen &&
+            {modalOpen && (
                 <>
-                    {
-                        metric ? 
-                            <Form
-                                enableReinitialize
-                                initialValues={{
-                                    column: '',
-                                    metric: ''
-                                }}
-                                onSubmit={async (values, form) => {
-                                    try {
-                                        await setFilters({
-                                            column,
-                                            metric
-                                        });
+                    {metric ? (
+                        <Form
+                            enableReinitialize
+                            initialValues={{
+                                column: '',
+                                metric: '',
+                            }}
+                            onSubmit={async (values, form) => {
+                                try {
+                                    await setFilters({
+                                        column,
+                                        metric,
+                                    });
 
-                                        _applyFilters({
-                                            column,
-                                            metric
-                                        });
-                                        // toast.success('Filter has been successfully created.');
-                                    } catch (error) {
-                                        Form.handleAPIError(error, form);
+                                    _applyFilters({
+                                        column,
+                                        metric,
+                                    });
+                                    // toast.success('Filter has been successfully created.');
+                                } catch (error) {
+                                    Form.handleAPIError(error, form);
+                                }
+                            }}
+                        >
+                            <FormElement>
+                                <FormHeading>Apply Filter</FormHeading>
+                                <Actions>
+                                    {!areFiltersCleared && (
+                                        <ClearAll onClick={_clear}>Clear all</ClearAll>
+                                    )}
+                                    <StyledButton
+                                        type="submit"
+                                        variant="primary"
+                                        isWorking={loading}
+                                    >
+                                        Search with this filter
+                                    </StyledButton>
+                                    <StyledButton
+                                        type="button"
+                                        variant="empty"
+                                        onClick={_toggleModal}
+                                    >
+                                        Cancel
+                                    </StyledButton>
+                                </Actions>
+                            </FormElement>
+                        </Form>
+                    ) : (
+                        <Form
+                            enableReinitialize
+                            initialValues={{
+                                column: '',
+                                metric: '',
+                            }}
+                            onSubmit={async (values, form) => {
+                                try {
+                                    if (values.column) {
+                                        await _fetchColumn(values.column);
                                     }
-                                }}
-                            >
-                                <FormElement>
-                                    <FormHeading>Apply Filter</FormHeading>
-                                    <Actions>
-                                        {!areFiltersCleared && (
-                                            <ClearAll onClick={_clear}>Clear all</ClearAll>
-                                        )}
-                                        <StyledButton 
-                                            type="submit"
-                                            variant="primary"
-                                            isWorking={loading}
-                                        >
-                                            Search with this filter
-                                        </StyledButton>
-                                        <StyledButton
-                                            type="button"
-                                            variant="empty"
-                                            onClick={_toggleModal}
-                                        >
-                                            Cancel
-                                        </StyledButton>
-                                    </Actions>
-                                </FormElement>
-                            </Form>
-                            :
-                            <Form
-                                enableReinitialize
-                                initialValues={{
-                                    column: '',
-                                    metric: ''
-                                }}
-                                onSubmit={async (values, form) => {
-                                    try {
-                                        if (values.column) {
-                                            await _fetchColumn(values.column);
-                                        }
 
-                                        if (values.metric) {
-                                            await setMetric(values.metric);
-                                        }
-
-                                        // toast.success('Filter has been successfully created.');
-                                    } catch (error) {
-                                        Form.handleAPIError(error, form);
+                                    if (values.metric) {
+                                        await setMetric(values.metric);
                                     }
-                                }}
-                            >
-                                <FormElement>
-                                    <FormHeading>Create Filter</FormHeading>
-                                    {columnData.length ?
-                                        column === 'body_html' ? 
-                                            <Form.Field
-                                                name="metric"
-                                                tip={`Type a word or phrase to search for.`}
-                                            />
-                                            :
-                                            <Form.Field.Select
-                                                name="metric"
-                                                // label={`Options for: ${ column } `}
-                                                tip={`Now set the items in the ${ column } column to search for.`}
-                                                options={columnData}
-                                                renderOption={renderList}
-                                                renderValue={renderList}
-                                            />
-                                        :
+
+                                    // toast.success('Filter has been successfully created.');
+                                } catch (error) {
+                                    Form.handleAPIError(error, form);
+                                }
+                            }}
+                        >
+                            <FormElement>
+                                <FormHeading>Create Filter</FormHeading>
+                                {columnData.length ? (
+                                    column === 'body_html' ? (
+                                        <Form.Field
+                                            name="metric"
+                                            tip={`Type a word or phrase to search for.`}
+                                        />
+                                    ) : (
                                         <Form.Field.Select
-                                            name="column"
-                                            // label="Database Column"
-                                            tip="First set the column we will search on."
-                                            options={columnOptions}
+                                            name="metric"
+                                            // label={`Options for: ${ column } `}
+                                            tip={`Now set the items in the ${column} column to search for.`}
+                                            options={columnData}
                                             renderOption={renderList}
                                             renderValue={renderList}
                                         />
-                                    }
-                                    <Actions>
-                                        {!areFiltersCleared && (
-                                            <ClearAll onClick={_clear}>Clear all</ClearAll>
-                                        )}
-                                        <StyledButton
-                                            type="submit"
-                                            variant="primary"
-                                            isWorking={loading}
-                                        >
-                                            {columnData.length ? 'Create Filter' : 'Next Step'}
-                                        </StyledButton>
-                                        <StyledButton
-                                            type="button"
-                                            variant="empty"
-                                            onClick={_toggleModal}
-                                        >
-                                            Cancel
-                                        </StyledButton>
-                                    </Actions>
-                                </FormElement>
-                            </Form>
-                    }
+                                    )
+                                ) : (
+                                    <Form.Field.Select
+                                        name="column"
+                                        // label="Database Column"
+                                        tip="First set the column we will search on."
+                                        options={columnOptions}
+                                        renderOption={renderList}
+                                        renderValue={renderList}
+                                    />
+                                )}
+                                <Actions>
+                                    {!areFiltersCleared && (
+                                        <ClearAll onClick={_clear}>Clear all</ClearAll>
+                                    )}
+                                    <StyledButton
+                                        type="submit"
+                                        variant="primary"
+                                        isWorking={loading}
+                                    >
+                                        {columnData.length ? 'Create Filter' : 'Next Step'}
+                                    </StyledButton>
+                                    <StyledButton
+                                        type="button"
+                                        variant="empty"
+                                        onClick={_toggleModal}
+                                    >
+                                        Cancel
+                                    </StyledButton>
+                                </Actions>
+                            </FormElement>
+                        </Form>
+                    )}
                 </>
-            }
+            )}
         </Filters>
     );
 };
@@ -239,7 +227,7 @@ export const Filters = styled.div`
 export const Column = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 35px 0;
+    padding: 30.05rem 0;
     @media (max-width: 700px) {
         flex-direction: column;
     }
@@ -249,7 +237,7 @@ export const Row = styled.div`
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    margin: 10px;
+    margin: 0.1rem;
 `;
 
 export const FilterText = styled.p`
@@ -264,37 +252,37 @@ export const StyledButton = styled(Button)`
     border: none;
     font-family: 'Yanone Kaffeesatz', Sans-serif;
     font-size: 22px;
-    margin-left: 10px;
+    margin-left: 0.1rem;
 `;
 
 export const ClearAll = styled.div`
     height: 32px;
     line-height: 32px;
-    margin-left: 15px;
+    margin-left: 10.05rem;
     padding-left: 12px;
-    border-left: 1px solid ${ color.borderLightest };
-    color: ${ color.textDark };
-    ${ font.size(14.5) }
-    ${ mixin.clickable }
+    border-left: 1px solid ${color.borderLightest};
+    color: ${color.textDark};
+    ${font.size(14.5)}
+    ${mixin.clickable}
     &:hover {
-    color: ${ color.textMedium };
+        color: ${color.textMedium};
     }
 `;
 
 export const FormElement = styled(Form.Element)`
-    padding: 25px 40px 35px;
+    padding: 20.05rem 40px 30.05rem;
 `;
 
 export const FormHeading = styled.div`
-    padding-bottom: 15px;
-    ${ font.size(21) }
+    padding-bottom: 10.05rem;
+    ${font.size(21)}
 `;
 
 export const SelectItem = styled.div`
     display: flex;
     align-items: center;
-    margin-right: 15px;
-    ${ (props) => props.withBottomMargin && `margin-bottom: 5px;` }
+    margin-right: 10.05rem;
+    ${(props) => props.withBottomMargin && `margin-bottom: 0.05rem;`}
 `;
 
 export const Actions = styled.div`

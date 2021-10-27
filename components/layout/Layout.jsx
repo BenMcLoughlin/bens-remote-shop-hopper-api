@@ -6,6 +6,7 @@ import { LandingFooter } from './LandingFooter';
 import Head from 'next/head';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import { DevTools } from 'components';
 
 export const Layout = (props) => {
     const router = useRouter();
@@ -26,6 +27,8 @@ export const Layout = (props) => {
             </Head>
 
             <Header />
+            {/* {process.env.NODE_ENV === 'development' && <DevTools />} */}
+
             <Center>{props.children}</Center>
             {isLandingPage ? <LandingFooter {...props.children.props.footer} /> : <Footer />}
         </Wrapper>
@@ -44,13 +47,13 @@ const Center = styled.div`
     flex-direction: column;
     margin: 0 auto;
     min-height: 100vh;
-    // @media (min-width: 0px) {
-    //     width: 100vw;
-    // }
-    // @media (min-width: 768px) {
-    //     width: 90vw;
-    // }
-    // @media (min-width: 1500px) {
-    //     width: 75vw;
-    // }
+    @media (min-width: 0px) {
+        width: 100vw;
+    }
+    @media (min-width: 768px) {
+        width: 90vw;
+    }
+    @media (min-width: 1500px) {
+        width: 75vw;
+    }
 `;

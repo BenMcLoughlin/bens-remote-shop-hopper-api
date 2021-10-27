@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export const RowSingleSelect = ({ options, handleChanges, styles, title, value }) => {
-    const [ selected, setSelected ] = useState(value);
+    const [selected, setSelected] = useState(value);
 
     const { length } = options;
     const positionIndex = options.findIndex((d) => d === selected);
@@ -13,7 +13,7 @@ export const RowSingleSelect = ({ options, handleChanges, styles, title, value }
             <Options length={length}>
                 {options.map((option, i) => (
                     <Option
-                        id={`option_${ i + 1 }`}
+                        id={`option_${i + 1}`}
                         key={i}
                         className={'enablesTransition'}
                         onClick={() => {
@@ -34,7 +34,7 @@ export const RowSingleSelect = ({ options, handleChanges, styles, title, value }
 // ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
-    ${ (props) => props.styles }
+    ${(props) => props.styles}
 `;
 
 const Option = styled.div`
@@ -42,7 +42,7 @@ const Option = styled.div`
     width: 10rem;
     min-height: 3rem;
     transition: all 2s ease;
-    color: ${ (props) => props.theme.color.darkGrey };
+    color: ${(props) => props.theme.color.darkGrey};
     text-align: center;
     z-index: 1;
     transition: all 100ms linear 0s;
@@ -53,11 +53,11 @@ const Option = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: ${ (props) => props.theme.font.small };
+    font-size: ${(props) => props.theme.font.small};
 `;
 const Options = styled.div`
     display: flex;
-    width: ${ (props) => props.length * 10 }rem;
+    width: ${(props) => props.length * 10}rem;
     height: 5rem;
     margin: 0px;
     padding: 0px;
@@ -73,7 +73,7 @@ const Title = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: ${ (props) => props.theme.font.smallest };
+    font-size: ${(props) => props.theme.font.smallest};
 `;
 const Pill = styled.div`
         position: absolute;
@@ -81,10 +81,10 @@ const Pill = styled.div`
         height: 3rem;
         top: 1rem;
         background-color: #4F9190;
-        transform: ${ (props) => `translate(${ props.positionIndex * 10 }rem, 0)` };
+        transform: ${(props) => `translate(${props.positionIndex * 10}rem, 0)`};
         transition: all .3s ease;
-        border-radius: 15px;
+        border-radius: 10.05rem;
         animation: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s 1 normal forwards running fmdUjs;
-        ${ (props) => props.theme.neomorph };
+        ${(props) => props.theme.neomorph};
 }
 `;

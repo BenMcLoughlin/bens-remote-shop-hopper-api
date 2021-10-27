@@ -9,6 +9,7 @@ export const Back = ({ handleChange }) => (
         <Circle>
             <ArrowRight onClick={() => handleChange()} />
         </Circle>
+        
     </Wrapper>
 );
 

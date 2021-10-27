@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useSession } from "next-auth/react";
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { sizes } from 'styles/theme';
-import searchTwoParams from "requests/searchTwoParams";
-import useGlobal from "globalState/store";
+import searchTwoParams from 'requests/searchTwoParams';
+import useGlobal from 'globalState/store';
 import Layout from 'components/Layout';
 import NavbarLeft from 'components/NavbarLeft';
 import Sidebar from './Sidebar';
@@ -15,12 +15,12 @@ import Tags from './Tags';
 const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
 
 const TagReviewSystem = () => {
-    const [ globalState, globalActions ] = useGlobal();
+    const [globalState, globalActions] = useGlobal();
 
-    const [ loading, setLoading ] = useState(false);
-    const [ queryStrings, setQueryStrings ] = useState({
-        column: 'buckets', 
-        metric: "Athletic"
+    const [loading, setLoading] = useState(false);
+    const [queryStrings, setQueryStrings] = useState({
+        column: 'buckets',
+        metric: 'Athletic',
     });
 
     useEffect(() => {
@@ -55,12 +55,12 @@ const TagReviewSystem = () => {
 };
 
 export const ProjectPage = styled.div`
-    padding: 25px 32px 50px ${ paddingLeft }px;
+    padding: 20.05rem 32px 50px ${paddingLeft}px;
     @media (max-width: 1100px) {
-        padding: 25px 20px 50px ${ paddingLeft - 20 }px;
+        padding: 20.05rem 0.2rem 50px ${paddingLeft - 20}px;
     }
     @media (max-width: 999px) {
-        padding-left: ${ paddingLeft - 20 - sizes.secondarySideBarWidth }px;
+        padding-left: ${paddingLeft - 20 - sizes.secondarySideBarWidth}px;
     }
 `;
 

@@ -19,7 +19,7 @@ export const Styles = ({ styles }) => {
                     >
                         <OptionImage>
                             <Image
-                                src={`/../public/assets/onboard/styles/${ option }.jpg`}
+                                src={`/../public/assets/onboard/styles/${option}.jpg`}
                                 layout="fill"
                             />
                         </OptionImage>
@@ -42,7 +42,6 @@ const Wrapper = styled.div`
     position: relative;
     margin: 0 auto;
     gap: 2rem;
-
 `;
 
 const Options = styled.div`
@@ -66,9 +65,9 @@ const Option = styled.div`
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    border: ${ (p) => p.selected && '4px solid #14C691' };
+    border: ${(p) => p.selected && '4px solid #14C691'};
     transition: all 0.2s ease;
-    border-radius: 5px;
+    border-radius: 0.05rem;
     @media (max-width: 600px) {
         width: 40%;
     }
@@ -80,14 +79,14 @@ const OptionImage = styled.div`
 `;
 const OptionTitle = styled.div`
     height: 20%;
-    font-size: ${ (p) => p.theme.font.medium };
+    font-size: ${(p) => p.theme.font.medium};
     display: flex;
     justify-content: center;
     align-items: center;
 `;
 
 const Question = styled.div`
-    font-size: ${ (p) => p.theme.font.mediumLarge };
+    font-size: ${(p) => p.theme.font.mediumLarge};
     font-family: 'Poppins', sans-serif;
     color: #12142d;
     height: 8rem;
@@ -144,7 +143,7 @@ const Question = styled.div`
 // const Options = styled.div`
 //     display: flex;
 //     flex-wrap: wrap;
-//     gap: 10px;
+//     gap: 0.1rem;
 //     height: 100%;
 //     width: 80%;
 // `;

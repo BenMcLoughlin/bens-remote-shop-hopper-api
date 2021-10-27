@@ -11,9 +11,11 @@ export const single = async (store, params) => {
         const uploaded = await res.json();
 
         if (res.status === 200) {
-            store.actions.counter.addResult([{ result: `${ params.businessName } SUCCESS`, status: 200 }]);
-            console.log(`SUCCESSFULLY UPDATED ${ uploaded.count } PRODUCTS`);
-            store.setState({ result: `${ params.businessName } SUCCESS`, status: 200 });
+            store.actions.counter.addResult([
+                { result: `${params.businessName} SUCCESS`, status: 200 }
+            ]);
+            console.log(`SUCCESSFULLY UPDATED ${uploaded.count} PRODUCTS`);
+            store.setState({ result: `${params.businessName} SUCCESS`, status: 200 });
             store.actions.counter.addSuccess();
 
             return res;

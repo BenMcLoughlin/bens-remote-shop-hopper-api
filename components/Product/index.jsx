@@ -12,23 +12,29 @@ const propTypes = {
     index: PropTypes.number,
     title: PropTypes.string,
     rating: PropTypes.number,
-    price: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]),
-    compareAtPrice: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]),
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    compareAtPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     tags: PropTypes.array,
     buckets: PropTypes.array,
-    incrementProduct: PropTypes.func
+    incrementProduct: PropTypes.func,
 };
 
-const Product = ({ businessName, src, title, rating, id, price, compareAtPrice, tags, buckets, incrementProduct }) => {
-    const [ localRating, setRating ] = useState(0);
+const Product = ({
+    businessName,
+    src,
+    title,
+    rating,
+    id,
+    price,
+    compareAtPrice,
+    tags,
+    buckets,
+    incrementProduct,
+}) => {
+    const [localRating, setRating] = useState(0);
 
-    useEffect(() => { // todo
+    useEffect(() => {
+        // todo
         setRating(rating);
     }, []);
 
@@ -45,36 +51,25 @@ const Product = ({ businessName, src, title, rating, id, price, compareAtPrice, 
                     <Title>{truncate(title)}</Title>
                     <Img src={src} />
                     <Bottom>
-                        <Details>
-                            Rating: {localRating} 
-                        </Details>
-                        {localRating > 0 && (
-                            <Star>⭐️</Star>
+                        <Details>Rating: {localRating}</Details>
+                        {localRating > 0 && <Star>⭐️</Star>}
+
+                        <Border />
+                        <Details>Price: {price}</Details>
+                        {compareAtPrice > 0 && (
+                            <>
+                                <Details>Compare: {compareAtPrice}</Details>
+                                <Details>
+                                    Savings Ratio:{' '}
+                                    {(((compareAtPrice - price) / compareAtPrice) * 100).toFixed(2)}
+                                    %
+                                </Details>
+                            </>
                         )}
-                        
                         <Border />
-                        <Details>
-                            Price: {price}
-                        </Details>
-                        {
-                            compareAtPrice > 0 &&
-                        <>
-                            <Details>
-                                Compare: {compareAtPrice}
-                            </Details>
-                            <Details>
-                                Savings Ratio: {(((compareAtPrice - price) / compareAtPrice) * 100).toFixed(2)}%
-                            </Details>
-                        </>
-                        }
+                        <Details>Tags: {tags?.join(', ')}</Details>
                         <Border />
-                        <Details>
-                            Tags: {tags?.join(', ')}
-                        </Details>
-                        <Border />
-                        <Details>
-                            Buckets: {buckets?.join(', ')}
-                        </Details>
+                        <Details>Buckets: {buckets?.join(', ')}</Details>
                     </Bottom>
                 </Card>
             </ProductBlock>
@@ -88,23 +83,23 @@ export const ProductBlock = styled.div`
     align-items: center;
     justify-content: center;
     max-width: 250px;
-    padding: 10px;
+    padding: 0.1rem;
     border-radius: 3px;
     background: #fff;
     box-shadow: 0px 1px 2px 0px rgba(9, 30, 66, 0.25);
     transition: background 0.1s;
-    ${ mixin.clickable }
-    margin: 5px;
+    ${mixin.clickable}
+    margin: 0.05rem;
     &:hover {
-        background: ${ color.backgroundLight };
+        background: ${color.backgroundLight};
     }
 `;
 
 export const Title = styled.p`
     padding-bottom: 11px;
-    ${ font.size(15) }
+    ${font.size(15)}
     @media (max-width: 1100px) {
-        ${ font.size(14.5) }
+        ${font.size(14.5)}
     }
 `;
 
@@ -117,18 +112,18 @@ export const Bottom = styled.div`
 `;
 
 export const Star = styled.p`
-    transform: scale(3, 3) translate(30px, -10px);
+    transform: scale(3, 3) translate(30px, -0.1rem);
 `;
 
 export const Details = styled.p`
-    ${ font.size(11) }
+    ${font.size(11)}
     display: flex;
     flex-wrap: wrap;
 `;
 
 export const Border = styled.div`
-    border-bottom: 1px solid ${ color.backgroundLight };
-    margin: 5px;
+    border-bottom: 1px solid ${color.backgroundLight};
+    margin: 0.05rem;
     width: 100%;
 `;
 

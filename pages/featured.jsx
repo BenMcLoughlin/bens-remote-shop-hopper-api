@@ -1,20 +1,19 @@
-
 /* eslint-disable no-undef */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import Layout from "../components/Layout";
+import Layout from '../components/Layout';
 import styled from 'styled-components';
 
 import { color } from 'styles/theme';
-import incrementProduct from "../requests/incrementProduct";
+import incrementProduct from '../requests/incrementProduct';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
-import useGlobal from "globalState/store";
+import useGlobal from 'globalState/store';
 import Product from 'components/Product';
 
 const Featured = () => {
-    const [ globalState, globalActions ] = useGlobal();
-    const [ products, setProducts ] = useState([]);
-    const [ loading, setLoading ] = useState(false);
+    const [globalState, globalActions] = useGlobal();
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
     const mountedRef = useRef(true);
 
     // useEffect(() => {
@@ -49,35 +48,36 @@ const Featured = () => {
         <Layout>
             <Main>
                 <Title>
-                    These are the {globalState.products.hotItems.length} hottest items, or items that have the highest rating, according to predefined query parameters. In the future these will be specific to the viewer.
+                    These are the {globalState.products.hotItems.length} hottest items, or items
+                    that have the highest rating, according to predefined query parameters. In the
+                    future these will be specific to the viewer.
                 </Title>
                 <List>
-                    {
-                        loading ?
-                            <Image src={loaderGif} width={800} height={600} />
-                            :
-                            <>
-                                {globalState.products.hotItems.map((product, index) => (
-                                    <Product
-                                        key={product.id}
-                                        id={product.id}
-                                        businessName={product.business_name}
-                                        index={index}
-                                        src={product.images[0]?.src}
-                                        title={product.title}
-                                        rating={product.rating}
-                                        price={(product.original_price / 100).toFixed(2)}
-                                        compareAtPrice={(product.original_price / 100).toFixed(2)}
-                                        tags={product.tags}
-                                        buckets={product.buckets}
-                                        incrementProduct={_incrementProduct}
-                                    />
-                                ))}
-                            </>
-                    }
+                    {loading ? (
+                        <Image src={loaderGif} width={800} height={600} />
+                    ) : (
+                        <>
+                            {globalState.products.hotItems.map((product, index) => (
+                                <Product
+                                    key={product.id}
+                                    id={product.id}
+                                    businessName={product.business_name}
+                                    index={index}
+                                    src={product.images[0]?.src}
+                                    title={product.title}
+                                    rating={product.rating}
+                                    price={(product.original_price / 100).toFixed(2)}
+                                    compareAtPrice={(product.original_price / 100).toFixed(2)}
+                                    tags={product.tags}
+                                    buckets={product.buckets}
+                                    incrementProduct={_incrementProduct}
+                                />
+                            ))}
+                        </>
+                    )}
                 </List>
             </Main>
-        </Layout >
+        </Layout>
     );
 };
 
@@ -98,14 +98,14 @@ export const List = styled.div`
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    margin: 0 5px;
+    margin: 0 0.05rem;
     min-height: 400px;
     overflow-y: auto;
     height: 100vh;
     width: 100%;
     border-radius: 3px;
-    background: ${ color.backgroundLightest };
-    padding: 10px 8px 300px 8px;
+    background: ${color.backgroundLightest};
+    padding: 0.1rem 8px 300px 8px;
 `;
 
 export const ButtonsWrapper = styled.div`

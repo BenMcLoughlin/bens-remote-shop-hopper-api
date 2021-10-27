@@ -7,7 +7,7 @@ import { CheckCircle } from '@styled-icons/boxicons-solid/CheckCircle';
 
 export const Brands = ({ brands }) => {
     const { selectedValues, handleChange, options } = brands;
-    const [ searchValue, setSearchValue ] = useState('');
+    const [searchValue, setSearchValue] = useState('');
 
     let filteredOptions =
         searchValue.length > 2
@@ -67,7 +67,7 @@ const Wrapper = styled.div`
 `;
 
 const Question = styled.div`
-    font-size: ${ (p) => p.theme.font.mediumLarge };
+    font-size: ${(p) => p.theme.font.mediumLarge};
     font-family: 'Poppins', sans-serif;
     color: #12142d;
     height: 8rem;
@@ -87,7 +87,6 @@ const Options = styled.div`
     justify-content: space-around;
     z-index: 1;
     opacity: 0.8;
-
 `;
 
 const Option = styled.div`
@@ -96,9 +95,9 @@ const Option = styled.div`
     display: flex;
     cursor: pointer;
     transition: all 0.2s ease;
-    border-radius: 5px;
-    background: ${ (p) => (p.selected ? '#14C691' : '#e9ecef') };
-    font-size: ${ (p) => p.theme.font.small };
+    border-radius: 0.05rem;
+    background: ${(p) => (p.selected ? '#14C691' : '#e9ecef')};
+    font-size: ${(p) => p.theme.font.small};
     justify-content: center;
     text-align: center;
     align-items: center;
@@ -124,7 +123,7 @@ const SearchInput = styled.input`
     width: 35rem;
     background: white;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: 0.05rem;
 `;
 const IconWrapper = styled.div`
     position: absolute;

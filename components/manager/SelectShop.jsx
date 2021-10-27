@@ -6,47 +6,48 @@ import styled from 'styled-components';
 
 import useGlobal from 'globalState/store';
 import { camelCase } from 'utils/strings';
-import addShops from "requests/addShops";
-import fetchShops from "requests/fetchShops";
+import addShops from 'requests/addShops';
+import fetchShops from 'requests/fetchShops';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
-import CreateShopModal from "./CreateShopModal";
+import CreateShopModal from './CreateShopModal';
 
 const SelectShop = ({ set, selected }) => {
-    const [ globalState, globalActions ] = useGlobal();
-    const [ list, setList ] = useState([]);
-    const [ statuses, setStatuses ] = useState({});
-    const [ addShopModal, toggleAddShopModal ] = useState(false);
-    const [ loading, setLoading ] = useState(false || "");
+    const [globalState, globalActions] = useGlobal();
+    const [list, setList] = useState([]);
+    const [statuses, setStatuses] = useState({});
+    const [addShopModal, toggleAddShopModal] = useState(false);
+    const [loading, setLoading] = useState(false || '');
 
     useEffect(() => {
         const _getShopStatus = async () => {
             setLoading(true);
-            console.time("_getShopStatus");
+            console.time('_getShopStatus');
             const shops = await globalActions.shops.shopStatuses();
 
             let businessStatus = {};
 
             if (shops) {
-                shops.map((d) => (
-                    businessStatus[d.business_name] = {
-                        products: d.products,
-                        updatedAt: d.updated_at
-                    }
-                ));
+                shops.map(
+                    (d) =>
+                        (businessStatus[d.business_name] = {
+                            products: d.products,
+                            updatedAt: d.updated_at,
+                        })
+                );
 
                 setStatuses(businessStatus);
                 setLoading(false);
-                console.timeEnd("_getShopStatus");
+                console.timeEnd('_getShopStatus');
             }
         };
 
         _getShopStatus();
-    }, [ globalState.status ]);
+    }, [globalState.status]);
 
     useEffect(() => {
         const _getShopList = async () => {
             setLoading(true);
-            console.time("_getShopList");
+            console.time('_getShopList');
             const uniqueShops = await fetchShops();
 
             if (uniqueShops) {
@@ -55,12 +56,12 @@ const SelectShop = ({ set, selected }) => {
 
                 setList(businessNames);
                 setLoading(false);
-                console.timeEnd("_getShopList");
+                console.timeEnd('_getShopList');
             }
         };
 
         _getShopList();
-    }, [ addShopModal ]);
+    }, [addShopModal]);
 
     const _toggleAddShopModal = () => {
         toggleAddShopModal(!addShopModal);
@@ -81,54 +82,55 @@ const SelectShop = ({ set, selected }) => {
     return (
         <>
             <Wrapper>
-                {
-                    addShopModal &&
+                {addShopModal && (
                     <button className="send" onClick={() => _addShop('all')}>
                         Add All Shops from local JSON file
                     </button>
-                }
+                )}
 
-                {
-                    addShopModal &&
-                    <CreateShopModal
-                        addShop={_addShop}
-                        close={_toggleAddShopModal}
-                    />
-                }
+                {addShopModal && <CreateShopModal addShop={_addShop} close={_toggleAddShopModal} />}
 
-                {
-                    loading ?
+                {loading ? (
+                    <div className="header">
+                        <Image src={loaderGif} className="loading" width={800} height={600} />
+                    </div>
+                ) : (
+                    <React.Fragment>
                         <div className="header">
-                            <Image src={loaderGif} className="loading" width={800} height={600} />
+                            <h4>Available Stores</h4>
+                            <h4 className="button" onClick={_toggleAddShopModal}>
+                                Add
+                            </h4>
                         </div>
-                        :
-                        <React.Fragment>
-                            <div className="header">
-                                <h4>Available Stores</h4>
-                                <h4 className="button" onClick={_toggleAddShopModal}>Add</h4>
-                            </div>
 
-                            <Row>
-                                {list.map((businessName) => (
-                                    <div
-                                        key={businessName}
-                                        className={`businessName ${ camelCase(businessName) }`}
-                                        onClick={() => set.selectedBusinessName(businessName)}
-                                    >
-                                        <div className="title">{businessName}</div>
-                                        {statuses[businessName] &&
-                                            <div className="updateColumn">
-                                                <div>Most Recent: <span className="update">{statuses[businessName]?.products}</span></div>
-                                                <div className="time">
-                                                    <Moment format="MM/DD hh:ssa">{statuses[businessName]?.updatedAt}</Moment>
-                                                </div>
+                        <Row>
+                            {list.map((businessName) => (
+                                <div
+                                    key={businessName}
+                                    className={`businessName ${camelCase(businessName)}`}
+                                    onClick={() => set.selectedBusinessName(businessName)}
+                                >
+                                    <div className="title">{businessName}</div>
+                                    {statuses[businessName] && (
+                                        <div className="updateColumn">
+                                            <div>
+                                                Most Recent:{' '}
+                                                <span className="update">
+                                                    {statuses[businessName]?.products}
+                                                </span>
                                             </div>
-                                        }
-                                    </div>
-                                ))}
-                            </Row>
-                        </React.Fragment>
-                }
+                                            <div className="time">
+                                                <Moment format="MM/DD hh:ssa">
+                                                    {statuses[businessName]?.updatedAt}
+                                                </Moment>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </Row>
+                    </React.Fragment>
+                )}
             </Wrapper>
             <style jsx>{`
                 .header {
@@ -149,7 +151,7 @@ const SelectShop = ({ set, selected }) => {
                     max-width: 300px;
                     margin: 1rem;
                     padding: 2rem;
-                    border-radius: 5px;
+                    border-radius: 0.05rem;
                     position: relative;
                     cursor: pointer;
                     transition: all 0.7s ease;
@@ -157,7 +159,7 @@ const SelectShop = ({ set, selected }) => {
                     background: #f7f7f7;
                     box-shadow: 11px 11px 22px #dedede, -11px -11px 22px #ffffff;
                 }
-                .${ camelCase(selected.businessName) } {
+                .${camelCase(selected.businessName)} {
                     background: #485056;
                     color: white;
                 }
@@ -174,14 +176,14 @@ const SelectShop = ({ set, selected }) => {
                     align-items: center;
                     justify-content: space-between;
                     background-color: #e7e7e7a6;
-                    padding: .2rem;
+                    padding: 0.2rem;
                     width: 100%;
                 }
                 .time {
-                    font-size: .8rem;
+                    font-size: 0.8rem;
                 }
                 .update {
-                    font-size: .8rem;
+                    font-size: 0.8rem;
                     color: green;
                 }
             `}</style>
@@ -213,7 +215,7 @@ const Row = styled.div`
 
 SelectShop.propTypes = {
     set: PropTypes.object,
-    selected: PropTypes.object
+    selected: PropTypes.object,
 };
 
 export default SelectShop;
