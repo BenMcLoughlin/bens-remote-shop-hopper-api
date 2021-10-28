@@ -1,12 +1,12 @@
 import { hash } from 'bcrypt';
-import prisma from 'backend/prisma/prisma.js';
+import prisma from 'prisma/prisma.js';
 import bcrypt from 'bcryptjs';
 
 export default async function signup({ body }, res) {
     const userExists = await prisma.user.findUnique({
         where: {
-            email: body.email,
-        },
+            email: body.email
+        }
     });
 
     JSON.stringify(userExists, null, 4);
@@ -18,11 +18,9 @@ export default async function signup({ body }, res) {
             name: body.name,
             email: body.email,
             role: body.role,
-            password: hashedPassword,
-        },
+            password: hashedPassword
+        }
     });
-
 
     res.json(newUser);
 }
-

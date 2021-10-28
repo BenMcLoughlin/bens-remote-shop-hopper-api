@@ -25,6 +25,6 @@
         "lib/script.ts",
         "pages/features.jsx",
         "script.js",
-        "backend/prisma/prisma.js"
+        "prisma/prisma.js"
     ]
 }

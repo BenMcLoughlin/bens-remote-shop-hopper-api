@@ -1,5 +1,5 @@
 // // import { getSession } from 'next-auth/react';
-import prisma from 'backend/prisma/prisma.js';
+import prisma from 'prisma/prisma.js';
 
 export async function getHotItems(query) {
     let amount = query.amount;

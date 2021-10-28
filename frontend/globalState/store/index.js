@@ -59,7 +59,7 @@ const initialState = {
         brands: []
     },
     ui: {
-        onboardPageNum: 3
+        onboardPageNum: 0
     },
     loading: false
 };

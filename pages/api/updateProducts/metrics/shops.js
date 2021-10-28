@@ -1,4 +1,4 @@
-import prisma from '../backend/prisma/prisma.js';
+import prisma from '../prisma/prisma.js';
 
 async function createRow(data) {
     let result = {};

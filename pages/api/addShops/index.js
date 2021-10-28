@@ -1,5 +1,4 @@
-
-import prisma from 'backend/prisma/prisma.js';
+import prisma from 'prisma/prisma.js';
 import shopifySHopArray from '../../../mock/shopsLists/kelowna.json';
 
 async function createAllShops() {
@@ -71,7 +70,8 @@ export default async (req, res) => {
         try {
             const shopData = req.body;
 
-            let result = shopData === 'all' ? await createAllShops() : await createNewShop(shopData);
+            let result =
+                shopData === 'all' ? await createAllShops() : await createNewShop(shopData);
 
             return res.status(200).json({ result });
         } catch (error) {

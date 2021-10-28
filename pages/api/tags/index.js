@@ -1,11 +1,11 @@
-
 // import { getSession } from 'next-auth/react';
-import prisma from 'backend/prisma/prisma.js';
+import prisma from 'prisma/prisma.js';
 
 export async function getRows() {
     const result = await prisma.$queryRaw`
         SELECT tags FROM products
-        `.catch((e) => {
+        `
+        .catch((e) => {
             console.log('e:', e);
             throw e;
         })
@@ -29,13 +29,15 @@ export default async (req, res) => {
 
             let uniqueTags = [];
 
-            result.map((obj) => obj.tags.map((tag) => {
-                if (!uniqueTags.includes(tag)) {
-                    uniqueTags.push(tag);
-                }
+            result.map((obj) =>
+                obj.tags.map((tag) => {
+                    if (!uniqueTags.includes(tag)) {
+                        uniqueTags.push(tag);
+                    }
 
-                return true;
-            }));
+                    return true;
+                })
+            );
 
             return res.status(200).json({ uniqueTags });
         } catch (error) {

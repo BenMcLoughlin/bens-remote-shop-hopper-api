@@ -5,7 +5,7 @@ import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import prisma from 'backend/prisma/prisma';
+import prisma from 'prisma/prisma';
 import Auth0Provider from 'next-auth/providers/auth0';
 import bcrypt from 'bcryptjs';
 
@@ -24,8 +24,8 @@ const options = {
 
                 const user = await prisma.user.findUnique({
                     where: {
-                        email,
-                    },
+                        email
+                    }
                 });
 
                 const passwordMatch = await bcrypt.compare(password, user.password);
@@ -35,25 +35,25 @@ const options = {
                 } else {
                     throw new Error('invalid credentials');
                 }
-            },
+            }
         }),
         GitHubProvider({
             clientId: process.env.GITHUB_ID,
-            clientSecret: process.env.GITHUB_SECRET,
+            clientSecret: process.env.GITHUB_SECRET
         }),
         GoogleProvider({
             clientId: process.env.GOOGLE_ID,
-            clientSecret: process.env.GOOGLE_SECRET,
+            clientSecret: process.env.GOOGLE_SECRET
         }),
         FacebookProvider({
             clientId: process.env.FACEBOOK_ID,
-            clientSecret: process.env.FACEBOOK_SECRET,
+            clientSecret: process.env.FACEBOOK_SECRET
         }),
         Auth0Provider({
             clientId: process.env.AUTH0_CLIENT_ID,
             clientSecret: process.env.AUTH0_CLIENT_SECRET,
-            issuer: process.env.AUTH0_ISSUER,
-        }),
+            issuer: process.env.AUTH0_ISSUER
+        })
     ],
     adapter: PrismaAdapter(prisma),
     secret: process.env.SECRET,
@@ -62,21 +62,21 @@ const options = {
         signOut: '/auth/signout',
         error: '/auth/error', // Error code passed in query string as ?error=
         verifyRequest: '/auth/verify-request', // (used for check email message)
-        newUser: '/onboard',
+        newUser: '/shopper/onboard'
     },
     session: {
-        jwt: true,
+        jwt: true
     },
     callbacks: {
         async signIn(user, account, profile) {
             return true;
         },
         async redirect({ url, baseUrl }) {
-            return url.includes('signup') ? 'http://localhost:3000/onboard' : baseUrl;
-        },
+            return url.includes('signup') ? 'http://localhost:3000/shopper/onboard' : baseUrl;
+        }
         // async session(session, user) { return session },
         // async jwt(token, user, account, profile, isNewUser) { return token }
-    },
+    }
 };
 
 const authHandler = (req, res) => NextAuth(req, res, options);

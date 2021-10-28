@@ -1,19 +1,22 @@
 // import { getSession } from "next-auth/react";
-import prisma from 'backend/prisma/prisma.js';
+import prisma from 'prisma/prisma.js';
 
 export async function getColumn(column) {
     console.log('getColumn:', column);
 
-    const result = await prisma.product.findMany({
-        select: {
-            [column]: true
-        }
-    }).catch((e) => {
-        console.log('e:', e);
-        throw e;
-    }).finally(async () => {
-        await prisma.$disconnect();
-    });
+    const result = await prisma.product
+        .findMany({
+            select: {
+                [column]: true
+            }
+        })
+        .catch((e) => {
+            console.log('e:', e);
+            throw e;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
 
     return result;
 }
@@ -37,18 +40,16 @@ export default async (req, res) => {
 
             let unique = [];
 
-            if (body === 'sizes' ||
-                body === 'buckets' ||
-                body === 'colors' ||
-                body === 'tags'
-            ) {
-                done.map((obj) => obj[body].map((t) => {
-                    if (!unique.includes(t)) {
-                        unique.push(t);
-                    }
+            if (body === 'sizes' || body === 'buckets' || body === 'colors' || body === 'tags') {
+                done.map((obj) =>
+                    obj[body].map((t) => {
+                        if (!unique.includes(t)) {
+                            unique.push(t);
+                        }
 
-                    return true;
-                }));
+                        return true;
+                    })
+                );
             } else {
                 done.map((obj) => {
                     if (!unique.includes(obj[body])) {
