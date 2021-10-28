@@ -1,5 +1,5 @@
 
-import prisma from '../../../prisma/prisma.js';
+import prisma from 'backend/prisma/prisma.js';
 import shopifySHopArray from '../../../mock/shopsLists/kelowna.json';
 
 async function createAllShops() {

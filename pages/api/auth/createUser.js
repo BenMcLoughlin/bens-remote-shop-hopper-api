@@ -1,5 +1,5 @@
 import { hash } from 'bcrypt';
-import prisma from '../../../prisma/prisma.js';
+import prisma from 'backend/prisma/prisma.js';
 import bcrypt from 'bcryptjs';
 
 export default async function signup({ body }, res) {

@@ -1,6 +1,6 @@
 
 // import { getSession } from 'next-auth/react';
-import prisma from '../../../prisma/prisma.js';
+import prisma from 'backend/prisma/prisma.js';
 
 async function addPointToItem(name) {
     const result = await prisma.hot_item

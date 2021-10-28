@@ -5,7 +5,7 @@ import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import prisma from '../../../prisma/prisma';
+import prisma from 'backend/prisma/prisma';
 import Auth0Provider from 'next-auth/providers/auth0';
 import bcrypt from 'bcryptjs';
 

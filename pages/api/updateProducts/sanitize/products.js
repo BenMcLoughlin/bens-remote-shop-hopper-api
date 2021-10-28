@@ -1,4 +1,4 @@
-import buckets from '../../../../services/buckets';
+import buckets from 'backend/utils/search';
 
 export async function products(data, business_name) {
     let formatted = [];
