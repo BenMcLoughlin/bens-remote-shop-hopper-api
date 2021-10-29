@@ -27,7 +27,7 @@ export const Layout = (props) => {
             </Head>
 
             <Header />
-            {/* {process.env.NODE_ENV === 'development' && <DevTools />} */}
+            {process.env.NODE_ENV === 'development' && <DevTools />}
 
             <Center isManager={props.isManager}>{props.children}</Center>
             {isLandingPage ? <LandingFooter {...props.children.props.footer} /> : <Footer />}

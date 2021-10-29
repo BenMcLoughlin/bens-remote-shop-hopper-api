@@ -1,25 +1,29 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export const DevTools = () => {
+    const [response, setResponse] = useState('');
+
     const body = {
         name: 'ben',
-        likes: 'guns'
+        template: 'forgotPassword'
     };
 
     const sendEmail = async () => {
-        const res = await fetch('/api/emails/sendInBlue', {
+        const res = await fetch('/api/email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
         });
-        console.log(res);
+        let data = await res.json();
+        setResponse(data.status);
     };
 
     return (
         <Wrapper>
             <Button onClick={() => sendEmail()}> Send Email</Button>
+            <Status>{response}</Status>
         </Wrapper>
     );
 };
@@ -54,4 +58,8 @@ const Wrapper = styled.div`
     cursor: pointer;
     flex-direction: column;
     gap: 3rem;
+`;
+const Status = styled.div`
+    color: red;
+    margin-left: 5rem;
 `;
