@@ -49,7 +49,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-    color: ${ color.text.darkest };
+    color: ${ color.textDarkest };
     font-weight: bold;
     text-transform: uppercase;
 `;

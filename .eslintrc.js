@@ -265,7 +265,7 @@ module.exports = {
         yoda: 'error'
     },
     "settings": {
-    // Allows us to lint absolute imports within codebase
+        // Allows us to lint absolute imports within codebase
         "import/resolver": {
             "node": {
                 "moduleDirectory": [ "node_modules", "/" ]
