@@ -4,7 +4,7 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { LandingFooter } from './LandingFooter';
 import Head from 'next/head';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
 import { DevTools } from 'frontend/components';
 

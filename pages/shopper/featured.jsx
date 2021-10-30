@@ -54,7 +54,7 @@ const Featured = () => {
                     <Image src={loaderGif} width={800} height={600} />
                 ) : (
                     <>
-                        {globalState.products.hotItems.map((product, index) => (
+                        {globalState.products.hotItems?.map((product, index) => (
                             <Product
                                 key={product.id}
                                 id={product.id}

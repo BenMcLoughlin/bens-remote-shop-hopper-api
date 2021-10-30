@@ -35,7 +35,6 @@ const SignUp = (props) => {
             return alert(result.error);
         }
 
-        console.log('IN SIGN UP CLIENT SIDE, result: ', result);
         await signIn('credentials', result);
     };
 

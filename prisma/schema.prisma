@@ -4,60 +4,83 @@ generator client {
 
 datasource db {
   provider          = "postgresql"
-  url               = env("DATABASE_URL")
+  url               = "postgres://ecbkgjykhvnpsr:476026aa4ca7a07040c4f754d8c903907efd3d8a81825169429a55a9bc9e1525@ec2-54-145-188-92.compute-1.amazonaws.com:5432/dads1efmqn8d0h"
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model hot_item {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  value Int?
+  id               Int      @id @default(autoincrement())
+  body_html        String?  @map("bodyHtml")
+  buckets          String[]
+  business_name    String?  @map("businessName")
+  colors           String[]
+  compare_at_price Int?     @map("compareAtPrice")
+  created_at       DateTime @default(now()) @map("createdAt")
+  handle           String?
+  images           Json?
+  options          Json?
+  original_price   Int?     @map("originalPrice")
+  product_type     String?  @map("productType")
+  published_at     DateTime @default(now()) @map("publishedAt")
+  rating           Int?     @default(0)
+  sizes            String[]
+  tags             String[]
+  title            String   @unique
+  updated_at       DateTime @default(now()) @map("updatedAt")
+  variants         Json?
+  vendor           String?
 
-  @@map(name: "hot_items")
+  @@map("hot_items")
 }
 
 model status {
   id            Int      @id @default(autoincrement())
-  business_name String   @unique
   updated_at    DateTime @default(now())
   products      Int
+  business_name String   @unique
 
-  @@map(name: "statuses")
+  @@map("statuses")
 }
 
 model shop {
   id            Int      @id @default(autoincrement())
-  business_name String
   domain        String   @unique
   vertical      String?
-  site_host     String
   city          String?
   province      String?
-  postal_code   String?
   country       String?
   created_at    DateTime @default(now())
+  business_name String
+  postal_code   String?
+  site_host     String
+  buckets       String[]
 
-  @@map(name: "shops")
+  @@map("shops")
 }
 
 model product {
-  id            Int      @id @default(autoincrement())
-  business_name String?  @map(name: "businessName")
-  title         String   @unique
-  handle        String?
-  body_html     String?  @map(name: "bodyHtml")
-  vendor        String?
-  product_type  String?  @map(name: "productType")
-  created_at    DateTime @default(now()) @map(name: "createdAt")
-  published_at  DateTime @default(now()) @map(name: "publishedAt")
-  updated_at    DateTime @default(now()) @map(name: "updatedAt")
-  tags          String[]
-  variants      Json?
-  images        Json?
-  options       Json?
-  rating        Int?     @default(0)
+  id               Int      @id @default(autoincrement())
+  business_name    String?  @map("businessName")
+  title            String   @unique
+  handle           String?
+  vendor           String?
+  tags             String[]
+  variants         Json?
+  images           Json?
+  options          Json?
+  rating           Int?     @default(0)
+  body_html        String?  @map("bodyHtml")
+  created_at       DateTime @default(now()) @map("createdAt")
+  product_type     String?  @map("productType")
+  published_at     DateTime @default(now()) @map("publishedAt")
+  updated_at       DateTime @default(now()) @map("updatedAt")
+  colors           String[]
+  compare_at_price Int?     @map("compareAtPrice")
+  original_price   Int?     @map("originalPrice")
+  sizes            String[]
+  buckets          String[]
 
-  @@map(name: "products")
+  @@map("products")
 }
 
 model User {
@@ -110,3 +133,5 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// =============== Newest

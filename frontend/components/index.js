@@ -12,7 +12,7 @@ export {
 export { DevTools } from 'frontend/components/devoloper';
 
 // cards
- export { Product, Products } from './cards';
+export { Product, Products } from './cards';
 
 // export { Article } from './cards/Article';
 
@@ -47,7 +47,7 @@ export {
     Header_Nates,
     LandingFooter,
     Layout,
-    NavBar,
+    // NavBar,
     NavBarLeft,
     ProgressBar
 } from 'frontend/components/layout';

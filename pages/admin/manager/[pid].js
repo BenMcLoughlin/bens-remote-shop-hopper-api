@@ -3,19 +3,16 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import NavBarLeft from 'frontend/components/NavBarLeft';
+import { NavBarLeft, Layout, Counter, SelectShop, MetricsDisplay } from 'frontend/components';
 import Sidebar from './Sidebar';
-import Layout from 'frontend/components/Layout';
-import Counter from 'frontend/components/Counter';
 import * as shopsLists from 'frontend/mock/shopsLists';
 
 import { camelCase, capitalize } from 'frontend/utils/strings';
 import { updateMetrics } from 'backend/requests/updateMetrics';
 import useGlobal from 'frontend/globalState/store';
-import SelectShop from 'frontend/components/manager/SelectShop';
-import MetricsDisplay from 'frontend/components/manager/MetricsDisplay';
 
 import { sizes } from 'frontend/styles/theme';
+
 const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
 
 const SiteHost = () => {
@@ -84,80 +81,78 @@ const SiteHost = () => {
     };
 
     return (
-        <Layout isManager>
-            <Page>
-                <NavBarLeft />
+        <Page>
+            <NavBarLeft />
 
-                <Sidebar />
+            <Sidebar />
 
-                <Title>
-                    <h2 style={{ color: '#fff', margin: 10 }}>
-                        {`${capitalize(pid || 'not working')} Database Manager`}{' '}
-                    </h2>
-                    <Counter />
-                </Title>
-                {uploadedResult && (
-                    <Results>
-                        {status && globalState.counter.loading && (
-                            <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>
-                        )}
-                        {uploadedResult.map((result) => (
-                            <p
-                                key={result.result}
-                                style={
-                                    result.status === 422
-                                        ? { color: 'red', textAlign: 'right' }
-                                        : { textAlign: 'right' }
-                                }>
-                                {result.result}
-                            </p>
-                        ))}
-                    </Results>
-                )}
+            <Title>
+                <h2 style={{ color: '#fff', margin: 10 }}>
+                    {`${capitalize(pid || 'not working')} Database Manager`}{' '}
+                </h2>
+                <Counter />
+            </Title>
+            {uploadedResult && (
+                <Results>
+                    {status && globalState.counter.loading && (
+                        <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>
+                    )}
+                    {uploadedResult.map((result) => (
+                        <p
+                            key={result.result}
+                            style={
+                                result.status === 422
+                                    ? { color: 'red', textAlign: 'right' }
+                                    : { textAlign: 'right' }
+                            }>
+                            {result.result}
+                        </p>
+                    ))}
+                </Results>
+            )}
 
-                <SiteHostSection>
+            <SiteHostSection>
+                <MetricsDisplay
+                    headerTitle={selected.siteHost}
+                    isHost
+                    loading={globalState.counter.loading}
+                    cancel={_cancel}
+                    buttonTitle={`Load All ${selected.siteHost} Shops`}
+                    buttonClick={() => {
+                        set.selectedBusinessName('');
+
+                        _updateAll({
+                            siteHost: selected.siteHost,
+                            businessName: null,
+                            domain: null
+                        });
+                    }}
+                    disabled={Boolean(selected.businessName)}
+                />
+            </SiteHostSection>
+
+            <ShopSection>
+                {selected.businessName && (
                     <MetricsDisplay
-                        headerTitle={selected.siteHost}
-                        isHost
+                        headerTitle={selected.businessName}
                         loading={globalState.counter.loading}
                         cancel={_cancel}
-                        buttonTitle={`Load All ${selected.siteHost} Shops`}
+                        buttonTitle={`Load ${selected.businessName}`}
                         buttonClick={() => {
-                            set.selectedBusinessName('');
-
-                            _updateAll({
-                                siteHost: selected.siteHost,
-                                businessName: null,
-                                domain: null
-                            });
+                            _updateSingle(selected);
                         }}
-                        disabled={Boolean(selected.businessName)}
+                        disabled={false}
                     />
-                </SiteHostSection>
+                )}
+            </ShopSection>
 
-                <ShopSection>
-                    {selected.businessName && (
-                        <MetricsDisplay
-                            headerTitle={selected.businessName}
-                            loading={globalState.counter.loading}
-                            cancel={_cancel}
-                            buttonTitle={`Load ${selected.businessName}`}
-                            buttonClick={() => {
-                                _updateSingle(selected);
-                            }}
-                            disabled={false}
-                        />
-                    )}
-                </ShopSection>
-
-                <SelectShop
-                    shopsList={shopsList}
-                    set={set}
-                    selected={selected}
-                    refresh={Boolean(uploadedResult)}
-                />
-            </Page>
-        </Layout>
+            <SelectShop
+                shopsList={shopsList}
+                set={set}
+                selected={selected}
+                refresh={Boolean(uploadedResult)}
+            />
+        </Page>
     );
 };
 

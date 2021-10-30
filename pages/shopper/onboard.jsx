@@ -16,10 +16,10 @@ const Onboard = () => {
 
     const { onboardPageNum: num } = globalState.ui;
 
-    const pages = ['location', 'frontend/styles', 'brands', 'sizes'];
-    console.log('pages: ', pages);
+    const pages = ['location', 'styles', 'brands', 'sizes'];
+  
     let selectedPage = pages[num];
-
+    console.log('selectedPage: ', selectedPage);
     return (
         <Wrapper>
             <ProgressBar progress={num} length={pages.length} />
@@ -34,7 +34,7 @@ const Onboard = () => {
                         if (num + 1 < pages.length) {
                             setGlobalState({ ui: { onboardPageNum: num + 1 } });
                         } else {
-                            router.push('/featured');
+                            router.push('shopper/featured');
                         }
                     }}
                 />

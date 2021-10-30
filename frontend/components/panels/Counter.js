@@ -4,7 +4,7 @@ import Image from 'next/image';
 import useGlobal from 'frontend/globalState/store';
 import loaderGif from 'public/assets/loader/loading-buffering-grey.gif';
 
-const Counter = () => {
+export const Counter = () => {
     const [globalState] = useGlobal();
     const { requests, success, fail, loading } = globalState.counter;
 
@@ -20,4 +20,3 @@ const Counter = () => {
     );
 };
 
-export default Counter;
