@@ -2,7 +2,6 @@ import { buckets } from 'backend/utils/search';
 
 export async function products(data, business_name) {
     let formatted = [];
-    console.log('business_name, data:', business_name, buckets);
     let appliedBuckets = buckets[business_name];
 
     const getReference = (variants, options) => {

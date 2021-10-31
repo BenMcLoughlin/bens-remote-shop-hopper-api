@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { NavBarLeft, Layout, Counter, SelectShop, MetricsDisplay } from 'frontend/components';
+import { NavBarLeft, Layout, Counter, SelectShop, MetricsDisplay, Page } from 'frontend/components';
 import Sidebar from './Sidebar';
 import * as shopsLists from 'frontend/mock/shopsLists';
 
 import { camelCase, capitalize } from 'frontend/utils/strings';
 import { updateMetrics } from 'backend/requests/updateMetrics';
 import useGlobal from 'frontend/globalState/store';
-
-import { sizes } from 'frontend/styles/theme';
-
-const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
 
 const SiteHost = () => {
     const router = useRouter();
@@ -156,15 +152,15 @@ const SiteHost = () => {
     );
 };
 
-export const Page = styled.div`
-    padding: 20.05rem 32px 50px ${paddingLeft}px;
-    @media (max-width: 1100px) {
-        padding: 20.05rem 0.2rem 50px ${paddingLeft - 20}px;
-    }
-    @media (max-width: 999px) {
-        padding-left: ${paddingLeft - 20 - sizes.secondarySideBarWidth}px;
-    }
-`;
+// export const Page = styled.div`
+//     padding: 50px 32px 50px ${paddingLeft}px;
+//     @media (max-width: 1100px) {
+//         padding: 50px 0.2rem 50px ${paddingLeft - 20}px;
+//     }
+//     @media (max-width: 999px) {
+//         padding-left: ${paddingLeft - 20 - sizes.secondarySideBarWidth}px;
+//     }
+// `;
 
 const Title = styled.div`
     display: flex;

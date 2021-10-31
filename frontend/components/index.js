@@ -47,7 +47,7 @@ export {
     Header_Nates,
     LandingFooter,
     Layout,
-    // NavBar,
+    Page,
     NavBarLeft,
     ProgressBar
 } from 'frontend/components/layout';
