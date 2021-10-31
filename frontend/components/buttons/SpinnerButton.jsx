@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { color, font, mixin } from 'frontend/styles/theme';
-import { Spinner } from 'frontend/components';
+import { Spinner } from 'frontend/components/icons';
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '../icons';
