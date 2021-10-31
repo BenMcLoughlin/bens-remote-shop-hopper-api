@@ -17,7 +17,7 @@ const Onboard = () => {
     const { onboardPageNum: num } = globalState.ui;
 
     const pages = ['location', 'styles', 'brands', 'sizes'];
-  
+
     let selectedPage = pages[num];
     console.log('selectedPage: ', selectedPage);
     return (

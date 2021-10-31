@@ -229,7 +229,6 @@ export const Filters = styled.div`
 export const Column = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 30.05rem 0;
     @media (max-width: 700px) {
         flex-direction: column;
     }
@@ -273,7 +272,7 @@ export const ClearAll = styled.div`
 `;
 
 export const FormElement = styled(Form.Element)`
-    padding: 20.05rem 40px 30.05rem;
+    // padding: 20.05rem 40px 30.05rem;
 `;
 
 export const FormHeading = styled.div`

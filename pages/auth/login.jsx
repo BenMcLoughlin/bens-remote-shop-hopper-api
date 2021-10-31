@@ -35,6 +35,7 @@ const Login = (props) => {
                         src={'/../public/assets/onboard/shutterstock/womanInHat.jpg'}
                         width={1400}
                         height={1200}
+                        loading="eager"
                     />
                 </ImageWrapper>
             </Left>
