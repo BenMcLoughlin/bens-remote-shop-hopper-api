@@ -79,33 +79,31 @@ const Input = styled.input`
 `;
 
 const moveLabelUp = `
-      top: -.2rem;
- 
-      font-size: 1.2rem;
-      left 0.5rem;
-      height: 1rem;
-      font-weight: bold;
-      width: auto;
-      padding: .5rem;
+    top: -.2rem;
+    font-size: 1.2rem;
+    left 0.5rem;
+    height: 1rem;
+    font-weight: bold;
+    width: auto;
+    padding: .5rem;
 `;
 
 const Label = styled.label`
-  height: 2rem;
-     width: 20rem;
-
-  position: absolute;
-  top: 1.9rem;
-  z-index: 2;
-  left 3rem;
-  cursor: text;
-  display: flex;
-  font-size: ${(props) => props.theme.font.small};
-  justify-content: center;
-        width: auto;
-      padding: .5rem;
-  align-items: center;
-    ${Input}:focus ~ & {
-   ${moveLabelUp}
+    height: 2rem;
+    width: 20rem;
+    position: absolute;
+    top: 1.9rem;
+    z-index: 2;
+    left 3rem;
+    cursor: text;
+    display: flex;
+    font-size: ${(props) => props.theme.font.small};
+    justify-content: center;
+            width: auto;
+        padding: .5rem;
+    align-items: center;
+        ${Input}:focus ~ & {
+    ${moveLabelUp}
 
   };
   ${(props) => props.textValue.toString().length > 0 && moveLabelUp};

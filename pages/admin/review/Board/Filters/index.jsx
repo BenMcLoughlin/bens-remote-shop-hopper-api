@@ -1,14 +1,13 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 // import toast from 'frontend/utils/toast';
-import styled from 'styled-components';
 import { color, font, mixin } from 'frontend/styles/theme';
-import Button from 'frontend/components/Button';
-import Form from 'frontend/components/Form';
-import { columnOptions } from 'content/variables';
+import { Form, Button } from 'frontend/components';
+import { columnOptions } from 'frontend/content/variables';
 import useGlobal from 'frontend/globalState/store';
-import { capitalize } from 'frontend/utils/strings/capitalize';
+import { capitalize } from 'frontend/utils/strings';
 
 const propTypes = {
     search: PropTypes.func,
@@ -70,9 +69,12 @@ const BoardFilters = ({ search, defaultFilters }) => {
         <Filters ModelOpen={false}>
             <Column>
                 <Row>
-                    <StyledButton variant="empty" isActive={column} onClick={_toggleModel}>
-                        {ModelOpen ? 'Column' : 'Create Filters'}
-                    </StyledButton>
+                    <StyledButton
+                        variant="empty"
+                        isActive={column}
+                        onClick={_toggleModel}
+                        title={ModelOpen ? 'Column' : 'Create Filters'}
+                    />
                     {column && <FilterText>{capitalize(column)}</FilterText>}
                 </Row>
                 <Row>
@@ -80,9 +82,9 @@ const BoardFilters = ({ search, defaultFilters }) => {
                         <StyledButton
                             variant="empty"
                             isActive={metric}
-                            onClick={() => setMetric('')}>
-                            Metric -
-                        </StyledButton>
+                            onClick={() => setMetric('')}
+                            title={'Metric -'}
+                        />
                     )}
                     {metric && <FilterText>{metric}</FilterText>}
                 </Row>
@@ -121,15 +123,15 @@ const BoardFilters = ({ search, defaultFilters }) => {
                                     <StyledButton
                                         type="submit"
                                         variant="primary"
-                                        isWorking={loading}>
-                                        Search with this filter
-                                    </StyledButton>
+                                        isWorking={loading}
+                                        title={'Search with this filter'}
+                                    />
                                     <StyledButton
                                         type="button"
                                         variant="empty"
-                                        onClick={_toggleModel}>
-                                        Cancel
-                                    </StyledButton>
+                                        onClick={_toggleModel}
+                                        title={'Cancel'}
+                                    />
                                 </Actions>
                             </FormElement>
                         </Form>
@@ -190,15 +192,15 @@ const BoardFilters = ({ search, defaultFilters }) => {
                                     <StyledButton
                                         type="submit"
                                         variant="primary"
-                                        isWorking={loading}>
-                                        {columnData.length ? 'Create Filter' : 'Next Step'}
-                                    </StyledButton>
+                                        isWorking={loading}
+                                        title={columnData.length ? 'Create Filter' : 'Next Step'}
+                                    />
                                     <StyledButton
                                         type="button"
                                         variant="empty"
-                                        onClick={_toggleModel}>
-                                        Cancel
-                                    </StyledButton>
+                                        onClick={_toggleModel}
+                                        title={'Cancel'}
+                                    />
                                 </Actions>
                             </FormElement>
                         </Form>
@@ -243,6 +245,7 @@ export const FilterText = styled.p`
 
 export const StyledButton = styled(Button)`
     border: none;
+    color: black;
     font-family: 'Yanone Kaffeesatz', Sans-serif;
     font-size: 22px;
     margin-left: 0.1rem;

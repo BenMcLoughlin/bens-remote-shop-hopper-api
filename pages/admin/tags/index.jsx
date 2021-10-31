@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { sizes } from 'frontend/styles/theme';
+// import Layout from 'frontend/components/Layout';
+import { NavBarLeft, Layout } from 'frontend/components';
 import searchTwoParams from 'backend/requests/searchTwoParams';
 import useGlobal from 'frontend/globalState/store';
-import Layout from 'frontend/components/Layout';
-import NavBarLeft from 'frontend/components/NavBarLeft';
 import Sidebar from './Sidebar';
 import Tags from './Tags';
 

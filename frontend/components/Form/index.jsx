@@ -22,7 +22,7 @@ const defaultProps = {
     validateOnBlur: false
 };
 
-const Form = ({ validate, validations, ...otherProps }) => (
+export const Form = ({ validate, validations, ...otherProps }) => (
     <Formik
         {...otherProps}
         validate={(values) => {

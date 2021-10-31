@@ -9,7 +9,7 @@ export {
 } from 'frontend/components/buttons';
 
 // developer
-export { DevTools } from 'frontend/components/devoloper';
+export { DevTools } from 'frontend/components/developer';
 
 // cards
 export { Product, Products } from './cards';
@@ -24,6 +24,16 @@ export { SlideToSide } from './HOC/transitions/SlideToSide';
 // icons
 export { Spinner, Toast } from './icons';
 
+// Formik Form
+export {
+  Form
+} from 'frontend/components/Form';
+
+// Select
+export {
+  Select
+} from 'frontend/components/Select';
+
 // inputs
 export {
     Autocomplete,
@@ -33,7 +43,7 @@ export {
     FormText,
     PickSingleOption,
     RowSingleSelect,
-    Seach,
+    Search,
     TextArea,
     TextBox,
     TextEditor

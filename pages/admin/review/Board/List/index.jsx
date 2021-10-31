@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ArrowLeftShort } from '@styled-icons/bootstrap/ArrowLeftShort';
 import { ArrowRightShort } from '@styled-icons/bootstrap/ArrowRightShort';
 
-import Product from 'frontend/components/Product';
+import { Product } from 'frontend/components';
 import { color, font, mixin } from 'frontend/styles/theme';
 import incrementProduct from 'backend/requests/incrementProduct';
 import useGlobal from 'frontend/globalState/store';

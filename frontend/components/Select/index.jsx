@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import useOnOutsideClick from 'hooks/onOutsideClick';
-import { KeyCodes } from 'content/keyCodes';
+import useOnOutsideClick from 'frontend/hooks/onOutsideClick';
+import { KeyCodes } from 'frontend/content/keyCodes';
 import { Icon } from 'frontend/components/icons';
 
 import Dropdown from './Dropdown';
@@ -50,7 +50,7 @@ const defaultProps = {
     renderOption: undefined
 };
 
-const Select = ({
+export const Select = ({
     className,
     variant,
     dropdownWidth,
@@ -215,5 +215,3 @@ const Select = ({
 
 Select.propTypes = propTypes;
 Select.defaultProps = defaultProps;
-
-export default Select;
