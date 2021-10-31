@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { times, range } from 'lodash';
 import { asDate, asDateTimeForAPI } from 'frontend/utils/dates/dateTime';
-import { Icon } from 'frontend/components/Icons';
+import { Icon } from 'frontend/components/icons';
 
 import {
     DateSection,

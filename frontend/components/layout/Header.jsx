@@ -53,8 +53,6 @@ export const Header = () => {
     );
 };
 
-export default Header;
-
 // ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`

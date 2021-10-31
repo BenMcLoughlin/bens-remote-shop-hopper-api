@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 import { color, font, mixin, zIndexValues } from 'frontend/styles/theme';
-import { Icon } from 'frontend/components/Icons';
 
 export const StyledSelect = styled.div`
     position: relative;

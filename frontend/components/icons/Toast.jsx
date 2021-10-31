@@ -4,7 +4,6 @@ import pubsub from 'sweet-pubsub';
 import { uniqueId } from 'lodash';
 import styled from 'styled-components';
 import { color, font, mixin, zIndexValues } from 'frontend/styles/theme';
-import { Icon } from 'frontend/components/icons';
 
 const Toast = () => {
     const [toasts, setToasts] = useState([]);
