@@ -3,6 +3,7 @@ export {
     Back,
     Next,
     Button,
+    SpinnerButton,
     LinkText,
     LoginButton,
     ScrollUp //     SpinnerButton

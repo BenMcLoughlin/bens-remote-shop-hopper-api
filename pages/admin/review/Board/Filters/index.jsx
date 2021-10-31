@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 // import toast from 'frontend/utils/toast';
 import { color, font, mixin } from 'frontend/styles/theme';
-import { Form, Button } from 'frontend/components';
+import { Form, SpinnerButton } from 'frontend/components';
 import { columnOptions } from 'frontend/content/variables';
 import useGlobal from 'frontend/globalState/store';
 import { capitalize } from 'frontend/utils/strings';
@@ -73,8 +73,9 @@ const BoardFilters = ({ search, defaultFilters }) => {
                         variant="empty"
                         isActive={column}
                         onClick={_toggleModel}
-                        title={ModelOpen ? 'Column' : 'Create Filters'}
-                    />
+                    >
+                        {ModelOpen ? 'Column' : 'Create Filters'}
+                    </StyledButton>
                     {column && <FilterText>{capitalize(column)}</FilterText>}
                 </Row>
                 <Row>
@@ -84,7 +85,9 @@ const BoardFilters = ({ search, defaultFilters }) => {
                             isActive={metric}
                             onClick={() => setMetric('')}
                             title={'Metric -'}
-                        />
+                        >
+                            Metric -
+                        </StyledButton>
                     )}
                     {metric && <FilterText>{metric}</FilterText>}
                 </Row>
@@ -124,14 +127,16 @@ const BoardFilters = ({ search, defaultFilters }) => {
                                         type="submit"
                                         variant="primary"
                                         isWorking={loading}
-                                        title={'Search with this filter'}
-                                    />
+                                    >
+                                        Search with this filter
+                                    </StyledButton>
                                     <StyledButton
                                         type="button"
                                         variant="empty"
                                         onClick={_toggleModel}
-                                        title={'Cancel'}
-                                    />
+                                    >
+                                        Cancel
+                                    </StyledButton>
                                 </Actions>
                             </FormElement>
                         </Form>
@@ -193,14 +198,16 @@ const BoardFilters = ({ search, defaultFilters }) => {
                                         type="submit"
                                         variant="primary"
                                         isWorking={loading}
-                                        title={columnData.length ? 'Create Filter' : 'Next Step'}
-                                    />
+                                    >
+                                        {columnData.length ? 'Create Filter' : 'Next Step'}
+                                    </StyledButton>
                                     <StyledButton
                                         type="button"
                                         variant="empty"
                                         onClick={_toggleModel}
-                                        title={'Cancel'}
-                                    />
+                                    >
+                                        Cancel
+                                    </StyledButton>
                                 </Actions>
                             </FormElement>
                         </Form>
@@ -243,9 +250,9 @@ export const FilterText = styled.p`
     color: red;
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled(SpinnerButton)`
     border: none;
-    color: black;
+    // color: black;
     font-family: 'Yanone Kaffeesatz', Sans-serif;
     font-size: 22px;
     margin-left: 0.1rem;

@@ -138,12 +138,7 @@ const buttonVariants = {
     `
 };
 
-// export const StyledSpinner = styled(Spinner)`
-//     position: relative;
-//     top: 1px;
-// `;
-
-export const StyledSpinner = styled.div`
+export const StyledSpinner = styled(Spinner)`
     position: relative;
     top: 1px;
 `;
