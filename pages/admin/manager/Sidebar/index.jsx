@@ -30,7 +30,7 @@ const ManagerSidebar = () => {
         let Icon = iconType;
 
         return (
-            <Link key={index} href={`/manager/${path}`}>
+            <Link key={index} href={`/admin/manager/${path}`}>
                 <LinkItem isSelected={router.asPath.includes(path)}>
                     <>
                         <Icon size={30} />

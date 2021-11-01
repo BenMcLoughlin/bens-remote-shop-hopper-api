@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { NavBarLeft, Layout, Counter, SelectShop, MetricsDisplay, Page } from 'frontend/components';
+import { NavBarLeft, Counter, SelectShop, MetricsDisplay, Page } from 'frontend/components';
 import Sidebar from './Sidebar';
 import * as shopsLists from 'frontend/mock/shopsLists';
 
@@ -151,16 +151,6 @@ const SiteHost = () => {
         </Page>
     );
 };
-
-// export const Page = styled.div`
-//     padding: 50px 32px 50px ${paddingLeft}px;
-//     @media (max-width: 1100px) {
-//         padding: 50px 0.2rem 50px ${paddingLeft - 20}px;
-//     }
-//     @media (max-width: 999px) {
-//         padding-left: ${paddingLeft - 20 - sizes.secondarySideBarWidth}px;
-//     }
-// `;
 
 const Title = styled.div`
     display: flex;

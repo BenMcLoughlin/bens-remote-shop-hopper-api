@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Moment from 'react-moment';
 import styled from 'styled-components';
+
 import useGlobal from 'frontend/globalState/store';
 import { camelCase } from 'frontend/utils/strings';
+import { Button } from 'frontend/components';
 import addShops from 'backend/requests/addShops';
 import fetchShops from 'backend/requests/fetchShops';
 import loaderGif from 'public/assets/loader/octo_loader.gif';

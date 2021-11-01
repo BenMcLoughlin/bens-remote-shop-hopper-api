@@ -24,10 +24,10 @@ export const Header = () => {
                 </Left>
             </Link>
             <Right>
-                <LinkText title={'Featured'} href={'shopper/featured'} replace={true} />
-                <LinkText title={'About'} href={'about'} replace={true} />
-                <LinkText title={'Manager'} href={'admin/manager'} replace={true} />
-                <LinkText title={'Review'} href={'admin/review'} replace={true} />
+                <LinkText title={'Featured'} href={'/shopper/featured'} replace={true} />
+                <LinkText title={'About'} href={'/shopper/about'} replace={true} />
+                <LinkText title={'Manager'} href={'/admin/manager'} replace={true} />
+                <LinkText title={'Review'} href={'/admin/review'} replace={true} />
                 {isAdmin && (
                     <>
                         <LinkText title={'Manager'} />
@@ -61,7 +61,6 @@ const Wrapper = styled.div`
     height: 7rem;
     width: 100%;
 `;
-
 const Left = styled.div`
     display: flex;
     justify-content: left;
@@ -87,21 +86,4 @@ const Right = styled.div`
     flex-direction: row;
     width: 40%;
     gap: 3rem;
-`;
-const HeaderButton = styled.p`
-    cursor: pointer;
-    height: 2rem;
-    display: flex;
-    align-content: center;
-    border-radius: 2rem;
-    padding: 0 1rem 0 1rem;
-    justify-content: center;
-    align-items: center;
-    background: ${(props) => props.theme.color.backgroundThemeGreen};
-    ${(p) => p.theme.gradient[p.gradient]};
-    color: white;
-    &:hover {
-        background: ${(props) => props.theme.color.dark};
-    }
-    transition: all 0.6s ease;
 `;
