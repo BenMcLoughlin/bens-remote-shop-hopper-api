@@ -11,7 +11,7 @@ export const Button = ({
     gradient = 'primary',
     icon,
     handleChange,
-    href = '/auth/signup',
+    href,
     radius = 'square'
 }) => {
     const icons = {
@@ -26,9 +26,13 @@ export const Button = ({
                     {icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}
                 </Icon>
             )}
-            <Link href={href}>
+            {href ? (
+                <Link href={href}>
+                    <Title>{startCase(title)}</Title>
+                </Link>
+            ) : (
                 <Title>{startCase(title)}</Title>
-            </Link>
+            )}
         </Wrapper>
     );
 };
@@ -61,6 +65,12 @@ const Title = styled.div`
     ${(props) => props.theme.flex.vertical.center};
 `;
 const Icon = styled.div`
+    height: 2rem;
+    width: 2rem;
+    fill: white;
+    margin-right: 1.5rem;
+`;
+const NonLink = styled.div`
     height: 2rem;
     width: 2rem;
     fill: white;
