@@ -7,7 +7,7 @@ export {
     LinkText,
     LinkButton,
     LoginButton,
-    ScrollUp //     SpinnerButton
+    ScrollUp
 } from 'frontend/components/buttons';
 
 // developer

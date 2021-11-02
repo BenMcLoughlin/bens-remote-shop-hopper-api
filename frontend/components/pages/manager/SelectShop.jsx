@@ -27,13 +27,10 @@ export const SelectShop = ({ set, selected }) => {
             let businessStatus = {};
 
             if (shops) {
-                shops.map(
-                    (d) =>
-                        (businessStatus[d.business_name] = {
-                            products: d.products,
-                            updatedAt: d.updated_at
-                        })
-                );
+                shops.map((d) => (businessStatus[d.business_name] = {
+                    products: d.products,
+                    updatedAt: d.updated_at
+                }));
 
                 setStatuses(businessStatus);
                 // setLoading(false);
@@ -46,7 +43,6 @@ export const SelectShop = ({ set, selected }) => {
     useEffect(() => {
         const _getShopList = async () => {
             setLoading(true);
-            console.time('_getShopList');
             const uniqueShops = await fetchShops();
 
             if (uniqueShops) {
@@ -55,7 +51,6 @@ export const SelectShop = ({ set, selected }) => {
 
                 setList(businessNames);
                 setLoading(false);
-                console.timeEnd('_getShopList');
             }
         };
 
