@@ -66,11 +66,10 @@ const Login = (props) => {
                         oAuth={'none'}
                         label={'sign In'}
                         valid={true}
-                        handleChange={() =>
-                            signIn('credentials', {
-                                email: fields.email.value,
-                                password: fields.password.value
-                            })
+                        handleChange={() => signIn('credentials', {
+                            email: fields.email.value,
+                            password: fields.password.value
+                        })
                         }
                     />
                     <Disclaimer>

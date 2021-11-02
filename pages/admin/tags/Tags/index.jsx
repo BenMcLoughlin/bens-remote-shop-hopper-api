@@ -6,10 +6,10 @@ import fetchTags from "backend/requests/fetchTags";
 import searchTags from "backend/requests/searchTags";
 
 const Tags = () => {
-    const [ raw_Tags, set_Raw_Tags ] = useState([]);
-    const [ search_products, set_search_products ] = useState([]);
-    const [ loading, setLoading ] = useState(false || "");
-    const [ query, setQuery ] = useState('');
+    const [raw_Tags, set_Raw_Tags] = useState([]);
+    const [search_products, set_search_products] = useState([]);
+    const [loading, setLoading] = useState(false || "");
+    const [query, setQuery] = useState('');
 
     const _getAllTags = async () => {
         setLoading('getAllTags');

@@ -41,10 +41,9 @@ const Onboard = () => {
             </NextWrapper>
             <BackWrapper>
                 <Back
-                    handleChange={() =>
-                        setGlobalState({
-                            ui: { onboardPageNum: num > 0 ? num - 1 : 0 }
-                        })
+                    handleChange={() => setGlobalState({
+                        ui: { onboardPageNum: num > 0 ? num - 1 : 0 }
+                    })
                     }
                 />
             </BackWrapper>

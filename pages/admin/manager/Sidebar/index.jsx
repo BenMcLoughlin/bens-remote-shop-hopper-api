@@ -56,9 +56,7 @@ const ManagerSidebar = () => {
             </Header>
             <Divider />
             <ul className="list">
-                {siteHostList.map((siteHost, index) =>
-                    renderLinkItem(startCase(siteHost), Shopify, `${siteHost.toLowerCase()}`, index)
-                )}
+                {siteHostList.map((siteHost, index) => renderLinkItem(startCase(siteHost), Shopify, `${siteHost.toLowerCase()}`, index))}
             </ul>
             <Divider />
             {renderLinkItem('Etc...', Web, 'etc')}
@@ -180,8 +178,7 @@ export const LinkItem = styled.div`
         margin-right: 10.05rem;
         font-size: 0.2rem;
     }
-    ${(props) =>
-        props.isSelected &&
+    ${(props) => props.isSelected &&
         css`
             color: ${color.primary};
             background: ${color.backgroundLight};

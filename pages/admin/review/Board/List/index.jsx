@@ -28,9 +28,7 @@ const BoardList = ({ products }) => {
 
     useEffect(() => {
         mountedRef.current &&
-            setCurrentQuery(
-                `${globalState.products.query.column} : ${globalState.products.query.metric}`
-            );
+            setCurrentQuery(`${globalState.products.query.column} : ${globalState.products.query.metric}`);
 
         return () => {
             mountedRef.current = false;

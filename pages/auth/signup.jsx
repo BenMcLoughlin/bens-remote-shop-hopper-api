@@ -81,11 +81,10 @@ const SignUp = (props) => {
                         oAuth={'none'}
                         label={'sign Up'}
                         valid={noErrors}
-                        handleChange={() =>
-                            onSubmit({
-                                email: fields.email.value,
-                                password: fields.password.value
-                            })
+                        handleChange={() => onSubmit({
+                            email: fields.email.value,
+                            password: fields.password.value
+                        })
                         }
                     />
                     <Disclaimer>
