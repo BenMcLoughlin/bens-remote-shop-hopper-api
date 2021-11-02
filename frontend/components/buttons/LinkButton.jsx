@@ -3,13 +3,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { Rocket } from '@styled-icons/fa-solid/Rocket';
 import { PaperPlane } from '@styled-icons/entypo/PaperPlane';
+import Link from 'next/link';
 import { startCase } from 'frontend/utils/strings';
 
-export const Button = ({
+export const LinkButton = ({
     title = '',
     gradient = 'primary',
     icon,
-    onClick,
+    href = '',
     radius = 'square'
 }) => {
     const icons = {
@@ -18,13 +19,15 @@ export const Button = ({
     };
 
     return (
-        <Wrapper gradient={gradient} onClick={onClick} radius={radius} title={title}>
+        <Wrapper gradient={gradient} radius={radius} title={title}>
             {icon && (
                 <Icon>
                     {icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}
                 </Icon>
             )}
-            <Title>{startCase(title)}</Title>
+            <Link href={href}>
+                <Title>{startCase(title)}</Title>
+            </Link>
         </Wrapper>
     );
 };
@@ -50,7 +53,6 @@ const Wrapper = styled.div`
     }
     transition: all 0.6s ease;
 `;
-
 const Title = styled.div`
     font-size: 1.4rem;
     color: white;

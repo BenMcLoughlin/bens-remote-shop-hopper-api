@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, LinkText } from 'frontend/components';
+import { Button, LinkText, LinkButton } from 'frontend/components';
 import logo from 'public/assets/logos/shopHopperTitle.svg';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -37,8 +37,8 @@ export const Header = () => {
                 )}
                 {!session ?
                     <>
-                        <Button href="/auth/signup" title="Sign up" radius="round" />
-                        <Button href="/auth/login" title="Log In" radius="round" />
+                        <LinkButton href="/auth/signup" title="Sign up" radius="round" />
+                        <LinkButton href="/auth/login" title="Log In" radius="round" />
                     </>
                     :
                     <Button

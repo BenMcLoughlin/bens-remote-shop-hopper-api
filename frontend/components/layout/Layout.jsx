@@ -12,7 +12,8 @@ export const Layout = (props) => {
     const router = useRouter();
 
     const isLandingPage = router.pathname === '/';
-    const isActive = (pathname) => router.pathname === pathname;
+    // const isActive = (pathname) => router.pathname === pathname;
+
     return (
         <Wrapper>
             <Head>
