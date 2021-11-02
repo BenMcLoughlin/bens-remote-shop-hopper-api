@@ -53,7 +53,6 @@ const SiteHost = () => {
 
     const _updateAll = async () => {
         setLoading(true);
-        console.time('_updateAll');
         globalActions.counter.clearRequests();
         await globalActions.counter.setLoading(true);
         const success = await globalActions.products.all(globalState.shops);
@@ -61,7 +60,6 @@ const SiteHost = () => {
         if (success) {
             updateMetrics(true, 'all');
             await globalActions.counter.setLoading(false);
-            console.timeEnd('_updateAll');
             setLoading(false);
 
             return true;
@@ -70,7 +68,6 @@ const SiteHost = () => {
 
     const _updateSingle = async (params) => {
         setLoading(true);
-        console.time('_updateSingle');
         globalActions.counter.clearRequests();
         await globalActions.counter.setLoading(true);
         const success = await globalActions.products.single(params);
@@ -78,7 +75,6 @@ const SiteHost = () => {
         if (success) {
             updateMetrics(true, params.business_name);
             await globalActions.counter.setLoading(false);
-            console.timeEnd('_updateSingle');
             setLoading(false);
 
             return true;
@@ -95,7 +91,7 @@ const SiteHost = () => {
                 <h2 style={{ color: '#fff', margin: 10 }}>
                     {`${capitalize(pid || 'not working')} Database Manager`}{' '}
                 </h2>
-                <Counter loading={loading} />
+                <Counter />
             </Title>
             {uploadedResult && (
                 <Results>
