@@ -1,5 +1,5 @@
 // import { getSession } from 'next-auth/react';
-import prisma from '../../../prisma/prisma.js';
+import prisma from 'prisma/prisma.js';
 
 export async function searchTwoParams(query) {
     let column = query.column;
@@ -10,8 +10,9 @@ export async function searchTwoParams(query) {
     console.log('searchTwoParams:', column, metric, cursor, amount);
     let where = {};
 
-    if (column === 'business_name' || 
-        column === 'handle' || 
+    if (
+        column === 'business_name' ||
+        column === 'handle' ||
         column === 'product_type' ||
         column === 'vendor' ||
         column === 'original_price' ||

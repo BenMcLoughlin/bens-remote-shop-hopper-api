@@ -7,7 +7,7 @@ export async function singleBusiness(businessName, domain) {
 
     try {
         for (let page = 1; page <= 100; page++) {
-            const url = `https://${ domain }/products.json?limit=250&page=${ page }`;
+            const url = `https://${domain}/products.json?limit=250&page=${page}`;
             const response = await fetch(url);
             const data = await response.json();
 
@@ -16,7 +16,7 @@ export async function singleBusiness(businessName, domain) {
                 continue;
             }
 
-            const sanitizedData = await sanitize.products([ ...data.products ], businessName);
+            const sanitizedData = await sanitize.products([...data.products], businessName);
             const successfulUploads = await load.products(sanitizedData);
 
             productsUploaded += Number(successfulUploads);
