@@ -1,6 +1,5 @@
-
 // import { getSession } from 'next-auth/react';
-import prisma from '../../../prisma/prisma.js';
+import prisma from 'prisma/prisma.js';
 
 export async function searchTags(tag) {
     const result = await prisma.product

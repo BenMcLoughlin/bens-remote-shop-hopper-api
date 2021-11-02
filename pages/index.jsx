@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { landingProps } from '../content/landingProps';
-import { HowItWorks, Testimonials, Callout, Welcome, WhoWeAre } from '../components/landing';
+import { landingProps } from '../frontend/content/landingProps';
+import {
+    HowItWorks,
+    Testimonials,
+    Callout,
+    Welcome,
+    WhoWeAre
+} from 'frontend/components/pages/landing';
 
-import { ScrollUp } from '../components';
+import { ScrollUp } from 'frontend/components';
 
 export function getStaticProps(context) {
     return {
@@ -31,8 +37,8 @@ Landing.propTypes = {
     callout: PropTypes.object,
     testimonials: PropTypes.object,
     news: PropTypes.object,
-    callout1: PropTypes.func,
-    callout2: PropTypes.func
+    callout1: PropTypes.object,
+    callout2: PropTypes.object
 };
 
 export default Landing;
