@@ -6,7 +6,7 @@ export const updateProducts = async (params) => {
 
     if (res) {
         const uploaded = await res.json();
-        console.log(`SUCCESSFULLY UPDATED ${ uploaded.result } PRODUCTS`);
+        console.log(`SUCCESSFULLY UPDATED ${uploaded.result} PRODUCTS`);
 
         return uploaded;
     }

@@ -48,7 +48,7 @@ const Center = styled.div`
     margin: 0 auto;
     min-height: 100vh;
     @media (min-width: 0px) {
-        width: 100vw;
+        width: 95vw;
     }
     @media (min-width: 768px) {
         width: 90vw;

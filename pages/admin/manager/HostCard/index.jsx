@@ -6,7 +6,7 @@ import { color, font, mixin } from 'frontend/styles/theme';
 
 const propTypes = {
     businessName: PropTypes.string,
-    openPage: PropTypes.func,
+    openPage: PropTypes.func
 };
 
 const HostCard = ({ businessName, openPage }) => (

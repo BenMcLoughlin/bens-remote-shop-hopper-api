@@ -63,12 +63,11 @@ const useQuery = (url, propsVariables = {}, options = {}) => {
     }, [makeRequest]);
 
     const setLocalData = useCallback(
-        (getUpdatedData) =>
-            mergeState(({ data }) => {
-                const updatedData = getUpdatedData(data);
-                cache[url] = { ...(cache[url] || {}), data: updatedData };
-                return { data: updatedData };
-            }),
+        (getUpdatedData) => mergeState(({ data }) => {
+            const updatedData = getUpdatedData(data);
+            cache[url] = { ...(cache[url] || {}), data: updatedData };
+            return { data: updatedData };
+        }),
         [mergeState, url]
     );
 

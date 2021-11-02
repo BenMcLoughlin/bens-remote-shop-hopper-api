@@ -9,8 +9,8 @@ export const sizes = {
     laptop: '1024px',
     laptopL: '1440px',
     desktop: '2560px',
-    appNavBarLeftWidth: 64,
-    secondarySideBarWidth: 230,
+    appNavBarLeftWidth: 50,
+    secondarySideBarWidth: 200,
     minViewportWidth: 1000
 };
 

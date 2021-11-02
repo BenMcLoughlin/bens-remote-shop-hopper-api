@@ -11,7 +11,7 @@ const defaults = {
     baseURL: process.env.API_URL || 'http://localhost:3000',
     headers: () => ({
         'Content-Type': 'application/json',
-        Authorization: getStoredAuthToken() ? `Bearer ${ getStoredAuthToken() }` : undefined
+        Authorization: getStoredAuthToken() ? `Bearer ${getStoredAuthToken()}` : undefined
     }),
     error: {
         code: 'INTERNAL_ERROR',
@@ -23,7 +23,7 @@ const defaults = {
 
 const api = (method, url, variables) => new Promise((resolve, reject) => {
     axios({
-        url: `${ defaults.baseURL }${ url }`,
+        url: `${defaults.baseURL}${url}`,
         method,
         headers: defaults.headers(),
         params: method === 'get' ? variables : undefined,

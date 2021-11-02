@@ -22,8 +22,8 @@ export const DevTools = () => {
 
     return (
         <Wrapper>
-            <Button onClick={() => sendEmail()}> Send Email</Button>
-            <Status>{response}</Status>
+            {/* <Button onClick={() => sendEmail()}> Send Email</Button>
+            <Status>{response}</Status> */}
         </Wrapper>
     );
 };

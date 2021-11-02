@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Image from 'next/image';
 import styled from 'styled-components';
 import useGlobal from 'frontend/globalState/store';
-import { buckets } from 'backend/utils/search';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 
 // import Breadcrumbs from 'frontend/components/breadcrumbs';

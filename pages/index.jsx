@@ -37,8 +37,8 @@ Landing.propTypes = {
     callout: PropTypes.object,
     testimonials: PropTypes.object,
     news: PropTypes.object,
-    callout1: PropTypes.func,
-    callout2: PropTypes.func
+    callout1: PropTypes.object,
+    callout2: PropTypes.object
 };
 
 export default Landing;

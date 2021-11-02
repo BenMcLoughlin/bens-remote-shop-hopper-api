@@ -7,7 +7,7 @@ import { Shopify } from '@styled-icons/fa-brands/Shopify';
 import styled from 'styled-components';
 
 import logoSrc from 'public/assets/logos/shophopper-logo.svg';
-import { color, sizes, font, mixin, zIndexValues } from 'fronteend/styles/theme';
+import { color, sizes, font, mixin, zIndexValues } from 'frontend/styles/theme';
 
 const Sidebar = () => (
     <SidebarWrapper>

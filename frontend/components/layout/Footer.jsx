@@ -45,8 +45,8 @@ export const Footer = () => {
     return (
         <Wrapper>
             <Links>
-                {links?.map((link) => (
-                    <Link key={link}>{link}</Link>
+                {links?.map((link, i) => (
+                    <Link key={link + i}>{link}</Link>
                 ))}
             </Links>
             <Policies>

@@ -41,15 +41,13 @@ export default async (req, res) => {
             let unique = [];
 
             if (body === 'sizes' || body === 'buckets' || body === 'colors' || body === 'tags') {
-                done.map((obj) =>
-                    obj[body].map((t) => {
-                        if (!unique.includes(t)) {
-                            unique.push(t);
-                        }
+                done.map((obj) => obj[body].map((t) => {
+                    if (!unique.includes(t)) {
+                        unique.push(t);
+                    }
 
-                        return true;
-                    })
-                );
+                    return true;
+                }));
             } else {
                 done.map((obj) => {
                     if (!unique.includes(obj[body])) {

@@ -12,7 +12,10 @@ export const Header = () => {
 
     const admins = ['Moseley', 'McLoughlin', 'Lancaster'];
 
-    const isAdmin = admins.some((d) => session?.user.name?.includes(d));
+    let isAdmin = false;
+    if (session) {
+        isAdmin = admins.some((d) => session?.user?.email?.includes(d.toLowerCase()));
+    }
 
     return (
         <Wrapper>
@@ -24,36 +27,29 @@ export const Header = () => {
                 </Left>
             </Link>
             <Right>
-                <LinkText title={'Featured'} href={'shopper/featured'} replace={true} />
-                <LinkText title={'About'} href={'about'} replace={true} />
-                <LinkText title={'Manager'} href={'admin/manager'} replace={true} />
-                <LinkText title={'Review'} href={'admin/review'} replace={true} />
+                <LinkText title={'Featured'} href={'/shopper/featured'} />
+                <LinkText title={'About'} href={'/shopper/about'} />
                 {isAdmin && (
                     <>
-                        <LinkText title={'Manager'} />
-                        <LinkText title={'Review'} />
+                        <LinkText title={'Manager'} href={'/admin/manager'} />
+                        <LinkText title={'Review'} href={'/admin/review'} />
                     </>
                 )}
-                {!session && (
+                {!session ? (
                     <>
                         <Button href="/auth/signup" title="Sign up" radius="round" />
                         <Button href="/auth/login" title="Log In" radius="round" />
                     </>
-                )}
-                {session && (
-                    <Link href="/">
-                        <Button
-                            title={'Sign Out'}
-                            handleChange={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
-                        />
-                    </Link>
+                ) : (
+                    <Button
+                        title={'Sign Out'}
+                        handleChange={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
+                    />
                 )}
             </Right>
         </Wrapper>
     );
 };
-
-export default Header;
 
 // ---------------------------STYLES-------------------------------------------//
 
@@ -63,7 +59,6 @@ const Wrapper = styled.div`
     height: 7rem;
     width: 100%;
 `;
-
 const Left = styled.div`
     display: flex;
     justify-content: left;
@@ -89,21 +84,4 @@ const Right = styled.div`
     flex-direction: row;
     width: 40%;
     gap: 3rem;
-`;
-const HeaderButton = styled.p`
-    cursor: pointer;
-    height: 2rem;
-    display: flex;
-    align-content: center;
-    border-radius: 2rem;
-    padding: 0 1rem 0 1rem;
-    justify-content: center;
-    align-items: center;
-    background: ${(props) => props.theme.color.backgroundThemeGreen};
-    ${(p) => p.theme.gradient[p.gradient]};
-    color: white;
-    &:hover {
-        background: ${(props) => props.theme.color.dark};
-    }
-    transition: all 0.6s ease;
 `;

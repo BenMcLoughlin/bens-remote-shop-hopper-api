@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 import sgMail from '@sendgrid/mail';
 import mockProducts from 'frontend/mock/products/emailProducts.json';
+=======
+const sgMail = require('@sendgrid/mail');
+>>>>>>> a18279988fe056bf09cd4aed95c51bafbf4b5f8b
 
 export default function sendEmail(req, res) {
-    const sgMail = require('@sendgrid/mail');
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const { template } = req.body;
@@ -24,6 +27,7 @@ export default function sendEmail(req, res) {
             ...mockProducts
         }
     };
+
     sgMail
         .send(msg)
         .then(() => {

@@ -1,14 +1,13 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 // import toast from 'frontend/utils/toast';
-import styled from 'styled-components';
 import { color, font, mixin } from 'frontend/styles/theme';
-import Button from 'frontend/components/Button';
-import Form from 'frontend/components/Form';
-import { columnOptions } from 'content/variables';
+import { Form, SpinnerButton } from 'frontend/components';
+import { columnOptions } from 'frontend/content/variables';
 import useGlobal from 'frontend/globalState/store';
-import { capitalize } from 'frontend/utils/strings/capitalize';
+import { capitalize } from 'frontend/utils/strings';
 
 const propTypes = {
     search: PropTypes.func,
@@ -70,7 +69,11 @@ const BoardFilters = ({ search, defaultFilters }) => {
         <Filters ModelOpen={false}>
             <Column>
                 <Row>
-                    <StyledButton variant="empty" isActive={column} onClick={_toggleModel}>
+                    <StyledButton
+                        variant="empty"
+                        isActive={column}
+                        onClick={_toggleModel}
+                    >
                         {ModelOpen ? 'Column' : 'Create Filters'}
                     </StyledButton>
                     {column && <FilterText>{capitalize(column)}</FilterText>}
@@ -80,7 +83,9 @@ const BoardFilters = ({ search, defaultFilters }) => {
                         <StyledButton
                             variant="empty"
                             isActive={metric}
-                            onClick={() => setMetric('')}>
+                            onClick={() => setMetric('')}
+                            title={'Metric -'}
+                        >
                             Metric -
                         </StyledButton>
                     )}
@@ -121,13 +126,15 @@ const BoardFilters = ({ search, defaultFilters }) => {
                                     <StyledButton
                                         type="submit"
                                         variant="primary"
-                                        isWorking={loading}>
+                                        isWorking={loading}
+                                    >
                                         Search with this filter
                                     </StyledButton>
                                     <StyledButton
                                         type="button"
                                         variant="empty"
-                                        onClick={_toggleModel}>
+                                        onClick={_toggleModel}
+                                    >
                                         Cancel
                                     </StyledButton>
                                 </Actions>
@@ -190,13 +197,15 @@ const BoardFilters = ({ search, defaultFilters }) => {
                                     <StyledButton
                                         type="submit"
                                         variant="primary"
-                                        isWorking={loading}>
+                                        isWorking={loading}
+                                    >
                                         {columnData.length ? 'Create Filter' : 'Next Step'}
                                     </StyledButton>
                                     <StyledButton
                                         type="button"
                                         variant="empty"
-                                        onClick={_toggleModel}>
+                                        onClick={_toggleModel}
+                                    >
                                         Cancel
                                     </StyledButton>
                                 </Actions>
@@ -220,7 +229,6 @@ export const Filters = styled.div`
 export const Column = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 30.05rem 0;
     @media (max-width: 700px) {
         flex-direction: column;
     }
@@ -241,8 +249,9 @@ export const FilterText = styled.p`
     color: red;
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled(SpinnerButton)`
     border: none;
+    // color: black;
     font-family: 'Yanone Kaffeesatz', Sans-serif;
     font-size: 22px;
     margin-left: 0.1rem;
@@ -263,7 +272,7 @@ export const ClearAll = styled.div`
 `;
 
 export const FormElement = styled(Form.Element)`
-    padding: 20.05rem 40px 30.05rem;
+    // padding: 20.05rem 40px 30.05rem;
 `;
 
 export const FormHeading = styled.div`

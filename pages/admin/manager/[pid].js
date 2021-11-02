@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { NavBarLeft, Layout, Counter, SelectShop, MetricsDisplay } from 'frontend/components';
+import { NavBarLeft, Counter, SelectShop, MetricsDisplay, Page } from 'frontend/components';
 import Sidebar from './Sidebar';
 import * as shopsLists from 'frontend/mock/shopsLists';
 
 import { camelCase, capitalize } from 'frontend/utils/strings';
 import { updateMetrics } from 'backend/requests/updateMetrics';
 import useGlobal from 'frontend/globalState/store';
-
-import { sizes } from 'frontend/styles/theme';
-
-const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
 
 const SiteHost = () => {
     const router = useRouter();
@@ -55,6 +51,7 @@ const SiteHost = () => {
     };
 
     const _updateAll = async () => {
+        console.time('_updateAll');
         globalActions.counter.clearRequests();
         await globalActions.counter.setLoading(true);
         const success = await globalActions.products.all(globalState.shops);
@@ -65,6 +62,8 @@ const SiteHost = () => {
 
             return true;
         }
+
+        console.timeend('_updateAll');
     };
 
     const _updateSingle = async (params) => {
@@ -79,6 +78,8 @@ const SiteHost = () => {
             return true;
         }
     };
+
+    console.log('status:', status);
 
     return (
         <Page>
@@ -117,7 +118,7 @@ const SiteHost = () => {
                     isHost
                     loading={globalState.counter.loading}
                     cancel={_cancel}
-                    buttonTitle={`Load All ${selected.siteHost} Shops`}
+                    buttonTitle={`Update All ${selected.siteHost} Shops`}
                     buttonClick={() => {
                         set.selectedBusinessName('');
 
@@ -137,7 +138,7 @@ const SiteHost = () => {
                         headerTitle={selected.businessName}
                         loading={globalState.counter.loading}
                         cancel={_cancel}
-                        buttonTitle={`Load ${selected.businessName}`}
+                        buttonTitle={`Update ${selected.businessName}`}
                         buttonClick={() => {
                             _updateSingle(selected);
                         }}
@@ -155,16 +156,6 @@ const SiteHost = () => {
         </Page>
     );
 };
-
-export const Page = styled.div`
-    padding: 20.05rem 32px 50px ${paddingLeft}px;
-    @media (max-width: 1100px) {
-        padding: 20.05rem 0.2rem 50px ${paddingLeft - 20}px;
-    }
-    @media (max-width: 999px) {
-        padding-left: ${paddingLeft - 20 - sizes.secondarySideBarWidth}px;
-    }
-`;
 
 const Title = styled.div`
     display: flex;

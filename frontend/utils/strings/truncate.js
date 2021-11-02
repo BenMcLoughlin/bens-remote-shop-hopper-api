@@ -3,5 +3,5 @@ export const truncate = (str) => {
         return str;
     }
 
-    return `${ str.substring(0, 37) }...`;
+    return `${str.substring(0, 37)}...`;
 };

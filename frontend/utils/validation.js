@@ -3,9 +3,9 @@ export const is = {
 
     required: () => (value) => isNilOrEmptyString(value) && 'This field is required',
 
-    minLength: (min) => (value) => Boolean(value) && value.length < min && `Must be at least ${ min } characters`,
+    minLength: (min) => (value) => Boolean(value) && value.length < min && `Must be at least ${min} characters`,
 
-    maxLength: (max) => (value) => Boolean(value) && value.length > max && `Must be at most ${ max } characters`,
+    maxLength: (max) => (value) => Boolean(value) && value.length > max && `Must be at most ${max} characters`,
 
     notEmptyArray: () => (value) => Array.isArray(value) && value.length === 0 && 'Please add at least one item',
 
@@ -22,8 +22,8 @@ const isNilOrEmptyString = (value) => value === undefined || value === null || v
 export const generateErrors = (fieldValues, fieldValidators) => {
     const errors = {};
 
-    Object.entries(fieldValidators).forEach(([ fieldName, validators ]) => {
-        [ validators ].flat().forEach((validator) => {
+    Object.entries(fieldValidators).forEach(([fieldName, validators]) => {
+        [validators].flat().forEach((validator) => {
             const errorMessage = validator(fieldValues[fieldName], fieldValues);
             if (errorMessage && !errors[fieldName]) {
                 errors[fieldName] = errorMessage;

@@ -1,15 +1,15 @@
 import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 
-import Autocomplete from "components/Autocomplete";
-import fetchTags from "requests/fetchTags";
-import searchTags from "requests/searchTags";
+import Autocomplete from "frontend/components/inputs/Autocomplete";
+import fetchTags from "backend/requests/fetchTags";
+import searchTags from "backend/requests/searchTags";
 
 const Tags = () => {
-    const [ raw_Tags, set_Raw_Tags ] = useState([]);
-    const [ search_products, set_search_products ] = useState([]);
-    const [ loading, setLoading ] = useState(false || "");
-    const [ query, setQuery ] = useState('');
+    const [raw_Tags, set_Raw_Tags] = useState([]);
+    const [search_products, set_search_products] = useState([]);
+    const [loading, setLoading] = useState(false || "");
+    const [query, setQuery] = useState('');
 
     const _getAllTags = async () => {
         setLoading('getAllTags');

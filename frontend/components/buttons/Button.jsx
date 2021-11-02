@@ -7,11 +7,13 @@ import Link from 'next/link';
 import { startCase } from 'frontend/utils/strings';
 
 export const Button = ({
-    title,
+    title = '',
     gradient = 'primary',
     icon,
     handleChange,
-    href,
+    href = '#',
+    onClick,
+    // href = '/auth/signup',
     radius = 'square'
 }) => {
     const icons = {

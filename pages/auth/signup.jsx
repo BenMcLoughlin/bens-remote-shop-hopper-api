@@ -59,10 +59,10 @@ const SignUp = (props) => {
                     </Link>
                 </SubTitle>
                 <Inputs>
-                    {Object.values(fields).map((field) => (
+                    {Object.values(fields).map((field, i) => (
                         <FormText
                             {...field}
-                            key={field}
+                            key={i}
                             handleChange={(e) => setField(e)}
                             errors={errors}
                             setErrors={setErrors}

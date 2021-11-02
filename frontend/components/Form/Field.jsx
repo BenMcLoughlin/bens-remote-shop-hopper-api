@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 
-import Input from 'frontend/components/Input';
-import Select from 'frontend/components/Select';
-import Textarea from 'frontend/components/Textarea';
-import TextEditor from 'frontend/components/TextEditor';
-import DatePicker from 'frontend/components/DatePicker';
+import { FormText, Textarea, TextEditor, DatePicker } from 'frontend/components/inputs';
+import { Select } from 'frontend/components/Select';
+
+// import Input from 'components/Input';
+// import Textarea from 'components/Textarea';
+// import TextEditor from 'components/TextEditor';
+// import DatePicker from 'components/DatePicker';
 
 import { StyledField, FieldLabel, FieldTip, FieldError } from './Styles';
 
@@ -50,9 +52,9 @@ const generateField = (FormComponent) => {
 };
 
 export default {
-    Input: generateField(Input),
+    FormText: generateField(FormText),
     Select: generateField(Select),
     Textarea: generateField(Textarea),
     TextEditor: generateField(TextEditor),
     DatePicker: generateField(DatePicker)
-};
+}

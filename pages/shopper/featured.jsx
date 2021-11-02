@@ -6,7 +6,7 @@ import { color } from 'frontend/styles/theme';
 import incrementProduct from '../../backend/requests/incrementProduct';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 import useGlobal from 'frontend/globalState/store';
-import { Product, Layout } from 'frontend/components';
+import { Product, Page } from 'frontend/components';
 
 const Featured = () => {
     const [globalState, globalActions] = useGlobal();
@@ -43,7 +43,7 @@ const Featured = () => {
     };
 
     return (
-        <Main>
+        <Page>
             <Title>
                 These are the {globalState.products.hotItems.length} hottest items, or items that
                 have the highest rating, according to predefined query parameters. In the future
@@ -73,12 +73,12 @@ const Featured = () => {
                     </>
                 )}
             </List>
-        </Main>
+        </Page>
     );
 };
 
 export const Title = styled.div`
-    font-size: 22px;
+    font-size: 16px;
     margin: 1rem;
 `;
 

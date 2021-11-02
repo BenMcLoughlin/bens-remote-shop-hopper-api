@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { color, font, mixin } from 'frontend/styles/theme';
-import { Spinner } from 'frontend/components';
+import { Spinner } from 'frontend/components/icons';
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '../icons';
@@ -55,11 +55,9 @@ export const SpinnerButton = forwardRef(
                 {children && <Text withPadding={isWorking || icon}>{children}</Text>}
             </StyledButton>
         );
-    }
-);
+    });
 
-const getIconColor = (variant) =>
-    ['secondary', 'empty'].includes(variant) ? color.textDark : '#fff';
+const getIconColor = (variant) => ['secondary', 'empty'].includes(variant) ? color.textDark : '#fff';
 
 SpinnerButton.propTypes = propTypes;
 SpinnerButton.defaultProps = defaultProps;
@@ -96,8 +94,7 @@ const colored = css`
         &:active {
             background: ${(props) => mixin.darken(color[props.variant], 0.1)};
         }
-        ${(props) =>
-            props.isActive &&
+        ${(props) => props.isActive &&
             css`
                 background: ${mixin.darken(color[props.variant], 0.1)} !important;
             `}
@@ -115,8 +112,7 @@ const secondaryAndEmptyShared = css`
             color: ${color.primary};
             background: ${color.backgroundLightPrimary};
         }
-        ${(props) =>
-            props.isActive &&
+        ${(props) => props.isActive &&
             css`
                 color: ${color.primary};
                 background: ${color.backgroundLightPrimary} !important;
@@ -138,12 +134,7 @@ const buttonVariants = {
     `
 };
 
-// export const StyledSpinner = styled(Spinner)`
-//     position: relative;
-//     top: 1px;
-// `;
-
-export const StyledSpinner = styled.div`
+export const StyledSpinner = styled(Spinner)`
     position: relative;
     top: 1px;
 `;

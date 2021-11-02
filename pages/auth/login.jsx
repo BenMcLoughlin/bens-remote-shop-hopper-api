@@ -35,6 +35,7 @@ const Login = (props) => {
                         src={'/../public/assets/onboard/shutterstock/womanInHat.jpg'}
                         width={1400}
                         height={1200}
+                        loading="eager"
                     />
                 </ImageWrapper>
             </Left>
@@ -65,11 +66,10 @@ const Login = (props) => {
                         oAuth={'none'}
                         label={'sign In'}
                         valid={true}
-                        handleChange={() =>
-                            signIn('credentials', {
-                                email: fields.email.value,
-                                password: fields.password.value
-                            })
+                        handleChange={() => signIn('credentials', {
+                            email: fields.email.value,
+                            password: fields.password.value
+                        })
                         }
                     />
                     <Disclaimer>

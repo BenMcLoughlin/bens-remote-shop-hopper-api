@@ -7,7 +7,7 @@ const incrementItem = async (body) => {
         body: JSON.stringify(body)
     });
     const data = await res.json();
-    console.log(`SUCCESSFUL INCREMENT, points for ${ body }:`, data.result.value);
+    console.log(`SUCCESSFUL INCREMENT, points for ${body}:`, data.result.value);
 
     return data;
 };

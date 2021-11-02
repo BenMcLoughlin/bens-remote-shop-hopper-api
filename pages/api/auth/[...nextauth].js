@@ -1,3 +1,4 @@
+/* eslint-disable require-await */
 import { NextApiHandler } from 'next';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -9,16 +10,11 @@ import prisma from 'prisma/prisma';
 import Auth0Provider from 'next-auth/providers/auth0';
 import bcrypt from 'bcryptjs';
 
-// if (process.env.NODE_ENV !== 'development') {
-//     process.env.DATABASE_URL =
-//         'postgres://ecbkgjykhvnpsr:476026aa4ca7a07040c4f754d8c903907efd3d8a81825169429a55a9bc9e1525@ec2-54-145-188-92.compute-1.amazonaws.com:5432/dads1efmqn8d0h';
-// }
-
 const options = {
     providers: [
         CredentialsProvider({
             async authorize(payload) {
-                if (payload.id) return payload;
+                if (payload.id) { return payload; }
 
                 const { email, password } = payload;
 
@@ -32,9 +28,10 @@ const options = {
 
                 if (user && passwordMatch) {
                     return user;
-                } else {
-                    throw new Error('invalid credentials');
                 }
+ 
+                throw new Error('invalid credentials');
+                
             }
         }),
         GitHubProvider({
@@ -73,9 +70,9 @@ const options = {
         },
         async redirect({ url, baseUrl }) {
             return url.includes('signup') ? 'http://localhost:3000/shopper/onboard' : baseUrl;
-        }
-        // async session(session, user) { return session },
-        // async jwt(token, user, account, profile, isNewUser) { return token }
+        },
+        async session(session, user) { return session; },
+        async jwt(token, user, account, profile, isNewUser) { return token; }
     }
 };
 

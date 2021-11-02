@@ -120,7 +120,7 @@ function changePassword(password, existing) {
  */
 function savePushToken(body) {
     const options = {
-        endpoint: `/user/pushToken/${ body.token }`,
+        endpoint: `/user/pushToken/${body.token}`,
         method: 'POST',
         noJson: true
     };

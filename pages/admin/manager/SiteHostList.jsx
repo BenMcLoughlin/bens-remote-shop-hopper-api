@@ -42,16 +42,16 @@ const SiteHostList = () => {
                                 key={`${host.id + index}`}
                                 id={host.id}
                                 businessName={host}
-                                openPage={() => _openPage(`/manager/${host.toLowerCase()}`)}
+                                openPage={() => _openPage(`/admin/manager/${host.toLowerCase()}`)}
                             />
                         ))}
-                        {Array.from('odfpinsdfpposndfpn').map((host, index) => (
+                        {Array.from('odfpinsdf').map((host, index) => (
                             <HostCard
                                 key={`${host + index}`}
                                 id={host.id}
                                 businessName={host}
                                 index={index}
-                                openPage={() => _openPage(`/manager/${host.toLowerCase()}`)}
+                                openPage={() => _openPage(`/admin/manager/${host.toLowerCase()}`)}
                             />
                         ))}
                     </>

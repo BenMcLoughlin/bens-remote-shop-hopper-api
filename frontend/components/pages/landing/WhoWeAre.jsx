@@ -8,8 +8,8 @@ export const WhoWeAre = ({ title, cards }) => (
     <Wrapper>
         <Title>{title}</Title>
         <Cards>
-            {cards.map(({ icon, titleText, subTitle }) => (
-                <Explainer key={titleText}>
+            {cards.map(({ icon, titleText, subTitle }, i) => (
+                <Explainer key={titleText, i}>
                     <Icon>
                         <Image src={explainerSvgs[icon]} className="image" width={80} height={80} />
                     </Icon>

@@ -2,7 +2,7 @@ import React, { useState, useRef, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { uniq } from 'lodash';
 
-import { KeyCodes } from 'content/keyCodes';
+import { KeyCodes } from 'frontend/content/keyCodes';
 
 import { ClearIcon, Dropdown, DropdownInput, Options, Option, OptionsNoResults } from './Styles';
 
