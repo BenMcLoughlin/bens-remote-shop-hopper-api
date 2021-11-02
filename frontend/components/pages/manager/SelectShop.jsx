@@ -21,8 +21,7 @@ export const SelectShop = ({ set, selected }) => {
 
     useEffect(() => {
         const _getShopStatus = async () => {
-            setLoading(true);
-            console.time('_getShopStatus');
+            // setLoading(true);
             const shops = await globalActions.shops.shopStatuses();
 
             let businessStatus = {};
@@ -37,8 +36,7 @@ export const SelectShop = ({ set, selected }) => {
                 );
 
                 setStatuses(businessStatus);
-                setLoading(false);
-                console.timeEnd('_getShopStatus');
+                // setLoading(false);
             }
         };
 

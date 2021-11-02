@@ -51,6 +51,7 @@ const SiteHost = () => {
     };
 
     const _updateAll = async () => {
+        console.time('_updateAll');
         globalActions.counter.clearRequests();
         await globalActions.counter.setLoading(true);
         const success = await globalActions.products.all(globalState.shops);
@@ -61,6 +62,8 @@ const SiteHost = () => {
 
             return true;
         }
+
+        console.timeend('_updateAll');
     };
 
     const _updateSingle = async (params) => {
@@ -75,6 +78,8 @@ const SiteHost = () => {
             return true;
         }
     };
+
+    console.log('status:', status)
 
     return (
         <Page>
@@ -113,7 +118,7 @@ const SiteHost = () => {
                     isHost
                     loading={globalState.counter.loading}
                     cancel={_cancel}
-                    buttonTitle={`Load All ${selected.siteHost} Shops`}
+                    buttonTitle={`Update All ${selected.siteHost} Shops`}
                     buttonClick={() => {
                         set.selectedBusinessName('');
 
@@ -133,7 +138,7 @@ const SiteHost = () => {
                         headerTitle={selected.businessName}
                         loading={globalState.counter.loading}
                         cancel={_cancel}
-                        buttonTitle={`Load ${selected.businessName}`}
+                        buttonTitle={`Update ${selected.businessName}`}
                         buttonClick={() => {
                             _updateSingle(selected);
                         }}

@@ -45,7 +45,7 @@ const SiteHostList = () => {
                                 openPage={() => _openPage(`/admin/manager/${host.toLowerCase()}`)}
                             />
                         ))}
-                        {Array.from('odfpinsdfpposndfpn').map((host, index) => (
+                        {Array.from('odfpinsdf').map((host, index) => (
                             <HostCard
                                 key={`${host + index}`}
                                 id={host.id}
