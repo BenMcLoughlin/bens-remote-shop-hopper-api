@@ -79,8 +79,6 @@ const SiteHost = () => {
         }
     };
 
-    console.log('status:', status);
-
     return (
         <Page>
             <NavBarLeft />
