@@ -38,6 +38,7 @@ const initialState = {
     buckets: []
 };
 
+// todo
 const buckets = [
     'Bohemian',
     'Chic',
