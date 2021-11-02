@@ -7,7 +7,7 @@ export const DevTools = () => {
 
     const body = {
         name: 'ben',
-        template: 'forgotPassword'
+        template: 'newProducts'
     };
 
     const sendEmail = async () => {
