@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// export { Avatar } from './Avatar';
-// export { Spinner } from './Spinner';
-// export { Toast } from './Toast';
-// export { Logo } from './Logo';
+export { Avatar } from './Avatar';
+export { Spinner } from './Spinner';
+export { Toast } from './Toast';
+export { Logo } from './Logo';
 
 const fontIconCodes = {
     [`bug`]: '\\e90f',
