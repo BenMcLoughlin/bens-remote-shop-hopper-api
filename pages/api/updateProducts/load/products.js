@@ -1,4 +1,4 @@
-import prisma from '../../../../prisma/prisma.js';
+import prisma from 'prisma/prisma.js';
 
 async function createRows(data) {
     let result = {};
@@ -25,15 +25,18 @@ async function createRows(data) {
     //     await prisma.$disconnect();
     // }));
 
-    result = await prisma.product.createMany({
-        data: data,
-        skipDuplicates: true
-    }).catch((e) => {
-        console.log('e:', e);
-        throw e;
-    }).finally(async () => {
-        await prisma.$disconnect();
-    });
+    result = await prisma.product
+        .createMany({
+            data: data,
+            skipDuplicates: true
+        })
+        .catch((e) => {
+            console.log('e:', e);
+            throw e;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
 
     return result;
 }
@@ -43,11 +46,7 @@ export async function products(data) {
 
     productsUploaded = await createRows(data);
 
-    console.log('productsUploaded:', productsUploaded);
-
-    // console.log('IN LOAD FUNCTION: ', productsUploaded.length);
-
-    // return productsUploaded.length;
+    console.log('IN LOAD FUNCTION: ', productsUploaded);
 
     return productsUploaded.count;
 }

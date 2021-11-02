@@ -1,12 +1,11 @@
-
-import prisma from '../../../prisma/prisma.js';
-import shopifySHopArray from '../../../mock/shopsLists/kelowna.json';
+import prisma from 'prisma/prisma.js';
+import shopifyShopArray from 'frontend/mock/shopsLists/kelowna.json';
 
 async function createAllShops() {
     let result = {};
     let shopArray = [];
 
-    shopifySHopArray.map((shop) => {
+    shopifyShopArray.map((shop) => {
         if (shop.site_host.toLowerCase() === 'shopify' && shop.buckets[0] !== 'Omit this shop') {
             const data = {
                 business_name: shop.business_name,
@@ -71,7 +70,8 @@ export default async (req, res) => {
         try {
             const shopData = req.body;
 
-            let result = shopData === 'all' ? await createAllShops() : await createNewShop(shopData);
+            let result =
+                shopData === 'all' ? await createAllShops() : await createNewShop(shopData);
 
             return res.status(200).json({ result });
         } catch (error) {

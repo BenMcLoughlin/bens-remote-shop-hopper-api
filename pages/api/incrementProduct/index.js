@@ -1,6 +1,5 @@
-
 // import { getSession } from 'next-auth/react';
-import prisma from '../../../prisma/prisma.js';
+import prisma from 'prisma/prisma.js';
 
 async function addPointToProduct(id) {
     const result = await prisma.product
