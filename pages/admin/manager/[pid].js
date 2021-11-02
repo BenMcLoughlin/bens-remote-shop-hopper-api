@@ -17,6 +17,7 @@ const SiteHost = () => {
     const { status } = globalState;
     const { pid } = router.query;
 
+    const [loading, setLoading] = useState(false);
     const [uploadedResult, setUpLoaded] = useState(false);
     const [siteHost, setSelectedSiteHost] = useState('shopify');
     const [businessName, setSelectedBusinessName] = useState('');
@@ -51,7 +52,7 @@ const SiteHost = () => {
     };
 
     const _updateAll = async () => {
-        console.time('_updateAll');
+        setLoading(true);
         globalActions.counter.clearRequests();
         await globalActions.counter.setLoading(true);
         const success = await globalActions.products.all(globalState.shops);
@@ -59,14 +60,14 @@ const SiteHost = () => {
         if (success) {
             updateMetrics(true, 'all');
             await globalActions.counter.setLoading(false);
+            setLoading(false);
 
             return true;
         }
-
-        console.timeend('_updateAll');
     };
 
     const _updateSingle = async (params) => {
+        setLoading(true);
         globalActions.counter.clearRequests();
         await globalActions.counter.setLoading(true);
         const success = await globalActions.products.single(params);
@@ -74,12 +75,11 @@ const SiteHost = () => {
         if (success) {
             updateMetrics(true, params.business_name);
             await globalActions.counter.setLoading(false);
+            setLoading(false);
 
             return true;
         }
     };
-
-    console.log('status:', status);
 
     return (
         <Page>
@@ -104,7 +104,7 @@ const SiteHost = () => {
                             style={
                                 result.status === 422
                                     ? { color: 'red', textAlign: 'right' }
-                                    : { textAlign: 'right' }
+                                    : { color: '#fff', textAlign: 'right' }
                             }>
                             {result.result}
                         </p>
@@ -116,7 +116,7 @@ const SiteHost = () => {
                 <MetricsDisplay
                     headerTitle={selected.siteHost}
                     isHost
-                    loading={globalState.counter.loading}
+                    loading={loading}
                     cancel={_cancel}
                     buttonTitle={`Update All ${selected.siteHost} Shops`}
                     buttonClick={() => {
@@ -136,7 +136,7 @@ const SiteHost = () => {
                 {selected.businessName && (
                     <MetricsDisplay
                         headerTitle={selected.businessName}
-                        loading={globalState.counter.loading}
+                        loading={loading}
                         cancel={_cancel}
                         buttonTitle={`Update ${selected.businessName}`}
                         buttonClick={() => {

@@ -29,7 +29,7 @@ const options = {
                 if (user && passwordMatch) {
                     return user;
                 }
- 
+
                 throw new Error('invalid credentials');
                 
             }
@@ -68,11 +68,14 @@ const options = {
         async signIn(user, account, profile) {
             return true;
         },
+        signOut() {
+            return true;
+        },
         async redirect({ url, baseUrl }) {
             return url.includes('signup') ? 'http://localhost:3000/shopper/onboard' : baseUrl;
-        },
-        async session(session, user) { return session; },
-        async jwt(token, user, account, profile, isNewUser) { return token; }
+        }
+        // async session(session, user) { return session; },
+        // async jwt(token, user, account, profile, isNewUser) { return token; }
     }
 };
 

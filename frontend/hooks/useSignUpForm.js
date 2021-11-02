@@ -49,7 +49,7 @@ export const useSignUpForm = () => {
 // todo
 var isValid = {
     name: function (name) {
-        const valid = name.length > 1 && name.length < 15;
+        const valid = name.length > 1 && name.length < 25;
         return {
             isError: !valid,
             message: 'Please provide a valid name.'

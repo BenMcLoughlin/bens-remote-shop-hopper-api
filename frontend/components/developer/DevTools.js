@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const DevTools = () => {
+export const DevTools = ({ hide }) => {
     const [response, setResponse] = useState('');
 
     const body = {
@@ -21,9 +21,9 @@ export const DevTools = () => {
     };
 
     return (
-        <Wrapper>
-            {/* <Button onClick={() => sendEmail()}> Send Email</Button>
-            <Status>{response}</Status> */}
+        <Wrapper hide={hide}>
+            <Button onClick={() => sendEmail()}> Send Email</Button>
+            <Status>{response}</Status>
         </Wrapper>
     );
 };
@@ -58,6 +58,7 @@ const Wrapper = styled.div`
     cursor: pointer;
     flex-direction: column;
     gap: 3rem;
+    ${(props) => props.hide && css`display: none;`}
 `;
 const Status = styled.div`
     color: red;

@@ -12,7 +12,8 @@ export const Layout = (props) => {
     const router = useRouter();
 
     const isLandingPage = router.pathname === '/';
-    const isActive = (pathname) => router.pathname === pathname;
+    // const isActive = (pathname) => router.pathname === pathname;
+
     return (
         <Wrapper>
             <Head>
@@ -27,7 +28,7 @@ export const Layout = (props) => {
             </Head>
 
             <Header />
-            {process.env.NODE_ENV === 'development' && <DevTools />}
+            {process.env.NODE_ENV === 'development' && <DevTools hide />}
 
             <Center isManager={props.isManager}>{props.children}</Center>
             {isLandingPage ? <LandingFooter {...props.children.props.footer} /> : <Footer />}
@@ -56,8 +57,7 @@ const Center = styled.div`
     @media (min-width: 1500px) {
         width: 75vw;
     }
-    ${(props) =>
-        props.isManager &&
+    ${(props) => props.isManager &&
         css`
             height: 100vh;
             overflow-y: auto;
