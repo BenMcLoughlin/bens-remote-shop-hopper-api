@@ -64,7 +64,7 @@ const Login = (props) => {
                 <Buttons>
                     <LoginButton
                         oAuth={'none'}
-                        label={'sign In'}
+                        label={'Sign In'}
                         valid={true}
                         handleChange={() => signIn('credentials', {
                             email: fields.email.value,

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { FormText, CheckBox, LoginButton } from 'frontend/components';
 import { useSignUpForm } from 'frontend/hooks';
 import createUser from 'backend/requests/createUser';
-import { getProviders, useSession, signOut, signIn } from 'next-auth/react';
+import { getProviders, useSession, signIn } from 'next-auth/react';
 
 export async function getServerSideProps(context) {
     const providers = await getProviders();
@@ -38,6 +38,8 @@ const SignUp = (props) => {
         await signIn('credentials', result);
     };
 
+    console.log('fields:', fields.email, fields.password);
+
     return (
         <Wrapper>
             <Left>
@@ -62,7 +64,7 @@ const SignUp = (props) => {
                     {Object.values(fields).map((field) => (
                         <FormText
                             {...field}
-                            key={JSON.stringify(field)}
+                            key={field.label}
                             handleChange={(e) => setField(e)}
                             errors={errors}
                             setErrors={setErrors}

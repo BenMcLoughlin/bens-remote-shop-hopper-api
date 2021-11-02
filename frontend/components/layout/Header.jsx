@@ -10,9 +10,12 @@ export const Header = () => {
     const { data: session, status } = useSession();
     const loading = status === 'loading';
 
-    const admins = ['Moseley', 'McLoughlin', 'Lancaster' ];
+    const admins = ['Moseley', 'McLoughlin', 'Lancaster'];
 
-    const isAdmin = admins.some((d) => session?.user.email?.includes(d.toLowerCase()));
+    let isAdmin = false;
+    if (session) {
+        isAdmin = admins.some((d) => session?.user?.email?.includes(d.toLowerCase()));
+    }
 
     return (
         <Wrapper>
@@ -24,12 +27,12 @@ export const Header = () => {
                 </Left>
             </Link>
             <Right>
-                <LinkText title={'Featured'} href={'/shopper/featured'}  />
-                <LinkText title={'About'} href={'/shopper/about'}  />
+                <LinkText title={'Featured'} href={'/shopper/featured'} />
+                <LinkText title={'About'} href={'/shopper/about'} />
                 {isAdmin && (
                     <>
-                        <LinkText title={'Manager'} href={'/admin/manager'}  />
-                        <LinkText title={'Review'} href={'/admin/review'}  />
+                        <LinkText title={'Manager'} href={'/admin/manager'} />
+                        <LinkText title={'Review'} href={'/admin/review'} />
                     </>
                 )}
                 {!session ?
@@ -40,7 +43,7 @@ export const Header = () => {
                     :
                     <Button
                         title={'Sign Out'}
-                        handleChange={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
+                        onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
                     />
                 }
             </Right>

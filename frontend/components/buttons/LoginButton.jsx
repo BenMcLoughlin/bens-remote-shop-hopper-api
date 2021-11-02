@@ -47,12 +47,12 @@ export const LoginButton = ({ label, oAuth, handleChange, valid = true }) => {
 // ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
-    background: ${ (p) => (p.valid ? p.oAuth.color : 'grey') };
-    color: ${ (p) => (p.oAuth.color === 'white' ? 'black' : 'white') };
-    border: ${ (p) => p.oAuth.border && '1px solid grey' };
+    background: ${(p) => (p.valid ? p.oAuth.color : 'grey')};
+    color: ${(p) => (p.oAuth.color === 'white' ? 'black' : 'white')};
+    border: ${(p) => p.oAuth.border && '1px solid grey'};
     height: 5rem;
     width: 36rem;
-    cursor: ${ (p) => p.valid && 'pointer' };
+    cursor: ${(p) => p.valid && 'pointer'};
     display: flex;
     align-content: center;
     border-radius: 1rem;
@@ -60,7 +60,7 @@ const Wrapper = styled.div`
     gap: 1rem;
     align-items: center;
     &: hover {
-        background: ${ (p) => p.valid && 'black' };
+        background: ${(p) => p.valid && 'black'};
         color: white;
     }
     transition: all 0.2s ease;
@@ -68,7 +68,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-    font-size: ${ (p) => p.theme.font.small };
+    font-size: ${(p) => p.theme.font.small};
     font-weight: bold;
     text-transform: uppercase;
     font-weight: 400;
@@ -76,10 +76,9 @@ const Title = styled.div`
     text-align: center;
 `;
 const Icon = styled.div`
-
     fill white;
-     position: absolute;
-        width: 2rem;
-        height: 2rem;
-        left: 3rem;
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    left: 3rem;
 `;

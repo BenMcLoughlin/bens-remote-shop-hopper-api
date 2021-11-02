@@ -14,7 +14,7 @@ export const Button = ({
     href = '#',
     onClick,
     // href = '/auth/signup',
-    radius = 'square',
+    radius = 'square'
 }) => {
     const icons = {
         rocket: <Rocket />,
@@ -22,7 +22,7 @@ export const Button = ({
     };
 
     return (
-        <Wrapper gradient={gradient} onClick={handleChange} radius={radius} title={title} onClick={onClick}>
+        <Wrapper gradient={gradient} onClick={handleChange} radius={radius} title={title}>
             {icon && (
                 <Icon>
                     {icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}
