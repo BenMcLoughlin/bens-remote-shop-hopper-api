@@ -62,7 +62,7 @@ const SignUp = (props) => {
                     {Object.values(fields).map((field) => (
                         <FormText
                             {...field}
-                            key={field}
+                            key={JSON.stringify(field)}
                             handleChange={(e) => setField(e)}
                             errors={errors}
                             setErrors={setErrors}
