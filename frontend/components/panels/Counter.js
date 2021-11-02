@@ -1,12 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Image from 'next/image';
 
 import useGlobal from 'frontend/globalState/store';
 import loaderGif from 'public/assets/loader/loading-buffering-grey.gif';
 
-export const Counter = () => {
+const propTypes = {
+    loading: PropTypes.bool
+};
+
+export const Counter = ({ loading }) => {
     const [globalState] = useGlobal();
-    const { requests, success, fail, loading } = globalState.counter;
+    const { requests, success, fail } = globalState.counter;
 
     return (
         <div style={{ display: 'flex', flexDirection: 'row', marginLeft: 20 }}>
@@ -20,3 +25,4 @@ export const Counter = () => {
     );
 };
 
+Counter.propTypes = propTypes;
