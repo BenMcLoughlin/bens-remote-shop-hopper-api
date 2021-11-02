@@ -13,8 +13,8 @@ export const HowItWorks = ({ title, cards, about }) => (
         <About>{about}</About>
         <Title>{title}</Title>
         <Cards>
-            {cards.map(({ titleText, number, flexDirection, image, brushImage }) => (
-                <ActionStep flexDirection={flexDirection}>
+            {cards.map(({ titleText, number, flexDirection, image, brushImage }, i) => (
+                <ActionStep key={titleText, i} flexDirection={flexDirection}>
                     <Text>
                         <Number>
                             <Image src={brushNumber[number]} width={110} height={180} />
