@@ -34,7 +34,7 @@ const Onboard = () => {
                         if (num + 1 < pages.length) {
                             setGlobalState({ ui: { onboardPageNum: num + 1 } });
                         } else {
-                            router.push('shopper/featured');
+                            router.push('/shopper/featured');
                         }
                     }}
                 />
