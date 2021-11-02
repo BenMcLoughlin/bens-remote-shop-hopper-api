@@ -1,14 +1,15 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { getSession } from 'next-auth/client';
-import prisma from '../../../prisma/prisma.js';
+// import { getSession } from 'next-auth/react';
+import prisma from 'prisma/prisma.js';
 
 export async function getRows() {
     const result = await prisma.$queryRaw`
         SELECT tags FROM products
-  `.catch((e) => {
+        `
+        .catch((e) => {
             console.log('e:', e);
             throw e;
-        }).finally(async () => {
+        })
+        .finally(async () => {
             await prisma.$disconnect();
         });
 
@@ -16,11 +17,11 @@ export async function getRows() {
 }
 
 export default async (req, res) => {
-    const session = await getSession({ req });
+    // const session = await getSession({ req });
 
-    if (!session) {
-        return res.status(401).json({ reason: 'Unauthorized' });
-    }
+    // if (!session) {
+    //     return res.status(401).json({ reason: 'Unauthorized' });
+    // }
 
     if (req.method === 'GET') {
         try {

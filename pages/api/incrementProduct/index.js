@@ -1,36 +1,76 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { getSession } from 'next-auth/client';
-import prisma from '../../../prisma/prisma.js';
+// import { getSession } from 'next-auth/react';
+import prisma from 'prisma/prisma.js';
 
 async function addPointToProduct(id) {
-    const result = await prisma.product.update({
-        where: {
-            id: id
-        },
-        data: {
-            rating: { increment: 1 }
-        }
-    }).catch((e) => {
-        console.log('e:', e);
-        throw e;
-    }).finally(async () => {
-        await prisma.$disconnect();
-    });
+    const result = await prisma.product
+        .update({
+            where: {
+                id: id
+            },
+            data: {
+                rating: { increment: 1 }
+            }
+        })
+        .catch((e) => {
+            console.log('e:', e);
+            throw e;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
+
+    return result;
+}
+
+export async function findProduct(id) {
+    const result = await prisma.product
+        .findUnique({
+            where: {
+                id
+            }
+        })
+        .catch((e) => {
+            console.log('e:', e);
+            throw e;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
+
+    return result;
+}
+
+async function addItemToHotList(item) {
+    const result = await prisma.hot_item
+        .upsert({
+            where: { title: item.title },
+            create: item,
+            update: item
+        })
+        .catch((e) => {
+            console.log('e:', e);
+            throw e;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
 
     return result;
 }
 
 export default async (req, res) => {
-    const session = await getSession({ req });
+    // const session = await getSession({ req });
 
-    if (!session) {
-        return res.status(401).json({ reason: 'Unauthorized' });
-    }
+    // if (!session) {
+    //     return res.status(401).json({ reason: 'Unauthorized' });
+    // }
 
     if (req.method === 'POST') {
         try {
             const { body } = req;
             const result = await addPointToProduct(body);
+            const item = await findProduct(body);
+            const added = await addItemToHotList(item);
 
             return res.status(200).json({ result });
         } catch (error) {

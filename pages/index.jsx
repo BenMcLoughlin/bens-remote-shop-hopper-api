@@ -1,51 +1,53 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Layout from '../components/Layout';
-import { landingProps } from '../controller/landingProps';
+import { landingProps } from '../frontend/content/landingProps';
 import {
-    Header,
     HowItWorks,
-    News,
     Testimonials,
     Callout,
     Welcome,
-    WhoWeAre,
-    Footer,
-} from '../components/landing';
-import { ScrollUp } from '../components';
+    WhoWeAre
+} from 'frontend/components/pages/landing';
 
-export async function getStaticProps(context) {
+import { ScrollUp } from 'frontend/components';
+
+export function getStaticProps(context) {
     return {
-        props: landingProps,
+        props: landingProps
     };
 }
 
-const Landing = ({ welcome, whoWeAre, howItWorks, callout, testimonials, news, footer }) => {
-    return (
-        <Layout isMain>
-            <FixedPosition>
-                <Header to="test1" />
-                <Welcome {...welcome} />
-                <WhoWeAre {...whoWeAre} />
-                <HowItWorks {...howItWorks} />
-                <Callout {...callout} />
-                <Testimonials {...testimonials} />
-                <News {...news} />
-                <Footer {...footer} />
-                <ScrollUp />
-            </FixedPosition>
-        </Layout>
-    );
+const Landing = ({ welcome, whoWeAre, howItWorks, callout1, callout2, testimonials }) => (
+    <Wrapper>
+        <Welcome {...welcome} />
+        <Callout {...callout1} />
+        <HowItWorks {...howItWorks} />
+        <WhoWeAre {...whoWeAre} />
+        <Callout {...callout2} />
+        <Testimonials {...testimonials} />
+        <ScrollUp />
+    </Wrapper>
+);
+
+Landing.propTypes = {
+    welcome: PropTypes.object,
+    whoWeAre: PropTypes.object,
+    howItWorks: PropTypes.object,
+    callout: PropTypes.object,
+    testimonials: PropTypes.object,
+    news: PropTypes.object,
+    callout1: PropTypes.object,
+    callout2: PropTypes.object
 };
 
 export default Landing;
 
-//---------------------------STYLES-------------------------------------------//
+// ---------------------------STYLES-------------------------------------------//
 
-const FixedPosition = styled.div`
-    height: 10rem;
-    position: absolute;
+const Wrapper = styled.div`
     width: 100%;
-    font-size: calc(0.03em + 0.66vw);
-    height: 100%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
 `;

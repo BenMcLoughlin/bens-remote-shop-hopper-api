@@ -2,38 +2,33 @@
 module.exports = {
     env: {
         browser: true,
-        es2021: true,
+        node: true,
+        es6: true,
+        es2021: true
     },
-    extends: [
-        'eslint:recommended',
-        'plugin:react/recommended',
-        'plugin:@typescript-eslint/recommended',
-        'prettier',
-        'plugin:prettier/recommended',
-    ],
-    parser: '@typescript-eslint/parser',
+    extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react/jsx-runtime'],
     parserOptions: {
         ecmaFeatures: {
-            jsx: true,
+            jsx: true
         },
         ecmaVersion: 12,
-        sourceType: 'module',
+        sourceType: 'module'
     },
-    plugins: ['react', '@typescript-eslint', 'prettier'],
+    plugins: ['react', 'prettier'],
     rules: {
         'accessor-pairs': 'error',
         'array-bracket-newline': 'off',
-        'array-bracket-spacing': [2, 'always', { objectsInArrays: false }],
+        'array-bracket-spacing': [2, 'never', { objectsInArrays: false }],
         'array-callback-return': 'error',
         'array-element-newline': 'off',
-        'arrow-body-style': 'error',
+        'arrow-body-style': ['error', 'as-needed'],
         'arrow-parens': ['error', 'always'],
         'arrow-spacing': [
             'error',
             {
                 after: true,
-                before: true,
-            },
+                before: true
+            }
         ],
         'block-scoped-var': 'error',
         'block-spacing': 'error',
@@ -47,23 +42,23 @@ module.exports = {
             'error',
             {
                 after: true,
-                before: false,
-            },
+                before: false
+            }
         ],
         'comma-style': ['error', 'last'],
         complexity: 'off',
         'computed-property-spacing': ['error', 'never'],
-        'consistent-return': 'error',
+        'consistent-return': 'off',
         'consistent-this': 'error',
-        curly: 'error',
+        'curly': 'error',
         'default-case': 'error',
         'dot-location': [2, 'property'],
         'dot-notation': 'error',
-        'eol-last': ['error', 'never'],
-        eqeqeq: 'error',
+        'eol-last': ['off', 'always'],
+        'eqeqeq': 'error',
         'func-call-spacing': 'error',
         'func-name-matching': 'error',
-        'func-names': 'error',
+        'func-names': 'off',
         'func-style': ['error', 'declaration', { allowArrowFunctions: true }],
         'function-paren-newline': 'error',
         'generator-star-spacing': 'error',
@@ -74,7 +69,7 @@ module.exports = {
         'id-length': 'off',
         'id-match': 'error',
         'implicit-arrow-linebreak': 'error',
-        indent: [2, 4, { SwitchCase: 1 }],
+        indent: ['error', 4],
         'indent-legacy': 'off',
         'init-declarations': 'error',
         'jsx-quotes': 'error',
@@ -93,9 +88,8 @@ module.exports = {
         'max-nested-callbacks': 'error',
         'max-params': 'off',
         'max-statements': 'off',
-        'max-statements-per-line': 'error',
+        'max-statements-per-line': 'off',
         'multiline-comment-style': 'off',
-        'multiline-ternary': [2, 'always-multiline'],
         'new-cap': 'off',
         'new-parens': 'error',
         'newline-after-var': 'off',
@@ -104,17 +98,17 @@ module.exports = {
         'no-alert': 'off',
         'no-array-constructor': 'error',
         'no-async-promise-executor': 'error',
-        'no-await-in-loop': 'error',
+        'no-await-in-loop': 'off',
         'no-bitwise': 'error',
         'no-buffer-constructor': 'error',
         'no-caller': 'error',
         'no-catch-shadow': 'error',
         'no-confusing-arrow': 'off',
-        'no-continue': 'error',
+        'no-continue': 'off',
         'no-div-regex': 'error',
         'no-duplicate-imports': 'error',
         'no-else-return': 'error',
-        'no-empty-function': 'error',
+        'no-empty-function': 'off',
         'no-eq-null': 'error',
         'no-eval': 'error',
         'no-extend-native': 'error',
@@ -157,7 +151,7 @@ module.exports = {
         'no-process-env': 'off',
         'no-process-exit': 'off',
         'no-proto': 'error',
-        'no-prototype-builtins': 'error',
+        'no-prototype-builtins': 'off',
         'no-restricted-globals': 'error',
         'no-restricted-imports': 'error',
         'no-restricted-modules': 'error',
@@ -214,14 +208,14 @@ module.exports = {
             {
                 blankLine: 'always',
                 prev: ['block-like', 'block', 'multiline-expression', 'iife', 'if'],
-                next: ['if'],
+                next: ['if']
             },
             { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
             {
                 blankLine: 'always',
                 prev: ['block-like', 'block', 'multiline-expression', 'iife', 'if'],
-                next: '*',
-            },
+                next: '*'
+            }
         ],
         'prefer-arrow-callback': 'error',
         'prefer-const': 'off',
@@ -237,6 +231,7 @@ module.exports = {
         'quote-props': 'off',
         quotes: 'off',
         radix: 'error',
+
         'require-atomic-updates': 'off',
         'require-await': 'error',
         'require-unicode-regexp': 'off',
@@ -256,7 +251,7 @@ module.exports = {
         strict: 'error',
         'switch-colon-spacing': 'error',
         'symbol-description': 'error',
-        'template-curly-spacing': [2, 'always'],
+        'template-curly-spacing': [2, 'never'],
         'template-tag-spacing': 'error',
         'unicode-bom': ['error', 'never'],
         'valid-jsdoc': 'off',
@@ -264,6 +259,14 @@ module.exports = {
         'wrap-iife': 'error',
         'wrap-regex': 'error',
         'yield-star-spacing': 'error',
-        yoda: 'error',
+        yoda: 'error'
     },
+    settings: {
+        // Allows us to lint absolute imports within codebase
+        'import/resolver': {
+            node: {
+                moduleDirectory: ['node_modules', '/']
+            }
+        }
+    }
 };

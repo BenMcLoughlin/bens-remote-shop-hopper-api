@@ -6,3 +6,4 @@ node_modules
 .next/
 .next
 test.js
+mocks.js
