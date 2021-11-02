@@ -3,14 +3,14 @@ export const startCase = (str) => {
         return str;
     }
 
-    return [ ...str ]
+    return [...str]
         .map((s, i) => {
             if (i === 0) {
                 return s.toUpperCase();
             }
 
             if (isUpperCase(s)) {
-                return ` ${ s }`;
+                return ` ${s}`;
             }
 
             return s;

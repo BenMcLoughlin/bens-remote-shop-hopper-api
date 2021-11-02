@@ -1,3 +1,4 @@
+/* eslint-disable require-await */
 import { NextApiHandler } from 'next';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -13,7 +14,7 @@ const options = {
     providers: [
         CredentialsProvider({
             async authorize(payload) {
-                if (payload.id) return payload;
+                if (payload.id) { return payload; }
 
                 const { email, password } = payload;
 
@@ -27,9 +28,10 @@ const options = {
 
                 if (user && passwordMatch) {
                     return user;
-                } else {
-                    throw new Error('invalid credentials');
                 }
+ 
+                throw new Error('invalid credentials');
+                
             }
         }),
         GitHubProvider({
@@ -68,9 +70,9 @@ const options = {
         },
         async redirect({ url, baseUrl }) {
             return url.includes('signup') ? 'http://localhost:3000/shopper/onboard' : baseUrl;
-        }
-        // async session(session, user) { return session },
-        // async jwt(token, user, account, profile, isNewUser) { return token }
+        },
+        async session(session, user) { return session; },
+        async jwt(token, user, account, profile, isNewUser) { return token; }
     }
 };
 

@@ -67,7 +67,7 @@ var isValid = {
         const isTooShort = password.length < 6;
         return {
             isError: !valid,
-            message: `Passwords must be ${ isTooShort ? 'more than 6' : 'less than 40' } characters`
+            message: `Passwords must be ${isTooShort ? 'more than 6' : 'less than 40'} characters`
         };
     },
     confirmPassword: function (value, fields) {

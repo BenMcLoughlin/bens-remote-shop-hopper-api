@@ -133,5 +133,3 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
-
-// =============== Newest

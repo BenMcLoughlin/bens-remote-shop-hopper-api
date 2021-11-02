@@ -27,12 +27,12 @@ export { Spinner, Toast } from './icons';
 
 // Formik Form
 export {
-  Form
+    Form
 } from 'frontend/components/Form';
 
 // Select
 export {
-  Select
+    Select
 } from 'frontend/components/Select';
 
 // inputs

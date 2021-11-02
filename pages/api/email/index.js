@@ -1,7 +1,6 @@
-import sgMail from '@sendgrid/mail';
+const sgMail = require('@sendgrid/mail');
 
 export default function sendEmail(req, res) {
-    const sgMail = require('@sendgrid/mail');
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const { template } = req.body;
@@ -24,6 +23,7 @@ export default function sendEmail(req, res) {
             price: '1 million!!!'
         }
     };
+
     sgMail
         .send(msg)
         .then(() => {

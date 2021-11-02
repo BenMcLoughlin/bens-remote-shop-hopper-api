@@ -8,8 +8,7 @@ export const StyledSelect = styled.div`
     cursor: pointer;
     ${font.size(14)}
     ${(props) => props.variant === 'empty' && `display: inline-block;`}
-  ${(props) =>
-        props.variant === 'normal' &&
+  ${(props) => props.variant === 'normal' &&
         css`
             width: 100%;
             border: 1px solid ${color.borderLightest};
@@ -21,8 +20,7 @@ export const StyledSelect = styled.div`
         `}
   &:focus {
         outline: none;
-        ${(props) =>
-            props.variant === 'normal' &&
+        ${(props) => props.variant === 'normal' &&
             css`
         border: 1px solid ${color.borderInputFocus};
         box-shadow: 0 0 0 1px ${color.borderInputFocus};
@@ -30,8 +28,7 @@ export const StyledSelect = styled.div`
       }
     `}
     }
-    ${(props) =>
-        props.invalid &&
+    ${(props) => props.invalid &&
         css`
             &,
             &:focus {
@@ -45,8 +42,7 @@ export const ValueContainer = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-    ${(props) =>
-        props.variant === 'normal' &&
+    ${(props) => props.variant === 'normal' &&
         css`
             min-height: 32px;
             padding: 0.05rem 0.05rem 0.05rem 0.1rem;

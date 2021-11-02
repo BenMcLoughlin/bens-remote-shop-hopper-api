@@ -79,7 +79,7 @@ const SiteHost = () => {
         }
     };
 
-    console.log('status:', status)
+    console.log('status:', status);
 
     return (
         <Page>

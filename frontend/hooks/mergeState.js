@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { isFunction } from 'lodash';
 
 const useMergeState = (initialState) => {
-    const [ state, setState ] = useState(initialState || {});
+    const [state, setState] = useState(initialState || {});
 
     const mergeState = useCallback((newState) => {
         if (isFunction(newState)) {
@@ -12,7 +12,7 @@ const useMergeState = (initialState) => {
         }
     }, []);
 
-    return [ state, mergeState ];
+    return [state, mergeState];
 };
 
 export default useMergeState;

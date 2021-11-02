@@ -11,21 +11,20 @@ const useMutation = (method, url) => {
     });
 
     const makeRequest = useCallback(
-        (variables = {}) =>
-            new Promise((resolve, reject) => {
-                mergeState({ isWorking: true });
+        (variables = {}) => new Promise((resolve, reject) => {
+            mergeState({ isWorking: true });
 
-                api[method](url, variables).then(
-                    (data) => {
-                        resolve(data);
-                        mergeState({ data, error: null, isWorking: false });
-                    },
-                    (error) => {
-                        reject(error);
-                        mergeState({ error, data: null, isWorking: false });
-                    }
-                );
-            }),
+            api[method](url, variables).then(
+                (data) => {
+                    resolve(data);
+                    mergeState({ data, error: null, isWorking: false });
+                },
+                (error) => {
+                    reject(error);
+                    mergeState({ error, data: null, isWorking: false });
+                }
+            );
+        }),
         [method, url, mergeState]
     );
 

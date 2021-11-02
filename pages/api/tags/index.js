@@ -29,15 +29,13 @@ export default async (req, res) => {
 
             let uniqueTags = [];
 
-            result.map((obj) =>
-                obj.tags.map((tag) => {
-                    if (!uniqueTags.includes(tag)) {
-                        uniqueTags.push(tag);
-                    }
+            result.map((obj) => obj.tags.map((tag) => {
+                if (!uniqueTags.includes(tag)) {
+                    uniqueTags.push(tag);
+                }
 
-                    return true;
-                })
-            );
+                return true;
+            }));
 
             return res.status(200).json({ uniqueTags });
         } catch (error) {
