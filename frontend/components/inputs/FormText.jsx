@@ -16,7 +16,6 @@ export const FormText = ({
     const [blurred, setBlurred] = useState(false);
     const [wasValid, setWasValid] = useState(false);
     const [error, setError] = useState(false);
-    console.log('handleErrors: ', handleErrors);
 
     useEffect(() => {
         if (blurred || wasValid) {
