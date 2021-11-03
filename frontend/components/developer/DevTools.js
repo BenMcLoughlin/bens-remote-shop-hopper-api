@@ -1,9 +1,13 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import { useRouter } from 'next/router';
+import { fillLoginForm } from 'frontend/utils/devTools';
 
 export const DevTools = ({ hide }) => {
     const [response, setResponse] = useState('');
+
+    const router = useRouter();
 
     const body = {
         name: 'ben',
@@ -23,6 +27,13 @@ export const DevTools = ({ hide }) => {
     return (
         <Wrapper hide={hide}>
             <Button onClick={() => sendEmail()}> Send Email</Button>
+            {router.pathname.includes('auth') && (
+                <>
+                    <Button onClick={() => fillLoginForm()}> Fill - New User</Button>
+                    <Button onClick={() => fillLoginForm()}> Fill - Existing User</Button>
+                </>
+            )}
+
             <Status>{response}</Status>
         </Wrapper>
     );
@@ -58,7 +69,11 @@ const Wrapper = styled.div`
     cursor: pointer;
     flex-direction: column;
     gap: 3rem;
-    ${(props) => props.hide && css`display: none;`}
+    ${(props) =>
+        props.hide &&
+        css`
+            display: none;
+        `}
 `;
 const Status = styled.div`
     color: red;

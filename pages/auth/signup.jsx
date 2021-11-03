@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -43,12 +43,12 @@ const SignUp = (props) => {
     return (
         <Wrapper>
             <Left>
-                <CalloutText>Find your perfect outfit, locally</CalloutText>
                 <ImageWrapper>
                     <Image
                         src={'/../public/assets/onboard/shutterstock/womanInHat.jpg'}
-                        width={1400}
+                        width={1200}
                         height={1200}
+                        loading="eager"
                     />
                 </ImageWrapper>
             </Left>
@@ -57,7 +57,7 @@ const SignUp = (props) => {
                 <SubTitle>
                     Already have an account?
                     <Link href="/auth/login" style={{ textDecoration: 'none' }}>
-                        Login
+                        <LinkText> Login</LinkText>
                     </Link>
                 </SubTitle>
                 <Inputs>
@@ -83,12 +83,12 @@ const SignUp = (props) => {
                         oAuth={'none'}
                         label={'sign Up'}
                         valid={noErrors}
-                        handleChange={() =>
+                        handleChange={() => {
                             onSubmit({
                                 email: fields.email.value,
                                 password: fields.password.value
-                            })
-                        }
+                            });
+                        }}
                     />
                     <Disclaimer>
                         By continuing, you agree to accept our Privacy Policy & Terms of Service.
@@ -119,7 +119,7 @@ const Wrapper = styled.div`
 `;
 
 const Left = styled.div`
-    width: 60%;
+    width: 50%;
     opacity: 0.7;
     position: relative;
     text-align: center;
@@ -136,17 +136,9 @@ const ImageWrapper = styled.div`
     top: 0;
     opacity: 0.8;
 `;
-const CalloutText = styled.div`
-    z-index: 10;
-    font-size: ${(p) => p.theme.font.mediumLarge};
-    margin-top: 1rem;
-    @media (max-width: 600px) {
-        opacity: 0;
-    }
-`;
 
 const Form = styled.form`
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -182,6 +174,11 @@ const Buttons = styled.div`
     gap: 2.5rem;
     align-items: center;
     height: 40%;
+`;
+const LinkText = styled.div`
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: underline;
 `;
 
 const Disclaimer = styled.div`

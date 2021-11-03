@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { startCase } from 'frontend/utils/strings/startCase.js';
 
 export const CheckBox = ({ label, value, handleChange }) => (
-    <Wrapper onClick={() => handleChange(!value)}>
+    <Wrapper id={'checkBox'} onClick={() => handleChange(!value)}>
         <Box selected={value} />
         <Text onClick={() => handleChange(!value)} selected={value}>
             {startCase(label)}
