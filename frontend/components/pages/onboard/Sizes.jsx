@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -10,7 +11,7 @@ export const Sizes = ({ sizes }) => {
     return (
         <Wrapper>
             <ImageWrapper>
-                <Image src={womanInStore} width={900} height={1000} />
+                <Image src={womanInStore} width={900} height={1000} loading="eager" />
             </ImageWrapper>
             <Right>
                 {sizeTypes.map((sizeType) => (

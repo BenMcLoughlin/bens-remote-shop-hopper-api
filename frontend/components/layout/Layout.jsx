@@ -50,6 +50,7 @@ const Center = styled.div`
     min-height: 100vh;
     @media (min-width: 0px) {
         width: 95vw;
+        min-height: 120vh;
     }
     @media (min-width: 768px) {
         width: 90vw;
@@ -62,5 +63,5 @@ const Center = styled.div`
         css`
             height: 100vh;
             overflow-y: auto;
-        `}
+        `}}
 `;

@@ -14,7 +14,7 @@ export const LandingFooter = ({ top, bottom, options }) => {
         <Wrapper>
             <Top>
                 <Background>
-                    <Image src={greenCircles} width={2000} height={700} />
+                    <Image src={greenCircles} layout="fill" />
                 </Background>
                 <Phone ref={setEntered} visible={enteredScreen}>
                     <Image src={phone} width={600} height={800} />
@@ -102,7 +102,8 @@ const Background = styled.div`
     position: absolute;
     top: 0rem;
     left: 0rem;
-    height: 40rem;
+    height: 100%;
+
     width: 100%;
 `;
 const Bottom = styled.div`

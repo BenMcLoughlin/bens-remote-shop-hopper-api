@@ -84,4 +84,7 @@ const Right = styled.div`
     flex-direction: row;
     width: 40%;
     gap: 3rem;
+    @media (max-width: 600px) {
+        width: 100%;
+    }
 `;
