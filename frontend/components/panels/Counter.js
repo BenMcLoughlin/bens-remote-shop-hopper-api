@@ -9,9 +9,9 @@ const propTypes = {
     loading: PropTypes.bool
 };
 
-export const Counter = ({ loading }) => {
+export const Counter = () => {
     const [globalState] = useGlobal();
-    const { requests, success, fail } = globalState.counter;
+    const { requests, success, fail, loading } = globalState.counter;
 
     return (
         <div style={{ display: 'flex', flexDirection: 'row', marginLeft: 20 }}>

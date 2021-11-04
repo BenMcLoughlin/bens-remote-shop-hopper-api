@@ -16,7 +16,7 @@ const Board = () => {
     const [columnData, setColumnData] = useState([]);
     const [defaultFilter, setDefaultFilter] = useState({
         column: 'buckets',
-        metric: 'Beauty'
+        metric: 'Athletic'
     });
     const mountedRef = useRef(true);
 
