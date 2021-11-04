@@ -43,6 +43,7 @@ export const Header = () => {
                     :
                     <Button
                         title={'Sign Out'}
+                        // Do we need a URL for this in production BEN?
                         onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
                     />
                 }
