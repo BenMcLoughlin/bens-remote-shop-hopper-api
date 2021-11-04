@@ -19,7 +19,9 @@ export async function products(data, business_name) {
         });
 
         options.map((option) => {
-            if (option.name.toLowerCase() === 'size') {
+            if (option.name.toLowerCase() === 'size'
+
+            ) {
                 sizes = option.values;
             }
 
@@ -30,10 +32,8 @@ export async function products(data, business_name) {
             return true;
         });
 
-        if (sizes) {
-            reference.sizes = sizes;
-        }
-        
+
+        reference.sizes = sizes;
         reference.colors = colors;
         // We won't use floats because JavaScript.
         reference.publishedAtPrice = Math.trunc((price / variants.length) * 100);
