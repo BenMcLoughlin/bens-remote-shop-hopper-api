@@ -43,6 +43,7 @@ export const Header = () => {
                     :
                     <Button
                         title={'Sign Out'}
+                        // Do we need a URL for this in production BEN?
                         onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
                     />
                 }
@@ -79,7 +80,7 @@ const Logo = styled.div`
 const Right = styled.div`
     display: flex;
     align-items: center;
-    margin-right: 20.05rem;
+    margin-right: 6rem;
     justify-content: flex-end;
     flex-direction: row;
     width: 40%;

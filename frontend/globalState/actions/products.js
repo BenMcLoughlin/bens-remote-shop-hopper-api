@@ -33,6 +33,7 @@ export const single = async (store, params) => {
 
 export const all = (store, shops) => {
     store.actions.counter.clearRequests();
+    console.time('_updateAll');
 
     let promises = shops.data.map(async (shop, i) => {
         if (shop.domain) {
@@ -54,6 +55,7 @@ export const all = (store, shops) => {
     Promise.all(promises)
         .then((results) => {
             store.actions.counter.addResult(results);
+            console.timeEnd('_updateAll');
         });
 
     return true;
