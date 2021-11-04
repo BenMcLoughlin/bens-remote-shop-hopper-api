@@ -1,4 +1,4 @@
-import { buckets } from 'backend/utils/search';
+import { buckets, sizeOptions } from 'backend/utils/search';
 
 export async function products(data, business_name) {
     let formatted = [];
@@ -19,9 +19,7 @@ export async function products(data, business_name) {
         });
 
         options.map((option) => {
-            if (option.name.toLowerCase() === 'size'
-
-            ) {
+            if (option.name.toLowerCase() === 'size') {
                 sizes = option.values;
             }
 
