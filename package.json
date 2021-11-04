@@ -5,6 +5,7 @@
   "description": "",
   "scripts": {
     "dev": "set NODE_ENV=development && next",
+    "devCloud": "prisma generate && prisma migrate deploy && next build && set NODE_ENV=devCloud",
     "staging": "prisma generate && prisma migrate deploy && next build && set NODE_ENV=staging",
     "build": "prisma generate && prisma migrate deploy && next build && set NODE_ENV=production",
     "start": "next start"
