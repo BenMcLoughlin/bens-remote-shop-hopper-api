@@ -21,8 +21,20 @@ function request(req) {
 
         const endpoint = `${envUrl}${req.endpoint}`;
         const options = {
-            method: req.method.toUpperCase()
+            method: req.method.toUpperCase(),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers":
+                "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+            }
         };
+
+        if (options.method === "OPTIONS") {
+            options.headers = {
+                ...options.headers,
+                "Access-Control-Allow-Methods": "PUT, POST, PATCH, DELETE, GET"
+            };
+        }
 
         // options.headers = {
         //   Authorization: `Bearer ${ token }`,
