@@ -1,4 +1,4 @@
-import * as shops from 'backend/xhr/shops';
+import * as shops from 'frontend/xhr/shops';
 
 export const setShops = (store, state) => {
     const shopsState = { ...store.state.shops };

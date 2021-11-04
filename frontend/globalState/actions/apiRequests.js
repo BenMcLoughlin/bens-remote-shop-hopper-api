@@ -1,6 +1,6 @@
 // We will split these up into concise containers
 
-import * as products from 'backend/xhr/products';
+import * as products from 'frontend/xhr/products';
 // import * as types from './types/products'; todo
 
 export const searchProducts = (store, query) => {
