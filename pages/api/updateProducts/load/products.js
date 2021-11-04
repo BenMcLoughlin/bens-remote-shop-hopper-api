@@ -14,7 +14,7 @@ async function createRows(data) {
     //     await prisma.$disconnect();
     // });
 
-    // result = await data.map((item) => prisma.product.upsert({
+    // result = await data.map((item) => prisma.product.upsert({ todo
     //     where: { title: item.title },
     //     update: item,
     //     create: item
