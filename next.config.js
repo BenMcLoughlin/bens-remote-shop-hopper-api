@@ -21,7 +21,7 @@ default:
 // next.config.js
 module.exports = {
     // async rewrites() {
-    //     return [
+    //     return [ todo
     //         {
     //             source: '/api/:path*',
     //             destination: `${apiRequestUrl}/:path*`
