@@ -30,17 +30,15 @@ const Board = () => {
             const success = await getColumn('buckets');
             // console.log('success.result:', success.result[0]?.value);
 
-            if (success.result) {
-                await setColumnData(success.result);
+            console.log('success.result:', success?.result[1].value);
 
-                await setDefaultFilter({
-                    column: 'buckets',
-                    metric: columnData[0]?.value
-                });
+            await setDefaultFilter({
+                column: 'buckets',
+                metric: columnData[0]?.value
+            });
 
-                setLoading(false);
-                return true;
-            }
+            setLoading(false);
+            return true;
         };
 
         _fetchDefault();
@@ -71,12 +69,8 @@ const Board = () => {
 
     return (
         <BoardWrapper>
-            {/* <Breadcrumbs items={[ 'Projects', 'project.name', 'Add' ]} /> */}
             <Filters defaultFilters={defaultFilter} search={_getProducts} />
-            <List
-                products={products}
-                // products={globalState.products.data}
-            />
+            <List products={products} />
         </BoardWrapper>
     );
 };

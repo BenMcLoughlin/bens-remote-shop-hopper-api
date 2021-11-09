@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DB_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model hot_item {
+  id               Int      @id @default(autoincrement())
+  body_html        String?  @map("bodyHtml")
+  buckets          String[]
+  business_name    String?  @map("businessName")
+  colors           String[]
+  compare_at_price Int?     @map("compareAtPrice")
+  created_at       DateTime @default(now()) @map("createdAt")
+  handle           String?
+  images           Json?
+  options          Json?
+  original_price   Int?     @map("originalPrice")
+  product_type     String?  @map("productType")
+  published_at     DateTime @default(now()) @map("publishedAt")
+  rating           Int?     @default(0)
+  sizes            String[]
+  tags             String[]
+  title            String   @unique
+  updated_at       DateTime @default(now()) @map("updatedAt")
+  variants         Json?
+  vendor           String?
+
+  @@map("hot_items")
+}
+
+model status {
+  id            Int      @id @default(autoincrement())
+  updated_at    DateTime @default(now())
+  products      Int
+  business_name String   @unique
+
+  @@map("statuses")
+}
+
+model shop {
+  id            Int      @id @default(autoincrement())
+  domain        String   @unique
+  vertical      String?
+  city          String?
+  province      String?
+  country       String?
+  created_at    DateTime @default(now())
+  business_name String
+  postal_code   String?
+  site_host     String
+  buckets       String[]
+
+  @@map("shops")
+}
+
+model product {
+  id               Int      @id @default(autoincrement())
+  business_name    String?  @map("businessName")
+  title            String   @unique
+  handle           String?
+  vendor           String?
+  tags             String[]
+  variants         Json?
+  images           Json?
+  options          Json?
+  rating           Int?     @default(0)
+  body_html        String?  @map("bodyHtml")
+  created_at       DateTime @default(now()) @map("createdAt")
+  product_type     String?  @map("productType")
+  published_at     DateTime @default(now()) @map("publishedAt")
+  updated_at       DateTime @default(now()) @map("updatedAt")
+  colors           String[]
+  compare_at_price Int?     @map("compareAtPrice")
+  original_price   Int?     @map("originalPrice")
+  sizes            String[]
+  buckets          String[]
+
+  @@map("products")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  role          String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+  oauth_token_secret String?
+  oauth_token        String?
+  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

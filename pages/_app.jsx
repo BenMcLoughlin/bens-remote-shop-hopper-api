@@ -26,11 +26,9 @@ Router.events.on('routeChangeError', () => {
 const App = ({ Component, pageProps }) => (
     <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
         <ThemeProvider theme={theme}>
-            {/* <Context.Provider value={{ state, setState }}> */}
             <Layout>
                 <Component {...pageProps} />
             </Layout>
-            {/* </Context.Provider> */}
         </ThemeProvider>
     </SessionProvider>
 );

@@ -1,4 +1,4 @@
-import { buckets } from 'backend/utils/search';
+import { buckets, sizeOptions } from 'backend/utils/search';
 
 export async function products(data, business_name) {
     let formatted = [];
@@ -30,6 +30,7 @@ export async function products(data, business_name) {
             return true;
         });
 
+
         reference.sizes = sizes;
         reference.colors = colors;
         // We won't use floats because JavaScript.
@@ -57,6 +58,10 @@ export async function products(data, business_name) {
             } = product;
 
             let reference = getReference(variants, options);
+
+            if (!reference.sizes.length) {
+                return false;
+            }
 
             const output = {
                 business_name,
