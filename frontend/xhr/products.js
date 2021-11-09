@@ -2,7 +2,7 @@ import request from './request';
 
 function getGeneric(body) {
     const options = {
-        endpoint: '/api/searchTwoParams',
+        endpoint: '/api/search',
         method: 'POST',
         body
     };

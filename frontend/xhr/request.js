@@ -1,4 +1,3 @@
-import envUrl from '../../config';
 import * as session from 'backend/utils/auth';
 
 /**
@@ -19,7 +18,6 @@ function request(req) {
             return;
         }
 
-        // const endpoint = `${envUrl}${req.endpoint}`;
         const endpoint = `${req.endpoint}`;
         let options = {
             method: req.method.toUpperCase(),
@@ -61,9 +59,6 @@ function request(req) {
                 options.body = JSON.stringify(req.body);
             }
         }
-
-        console.log('options:', options);
-        console.log('endpoint:', endpoint);
 
         fetch(endpoint, options)
             .then((res) => res.json())

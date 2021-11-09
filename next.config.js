@@ -21,7 +21,7 @@ default:
 // next.config.js
 module.exports = {
     env: {
-        apiRequestUrl
+        apiRequestUrl // todo
     },
     // async rewrites() {
     //     return [ todo

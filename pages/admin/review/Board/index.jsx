@@ -24,9 +24,7 @@ const Board = () => {
     useEffect(() => {
         setLoading(true);
         const _fetchDefault = async () => {
-            // Swap this function design and see if global state is causing the CORS error todo
-            // const success = await globalActions.apiRequests.getColumn('buckets');
-            const success = await getColumn('buckets');
+            const success = await globalActions.apiRequests.getColumn('buckets');
             // console.log('success.result:', success.result[0]?.value);
 
             console.log('success.result:', success?.result[1].value);
