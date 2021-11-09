@@ -20,6 +20,9 @@ default:
 
 // next.config.js
 module.exports = {
+    env: {
+        apiRequestUrl
+    },
     // async rewrites() {
     //     return [ todo
     //         {
@@ -29,6 +32,13 @@ module.exports = {
     //     ];
     // },
     async headers() {
+        if (environment === "future todo") {
+            return {
+
+                /* development only config options here */
+            };
+        }
+
         return [
             {
                 source: '/api/:path*',

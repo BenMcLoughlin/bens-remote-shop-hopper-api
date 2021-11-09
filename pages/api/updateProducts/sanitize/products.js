@@ -59,9 +59,9 @@ export async function products(data, business_name) {
 
             let reference = getReference(variants, options);
 
-            if (!reference.sizes.length) {
-                return false;
-            }
+            // if (!reference.sizes.length) {
+            //     return false;
+            // }
 
             const output = {
                 business_name,

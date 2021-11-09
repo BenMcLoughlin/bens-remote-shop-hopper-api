@@ -19,7 +19,8 @@ function request(req) {
             return;
         }
 
-        const endpoint = `${envUrl}${req.endpoint}`;
+        // const endpoint = `${envUrl}${req.endpoint}`;
+        const endpoint = `${req.endpoint}`;
         let options = {
             method: req.method.toUpperCase(),
             headers: {
@@ -61,7 +62,8 @@ function request(req) {
             }
         }
 
-        console.log('options:', endpoint, options);
+        console.log('options:', options);
+        console.log('endpoint:', endpoint);
 
         fetch(endpoint, options)
             .then((res) => res.json())
