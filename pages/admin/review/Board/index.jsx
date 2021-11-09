@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import useGlobal from 'frontend/globalState/store';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 
-// import Breadcrumbs from 'frontend/components/breadcrumbs';
 import List from './List';
 import Filters from './Filters';
 
