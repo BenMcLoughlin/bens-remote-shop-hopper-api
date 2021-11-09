@@ -8,8 +8,6 @@ import loaderGif from 'public/assets/loader/octo_loader.gif';
 import List from './List';
 import Filters from './Filters';
 
-import { getColumn } from 'backend/requests/getColumn';
-
 const Board = () => {
     const [globalState, globalActions] = useGlobal();
     const [loading, setLoading] = useState(false);
@@ -25,9 +23,8 @@ const Board = () => {
         setLoading(true);
         const _fetchDefault = async () => {
             const success = await globalActions.apiRequests.getColumn('buckets');
-            // console.log('success.result:', success.result[0]?.value);
 
-            console.log('success.result:', success?.result[1].value);
+            console.log('getColumn result:', success.result[0]?.value);
 
             await setDefaultFilter({
                 column: 'buckets',
