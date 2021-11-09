@@ -8,7 +8,7 @@ import { Button } from '..';
 import { useOnScreen } from 'frontend/hooks/useOnScreen';
 
 export const LandingFooter = ({ top, bottom, options }) => {
-    const [setEntered, enteredScreen] = useOnScreen({ rootMargin: '-30%', threshold: 0 });
+    const [setEntered, enteredScreen] = useOnScreen({ rootMargin: '-10%', threshold: 0 });
 
     return (
         <Wrapper>
@@ -32,11 +32,11 @@ export const LandingFooter = ({ top, bottom, options }) => {
                     <Button title={'Private Beta Sign Up'} />
                     <Button title={'News Letter'} gradient={'none'} icon={'plane'} radius="round" />
                 </Buttons>
-                <Social>
+                {/* <Social>
                     {options.social.map((d) => (
                         <SocialLink key={d}>{d}</SocialLink>
                     ))}
-                </Social>
+                </Social> */}
                 {/*  <Copyright>
                     {options.copyright.map((d, i) => (
                         <>
@@ -82,8 +82,9 @@ const Title = styled.div`
     font-weight: 600;
 `;
 const SubTitle = styled.div`
-    font-size: ${(props) => props.theme.font.small};
+    font-size: ${(props) => props.theme.font.smallMedium};
     font-weight: 200;
+    line-height: 3rem;
 `;
 
 const Phone = styled.div`

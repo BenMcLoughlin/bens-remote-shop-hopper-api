@@ -103,6 +103,7 @@ const Text = styled.div`
     padding-left: 5rem;
     justify-content: space-around;
     position: relative;
+    
 `;
 const Number = styled.div`
     position: absolute;
@@ -113,10 +114,12 @@ const Number = styled.div`
 `;
 
 const ActionTitle = styled.div`
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${(p) => p.theme.font.smallMedium};
     margin-left: 10%;
     width: 100%;
     text-align: left;
+    font-weight: 600;
+
 `;
 
 const Blotch = styled.div`

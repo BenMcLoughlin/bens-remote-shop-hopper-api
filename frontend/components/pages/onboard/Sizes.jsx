@@ -30,8 +30,8 @@ export const Sizes = ({ sizes }) => {
 const Wrapper = styled.div`
     height: 100%;
     width: 100%;
-    overflow: hidden;
     display: flex;
+
 `;
 const ImageWrapper = styled.div`
     width: 50%;

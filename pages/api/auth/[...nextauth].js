@@ -14,7 +14,9 @@ const options = {
     providers: [
         CredentialsProvider({
             async authorize(payload) {
-                if (payload.id) { return payload; }
+                if (payload.id) {
+                    return payload;
+                }
 
                 const { email, password } = payload;
 
@@ -31,7 +33,6 @@ const options = {
                 }
 
                 throw new Error('invalid credentials');
-                
             }
         }),
         GitHubProvider({
@@ -39,8 +40,8 @@ const options = {
             clientSecret: process.env.GITHUB_SECRET
         }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_ID,
-            clientSecret: process.env.GOOGLE_SECRET
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET
         }),
         FacebookProvider({
             clientId: process.env.FACEBOOK_ID,

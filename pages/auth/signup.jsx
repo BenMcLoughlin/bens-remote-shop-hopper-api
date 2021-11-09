@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -37,9 +37,7 @@ const SignUp = (props) => {
 
         await signIn('credentials', result);
     };
-
-    console.log('fields:', fields.email, fields.password);
-
+    console.log('fields: ', fields);
     return (
         <Wrapper>
             <Left>
@@ -101,7 +99,10 @@ const SignUp = (props) => {
                     <LoginButton
                         oAuth={'google'}
                         label={'sign up with google'}
-                        handleChange={() => signIn(providers.google.id)}
+                        handleChange={() => {
+                            console.log('providers.google.id: ', providers.google.id);
+                            signIn(providers.google.id);
+                        }}
                     />
                 </Buttons>
             </Form>

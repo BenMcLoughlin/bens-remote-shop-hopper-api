@@ -49,19 +49,14 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-<<<<<<< HEAD:components/landing/Welcome.jsx
-    color: ${ color.textDarkest };
-=======
     color: ${color.text.darkest};
->>>>>>> 487fb9e3d14e04f034a18360fe21c10bd1ede6d9:frontend/components/pages/landing/Welcome.jsx
     font-weight: bold;
     text-transform: uppercase;
 `;
 const SubTitle = styled.h2`
-    line-height: 3rem;
-    font-size: 2rem;
+    line-height: 3.5rem;
+    font-size: 2.5rem;
     margin-top: 1rem;
-    margin-left: 2rem;
     font-weight: 400;
 `;
 const Left = styled.div`

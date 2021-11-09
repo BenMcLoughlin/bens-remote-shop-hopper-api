@@ -41,6 +41,12 @@ prisma migrate dev --name <migration name>
 To run migrations after making schema changes for deployment
 
 ```
+prisma migrate resolve
+```
+
+prisma migrate resolve --applied "20201127134938_my_migration"
+
+```
 prisma migrate deploy
 ```
 

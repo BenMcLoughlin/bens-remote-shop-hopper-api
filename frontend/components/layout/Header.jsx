@@ -11,7 +11,7 @@ export const Header = () => {
     const loading = status === 'loading';
 
     const admins = ['Moseley', 'McLoughlin', 'Lancaster'];
-
+ 
     let isAdmin = false;
     if (session) {
         isAdmin = admins.some((d) => session?.user?.email?.includes(d.toLowerCase()));
@@ -27,7 +27,6 @@ export const Header = () => {
                 </Left>
             </Link>
             <Right>
-                <LinkText title={'Featured'} href={'/shopper/featured'} />
                 <LinkText title={'About'} href={'/shopper/about'} />
                 {isAdmin && (
                     <>
@@ -37,12 +36,14 @@ export const Header = () => {
                 )}
                 {!session ? (
                     <>
+                        <LinkText title={'Featured'} href={'/shopper/featured'} />
                         <LinkButton href="/auth/signup" title="Sign up" radius="round" />
                         <LinkButton href="/auth/login" title="Log In" radius="round" />
                     </>
                 ) : (
                     <Button
                         title={'Sign Out'}
+                        // Do we need a URL for this in production BEN?
                         onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
                     />
                 )}

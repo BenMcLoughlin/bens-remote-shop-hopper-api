@@ -16,7 +16,6 @@ export const Next = ({
     id = 'basic',
     enablePressEnter
 }) => {
-    console.log('valid: ', valid);
 
     useEffect(() => {
         const pressEnter = (event) => {
@@ -69,6 +68,7 @@ const Wrapper = styled(Link)`
     position: absolute;
     top: ${(props) => props.top};
     right: ${(props) => props.right};
+
 `;
 
 const Circle = styled.div`
@@ -79,13 +79,14 @@ const Circle = styled.div`
     align-items: center;
     height: 5.2rem;
     width: 5.2rem;
+    ${(p) => p.theme.gradient.primary};
 `;
 
 const ArrowRight = styled(ArrowIosForwardOutline)`
     cursor: ${(props) => (props.valid ? 'pointer' : null)};
     height: 3.2rem;
     width: 3.2rem;
-    color: ${(props) => props.theme.color.darkGrey};
+    color: white;
     z-index: 500;
 `;
 const Label = styled.label`
