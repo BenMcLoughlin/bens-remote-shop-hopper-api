@@ -25,10 +25,10 @@ const Board = () => {
         const _fetchDefault = async () => {
             const success = await globalActions.apiRequests.getColumn('buckets');
 
-            if (success.result) {
-                await setColumnData(success.result);
+            console.log('success.result:', success?.result[1].value);
 
-                // console.log('success.result:', success.result[1].value); todo
+            if (success?.result) {
+                await setColumnData(success?.result);
 
                 await setDefaultFilter({
                     column: 'buckets',

@@ -20,8 +20,13 @@ function request(req) {
         }
 
         const endpoint = `${envUrl}${req.endpoint}`;
-        const options = {
-            method: req.method.toUpperCase()
+        let options = {
+            method: req.method.toUpperCase(),
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers":
+                "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+            }
         };
 
         // options.headers = {
@@ -48,6 +53,9 @@ function request(req) {
                 options.body = JSON.stringify(req.body);
             }
         }
+
+        console.log('options:', endpoint, options);
+        // options = {};
 
         fetch(endpoint, options)
             .then((res) => res.json())
