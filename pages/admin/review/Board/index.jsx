@@ -9,6 +9,8 @@ import loaderGif from 'public/assets/loader/octo_loader.gif';
 import List from './List';
 import Filters from './Filters';
 
+import { getColumn } from 'backend/requests/getColumn';
+
 const Board = () => {
     const [globalState, globalActions] = useGlobal();
     const [loading, setLoading] = useState(false);
@@ -23,21 +25,20 @@ const Board = () => {
     useEffect(() => {
         setLoading(true);
         const _fetchDefault = async () => {
-            const success = await globalActions.apiRequests.getColumn('buckets');
+            // Swap this function design and see if global state is causing the CORS error todo
+            // const success = await globalActions.apiRequests.getColumn('buckets');
+            const success = await getColumn('buckets');
+            // console.log('success.result:', success.result[0]?.value);
 
             console.log('success.result:', success?.result[1].value);
 
-            if (success?.result) {
-                await setColumnData(success?.result);
+            await setDefaultFilter({
+                column: 'buckets',
+                metric: columnData[0]?.value
+            });
 
-                await setDefaultFilter({
-                    column: 'buckets',
-                    metric: columnData[0]?.value
-                });
-
-                setLoading(false);
-                return true;
-            }
+            setLoading(false);
+            return true;
         };
 
         _fetchDefault();

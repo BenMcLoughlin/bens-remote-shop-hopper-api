@@ -29,6 +29,13 @@ function request(req) {
             }
         };
 
+        if (options.method === "OPTIONS") {
+            options.headers = {
+                ...options.headers,
+                "Access-Control-Allow-Methods": "PUT, POST, PATCH, DELETE, GET"
+            };
+        }
+
         // options.headers = {
         //   Authorization: `Bearer ${ token }`,
         // };
@@ -55,7 +62,6 @@ function request(req) {
         }
 
         console.log('options:', endpoint, options);
-        // options = {};
 
         fetch(endpoint, options)
             .then((res) => res.json())

@@ -1,11 +1,36 @@
 /* eslint-disable require-await */
 /* eslint-disable no-undef */
+const environment = process.env.NODE_ENV;
+let apiRequestUrl = '';
+
+switch (environment) {
+case 'devCloud':
+    apiRequestUrl = 'https://shop-hopper-dev.vercel.app';
+    break;
+case 'staging':
+    apiRequestUrl = 'https://shop-hopper-staging.vercel.app';
+    break;
+case 'production':
+    apiRequestUrl = 'https://shophopper.ca';
+    break;
+default:
+    apiRequestUrl = 'http://localhost:3000';
+    break;
+}
+
 // next.config.js
 module.exports = {
+    // async rewrites() {
+    //     return [ todo
+    //         {
+    //             source: '/api/:path*',
+    //             destination: `${apiRequestUrl}/:path*`
+    //         }
+    //     ];
+    // },
     async headers() {
         return [
             {
-                // matching all API routes
                 source: '/api/:path*',
                 destination: 'https://www.shophopper.ca/:path*',
                 headers: [
