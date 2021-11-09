@@ -62,3 +62,9 @@ const Icon = styled.div`
     fill: white;
     margin-right: 1.5rem;
 `;
+const NonLink = styled.div`
+    height: 2rem;
+    width: 2rem;
+    fill: white;
+    margin-right: 1.5rem;
+`;

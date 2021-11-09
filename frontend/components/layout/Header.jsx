@@ -35,17 +35,17 @@ export const Header = () => {
                         <LinkText title={'Review'} href={'/admin/review'} />
                     </>
                 )}
-                {!session ?
+                {!session ? (
                     <>
                         <LinkButton href="/auth/signup" title="Sign up" radius="round" />
                         <LinkButton href="/auth/login" title="Log In" radius="round" />
                     </>
-                    :
+                ) : (
                     <Button
                         title={'Sign Out'}
                         onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
                     />
-                }
+                )}
             </Right>
         </Wrapper>
     );
@@ -84,4 +84,7 @@ const Right = styled.div`
     flex-direction: row;
     width: 40%;
     gap: 3rem;
+    @media (max-width: 600px) {
+        width: 100%;
+    }
 `;

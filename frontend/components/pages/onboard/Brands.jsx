@@ -52,7 +52,6 @@ export const Brands = ({ brands }) => {
 
 const Wrapper = styled.div`
     width: 100%;
-    height: 80rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -80,12 +79,12 @@ const Options = styled.div`
     width: 70%;
     min-height: 20rem;
     display: flex;
-    gap: 1rem;
     flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
     padding: 2rem;
-    justify-content: space-around;
     z-index: 1;
-    opacity: 0.8;
+    margin: 0 auto;
 `;
 
 const Option = styled.div`

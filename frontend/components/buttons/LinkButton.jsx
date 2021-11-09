@@ -19,16 +19,17 @@ export const LinkButton = ({
     };
 
     return (
-        <Wrapper gradient={gradient} radius={radius} title={title}>
-            {icon && (
-                <Icon>
-                    {icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}
-                </Icon>
-            )}
-            <Link href={href}>
+        <Link href={href}>
+            <Wrapper gradient={gradient} radius={radius} title={title}>
+                {icon && (
+                    <Icon>
+                        {icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}
+                    </Icon>
+                )}
+
                 <Title>{startCase(title)}</Title>
-            </Link>
-        </Wrapper>
+            </Wrapper>
+        </Link>
     );
 };
 

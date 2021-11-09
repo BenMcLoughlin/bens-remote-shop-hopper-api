@@ -44,7 +44,7 @@ const Login = (props) => {
                 <SubTitle>
                     Don&apos;t have an account?
                     <Link href="/auth/signup" style={{ textDecoration: 'none' }}>
-                        Sign Up
+                        <LinkText> Sign Up</LinkText>
                     </Link>
                 </SubTitle>
                 <Inputs>
@@ -66,10 +66,11 @@ const Login = (props) => {
                         oAuth={'none'}
                         label={'Sign In'}
                         valid={true}
-                        handleChange={() => signIn('credentials', {
-                            email: fields.email.value,
-                            password: fields.password.value
-                        })
+                        handleChange={() =>
+                            signIn('credentials', {
+                                email: fields.email.value,
+                                password: fields.password.value
+                            })
                         }
                     />
                     <Disclaimer>
@@ -163,6 +164,11 @@ const Buttons = styled.div`
     gap: 2.5rem;
     align-items: center;
     height: 40%;
+`;
+const LinkText = styled.div`
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: underline;
 `;
 
 const Disclaimer = styled.div`

@@ -28,7 +28,7 @@ export const Layout = (props) => {
             </Head>
 
             <Header />
-            {process.env.NODE_ENV === 'development' && <DevTools hide />}
+            {process.env.NODE_ENV === 'development' && <DevTools />}
 
             <Center isManager={props.isManager}>{props.children}</Center>
             {isLandingPage ? <LandingFooter {...props.children.props.footer} /> : <Footer />}
@@ -50,6 +50,7 @@ const Center = styled.div`
     min-height: 100vh;
     @media (min-width: 0px) {
         width: 95vw;
+        min-height: 120vh;
     }
     @media (min-width: 768px) {
         width: 90vw;
@@ -57,9 +58,10 @@ const Center = styled.div`
     @media (min-width: 1500px) {
         width: 75vw;
     }
-    ${(props) => props.isManager &&
+    ${(props) =>
+        props.isManager &&
         css`
             height: 100vh;
             overflow-y: auto;
-        `}
+        `}}
 `;
