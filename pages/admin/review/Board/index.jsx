@@ -68,12 +68,8 @@ const Board = () => {
 
     return (
         <BoardWrapper>
-            {/* <Breadcrumbs items={[ 'Projects', 'project.name', 'Add' ]} /> */}
             <Filters defaultFilters={defaultFilter} search={_getProducts} />
-            <List
-                products={products}
-                // products={globalState.products.data}
-            />
+            <List products={products} />
         </BoardWrapper>
     );
 };
