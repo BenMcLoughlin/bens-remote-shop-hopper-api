@@ -2,12 +2,13 @@
 import prisma from 'prisma/prisma.js';
 
 export async function searchTwoParams(query) {
-    let column = query.column;
-    let metric = query.metric;
+    let column = query.column || 'buckets';
+    let metric = query.metric || 'buckets';
     let cursor = query.cursor || 0;
     let amount = query.amount || 12;
+    // TODO: trigger warning if params not set
 
-    console.log('searchTwoParams:', column, metric, cursor, amount);
+    console.log('SEARCH_TWO_PARAMS column, metric, cursor, amount:', column, metric, cursor, amount);
     let where = {};
 
     if (

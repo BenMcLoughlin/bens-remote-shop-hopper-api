@@ -1,15 +1,14 @@
-import { buckets, sizeOptions } from 'backend/utils/search';
+import { bucketRelations } from 'backend/utils/search';
+import { optionsMutation } from 'backend/utils/products';
 
 export async function products(data, business_name) {
     let formatted = [];
-    let appliedBuckets = buckets[business_name];
+    let appliedBuckets = bucketRelations[business_name];
 
     const getReference = (variants, options) => {
         let reference = {};
         let price = 0;
         let compareAtPrice = 0;
-        let sizes = [];
-        let colors = [];
 
         variants.map((variant) => {
             price += Number(variant.price);
@@ -18,18 +17,7 @@ export async function products(data, business_name) {
             return true;
         });
 
-        options.map((option) => {
-            if (option.name.toLowerCase() === 'size') {
-                sizes = option.values;
-            }
-
-            if (option.name.toLowerCase() === 'color') {
-                colors = option.values;
-            }
-
-            return true;
-        });
-
+        const { sizes, colors } = optionsMutation(appliedBuckets, options);
 
         reference.sizes = sizes;
         reference.colors = colors;
@@ -41,7 +29,7 @@ export async function products(data, business_name) {
     };
 
     if (business_name) {
-        formatted = await data.map((product) => {
+        await data.map((product) => {
             const {
                 title,
                 handle,
@@ -58,10 +46,6 @@ export async function products(data, business_name) {
             } = product;
 
             let reference = getReference(variants, options);
-
-            // if (!reference.sizes.length) {
-            //     return false;
-            // }
 
             const output = {
                 business_name,
@@ -84,7 +68,11 @@ export async function products(data, business_name) {
                 colors: reference.colors
             };
 
-            return output;
+            if (reference.sizes.length >= 1) {
+                formatted.push(output);
+            }
+
+            return true;
         });
     }
 

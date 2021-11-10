@@ -1,2 +1,2 @@
-export { buckets } from './buckets';
-export { sizeOptions } from './sizeOptions';
+export { bucketRelations } from './buckets';
+export { sizeOptions } from './sizes';
