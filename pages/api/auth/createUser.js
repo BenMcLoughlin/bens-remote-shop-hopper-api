@@ -22,6 +22,7 @@ export default async function createUser({ body }, res) {
             role: body.role,
             gender: body.gender,
             size: body.size,
+            // todo: extrapolate from brands
             buckets: body.buckets,
             location: body.location,
             favourite: body.favourite

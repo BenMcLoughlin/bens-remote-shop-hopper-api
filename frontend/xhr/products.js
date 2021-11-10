@@ -12,9 +12,9 @@ function getGeneric(body) {
     });
 }
 
-function searchTwoParams(body) {
+function searchProducts(body) {
     const options = {
-        endpoint: '/api/searchTwoParams',
+        endpoint: '/api/searchProducts',
         method: 'POST',
         body
     };
@@ -63,7 +63,7 @@ function wipeProducts() {
 
 export {
     getGeneric,
-    searchTwoParams,
+    searchProducts,
     getHotItems,
     getColumn,
     wipeProducts

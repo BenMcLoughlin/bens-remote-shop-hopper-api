@@ -9,7 +9,7 @@ export const searchProducts = (store, query) => {
     store.actions.products.setQuery(query);
 
     return products
-        .searchTwoParams(query)
+        .searchProducts(query)
         .then((data) => {
             // store.actions.products.setData(data.result); todo
             console.log('SEARCH PRODUCTS:', data.result?.length);

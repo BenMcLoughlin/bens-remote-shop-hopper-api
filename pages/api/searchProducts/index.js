@@ -1,14 +1,15 @@
 // import { getSession } from 'next-auth/react';
 import prisma from 'prisma/prisma.js';
 
-export async function searchTwoParams(query) {
+export async function searchProducts(query) {
     let column = query.column || 'buckets';
-    let metric = query.metric || 'buckets';
+    let metric = query.metric || 'Athletic';
+    let size = query.size || undefined;
     let cursor = query.cursor || 0;
     let amount = query.amount || 12;
     // TODO: trigger warning if params not set
 
-    console.log('SEARCH_TWO_PARAMS column, metric, cursor, amount:', column, metric, cursor, amount);
+    console.log('SEARCH_PRODUCTS column, metric, size, cursor, amount:', column, metric, size, cursor, amount);
     let where = {};
 
     if (
@@ -20,19 +21,40 @@ export async function searchTwoParams(query) {
         column === 'compare_at_price'
     ) {
         where = {
-            [column]: metric
+            AND: [
+                {
+                    [column]: metric
+                },
+                { 
+                    sizes: size ? { has: size } : undefined
+                }
+            ]
         };
     } else if (column === 'body_html') {
         where = {
-            body_html: {
-                search: metric
-            }
+            AND: [
+                {
+                    body_html: {
+                        search: metric
+                    }
+                },
+                { 
+                    sizes: size ? { has: size } : undefined
+                }
+            ]
         };
     } else {
         where = {
-            [column]: {
-                has: metric
-            }
+            AND: [
+                {
+                    [column]: {
+                        has: metric
+                    }
+                },
+                { 
+                    sizes: size ? { has: size } : undefined
+                }
+            ]
         };
     }
 
@@ -41,11 +63,6 @@ export async function searchTwoParams(query) {
             take: amount,
             skip: cursor,
             where,
-            // where: {
-            //     [column]: {
-            //         has: metric
-            //     }
-            // },
             orderBy: {
                 rating: 'desc'
             }
@@ -77,9 +94,9 @@ export default async (req, res) => {
                 body = req.query;
             }
 
-            const result = await searchTwoParams(body);
+            const result = await searchProducts(body);
 
-            console.log('TWO PARAM SEARCH:', result.length);
+            console.log('SEARCH_PRODUCTS:', result);
 
             return res.status(200).json({ result });
         } catch (error) {

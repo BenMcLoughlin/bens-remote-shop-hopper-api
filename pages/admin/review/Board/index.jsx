@@ -15,26 +15,29 @@ const Board = () => {
     const [columnData, setColumnData] = useState([]);
     const [defaultFilter, setDefaultFilter] = useState({
         column: 'buckets',
-        metric: 'Athletic'
+        metric: globalState.user.buckets?.[0] || 'Athletic',
+        size: globalState.user.size?.[0] || ''
     });
     const mountedRef = useRef(true);
 
     console.log('globalState:', globalState.user);
 
     useEffect(() => {
-        setLoading(true);
         const _fetchDefault = async () => {
-            const success = await globalActions.apiRequests.getColumn('buckets');
+            if (!globalState.user.buckets?.length < 1) {
+                setLoading(true);
+                const success = await globalActions.apiRequests.getColumn('buckets');
 
-            console.log('getColumn result:', success.result[0]?.value);
+                console.log('getColumn result:', success.result[0]?.value);
 
-            await setDefaultFilter({
-                column: 'buckets',
-                metric: columnData[0]?.value
-            });
+                await setDefaultFilter({
+                    column: 'buckets',
+                    metric: columnData[0]?.value
+                });
 
-            setLoading(false);
-            return true;
+                setLoading(false);
+                return true;
+            }
         };
 
         _fetchDefault();
