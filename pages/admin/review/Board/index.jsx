@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import useGlobal from 'frontend/globalState/store';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 
-// import Breadcrumbs from 'frontend/components/breadcrumbs';
 import List from './List';
 import Filters from './Filters';
 
@@ -25,19 +24,15 @@ const Board = () => {
         const _fetchDefault = async () => {
             const success = await globalActions.apiRequests.getColumn('buckets');
 
-            if (success.result) {
-                await setColumnData(success.result);
+            console.log('getColumn result:', success.result[0]?.value);
 
-                // console.log('success.result:', success.result[1].value); todo
+            await setDefaultFilter({
+                column: 'buckets',
+                metric: columnData[0]?.value
+            });
 
-                await setDefaultFilter({
-                    column: 'buckets',
-                    metric: columnData[0]?.value
-                });
-
-                setLoading(false);
-                return true;
-            }
+            setLoading(false);
+            return true;
         };
 
         _fetchDefault();
@@ -68,12 +63,8 @@ const Board = () => {
 
     return (
         <BoardWrapper>
-            {/* <Breadcrumbs items={[ 'Projects', 'project.name', 'Add' ]} /> */}
             <Filters defaultFilters={defaultFilter} search={_getProducts} />
-            <List
-                products={products}
-                // products={globalState.products.data}
-            />
+            <List products={products} />
         </BoardWrapper>
     );
 };

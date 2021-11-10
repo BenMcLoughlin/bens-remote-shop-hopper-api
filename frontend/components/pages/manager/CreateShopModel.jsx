@@ -4,6 +4,8 @@ import Chips from 'react-chips';
 import produce from 'immer';
 import { set, has } from 'lodash';
 
+import { bucketList } from 'backend/utils/search';
+
 function enhancedReducer(state, updateArg) {
     // check if the type of update argument is a callback function
     if (updateArg.constructor === Function) {
@@ -37,26 +39,6 @@ const initialState = {
     country: 'Canada',
     buckets: []
 };
-
-const buckets = [
-    'Bohemian',
-    'Chic',
-    'Trendy',
-    'Athletic',
-    'Casual',
-    'Vintage',
-    'Music Festival',
-    'Baby & Kids',
-    'Accessories',
-    'Beauty',
-    'Streetwear',
-    'Hip Hop',
-    'Rock',
-    'Punk',
-    'Elegant',
-    'Formal',
-    'Maternity'
-];
 
 export const CreateShopModel = ({ addShop, close }) => {
     const [state, updateState] = useReducer(enhancedReducer, initialState);
@@ -177,7 +159,7 @@ export const CreateShopModel = ({ addShop, close }) => {
                     <Chips
                         value={state.buckets}
                         onChange={_addBuckets}
-                        suggestions={buckets}
+                        suggestions={bucketList}
                         placeholder="Start typing..."
                     />
                 </div>

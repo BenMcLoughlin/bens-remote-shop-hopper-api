@@ -49,11 +49,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-<<<<<<< HEAD:components/landing/Welcome.jsx
-    color: ${ color.textDarkest };
-=======
     color: ${color.text.darkest};
->>>>>>> 487fb9e3d14e04f034a18360fe21c10bd1ede6d9:frontend/components/pages/landing/Welcome.jsx
     font-weight: bold;
     text-transform: uppercase;
 `;

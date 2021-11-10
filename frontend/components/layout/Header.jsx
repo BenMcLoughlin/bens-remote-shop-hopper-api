@@ -8,7 +8,7 @@ import { signOut, useSession } from 'next-auth/react';
 
 export const Header = () => {
     const { data: session, status } = useSession();
-    const loading = status === 'loading';
+    // const loading = status === 'loading';
 
     const admins = ['Moseley', 'McLoughlin', 'Lancaster'];
 

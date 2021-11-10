@@ -43,7 +43,7 @@ const BoardFilters = ({ search, defaultFilters }) => {
         setColumnName(columnName);
         const success = await globalActions.apiRequests.getColumn(columnName);
 
-        console.log('success.length:', JSON.stringify(success));
+        console.log('success:', JSON.stringify(success));
 
         if (success) {
             setColumnData(success.result);
