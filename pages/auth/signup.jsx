@@ -37,7 +37,7 @@ const SignUp = (props) => {
 
         await signIn('credentials', result);
     };
-    console.log('fields: ', fields);
+
     return (
         <Wrapper>
             <Left>
@@ -99,10 +99,7 @@ const SignUp = (props) => {
                     <LoginButton
                         oAuth={'google'}
                         label={'sign up with google'}
-                        handleChange={() => {
-                            console.log('providers.google.id: ', providers.google.id);
-                            signIn(providers.google.id);
-                        }}
+                        handleChange={() => signIn(providers.google.id)}
                     />
                 </Buttons>
             </Form>
