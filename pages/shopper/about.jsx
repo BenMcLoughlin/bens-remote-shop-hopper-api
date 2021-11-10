@@ -15,7 +15,7 @@ const About = () => (
                     'So we created ShopHopper as a better, easier, and more personalized way to shop boutique local fashion. '
                 ]}
             />
-            <Image src={'/../public/assets/shutterstock/womanLookingAtPhone.jpg'} width={900} />
+            <Image src={'/../public/assets/shutterstock/womanLookingAtPhone.jpg'} />
         </Row>
         <Row>
             <Image src={'/../public/assets/shutterstock/parisStorefront.jpg'} />
@@ -29,7 +29,6 @@ const About = () => (
             />
         </Row>
         <Row>
-            <Image src={'/../public/assets/shutterstock/womanChoosing.jpg'} />
             <Paragraph
                 title={'One spot to find all your favourite local shops'}
                 contents={[
@@ -37,6 +36,7 @@ const About = () => (
                     "With our personalized fashion recommendations we'll automatically find you the best deals outfits that perfectly match your style and size from local retailers you love. "
                 ]}
             />
+            <Image src={'/../public/assets/shutterstock/womanChoosing.jpg'} />
         </Row>
         <Row>
             <Paragraph
@@ -82,14 +82,14 @@ const Wrapper = styled.div`
     margin-top: 5%;
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 2rem;
     align-items: center;
 `;
 const Row = styled.div`
     width: 80%;
     display: flex;
     gap: 4rem;
-    background: #e4eeed;
+    border-bottom: 1px solid grey;
     padding: 5rem;
     justify-content: space-between;
     position: relative;

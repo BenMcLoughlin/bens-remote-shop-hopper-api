@@ -54,11 +54,9 @@ export const Footer = () => {
             </Links>
             <Policies>
                 {policies.map((policy) => (
-                    <Policy key={policy}>
-                        <Link href={`${policy}`}>
-                            <LinkText key={policy}>- {startCase(policy)} -</LinkText>
-                        </Link>
-                    </Policy>
+                    <Link key={policy} href={`${policy}`}>
+                        <LinkText key={policy}>- {startCase(policy)} -</LinkText>
+                    </Link>
                 ))}
             </Policies>
             <Copyright>{copyright}</Copyright>
@@ -73,6 +71,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     height: 30rem;
+
     padding: 4rem;
     @media (max-width: 600px) {
         width: 100%;
@@ -80,7 +79,6 @@ const Wrapper = styled.div`
     }
 `;
 const Links = styled.div`
-    height: 16rem;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -91,23 +89,15 @@ const Links = styled.div`
     padding-left: 7rem;
 `;
 const LinkText = styled.div`
-    height: 4rem;
-    width: 100%;
     font-weight: 600;
     cursor: pointer;
+    font-size: 1.5rem;
 `;
 const Policies = styled.div`
     width: 70%;
     display: flex;
     justify-content: space-around;
     margin: 0 auto;
-`;
-const Policy = styled.div`
-    height: 3rem;
-    margin-top: 4rem;
-    width: 20%;
-    display: flex;
-    justify-content: center;
 `;
 const Copyright = styled.div`
     height: 3rem;

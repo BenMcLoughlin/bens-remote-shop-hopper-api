@@ -42,7 +42,7 @@ const Welcome = () => (
                     'We want to make it easy to search through the stores in the area with one simple click so you can save time, look great, and shop local!  '
                 ]}
             />
-            <Image src={'/../public/assets/media/shopHopperPhone.png'} height={900} />
+            <Image src={'/../public/assets/media/shopHopperPhone.png'} height={1200} />
         </Row>
         <Row>
             <Paragraph
@@ -94,9 +94,13 @@ const Row = styled.div`
     width: 80%;
     display: flex;
     gap: 4rem;
+    border-bottom: 1px solid grey;
     padding: 5rem;
     justify-content: space-between;
     position: relative;
+    @media (max-width: 900px) {
+        flex-direction: column;
+    }
 `;
 const H1 = styled.div`
     font-size: 3rem;
