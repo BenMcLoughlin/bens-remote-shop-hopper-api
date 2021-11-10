@@ -1,43 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Search, LinkText } from '..';
+import { Search } from '..';
 import logo from 'public/assets/logos/shopHopperTitle.svg';
 import Image from 'next/image';
 import { QuestionSquare } from '@styled-icons/bootstrap/QuestionSquare';
+import { startCase } from 'frontend/utils/strings';
+import Link from 'next/link';
 
 export const Footer = () => {
     const links = [
-        'Making payments',
-        'Rating and Reviews',
-        '',
-        '',
-        'Help Center',
-        'Contact Us',
-        'Policies & Rules',
-        '',
-        'Our Commitments',
-        'Meet Our Founder',
-        'FAQs',
-        'Sitemap',
-        'Business Identity',
-        'Logistics Service',
-        '',
-        '',
-        'Supplier Memberships',
-        'Learning Center',
-        'Partner Program',
-        '',
-        'Facebook',
-        'Instagram',
-        'Youtube',
-        'Twitter'
+        // 'Making payments',
+        // 'Rating and Reviews',
+        // '',
+        // '',
+        // 'Help Center',
+        // 'Contact Us',
+        // 'Policies & Rules',
+        // ''
+        // 'Our Commitments',
+        // 'Meet Our Founder',
+        // 'FAQs',
+        // 'Sitemap',
+        // 'Business Identity',
+        // 'Logistics Service',
+        // '',
+        // '',
+        // 'Supplier Memberships',
+        // 'Learning Center',
+        // 'Partner Program',
+        // '',
+        // 'Facebook',
+        // 'Instagram',
+        // 'Youtube',
+        // 'Twitter'
     ];
     const policies = [
-        'Product Listing Policy',
-        'Intellectual Property Protection',
-        ' Privacy Policy',
-        ' Terms of Use',
-        'User Information Legal Enquiry Guide'
+        'contact',
+        'about',
+        'welcome'
+        // ' Privacy Policy',
+        // ' Terms of Use',
+        // 'User Information Legal Enquiry Guide'
     ];
 
     const copyright = '© 1999-2021 ShopHopper.ca. All rights reserved';
@@ -51,7 +54,11 @@ export const Footer = () => {
             </Links>
             <Policies>
                 {policies.map((policy) => (
-                    <Policy key={policy}>- {policy} - </Policy>
+                    <Policy key={policy}>
+                        <Link href={`${policy}`}>
+                            <LinkText key={policy}>- {startCase(policy)} -</LinkText>
+                        </Link>
+                    </Policy>
                 ))}
             </Policies>
             <Copyright>{copyright}</Copyright>
@@ -83,16 +90,17 @@ const Links = styled.div`
     justify-content: space-between;
     padding-left: 7rem;
 `;
-const Link = styled.div`
+const LinkText = styled.div`
     height: 4rem;
-    width: 10%;
+    width: 100%;
     font-weight: 600;
     cursor: pointer;
 `;
 const Policies = styled.div`
-    width: 100%;
+    width: 70%;
     display: flex;
     justify-content: space-around;
+    margin: 0 auto;
 `;
 const Policy = styled.div`
     height: 3rem;

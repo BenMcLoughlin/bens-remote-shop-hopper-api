@@ -34,16 +34,17 @@ const Onboard = () => {
                         if (num + 1 < pages.length) {
                             setGlobalState({ ui: { onboardPageNum: num + 1 } });
                         } else {
-                            router.push('/shopper/featured');
+                            router.push('/shopper/welcome');
                         }
                     }}
                 />
             </NextWrapper>
             <BackWrapper>
                 <Back
-                    handleChange={() => setGlobalState({
-                        ui: { onboardPageNum: num > 0 ? num - 1 : 0 }
-                    })
+                    handleChange={() =>
+                        setGlobalState({
+                            ui: { onboardPageNum: num > 0 ? num - 1 : 0 }
+                        })
                     }
                 />
             </BackWrapper>

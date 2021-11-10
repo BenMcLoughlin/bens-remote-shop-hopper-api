@@ -42,7 +42,7 @@ const Welcome = () => (
                     'We want to make it easy to search through the stores in the area with one simple click so you can save time, look great, and shop local!  '
                 ]}
             />
-            <Image src={'/../public/assets/media/shopHopperPhone.png'} />
+            <Image src={'/../public/assets/media/shopHopperPhone.png'} height={900} />
         </Row>
         <Row>
             <Paragraph

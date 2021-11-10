@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Banner, FormText, Image, Paragraph, Button, TextArea } from 'frontend/components';
@@ -9,9 +9,23 @@ const Contact = () => {
         email: '',
         phoneNumber: ''
     });
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState('asdfa');
 
     const [errors, setErrors] = useState({});
+
+    const [response, setResponse] = useState('Submit');
+
+    const sendEmail = async () => {
+        console.log('Hello from contact');
+        const res = await fetch('/api/email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ...fields, message, template: 'contactUs' })
+        });
+        let data = await res.json();
+
+        setResponse(data.status);
+    };
 
     return (
         <Wrapper>
@@ -29,21 +43,16 @@ const Contact = () => {
                             'Need Help? Questions? Feedback? Random thoughts? We want to hear from you! The best way to contact us is to use our Contact Form here.'
                         ]}
                     />
-                    <Image src={'/../public/assets/shutterstock/womanInStripedShirt.jpg'} />
                 </Column>
-                <Form>
+                <Form onSubmit={sendEmail}>
                     {Object.entries(fields).map(([key, value], i) => {
-                        console.log('key: ', key);
-                        console.log('value: ', value);
                         return (
                             <FormText
                                 value={value}
                                 key={i}
                                 label={key}
                                 type={key}
-                                handleChange={(e) =>
-                                    setField({ ...fields, [e.target.name]: e.target.value })
-                                }
+                                handleChange={(e) => setField({ ...fields, [e.target.name]: e.target.value })}
                                 handleErrors={() => false}
                                 errors={false}
                                 setErrors={() => false}
@@ -52,12 +61,12 @@ const Contact = () => {
                     })}
                     <TextArea
                         className="contact"
-                        value={message}
+                        value={'message'}
                         onChange={(value) => setMessage(value)}
                         minRows={10}
                         label="message"
                     />
-                    <Button title="Submit" />
+                    <Button title={response} onSubmit={() => sendEmail()} value="Submit" />
                 </Form>
             </Row>
         </Wrapper>
@@ -87,6 +96,10 @@ const Row = styled.div`
     padding: 5rem;
     justify-content: space-between;
     position: relative;
+    @media (max-width: 900px) {
+        flex-direction: column;
+        width: 100%;
+    }
 `;
 const Column = styled.div`
     width: 80%;
@@ -97,10 +110,10 @@ const Column = styled.div`
     position: relative;
     flex-direction: column;
 `;
-const Form = styled.div`
+const Form = styled.form`
     width: 80%;
     display: flex;
-    gap: 4rem;
+    gap: 2rem;
     padding: 5rem;
     justify-content: start;
     position: relative;

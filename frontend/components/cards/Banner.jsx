@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Image from 'next/image';
 
 export const Banner = ({ title, subTitle, imgSrc }) => {
-    console.log('title: ', title);
     return (
         <Wrapper>
             <Text>
@@ -31,7 +30,7 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 120%;
-    margin-left: -10%;
+    margin: 0 auto 0 -10%;
     height: 20rem;
     position: relative;
 `;

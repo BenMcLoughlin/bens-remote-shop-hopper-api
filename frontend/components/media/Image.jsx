@@ -2,16 +2,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Image from 'next/image';
 
-export const _Image = ({ src }) => (
+export const _Image = ({ src, width = 700, height = 600 }) => (
     <Wrapper>
         <ImageWrapper>
-            <Image src={src} width={50} height={50} loading="eager" layout="fill" />
+            <Image src={src} width={width} height={height} loading="eager" />
         </ImageWrapper>
     </Wrapper>
 );
 
 const propTypes = {
-    src: PropTypes.string
+    src: PropTypes.string,
+    width: PropTypes.string,
+    height: PropTypes.string
 };
 
 _Image.propTypes = propTypes;
@@ -20,7 +22,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     flex: 1;
-   
+
     padding: 5rem;
     @media (max-width: 800px) {
         position: absolute;

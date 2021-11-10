@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
-import { fillLoginForm } from 'frontend/utils/devTools';
+import { fillLoginForm, fillContactForm } from 'frontend/utils/devTools';
 
 export const DevTools = ({}) => {
     const [response, setResponse] = useState('');
@@ -37,6 +37,11 @@ export const DevTools = ({}) => {
             show: router.asPath.includes('/signup')
         },
         {
+            label: 'Fill - Contact',
+            onClick: () => fillContactForm(),
+            show: router.asPath.includes('/contact')
+        },
+        {
             label: 'Fill - Existing User',
             onClick: () => fillLoginForm('existingUser'),
             show: router.asPath.includes('/login')
@@ -64,12 +69,11 @@ export const DevTools = ({}) => {
 
 // ---------------------------STYLES-------------------------------------------//
 const Wrapper = styled.div`
-    position: absolute;
+    position: fixed;
     top: 25rem;
     right: 2rem;
     min-width: 10rem;
     min-height: 5rem;
-    position: absolute;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -107,7 +111,7 @@ const Status = styled.div`
 `;
 
 const shared = `
-    position: absolute;
+    position: fixed;
     cursor: pointer;
     right: 1rem;
     top: 1rem;
