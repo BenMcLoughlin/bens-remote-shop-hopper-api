@@ -100,7 +100,6 @@ export const getHotItems = (store, amount = 12) => {
 
 export const getColumn = (store, body) => {
     store.actions.products.setLoading(true);
-    console.log('getColumn body:', body);
 
     return products
         .getColumn(body)
@@ -114,3 +113,22 @@ export const getColumn = (store, body) => {
             console.log('error:', error);
         });
 };
+
+export const wipeProducts = (store, body) => {
+    store.actions.products.setLoading(true);
+
+    return products
+        .wipeProducts(body)
+        .then((data) => {
+            store.actions.products.setLoading(false);
+            console.log('DESTROY PRODUCTS RESPONSE:', data);
+
+            return data;
+        })
+        .catch((error) => {
+            store.actions.products.setLoading(false);
+            console.log('error:', error);
+        });
+};
+
+

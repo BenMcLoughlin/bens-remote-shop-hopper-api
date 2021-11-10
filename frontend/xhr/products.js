@@ -48,9 +48,23 @@ function getColumn(body) {
     });
 }
 
+export default wipeProducts;
+
+function wipeProducts() {
+    const options = {
+        endpoint: '/api/wipeProducts',
+        method: 'POST'
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
 export {
     getGeneric,
     searchTwoParams,
     getHotItems,
-    getColumn
+    getColumn,
+    wipeProducts
 };

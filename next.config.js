@@ -18,19 +18,10 @@ default:
     break;
 }
 
-// next.config.js
 module.exports = {
     env: {
         apiRequestUrl // todo
     },
-    // async rewrites() {
-    //     return [ todo
-    //         {
-    //             source: '/api/:path*',
-    //             destination: `${apiRequestUrl}/:path*`
-    //         }
-    //     ];
-    // },
     async headers() {
         if (environment === "future todo") {
             return {
