@@ -5,11 +5,7 @@ import { Banner, ProfileCard, Paragraph, Image } from 'frontend/components';
 
 const About = () => (
     <Wrapper>
-        <Banner
-            title={'About'}
-            subTitle={'WHO WE ARE'}
-            imgSrc={'/../public/assets/banners/twoFriendsWalking.jpg'}
-        />
+        <Banner title={'About'} subTitle={'WHO WE ARE'} imgSrc={'/../public/assets/banners/twoFriendsWalking.jpg'} />
         <Row>
             <Paragraph
                 title={'Building a better way to shop locally'}
@@ -19,7 +15,7 @@ const About = () => (
                     'So we created ShopHopper as a better, easier, and more personalized way to shop boutique local fashion. '
                 ]}
             />
-            <Image src={'/../public/assets/shutterstock/womanLookingAtPhone.jpg'} />
+            <Image src={'/../public/assets/shutterstock/womanLookingAtPhone.jpg'} width={900} />
         </Row>
         <Row>
             <Image src={'/../public/assets/shutterstock/parisStorefront.jpg'} />
@@ -93,9 +89,13 @@ const Row = styled.div`
     width: 80%;
     display: flex;
     gap: 4rem;
+    background: #e4eeed;
     padding: 5rem;
     justify-content: space-between;
     position: relative;
+    @media (max-width: 900px) {
+        flex-direction: column;
+    }
 `;
 const H1 = styled.div`
     font-size: 3rem;

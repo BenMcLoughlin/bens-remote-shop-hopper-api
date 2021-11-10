@@ -72,6 +72,12 @@ function removePasswordWasReset() {
     localStorage.removeItem('pw-reset');
 }
 
+export function session() {
+    return null;
+}
+
+
+
 export {
     setToken,
     getStoredAuthToken,

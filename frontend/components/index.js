@@ -50,7 +50,6 @@ export {
 // layout
 export {
     Footer,
-    OnboardHeader,
     Header,
     Header_Nates,
     LandingFooter,

@@ -1,5 +1,5 @@
 import envUrl from '../../config';
-import * as session from 'backend/utils/auth';
+//import * as session from 'backend/utils/auth';
 
 /**
  * @param req
@@ -69,15 +69,11 @@ function request(req) {
 
                 if (res.status === 'Fail') {
                     if (
-                        [
-                            'INVALID_TOKEN',
-                            'SESSION_EXPIRED',
-                            'INVALID_USER',
-                            'UNKNOWN_USER',
-                            'NOT_FOUND'
-                        ].indexOf(res.code) > -1
+                        ['INVALID_TOKEN', 'SESSION_EXPIRED', 'INVALID_USER', 'UNKNOWN_USER', 'NOT_FOUND'].indexOf(
+                            res.code
+                        ) > -1
                     ) {
-                        await session.logout();
+                        //  await session.logout();
                     }
 
                     reject(res);

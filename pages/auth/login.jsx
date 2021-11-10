@@ -66,16 +66,14 @@ const Login = (props) => {
                         oAuth={'none'}
                         label={'Sign In'}
                         valid={true}
-                        handleChange={() =>
+                        handleChange={() => {
                             signIn('credentials', {
                                 email: fields.email.value,
                                 password: fields.password.value
-                            })
-                        }
+                            });
+                        }}
                     />
-                    <Disclaimer>
-                        By continuing, you agree to accept our Privacy Policy & Terms of Service.
-                    </Disclaimer>
+                    <Disclaimer>By continuing, you agree to accept our Privacy Policy & Terms of Service.</Disclaimer>
                     <LoginButton
                         oAuth={'facebook'}
                         label={'sign in with facebook'}

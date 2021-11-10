@@ -25,21 +25,19 @@ const defaultProps = {
     }
 };
 
-export const TextArea = forwardRef(
-    ({ className, invalid, value, label, onChange, ...textareaProps }, ref) => (
-        <StyledTextarea className={className} invalid={invalid}>
-            <Label textValue={value} htmlFor={label}>
-                <LabelText>{startCase(label)}</LabelText>
-            </Label>
-            <TextAreaAutoSize
-                {...textareaProps}
-                onChange={(event) => onChange(event.target.value, event)}
-                inputRef={ref || undefined}
-                id={label}
-            />
-        </StyledTextarea>
-    )
-);
+export const TextArea = forwardRef(({ className, invalid, value, label, onChange, ...textareaProps }, ref) => (
+    <StyledTextarea className={className} invalid={invalid}>
+        <Label textValue={value} htmlFor={label}>
+            <LabelText>{startCase(label)}</LabelText>
+        </Label>
+        <TextAreaAutoSize
+            {...textareaProps}
+            onChange={(event) => onChange(event.target.value, event)}
+            inputRef={ref || undefined}
+            id={label}
+        />
+    </StyledTextarea>
+));
 
 TextArea.propTypes = propTypes;
 TextArea.defaultProps = defaultProps;
