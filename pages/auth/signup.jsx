@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getProviders, useSession, signIn } from 'next-auth/react';
+
 import { FormText, CheckBox, LoginButton } from 'frontend/components';
 import { useSignUpForm } from 'frontend/hooks';
 import createUser from 'backend/requests/createUser';
-import { getProviders, useSession, signIn } from 'next-auth/react';
+import useGlobal from 'frontend/globalState/store';
 
 export async function getServerSideProps(context) {
     const providers = await getProviders();
@@ -16,6 +18,7 @@ export async function getServerSideProps(context) {
 }
 
 const SignUp = (props) => {
+    const [globalState, globalActions] = useGlobal();
     const [fields, setField] = useSignUpForm();
     const { providers } = props;
     const [wantsEmails, setWantsEmails] = useState(false);
@@ -29,7 +32,12 @@ const SignUp = (props) => {
     const noErrors = errorsArray.length === 4 && errorsArray.every((d) => !d);
 
     const onSubmit = async (userData) => {
-        const result = await createUser(userData);
+        console.log('globalState:', globalState.user);
+        const data = {
+            ...userData,
+            ...globalState.user
+        };
+        const result = await createUser(data);
 
         if (result.error) {
             return alert(result.error);

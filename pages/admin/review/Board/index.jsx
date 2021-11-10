@@ -19,6 +19,8 @@ const Board = () => {
     });
     const mountedRef = useRef(true);
 
+    console.log('globalState:', globalState.user);
+
     useEffect(() => {
         setLoading(true);
         const _fetchDefault = async () => {
