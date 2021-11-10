@@ -16,7 +16,7 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.5.0",
     "@next-auth/prisma-adapter": "^0.5.2-next.15",
-    "@prisma/client": "^3.4.1",
+    "@prisma/client": "^3.4.2",
     "@sendgrid/mail": "^7.5.0",
     "api": "^3.4.2",
     "bcrypt": "^5.0.1",
