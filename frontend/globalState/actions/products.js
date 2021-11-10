@@ -15,7 +15,7 @@ export const single = async (store, params) => {
                 { result: `${params.businessName} SUCCESS`, status: 200 }
             ]);
 
-            console.log(`SUCCESSFULLY UPDATED ${uploaded.count} PRODUCTS`);
+            console.log(`SUCCESSFULLY UPDATED ${uploaded.count} PRODUCTS from ${params.businessName}`);
             store.setState({ result: `${params.businessName} SUCCESS`, status: 200 });
             store.actions.counter.addSuccess();
 

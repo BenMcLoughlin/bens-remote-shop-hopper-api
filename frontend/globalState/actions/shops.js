@@ -18,7 +18,7 @@ export const shopStatuses = (store) => {
     return shops
         .shopStatuses()
         .then((data) => {
-            console.log('SHOPS STATUSES:', data.result?.length);
+            // console.log('SHOPS STATUSES:', data.result?.length);
 
             store.actions.shops.setLoading(false);
             store.setState({ status: 'SHOP STATUSES' });
@@ -27,6 +27,23 @@ export const shopStatuses = (store) => {
         })
         .catch((error) => {
             setLoading(false);
+            console.log('error:', error);
+        });
+};
+
+export const updateMetrics = (store, isShopify, header) => {
+    store.actions.shops.setLoading(true);
+
+    return shops
+        .updateMetrics(isShopify, header)
+        .then((data) => {
+            console.log(`GET NUMBER OF PRODUCTS:`, data.result);
+
+            store.actions.shops.setLoading(false);
+            return data;
+        })
+        .catch((error) => {
+            store.actions.shops.setLoading(false);
             console.log('error:', error);
         });
 };

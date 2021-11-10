@@ -130,5 +130,3 @@ export const wipeProducts = (store, body) => {
             console.log('error:', error);
         });
 };
-
-

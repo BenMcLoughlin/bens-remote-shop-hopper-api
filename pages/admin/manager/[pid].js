@@ -8,7 +8,6 @@ import Sidebar from './Sidebar';
 import * as shopsLists from 'frontend/mock/shopsLists';
 
 import { camelCase, capitalize } from 'frontend/utils/strings';
-import { updateMetrics } from 'backend/requests/updateMetrics';
 import useGlobal from 'frontend/globalState/store';
 
 const SiteHost = () => {
@@ -58,7 +57,7 @@ const SiteHost = () => {
         const success = await globalActions.products.all(globalState.shops);
 
         if (success) {
-            updateMetrics(true, 'all');
+            await globalActions.shops.updateMetrics(true, 'all');
             await globalActions.counter.setLoading(false);
             setLoading(false);
 
@@ -73,7 +72,7 @@ const SiteHost = () => {
         const success = await globalActions.products.single(params);
 
         if (success) {
-            updateMetrics(true, params.business_name);
+            await globalActions.shops.updateMetrics(true, params.business_name);
             await globalActions.counter.setLoading(false);
             setLoading(false);
 
