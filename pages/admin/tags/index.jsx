@@ -23,10 +23,10 @@ const TagReviewSystem = () => {
     });
 
     useEffect(() => {
-        _searchTwoParams(queryStrings);
+        _searchProducts(queryStrings);
     }, []);
 
-    const _searchTwoParams = async () => {
+    const _searchProducts = async () => {
         setLoading('search');
         const result = await globalActions.apiRequests.searchProducts(queryStrings);
 
