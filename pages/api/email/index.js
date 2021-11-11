@@ -3,7 +3,7 @@ import mockProducts from 'frontend/mock/products/emailProducts.json';
 
 export default function sendEmail(req, res) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    const { template } = req.body;
+    const { template, sendTo, sendFrom } = req.body;
     console.log('req.body: ', req.body);
     const templates = {
         welcome: 'd-b703a0be17fc4189891b23cf33bb8b83',
@@ -15,8 +15,8 @@ export default function sendEmail(req, res) {
     };
 
     const msg = {
-        to: 'dev@shophopper.ca',
-        from: 'dev@shophopper.ca',
+        to: sendTo,
+        from: sendFrom || 'dev@shophopper.ca',
         templateId: templates[template],
         dynamic_template_data: req.body
     };

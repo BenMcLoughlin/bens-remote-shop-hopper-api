@@ -91,11 +91,11 @@ const SignUp = (props) => {
                     <Disclaimer>
                         By continuing, you agree to accept our Privacy Policy & Terms of Service.
                     </Disclaimer>
-                    <LoginButton
+                    {/* <LoginButton
                         oAuth={'facebook'}
                         label={'sign up with facebook'}
                         handleChange={() => signIn(providers.facebook.id)}
-                    />
+                    /> */}
                     <LoginButton
                         oAuth={'google'}
                         label={'sign up with google'}
@@ -165,6 +165,7 @@ const Inputs = styled.div`
     flex-direction: column;
     justify-content: space-around;
     height: 30%;
+    margin-top: 15px;
 `;
 const Buttons = styled.div`
     display: flex;

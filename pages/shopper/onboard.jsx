@@ -19,7 +19,16 @@ const Onboard = () => {
     const pages = ['location', 'styles', 'brands', 'sizes'];
 
     let selectedPage = pages[num];
-    console.log('selectedPage: ', selectedPage);
+    console.log('session?.user?.email: ', session?.user?.email);
+    const sendEmail = async () => {
+        const res = await fetch('/api/email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sendTo: session?.user?.email, template: 'welcome' })
+        });
+        let data = await res.json();
+    };
+
     return (
         <Wrapper>
             <ProgressBar progress={num} length={pages.length} />
@@ -35,6 +44,7 @@ const Onboard = () => {
                             setGlobalState({ ui: { onboardPageNum: num + 1 } });
                         } else {
                             router.push('/shopper/welcome');
+                            sendEmail();
                         }
                     }}
                 />

@@ -74,11 +74,11 @@ const Login = (props) => {
                         }}
                     />
                     <Disclaimer>By continuing, you agree to accept our Privacy Policy & Terms of Service.</Disclaimer>
-                    <LoginButton
+                    {/* <LoginButton
                         oAuth={'facebook'}
                         label={'sign in with facebook'}
                         handleChange={() => signIn(providers.facebook.id)}
-                    />
+                    /> */}
                     <LoginButton
                         oAuth={'google'}
                         label={'sign in with google'}
