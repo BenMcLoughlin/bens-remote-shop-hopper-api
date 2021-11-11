@@ -53,17 +53,17 @@ const About = () => (
             <ProfileCard
                 imgSrc="/../public/assets/profilePhotos/ryanLancaster.jpg"
                 title="Ryan Lancaster"
-                subTitle={'President & CEO Co-Founder'}
+                subTitles={['President & CEO', 'Co-Founder']}
             />
             <ProfileCard
                 imgSrc="/../public/assets/profilePhotos/nathanMosely.jpg"
                 title="Nathan Moseley"
-                subTitle={'Senior Software Engineer Co-Founder'}
+                subTitles={['Senior Software Engineer', 'Co-Founder']}
             />
             <ProfileCard
                 imgSrc="/../public/assets/profilePhotos/benMcLoughlin.jpg"
                 title="Ben McLoughlin"
-                subTitle={'Software Engineer Co-Founder'}
+                subTitles={['Software Engineer', 'Co-Founder']}
             />
         </Row>
     </Wrapper>
@@ -86,7 +86,7 @@ const Wrapper = styled.div`
     align-items: center;
 `;
 const Row = styled.div`
-    width: 80%;
+    width: 85%;
     display: flex;
     gap: 4rem;
     border-bottom: 1px solid grey;

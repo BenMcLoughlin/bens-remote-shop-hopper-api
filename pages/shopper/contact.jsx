@@ -96,6 +96,7 @@ const Row = styled.div`
     padding: 5rem;
     justify-content: space-between;
     position: relative;
+    border-top: 1px solid grey;
     @media (max-width: 900px) {
         flex-direction: column;
         width: 100%;
@@ -118,6 +119,7 @@ const Form = styled.form`
     justify-content: start;
     position: relative;
     flex-direction: column;
+
 `;
 const H1 = styled.div`
     font-size: 3rem;

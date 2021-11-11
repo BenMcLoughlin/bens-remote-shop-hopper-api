@@ -53,7 +53,6 @@ export const SubTitle = styled.div`
     font-size: 3rem;
     z-index: 1;
     padding: 0;
-    margin-top: -2rem;
 
 `;
 export const Text = styled.div`

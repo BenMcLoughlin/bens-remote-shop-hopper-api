@@ -11,7 +11,7 @@ export const Header = () => {
     const loading = status === 'loading';
 
     const admins = ['Moseley', 'McLoughlin', 'Lancaster'];
- 
+
     let isAdmin = false;
     if (session) {
         isAdmin = admins.some((d) => session?.user?.email?.includes(d.toLowerCase()));
@@ -32,11 +32,11 @@ export const Header = () => {
                     <>
                         <LinkText title={'Manager'} href={'/admin/manager'} />
                         <LinkText title={'Review'} href={'/admin/review'} />
+                        <LinkText title={'Featured'} href={'/shopper/featured'} />
                     </>
                 )}
                 {!session ? (
                     <>
-                        <LinkText title={'Featured'} href={'/shopper/featured'} />
                         <LinkButton href="/auth/signup" title="Sign up" radius="round" />
                         <LinkButton href="/auth/login" title="Log In" radius="round" />
                     </>

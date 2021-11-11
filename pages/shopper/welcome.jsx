@@ -59,7 +59,7 @@ const Welcome = () => (
             <ProfileCard
                 imgSrc="/../public/assets/profilePhotos/ryanLancaster.jpg"
                 title="Ryan Lancaster"
-                subTitle={'President & CEO Co-Founder'}
+                subTitles={['President & CEO', 'Co-Founder']}
             />
             <Paragraph
                 title={'Thank You For Being A Part Of This Movement'}
@@ -91,7 +91,7 @@ const Wrapper = styled.div`
     align-items: center;
 `;
 const Row = styled.div`
-    width: 80%;
+    width: 85%;
     display: flex;
     gap: 4rem;
     border-bottom: 1px solid grey;
@@ -103,5 +103,5 @@ const Row = styled.div`
     }
 `;
 const H1 = styled.div`
-    font-size: 3rem;
+    font-size: 5rem;
 `;

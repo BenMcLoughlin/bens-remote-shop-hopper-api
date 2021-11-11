@@ -2,20 +2,22 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Image from 'next/image';
 
-export const ProfileCard = ({ imgSrc, title, subTitle }) => (
+export const ProfileCard = ({ imgSrc, title, subTitles }) => (
     <Wrapper>
         <ImagWrapper>
             <Image src={imgSrc} width={500} height={500} loading="eager" layout="fill" />
         </ImagWrapper>
         <Title>{title}</Title>
-        <SubTitle>{subTitle}</SubTitle>
+        {subTitles.map((subTitle) => (
+            <SubTitle key={subTitle}>{subTitle}</SubTitle>
+        ))}
     </Wrapper>
 );
 
 const propTypes = {
     imgSrc: PropTypes.string,
     title: PropTypes.string,
-    subTitle: PropTypes.string
+    subTitles: PropTypes.array
 };
 
 ProfileCard.propTypes = propTypes;
@@ -43,8 +45,8 @@ export const Title = styled.p`
     font-weight: 400;
 `;
 export const SubTitle = styled.p`
-    width: 70%;
-    padding-bottom: 11px;
+    width: 90%;
+
     text-align: center;
     font-weight: 100;
 `;
