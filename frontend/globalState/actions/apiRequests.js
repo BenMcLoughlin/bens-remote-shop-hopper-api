@@ -30,6 +30,7 @@ export const nextPage = (store) => {
     const body = {
         column: store.state.products.query.column,
         metric: store.state.products.query.metric,
+        size: store.state.products.query.size,
         cursor: store.state.products.cursor + store.state.products.amount,
         amount: store.state.products.amount
     };
@@ -56,6 +57,7 @@ export const prevPage = (store) => {
     const body = {
         column: store.state.products.query.column,
         metric: store.state.products.query.metric,
+        size: store.state.products.query.size,
         cursor: store.state.products.cursor - store.state.products.amount,
         amount: store.state.products.amount
     };

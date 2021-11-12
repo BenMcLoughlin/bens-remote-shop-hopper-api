@@ -66,8 +66,7 @@ const BoardList = ({ products }) => {
     return (
         <>
             <Title>
-                {currentQuery}
-                <ProductsCount>: {formatProductsCount()} Items</ProductsCount>
+                {globalState.products.query.column} / {globalState.products.query.metric} / {globalState.products.query.size}: <ProductsCount>{formatProductsCount()} Items</ProductsCount>
             </Title>
             <ButtonsWrapper>
                 {globalState.products.cursor > products.length ? (
@@ -122,6 +121,14 @@ const BoardList = ({ products }) => {
     );
 };
 
+export const Title = styled.div`
+    padding: 13px 0.1rem 17px;
+    text-transform: uppercase;
+    color: ${color.textMedium};
+    ${font.size(12.5)};
+    ${mixin.truncateText}
+`;
+
 const Icon = styled.div`
     height: 2rem;
     width: 2rem;
@@ -151,14 +158,6 @@ export const List = styled.div`
     border-radius: 3px;
     background: ${color.backgroundLightest};
     padding: 0.1rem 8px 300px 8px;
-`;
-
-export const Title = styled.div`
-    padding: 13px 0.1rem 17px;
-    text-transform: uppercase;
-    color: ${color.textMedium};
-    ${font.size(12.5)};
-    ${mixin.truncateText}
 `;
 
 export const ProductsCount = styled.span`

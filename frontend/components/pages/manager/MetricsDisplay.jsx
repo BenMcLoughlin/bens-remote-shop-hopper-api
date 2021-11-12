@@ -23,6 +23,7 @@ export const MetricsDisplay = ({
     useEffect(() => {
         const _updateMetrics = async () => {
             await globalActions.shops.updateMetrics(isHost, headerTitle).then((data) => {
+                console.log('running:', data);
                 setTotalItems(data.result);
             });
         };

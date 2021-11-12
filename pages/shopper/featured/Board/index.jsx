@@ -68,11 +68,27 @@ const Board = () => {
 
     return (
         <BoardWrapper>
-            <Filters defaultFilters={defaultFilter} search={_getProducts} />
+            {/* <Filters defaultFilters={defaultFilter} search={_getProducts} /> */}
+            <Title>
+                Welcome to your new Local Shopping Tool!
+            </Title>
+            <H2>
+                These {products.length} items match your Profile, browse what is available, or set some additional filters below.
+            </H2>
             <List products={products} />
         </BoardWrapper>
     );
 };
+
+export const Title = styled.div`
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 50px;
+`;
+
+export const H2 = styled.div`
+    font-size: 16px;
+`;
 
 export const BoardWrapper = styled.div`
     overflow-y: auto;
