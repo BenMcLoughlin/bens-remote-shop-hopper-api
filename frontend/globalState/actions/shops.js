@@ -26,7 +26,7 @@ export const shopStatuses = (store) => {
             return data.result;
         })
         .catch((error) => {
-            setLoading(false);
+            store.actions.shops.setLoading(false);
             console.log('error:', error);
         });
 };
