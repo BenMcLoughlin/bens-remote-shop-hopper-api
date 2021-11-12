@@ -17,7 +17,7 @@ const Sidebar = () => (
             </Link>
         </Info>
 
-        {renderLinkItem('Shopify, Kelowna', Shopify, '/manager')}
+        {renderLinkItem('Shopify, Kelowna', Shopify, '/admin/manager')}
         <Divider />
     </SidebarWrapper>
 );
