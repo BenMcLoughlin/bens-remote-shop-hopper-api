@@ -47,7 +47,7 @@ export async function products(data) {
 
     productsUploaded = await createRows(data);
 
-    console.log('IN LOAD FUNCTION: ', productsUploaded);
+    console.log('IN LOAD FUNCTION: ', productsUploaded.length);
 
-    return productsUploaded.count;
+    return productsUploaded.length;
 }
