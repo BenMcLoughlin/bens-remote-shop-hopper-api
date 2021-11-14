@@ -4,7 +4,7 @@ import { NavBarLeft, Page } from 'frontend/components';
 import Sidebar from './Sidebar';
 // import TemplateExamples from './TemplateExamples';
 
-const ProductReviewSystem = () => (
+const Review = () => (
     <Page>
         <NavBarLeft />
 
@@ -14,4 +14,4 @@ const ProductReviewSystem = () => (
     </Page>
 );
 
-export default ProductReviewSystem;
+export default Review;

@@ -14,7 +14,7 @@ const propTypes = {
     defaultFilters: PropTypes.object
 };
 
-const BoardFilters = ({ search, defaultFilters }) => {
+const ReviewBoardFilters = ({ search, defaultFilters }) => {
     const [globalState, globalActions] = useGlobal();
     const [loading, setLoading] = useState(false);
     const [ModelOpen, setModelOpen] = useState(false);
@@ -293,6 +293,6 @@ export const Actions = styled.div`
     padding-top: 30px;
 `;
 
-BoardFilters.propTypes = propTypes;
+ReviewBoardFilters.propTypes = propTypes;
 
-export default BoardFilters;
+export default ReviewBoardFilters;

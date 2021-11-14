@@ -19,20 +19,20 @@ const Board = () => {
     let pastDate = dateFrom.getDate() - 7;
     dateFrom.setDate(pastDate);
 
-    const [defaultFilter, setDefaultFilter] = useState({
-        column: 'buckets',
-        metric: pid
-    });
+    const [defaultFilter, setDefaultFilter] = useState({});
     const mountedRef = useRef(true);
 
     // console.log('globalState:', globalState.user);
 
     useEffect(() => {
-        _getInitialProducts({
+        const current = {
             column: 'buckets',
             metric: pid,
             dateFrom
-        });
+        };
+
+        _getInitialProducts(current);
+        setDefaultFilter(current);
     }, [pid]);
 
     useEffect(() => {

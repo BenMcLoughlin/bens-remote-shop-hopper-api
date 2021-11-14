@@ -10,6 +10,13 @@ const initialState = {
         fail: 0,
         loading: false
     },
+    templateClass: {
+        data: [],
+        result: false,
+        query: {},
+        status: 'INITIAL',
+        loading: false
+    },
     products: {
         data: [],
         hotItems: [],

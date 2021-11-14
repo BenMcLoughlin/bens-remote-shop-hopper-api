@@ -46,7 +46,7 @@ const SiteHost = () => {
 
     const _cancel = async () => {
         // todo
-        // await globalActions.products.all([], true);
+        // await globalActions.apiRequests.all([], true);
     };
 
     const _updateAll = async () => {
@@ -54,7 +54,7 @@ const SiteHost = () => {
         globalActions.counter.clearRequests();
         await globalActions.counter.setLoading(true);
         console.time('_updateAll');
-        const success = await globalActions.products.all(globalState.shops);
+        const success = await globalActions.apiRequests.all(globalState.shops);
 
         if (success) {
             console.timeEnd('_updateAll');
@@ -70,7 +70,7 @@ const SiteHost = () => {
         setLoading(true);
         globalActions.counter.clearRequests();
         await globalActions.counter.setLoading(true);
-        const success = await globalActions.products.single(params);
+        const success = await globalActions.apiRequests.single(params);
 
         if (success) {
             await globalActions.shops.updateMetrics(true, params.business_name);

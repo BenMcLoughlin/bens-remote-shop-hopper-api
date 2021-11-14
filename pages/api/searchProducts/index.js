@@ -116,13 +116,7 @@ export default async (req, res) => {
 
             const result = await searchProducts(body);
 
-            let arr = [];
-
-            result.map((item) => {
-                arr.push(item.updated_at);
-            });
-
-            console.log('SEARCH_PRODUCTS:', result.updated_at, arr);
+            console.log('SEARCH_PRODUCTS:', result[0]);
 
             return res.status(200).json({ result });
         } catch (error) {

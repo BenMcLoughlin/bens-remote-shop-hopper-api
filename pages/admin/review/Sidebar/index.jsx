@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { Shopify } from '@styled-icons/fa-brands/Shopify';
 import { UiChecksGrid } from '@styled-icons/bootstrap/UiChecksGrid';
 import { CheckCircleFill } from '@styled-icons/bootstrap/CheckCircleFill';
 import { CheckCircle } from '@styled-icons/bootstrap/CheckCircle';
@@ -13,7 +12,7 @@ import { color, sizes, font, mixin, zIndexValues } from 'frontend/styles/theme';
 import { templateClasses } from '../templateClasses';
 import useGlobal from 'frontend/globalState/store';
 
-const Sidebar = () => {
+const ReviewSidebar = () => {
     const router = useRouter();
     const [globalState, globalActions] = useGlobal();
 
@@ -145,4 +144,4 @@ export const LinkText = styled.div`
         `}
 `;
 
-export default Sidebar;
+export default ReviewSidebar;
