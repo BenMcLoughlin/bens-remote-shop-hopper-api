@@ -6,7 +6,7 @@ export async function getTemplateClass(query) {
 
     console.log('getTemplateClass:', templateClass);
 
-    const result = await prisma.template_classes
+    const result = await prisma.templateClass
         .findUnique({
             where: {
                 class_name: templateClass

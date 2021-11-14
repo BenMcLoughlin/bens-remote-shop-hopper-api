@@ -2,13 +2,13 @@
 import prisma from 'prisma/prisma.js';
 
 export async function checkTemplateClasses() {
-    const result = await prisma.template_classes
+    const result = await prisma.templateClass
         .findMany({
             where: {
                 submitted: false
             },
             select: {
-                id: true
+                class_name: true
             }
         })
         .catch((e) => {
@@ -34,9 +34,7 @@ export default async (req, res) => {
         try {
             const result = await checkTemplateClasses();
 
-            console.log('unsubmitted:', result);
-
-            console.log('CHECK_TEMPLATE_CLASSES:', result.length);
+            console.log('CHECK_TEMPLATE_CLASSES:', result);
 
             return res.status(200).json({ result });
         } catch (error) {

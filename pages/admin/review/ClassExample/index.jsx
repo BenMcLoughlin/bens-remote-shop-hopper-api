@@ -15,7 +15,8 @@ const ClassExample = () => {
     const { pid } = router.query;
     const [globalState, globalActions] = useGlobal();
     const [loading, setLoading] = useState(false);
-    const [products, setProducts] = useState([]);
+    const [unSubmitted, setUnSubmitted] = useState(false);
+    const [classData, setClass] = useState([]);
     const [date, setDate] = useState(new Date());
 
     useEffect(() => {
@@ -23,35 +24,62 @@ const ClassExample = () => {
     }, [pid]);
 
     useEffect(() => {
-        setProducts(globalState.templateClass.data);
+        setClass(globalState.templateClass.data);
     }, [globalState.templateClass.data]);
 
     const _getClass = async (templateClass) => {
-        // const result = await globalActions.apiRequests.getTemplateClass(templateClass);
-        const result = await globalActions.apiRequests.checkTemplateClasses();
+        const result = await globalActions.apiRequests.getTemplateClass(templateClass);
 
         if (result) {
-            // globalActions.templateClass.setData(result);
+            globalActions.templateClass.setData(result);
         }
     };
 
-    const _resetClasses = async (templateClass) => {
-        // const result = await globalActions.apiRequests.getTemplateClass(templateClass);
-        const result = await globalActions.apiRequests.resetTemplateClasses(templateClasses);
+    const _checkClasses = async () => {
+        const result = await globalActions.apiRequests.checkTemplateClasses();
+
+        if (result) {
+            return setUnSubmitted(result);
+        }
+
+        _resetClasses();
     };
 
-    if (!products) {
+    const _resetClasses = async () => {
+        const success = await globalActions.apiRequests.resetTemplateClasses(templateClasses);
+
+        if (success) {
+            setUnSubmitted(false);
+        }
+    };
+
+    if (!globalState.products.data) {
         return <Image src={loaderGif} className="loading" width={800} height={600} />;
     }
 
     return (
         <ClassExampleWrapper>
-            <Button
-                title={'Reset Classes'}
-                onClick={_resetClasses}
-            />
+            {
+                unSubmitted ?
+                    <>
+                        {unSubmitted?.map((item) => (
+                            <Text key={item.class_name}>
+                                {item.class_name} <span style={{ color: 'black' }}>has not been submitted yet</span>
+                            </Text>
+                        ))}
+                        <Button
+                            title={'Reset Anyway'}
+                            onClick={_resetClasses}
+                        />
+                    </>
+                    :
+                    <Button
+                        title={'Reset Classes'}
+                        onClick={_checkClasses}
+                    />
+            }
             
-            <Block products={products} />
+            <Block products={globalState.products.data} />
         </ClassExampleWrapper>
     );
 };
@@ -59,6 +87,11 @@ const ClassExample = () => {
 export const ClassExampleWrapper = styled.div`
     overflow-y: auto;
     height: 100vh;
+`;
+
+const Text = styled.div`
+    color: red;
+    font-size: 14px;
 `;
 
 export default ClassExample;
