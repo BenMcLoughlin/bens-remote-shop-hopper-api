@@ -13,7 +13,6 @@ import useGlobal from 'frontend/globalState/store';
 const SiteHost = () => {
     const router = useRouter();
     const [globalState, globalActions] = useGlobal();
-    const { status } = globalState;
     const { pid } = router.query;
 
     const [loading, setLoading] = useState(false);
@@ -54,9 +53,11 @@ const SiteHost = () => {
         setLoading(true);
         globalActions.counter.clearRequests();
         await globalActions.counter.setLoading(true);
+        console.time('_updateAll');
         const success = await globalActions.products.all(globalState.shops);
 
         if (success) {
+            console.timeEnd('_updateAll');
             await globalActions.shops.updateMetrics(true, 'all');
             await globalActions.counter.setLoading(false);
             setLoading(false);
@@ -94,9 +95,6 @@ const SiteHost = () => {
             </Title>
             {uploadedResult && (
                 <Results>
-                    {status && globalState.counter.loading && (
-                        <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>
-                    )}
                     {uploadedResult.map((result) => (
                         <p
                             key={result.result}

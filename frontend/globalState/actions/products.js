@@ -11,20 +11,15 @@ export const single = async (store, params) => {
         const uploaded = await res.json();
 
         if (res.status === 200) {
-            store.actions.counter.addResult([
-                { result: `${params.businessName} SUCCESS`, status: 200 }
-            ]);
-
             console.log(`SUCCESSFULLY UPDATED ${uploaded.count} PRODUCTS from ${params.businessName}`);
-            store.setState({ result: `${params.businessName} SUCCESS`, status: 200 });
+            store.actions.counter.addResult([{ result: `SUCCESSFULLY UPDATED ${uploaded.count} PRODUCTS from ${params.businessName}`, status: 200 }]);
             store.actions.counter.addSuccess();
 
             return res;
         }
 
         console.log(`FAILED TO UPDATE ${params.businessName}`);
-        store.setState({ result: `${params.businessName} FAILED`, status: 422 });
-        store.actions.counter.addResult([{ result: `${params.businessName} FAILED`, status: 422 }]);
+        store.actions.counter.addResult([{ result: `FAILED TO UPDATE ${params.businessName}`, status: 422 }]);
         store.actions.counter.addFail();
 
         return res;
@@ -33,7 +28,6 @@ export const single = async (store, params) => {
 
 export const all = (store, shops) => {
     store.actions.counter.clearRequests();
-    console.time('_updateAll');
 
     let promises = shops.data.map(async (shop, i) => {
         if (shop.domain) {
@@ -55,7 +49,6 @@ export const all = (store, shops) => {
     Promise.all(promises)
         .then((results) => {
             store.actions.counter.addResult(results);
-            console.timeEnd('_updateAll');
         });
 
     return true;

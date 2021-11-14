@@ -18,8 +18,6 @@ export const shopStatuses = (store) => {
     return shops
         .shopStatuses()
         .then((data) => {
-            // console.log('SHOPS STATUSES:', data.result?.length);
-
             store.actions.shops.setLoading(false);
             store.setState({ status: 'SHOP STATUSES' });
 

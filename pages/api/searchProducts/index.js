@@ -96,7 +96,7 @@ export default async (req, res) => {
 
             const result = await searchProducts(body);
 
-            console.log('SEARCH_PRODUCTS:', result);
+            console.log('SEARCH_PRODUCTS:', result[1]);
 
             return res.status(200).json({ result });
         } catch (error) {

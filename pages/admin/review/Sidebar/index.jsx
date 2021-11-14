@@ -2,10 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Shopify } from '@styled-icons/fa-brands/Shopify';
+import { BookmarkCheck } from '@styled-icons/bootstrap/BookmarkCheck';
 import styled from 'styled-components';
 
 import logoSrc from 'public/assets/logos/shophopper-logo.svg';
 import { color, sizes, font, mixin, zIndexValues } from 'frontend/styles/theme';
+import { templateClasses } from '../templateClasses';
 
 const Sidebar = () => (
     <SidebarWrapper>
@@ -17,8 +19,13 @@ const Sidebar = () => (
             </Link>
         </Info>
 
-        {renderLinkItem('Shopify, Kelowna', Shopify, '/admin/manager')}
+        {renderLinkItem('Shopify, Kelowna (Change)', Shopify, '/admin/manager')}
         <Divider />
+        {
+            templateClasses.map((item) => (
+                renderLinkItem(Object.keys(item), BookmarkCheck, `/admin/review/${Object.keys(item)}`)
+            ))
+        }
     </SidebarWrapper>
 );
 

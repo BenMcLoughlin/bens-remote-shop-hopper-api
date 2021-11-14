@@ -2,7 +2,7 @@ import React from 'react';
 
 import { NavBarLeft, Page } from 'frontend/components';
 import Sidebar from './Sidebar';
-// import TemplateExamples from './TemplateExamples';
+import Board from './Board';
 
 const ProductReviewSystem = () => (
     <Page>
@@ -11,6 +11,7 @@ const ProductReviewSystem = () => (
         <Sidebar />
 
         {/* Add compiled template examples here */}
+        <Board />
     </Page>
 );
 
