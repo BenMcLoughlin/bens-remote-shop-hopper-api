@@ -2,7 +2,6 @@
 
 import * as templateClass from 'frontend/xhr/templateClass';
 import * as products from 'frontend/xhr/products';
-// import * as types from './types/products'; todo
 
 export const single = async (store, params) => {
     store.actions.counter.addRequest();
@@ -204,6 +203,44 @@ export const getTemplateClass = (store, templateClassName) => {
             store.actions.templateClass.setLoading(false);
 
             return data.result;
+        })
+        .catch((error) => {
+            store.actions.templateClass.setLoading(false);
+            console.log('error:', error);
+        });
+};
+
+export const checkTemplateClasses = (store) => {
+    store.actions.templateClass.setLoading(true);
+
+    console.log('checkTemplateClasses');
+
+    return templateClass
+        .checkTemplateClasses()
+        .then((data) => {
+            store.actions.templateClass.setLoading(false);
+
+            return data.result;
+        })
+        .catch((error) => {
+            store.actions.templateClass.setLoading(false);
+            console.log('error:', error);
+        });
+};
+
+export const resetTemplateClasses = (store, templateClasses) => {
+    store.actions.templateClass.setLoading(true);
+
+    const body = templateClasses;
+
+    console.log('resetTemplateClasses body:', body);
+
+    return templateClass
+        .resetTemplateClasses(body)
+        .then(() => {
+            store.actions.templateClass.setLoading(false);
+
+            return true;
         })
         .catch((error) => {
             store.actions.templateClass.setLoading(false);

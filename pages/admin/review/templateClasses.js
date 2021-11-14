@@ -1,22 +1,37 @@
 export const templateClasses = [
-    { "Athletic": {
+    {
+        class_name: "Athletic",
         isSet: false,
-        items: []
-    } },
-    { "Bohemian": {
+        items: [],
+        submitted: false
+        
+    },
+    {   
+        class_name: "Bohemian",
         isSet: false,
-        items: []
-    } },
-    { "Chic": {
+        items: [],
+        submitted: false
+        
+    },
+    {   
+        class_name: "Chic",
         isSet: false,
-        items: []
-    } },
-    { "Trendy": {
+        items: [],
+        submitted: false
+        
+    },
+    {   
+        class_name: "Trendy",
         isSet: false,
-        items: []
-    } }, 
-    { "Casual": {
+        items: [],
+        submitted: false
+        
+    }, 
+    { 
+        class_name: "Casual",
         isSet: false,
-        items: []
-    } }
+        items: [],
+        submitted: false
+        
+    }
 ];

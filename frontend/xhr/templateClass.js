@@ -12,6 +12,31 @@ function getTemplateClass(body) {
     });
 }
 
+function checkTemplateClasses() {
+    const options = {
+        endpoint: '/api/checkTemplateClasses',
+        method: 'GET'
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
+function resetTemplateClasses(body) {
+    const options = {
+        endpoint: '/api/resetTemplateClasses',
+        method: 'POST',
+        body
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
 export {
-    getTemplateClass
+    getTemplateClass,
+    checkTemplateClasses,
+    resetTemplateClasses
 };

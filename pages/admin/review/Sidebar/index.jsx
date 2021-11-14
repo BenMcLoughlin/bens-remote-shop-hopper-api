@@ -55,7 +55,7 @@ const ReviewSidebar = () => {
             <Divider />
             {
                 templateClasses.map((item) => (
-                    renderLinkItem(Object.keys(item), UiChecksGrid, `/admin/review/${Object.keys(item)}`, item.isSet)
+                    renderLinkItem(item.class_name, UiChecksGrid, `/admin/review/${item.class_name}`, item.isSet)
                 ))
             }
         </SidebarWrapper>

@@ -13,6 +13,7 @@ model TemplateClass {
   class_name       String   @unique
   items            String[]
   isSet            Boolean
+  submitted        Boolean
   updated_at       DateTime @default(now())
   created_at       DateTime @default(now())
 
