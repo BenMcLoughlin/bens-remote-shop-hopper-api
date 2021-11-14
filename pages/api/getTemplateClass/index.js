@@ -1,16 +1,15 @@
 // // import { getSession } from 'next-auth/react';
 import prisma from 'prisma/prisma.js';
 
-export async function getHotItems(query) {
-    let amount = query.amount;
+export async function getTemplateClass(query) {
+    let templateClass = query.templateClass;
 
-    console.log('getHotItems:', amount);
+    console.log('getTemplateClass:', templateClass);
 
-    const result = await prisma.hot_item
-        .findMany({
-            take: amount,
-            orderBy: {
-                rating: 'desc'
+    const result = await prisma.template_classes
+        .findUnique({
+            where: {
+                class_name: templateClass
             }
         })
         .catch((e) => {
@@ -36,13 +35,9 @@ export default async (req, res) => {
         try {
             let { body } = req;
 
-            if (!body) {
-                body = req.query;
-            }
+            const result = await getTemplateClass(body);
 
-            const result = await getHotItems(body);
-
-            console.log('HOT_ITEMS_FETCH:', result.length);
+            console.log('GET_TEMPLATE_CLASS:', result.length);
 
             return res.status(200).json({ result });
         } catch (error) {

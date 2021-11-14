@@ -8,6 +8,17 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+model TemplateClass {
+  id               Int      @id @default(autoincrement())
+  class_name       String   @unique
+  items            String[]
+  isSet            Boolean
+  updated_at       DateTime @default(now())
+  created_at       DateTime @default(now())
+
+  @@map("template_classes")
+}
+
 model HotItem {
   id               Int      @id @default(autoincrement())
   body_html        String?  
