@@ -18,29 +18,5 @@ export const templateClasses = [
     { "Casual": {
         isSet: false,
         items: []
-    } }, 
-    { "Vintage": {
-        isSet: false,
-        items: []
-    } }, 
-    { "HipHop": {
-        isSet: false,
-        items: []
-    } }, 
-    { "Streetwear": {
-        isSet: false,
-        items: []
-    } }, 
-    { "Beauty": {
-        isSet: false,
-        items: []
-    } }, 
-    { "Elegant": {
-        isSet: false,
-        items: []
-    } },
-    { "Formal": {
-        isSet: false,
-        items: []
     } }
 ];

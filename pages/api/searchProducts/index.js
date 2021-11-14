@@ -7,6 +7,8 @@ export async function searchProducts(query) {
     let size = query.size || undefined;
     let cursor = query.cursor || 0;
     let amount = query.amount || 12;
+    let dateFrom = query.dateFrom || undefined;
+    let dateTo = query.dateTo || undefined;
     // TODO: trigger warning if params not set
 
     console.log('SEARCH_PRODUCTS column, metric, size, cursor, amount:', column, metric, size, cursor, amount);
@@ -27,6 +29,12 @@ export async function searchProducts(query) {
                 },
                 { 
                     sizes: size ? { has: size } : undefined
+                },
+                {
+                    updated_at: {
+                        gte: dateFrom,
+                        lt: dateTo ? dateTo : new Date()
+                    }
                 }
             ]
         };
@@ -40,6 +48,12 @@ export async function searchProducts(query) {
                 },
                 { 
                     sizes: size ? { has: size } : undefined
+                },
+                {
+                    updated_at: {
+                        gte: dateFrom,
+                        lt: dateTo ? dateTo : new Date()
+                    }
                 }
             ]
         };
@@ -53,6 +67,12 @@ export async function searchProducts(query) {
                 },
                 { 
                     sizes: size ? { has: size } : undefined
+                },
+                {
+                    updated_at: {
+                        gte: dateFrom,
+                        lt: dateTo ? dateTo : new Date()
+                    }
                 }
             ]
         };
@@ -96,7 +116,13 @@ export default async (req, res) => {
 
             const result = await searchProducts(body);
 
-            console.log('SEARCH_PRODUCTS:', result[1]);
+            let arr = [];
+
+            result.map((item) => {
+                arr.push(item.updated_at);
+            });
+
+            console.log('SEARCH_PRODUCTS:', result.updated_at, arr);
 
             return res.status(200).json({ result });
         } catch (error) {

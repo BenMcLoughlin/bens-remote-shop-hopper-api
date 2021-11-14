@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import PropTypes from 'prop-types';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import useGlobal from 'frontend/globalState/store';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
@@ -9,40 +9,31 @@ import List from './List';
 import Filters from './Filters';
 
 const Board = () => {
+    const router = useRouter();
+    const { pid } = router.query;
     const [globalState, globalActions] = useGlobal();
     const [loading, setLoading] = useState(false);
     const [products, setProducts] = useState([]);
-    const [columnData, setColumnData] = useState([]);
+    const [date, setDate] = useState(new Date());
+    let dateFrom = new Date();
+    let pastDate = dateFrom.getDate() - 7;
+    dateFrom.setDate(pastDate);
+
     const [defaultFilter, setDefaultFilter] = useState({
         column: 'buckets',
-        metric: globalState.user.buckets?.[0] || 'Athletic',
-        size: globalState.user.size?.[0] || 'XXS'
+        metric: pid
     });
     const mountedRef = useRef(true);
 
-    console.log('globalState:', globalState.user);
+    // console.log('globalState:', globalState.user);
 
     useEffect(() => {
-        const _fetchDefault = async () => {
-            if (!globalState.user.buckets?.length < 1) {
-                setLoading(true);
-                const success = await globalActions.apiRequests.getColumn('buckets');
-
-                console.log('getColumn result:', success.result[0]?.value);
-
-                await setDefaultFilter({
-                    column: 'buckets',
-                    metric: columnData[0]?.value
-                });
-
-                setLoading(false);
-                return true;
-            }
-        };
-
-        _fetchDefault();
-        _getProducts(defaultFilter);
-    }, []);
+        _getInitialProducts({
+            column: 'buckets',
+            metric: pid,
+            dateFrom
+        });
+    }, [pid]);
 
     useEffect(() => {
         mountedRef.current && setProducts(globalState.products.data);
@@ -52,7 +43,7 @@ const Board = () => {
         // };
     }, [globalState.products.data]);
 
-    const _getProducts = async (filters = defaultFilter) => {
+    const _getInitialProducts = async (filters = defaultFilter) => {
         const result = await globalActions.apiRequests.searchProducts(filters);
 
         if (result) {
@@ -68,7 +59,7 @@ const Board = () => {
 
     return (
         <BoardWrapper>
-            <Filters defaultFilters={defaultFilter} search={_getProducts} />
+            <Filters defaultFilters={defaultFilter} search={_getInitialProducts} />
             <List products={products} />
         </BoardWrapper>
     );

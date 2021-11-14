@@ -10,7 +10,6 @@ const ProductReviewSystem = () => (
 
         <Sidebar />
 
-        {/* Add compiled template examples here */}
         <Board />
     </Page>
 );

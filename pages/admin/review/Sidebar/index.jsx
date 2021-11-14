@@ -24,7 +24,7 @@ const Sidebar = () => {
         let InCompleteIcon = CheckCircle;
 
         return (
-            <Link href={path}>
+            <Link href={path} key={text}>
                 <LinkItem isSelected={isSelected}>
                     <>
                         <Icon size={30} />

@@ -11,8 +11,7 @@ export const searchProducts = (store, query) => {
     return products
         .searchProducts(query)
         .then((data) => {
-            // store.actions.products.setData(data.result); todo
-            console.log('SEARCH PRODUCTS:', data.result?.length);
+            console.log('searchProducts:', data.result?.length);
 
             store.actions.products.setLoading(false);
 
