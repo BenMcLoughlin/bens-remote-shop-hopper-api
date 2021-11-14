@@ -19,12 +19,21 @@ const Onboard = () => {
     const pages = ['location', 'styles', 'brands', 'sizes'];
 
     let selectedPage = pages[num];
-    console.log('session?.user?.email: ', session?.user?.email);
+
     const sendEmail = async () => {
         const res = await fetch('/api/email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ sendTo: session?.user?.email, template: 'welcome' })
+        });
+        let data = await res.json();
+    };
+
+    const updateProfile = async () => {
+        const res = await fetch('/api/updateProfile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(globalState.user)
         });
         let data = await res.json();
     };
