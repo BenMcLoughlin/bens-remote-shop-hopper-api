@@ -23,7 +23,7 @@ export const templateClasses = [
         isSet: false,
         items: []
     } }, 
-    { "Hip Hop": {
+    { "HipHop": {
         isSet: false,
         items: []
     } }, 
