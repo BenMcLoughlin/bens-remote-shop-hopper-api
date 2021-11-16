@@ -18,15 +18,15 @@ export const Back = ({ handleChange }) => (
 const Wrapper = styled(Link)`
     z-index: 50;
     position: absolute;
-    top: ${ (props) => props.top };
-    right: ${ (props) => props.right };
+    top: ${(props) => props.top};
+    right: ${(props) => props.right};
     transform: rotate(180deg);
     cursor: pointer;
 `;
 
 const Circle = styled.div`
     border-radius: 50%;
-    ${ (props) => props.theme.neomorph };
+    ${(props) => props.theme.neomorph};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,6 +37,6 @@ const Circle = styled.div`
 const ArrowRight = styled(ArrowIosForwardOutline)`
     height: 3.2rem;
     width: 3.2rem;
-    color: ${ (props) => props.theme.color.darkGrey };
+    color: ${(props) => props.theme.color.darkGrey};
     z-index: 500;
 `;

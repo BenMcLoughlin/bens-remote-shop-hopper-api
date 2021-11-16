@@ -1,8 +1,7 @@
 // // import { getSession } from 'next-auth/react';
 import prisma from 'prisma/prisma.js';
 
-export async function getTemplateClass(query) {
-    let templateClass = query.templateClass;
+export async function getTemplateClass(templateClass) {
 
     console.log('getTemplateClass:', templateClass);
 
@@ -33,11 +32,11 @@ export default async (req, res) => {
 
     if (req.method === 'POST') {
         try {
-            let { body } = req;
+            let body = req.body;
 
             const result = await getTemplateClass(body);
 
-            console.log('GET_TEMPLATE_CLASS:', result.length);
+            console.log('GET_TEMPLATE_CLASS:', result);
 
             return res.status(200).json({ result });
         } catch (error) {

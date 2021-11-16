@@ -77,13 +77,6 @@ export const templateClasses = [
         
     },
     {   
-        class_name: "Chic",
-        isSet: false,
-        items: [],
-        submitted: false
-        
-    },
-    {   
         class_name: "Elegant",
         isSet: false,
         items: [],

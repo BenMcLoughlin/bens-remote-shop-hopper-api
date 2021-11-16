@@ -191,9 +191,8 @@ export const wipeProducts = (store, body) => {
 export const getTemplateClass = (store, templateClassName) => {
     store.actions.templateClass.setLoading(true);
 
-    const body = {
-        templateClass: templateClassName
-    };
+    const body = templateClassName;
+
     console.log('getTemplateClass body:', body);
 
     return templateClass

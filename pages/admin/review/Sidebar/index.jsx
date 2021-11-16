@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -13,7 +14,7 @@ import { color, sizes, font, mixin, zIndexValues } from 'frontend/styles/theme';
 import logoSrc from 'public/assets/logos/shophopper-logo.svg';
 import { templateClasses } from '../templateClasses';
 
-const ReviewSidebar = () => {
+const ReviewSidebar = ({ isPID }) => {
     const router = useRouter();
     const [globalState, globalActions] = useGlobal();
     const [unSubmitted, setUnSubmitted] = useState(false);
@@ -71,7 +72,9 @@ const ReviewSidebar = () => {
             </Info>
 
             <Divider />
-            <Title>Review and Assign</Title>
+            <Link href={'/admin/review/'}>
+                <Title>{ isPID ? 'Templates Home' : 'Review and Assign'}</Title>
+            </Link>
             <Divider />
             {
                 templateClasses.map((item) => (
@@ -109,6 +112,7 @@ export const Title = styled.div`
     text-align: center;
     padding-top: 2px;
     font-size: 15px;
+    cursor: pointer;
 `;
 
 export const SidebarWrapper = styled.div`
@@ -193,5 +197,11 @@ export const LinkText = styled.div`
             font-size: 15px;
         `}
 `;
+
+ReviewSidebar.propTypes = {
+    isPID: PropTypes.bool
+    // price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    // compareAtPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
 
 export default ReviewSidebar;

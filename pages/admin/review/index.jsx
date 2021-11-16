@@ -2,7 +2,7 @@ import React from 'react';
 
 import { NavBarLeft, Page } from 'frontend/components';
 import Sidebar from './Sidebar';
-// import TemplateExamples from './TemplateExamples';
+// import ClassTemplates from './ClassTemplates';
 
 const Review = () => (
     <Page>

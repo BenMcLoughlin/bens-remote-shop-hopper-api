@@ -2,19 +2,16 @@ import React from 'react';
 
 import { NavBarLeft, Page } from 'frontend/components';
 import Sidebar from './Sidebar';
-import Board from './Board';
 import ClassExample from './ClassExample';
 
-const ProductReviewClass = () => (
+const ReviewPID = () => (
     <Page>
         <NavBarLeft />
 
-        <Sidebar />
+        <Sidebar isPID />
 
         <ClassExample />
-
-        <Board />
     </Page>
 );
 
-export default ProductReviewClass;
+export default ReviewPID;
