@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -7,14 +7,34 @@ import { CheckCircleFill } from '@styled-icons/bootstrap/CheckCircleFill';
 import { CheckCircle } from '@styled-icons/bootstrap/CheckCircle';
 import styled, { css } from 'styled-components';
 
-import logoSrc from 'public/assets/logos/shophopper-logo.svg';
-import { color, sizes, font, mixin, zIndexValues } from 'frontend/styles/theme';
-import { templateClasses } from '../templateClasses';
 import useGlobal from 'frontend/globalState/store';
+import { Button } from 'frontend/components';
+import { color, sizes, font, mixin, zIndexValues } from 'frontend/styles/theme';
+import logoSrc from 'public/assets/logos/shophopper-logo.svg';
+import { templateClasses } from '../templateClasses';
 
 const ReviewSidebar = () => {
     const router = useRouter();
     const [globalState, globalActions] = useGlobal();
+    const [unSubmitted, setUnSubmitted] = useState(false);
+
+    const _checkClasses = async () => {
+        const result = await globalActions.apiRequests.checkTemplateClasses();
+
+        if (result) {
+            return setUnSubmitted(result);
+        }
+
+        _resetClasses();
+    };
+
+    const _resetClasses = async () => {
+        const success = await globalActions.apiRequests.resetTemplateClasses(templateClasses);
+
+        if (success) {
+            setUnSubmitted(false);
+        }
+    };
 
     const renderLinkItem = (text, iconType, path, isSet) => {
         let isSelected = router.asPath.includes(path);
@@ -26,13 +46,13 @@ const ReviewSidebar = () => {
             <Link href={path} key={text}>
                 <LinkItem isSelected={isSelected}>
                     <>
-                        <Icon size={30} />
+                        <Icon size={30} color={isSelected ? color.primary : "white"} />
                         <LinkText isSelected={isSelected}>{text}</LinkText>
                         {
                             isSet ? 
                                 <CompleteIcon size={20} color="green" />
                                 : 
-                                <InCompleteIcon size={20} />
+                                <InCompleteIcon size={20} color="white" />
                         }
                     </>
                 </LinkItem>
@@ -51,16 +71,45 @@ const ReviewSidebar = () => {
             </Info>
 
             <Divider />
-            <LinkText>Review and Assign</LinkText>
+            <Title>Review and Assign</Title>
             <Divider />
             {
                 templateClasses.map((item) => (
                     renderLinkItem(item.class_name, UiChecksGrid, `/admin/review/${item.class_name}`, item.isSet)
                 ))
             }
+            <Divider />
+            {
+                unSubmitted ?
+                    <>
+                        <Text>
+                            Note:
+                        </Text>
+                        {unSubmitted?.map((item) => (
+                            <Text key={item.class_name}>
+                                {item.class_name} <span style={{ color: 'black' }}>has not been submitted yet</span>
+                            </Text>
+                        ))}
+                        <Button
+                            title={'Reset Anyway?'}
+                            onClick={_resetClasses}
+                        />
+                    </>
+                    :
+                    <Button
+                        title="Reset"
+                        onClick={_checkClasses}
+                    />
+            }
         </SidebarWrapper>
     );
 };
+
+export const Title = styled.div`
+    text-align: center;
+    padding-top: 2px;
+    font-size: 15px;
+`;
 
 export const SidebarWrapper = styled.div`
     position: fixed;
@@ -92,8 +141,9 @@ export const Info = styled.div`
     padding: 24px 4px;
 `;
 
-export const Texts = styled.div`
-    padding: 3px 0 0 0.1rem;
+const Text = styled.div`
+    color: red;
+    font-size: 14px;
 `;
 
 export const Name = styled.div`
@@ -118,7 +168,7 @@ export const LinkItem = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 0;
+    padding: 8px 5px;
     border-radius: 3px;
     cursor: pointer;
     i {
