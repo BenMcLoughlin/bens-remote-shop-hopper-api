@@ -42,7 +42,7 @@ export const templateClasses = [
         
     },
     {   
-        class_name: "Music Festival",
+        class_name: "MusicFestival",
         isSet: false,
         items: [],
         submitted: false
@@ -56,7 +56,7 @@ export const templateClasses = [
         
     }, 
     { 
-        class_name: "Hip Hop",
+        class_name: "HipHop",
         isSet: false,
         items: [],
         submitted: false

@@ -28,14 +28,13 @@ export const buckets = [
     "Trendy",
     "Casual",
     "Vintage",
-    "Music Festival",
-    "Beauty",
+    "MusicFestival",
     "Streetwear",
-    "Hip Hop",
+    "HipHop",
     "Rock",
     "Punk",
     "Elegant",
     "Formal"
 ];
 
-export const bucketOptions = [{ "label": "Athletic", "value": "Athletic" }, { "label": "Bohemian", "value": "Bohemian" }, { "label": "Chic", "value": "Chic" }, { "label": "Trendy", "value": "Trendy" }, { "label": "Casual", "value": "Casual" }, { "label": "Vintage", "value": "Vintage" }, { "label": "Music Festival", "value": "Music Festival" }, { "label": "Baby & Kids", "value": "Baby & Kids" }, { "label": "Accessories", "value": "Accessories" }, { "label": "Beauty", "value": "Beauty" }, { "label": "Streetwear", "value": "Streetwear" }, { "label": "Hip Hop", "value": "Hip Hop" }, { "label": "Rock", "value": "Rock" }, { "label": "Punk", "value": "Punk" }, { "label": "Elegant", "value": "Elegant" }, { "label": "Formal", "value": "Formal" }, { "label": "Maternity", "value": "Maternity" }];
+export const bucketOptions = [{ "label": "Athletic", "value": "Athletic" }, { "label": "Bohemian", "value": "Bohemian" }, { "label": "Chic", "value": "Chic" }, { "label": "Trendy", "value": "Trendy" }, { "label": "Casual", "value": "Casual" }, { "label": "Vintage", "value": "Vintage" }, { "label": "MusicFestival", "value": "MusicFestival" }, { "label": "Baby & Kids", "value": "Baby & Kids" }, { "label": "Accessories", "value": "Accessories" }, { "label": "Beauty", "value": "Beauty" }, { "label": "Streetwear", "value": "Streetwear" }, { "label": "HipHop", "value": "HipHop" }, { "label": "Rock", "value": "Rock" }, { "label": "Punk", "value": "Punk" }, { "label": "Elegant", "value": "Elegant" }, { "label": "Formal", "value": "Formal" }, { "label": "Maternity", "value": "Maternity" }];
