@@ -1,38 +1,51 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { color, font, mixin } from 'frontend/styles/theme';
 import { truncate } from 'frontend/utils/strings';
 import useGlobal from 'frontend/globalState/store';
+import { Product } from 'frontend/components/cards/Product';
 
 const propTypes = {
     id: PropTypes.number,
     src: PropTypes.string,
     position: PropTypes.string,
     populateCard: PropTypes.func,
-    pid: PropTypes.string
+    pid: PropTypes.string,
+    currentItems: PropTypes.array
+};
+
+const locationMap = {
+    'Top Left': 'topLeft'
 };
 
 export const Card = ({
     src,
     position,
-    pid,
     populateCard,
-    id
+    id,
+    currentItems
 }) => {
+    const router = useRouter();
+    const { pid } = router.query;
     const [globalState, globalActions] = useGlobal();
     const [loading, setLoading] = useState(false);
     const [product, setProduct] = useState({});
 
     useEffect(() => {
-        if (id) {
-            _getProduct(id);
-        }
-    }, [id]);
+        const current = currentItems?.filter((item) => item.position === locationMap[position]);
 
-    const _getProduct = async (filters) => {
-        const result = await globalActions.apiRequests.searchProductById(filters);
+        if (current[0]?.product_id) {
+            _getProduct(current[0]?.product_id);
+        }
+
+        setProduct({});
+    }, [globalState.templateClass.data?.items]);
+
+    const _getProduct = async (filter) => {
+        const result = await globalActions.apiRequests.searchProductById(filter);
 
         if (result) {
             setProduct(result);
@@ -45,13 +58,30 @@ export const Card = ({
 
     return (
         <>
-            <CardBlock onClick={() => _populateCard(position)}>
-                <Details>{pid}</Details>
-                <Bottom>
-                    <Border />
-                    <Details>Apply {position}</Details>
-                </Bottom>
-            </CardBlock>
+            {
+                product.id ? 
+                    <Product
+                        id={product.id}
+                        businessName={product.business_name}
+                        src={product.images[0]?.src}
+                        title={product.title}
+                        rating={product.rating}
+                        price={(product.original_price / 100).toFixed(2)}
+                        compareAtPrice={(product.original_price / 100).toFixed(2)}
+                        tags={product.tags}
+                        buckets={product.buckets}
+                        sizes={product.sizes}
+                        // incrementProduct={_incrementProduct}
+                    />
+                    : 
+                    <CardBlock onClick={() => _populateCard(position)}>
+                        <Details>{pid}</Details>
+                        <Bottom>
+                            <Border />
+                            <Details>Apply {position}</Details>
+                        </Bottom>
+                    </CardBlock>
+            }
         </>
     );
 };

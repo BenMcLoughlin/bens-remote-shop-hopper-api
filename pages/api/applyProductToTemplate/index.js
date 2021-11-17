@@ -1,15 +1,20 @@
-// import { getSession } from 'next-auth/react';
+// // import { getSession } from 'next-auth/react';
 import prisma from 'prisma/prisma.js';
 
-export async function searchProductById(id) {
-    // TODO: trigger warning if params not set
+export async function applyProductToTemplate(body) {
 
-    console.log('SEARCH_PRODUCTS_BY_ID id', id);
-    let where = {};
+    const itemString = JSON.stringify(body);
 
-    const result = await prisma.product
-        .findUnique({
-            where: { id: Number(id) }
+    const result = await prisma.templateClass
+        .update({
+            where: {
+                class_name: body.pid
+            },
+            data: {
+                items: {
+                    push: itemString
+                }
+            }
         })
         .catch((e) => {
             console.log('e:', e);
@@ -34,9 +39,9 @@ export default async (req, res) => {
         try {
             let body = req.body;
 
-            const result = await searchProductById(body);
+            const result = await applyProductToTemplate(body);
 
-            console.log('SEARCH_PRODUCTS_BY_ID:', result.title);
+            console.log('APPLY_PRODUCT_TO_TEMPLATE:', result);
 
             return res.status(200).json({ result });
         } catch (error) {

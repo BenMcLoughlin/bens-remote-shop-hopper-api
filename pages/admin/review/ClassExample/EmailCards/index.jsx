@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { ArrowLeftShort } from '@styled-icons/bootstrap/ArrowLeftShort';
@@ -16,16 +17,35 @@ const defaultProps = {
     pid: 'Athletic'
 };
 
-const EmailCards = ({ pid }) => {
+const EmailCards = () => {
+    const router = useRouter();
+    const { pid } = router.query;
     const [globalState, globalActions] = useGlobal();
     const [loading, setLoading] = useState(false);
-    const [currentQuery, setCurrentQuery] = useState('');
+    const [currentItems, setCurrentItems] = useState([]);
     const mountedRef = useRef(true);
 
     useEffect(() => {
-        // _getInitialProducts(current);
-        // setCurrentQuery(current.metric);
-    }, [pid]);
+        let items = [];
+        console.log('globalState.templateClass.data:', globalState.templateClass.data?.class_name, pid);
+
+        globalState.templateClass.data?.items?.map((item) => {
+            items.push(JSON.parse(item));
+        });
+
+        console.log('items:', items);
+
+        setCurrentItems(items);
+    }, [globalState.templateClass.loading]);
+
+    const _getTemplateItems = async (name) => {
+        // const result = await globalActions.apiRequests.searchProducts(name);
+
+        // if (result) {
+        //     globalActions.products.setData(result);
+        //     globalActions.products.setCursor(result.length);
+        // }
+    };
 
     return (
         <>
@@ -33,7 +53,7 @@ const EmailCards = ({ pid }) => {
                 <Card
                     position="Top Left"
                     pid={pid}
-                    id={"product.id"}
+                    currentItems={currentItems}
                     // src={product.images[0]?.src}
                     // title={product.title}
                     // rating={product.rating}
@@ -47,7 +67,7 @@ const EmailCards = ({ pid }) => {
                 <Card
                     position="Top Right"
                     pid={pid}
-                    id={"product.id"}
+                    currentItems={currentItems}
                     // src={product.images[0]?.src}
                     // title={product.title}
                     // rating={product.rating}
@@ -61,7 +81,7 @@ const EmailCards = ({ pid }) => {
                 <Card
                     position="Bottom Left"
                     pid={pid}
-                    id={"product.id"}
+                    currentItems={currentItems}
                     // src={product.images[0]?.src}
                     // title={product.title}
                     // rating={product.rating}
@@ -75,7 +95,7 @@ const EmailCards = ({ pid }) => {
                 <Card
                     position="Bottom Right"
                     pid={pid}
-                    id={"product.id"}
+                    currentItems={currentItems}
                     // src={product.images[0]?.src}
                     // title={product.title}
                     // rating={product.rating}

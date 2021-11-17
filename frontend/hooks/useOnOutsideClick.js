@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import useDeepCompareMemoize from 'frontend/hooks/deepCompareMemoize';
 
-const useOnOutsideClick = (
+export const useOnOutsideClick = (
     $ignoredElementRefs,
     isListening,
     onOutsideClick,
@@ -37,5 +37,3 @@ const useOnOutsideClick = (
         };
     }, [$ignoredElementRefsMemoized, $listeningElementRef, isListening, onOutsideClick]);
 };
-
-export default useOnOutsideClick;

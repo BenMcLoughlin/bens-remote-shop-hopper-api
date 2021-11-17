@@ -11,7 +11,7 @@ datasource db {
 model TemplateClass {
   id               Int      @id @default(autoincrement())
   class_name       String   @unique
-  items            String[]
+  items            String[]        
   isSet            Boolean
   submitted        Boolean
   updated_at       DateTime @default(now())

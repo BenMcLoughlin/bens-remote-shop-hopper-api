@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ArrowLeftShort } from '@styled-icons/bootstrap/ArrowLeftShort';
 import { ArrowRightShort } from '@styled-icons/bootstrap/ArrowRightShort';
 
-import { Product } from 'frontend/components';
+import { ReviewProduct } from './ReviewProduct';
 import { color, font, mixin } from 'frontend/styles/theme';
 import incrementProduct from 'backend/requests/incrementProduct';
 import useGlobal from 'frontend/globalState/store';
@@ -37,12 +37,8 @@ const ProductsBlock = ({ pid }) => {
             dateFrom
         };
         _getInitialProducts(initial);
-        setCurrentQuery(`Items that match: ${initial.metric} and Updated since ${dateFrom.toString().slice(0, 16)}`);
+        setCurrentQuery(`Items: ${initial.metric} and Updated since ${dateFrom.toString().slice(0, 16)}`);
     }, [pid]);
-
-    const _incrementProduct = async (id) => {
-        await incrementProduct(id);
-    };
 
     const _getInitialProducts = async (filters) => {
         const result = await globalActions.apiRequests.searchProducts(filters);
@@ -64,6 +60,16 @@ const ProductsBlock = ({ pid }) => {
     const _prevPage = async () => {
         // setLoading('prevPage');
         const result = await globalActions.apiRequests.prevPage();
+        if (result) {
+            // setLoading(false);
+        }
+    };
+
+    const _setAs = async (location, id) => {
+        console.log('_set As:', pid, location, id);
+
+        const result = await globalActions.apiRequests.applyProductToTemplate(pid, location, id);
+
         if (result) {
             // setLoading(false);
         }
@@ -113,7 +119,7 @@ const ProductsBlock = ({ pid }) => {
                         )}
                     </ButtonsWrapper>
                     {globalState.products.data.map((product, index) => (
-                        <Product
+                        <ReviewProduct
                             key={product.id}
                             id={product.id}
                             businessName={product.business_name}
@@ -126,7 +132,7 @@ const ProductsBlock = ({ pid }) => {
                             tags={product.tags}
                             buckets={product.buckets}
                             sizes={product.sizes}
-                            incrementProduct={_incrementProduct}
+                            setAs={_setAs}
                         />
                     ))}
                     <ButtonsWrapper>
@@ -159,12 +165,9 @@ export const List = styled.div`
     display: flex;
     flex-direction: row;
     padding: 8px;
-    // align-items: center;
-    // justify-content: space-evenly;
     min-height: 400px;
     overflow-x: auto;
-    height: 550px;
-    // width: 100%;
+    height: 780px;
     border-radius: 3px;
     background: ${color.backgroundLightest};
 `;

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import useOnOutsideClick from 'frontend/hooks/onOutsideClick';
+import { useOnOutsideClick } from 'frontend/hooks/useOnOutsideClick';
 import { KeyCodes } from 'frontend/content/keyCodes';
 import { Icon } from 'frontend/components/icons';
 
@@ -164,21 +164,19 @@ export const Select = ({
 
                 {!isValueEmpty && isMulti && (
                     <ValueMulti variant={variant}>
-                        {value.map((optionValue) =>
-                            propsRenderValue ? (
-                                propsRenderValue({
-                                    value: optionValue,
-                                    removeOptionValue: () => removeOptionValue(optionValue)
-                                })
-                            ) : (
-                                <ValueMultiItem
-                                    key={optionValue}
-                                    onClick={() => removeOptionValue(optionValue)}>
-                                    {getOptionLabel(optionValue)}
-                                    <Icon type="close" size={14} />
-                                </ValueMultiItem>
-                            )
-                        )}
+                        {value.map((optionValue) => propsRenderValue ? (
+                            propsRenderValue({
+                                value: optionValue,
+                                removeOptionValue: () => removeOptionValue(optionValue)
+                            })
+                        ) : (
+                            <ValueMultiItem
+                                key={optionValue}
+                                onClick={() => removeOptionValue(optionValue)}>
+                                {getOptionLabel(optionValue)}
+                                <Icon type="close" size={14} />
+                            </ValueMultiItem>
+                        ))}
                         <AddMore>
                             <Icon type="plus" />
                             Add more

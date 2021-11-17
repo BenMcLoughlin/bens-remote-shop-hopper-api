@@ -1,5 +1,17 @@
 import request from './request';
 
+function applyProductToTemplate(body) {
+    const options = {
+        endpoint: '/api/applyProductToTemplate',
+        method: 'POST',
+        body
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
 function getTemplateClass(body) {
     const options = {
         endpoint: '/api/getTemplateClass',
@@ -36,6 +48,7 @@ function resetTemplateClasses(body) {
 }
 
 export {
+    applyProductToTemplate,
     getTemplateClass,
     checkTemplateClasses,
     resetTemplateClasses

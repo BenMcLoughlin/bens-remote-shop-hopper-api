@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { asDate, asDateTime } from 'frontend/utils/dates';
-import useOnOutsideClick from 'frontend/hooks/onOutsideClick';
+import { useOnOutsideClick } from 'frontend/hooks/useOnOutsideClick';
 import TextBox from 'frontend/components';
 
 import DateSection from './DateSection';

@@ -192,23 +192,6 @@ export const getColumn = (store, body) => {
         });
 };
 
-export const wipeProducts = (store, body) => {
-    store.actions.products.setLoading(true);
-
-    return products
-        .wipeProducts(body)
-        .then((data) => {
-            store.actions.products.setLoading(false);
-            console.log('DESTROY PRODUCTS RESPONSE:', data);
-
-            return data;
-        })
-        .catch((error) => {
-            store.actions.products.setLoading(false);
-            console.log('error:', error);
-        });
-};
-
 export const getTemplateClass = (store, templateClassName) => {
     store.actions.templateClass.setLoading(true);
 
@@ -218,6 +201,31 @@ export const getTemplateClass = (store, templateClassName) => {
 
     return templateClass
         .getTemplateClass(body)
+        .then((data) => {
+            store.actions.templateClass.setData(data.result);
+            store.actions.templateClass.setLoading(false);
+
+            return data.result;
+        })
+        .catch((error) => {
+            store.actions.templateClass.setLoading(false);
+            console.log('error:', error);
+        });
+};
+
+export const applyProductToTemplate = (store, pid, position, id) => {
+    store.actions.templateClass.setLoading(true);
+
+    const body = {
+        pid, 
+        position,
+        product_id: id
+    };
+
+    console.log('applyProductToTemplate body:', body);
+
+    return templateClass
+        .applyProductToTemplate(body)
         .then((data) => {
             store.actions.templateClass.setData(data.result);
             store.actions.templateClass.setLoading(false);
@@ -264,6 +272,23 @@ export const resetTemplateClasses = (store, templateClasses) => {
         })
         .catch((error) => {
             store.actions.templateClass.setLoading(false);
+            console.log('error:', error);
+        });
+};
+
+export const wipeProducts = (store, body) => {
+    store.actions.products.setLoading(true);
+
+    return products
+        .wipeProducts(body)
+        .then((data) => {
+            store.actions.products.setLoading(false);
+            console.log('DESTROY PRODUCTS RESPONSE:', data);
+
+            return data;
+        })
+        .catch((error) => {
+            store.actions.products.setLoading(false);
             console.log('error:', error);
         });
 };
