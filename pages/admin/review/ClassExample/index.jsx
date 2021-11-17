@@ -7,7 +7,8 @@ import useGlobal from 'frontend/globalState/store';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 import { templateClasses } from '../templateClasses';
 
-import Block from './Block';
+import EmailCards from './EmailCards';
+import ProductBlock from './ProductsBlock';
 
 const ClassExample = () => {
     const router = useRouter();
@@ -40,14 +41,15 @@ const ClassExample = () => {
 
     return (
         <ClassExampleWrapper>
-            <Block pid={pid} />
+            <EmailCards pid={pid} />
+            <ProductBlock pid={pid} />
         </ClassExampleWrapper>
     );
 };
 
 export const ClassExampleWrapper = styled.div`
-    overflow-y: auto;
-    height: 100vh;
+    // overflow-y: auto;
+    // height: 100vh;
 `;
 
 export default ClassExample;

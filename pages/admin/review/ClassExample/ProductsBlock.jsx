@@ -21,7 +21,7 @@ const defaultProps = {
     pid: 'Athletic'
 };
 
-const ReviewBoardList = ({ pid }) => {
+const ProductsBlock = ({ pid }) => {
     const [globalState, globalActions] = useGlobal();
     const [loading, setLoading] = useState(false);
     const [currentQuery, setCurrentQuery] = useState('');
@@ -31,13 +31,13 @@ const ReviewBoardList = ({ pid }) => {
     dateFrom.setDate(pastDate);
 
     useEffect(() => {
-        const current = {
+        const initial = {
             column: 'buckets',
             metric: pid,
             dateFrom
         };
-        _getInitialProducts(current);
-        setCurrentQuery(current.metric);
+        _getInitialProducts(initial);
+        setCurrentQuery(`Items that match: ${initial.metric} and Updated since ${dateFrom.toString().slice(0, 16)}`);
     }, [pid]);
 
     const _incrementProduct = async (id) => {
@@ -70,11 +70,13 @@ const ReviewBoardList = ({ pid }) => {
     };
 
     const formatProductsCount = () => {
-        if (globalState.products.data.length !== globalState.products.cursor) {
-            return `${globalState.products.data.length} of ${globalState.products.cursor}`;
+        let products = globalState.products.data;
+        let cursor = globalState.products.cursor;
+        if (products.length !== cursor) {
+            return `Items ${cursor - products.length} to ${cursor}`;
         }
 
-        return globalState.products.data.length;
+        return `${products.length} Items`;
     };
 
     if (!globalState.products.data) {
@@ -85,7 +87,7 @@ const ReviewBoardList = ({ pid }) => {
         <>
             <Title>
                 {currentQuery}
-                <ProductsCount>: {formatProductsCount()} Items</ProductsCount>
+                <ProductsCount>: {formatProductsCount()}</ProductsCount>
             </Title>
             <ButtonsWrapper>
                 {globalState.products.cursor > globalState.products.data.length ? (
@@ -101,6 +103,15 @@ const ReviewBoardList = ({ pid }) => {
             </ButtonsWrapper>
             <List>
                 <>
+                    <ButtonsWrapper>
+                        {globalState.products.cursor > globalState.products.data.length ? (
+                            <Icon onClick={_prevPage}>
+                                <ArrowLeftShort />
+                            </Icon>
+                        ) : (
+                            <div></div>
+                        )}
+                    </ButtonsWrapper>
                     {globalState.products.data.map((product, index) => (
                         <Product
                             key={product.id}
@@ -119,13 +130,6 @@ const ReviewBoardList = ({ pid }) => {
                         />
                     ))}
                     <ButtonsWrapper>
-                        {globalState.products.cursor > globalState.products.data.length ? (
-                            <Icon onClick={_prevPage}>
-                                <ArrowLeftShort />
-                            </Icon>
-                        ) : (
-                            <div></div>
-                        )}
                         <Icon onClick={_nextPage}>
                             <ArrowRightShort />
                         </Icon>
@@ -154,17 +158,15 @@ export const ButtonsWrapper = styled.div`
 export const List = styled.div`
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    margin: 0 0.05rem;
+    padding: 8px;
+    // align-items: center;
+    // justify-content: space-evenly;
     min-height: 400px;
-    overflow-y: auto;
-    height: 100vh;
-    width: 100%;
+    overflow-x: auto;
+    height: 550px;
+    // width: 100%;
     border-radius: 3px;
     background: ${color.backgroundLightest};
-    padding: 0.1rem 8px 300px 8px;
 `;
 
 export const Title = styled.div`
@@ -185,7 +187,7 @@ export const Products = styled.div`
     padding: 0 0.05rem;
 `;
 
-ReviewBoardList.propTypes = propTypes;
-ReviewBoardList.defaultProps = defaultProps;
+ProductsBlock.propTypes = propTypes;
+ProductsBlock.defaultProps = defaultProps;
 
-export default ReviewBoardList;
+export default ProductsBlock;

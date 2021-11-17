@@ -24,6 +24,18 @@ function searchProducts(body) {
     });
 }
 
+function searchProductById(body) {
+    const options = {
+        endpoint: '/api/searchProductById',
+        method: 'POST',
+        body
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
 function getHotItems(body) {
     const options = {
         endpoint: '/api/getHotItems',
@@ -64,6 +76,7 @@ function wipeProducts() {
 export {
     getGeneric,
     searchProducts,
+    searchProductById,
     getHotItems,
     getColumn,
     wipeProducts

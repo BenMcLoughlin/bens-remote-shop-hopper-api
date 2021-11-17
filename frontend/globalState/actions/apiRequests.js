@@ -79,6 +79,27 @@ export const searchProducts = (store, query) => {
         });
 };
 
+export const searchProductById = (store, id) => {
+    store.actions.products.setLoading(true);
+    const body = JSON.stringify(id);
+
+    console.log('searchProductById query:', body);
+
+    return products
+        .searchProductById(body)
+        .then((data) => {
+            console.log('searchProductById:', data.result);
+
+            store.actions.products.setLoading(false);
+
+            return data.result;
+        })
+        .catch((error) => {
+            store.actions.products.setLoading(false);
+            console.log('error:', error);
+        });
+};
+
 export const nextPage = (store) => {
     store.actions.products.setLoading(true);
 

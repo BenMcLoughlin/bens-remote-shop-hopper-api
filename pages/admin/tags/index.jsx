@@ -41,15 +41,13 @@ const TagReviewSystem = () => {
     };
 
     return (
-        <Layout>
-            <ProjectPage>
-                <NavBarLeft />
+        <ProjectPage>
+            <NavBarLeft />
 
-                <Sidebar />
+            <Sidebar />
 
-                <Tags />
-            </ProjectPage>
-        </Layout>
+            <Tags />
+        </ProjectPage>
     );
 };
 

@@ -5,7 +5,7 @@ import Sidebar from './Sidebar';
 import ClassExample from './ClassExample';
 
 const ReviewPID = () => (
-    <Page>
+    <Page noFooter>
         <NavBarLeft />
 
         <Sidebar isPID />
