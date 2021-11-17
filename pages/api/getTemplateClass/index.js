@@ -3,8 +3,6 @@ import prisma from 'prisma/prisma.js';
 
 export async function getTemplateClass(templateClass) {
 
-    console.log('getTemplateClass:', templateClass);
-
     const result = await prisma.templateClass
         .findUnique({
             where: {

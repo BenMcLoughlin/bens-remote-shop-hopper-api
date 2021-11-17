@@ -12,31 +12,45 @@ import useGlobal from 'frontend/globalState/store';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 
 const propTypes = {
-    status: PropTypes.string,
+    pid: PropTypes.string,
     products: PropTypes.array.isRequired
 };
 
 const defaultProps = {
-    products: []
+    products: [],
+    pid: 'Athletic'
 };
 
-const ReviewBoardList = ({ products }) => {
+const ReviewBoardList = ({ pid }) => {
     const [globalState, globalActions] = useGlobal();
     const [loading, setLoading] = useState(false);
     const [currentQuery, setCurrentQuery] = useState('');
     const mountedRef = useRef(true);
+    let dateFrom = new Date();
+    let pastDate = dateFrom.getDate() - 7;
+    dateFrom.setDate(pastDate);
 
     useEffect(() => {
-        mountedRef.current &&
-            setCurrentQuery(`${globalState.products.query.column} : ${globalState.products.query.metric}`);
-
-        return () => {
-            mountedRef.current = false;
+        const current = {
+            column: 'buckets',
+            metric: pid,
+            dateFrom
         };
-    }, [globalState.products.query]);
+        _getInitialProducts(current);
+        setCurrentQuery(current.metric);
+    }, [pid]);
 
     const _incrementProduct = async (id) => {
         await incrementProduct(id);
+    };
+
+    const _getInitialProducts = async (filters) => {
+        const result = await globalActions.apiRequests.searchProducts(filters);
+
+        if (result) {
+            globalActions.products.setData(result);
+            globalActions.products.setCursor(result.length);
+        }
     };
 
     const _nextPage = async () => {
@@ -56,12 +70,16 @@ const ReviewBoardList = ({ products }) => {
     };
 
     const formatProductsCount = () => {
-        if (products.length !== globalState.products.cursor) {
-            return `${products.length} of ${globalState.products.cursor}`;
+        if (globalState.products.data.length !== globalState.products.cursor) {
+            return `${globalState.products.data.length} of ${globalState.products.cursor}`;
         }
 
-        return products.length;
+        return globalState.products.data.length;
     };
+
+    if (!globalState.products.data) {
+        return <Image src={loaderGif} className="loading" width={800} height={600} />;
+    }
 
     return (
         <>
@@ -70,7 +88,7 @@ const ReviewBoardList = ({ products }) => {
                 <ProductsCount>: {formatProductsCount()} Items</ProductsCount>
             </Title>
             <ButtonsWrapper>
-                {globalState.products.cursor > products.length ? (
+                {globalState.products.cursor > globalState.products.data.length ? (
                     <Icon onClick={_prevPage}>
                         <ArrowLeftShort />
                     </Icon>
@@ -82,41 +100,37 @@ const ReviewBoardList = ({ products }) => {
                 </Icon>
             </ButtonsWrapper>
             <List>
-                {loading ? (
-                    <Image src={loaderGif} className="loading" width={800} height={600} />
-                ) : (
-                    <>
-                        {products.map((product, index) => (
-                            <Product
-                                key={product.id}
-                                id={product.id}
-                                businessName={product.business_name}
-                                index={index}
-                                src={product.images[0]?.src}
-                                title={product.title}
-                                rating={product.rating}
-                                price={(product.original_price / 100).toFixed(2)}
-                                compareAtPrice={(product.original_price / 100).toFixed(2)}
-                                tags={product.tags}
-                                buckets={product.buckets}
-                                sizes={product.sizes}
-                                incrementProduct={_incrementProduct}
-                            />
-                        ))}
-                        <ButtonsWrapper>
-                            {globalState.products.cursor > products.length ? (
-                                <Icon onClick={_prevPage}>
-                                    <ArrowLeftShort />
-                                </Icon>
-                            ) : (
-                                <div></div>
-                            )}
-                            <Icon onClick={_nextPage}>
-                                <ArrowRightShort />
+                <>
+                    {globalState.products.data.map((product, index) => (
+                        <Product
+                            key={product.id}
+                            id={product.id}
+                            businessName={product.business_name}
+                            index={index}
+                            src={product.images[0]?.src}
+                            title={product.title}
+                            rating={product.rating}
+                            price={(product.original_price / 100).toFixed(2)}
+                            compareAtPrice={(product.original_price / 100).toFixed(2)}
+                            tags={product.tags}
+                            buckets={product.buckets}
+                            sizes={product.sizes}
+                            incrementProduct={_incrementProduct}
+                        />
+                    ))}
+                    <ButtonsWrapper>
+                        {globalState.products.cursor > globalState.products.data.length ? (
+                            <Icon onClick={_prevPage}>
+                                <ArrowLeftShort />
                             </Icon>
-                        </ButtonsWrapper>
-                    </>
-                )}
+                        ) : (
+                            <div></div>
+                        )}
+                        <Icon onClick={_nextPage}>
+                            <ArrowRightShort />
+                        </Icon>
+                    </ButtonsWrapper>
+                </>
             </List>
         </>
     );

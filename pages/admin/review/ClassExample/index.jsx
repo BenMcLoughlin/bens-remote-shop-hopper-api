@@ -17,6 +17,7 @@ const ClassExample = () => {
     const [classData, setClass] = useState([]);
     const [date, setDate] = useState(new Date());
 
+
     useEffect(() => {
         _getClass(pid);
     }, [pid]);
@@ -39,7 +40,7 @@ const ClassExample = () => {
 
     return (
         <ClassExampleWrapper>
-            <Block products={globalState.products.data} />
+            <Block pid={pid} />
         </ClassExampleWrapper>
     );
 };
