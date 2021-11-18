@@ -1,5 +1,4 @@
 // We will split these up into concise containers
-
 import * as templateClass from 'frontend/xhr/templateClass';
 import * as products from 'frontend/xhr/products';
 
@@ -60,7 +59,6 @@ export const all = (store, shops) => {
 };
 
 export const searchProducts = (store, query) => {
-    store.actions.products.setLoading(true);
     console.log('searchProducts query:', query);
     store.actions.products.setQuery(query);
 
@@ -69,18 +67,14 @@ export const searchProducts = (store, query) => {
         .then((data) => {
             console.log('searchProducts:', data.result?.length);
 
-            store.actions.products.setLoading(false);
-
             return data.result;
         })
         .catch((error) => {
-            store.actions.products.setLoading(false);
             console.log('error:', error);
         });
 };
 
 export const searchProductById = (store, id) => {
-    store.actions.products.setLoading(true);
     const body = JSON.stringify(id);
 
     console.log('searchProductById query:', body);
@@ -90,19 +84,14 @@ export const searchProductById = (store, id) => {
         .then((data) => {
             console.log('searchProductById:', data.result);
 
-            store.actions.products.setLoading(false);
-
             return data.result;
         })
         .catch((error) => {
-            store.actions.products.setLoading(false);
             console.log('error:', error);
         });
 };
 
 export const nextPage = (store) => {
-    store.actions.products.setLoading(true);
-
     const body = {
         column: store.state.products.query.column,
         metric: store.state.products.query.metric,
@@ -117,19 +106,15 @@ export const nextPage = (store) => {
         .then((data) => {
             store.actions.products.setData(data.result);
             store.actions.products.setCursor(body.cursor);
-            store.actions.products.setLoading(false);
 
             return data.result;
         })
         .catch((error) => {
-            store.actions.products.setLoading(false);
             console.log('error:', error);
         });
 };
 
 export const prevPage = (store) => {
-    store.actions.products.setLoading(true);
-
     const body = {
         column: store.state.products.query.column,
         metric: store.state.products.query.metric,
@@ -144,19 +129,15 @@ export const prevPage = (store) => {
         .then((data) => {
             store.actions.products.setData(data.result);
             store.actions.products.setCursor(body.cursor);
-            store.actions.products.setLoading(false);
 
             return data.result;
         })
         .catch((error) => {
-            store.actions.products.setLoading(false);
             console.log('error:', error);
         });
 };
 
 export const getHotItems = (store, amount = 12) => {
-    store.actions.products.setLoading(true);
-
     const body = {
         amount: amount
     };
@@ -166,35 +147,22 @@ export const getHotItems = (store, amount = 12) => {
         .getHotItems(body)
         .then((data) => {
             store.actions.products.setHotItems(data.result);
-            store.actions.products.setLoading(false);
 
             return data.result;
         })
         .catch((error) => {
-            store.actions.products.setLoading(false);
             console.log('error:', error);
         });
 };
 
-export const getColumn = (store, body) => {
-    store.actions.products.setLoading(true);
-
-    return products
-        .getColumn(body)
-        .then((data) => {
-            store.actions.products.setLoading(false);
-
-            return data;
-        })
-        .catch((error) => {
-            store.actions.products.setLoading(false);
-            console.log('error:', error);
-        });
-};
+export const getColumn = (store, body) => products
+    .getColumn(body)
+    .then((data) => data)
+    .catch((error) => {
+        console.log('error:', error);
+    });
 
 export const getTemplateClass = (store, templateClassName) => {
-    store.actions.templateClass.setLoading(true);
-
     const body = templateClassName;
 
     console.log('getTemplateClass body:', body);
@@ -203,19 +171,15 @@ export const getTemplateClass = (store, templateClassName) => {
         .getTemplateClass(body)
         .then((data) => {
             store.actions.templateClass.setData(data.result);
-            store.actions.templateClass.setLoading(false);
 
             return data.result;
         })
         .catch((error) => {
-            store.actions.templateClass.setLoading(false);
             console.log('error:', error);
         });
 };
 
 export const applyProductToTemplate = (store, pid, position, id) => {
-    store.actions.templateClass.setLoading(true);
-
     const body = {
         pid, 
         position,
@@ -228,67 +192,45 @@ export const applyProductToTemplate = (store, pid, position, id) => {
         .applyProductToTemplate(body)
         .then((data) => {
             store.actions.templateClass.setData(data.result);
-            store.actions.templateClass.setLoading(false);
 
             return data.result;
         })
         .catch((error) => {
-            store.actions.templateClass.setLoading(false);
             console.log('error:', error);
         });
 };
 
 export const checkTemplateClasses = (store) => {
-    store.actions.templateClass.setLoading(true);
-
     console.log('checkTemplateClasses');
 
     return templateClass
         .checkTemplateClasses()
-        .then((data) => {
-            store.actions.templateClass.setLoading(false);
-
-            return data.result;
-        })
+        .then((data) => data.result)
         .catch((error) => {
-            store.actions.templateClass.setLoading(false);
             console.log('error:', error);
         });
 };
 
 export const resetTemplateClasses = (store, templateClasses) => {
-    store.actions.templateClass.setLoading(true);
-
     const body = templateClasses;
 
     console.log('resetTemplateClasses body:', body);
 
     return templateClass
         .resetTemplateClasses(body)
-        .then(() => {
-            store.actions.templateClass.setLoading(false);
-
-            return true;
-        })
+        .then(() => true)
         .catch((error) => {
-            store.actions.templateClass.setLoading(false);
             console.log('error:', error);
         });
 };
 
-export const wipeProducts = (store, body) => {
-    store.actions.products.setLoading(true);
+export const wipeProducts = (store, body) => products
+    .wipeProducts(body)
+    .then((data) => {
+        console.log('DESTROY PRODUCTS RESPONSE:', data);
 
-    return products
-        .wipeProducts(body)
-        .then((data) => {
-            store.actions.products.setLoading(false);
-            console.log('DESTROY PRODUCTS RESPONSE:', data);
-
-            return data;
-        })
-        .catch((error) => {
-            store.actions.products.setLoading(false);
-            console.log('error:', error);
-        });
-};
+        return data;
+    })
+    .catch((error) => {
+        console.log('error:', error);
+    });

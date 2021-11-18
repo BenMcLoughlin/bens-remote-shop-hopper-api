@@ -10,7 +10,7 @@ import { templateClasses } from '../templateClasses';
 import EmailCards from './EmailCards';
 import ProductBlock from './ProductsBlock';
 
-const ClassExample = () => {
+const ClassExamples = () => {
     const router = useRouter();
     const { pid } = router.query;
     const [globalState, globalActions] = useGlobal();
@@ -53,4 +53,4 @@ export const ClassExampleWrapper = styled.div`
     // height: 100vh;
 `;
 
-export default ClassExample;
+export default ClassExamples;

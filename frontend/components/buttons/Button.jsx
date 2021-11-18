@@ -10,7 +10,8 @@ export const Button = ({
     gradient = 'primary',
     icon,
     onClick,
-    radius = 'square'
+    radius = 'square',
+    fullWidth
 }) => {
     const icons = {
         rocket: <Rocket />,
@@ -18,7 +19,7 @@ export const Button = ({
     };
 
     return (
-        <Wrapper gradient={gradient} onClick={onClick} radius={radius} title={title}>
+        <Wrapper gradient={gradient} onClick={onClick} radius={radius} title={title} fullWidth={fullWidth}>
             {icon && (
                 <Icon>
                     {icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}
@@ -34,7 +35,7 @@ export const Button = ({
 const Wrapper = styled.div`
     height: 5rem;
     min-width: 11rem;
-    max-width: ${(p) => `${p.title.length * 2}rem`};
+    max-width: ${(p) => p.fullWidth ? 'unset' : `${p.title.length * 2}rem`};
     cursor: pointer;
     display: flex;
     align-content: center;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { NavBarLeft, Page } from 'frontend/components';
 import Sidebar from './Sidebar';
-import ClassExample from './ClassExample';
+import ClassExamples from './ClassExamples';
 
 const ReviewPID = () => (
     <Page noFooter>
@@ -10,7 +10,7 @@ const ReviewPID = () => (
 
         <Sidebar isPID />
 
-        <ClassExample />
+        <ClassExamples />
     </Page>
 );
 

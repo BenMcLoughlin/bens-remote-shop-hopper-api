@@ -30,11 +30,12 @@ const ReviewSidebar = ({ isPID }) => {
     };
 
     const _resetClasses = async () => {
-        const success = await globalActions.apiRequests.resetTemplateClasses(templateClasses);
-
-        if (success) {
-            setUnSubmitted(false);
+        let response = confirm('Are you sure you want to delete ALL items stored for all classes from the database?');
+        if (response) {
+            await globalActions.apiRequests.resetTemplateClasses(templateClasses);
         }
+
+        setUnSubmitted(false);
     };
 
     const renderLinkItem = (text, iconType, path, isSet) => {
@@ -97,11 +98,18 @@ const ReviewSidebar = ({ isPID }) => {
                             title={'Reset Anyway?'}
                             onClick={_resetClasses}
                         />
+                        <Button
+                            title={'Cancel'}
+                            onClick={() => setUnSubmitted(false)}
+                            gradient={'secondary'}
+                            fullWidth
+                        />
                     </>
                     :
                     <Button
                         title="Reset"
                         onClick={_checkClasses}
+                        fullWidth
                     />
             }
         </SidebarWrapper>
