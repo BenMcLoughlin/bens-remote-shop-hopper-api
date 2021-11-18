@@ -36,6 +36,8 @@ const ReviewSidebar = ({ isPID }) => {
         }
 
         setUnSubmitted(false);
+       
+        await globalActions.templateClass.setData([]);
     };
 
     const renderLinkItem = (text, iconType, path, isSet) => {

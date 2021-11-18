@@ -2,8 +2,35 @@
 import prisma from 'prisma/prisma.js';
 
 export async function applyProductToTemplate(body) {
+    let existingItems = await prisma.templateClass
+        .findUnique({
+            where: {
+                class_name: body.pid
+            },
+            select: {
+                items: true
+            }
+        }).finally(async () => {
+            await prisma.$disconnect();
+        });
 
-    const itemString = JSON.stringify(body);
+    let itemString = [JSON.stringify(body)];
+
+    if (existingItems.items.length) {
+        let newArr = [];
+
+        existingItems.items.map((item) => {
+            if (!item.includes(body.position)) {
+                newArr.push(item);
+            }
+
+            return true;
+        });
+
+        newArr.push(JSON.stringify(body));
+
+        itemString = newArr;
+    }
 
     const result = await prisma.templateClass
         .update({
@@ -11,9 +38,7 @@ export async function applyProductToTemplate(body) {
                 class_name: body.pid
             },
             data: {
-                items: {
-                    push: itemString
-                }
+                items: itemString
             }
         })
         .catch((e) => {

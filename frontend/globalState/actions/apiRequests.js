@@ -77,15 +77,9 @@ export const searchProducts = (store, query) => {
 export const searchProductById = (store, id) => {
     const body = JSON.stringify(id);
 
-    console.log('searchProductById query:', body);
-
     return products
         .searchProductById(body)
-        .then((data) => {
-            console.log('searchProductById:', data.result);
-
-            return data.result;
-        })
+        .then((data) => data.result)
         .catch((error) => {
             console.log('error:', error);
         });
