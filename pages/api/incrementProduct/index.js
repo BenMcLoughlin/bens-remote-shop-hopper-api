@@ -41,7 +41,7 @@ export async function findProduct(id) {
 }
 
 async function addItemToHotList(item) {
-    const result = await prisma.hot_item
+    const result = await prisma.hotItem
         .upsert({
             where: { title: item.title },
             create: item,
@@ -70,7 +70,7 @@ export default async (req, res) => {
             const { body } = req;
             const result = await addPointToProduct(body);
             const item = await findProduct(body);
-            const added = await addItemToHotList(item);
+            await addItemToHotList(item);
 
             return res.status(200).json({ result });
         } catch (error) {

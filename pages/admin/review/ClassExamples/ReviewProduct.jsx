@@ -6,20 +6,7 @@ import { Menu } from 'frontend/components/menu';
 import { color, font, mixin } from 'frontend/styles/theme';
 import { truncate } from 'frontend/utils/strings';
 
-const propTypes = {
-    id: PropTypes.number,
-    src: PropTypes.string,
-    businessName: PropTypes.string,
-    index: PropTypes.number,
-    title: PropTypes.string,
-    rating: PropTypes.number,
-    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    compareAtPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    tags: PropTypes.array,
-    buckets: PropTypes.array,
-    sizes: PropTypes.array,
-    setAs: PropTypes.func
-};
+import incrementProduct from 'backend/requests/incrementProduct';
 
 export const ReviewProduct = ({
     businessName,
@@ -46,6 +33,10 @@ export const ReviewProduct = ({
         setAs(location, id);
     };
 
+    const _incrementProduct = async () => {
+        await incrementProduct(id);
+    };
+
     return (
         <Wrapper>
             {
@@ -53,6 +44,7 @@ export const ReviewProduct = ({
                     <Menu 
                         open={open}
                         setAs={_setAs}
+                        incrementProduct={_incrementProduct}
                     />
                     : null
             }
@@ -90,7 +82,20 @@ export const ReviewProduct = ({
     );
 };
 
-ReviewProduct.propTypes = propTypes;
+ReviewProduct.propTypes = {
+    id: PropTypes.number,
+    src: PropTypes.string,
+    businessName: PropTypes.string,
+    index: PropTypes.number,
+    title: PropTypes.string,
+    rating: PropTypes.number,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    compareAtPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    tags: PropTypes.array,
+    buckets: PropTypes.array,
+    sizes: PropTypes.array,
+    setAs: PropTypes.func
+};
 
 export const Wrapper = styled.div`
     display: flex;

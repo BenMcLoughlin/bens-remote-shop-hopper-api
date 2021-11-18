@@ -7,7 +7,6 @@ import { ArrowRightShort } from '@styled-icons/bootstrap/ArrowRightShort';
 
 import { ReviewProduct } from './ReviewProduct';
 import { color, font, mixin } from 'frontend/styles/theme';
-import incrementProduct from 'backend/requests/incrementProduct';
 import useGlobal from 'frontend/globalState/store';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 
@@ -50,29 +49,15 @@ const ProductsBlock = ({ pid }) => {
     };
 
     const _nextPage = async () => {
-        // setLoading('nextPage');
-        const result = await globalActions.apiRequests.nextPage();
-        if (result) {
-            // setLoading(false);
-        }
+        await globalActions.apiRequests.nextPage();
     };
 
     const _prevPage = async () => {
-        // setLoading('prevPage');
-        const result = await globalActions.apiRequests.prevPage();
-        if (result) {
-            // setLoading(false);
-        }
+        await globalActions.apiRequests.prevPage();
     };
 
     const _setAs = async (location, id) => {
-        console.log('_set As:', pid, location, id);
-
-        const result = await globalActions.apiRequests.applyProductToTemplate(pid, location, id);
-
-        if (result) {
-            // setLoading(false);
-        }
+        await globalActions.apiRequests.applyProductToTemplate(pid, location, id);
     };
 
     const formatProductsCount = () => {
@@ -167,7 +152,7 @@ export const List = styled.div`
     padding: 8px;
     min-height: 400px;
     overflow-x: auto;
-    height: 780px;
+    height: auto;
     border-radius: 3px;
     background: ${color.backgroundLightest};
 `;

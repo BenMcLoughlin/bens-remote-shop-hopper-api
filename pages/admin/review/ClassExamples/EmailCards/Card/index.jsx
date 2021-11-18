@@ -3,8 +3,7 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { color, font, mixin } from 'frontend/styles/theme';
-import { truncate } from 'frontend/utils/strings';
+import { color, font } from 'frontend/styles/theme';
 import useGlobal from 'frontend/globalState/store';
 // Ben can you replace this (SingleProduct) with something true to the Email templates we will send. Not identical, just sharing similar info
 import { SingleProduct } from './SingleProduct';
@@ -75,7 +74,7 @@ export const Card = ({
                         sizes={product.sizes}
                     />
                     : 
-                    <CardBlock onClick={() => _populateCard(position)}>
+                    <CardBlock>
                         <Details>{pid}</Details>
                         <Bottom>
                             <Border />
@@ -101,11 +100,7 @@ export const CardBlock = styled.div`
     margin: 5px;
     border-radius: 3px;
     background: #fff;
-    // box-shadow: 1px 1px 2px 2px rgba(9, 30, 66, 0.25);
     transition: background 0.1s;
-    &:hover {
-        background: ${color.backgroundLight};
-    }
     @media (max-width: 1100px) {
         width: 46%;
     }

@@ -3,10 +3,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { color } from 'frontend/styles/theme';
-import incrementProduct from '../../backend/requests/incrementProduct';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 import useGlobal from 'frontend/globalState/store';
 import { Product, Page } from 'frontend/components';
+
+import incrementProduct from 'backend/requests/incrementProduct';
 
 const HotItems = () => {
     const [globalState, globalActions] = useGlobal();

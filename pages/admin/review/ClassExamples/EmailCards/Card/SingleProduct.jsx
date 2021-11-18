@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Menu } from 'frontend/components/menu';
-import { color, font, mixin } from 'frontend/styles/theme';
+import { color, font } from 'frontend/styles/theme';
 import { truncate } from 'frontend/utils/strings';
 
 const propTypes = {
@@ -33,44 +32,30 @@ export const SingleProduct = ({
     buckets,
     sizes,
     setAs
-}) => {
-    const [localRating, setRating] = useState(0);
-    const [open, setOpen] = useState(false);
-
-    useEffect(() => {
-        // todo
-        setRating(rating);
-    }, []);
-
-    const _setAs = (location) => {
-        setAs(location, id);
-    };
-
-    return (
-        <ProductBlock>
-            <Details>{businessName}</Details>
-            <Card>
-                <Title>{truncate(title)}</Title>
-                <Img src={src} />
-                <Bottom>
-                    <Details>Price: {price}</Details>
-                    {compareAtPrice > 0 && (
-                        <>
-                            <Details>Compare: {compareAtPrice}</Details>
-                            <Details>
+}) => (
+    <ProductBlock>
+        <Details>{businessName}</Details>
+        <Card>
+            <Title>{truncate(title)}</Title>
+            <Img src={src} />
+            <Bottom>
+                <Details>Price: {price}</Details>
+                {compareAtPrice > 0 && (
+                    <>
+                        <Details>Compare: {compareAtPrice}</Details>
+                        <Details>
                                     Savings Ratio:{' '}
-                                {(((compareAtPrice - price) / compareAtPrice) * 100).toFixed(2)}
+                            {(((compareAtPrice - price) / compareAtPrice) * 100).toFixed(2)}
                                     %
-                            </Details>
-                        </>
-                    )}
-                    <Border />
-                    <Details>Sizes: {sizes?.join(', ')}</Details>
-                </Bottom>
-            </Card>
-        </ProductBlock>
-    );
-};
+                        </Details>
+                    </>
+                )}
+                <Border />
+                <Details>Sizes: {sizes?.join(', ')}</Details>
+            </Bottom>
+        </Card>
+    </ProductBlock>
+);
 
 SingleProduct.propTypes = propTypes;
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import { bool } from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export const Menu = ({ open, setAs, hotItems }) => {
+export const Menu = ({ open, setAs, incrementProduct }) => {
     const isHidden = Boolean(open);
     const tabIndex = isHidden ? 0 : -1;
 
@@ -21,7 +21,7 @@ export const Menu = ({ open, setAs, hotItems }) => {
                 Apply to Bottom Right
             </p>
             <Border />
-            <p onClick={hotItems} tabIndex={tabIndex}>
+            <p onClick={incrementProduct} tabIndex={tabIndex}>
                 Save in Hot Items
             </p>
             <p onClick={() => ''} tabIndex={tabIndex}>
@@ -64,7 +64,7 @@ export const Border = styled.div`
 `;
 
 Menu.propTypes = {
-    open: bool.isRequired,
-    setAs: Function.isRequired,
-    hotItems: Function.isRequired
-}; 
+    open: PropTypes.bool,
+    setAs: PropTypes.func,
+    incrementProduct: PropTypes.func
+};
