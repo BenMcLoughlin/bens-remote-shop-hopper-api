@@ -133,15 +133,15 @@ export const Card = styled.div`
     justify-content: space-between;
     align-items: center;
     max-width: 250px;
-    // overflow: hidden;
+    width: 100%;
+    overflow-y: auto;
     background: white;
     transition: box-shadow 0.1s ease-in;
-    // min-height: 500px;
-    padding: 1rem;
+    paddingBottom: 1rem;
 `;
 
 export const Img = styled.img`
-    width: 200px;
+    // width: 200px;
     height: auto;
     max-height: 230px;
     object-fit: contain;
