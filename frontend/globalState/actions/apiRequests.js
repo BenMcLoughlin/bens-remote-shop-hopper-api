@@ -59,16 +59,11 @@ export const all = (store, shops) => {
 };
 
 export const searchProducts = (store, query) => {
-    console.log('searchProducts query:', query);
     store.actions.products.setQuery(query);
 
     return products
         .searchProducts(query)
-        .then((data) => {
-            console.log('searchProducts:', data.result?.length);
-
-            return data.result;
-        })
+        .then((data) => data.result)
         .catch((error) => {
             console.log('error:', error);
         });
@@ -93,7 +88,6 @@ export const nextPage = (store) => {
         cursor: store.state.products.cursor + store.state.products.amount,
         amount: store.state.products.amount
     };
-    console.log('nextPage body:', body);
 
     return products
         .searchProducts(body)
@@ -116,7 +110,6 @@ export const prevPage = (store) => {
         cursor: store.state.products.cursor - store.state.products.amount,
         amount: store.state.products.amount
     };
-    console.log('prevPage body:', body);
 
     return products
         .searchProducts(body)
@@ -135,7 +128,6 @@ export const getHotItems = (store, amount = 12) => {
     const body = {
         amount: amount
     };
-    console.log('getHotItems body:', body);
 
     return products
         .getHotItems(body)
@@ -159,8 +151,6 @@ export const getColumn = (store, body) => products
 export const getTemplateClass = (store, templateClassName) => {
     const body = templateClassName;
 
-    console.log('getTemplateClass body:', body);
-
     return templateClass
         .getTemplateClass(body)
         .then((data) => {
@@ -180,8 +170,6 @@ export const applyProductToTemplate = (store, pid, position, id) => {
         product_id: id
     };
 
-    console.log('applyProductToTemplate body:', body);
-
     return templateClass
         .applyProductToTemplate(body)
         .then((data) => {
@@ -194,21 +182,14 @@ export const applyProductToTemplate = (store, pid, position, id) => {
         });
 };
 
-export const checkTemplateClasses = (store) => {
-    console.log('checkTemplateClasses');
-
-    return templateClass
-        .checkTemplateClasses()
-        .then((data) => data.result)
-        .catch((error) => {
-            console.log('error:', error);
-        });
-};
-
+export const checkTemplateClasses = (store) => templateClass
+    .checkTemplateClasses()
+    .then((data) => data.result)
+    .catch((error) => {
+        console.log('error:', error);
+    });
 export const resetTemplateClasses = (store, templateClasses) => {
     const body = templateClasses;
-
-    console.log('resetTemplateClasses body:', body);
 
     return templateClass
         .resetTemplateClasses(body)
@@ -221,7 +202,7 @@ export const resetTemplateClasses = (store, templateClasses) => {
 export const wipeProducts = (store, body) => products
     .wipeProducts(body)
     .then((data) => {
-        console.log('DESTROY PRODUCTS RESPONSE:', data);
+        console.log('DESTROY_PRODUCTS_RESPONSE:', data);
 
         return data;
     })

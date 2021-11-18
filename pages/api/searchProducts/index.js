@@ -11,7 +11,13 @@ export async function searchProducts(query) {
     let dateTo = query.dateTo || undefined;
     // TODO: trigger warning if params not set
 
-    console.log('SEARCH_PRODUCTS column, metric, size, cursor, amount:', column, metric, size, cursor, amount);
+    console.log('==== SEARCH_PRODUCTS =====');
+    console.log('  column:', column);
+    console.log('  metric:', metric);
+    console.log('  size:', size);
+    console.log('  cursor:', cursor);
+    console.log('  amount:', amount);
+    console.log('==========================');
     let where = {};
 
     if (
@@ -116,7 +122,7 @@ export default async (req, res) => {
 
             const result = await searchProducts(body);
 
-            console.log('SEARCH_PRODUCTS:', result[0].title);
+            // console.log('SEARCH_PRODUCTS:', result[0].title);
 
             return res.status(200).json({ result });
         } catch (error) {

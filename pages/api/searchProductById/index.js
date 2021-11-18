@@ -5,7 +5,6 @@ export async function searchProductById(id) {
     // TODO: trigger warning if params not set
 
     console.log('SEARCH_PRODUCTS_BY_ID id', id);
-    let where = {};
 
     const result = await prisma.product
         .findUnique({
@@ -36,7 +35,7 @@ export default async (req, res) => {
 
             const result = await searchProductById(body);
 
-            console.log('SEARCH_PRODUCTS_BY_ID:', result.title);
+            // console.log('SEARCH_PRODUCTS_BY_ID:', result.title);
 
             return res.status(200).json({ result });
         } catch (error) {
