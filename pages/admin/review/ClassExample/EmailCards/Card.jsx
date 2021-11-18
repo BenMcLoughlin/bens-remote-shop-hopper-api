@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { color, font, mixin } from 'frontend/styles/theme';
 import { truncate } from 'frontend/utils/strings';
 import useGlobal from 'frontend/globalState/store';
+// Ben can you replace this (Product) with something true to the Email templates we will send. Not identical, just sharing similar info
 import { Product } from 'frontend/components/cards/Product';
 
 const propTypes = {
@@ -18,14 +19,15 @@ const propTypes = {
 };
 
 const locationMap = {
-    'Top Left': 'topLeft'
+    'Top Left': 'topLeft',
+    'Top Right': 'topRight',
+    'Bottom Left': 'bottomLeft',
+    'Bottom Right': 'bottomRight'
 };
 
 export const Card = ({
-    src,
     position,
     populateCard,
-    id,
     currentItems
 }) => {
     const router = useRouter();
@@ -42,7 +44,7 @@ export const Card = ({
         }
 
         setProduct({});
-    }, [globalState.templateClass.data?.items]);
+    }, [currentItems]);
 
     const _getProduct = async (filter) => {
         const result = await globalActions.apiRequests.searchProductById(filter);

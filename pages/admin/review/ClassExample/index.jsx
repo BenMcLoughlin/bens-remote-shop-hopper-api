@@ -18,7 +18,6 @@ const ClassExample = () => {
     const [classData, setClass] = useState([]);
     const [date, setDate] = useState(new Date());
 
-
     useEffect(() => {
         _getClass(pid);
     }, [pid]);
@@ -28,10 +27,12 @@ const ClassExample = () => {
     }, [globalState.templateClass.data]);
 
     const _getClass = async (templateClass) => {
+        await globalActions.templateClass.setLoading(true);
         const result = await globalActions.apiRequests.getTemplateClass(templateClass);
 
         if (result) {
-            globalActions.templateClass.setData(result);
+            await globalActions.templateClass.setData(result);
+            await globalActions.templateClass.setLoading(false);
         }
     };
 
