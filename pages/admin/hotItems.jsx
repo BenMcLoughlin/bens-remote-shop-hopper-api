@@ -5,15 +5,13 @@ import styled from 'styled-components';
 import { color } from 'frontend/styles/theme';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 import useGlobal from 'frontend/globalState/store';
-import { Product, Page } from 'frontend/components';
+import { Product } from 'frontend/components';
 
 import incrementProduct from 'backend/requests/incrementProduct';
 
 const HotItems = () => {
     const [globalState, globalActions] = useGlobal();
-    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
-    const mountedRef = useRef(true);
 
     useEffect(() => {
         _getHotItems(40);
@@ -36,7 +34,7 @@ const HotItems = () => {
     };
 
     return (
-        <Page>
+        <Main>
             <Title>
                 These are the {globalState.products.hotItems.length} hottest items, or items that
                 have the highest rating, according to predefined query parameters.
@@ -66,7 +64,7 @@ const HotItems = () => {
                     </>
                 )}
             </List>
-        </Page>
+        </Main>
     );
 };
 
@@ -79,6 +77,7 @@ export const Main = styled.div`
     display: block;
     height: 100vh;
     overflow-y: auto;
+    margin-top: 3rem;
 `;
 
 export const List = styled.div`

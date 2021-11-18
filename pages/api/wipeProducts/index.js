@@ -33,7 +33,7 @@ export default async (req, res) => {
                     await prisma.$disconnect();
                 });
 
-            let hot_items = await prisma.hot_item
+            let hot_items = await prisma.hotItem
                 .deleteMany({})
                 .catch((e) => {
                     console.log('e:', e);

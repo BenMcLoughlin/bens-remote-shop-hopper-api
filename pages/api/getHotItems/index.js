@@ -6,7 +6,7 @@ export async function getHotItems(query) {
 
     console.log('getHotItems:', amount);
 
-    const result = await prisma.hot_item
+    const result = await prisma.hotItem
         .findMany({
             take: amount,
             orderBy: {
