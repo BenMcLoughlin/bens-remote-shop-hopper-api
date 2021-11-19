@@ -20,22 +20,15 @@ export const ClassExamples = () => {
     const _getClass = async (name) => {
         const result = await globalActions.apiRequests.getTemplateClass(name);
 
-        console.log('result:', result);
-
         if (result) {
             setCurrentClass(result);
         }
     };
 
     return (
-        <ClassExampleWrapper>
+        <>
             <EmailCards pid={pid} items={currentClass.items} />
             <ProductsBlock pid={pid} />
-        </ClassExampleWrapper>
+        </>
     );
 };
-
-export const ClassExampleWrapper = styled.div`
-    // overflow-y: auto;
-    // height: 100vh;
-`;

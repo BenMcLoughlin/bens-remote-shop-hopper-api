@@ -12,6 +12,17 @@ function applyProductToTemplate(body) {
     });
 }
 
+function getTemplateClasses() {
+    const options = {
+        endpoint: '/api/getTemplateClasses',
+        method: 'GET'
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
 function getTemplateClass(body) {
     const options = {
         endpoint: '/api/getTemplateClass',
@@ -47,9 +58,23 @@ function resetTemplateClasses(body) {
     });
 }
 
+function toggleTemplateClassSet(body) {
+    const options = {
+        endpoint: '/api/toggleTemplateClassSet',
+        method: 'POST',
+        body
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
 export {
     applyProductToTemplate,
+    getTemplateClasses,
     getTemplateClass,
     checkTemplateClasses,
-    resetTemplateClasses
+    resetTemplateClasses,
+    toggleTemplateClassSet
 };

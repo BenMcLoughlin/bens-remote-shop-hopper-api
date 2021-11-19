@@ -1,4 +1,4 @@
-export const templateClasses = [
+export const templateClassesSeed = [
     {
         class_name: "Athletic",
         isSet: false,

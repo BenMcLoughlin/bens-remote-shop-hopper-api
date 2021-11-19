@@ -12,6 +12,7 @@ const initialState = {
     },
     templateClass: {
         data: [],
+        all: [],
         result: false,
         query: {},
         status: 'INITIAL',

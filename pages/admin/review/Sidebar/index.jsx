@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -12,12 +12,24 @@ import useGlobal from 'frontend/globalState/store';
 import { Button } from 'frontend/components';
 import { color, sizes, font, mixin, zIndexValues } from 'frontend/styles/theme';
 import logoSrc from 'public/assets/logos/shophopper-logo.svg';
-import { templateClasses } from '../templateClasses';
+import { templateClassesSeed } from '../templateClassesSeed';
 
 export const ReviewSidebar = ({ isPID }) => {
     const router = useRouter();
     const [globalState, globalActions] = useGlobal();
     const [unSubmitted, setUnSubmitted] = useState(false);
+    const [templateClassesList, setTemplateClassesList] = useState([]);
+
+    useEffect(() => {
+        _getClasses();
+    }, []);
+
+    const _getClasses = async () => {
+        // todo: result is undefined?
+        const result = await globalActions.apiRequests.getTemplateClasses();
+
+        setTemplateClassesList(globalState.templateClass.all);
+    };
 
     const _checkClasses = async () => {
         const result = await globalActions.apiRequests.checkTemplateClasses();
@@ -32,11 +44,11 @@ export const ReviewSidebar = ({ isPID }) => {
     const _resetClasses = async () => {
         let response = confirm('Are you sure you want to delete ALL items stored for all classes from the database?');
         if (response) {
-            await globalActions.apiRequests.resetTemplateClasses(templateClasses);
+            await globalActions.apiRequests.resetTemplateClasses(templateClassesSeed);
         }
 
         setUnSubmitted(false);
-       
+
         await globalActions.templateClass.setData([]);
     };
 
@@ -80,7 +92,7 @@ export const ReviewSidebar = ({ isPID }) => {
             </Link>
             <Divider />
             {
-                templateClasses.map((item) => (
+                templateClassesList.map((item) => (
                     renderLinkItem(item.class_name, UiChecksGrid, `/admin/review/${item.class_name}`, item.isSet)
                 ))
             }

@@ -148,6 +148,19 @@ export const getColumn = (store, body) => products
         console.log('error:', error);
     });
 
+export const getTemplateClasses = (store) => {
+    templateClass
+        .getTemplateClasses()
+        .then((data) => {
+            store.actions.templateClass.setAll(data.result);
+
+            return data.result;
+        })
+        .catch((error) => {
+            console.log('error:', error);
+        });
+};
+
 export const getTemplateClass = (store, templateClassName) => {
     const body = templateClassName;
 
@@ -185,14 +198,24 @@ export const applyProductToTemplate = (store, pid, position, id) => {
 export const checkTemplateClasses = (store) => templateClass
     .checkTemplateClasses()
     .then((data) => data.result)
-    .catch((error) => {
-        console.log('error:', error);
-    });
+    .catch((error) => { console.log('error:', error); });
+
 export const resetTemplateClasses = (store, templateClasses) => {
     const body = templateClasses;
 
     return templateClass
         .resetTemplateClasses(body)
+        .then(() => true)
+        .catch((error) => {
+            console.log('error:', error);
+        });
+};
+
+export const toggleTemplateClassSet = (store, templateClassName) => {
+    const body = templateClassName;
+
+    return templateClass
+        .toggleTemplateClassSet(body)
         .then(() => true)
         .catch((error) => {
             console.log('error:', error);

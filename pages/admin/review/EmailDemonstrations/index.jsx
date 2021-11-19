@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import useGlobal from 'frontend/globalState/store';
 import { color, font, mixin } from 'frontend/styles/theme';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
-import { templateClasses } from '../templateClasses';
+import { templateClassesSeed } from '../templateClassesSeed';
 
 import { ClassBlock } from './ClassBlock';
 
@@ -20,7 +20,7 @@ export const EmailDemonstrations = () => {
 
     // useEffect(() => {
     //     _getClass(pid);
-    // }, [pid]);
+    // }, []);
 
     // useEffect(() => {
     //     setClass(globalState.templateClass.data);
