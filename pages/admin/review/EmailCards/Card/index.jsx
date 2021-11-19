@@ -93,16 +93,16 @@ export const CardBlock = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 22%;
-    max-width: 250px;
+    width: 47%;
+    // max-width: 250px;
     height: 330px;
     padding: 8px;
     margin: 5px;
     border-radius: 3px;
     background: #fff;
     transition: background 0.1s;
-    @media (max-width: 1100px) {
-        width: 46%;
+    @media (max-width: 700px) {
+        width: 95%;
     }
 `;
 

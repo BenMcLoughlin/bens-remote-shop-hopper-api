@@ -64,7 +64,7 @@ export const ProductBlock = styled.div`
     flex-direction: column;
     align-items: center;
     border-radius: 3px;
-    width: 22%;
+    width: 48%;
     max-width: 250px;
     height: 330px;
     margin: 5px;

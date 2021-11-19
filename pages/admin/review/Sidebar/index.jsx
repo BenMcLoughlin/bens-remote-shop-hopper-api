@@ -14,7 +14,7 @@ import { color, sizes, font, mixin, zIndexValues } from 'frontend/styles/theme';
 import logoSrc from 'public/assets/logos/shophopper-logo.svg';
 import { templateClasses } from '../templateClasses';
 
-const ReviewSidebar = ({ isPID }) => {
+export const ReviewSidebar = ({ isPID }) => {
     const router = useRouter();
     const [globalState, globalActions] = useGlobal();
     const [unSubmitted, setUnSubmitted] = useState(false);
@@ -213,5 +213,3 @@ ReviewSidebar.propTypes = {
     // price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     // compareAtPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
-
-export default ReviewSidebar;

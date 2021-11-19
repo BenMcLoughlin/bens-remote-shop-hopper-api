@@ -2,33 +2,44 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { color, font, mixin } from 'frontend/styles/theme';
 import useGlobal from 'frontend/globalState/store';
+import { color, font, mixin } from 'frontend/styles/theme';
 import { Card } from './Card';
 
 const propTypes = {
-    pid: PropTypes.string
+    pid: PropTypes.string,
+    items: PropTypes.array
 };
 
 const defaultProps = {
-    pid: 'Athletic'
+    pid: 'Athletic',
+    items: []
 };
 
-const EmailCards = ({ pid }) => {
-    const [globalState, globalActions] = useGlobal();
+export const EmailCards = ({ pid, items }) => {
     const [currentItems, setCurrentItems] = useState([]);
+    const [globalState, globalActions] = useGlobal();
 
     useEffect(() => {
         let parsedItems = [];
 
-        globalState.templateClass.data?.items?.map((item) => parsedItems.push(JSON.parse(item)));
+        items?.map((item) => parsedItems.push(JSON.parse(item)));
 
         setCurrentItems(parsedItems);
+    }, [items]);
+
+    useEffect(() => {
+        if (globalState.templateClass.data?.class_name === pid) {
+            let parsedItems = [];
+            globalState.templateClass.data?.items?.map((item) => parsedItems.push(JSON.parse(item)));
+
+            setCurrentItems(parsedItems);
+        }
     }, [globalState.templateClass.data]);
 
     return (
         <>
-            <Grid>
+            <Top>
                 <Card
                     position="Top Left"
                     pid={pid}
@@ -39,6 +50,8 @@ const EmailCards = ({ pid }) => {
                     pid={pid}
                     currentItems={currentItems}
                 />
+            </Top>
+            <Bottom>
                 <Card
                     position="Bottom Left"
                     pid={pid}
@@ -49,27 +62,12 @@ const EmailCards = ({ pid }) => {
                     pid={pid}
                     currentItems={currentItems}
                 />
-            </Grid>
+            </Bottom>
         </>
     );
 };
 
-const Icon = styled.div`
-    height: 2rem;
-    width: 2rem;
-    fill: white;
-    margin-right: 1.5rem;
-    cursor: pointer;
-`;
-
-export const ButtonsWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-`;
-
-export const Grid = styled.div`
+export const Top = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -82,20 +80,17 @@ export const Grid = styled.div`
     padding: 8px 8px;
 `;
 
-export const GridBottom = styled.div`
+export const Bottom = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    margin: 0 0.05rem;
-    min-height: 400px;
     overflow-y: auto;
-    height: 100vh;
     width: 100%;
     border-radius: 3px;
     background: ${color.backgroundLightest};
-    padding: 0.1rem 8px 300px 8px;
+    padding: 8px 8px;
 `;
 
 export const Title = styled.div`
@@ -118,5 +113,3 @@ export const Products = styled.div`
 
 EmailCards.propTypes = propTypes;
 EmailCards.defaultProps = defaultProps;
-
-export default EmailCards;

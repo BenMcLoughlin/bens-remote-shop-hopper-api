@@ -20,7 +20,7 @@ const defaultProps = {
     pid: 'Athletic'
 };
 
-const ProductsBlock = ({ pid }) => {
+export const ProductsBlock = ({ pid }) => {
     const [globalState, globalActions] = useGlobal();
     const [loading, setLoading] = useState(false);
     const [currentQuery, setCurrentQuery] = useState('');
@@ -177,5 +177,3 @@ export const Products = styled.div`
 
 ProductsBlock.propTypes = propTypes;
 ProductsBlock.defaultProps = defaultProps;
-
-export default ProductsBlock;
