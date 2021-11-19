@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Button } from 'frontend/components';
 import useGlobal from 'frontend/globalState/store';
 import { color } from 'frontend/styles/theme';
 import { Card } from './Card';
@@ -38,51 +37,42 @@ export const EmailCards = ({ pid, items }) => {
         }
     }, [globalState.templateClass.data]);
 
-    const _set = async (className) => {
-        await globalActions.apiRequests.toggleTemplateClassSet(className);
-    };
-
     return (
-        <Wrapper>
-            <Button
-                title="Ready for deployment"
-                onClick={() => _set(pid)}
-                gradient="secondary"
-            />
-            <>
-                <Top>
-                    <Card
-                        position="Top Left"
-                        pid={pid}
-                        currentItems={currentItems}
-                    />
-                    <Card
-                        position="Top Right"
-                        pid={pid}
-                        currentItems={currentItems}
-                    />
-                </Top>
-                <Bottom>
-                    <Card
-                        position="Bottom Left"
-                        pid={pid}
-                        currentItems={currentItems}
-                    />
-                    <Card
-                        position="Bottom Right"
-                        pid={pid}
-                        currentItems={currentItems}
-                    />
-                </Bottom>
-            </>
-        </Wrapper>
+        // <Wrapper>
+        <>
+            <Top>
+                <Card
+                    position="Top Left"
+                    pid={pid}
+                    currentItems={currentItems}
+                />
+                <Card
+                    position="Top Right"
+                    pid={pid}
+                    currentItems={currentItems}
+                />
+            </Top>
+            <Bottom>
+                <Card
+                    position="Bottom Left"
+                    pid={pid}
+                    currentItems={currentItems}
+                />
+                <Card
+                    position="Bottom Right"
+                    pid={pid}
+                    currentItems={currentItems}
+                />
+            </Bottom>
+        </>
+        // </Wrapper>
     );
 };
 
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
-    align-items: end;
+    // align-items: end;
     // justify-content: space-evenly;
     // flex-wrap: wrap;
     // overflow-y: auto;

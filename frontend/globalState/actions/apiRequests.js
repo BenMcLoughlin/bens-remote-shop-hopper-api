@@ -216,7 +216,11 @@ export const toggleTemplateClassSet = (store, templateClassName) => {
 
     return templateClass
         .toggleTemplateClassSet(body)
-        .then(() => true)
+        .then(() => {
+            console.log('run:', toggleTemplateClassSet);
+
+            return true;
+        })
         .catch((error) => {
             console.log('error:', error);
         });

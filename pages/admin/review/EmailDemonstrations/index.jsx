@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import useGlobal from 'frontend/globalState/store';
-import { color, font, mixin } from 'frontend/styles/theme';
-import loaderGif from 'public/assets/loader/octo_loader.gif';
-import { templateClassesSeed } from '../templateClassesSeed';
+import { font } from 'frontend/styles/theme';
 
 import { ClassBlock } from './ClassBlock';
 
@@ -14,35 +11,16 @@ export const EmailDemonstrations = () => {
     const router = useRouter();
     const { pid } = router.query;
     const [globalState, globalActions] = useGlobal();
-    const [loading, setLoading] = useState(false);
-    const [classData, setClass] = useState([]);
-    const [date, setDate] = useState(new Date());
+    const [classData, setClassData] = useState([]);
 
-    // useEffect(() => {
-    //     _getClass(pid);
-    // }, []);
-
-    // useEffect(() => {
-    //     setClass(globalState.templateClass.data);
-    // }, [globalState.templateClass.data]);
-
-    // const _getClass = async (templateClass) => {
-    //     const result = await globalActions.apiRequests.getTemplateClass(templateClass);
-
-    //     if (result) {
-    //         await globalActions.templateClass.setData(result);
-    //     }
-    // };
-
-    // if (!globalState.products.data) {
-    //     return <Image src={loaderGif} className="loading" width={800} height={600} />;
-    // }
+    useEffect(() => {
+        let classList = globalState.templateClass.all;
+        setClassData(classList);
+    }, []);
 
     return (
         <EmailDemonstrationsWrapper>
-            {
-                templateClasses.map((item) => <ClassBlock key={item.class_name} templateClass={item} />)
-            }
+            {classData.map((item) => <ClassBlock key={item.class_name} templateClass={item} />)}
         </EmailDemonstrationsWrapper>
     );
 };

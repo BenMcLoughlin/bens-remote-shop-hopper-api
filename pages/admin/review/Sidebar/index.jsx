@@ -101,11 +101,11 @@ export const ReviewSidebar = ({ isPID }) => {
                 unSubmitted ?
                     <>
                         <Text>
-                            Note:
+                            Note, the following have not been submitted and will be lost:
                         </Text>
                         {unSubmitted?.map((item) => (
                             <Text key={item.class_name}>
-                                {item.class_name} <span style={{ color: 'black' }}>has not been submitted yet</span>
+                                <span style={{ color: 'red' }}>{item.class_name}</span>
                             </Text>
                         ))}
                         <Button
@@ -168,7 +168,7 @@ export const Info = styled.div`
 `;
 
 const Text = styled.div`
-    color: red;
+    color: black;
     font-size: 14px;
 `;
 

@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 import styled from 'styled-components';
-import { ArrowLeftShort } from '@styled-icons/bootstrap/ArrowLeftShort';
-import { ArrowRightShort } from '@styled-icons/bootstrap/ArrowRightShort';
 
-import { color, font, mixin } from 'frontend/styles/theme';
+import { Button } from 'frontend/components';
+import { color, font } from 'frontend/styles/theme';
 import useGlobal from 'frontend/globalState/store';
-import loaderGif from 'public/assets/loader/octo_loader.gif';
 import { EmailCards } from '../EmailCards';
 
 const propTypes = {
@@ -36,10 +33,21 @@ export const ClassBlock = ({ templateClass }) => {
         }
     };
 
+    const _set = async (className) => {
+        await globalActions.apiRequests.toggleTemplateClassSet(className);
+    };
+
     return (
         <>
             <Title>
-                {templateClass.class_name}
+                {!templateClass.isSet ?
+                    <Button
+                        title={`Set ${templateClass.class_name} for deployment?`}
+                        onClick={() => _set(templateClass.class_name)}
+                        gradient="secondary"
+                    />
+                    : `${templateClass.class_name} is Set`
+                }
             </Title>
             <EmailCards pid={templateClass.class_name} items={currentClass.items} />
         </>
