@@ -32,7 +32,6 @@ const SignUp = (props) => {
     const noErrors = errorsArray.length === 4 && errorsArray.every((d) => !d);
 
     const onSubmit = async (userData) => {
-        console.log('globalState:', globalState.user);
         const data = {
             ...userData,
             ...globalState.user

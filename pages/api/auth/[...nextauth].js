@@ -1,4 +1,3 @@
-/* eslint-disable require-await */
 import { NextApiHandler } from 'next';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -66,14 +65,13 @@ const options = {
         jwt: true
     },
     callbacks: {
-        async signIn(user, account, profile) {
+        signIn(user, account, profile) {
             return true;
         },
         signOut() {
             return true;
         },
-        async redirect({ url, baseUrl }) {
-            // Ben, is this good/used?
+        redirect({ url, baseUrl }) {
             return url.includes('signup') ? 'http://localhost:3000/shopper/onboard' : baseUrl;
         }
         // async session(session, user) { return session; },
