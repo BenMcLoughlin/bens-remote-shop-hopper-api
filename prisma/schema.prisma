@@ -8,32 +8,44 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model hot_item {
+model TemplateClass {
   id               Int      @id @default(autoincrement())
-  body_html        String?  @map("bodyHtml")
+  class_name       String   @unique
+  items            String[]
+  isSet            Boolean
+  submitted        Boolean
+  updated_at       DateTime @default(now())
+  created_at       DateTime @default(now())
+
+  @@map("template_classes")
+}
+
+model HotItem {
+  id               Int      @id @default(autoincrement())
+  body_html        String?  
   buckets          String[]
-  business_name    String?  @map("businessName")
+  business_name    String?  
   colors           String[]
-  compare_at_price Int?     @map("compareAtPrice")
-  created_at       DateTime @default(now()) @map("createdAt")
+  compare_at_price Int?     
+  created_at       DateTime @default(now()) 
   handle           String?
   images           Json?
   options          Json?
-  original_price   Int?     @map("originalPrice")
-  product_type     String?  @map("productType")
-  published_at     DateTime @default(now()) @map("publishedAt")
+  original_price   Int?     
+  product_type     String?  
+  published_at     DateTime @default(now())
   rating           Int?     @default(0)
   sizes            String[]
   tags             String[]
   title            String   @unique
-  updated_at       DateTime @default(now()) @map("updatedAt")
+  updated_at       DateTime @default(now())
   variants         Json?
   vendor           String?
 
   @@map("hot_items")
 }
 
-model status {
+model Status {
   id            Int      @id @default(autoincrement())
   updated_at    DateTime @default(now())
   products      Int
@@ -42,7 +54,7 @@ model status {
   @@map("statuses")
 }
 
-model shop {
+model Shop {
   id            Int      @id @default(autoincrement())
   domain        String   @unique
   vertical      String?
@@ -58,9 +70,9 @@ model shop {
   @@map("shops")
 }
 
-model product {
+model Product {
   id               Int      @id @default(autoincrement())
-  business_name    String?  @map("businessName")
+  business_name    String?  
   title            String   @unique
   handle           String?
   vendor           String?
@@ -69,14 +81,14 @@ model product {
   images           Json?
   options          Json?
   rating           Int?     @default(0)
-  body_html        String?  @map("bodyHtml")
-  created_at       DateTime @default(now()) @map("createdAt")
-  product_type     String?  @map("productType")
-  published_at     DateTime @default(now()) @map("publishedAt")
-  updated_at       DateTime @default(now()) @map("updatedAt")
+  body_html        String?  
+  created_at       DateTime @default(now()) 
+  product_type     String?  
+  published_at     DateTime @default(now())
+  updated_at       DateTime @default(now()) 
   colors           String[]
-  compare_at_price Int?     @map("compareAtPrice")
-  original_price   Int?     @map("originalPrice")
+  compare_at_price Int?     
+  original_price   Int?     
   sizes            String[]
   buckets          String[]
 
@@ -87,12 +99,20 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
-  password      String?
   emailVerified DateTime?
+  password      String?
+  birthdate     Int?
+  gender        String?
   image         String?
   role          String?
+  size          Json?
+  buckets       String[]
+  location      Json?
+  favourite     Json?
   accounts      Account[]
   sessions      Session[]
+
+  @@map("users")
 }
 
 model Account {

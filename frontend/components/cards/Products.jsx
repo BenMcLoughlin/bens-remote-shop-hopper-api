@@ -2,12 +2,11 @@ import React from 'react';
 
 import useGlobal from '../../globalState/store';
 
-const mapProducts = (products) =>
-    products.map((product) => (
-        <a key={product.id} href={product.html_url} target="_blank" rel="noopener noreferrer">
-            <h3>{product.name}</h3>
-        </a>
-    ));
+const mapProducts = (products) => products.map((product) => (
+    <a key={product.id} href={product.html_url} target="_blank" rel="noopener noreferrer">
+        <h3>{product.name}</h3>
+    </a>
+));
 
 export const Products = () => {
     const [globalState, globalActions] = useGlobal();

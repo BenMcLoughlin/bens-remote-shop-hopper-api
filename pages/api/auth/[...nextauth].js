@@ -73,6 +73,7 @@ const options = {
             return true;
         },
         async redirect({ url, baseUrl }) {
+            // Ben, is this good/used?
             return url.includes('signup') ? 'http://localhost:3000/shopper/onboard' : baseUrl;
         }
         // async session(session, user) { return session; },

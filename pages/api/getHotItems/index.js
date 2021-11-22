@@ -42,7 +42,7 @@ export default async (req, res) => {
 
             const result = await getHotItems(body);
 
-            console.log('HOT ITEM FETCH:', result.length);
+            console.log('HOT_ITEMS_FETCH:', result.length);
 
             return res.status(200).json({ result });
         } catch (error) {

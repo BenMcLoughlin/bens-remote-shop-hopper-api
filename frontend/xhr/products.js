@@ -2,7 +2,7 @@ import request from './request';
 
 function getGeneric(body) {
     const options = {
-        endpoint: '/api/searchTwoParams',
+        endpoint: '/api/search',
         method: 'POST',
         body
     };
@@ -12,9 +12,9 @@ function getGeneric(body) {
     });
 }
 
-function searchTwoParams(body) {
+function searchProducts(body) {
     const options = {
-        endpoint: '/api/searchTwoParams',
+        endpoint: '/api/searchProducts',
         method: 'POST',
         body
     };
@@ -48,9 +48,23 @@ function getColumn(body) {
     });
 }
 
+export default wipeProducts;
+
+function wipeProducts() {
+    const options = {
+        endpoint: '/api/wipeProducts',
+        method: 'POST'
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
 export {
     getGeneric,
-    searchTwoParams,
+    searchProducts,
     getHotItems,
-    getColumn
+    getColumn,
+    wipeProducts
 };

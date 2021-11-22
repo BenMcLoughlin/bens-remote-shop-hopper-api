@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { sizes } from 'frontend/styles/theme';
 // import Layout from 'frontend/components/Layout';
 import { NavBarLeft, Layout } from 'frontend/components';
-import searchTwoParams from 'backend/requests/searchTwoParams';
 import useGlobal from 'frontend/globalState/store';
 import Sidebar from './Sidebar';
 import Tags from './Tags';
@@ -24,12 +23,12 @@ const TagReviewSystem = () => {
     });
 
     useEffect(() => {
-        _searchTwoParams(queryStrings);
+        _searchProducts(queryStrings);
     }, []);
 
-    const _searchTwoParams = async () => {
+    const _searchProducts = async () => {
         setLoading('search');
-        const result = await searchTwoParams(queryStrings);
+        const result = await globalActions.apiRequests.searchProducts(queryStrings);
 
         if (result) {
             globalActions.products.setQuery(queryStrings);

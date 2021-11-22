@@ -8,19 +8,11 @@ import loaderGif from 'public/assets/loader/octo_loader.gif';
 import useGlobal from 'frontend/globalState/store';
 import { Product, Page } from 'frontend/components';
 
-const Featured = () => {
+const HotItems = () => {
     const [globalState, globalActions] = useGlobal();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const mountedRef = useRef(true);
-
-    // useEffect(() => {
-    //     mountedRef.current && setProducts(globalState.products.hotItems);
-
-    //     // return () => {
-    //     //     mountedRef.current = false;
-    //     // };
-    // }, [ globalState.products.hotItems ]);
 
     useEffect(() => {
         _getHotItems(40);
@@ -46,8 +38,7 @@ const Featured = () => {
         <Page>
             <Title>
                 These are the {globalState.products.hotItems.length} hottest items, or items that
-                have the highest rating, according to predefined query parameters. In the future
-                these will be specific to the viewer.
+                have the highest rating, according to predefined query parameters.
             </Title>
             <List>
                 {loading ? (
@@ -67,6 +58,7 @@ const Featured = () => {
                                 compareAtPrice={(product.original_price / 100).toFixed(2)}
                                 tags={product.tags}
                                 buckets={product.buckets}
+                                sizes={product.sizes}
                                 incrementProduct={_incrementProduct}
                             />
                         ))}
@@ -111,4 +103,4 @@ export const ButtonsWrapper = styled.div`
     justify-content: space-between;
 `;
 
-export default Featured;
+export default HotItems;

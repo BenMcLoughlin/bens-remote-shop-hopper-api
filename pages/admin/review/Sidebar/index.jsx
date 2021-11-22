@@ -1,39 +1,64 @@
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { Shopify } from '@styled-icons/fa-brands/Shopify';
-import styled from 'styled-components';
+import { UiChecksGrid } from '@styled-icons/bootstrap/UiChecksGrid';
+import { CheckCircleFill } from '@styled-icons/bootstrap/CheckCircleFill';
+import { CheckCircle } from '@styled-icons/bootstrap/CheckCircle';
+import styled, { css } from 'styled-components';
 
 import logoSrc from 'public/assets/logos/shophopper-logo.svg';
 import { color, sizes, font, mixin, zIndexValues } from 'frontend/styles/theme';
+import { templateClasses } from '../templateClasses';
+import useGlobal from 'frontend/globalState/store';
 
-const Sidebar = () => (
-    <SidebarWrapper>
-        <Info>
-            <Link href="/">
-                <Logo>
-                    <Image src={logoSrc} width={200} height={100} />
-                </Logo>
+const ReviewSidebar = () => {
+    const router = useRouter();
+    const [globalState, globalActions] = useGlobal();
+
+    const renderLinkItem = (text, iconType, path, isSet) => {
+        let isSelected = router.asPath.includes(path);
+        let Icon = iconType;
+        let CompleteIcon = CheckCircleFill;
+        let InCompleteIcon = CheckCircle;
+
+        return (
+            <Link href={path} key={text}>
+                <LinkItem isSelected={isSelected}>
+                    <>
+                        <Icon size={30} />
+                        <LinkText isSelected={isSelected}>{text}</LinkText>
+                        {
+                            isSet ? 
+                                <CompleteIcon size={20} color="green" />
+                                : 
+                                <InCompleteIcon size={20} />
+                        }
+                    </>
+                </LinkItem>
             </Link>
-        </Info>
-
-        {renderLinkItem('Shopify, Kelowna', Shopify, '/manager')}
-        <Divider />
-    </SidebarWrapper>
-);
-
-const renderLinkItem = (text, iconType, path) => {
-    let Icon = iconType;
+        );
+    };
 
     return (
-        <Link href={path}>
-            <LinkItem>
-                <>
-                    <Icon size={30} />
-                    <LinkText>{text}</LinkText>
-                </>
-            </LinkItem>
-        </Link>
+        <SidebarWrapper>
+            <Info>
+                <Link href="/">
+                    <Logo>
+                        <Image src={logoSrc} width={200} height={100} />
+                    </Logo>
+                </Link>
+            </Info>
+
+            <Divider />
+            <LinkText>Review and Assign</LinkText>
+            <Divider />
+            {
+                templateClasses.map((item) => (
+                    renderLinkItem(item.class_name, UiChecksGrid, `/admin/review/${item.class_name}`, item.isSet)
+                ))
+            }
+        </SidebarWrapper>
     );
 };
 
@@ -92,27 +117,31 @@ export const LinkItem = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    display: flex;
-    padding: 8px 12px;
+    justify-content: space-between;
+    padding: 8px 0;
     border-radius: 3px;
     cursor: pointer;
     i {
-        margin-right: 10.05rem;
+        margin-right: 1rem;
         font-size: 0.2rem;
     }
-    &.active {
-        color: ${color.primary};
-        background: ${color.backgroundLight};
-        i {
+    ${(props) => props.isSelected &&
+        css`
             color: ${color.primary};
-        }
-    }
+            background: ${color.backgroundLight};
+            i {
+                color: ${color.primary};
+            }
+        `}
 `;
 
 export const LinkText = styled.div`
     padding-top: 2px;
-    margin-left: 10.05rem;
-    ${font.size(14.7)};
+    font-size: 12px;
+    ${(props) => props.isSelected &&
+        css`
+            font-size: 15px;
+        `}
 `;
 
-export default Sidebar;
+export default ReviewSidebar;

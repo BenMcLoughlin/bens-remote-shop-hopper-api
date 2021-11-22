@@ -1,16 +1,21 @@
-const environment = process.env.REACT_APP_ENVIRONMENT;
-let apiRequestUrl = 'http://localhost:3000';
+const environment = process.env.NODE_ENV;
+let apiRequestUrl = '';
 
-switch (environment) {
-case 'staging':
-    apiRequestUrl = 'https://shop-hopper-api.vercel.app';
-    break;
-case 'production':
-    apiRequestUrl = 'https://shophopper.ca';
-    break;
-default:
-    apiRequestUrl = 'http://localhost:3000';
-    break;
-}
+console.log('NODE_ENV environment:', environment);
 
-export default apiRequestUrl;
+// switch (environment) {
+// case 'devCloud':
+//     apiRequestUrl = 'https://shop-hopper-dev.vercel.app';
+//     break;
+// case 'staging':
+//     apiRequestUrl = 'https://shop-hopper-staging.vercel.app';
+//     break;
+// case 'production':
+//     apiRequestUrl = 'https://shophopper.ca';
+//     break;
+// default:
+//     apiRequestUrl = 'http://localhost:3000';
+//     break;
+// }
+
+// export default apiRequestUrl;

@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import useGlobal from 'frontend/globalState/store';
 import { startCase } from 'frontend/utils/strings';
 import { Button } from 'frontend/components';
-import { updateMetrics } from 'backend/requests/updateMetrics';
 
 export const MetricsDisplay = ({
     headerTitle,
@@ -22,9 +21,13 @@ export const MetricsDisplay = ({
     const [date, setDate] = useState('');
 
     useEffect(() => {
-        updateMetrics(isHost, headerTitle).then((data) => {
-            setTotalItems(data.result);
-        });
+        const _updateMetrics = async () => {
+            await globalActions.shops.updateMetrics(isHost, headerTitle).then((data) => {
+                setTotalItems(data.result);
+            });
+        };
+
+        _updateMetrics();
     }, [headerTitle, globalState.status]);
 
     useEffect(() => {

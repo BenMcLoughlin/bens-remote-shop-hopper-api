@@ -2,16 +2,16 @@ import React from 'react';
 
 import { NavBarLeft, Page } from 'frontend/components';
 import Sidebar from './Sidebar';
-import Board from './Board';
+// import TemplateExamples from './TemplateExamples';
 
-const ProductReviewSystem = () => (
+const Review = () => (
     <Page>
         <NavBarLeft />
 
         <Sidebar />
 
-        <Board />
+        {/* Add compiled template examples here */}
     </Page>
 );
 
-export default ProductReviewSystem;
+export default Review;

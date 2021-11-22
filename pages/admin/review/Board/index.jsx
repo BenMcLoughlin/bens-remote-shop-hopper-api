@@ -1,48 +1,39 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import PropTypes from 'prop-types';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import useGlobal from 'frontend/globalState/store';
 import loaderGif from 'public/assets/loader/octo_loader.gif';
 
-// import Breadcrumbs from 'frontend/components/breadcrumbs';
 import List from './List';
 import Filters from './Filters';
 
 const Board = () => {
+    const router = useRouter();
+    const { pid } = router.query;
     const [globalState, globalActions] = useGlobal();
     const [loading, setLoading] = useState(false);
     const [products, setProducts] = useState([]);
-    const [columnData, setColumnData] = useState([]);
-    const [defaultFilter, setDefaultFilter] = useState({
-        column: 'buckets',
-        metric: 'Athletic'
-    });
+    const [date, setDate] = useState(new Date());
+    let dateFrom = new Date();
+    let pastDate = dateFrom.getDate() - 7;
+    dateFrom.setDate(pastDate);
+
+    const [defaultFilter, setDefaultFilter] = useState({});
     const mountedRef = useRef(true);
 
+    // console.log('globalState:', globalState.user);
+
     useEffect(() => {
-        setLoading(true);
-        const _fetchDefault = async () => {
-            const success = await globalActions.apiRequests.getColumn('buckets');
-
-            if (success.result) {
-                await setColumnData(success.result);
-
-                // console.log('success.result:', success.result[1].value); todo
-
-                await setDefaultFilter({
-                    column: 'buckets',
-                    metric: columnData[0]?.value
-                });
-
-                setLoading(false);
-                return true;
-            }
+        const current = {
+            column: 'buckets',
+            metric: pid,
+            dateFrom
         };
 
-        _fetchDefault();
-        _getProducts(defaultFilter);
-    }, []);
+        _getInitialProducts(current);
+        setDefaultFilter(current);
+    }, [pid]);
 
     useEffect(() => {
         mountedRef.current && setProducts(globalState.products.data);
@@ -52,7 +43,7 @@ const Board = () => {
         // };
     }, [globalState.products.data]);
 
-    const _getProducts = async (filters = defaultFilter) => {
+    const _getInitialProducts = async (filters = defaultFilter) => {
         const result = await globalActions.apiRequests.searchProducts(filters);
 
         if (result) {
@@ -68,12 +59,8 @@ const Board = () => {
 
     return (
         <BoardWrapper>
-            {/* <Breadcrumbs items={[ 'Projects', 'project.name', 'Add' ]} /> */}
-            <Filters defaultFilters={defaultFilter} search={_getProducts} />
-            <List
-                products={products}
-                // products={globalState.products.data}
-            />
+            <Filters defaultFilters={defaultFilter} search={_getInitialProducts} />
+            <List products={products} />
         </BoardWrapper>
     );
 };

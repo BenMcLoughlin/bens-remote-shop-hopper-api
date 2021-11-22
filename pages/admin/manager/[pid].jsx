@@ -8,13 +8,11 @@ import Sidebar from './Sidebar';
 import * as shopsLists from 'frontend/mock/shopsLists';
 
 import { camelCase, capitalize } from 'frontend/utils/strings';
-import { updateMetrics } from 'backend/requests/updateMetrics';
 import useGlobal from 'frontend/globalState/store';
 
 const SiteHost = () => {
     const router = useRouter();
     const [globalState, globalActions] = useGlobal();
-    const { status } = globalState;
     const { pid } = router.query;
 
     const [loading, setLoading] = useState(false);
@@ -48,17 +46,19 @@ const SiteHost = () => {
 
     const _cancel = async () => {
         // todo
-        // await globalActions.products.all([], true);
+        // await globalActions.apiRequests.all([], true);
     };
 
     const _updateAll = async () => {
         setLoading(true);
         globalActions.counter.clearRequests();
         await globalActions.counter.setLoading(true);
-        const success = await globalActions.products.all(globalState.shops);
+        console.time('_updateAll');
+        const success = await globalActions.apiRequests.all(globalState.shops);
 
         if (success) {
-            updateMetrics(true, 'all');
+            console.timeEnd('_updateAll');
+            await globalActions.shops.updateMetrics(true, 'all');
             await globalActions.counter.setLoading(false);
             setLoading(false);
 
@@ -70,10 +70,10 @@ const SiteHost = () => {
         setLoading(true);
         globalActions.counter.clearRequests();
         await globalActions.counter.setLoading(true);
-        const success = await globalActions.products.single(params);
+        const success = await globalActions.apiRequests.single(params);
 
         if (success) {
-            updateMetrics(true, params.business_name);
+            await globalActions.shops.updateMetrics(true, params.business_name);
             await globalActions.counter.setLoading(false);
             setLoading(false);
 
@@ -95,9 +95,6 @@ const SiteHost = () => {
             </Title>
             {uploadedResult && (
                 <Results>
-                    {status && globalState.counter.loading && (
-                        <span style={{ margin: 5, fontSize: 8, color: '#fff' }}>{status}</span>
-                    )}
                     {uploadedResult.map((result) => (
                         <p
                             key={result.result}

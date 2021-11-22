@@ -21,10 +21,11 @@ const Onboard = () => {
     let selectedPage = pages[num];
 
     const sendEmail = async () => {
+        let userEmail = process.env.NODE === 'development' ? 'dev@shophopper.ca' : session?.user?.email;
         const res = await fetch('/api/email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ sendTo: session?.user?.email, template: 'welcome' })
+            body: JSON.stringify({ sendTo: userEmail, template: 'welcome' })
         });
         let data = await res.json();
     };
@@ -54,6 +55,7 @@ const Onboard = () => {
                         } else {
                             router.push('/shopper/welcome');
                             sendEmail();
+                            updateProfile();
                         }
                     }}
                 />
