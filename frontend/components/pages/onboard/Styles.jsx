@@ -65,7 +65,7 @@ const Options = styled.div`
 
 const Option = styled.div`
     height: 25rem;
-    width: 22%;
+    width: 20%;
     display: flex;
     flex-direction: column;
     cursor: pointer;

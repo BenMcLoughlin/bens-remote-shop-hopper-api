@@ -29,7 +29,7 @@ const Login = (props) => {
     return (
         <Wrapper>
             <Left>
-                <CalloutText>Find your perfect outfit, locally</CalloutText>
+              
                 <ImageWrapper>
                     <Image
                         src={'/../public/assets/onboard/shutterstock/womanInHat.jpg'}
@@ -79,11 +79,11 @@ const Login = (props) => {
                         label={'sign in with facebook'}
                         handleChange={() => signIn(providers.facebook.id)}
                     /> */}
-                    <LoginButton
+                    {/* <LoginButton
                         oAuth={'google'}
                         label={'sign in with google'}
                         handleChange={() => signIn(providers.google.id)}
-                    />
+                    /> */}
                 </Buttons>
             </Form>
         </Wrapper>
@@ -118,13 +118,14 @@ const ImageWrapper = styled.div`
     opacity: 0.8;
 `;
 const Form = styled.form`
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    justify-content: space-around;
     color: black;
-    height: 100%;
+
     @media (max-width: 600px) {
         width: 100%;
     }
@@ -154,8 +155,10 @@ const Inputs = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 20%;
+    height: 30%;
+    margin-top: 15px;
 `;
+
 const Buttons = styled.div`
     display: flex;
     flex-direction: column;
@@ -178,12 +181,12 @@ const Disclaimer = styled.div`
     position: relative;
     &::after {
         position: absolute;
-        content: 'OR';
+        content: '';
         width: 3rem;
         height: 3rem;
         bottom: -2rem;
         border-radius: 3px;
-        background: ${(p) => p.theme.color.background};
+
         font-size: ${(p) => p.theme.font.smallMedium};
     }
 `;

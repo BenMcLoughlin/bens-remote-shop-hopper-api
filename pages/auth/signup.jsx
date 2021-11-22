@@ -101,11 +101,11 @@ const SignUp = (props) => {
                         label={'sign up with facebook'}
                         handleChange={() => signIn(providers.facebook.id)}
                     /> */}
-                    <LoginButton
+                    {/* <LoginButton
                         oAuth={'google'}
                         label={'sign up with google'}
                         handleChange={() => signIn(providers.google.id)}
-                    />
+                    /> */}
                 </Buttons>
             </Form>
         </Wrapper>
@@ -146,7 +146,9 @@ const Form = styled.form`
     flex-direction: column;
     align-items: center;
     text-align: center;
+    justify-content: space-around;
     color: black;
+
     @media (max-width: 600px) {
         width: 100%;
     }
@@ -177,7 +179,8 @@ const Buttons = styled.div`
     flex-direction: column;
     gap: 2.5rem;
     align-items: center;
-    height: 40%;
+    height: 20%;
+    
 `;
 const LinkText = styled.div`
     font-weight: 800;
@@ -194,12 +197,11 @@ const Disclaimer = styled.div`
     position: relative;
     &::after {
         position: absolute;
-        content: 'OR';
+        content: '';
         width: 3rem;
         height: 3rem;
         bottom: -2rem;
         border-radius: 3px;
-        background: ${(p) => p.theme.color.background};
         font-size: ${(p) => p.theme.font.smallMedium};
     }
 `;
