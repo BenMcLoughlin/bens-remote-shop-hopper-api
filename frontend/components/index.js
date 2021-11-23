@@ -51,7 +51,6 @@ export {
 export {
     Footer,
     Header,
-    Header_Nates,
     LandingFooter,
     Layout,
     Page,
