@@ -32,7 +32,6 @@ export const Welcome = ({ title, subTitle }) => {
                     <Right>
                         <Blotch1>
                             <Image src={paint1} width={1000} height={700} />
-                            {console.log('Blotch1:', paint1)}
                         </Blotch1>
                         <ImageWrapper>
                             <Image src={women} width={1000} height={1200} />
