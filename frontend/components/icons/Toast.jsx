@@ -5,7 +5,7 @@ import { uniqueId } from 'lodash';
 import styled from 'styled-components';
 import { color, font, mixin, zIndexValues } from 'frontend/styles/theme';
 
-const Toast = () => {
+export const Toast = () => {
     const [toasts, setToasts] = useState([]);
 
     useEffect(() => {
@@ -49,8 +49,6 @@ const Toast = () => {
         </Container>
     );
 };
-
-export default Toast;
 
 export const Container = styled.div`
     z-index: ${zIndexValues.Model + 1};

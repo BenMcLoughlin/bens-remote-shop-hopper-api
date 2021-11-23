@@ -3,7 +3,7 @@ import { NavBarLeft, Page } from 'frontend/components';
 import SiteHostList from './SiteHostList';
 import Sidebar from './Sidebar';
 
-const manager = () => (
+const Manager = () => (
     <Page>
         <NavBarLeft />
 
@@ -13,4 +13,4 @@ const manager = () => (
     </Page>
 );
 
-export default manager;
+export default Manager;

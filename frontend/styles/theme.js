@@ -24,6 +24,7 @@ export const devices = {
     desktop: `(min-width: ${sizes.desktop})`
 };
 
+// Merge with other colors.
 export const color = {
     primary: '#0052cc', // Blue
     success: '#0B875B', // green
@@ -51,7 +52,7 @@ export const color = {
 };
 
 export const font = {
-    regular: 'font-family: "CircularStdBook"; font-weight: normal;',
+    regular: 'font-family: "Poppins"; font-weight: normal;',
     medium: 'font-family: "CircularStdMedium"; font-weight: normal;',
     bold: 'font-family: "CircularStdBold"; font-weight: normal;',
     black: 'font-family: "CircularStdBlack"; font-weight: normal;',

@@ -8,10 +8,10 @@ import { signOut, useSession } from 'next-auth/react';
 
 export const Header = () => {
     const { data: session, status } = useSession();
-    const loading = status === 'loading';
+    // const loading = status === 'loading';
 
     const admins = ['Moseley', 'McLoughlin', 'Lancaster'];
- 
+
     let isAdmin = false;
     if (session) {
         isAdmin = admins.some((d) => session?.user?.email?.includes(d.toLowerCase()));
@@ -30,13 +30,14 @@ export const Header = () => {
                 <LinkText title={'About'} href={'/shopper/about'} />
                 {isAdmin && (
                     <>
+                        <LinkText title={'Featured'} href={'/shopper/featured'} />
                         <LinkText title={'Manager'} href={'/admin/manager'} />
                         <LinkText title={'Review'} href={'/admin/review'} />
+                        <LinkText title={'Featured'} href={'/shopper/featured'} />
                     </>
                 )}
                 {!session ? (
                     <>
-                        <LinkText title={'Featured'} href={'/shopper/featured'} />
                         <LinkButton href="/auth/signup" title="Sign up" radius="round" />
                         <LinkButton href="/auth/login" title="Log In" radius="round" />
                     </>
@@ -63,12 +64,10 @@ const Wrapper = styled.div`
 const Left = styled.div`
     display: flex;
     justify-content: left;
-    margin-left: 10rem;
+    margin-left: 5rem;
     cursor: pointer;
-    @media (max-width: 600px) {
-        position: absolute;
-        width: 0%;
-        opacity: 0;
+    @media (max-width: 1000px) {
+        margin-left: 10rem;
     }
 `;
 const Logo = styled.div`

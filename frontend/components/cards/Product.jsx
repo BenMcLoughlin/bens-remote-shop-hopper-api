@@ -15,6 +15,7 @@ const propTypes = {
     compareAtPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     tags: PropTypes.array,
     buckets: PropTypes.array,
+    sizes: PropTypes.array,
     incrementProduct: PropTypes.func
 };
 
@@ -28,6 +29,7 @@ export const Product = ({
     compareAtPrice,
     tags,
     buckets,
+    sizes,
     incrementProduct
 }) => {
     const [localRating, setRating] = useState(0);
@@ -69,6 +71,8 @@ export const Product = ({
                         <Details>Tags: {tags?.join(', ')}</Details>
                         <Border />
                         <Details>Buckets: {buckets?.join(', ')}</Details>
+                        <Border />
+                        <Details>Sizes: {sizes?.join(', ')}</Details>
                     </Bottom>
                 </Card>
             </ProductBlock>
@@ -84,13 +88,13 @@ export const ProductBlock = styled.div`
     align-items: center;
     justify-content: center;
     max-width: 250px;
-    padding: 0.1rem;
+    padding: 0.3rem;
     border-radius: 3px;
     background: #fff;
     box-shadow: 0px 1px 2px 0px rgba(9, 30, 66, 0.25);
     transition: background 0.1s;
     ${mixin.clickable}
-    margin: 0.05rem;
+    margin: 0.5rem;
     &:hover {
         background: ${color.backgroundLight};
     }

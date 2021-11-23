@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 
-import Autocomplete from "frontend/components/inputs/Autocomplete";
+import { Autocomplete } from "frontend/components/inputs/Autocomplete";
 import fetchTags from "backend/requests/fetchTags";
 import searchTags from "backend/requests/searchTags";
 

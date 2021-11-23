@@ -1,11 +1,37 @@
 /* eslint-disable require-await */
 /* eslint-disable no-undef */
-// next.config.js
+const environment = process.env.NODE_ENV;
+let apiRequestUrl = '';
+
+switch (environment) {
+case 'devCloud':
+    apiRequestUrl = 'https://shop-hopper-dev.vercel.app';
+    break;
+case 'staging':
+    apiRequestUrl = 'https://shop-hopper-staging.vercel.app';
+    break;
+case 'production':
+    apiRequestUrl = 'https://shophopper.ca';
+    break;
+default:
+    apiRequestUrl = 'http://localhost:3000';
+    break;
+}
+
 module.exports = {
+    env: {
+        apiRequestUrl // todo
+    },
     async headers() {
+        if (environment === "future todo") {
+            return {
+
+                /* development only config options here */
+            };
+        }
+
         return [
             {
-                // matching all API routes
                 source: '/api/:path*',
                 headers: [
                     { key: 'Access-Control-Allow-Credentials', value: 'true' },

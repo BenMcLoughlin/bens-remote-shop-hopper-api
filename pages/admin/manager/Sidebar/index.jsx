@@ -50,10 +50,13 @@ const ManagerSidebar = () => {
                     </Logo>
                 </Link>
             </Info>
-            <Header>
-                <BuildingBankLink size={30} />
-                <p>SiteHosts</p>
-            </Header>
+            <Divider />
+            <Link href="/admin/manager/">
+                <Header>
+                    <BuildingBankLink size={30} />
+                    <p>SiteHosts</p>
+                </Header>
+            </Link>
             <Divider />
             <ul className="list">
                 {siteHostList.map((siteHost, index) => renderLinkItem(startCase(siteHost), Shopify, `${siteHost.toLowerCase()}`, index))}
@@ -100,6 +103,7 @@ export const Header = styled.div`
     border-radius: 3px;
     font-size: 1.2rem;
     font-weight: bold;
+    cursor: pointer;
     p {
         margin-left: 0.1rem;
     }

@@ -1,4 +1,4 @@
-export const buckets = {
+export const bucketRelations = {
     'Healing Hollow': ['Beauty'],
     'Baby and Me': ['Baby & Kids'],
     'Funktional': ['Omit this shop'],
@@ -11,7 +11,7 @@ export const buckets = {
     'Man + Woman': ['Trendy'],
     'Portia Ella': ['Beauty'],
     'Loyal Hair': ['Beauty'],
-    'Set 4 Lyfe': ['Music Festival'],
+    'Set 4 Lyfe': ['MusicFestival'],
     'Scopey': ['Casual'],
     'Leoella': ['Omit this shop'],
     '6am Work Shirts': ['Omit this shop'],
@@ -50,3 +50,23 @@ export const buckets = {
     'MOGANO': ['Accessories'],
     'lolo and spence ': ['Baby & Kids']
 };
+
+export const bucketList = [
+    'Bohemian',
+    'Chic',
+    'Trendy',
+    'Athletic',
+    'Casual',
+    'Vintage',
+    'MusicFestival',
+    'Baby & Kids',
+    'Accessories',
+    'Beauty',
+    'Streetwear',
+    'HipHop',
+    'Rock',
+    'Punk',
+    'Elegant',
+    'Formal',
+    'Maternity'
+];

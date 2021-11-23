@@ -17,7 +17,7 @@ const defaultProps = {
     size: 32
 };
 
-const Avatar = ({ className, avatarUrl, name, size, ...otherProps }) => {
+export const Avatar = ({ className, avatarUrl, name, size, ...otherProps }) => {
     const sharedProps = {
         className,
         size,
@@ -51,8 +51,6 @@ const getColorFromName = (name) => colors[name.toLocaleLowerCase().charCodeAt(0)
 
 Avatar.propTypes = propTypes;
 Avatar.defaultProps = defaultProps;
-
-export default Avatar;
 
 export const Image = styled.div`
     display: inline-block;

@@ -3,18 +3,19 @@ import prisma from 'prisma/prisma.js';
 async function createRows(data) {
     let result = {};
 
-    // result = await prisma.$transaction(data.map((item) => prisma.product.upsert({
-    //     where: { title: item.title },
-    //     update: item,
-    //     create: item
-    // }))).catch((e) => {
-    //     console.log('e:', e);
-    //     throw e;
-    // }).finally(async () => {
-    //     await prisma.$disconnect();
-    // });
+    // this one appears to update the info and is stable on local
+    result = await prisma.$transaction(data.map((item) => prisma.product.upsert({
+        where: { title: item.title },
+        update: item,
+        create: item
+    }))).catch((e) => {
+        console.log('e:', e);
+        throw e;
+    }).finally(async () => {
+        await prisma.$disconnect();
+    });
 
-    // result = await data.map((item) => prisma.product.upsert({
+    // result = await data.map((item) => prisma.product.upsert({ todo
     //     where: { title: item.title },
     //     update: item,
     //     create: item
@@ -25,18 +26,18 @@ async function createRows(data) {
     //     await prisma.$disconnect();
     // }));
 
-    result = await prisma.product
-        .createMany({
-            data: data,
-            skipDuplicates: true
-        })
-        .catch((e) => {
-            console.log('e:', e);
-            throw e;
-        })
-        .finally(async () => {
-            await prisma.$disconnect();
-        });
+    // result = await prisma.product
+    //     .createMany({
+    //         data: data,
+    //         skipDuplicates: true
+    //     })
+    //     .catch((e) => {
+    //         console.log('e:', e);
+    //         throw e;
+    //     })
+    //     .finally(async () => {
+    //         await prisma.$disconnect();
+    //     });
 
     return result;
 }
@@ -46,7 +47,7 @@ export async function products(data) {
 
     productsUploaded = await createRows(data);
 
-    console.log('IN LOAD FUNCTION: ', productsUploaded);
+    console.log('IN LOAD FUNCTION: ', productsUploaded.length);
 
-    return productsUploaded.count;
+    return productsUploaded.length;
 }
