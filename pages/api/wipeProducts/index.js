@@ -10,25 +10,40 @@ export default async (req, res) => {
 
     if (req.method === 'POST') {
         try {
-            let result = '';
-            if (req.body.request === 'DESTROY') {
-                console.log('DESTROY');
+            console.log('DESTROY');
 
-                // be careful this wipes the DB
-                result = await prisma.product
-                    .deleteMany({})
-                    .catch((e) => {
-                        console.log('e:', e);
-                        throw e;
-                    })
-                    .finally(async () => {
-                        await prisma.$disconnect();
-                    });
+            // be careful this wipes the DB
+            let statuses = await prisma.status
+                .deleteMany({})
+                .catch((e) => {
+                    console.log('e:', e);
+                    throw e;
+                })
+                .finally(async () => {
+                    await prisma.$disconnect();
+                });
 
-                return res.status(200).json({ removed: result, action: 'DESTROYED' });
-            }
+            let products = await prisma.product
+                .deleteMany({})
+                .catch((e) => {
+                    console.log('e:', e);
+                    throw e;
+                })
+                .finally(async () => {
+                    await prisma.$disconnect();
+                });
 
-            return res.status(200).json({ result });
+            let hot_items = await prisma.hotItem
+                .deleteMany({})
+                .catch((e) => {
+                    console.log('e:', e);
+                    throw e;
+                })
+                .finally(async () => {
+                    await prisma.$disconnect();
+                });
+
+            return res.status(200).json({ products, statuses, hot_items, action: 'DESTROYED' });
         } catch (error) {
             return res.status(422).json(error);
         }

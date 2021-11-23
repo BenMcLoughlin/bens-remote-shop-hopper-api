@@ -14,7 +14,7 @@ export const HowItWorks = ({ title, cards, about }) => (
         <Title>{title}</Title>
         <Cards>
             {cards.map(({ titleText, number, flexDirection, image, brushImage }, i) => (
-                <ActionStep key={titleText, i} flexDirection={flexDirection}>
+                <ActionStep key={(titleText, i)} flexDirection={flexDirection}>
                     <Text>
                         <Number>
                             <Image src={brushNumber[number]} width={110} height={180} />
@@ -65,7 +65,8 @@ const Cards = styled.div`
     justify-content: center;
     align-items: center;
     gap: 3rem;
-    justify-content: space-around;
+    width: 100%;
+    justify-content: center;
     padding-top: 5rem;
     margin: 0 auto;
     @media (max-width: 768px) {
@@ -102,6 +103,7 @@ const Text = styled.div`
     padding-left: 5rem;
     justify-content: space-around;
     position: relative;
+    
 `;
 const Number = styled.div`
     position: absolute;
@@ -112,10 +114,12 @@ const Number = styled.div`
 `;
 
 const ActionTitle = styled.div`
-    font-size: ${(p) => p.theme.font.small};
+    font-size: ${(p) => p.theme.font.smallMedium};
     margin-left: 10%;
     width: 100%;
     text-align: left;
+    font-weight: 600;
+
 `;
 
 const Blotch = styled.div`
@@ -131,7 +135,7 @@ const Blotch = styled.div`
 const Photo = styled.div`
     clip-path: polygon(0 19%, 100% 7%, 100% 88%, 0 77%);
     overflow: hidden;
-    width: 140%;
+    width: 130%;
     margin-left: -20%;
     z-index: 4;
     @media (max-width: 768px) {

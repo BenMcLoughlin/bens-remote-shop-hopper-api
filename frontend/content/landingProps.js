@@ -19,21 +19,21 @@ export const landingProps = {
         cards: [
             {
                 number: 1,
-                title: 'sign up for free and choose your style',
+                titleText: 'sign up for free and choose your style',
                 image: 'actionStep1',
                 flexDirection: 'row',
                 brushImage: '/public/assets/landing/brushNumbers/brushNumber1.png'
             },
             {
                 number: 2,
-                title: "we'll hop through all the local shops",
+                titleText: "we'll hop through all the local shops",
                 image: 'actionStep2',
                 flexDirection: 'row-reverse',
                 brushImage: '/public/assets/landing/brushNumbers/brushNumber2.png'
             },
             {
                 number: 3,
-                title: 'delivering the best deals just for you',
+                titleText: 'delivering the best deals just for you',
                 image: 'actionStep3',
                 flexDirection: 'row',
                 brushImage: '/public/assets/landing/brushNumbers/brushNumber3.png'
@@ -123,7 +123,7 @@ export const landingProps = {
             },
             {
                 number: '1',
-                title: 'OTHING COMPARES TO SWEDISH SUMMER',
+                title: 'NOTHING COMPARES TO SWEDISH SUMMER',
                 subTitle: 'Ryan Lancaster  17 January 2018',
                 content:
                     'When, while lovely valley teems with vapour around meand meridian sun strikes the upper impenetrable . foliage of my trees, and but a thousand',
@@ -140,7 +140,7 @@ export const landingProps = {
                 'Help us build the best local shopping platform possible. Sign up to be a part of our ShopHopper private beta and give us your thoughts and feedback to help power the local shopping movement.'
         },
         bottom: {
-            title: 'ShopHopper Is Coming Soon!',
+            title: 'Our Shophopper App is Coming Soon!',
             subTitle: 'Please sign up to get more info and share your thoughts'
         },
         options: {

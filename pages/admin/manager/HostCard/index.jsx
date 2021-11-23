@@ -1,31 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Shopify } from '@styled-icons/fa-brands/Shopify';
 import styled from 'styled-components';
 import { color, font, mixin } from 'frontend/styles/theme';
 
 const propTypes = {
     businessName: PropTypes.string,
-    openPage: PropTypes.func
+    openPage: PropTypes.func,
+    details: PropTypes.string,
+    iconType: PropTypes.func
 };
 
-const HostCard = ({ businessName, openPage }) => (
-    <Block onClick={openPage}>
-        <Shopify size={30} />
-        <Card>
-            <Title>{businessName}</Title>
-            <Bottom>
-                <Details>
-                    We will add some metrics and interesting info about each host type here as time
-                    goes on
-                </Details>
+const HostCard = ({ businessName, openPage, details, iconType }) => {
+    let Icon = iconType;
+    return (
+        <Block onClick={openPage}>
+            { iconType ? 
+                <Icon size={30} />
+                : null
+            }
+            <Card>
+                <Title>{businessName}</Title>
+                <Bottom>
+                    <Details>
+                        {details}
+                    </Details>
 
-                <Border />
-            </Bottom>
-        </Card>
-        <Details>{businessName}</Details>
-    </Block>
-);
+                    <Border />
+                </Bottom>
+            </Card>
+            <Details>{businessName}</Details>
+        </Block>
+    );
+};
 
 export const Block = styled.div`
     display: flex;
@@ -33,15 +39,16 @@ export const Block = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 0.1rem;
+    padding: 1rem;
     border-radius: 3px;
     background: #fff;
     box-shadow: 0px 1px 2px 0px rgba(9, 30, 66, 0.25);
     transition: background 0.1s;
     ${mixin.clickable}
-    margin: 0.05rem;
+    margin: .5rem;
     &:hover {
-        background: ${color.backgroundLight};
+        background: ${color.backgroundLightest};
+        box-shadow: none;
     }
 `;
 
@@ -82,9 +89,6 @@ export const Card = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    // overflow: hidden;
-    background: white;
-    transition: box-shadow 0.1s ease-in;
     padding: 1rem;
 `;
 

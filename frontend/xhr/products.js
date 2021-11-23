@@ -12,9 +12,21 @@ function getGeneric(body) {
     });
 }
 
-function searchTwoParams(body) {
+function searchProducts(body) {
     const options = {
-        endpoint: '/api/searchTwoParams',
+        endpoint: '/api/searchProducts',
+        method: 'POST',
+        body
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
+function searchProductById(body) {
+    const options = {
+        endpoint: '/api/searchProductById',
         method: 'POST',
         body
     };
@@ -48,9 +60,24 @@ function getColumn(body) {
     });
 }
 
+export default wipeProducts;
+
+function wipeProducts() {
+    const options = {
+        endpoint: '/api/wipeProducts',
+        method: 'POST'
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(resolve).catch(reject);
+    });
+}
+
 export {
     getGeneric,
-    searchTwoParams,
+    searchProducts,
+    searchProductById,
     getHotItems,
-    getColumn
+    getColumn,
+    wipeProducts
 };

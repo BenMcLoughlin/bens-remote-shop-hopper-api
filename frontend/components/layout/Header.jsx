@@ -27,26 +27,27 @@ export const Header = () => {
                 </Left>
             </Link>
             <Right>
-                <LinkText title={'Featured'} href={'/shopper/featured'} />
                 <LinkText title={'About'} href={'/shopper/about'} />
                 {isAdmin && (
                     <>
+                        <LinkText title={'Featured'} href={'/shopper/featured'} />
                         <LinkText title={'Manager'} href={'/admin/manager'} />
                         <LinkText title={'Review'} href={'/admin/review'} />
+                        <LinkText title={'Featured'} href={'/shopper/featured'} />
                     </>
                 )}
-                {!session ?
+                {!session ? (
                     <>
                         <LinkButton href="/auth/signup" title="Sign up" radius="round" />
                         <LinkButton href="/auth/login" title="Log In" radius="round" />
                     </>
-                    :
+                ) : (
                     <Button
                         title={'Sign Out'}
                         // Do we need a URL for this in production BEN?
                         onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
                     />
-                }
+                )}
             </Right>
         </Wrapper>
     );
@@ -63,12 +64,10 @@ const Wrapper = styled.div`
 const Left = styled.div`
     display: flex;
     justify-content: left;
-    margin-left: 10rem;
+    margin-left: 5rem;
     cursor: pointer;
-    @media (max-width: 600px) {
-        position: absolute;
-        width: 0%;
-        opacity: 0;
+    @media (max-width: 1000px) {
+        margin-left: 10rem;
     }
 `;
 const Logo = styled.div`
@@ -85,4 +84,7 @@ const Right = styled.div`
     flex-direction: row;
     width: 40%;
     gap: 3rem;
+    @media (max-width: 600px) {
+        width: 100%;
+    }
 `;

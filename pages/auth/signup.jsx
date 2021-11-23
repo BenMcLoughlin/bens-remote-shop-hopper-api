@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getProviders, useSession, signIn } from 'next-auth/react';
+
 import { FormText, CheckBox, LoginButton } from 'frontend/components';
 import { useSignUpForm } from 'frontend/hooks';
 import createUser from 'backend/requests/createUser';
-import { getProviders, useSession, signIn } from 'next-auth/react';
+import useGlobal from 'frontend/globalState/store';
 
 export async function getServerSideProps(context) {
     const providers = await getProviders();
@@ -16,6 +18,7 @@ export async function getServerSideProps(context) {
 }
 
 const SignUp = (props) => {
+    const [globalState, globalActions] = useGlobal();
     const [fields, setField] = useSignUpForm();
     const { providers } = props;
     const [wantsEmails, setWantsEmails] = useState(false);
@@ -29,7 +32,11 @@ const SignUp = (props) => {
     const noErrors = errorsArray.length === 4 && errorsArray.every((d) => !d);
 
     const onSubmit = async (userData) => {
-        const result = await createUser(userData);
+        const data = {
+            ...userData,
+            ...globalState.user
+        };
+        const result = await createUser(data);
 
         if (result.error) {
             return alert(result.error);
@@ -38,17 +45,15 @@ const SignUp = (props) => {
         await signIn('credentials', result);
     };
 
-    console.log('fields:', fields.email, fields.password);
-
     return (
         <Wrapper>
             <Left>
-                <CalloutText>Find your perfect outfit, locally</CalloutText>
                 <ImageWrapper>
                     <Image
                         src={'/../public/assets/onboard/shutterstock/womanInHat.jpg'}
-                        width={1400}
+                        width={1200}
                         height={1200}
+                        loading="eager"
                     />
                 </ImageWrapper>
             </Left>
@@ -57,11 +62,11 @@ const SignUp = (props) => {
                 <SubTitle>
                     Already have an account?
                     <Link href="/auth/login" style={{ textDecoration: 'none' }}>
-                        Login
+                        <LinkText> Login</LinkText>
                     </Link>
                 </SubTitle>
                 <Inputs>
-                    {Object.values(fields).map((field) => (
+                    {Object.values(fields).map((field, i) => (
                         <FormText
                             {...field}
                             key={field.label}
@@ -83,25 +88,24 @@ const SignUp = (props) => {
                         oAuth={'none'}
                         label={'sign Up'}
                         valid={noErrors}
-                        handleChange={() => onSubmit({
-                            email: fields.email.value,
-                            password: fields.password.value
-                        })
-                        }
+                        handleChange={() => {
+                            onSubmit({
+                                email: fields.email.value,
+                                password: fields.password.value
+                            });
+                        }}
                     />
-                    <Disclaimer>
-                        By continuing, you agree to accept our Privacy Policy & Terms of Service.
-                    </Disclaimer>
-                    <LoginButton
+                    <Disclaimer>By continuing, you agree to accept our Privacy Policy & Terms of Service.</Disclaimer>
+                    {/* <LoginButton
                         oAuth={'facebook'}
                         label={'sign up with facebook'}
                         handleChange={() => signIn(providers.facebook.id)}
-                    />
-                    <LoginButton
+                    /> */}
+                    {/* <LoginButton
                         oAuth={'google'}
                         label={'sign up with google'}
                         handleChange={() => signIn(providers.google.id)}
-                    />
+                    /> */}
                 </Buttons>
             </Form>
         </Wrapper>
@@ -118,7 +122,7 @@ const Wrapper = styled.div`
 `;
 
 const Left = styled.div`
-    width: 60%;
+    width: 50%;
     opacity: 0.7;
     position: relative;
     text-align: center;
@@ -135,22 +139,16 @@ const ImageWrapper = styled.div`
     top: 0;
     opacity: 0.8;
 `;
-const CalloutText = styled.div`
-    z-index: 10;
-    font-size: ${(p) => p.theme.font.mediumLarge};
-    margin-top: 1rem;
-    @media (max-width: 600px) {
-        opacity: 0;
-    }
-`;
 
 const Form = styled.form`
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    justify-content: space-around;
     color: black;
+
     @media (max-width: 600px) {
         width: 100%;
     }
@@ -174,13 +172,20 @@ const Inputs = styled.div`
     flex-direction: column;
     justify-content: space-around;
     height: 30%;
+    margin-top: 15px;
 `;
 const Buttons = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
     align-items: center;
-    height: 40%;
+    height: 20%;
+    
+`;
+const LinkText = styled.div`
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: underline;
 `;
 
 const Disclaimer = styled.div`
@@ -192,12 +197,11 @@ const Disclaimer = styled.div`
     position: relative;
     &::after {
         position: absolute;
-        content: 'OR';
+        content: '';
         width: 3rem;
         height: 3rem;
         bottom: -2rem;
         border-radius: 3px;
-        background: ${(p) => p.theme.color.background};
         font-size: ${(p) => p.theme.font.smallMedium};
     }
 `;

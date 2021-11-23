@@ -1,4 +1,4 @@
-import * as session from 'backend/utils/auth';
+// import * as session from 'backend/utils/auth';
 
 /**
  * @param req
@@ -22,16 +22,15 @@ function request(req) {
         let options = {
             method: req.method.toUpperCase(),
             headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers":
-                "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
             }
         };
 
-        if (options.method === "OPTIONS") {
+        if (options.method === 'OPTIONS') {
             options.headers = {
                 ...options.headers,
-                "Access-Control-Allow-Methods": "PUT, POST, PATCH, DELETE, GET"
+                'Access-Control-Allow-Methods': 'PUT, POST, PATCH, DELETE, GET'
             };
         }
 
@@ -62,7 +61,7 @@ function request(req) {
 
         fetch(endpoint, options)
             .then((res) => res.json())
-            .then(async (res) => {
+            .then((res) => {
                 if (res.statusCode) {
                     const error = {
                         verbiage: res.message,
@@ -80,15 +79,11 @@ function request(req) {
 
                 if (res.status === 'Fail') {
                     if (
-                        [
-                            'INVALID_TOKEN',
-                            'SESSION_EXPIRED',
-                            'INVALID_USER',
-                            'UNKNOWN_USER',
-                            'NOT_FOUND'
-                        ].indexOf(res.code) > -1
+                        ['INVALID_TOKEN', 'SESSION_EXPIRED', 'INVALID_USER', 'UNKNOWN_USER', 'NOT_FOUND'].indexOf(
+                            res.code
+                        ) > -1
                     ) {
-                        await session.logout();
+                        //  await session.logout();
                     }
 
                     reject(res);
