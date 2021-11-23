@@ -7,6 +7,9 @@ import twoFriendsWalking from 'public/assets/banners/two-friends-walking.jpg';
 import womanLookingAtPhone from 'public/assets/shutterstock/woman-looking-at-phone.jpg';
 import parisStorefront from 'public/assets/shutterstock/paris-store-front.jpg';
 import womanChoosing from 'public/assets/shutterstock/woman-choosing.jpg';
+import ryanLancaster from 'public/assets/profilePhotos/ryan-lancaster.jpg';
+import nathanMoseley from 'public/assets/profilePhotos/nathan-moseley.jpg';
+import benMcLoughlin from 'public/assets/profilePhotos/ben-mcLoughlin.jpg';
 
 const About = () => (
     <Wrapper>
@@ -56,17 +59,17 @@ const About = () => (
         <H1>Our Team </H1>
         <Row>
             <ProfileCard
-                imgSrc="/../public/assets/profilePhotos/ryanLancaster.jpg"
+                imgSrc={ryanLancaster}
                 title="Ryan Lancaster"
                 subTitles={['President & CEO', 'Co-Founder']}
             />
             <ProfileCard
-                imgSrc="/../public/assets/profilePhotos/nathanMosely.jpg"
+                imgSrc={nathanMoseley}
                 title="Nathan Moseley"
                 subTitles={['Senior Software Engineer', 'Co-Founder']}
             />
             <ProfileCard
-                imgSrc="/../public/assets/profilePhotos/benMcLoughlin.jpg"
+                imgSrc={benMcLoughlin}
                 title="Ben McLoughlin"
                 subTitles={['Software Engineer', 'Co-Founder']}
             />
