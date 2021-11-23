@@ -43,4 +43,5 @@ const Left = styled.div`
     flex: 1;
     display: flex;
     padding: 0.2rem;
+    margin-top: 3rem;
 `;

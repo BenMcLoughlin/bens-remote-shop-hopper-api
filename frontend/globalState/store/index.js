@@ -1,6 +1,6 @@
-import useGlobalHook from "use-global-hook";
+import useGlobalHook from 'use-global-hook';
 
-import * as actions from "../actions";
+import * as actions from '../actions';
 
 const initialState = {
     counter: {
@@ -67,7 +67,7 @@ const initialState = {
         brands: []
     },
     ui: {
-        onboardPageNum: 2
+        onboardPageNum: 0
     },
     loading: false
 };
