@@ -31,7 +31,7 @@ const About = () => (
                 title={'One spot to find all your favourite local shops'}
                 align="right"
                 contents={[
-                    'ShopHopper brings together all the best local boutique fashion retailer in your area to create a convenient and personized local shopping experience.',
+                    'ShopHopper brings together all the best local boutique fashion retailer in your area to create a convenient and personalized local shopping experience.',
                     "Now it's easy to search through the stores in the area to find outfits that match your style and size and also snag some amazing deals!"
                 ]}
             />
