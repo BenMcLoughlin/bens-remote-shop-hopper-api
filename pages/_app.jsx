@@ -31,7 +31,7 @@ const App = ({ Component, pageProps }) => (
                 domain="dev-lb7cs6nt.us.auth0.com"
                 clientId="XUT4AkENVnJtWG5dKIkDdNWPYLmEpTgK"
                 //secret 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
-                redirectUri={'http://localhost:3000/'}>
+                redirectUri={'https://bens-remote-shop-hopper-api-j9hr7zm4z-benmcloughlin.vercel.app'}>
                 <Layout>
                     <Component {...pageProps} />
                 </Layout>
