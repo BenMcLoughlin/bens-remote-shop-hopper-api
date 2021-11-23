@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Banner, ProfileCard, Paragraph, Image } from 'frontend/components';
 
+import twoFriendsWalking from 'public/assets/banners/two-friends-walking.jpg';
+import womanLookingAtPhone from '/../public/assets/shutterstock/woman-looking-at-phone.jpg';
+import parisStorefront from '/../public/assets/shutterstock/paris-store-front.jpg';
+
 const About = () => (
     <Wrapper>
-        <Banner title={'About'} subTitle={'WHO WE ARE'} imgSrc={'/../public/assets/banners/twoFriendsWalking.jpg'} />
+        <Banner title={'About'} subTitle={'WHO WE ARE'} imgSrc={twoFriendsWalking} />
         <Row>
             <Paragraph
                 title={'Building a better way to shop locally'}
@@ -15,10 +19,10 @@ const About = () => (
                     'So we created ShopHopper as a better, easier, and more personalized way to shop boutique local fashion. '
                 ]}
             />
-            <Image src={'/../public/assets/shutterstock/womanLookingAtPhone.jpg'} />
+            <Image src={womanLookingAtPhone} />
         </Row>
         <Row>
-            <Image src={'/../public/assets/shutterstock/parisStorefront.jpg'} />
+            <Image src={parisStorefront} />
             <Paragraph
                 title={'One spot to find all your favourite local shops'}
                 align="right"

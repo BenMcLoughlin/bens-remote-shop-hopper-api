@@ -10,8 +10,10 @@ export const Banner = ({ title, subTitle, imgSrc }) => {
                 <SubTitle>{subTitle}</SubTitle>
             </Text>
 
+            {console.log('Banner:', imgSrc)}
+
             <Background>
-                <Image src={imgSrc} width={700} height={900} loading="eager" layout="fill" />
+                <Image src={imgSrc} loading="eager" layout="fill" />
             </Background>
         </Wrapper>
     );
