@@ -14,7 +14,7 @@ export {
 export { DevTools } from 'frontend/components/developer';
 
 // cards
-export { Product, Products } from './cards';
+export { Product } from './cards';
 
 // export { Article } from './cards/Article';
 
@@ -54,9 +54,7 @@ export {
 // layout
 export {
     Footer,
-    OnboardHeader,
     Header,
-    Header_Nates,
     LandingFooter,
     Layout,
     Page,
@@ -72,7 +70,7 @@ export { Counter } from './panels';
 
 // pages - onboard
 
-export { Brands, Gender, Location, Sizes, Styles } from 'frontend/components/pages/onboard';
+export { Brands, Gender, Location, Sizes, Styles, OnboardHeader } from 'frontend/components/pages/onboard';
 
 // pages - landing
 

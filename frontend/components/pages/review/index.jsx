@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { NavBarLeft, Page } from 'frontend/components';
-import { ReviewSidebar } from 'frontend/components/pages/review/Sidebar';
-import { EmailDemonstrations } from 'frontend/components/pages/review/EmailDemonstrations';
+import { ReviewSidebar } from './Sidebar';
+import { EmailDemonstrations } from './EmailDemonstrations';
 
 const Review = () => (
     <Page>

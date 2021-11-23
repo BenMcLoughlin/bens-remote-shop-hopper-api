@@ -1,4 +1,4 @@
-import * as session from 'backend/utils/auth';
+// import * as session from 'backend/utils/auth';
 
 /**
  * @param req
@@ -62,7 +62,7 @@ function request(req) {
 
         fetch(endpoint, options)
             .then((res) => res.json())
-            .then(async (res) => {
+            .then((res) => {
                 if (res.statusCode) {
                     const error = {
                         verbiage: res.message,
@@ -88,7 +88,7 @@ function request(req) {
                             'NOT_FOUND'
                         ].indexOf(res.code) > -1
                     ) {
-                        await session.logout();
+                        // await session.logout();
                     }
 
                     reject(res);

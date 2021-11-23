@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { asDate, asDateTime } from 'frontend/utils/dates';
 import { useOnOutsideClick } from 'frontend/hooks/useOnOutsideClick';
-import TextBox from 'frontend/components';
+import { TextBox } from 'frontend/components';
 
 import DateSection from './DateSection';
 import TimeSection from './TimeSection';
@@ -22,7 +22,7 @@ const defaultProps = {
     value: undefined
 };
 
-const DatePicker = ({ className, withTime, value, onChange, ...inputProps }) => {
+export const DatePicker = ({ className, withTime, value, onChange, ...inputProps }) => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const $containerRef = useRef();
 
