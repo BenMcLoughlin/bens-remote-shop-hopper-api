@@ -74,7 +74,7 @@ const options = {
             return true;
         },
         redirect({ url, baseUrl }) {
-            return url.includes('signup') ? 'http://localhost:3000/shopper/onboard' : baseUrl;
+            return url.includes('signup') ? '/shopper/onboard' : baseUrl;
         }
         // async session(session, user) { return session; },
         // async jwt(token, user, account, profile, isNewUser) { return token; }
