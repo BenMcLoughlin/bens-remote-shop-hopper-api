@@ -25,8 +25,7 @@ export const ReviewSidebar = ({ isPID }) => {
     }, []);
 
     const _getClasses = async () => {
-        // todo: result is undefined?
-        const result = await globalActions.apiRequests.getTemplateClasses();
+        await globalActions.apiRequests.getTemplateClasses();
 
         setTemplateClassesList(globalState.templateClass.all);
     };
@@ -51,6 +50,11 @@ export const ReviewSidebar = ({ isPID }) => {
 
         await globalActions.templateClass.setData([]);
     };
+
+    if (!templateClassesList.length) {
+        _getClasses();
+        return null;
+    }
 
     const renderLinkItem = (text, iconType, path, isSet) => {
         let isSelected = router.asPath.includes(path);
