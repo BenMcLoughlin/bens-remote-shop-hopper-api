@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Banner, ProfileCard, Paragraph, Image } from 'frontend/components';
 
+import clothingOnRack from 'public/assets/banners/clothing-on-rack.jpg';
+import womanInStripedShirt from 'public/assets/shutterstock/woman-in-striped-shirt.jpg';
+import parisStorefront from 'public/assets/shutterstock/paris-store-front.jpg';
+import shopHopperPhone from 'public/assets/media/shopHopper-phone.png';
+import ryanLancaster from 'public/assets/profilePhotos/ryan-lancaster.jpg';
+
 const Welcome = () => (
     <Wrapper>
         <Banner
             title={'Welcome'}
             subTitle={'Amazing Local Outfits Our On There Way Soon!'}
-            imgSrc={'/../public/assets/banners/clothingOnRack.jpg'}
+            imgSrc={clothingOnRack}
         />
         <Row>
             <Paragraph
@@ -19,11 +25,11 @@ const Welcome = () => (
                     "We can't wait to help you discover all the incredible local shops and outfits right here in your own back yard. "
                 ]}
             />
-            <Image src={'/../public/assets/shutterstock/womanInStripedShirt.jpg'} />
+            <Image src={womanInStripedShirt} />
         </Row>
         <H1>What Happens Next?</H1>
         <Row>
-            <Image src={'/../public/assets/shutterstock/parisStorefront.jpg'} />
+            <Image src={parisStorefront} />
             <Paragraph
                 title={'Finding You Perfect Outfits'}
                 align="right"
@@ -42,7 +48,7 @@ const Welcome = () => (
                     'We want to make it easy to search through the stores in the area with one simple click so you can save time, look great, and shop local!  '
                 ]}
             />
-            <Image src={'/../public/assets/media/shopHopperPhone.png'} height={1200} />
+            <Image src={shopHopperPhone} height={1200} />
         </Row>
         <Row>
             <Paragraph
@@ -57,7 +63,7 @@ const Welcome = () => (
         </Row>
         <Row>
             <ProfileCard
-                imgSrc="/../public/assets/profilePhotos/ryanLancaster.jpg"
+                imgSrc={ryanLancaster}
                 title="Ryan Lancaster"
                 subTitles={['President & CEO', 'Co-Founder']}
             />
