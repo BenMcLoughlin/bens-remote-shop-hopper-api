@@ -13,7 +13,7 @@ import benMcLoughlin from 'public/assets/profilePhotos/ben-mcLoughlin.jpg';
 
 const About = () => (
     <Wrapper>
-        <Banner title={'About'} subTitle={'WHO WE ARE'} imgSrc={twoFriendsWalking} />
+        <Banner title="About" subTitle="WHO WE ARE" imgSrc={twoFriendsWalking} />
         <Row>
             <Paragraph
                 title={'Building a better way to shop locally'}

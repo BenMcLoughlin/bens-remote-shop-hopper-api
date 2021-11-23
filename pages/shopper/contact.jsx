@@ -32,8 +32,8 @@ const Contact = () => {
     return (
         <Wrapper>
             <Banner
-                title={'Say Hello'}
-                subTitle={'We want to hear from you!'}
+                title="Say Hello"
+                subTitle="We want to hear from you!"
                 imgSrc={clothingOnRack}
             />
             <Row>

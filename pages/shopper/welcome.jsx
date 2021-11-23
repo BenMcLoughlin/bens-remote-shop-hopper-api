@@ -12,8 +12,8 @@ import ryanLancaster from 'public/assets/profilePhotos/ryan-lancaster.jpg';
 const Welcome = () => (
     <Wrapper>
         <Banner
-            title={'Welcome'}
-            subTitle={'Amazing Local Outfits Our On There Way Soon!'}
+            title="Welcome"
+            subTitle="Amazing Local Outfits Our On There Way Soon!"
             imgSrc={clothingOnRack}
         />
         <Row>
