@@ -9,6 +9,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from 'frontend/styles/theme';
 import { Layout } from 'frontend/components/layout/Layout';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { useRouter } from 'next/router';
 
 NProgress.configure({ showSpinner: true, trickleRate: 0.1, trickleSpeed: 300 });
 
@@ -31,7 +32,7 @@ const App = ({ Component, pageProps }) => (
                 domain="dev-lb7cs6nt.us.auth0.com"
                 clientId="XUT4AkENVnJtWG5dKIkDdNWPYLmEpTgK"
                 //secret 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
-                redirectUri={'https://bens-remote-shop-hopper-api-j9hr7zm4z-benmcloughlin.vercel.app'}>
+                redirectUri={'https://bens-remote-shop-hopper-api-j9hr7zm4z-benmcloughlin.vercel.app/shopper/onboard'}>
                 <Layout>
                     <Component {...pageProps} />
                 </Layout>
