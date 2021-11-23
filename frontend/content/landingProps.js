@@ -6,7 +6,7 @@ export const landingProps = {
             'ShopHopper searches through all your favorite local independent retailers to bring you the best deals on perfect “for you” pieces.'
     },
     callout1: {
-        image: 'woman-choosing',
+        image: 'womanChoosing',
         fontColor: 'black',
         blotch1: 'bigBlueLittleYellow',
         blotch2: 'blueOrangeGrey',
