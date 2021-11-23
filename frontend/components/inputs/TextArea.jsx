@@ -26,7 +26,7 @@ const defaultProps = {
 };
 
 export const TextArea = forwardRef(({ className, invalid, value, label, onChange, ...textareaProps }, ref) => (
-    <StyledTextarea className={className} invalid={invalid}>
+    <StyledTextArea className={className} invalid={invalid}>
         <Label textValue={value} htmlFor={label}>
             <LabelText>{startCase(label)}</LabelText>
         </Label>
