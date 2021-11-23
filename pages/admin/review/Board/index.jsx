@@ -20,7 +20,7 @@ const Board = () => {
     dateFrom.setDate(pastDate);
 
     const [defaultFilter, setDefaultFilter] = useState({});
-    const mountedRef = useRef(true);
+    // const mountedRef = useRef(true);
 
     // console.log('globalState:', globalState.user);
 
@@ -36,7 +36,8 @@ const Board = () => {
     }, [pid]);
 
     useEffect(() => {
-        mountedRef.current && setProducts(globalState.products.data);
+        setProducts(globalState.products.data);
+        // mountedRef.current && setProducts(globalState.products.data);
 
         // return () => {
         //     mountedRef.current = false;

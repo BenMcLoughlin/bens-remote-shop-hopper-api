@@ -20,15 +20,11 @@ const Board = () => {
     });
     const mountedRef = useRef(true);
 
-    console.log('globalState:', globalState.user);
-
     useEffect(() => {
         const _fetchDefault = async () => {
             if (!globalState.user.buckets?.length < 1) {
                 setLoading(true);
                 const success = await globalActions.apiRequests.getColumn('buckets');
-
-                console.log('getColumn result:', success.result[0]?.value);
 
                 await setDefaultFilter({
                     column: 'buckets',

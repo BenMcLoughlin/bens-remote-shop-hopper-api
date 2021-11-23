@@ -38,7 +38,6 @@ export const EmailCards = ({ pid, items }) => {
     }, [globalState.templateClass.data]);
 
     return (
-        // <Wrapper>
         <>
             <Top>
                 <Card
@@ -65,7 +64,6 @@ export const EmailCards = ({ pid, items }) => {
                 />
             </Bottom>
         </>
-        // </Wrapper>
     );
 };
 
