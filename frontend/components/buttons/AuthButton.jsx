@@ -7,11 +7,7 @@ export const AuthButton = ({ title = 'sign up', gradient = 'primary' }) => {
     const { loginWithRedirect, logout, user, loading } = useAuth0();
     console.log(useAuth0());
     const onClick = () => {
-        user
-            ? logout()
-            : loginWithRedirect({
-                  appState: { targetUrl: `${window.location.pathname}/shopper/onboard` }
-              });
+        user ? logout() : loginWithRedirect();
     };
 
     return (
