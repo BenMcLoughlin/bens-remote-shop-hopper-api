@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Avatar from './Avatar';
-export { Avatar };
 export { Spinner } from './Spinner';
-import Toast from './Toast';
+import { Toast } from './Toast';
 export { Toast };
 export { Logo } from './Logo';
 

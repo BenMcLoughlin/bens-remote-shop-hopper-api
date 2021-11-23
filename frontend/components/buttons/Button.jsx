@@ -5,35 +5,18 @@ import { Rocket } from '@styled-icons/fa-solid/Rocket';
 import { PaperPlane } from '@styled-icons/entypo/PaperPlane';
 import { startCase } from 'frontend/utils/strings';
 
-<<<<<<< HEAD
 export const Button = ({
     title = '',
     gradient = 'primary',
     icon,
     onClick,
     radius = 'square',
-    fullWidth
+    fullWidth,
+    onSubmit = null
 }) => {
-=======
-export const Button = ({ title = '', gradient = 'primary', icon, onClick, radius = 'square', onSubmit = null }) => {
->>>>>>> 7a133e79ce919881875d4f378eaa76a760acece0
-    const icons = {
-        rocket: <Rocket />,
-        plane: <PaperPlane />
-    };
-
     return (
-<<<<<<< HEAD
-        <Wrapper gradient={gradient} onClick={onClick} radius={radius} title={title} fullWidth={fullWidth}>
-            {icon && (
-                <Icon>
-                    {icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}
-                </Icon>
-            )}
-=======
-        <Wrapper gradient={gradient} onClick={onClick} radius={radius} title={title} onSubmit={onSubmit && onSubmit}>
+        <Wrapper gradient={gradient} onClick={onClick} radius={radius} title={title} fullWidth={fullWidth} onSubmit={onSubmit && onSubmit}>
             {icon && <Icon>{icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}</Icon>}
->>>>>>> 7a133e79ce919881875d4f378eaa76a760acece0
             <Title>{startCase(title)}</Title>
             {onSubmit && <SubmitOption type="submit" value="Submit" />}
         </Wrapper>

@@ -14,8 +14,7 @@ export {
 export { DevTools } from 'frontend/components/developer';
 
 // cards
-export { Product } from './cards';
-export { Banner, Paragraph, Product, Products, ProfileCard } from './cards';
+export { Banner, Paragraph, Product, ProfileCard } from './cards';
 
 // export { Article } from './cards/Article';
 
