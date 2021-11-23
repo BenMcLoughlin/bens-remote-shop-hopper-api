@@ -29,6 +29,7 @@ export const Layout = (props) => {
                     @import
                     url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;900&display=swap')
                 </style>
+                <meta name="google-site-verification" content="jFBJxrS89w3gyD3-3xbcMObmJNZnL2BO-xgl89rpSa0" />
             </Head>
 
             <Header />

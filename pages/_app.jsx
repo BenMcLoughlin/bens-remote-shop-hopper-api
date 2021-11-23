@@ -29,7 +29,7 @@ const App = ({ Component, pageProps }) => (
         <ThemeProvider theme={theme}>
             <Auth0Provider
                 domain="dev-lb7cs6nt.us.auth0.com"
-                clientId="396358957135-7sbnb2f0deai98q654225198tba1aepg.apps.googleusercontent.com"
+                clientId="XUT4AkENVnJtWG5dKIkDdNWPYLmEpTgK"
                 //secret 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
                 redirectUri={'http://localhost:3000/'}>
                 <Layout>

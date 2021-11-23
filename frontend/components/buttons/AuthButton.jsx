@@ -5,9 +5,13 @@ import { Spinner } from 'frontend/components/icons';
 
 export const AuthButton = ({ title = 'sign up', gradient = 'primary' }) => {
     const { loginWithRedirect, logout, user, loading } = useAuth0();
-
+    console.log(useAuth0());
     const onClick = () => {
-        user ? logout() : loginWithRedirect();
+        user
+            ? logout()
+            : loginWithRedirect({
+                  appState: { targetUrl: `${window.location.pathname}/shopper/onboard` }
+              });
     };
 
     return (
