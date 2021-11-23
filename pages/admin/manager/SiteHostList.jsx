@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styled from 'styled-components';
+import { Shopify } from '@styled-icons/fa-brands/Shopify';
 import HostCard from './HostCard';
 import { color, font, mixin } from 'frontend/styles/theme';
 import useGlobal from 'frontend/globalState/store';
@@ -10,7 +11,6 @@ import loaderGif from 'public/assets/loader/octo_loader.gif';
 const SiteHostList = () => {
     const router = useRouter();
     const [globalState, globalActions] = useGlobal();
-    const [loading, setLoading] = useState(false);
     const [siteHosts, setSiteHosts] = useState([]);
 
     // useEffect(() => {
@@ -24,38 +24,36 @@ const SiteHostList = () => {
     };
 
     if (!globalState.siteHosts.list.length) {
-        return <p>Loading ...</p>;
+        return <Image src={loaderGif} className="loading" width={800} height={600} />;
     }
 
     return (
         <>
             <Title>
-                <HostsCount>{siteHosts.length} Items</HostsCount>
+                <HostsCount>{globalState.siteHosts.list.length} Host</HostsCount>
             </Title>
             <List>
-                {loading ? (
-                    <Image src={loaderGif} className="loading" width={800} height={600} />
-                ) : (
-                    <>
-                        {globalState.siteHosts.list.map((host, index) => (
-                            <HostCard
-                                key={`${host.id + index}`}
-                                id={host.id}
-                                businessName={host}
-                                openPage={() => _openPage(`/admin/manager/${host.toLowerCase()}`)}
-                            />
-                        ))}
-                        {Array.from('odfpinsdf').map((host, index) => (
-                            <HostCard
-                                key={`${host + index}`}
-                                id={host.id}
-                                businessName={host}
-                                index={index}
-                                openPage={() => _openPage(`/admin/manager/${host.toLowerCase()}`)}
-                            />
-                        ))}
-                    </>
-                )}
+                <>
+                    {globalState.siteHosts.list.map((host, index) => (
+                        <HostCard
+                            key={`${host.id + index}`}
+                            id={host.id}
+                            businessName={host}
+                            openPage={() => _openPage(`/admin/manager/${host.toLowerCase()}`)}
+                            details="We will add some metrics and interesting info about each host type here as time goes on"
+                            iconType={Shopify}
+                        />
+                    ))}
+                    {Array.from('odfpinsdf').map((host, index) => (
+                        <HostCard
+                            key={`${host + index}`}
+                            id={host.id}
+                            businessName={host}
+                            index={index}
+                            openPage={() => _openPage(`/admin/manager/${host.toLowerCase()}`)}
+                        />
+                    ))}
+                </>
             </List>
         </>
     );

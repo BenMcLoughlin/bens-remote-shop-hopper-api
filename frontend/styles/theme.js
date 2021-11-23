@@ -24,6 +24,7 @@ export const devices = {
     desktop: `(min-width: ${sizes.desktop})`
 };
 
+// Merge with other colors.
 export const color = {
     primary: '#0052cc', // Blue
     success: '#0B875B', // green

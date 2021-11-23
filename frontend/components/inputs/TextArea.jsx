@@ -24,19 +24,19 @@ const defaultProps = {
 };
 
 export const TextArea = forwardRef(({ className, invalid, onChange, ...textareaProps }, ref) => (
-    <StyledTextarea className={className} invalid={invalid}>
+    <StyledTextArea className={className} invalid={invalid}>
         <TextAreaAutoSize
             {...textareaProps}
             onChange={(event) => onChange(event.target.value, event)}
             inputRef={ref || undefined}
         />
-    </StyledTextarea>
+    </StyledTextArea>
 ));
 
 TextArea.propTypes = propTypes;
 TextArea.defaultProps = defaultProps;
 
-export const StyledTextarea = styled.div`
+export const StyledTextArea = styled.div`
     display: inline-block;
     width: 100%;
     textarea {
@@ -54,8 +54,7 @@ export const StyledTextarea = styled.div`
             border: 1px solid ${color.borderInputFocus};
             box-shadow: 0 0 0 1px ${color.borderInputFocus};
         }
-        ${(props) =>
-            props.invalid &&
+        ${(props) => props.invalid &&
             css`
                 &,
                 &:focus {
