@@ -1,3 +1,4 @@
+export { AuthButton } from './AuthButton';
 export { Back } from './Back';
 export { Button } from './Button';
 export { LinkText } from './LinkText';

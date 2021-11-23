@@ -8,6 +8,7 @@ import 'frontend/styles/global.css';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'frontend/styles/theme';
 import { Layout } from 'frontend/components/layout/Layout';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 NProgress.configure({ showSpinner: true, trickleRate: 0.1, trickleSpeed: 300 });
 
@@ -26,9 +27,15 @@ Router.events.on('routeChangeError', () => {
 const App = ({ Component, pageProps }) => (
     <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
         <ThemeProvider theme={theme}>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            <Auth0Provider
+                domain="dev-lb7cs6nt.us.auth0.com"
+                clientId="396358957135-7sbnb2f0deai98q654225198tba1aepg.apps.googleusercontent.com"
+                //secret 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
+                redirectUri={'http://localhost:3000/'}>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </Auth0Provider>
         </ThemeProvider>
     </SessionProvider>
 );

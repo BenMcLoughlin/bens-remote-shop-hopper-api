@@ -1,5 +1,6 @@
 // buttons
 export {
+    AuthButton,
     Back,
     Next,
     Button,
@@ -48,15 +49,7 @@ export {
 } from 'frontend/components/inputs';
 
 // layout
-export {
-    Footer,
-    Header,
-    LandingFooter,
-    Layout,
-    Page,
-    NavBarLeft,
-    ProgressBar
-} from 'frontend/components/layout';
+export { Footer, Header, LandingFooter, Layout, Page, NavBarLeft, ProgressBar } from 'frontend/components/layout';
 
 // maps
 export { GoogleMap } from './maps/GoogleMap';
@@ -73,14 +66,7 @@ export { Brands, Gender, Location, Sizes, Styles, OnboardHeader } from 'frontend
 
 // pages - landing
 
-export {
-    HowItWorks,
-    News,
-    Callout,
-    Testimonials,
-    Welcome,
-    WhoWeAre
-} from 'frontend/components/pages/landing';
+export { HowItWorks, News, Callout, Testimonials, Welcome, WhoWeAre } from 'frontend/components/pages/landing';
 
 // pages - manager
 

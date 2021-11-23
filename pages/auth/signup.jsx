@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getProviders, useSession, signIn } from 'next-auth/react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import { FormText, CheckBox, LoginButton } from 'frontend/components';
 import { useSignUpForm } from 'frontend/hooks';
@@ -17,7 +18,15 @@ export async function getServerSideProps(context) {
     };
 }
 
+const LoginButtonAuth0 = () => {
+    const { loginWithRedirect } = useAuth0();
+
+    return <button onClick={() => loginWithRedirect()}>Log In</button>;
+};
+
 const SignUp = (props) => {
+    const { user } = useAuth0();
+    console.log(' user : ', user);
     const [globalState, globalActions] = useGlobal();
     const [fields, setField] = useSignUpForm();
     const { providers } = props;
@@ -59,6 +68,7 @@ const SignUp = (props) => {
             </Left>
             <Form method="post">
                 <Title>Sign Up</Title>
+                <LoginButtonAuth0 />
                 <SubTitle>
                     Already have an account?
                     <Link href="/auth/login" style={{ textDecoration: 'none' }}>
@@ -180,7 +190,6 @@ const Buttons = styled.div`
     gap: 2.5rem;
     align-items: center;
     height: 20%;
-    
 `;
 const LinkText = styled.div`
     font-weight: 800;

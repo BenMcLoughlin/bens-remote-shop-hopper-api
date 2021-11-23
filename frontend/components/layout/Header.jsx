@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, LinkText, LinkButton } from 'frontend/components';
+import { AuthButton, Button, LinkText, LinkButton } from 'frontend/components';
 import logo from 'public/assets/logos/shophopper-logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,6 +28,8 @@ export const Header = () => {
             </Link>
             <Right>
                 <LinkText title={'About'} href={'/shopper/about'} />
+                <AuthButton title={'Login'} />
+
                 {isAdmin && (
                     <>
                         <LinkText title={'Featured'} href={'/shopper/featured'} />
@@ -36,7 +38,7 @@ export const Header = () => {
                         <LinkText title={'Featured'} href={'/shopper/featured'} />
                     </>
                 )}
-                {!session ? (
+                {/* {!session ? (
                     <>
                         <LinkButton href="/auth/signup" title="Sign up" radius="round" />
                         <LinkButton href="/auth/login" title="Log In" radius="round" />
@@ -47,7 +49,7 @@ export const Header = () => {
                         // Do we need a URL for this in production BEN?
                         onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
                     />
-                )}
+                )} */}
             </Right>
         </Wrapper>
     );
@@ -84,10 +86,8 @@ const Logo = styled.div`
         height: 10rem;
         margin-top: -1rem;
         margin-left: -5rem;
-
     }
 `;
-
 
 const Right = styled.div`
     display: flex;
