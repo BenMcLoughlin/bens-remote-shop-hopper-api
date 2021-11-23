@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { startCase } from 'frontend/utils/strings';
 
@@ -16,6 +16,7 @@ export const FormText = ({
     const [blurred, setBlurred] = useState(false);
     const [wasValid, setWasValid] = useState(false);
     const [error, setError] = useState(false);
+    const reference = useRef('hi');
 
     useEffect(() => {
         if (blurred || wasValid) {

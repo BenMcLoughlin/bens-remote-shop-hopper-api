@@ -19,7 +19,26 @@ const Onboard = () => {
     const pages = ['location', 'styles', 'brands', 'sizes'];
 
     let selectedPage = pages[num];
-    console.log('selectedPage: ', selectedPage);
+
+    const sendEmail = async () => {
+        let userEmail = process.env.NODE === 'development' ? 'dev@shophopper.ca' : session?.user?.email;
+        const res = await fetch('/api/email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sendTo: userEmail, template: 'welcome' })
+        });
+        let data = await res.json();
+    };
+
+    const updateProfile = async () => {
+        const res = await fetch('/api/updateProfile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(globalState.user)
+        });
+        let data = await res.json();
+    };
+
     return (
         <Wrapper>
             <ProgressBar progress={num} length={pages.length} />
@@ -34,17 +53,20 @@ const Onboard = () => {
                         if (num + 1 < pages.length) {
                             setGlobalState({ ui: { onboardPageNum: num + 1 } });
                         } else {
-                            router.push('/shopper/featured');
+                            router.push('/shopper/welcome');
+                            sendEmail();
+                            updateProfile();
                         }
                     }}
                 />
             </NextWrapper>
             <BackWrapper>
                 <Back
-                    handleChange={() => setGlobalState({
-                        ui: { onboardPageNum: num > 0 ? num - 1 : 0 }
-                    })
-                    }
+                    handleChange={() => {
+                        setGlobalState({
+                            ui: { onboardPageNum: num > 0 ? num - 1 : 0 }
+                        });
+                    }}
                 />
             </BackWrapper>
         </Wrapper>

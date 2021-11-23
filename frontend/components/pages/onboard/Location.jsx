@@ -21,7 +21,7 @@ export const Location = (props) => (
 // ---------------------------STYLES-------------------------------------------//
 
 const Wrapper = styled.div`
-    width: 100%;
+    width: 95%;
     height: 100%;
     display: flex;
     justify-content: center;

@@ -22,7 +22,7 @@ export const Styles = ({ styles }) => {
                                 layout="fill"
                             />
                         </OptionImage>
-                        <OptionTitle>{option}</OptionTitle>
+                        <OptionTitle>{startCase(option)}</OptionTitle>
                     </Option>
                 ))}
             </Options>
@@ -41,11 +41,13 @@ const Wrapper = styled.div`
     position: relative;
     margin: 0 auto;
     gap: 2rem;
+    min-height: 100%;
+    
 `;
 
 const Options = styled.div`
-    width: 70%;
-    height: 80%;
+    width: 60%;
+    min-height: 80%;
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
@@ -53,8 +55,11 @@ const Options = styled.div`
     justify-content: space-around;
     z-index: 1;
     opacity: 0.8;
-    @media (max-width: 600px) {
+    @media (max-width: 440px) {
         width: 100%;
+    }
+    @media (max-width: 700px) {
+        width: 80%;
     }
 `;
 
@@ -72,12 +77,12 @@ const Option = styled.div`
     }
 `;
 const OptionImage = styled.div`
-    height: 80%;
+    min-height: 80%;
     width: 100%;
     position: relative;
 `;
 const OptionTitle = styled.div`
-    height: 20%;
+    min-height: 20%;
     font-size: ${(p) => p.theme.font.medium};
     display: flex;
     justify-content: center;
@@ -88,86 +93,8 @@ const Question = styled.div`
     font-size: ${(p) => p.theme.font.mediumLarge};
     font-family: 'Poppins', sans-serif;
     color: #12142d;
-    height: 8rem;
     text-align: center;
     @media (max-width: 600px) {
         width: 80%;
     }
 `;
-
-// import React, { useState, useEffect } from 'react';
-// import styled from 'styled-components';
-// import Image from 'next/image';
-// import { startCase } from 'frontend/utils/strings';
-
-// export const FavStyles = ({ favStyles }) => {
-//     const { handleChange, selectedValues } = favStyles;
-
-//     return (
-//         <Wrapper>
-//             <Question>{favStyles.question}</Question>
-//             <Options>
-//                 {favStyles.options.map((option) => (
-//                     <Option
-//                         onClick={() => handleChange(option)}
-//                         selected={selectedValues.includes(option)}
-//                     >
-//                         <OptionImage>
-//                             {/* <Image
-//                                 src={`/../public/assets/onboard/styles/${option}.jpg`}
-//                                 layout="fill"
-//                             /> */}
-//                         </OptionImage>
-//                         <OptionTitle>{startCase(option)}</OptionTitle>
-//                     </Option>
-//                 ))}
-//             </Options>
-//         </Wrapper>
-//     );
-// };
-
-// //---------------------------STYLES-------------------------------------------//
-
-// const Wrapper = styled.div`
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: flex-start;
-//     align-items: center;
-//     position: relative;
-//     margin: 0 auto;
-//     gap: 2rem;
-//     height: 100%;
-// `;
-
-// const Options = styled.div`
-//     display: flex;
-//     flex-wrap: wrap;
-//     gap: 0.1rem;
-//     height: 100%;
-//     width: 80%;
-// `;
-
-// const Option = styled.div`
-//     width: 30%;
-//     margin-bottom: 2%;
-//     background: yellow;
-// `;
-// const OptionImage = styled.div`
-//     fill: 1;
-//     background: blue;
-//     position: relative;
-// `;
-// const OptionTitle = styled.div`
-//     fill: 1;
-//     font-size: ${(p) => p.theme.font.medium};
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-// `;
-
-// const Question = styled.div`
-//     font-size: ${(p) => p.theme.font.mediumLarge};
-//     font-family: 'Poppins', sans-serif;
-//     color: #12142d;
-//     fill: 1;
-// `;

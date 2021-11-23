@@ -1,8 +1,6 @@
-/* eslint-disable require-await */
 import { NextApiHandler } from 'next';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
@@ -14,7 +12,9 @@ const options = {
     providers: [
         CredentialsProvider({
             async authorize(payload) {
-                if (payload.id) { return payload; }
+                if (payload.id) {
+                    return payload;
+                }
 
                 const { email, password } = payload;
 
@@ -31,16 +31,18 @@ const options = {
                 }
 
                 throw new Error('invalid credentials');
-                
             }
         }),
-        GitHubProvider({
-            clientId: process.env.GITHUB_ID,
-            clientSecret: process.env.GITHUB_SECRET
-        }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_ID,
-            clientSecret: process.env.GOOGLE_SECRET
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            authorization: {
+                params: {
+                    prompt: 'consent',
+                    access_type: 'offline',
+                    response_type: 'code'
+                }
+            }
         }),
         FacebookProvider({
             clientId: process.env.FACEBOOK_ID,
@@ -65,15 +67,14 @@ const options = {
         jwt: true
     },
     callbacks: {
-        async signIn(user, account, profile) {
+        signIn(user, account, profile) {
             return true;
         },
         signOut() {
             return true;
         },
-        async redirect({ url, baseUrl }) {
-            // Ben, is this good/used?
-            return url.includes('signup') ? 'http://localhost:3000/shopper/onboard' : baseUrl;
+        redirect({ url, baseUrl }) {
+            return url.includes('signup') ? '/shopper/onboard' : baseUrl;
         }
         // async session(session, user) { return session; },
         // async jwt(token, user, account, profile, isNewUser) { return token; }

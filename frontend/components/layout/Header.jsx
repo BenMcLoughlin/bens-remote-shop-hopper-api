@@ -33,20 +33,21 @@ export const Header = () => {
                         <LinkText title={'Featured'} href={'/shopper/featured'} />
                         <LinkText title={'Manager'} href={'/admin/manager'} />
                         <LinkText title={'Review'} href={'/admin/review'} />
+                        <LinkText title={'Featured'} href={'/shopper/featured'} />
                     </>
                 )}
-                {!session ?
+                {!session ? (
                     <>
                         <LinkButton href="/auth/signup" title="Sign up" radius="round" />
                         <LinkButton href="/auth/login" title="Log In" radius="round" />
                     </>
-                    :
+                ) : (
                     <Button
                         title={'Sign Out'}
                         // Do we need a URL for this in production BEN?
                         onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
                     />
-                }
+                )}
             </Right>
         </Wrapper>
     );
@@ -83,4 +84,7 @@ const Right = styled.div`
     flex-direction: row;
     width: 40%;
     gap: 3rem;
+    @media (max-width: 600px) {
+        width: 100%;
+    }
 `;

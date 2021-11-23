@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-export { Avatar } from './Avatar';
+import Avatar from './Avatar';
+export { Avatar };
 export { Spinner } from './Spinner';
-export { Toast } from './Toast';
+import Toast from './Toast';
+export { Toast };
 export { Logo } from './Logo';
 
 const fontIconCodes = {
@@ -63,7 +65,7 @@ const Icon = ({ type, ...iconProps }) => (
 export const StyledIcon = styled.i`
     display: inline-block;
     font-size: ${(props) => `${props.size}px`};
-    ${(props) => props.left || props.top ? `transform: translate(${props.left}px, ${props.top}px);` : ''}
+    ${(props) => (props.left || props.top ? `transform: translate(${props.left}px, ${props.top}px);` : '')}
     &:before {
         content: '${(props) => props.code}';
         font-family: 'jira' !important;

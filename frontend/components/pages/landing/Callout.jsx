@@ -9,7 +9,7 @@ import { background } from 'public/assets/landing/shutterstock/index.js';
 export const Callout = ({ title, subTitle, image, blotch1, blotch2, clothingIcon }) => (
     <Wrapper>
         <BackgroundImage>
-            <Image src={background[image]} width={3000} height={2000} />
+            <Image src={background[image]} width={3000} height={2000} loading="eager" />
         </BackgroundImage>
         <Title dangerouslySetInnerHTML={{ __html: title }} />
         <SubTitle dangerouslySetInnerHTML={{ __html: subTitle }} />
@@ -91,7 +91,7 @@ const Blotch1 = styled.div`
     width: 15%;
     left: -10%;
     top: -10%;
-    opacity: 0.7;
+
     @media (max-width: 600px) {
         top: -5%;
     }
@@ -102,7 +102,7 @@ const Blotch2 = styled.div`
     right: 0%;
     height: 15%;
     width: 15%;
-    opacity: 0.7;
+
     @media (max-width: 600px) {
         bottom: 5%;
     }
@@ -113,7 +113,7 @@ const ClothingIcon = styled.div`
     right: 0%;
     height: 10%;
     width: 10%;
-    opacity: 0.7;
+
     transform: rotate(-30deg);
     @media (max-width: 600px) {
         bottom: 5%;

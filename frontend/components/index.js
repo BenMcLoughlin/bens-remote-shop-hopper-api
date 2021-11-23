@@ -15,6 +15,7 @@ export { DevTools } from 'frontend/components/developer';
 
 // cards
 export { Product } from './cards';
+export { Banner, Paragraph, Product, Products, ProfileCard } from './cards';
 
 // export { Article } from './cards/Article';
 
@@ -27,14 +28,10 @@ export { SlideToSide } from './HOC/transitions/SlideToSide';
 export { Spinner, Toast } from './icons';
 
 // Formik Form
-export {
-    Form
-} from 'frontend/components/Form';
+export { Form } from 'frontend/components/Form';
 
 // Select
-export {
-    Select
-} from 'frontend/components/Select';
+export { Select } from 'frontend/components/Select';
 
 // inputs
 export {
@@ -64,6 +61,9 @@ export {
 
 // maps
 export { GoogleMap } from './maps/GoogleMap';
+
+// maps
+export { Image } from './media';
 
 // panels
 export { Counter } from './panels';

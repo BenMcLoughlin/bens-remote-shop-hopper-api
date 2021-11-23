@@ -101,14 +101,14 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   password      String?
-  birthdate     DateTime?
+  birthdate     Int?
   gender        String?
   image         String?
   role          String?
   size          Json?
   buckets       String[]
-  location      String?
-  favourite     String[]
+  location      Json?
+  favourite     Json?
   accounts      Account[]
   sessions      Session[]
 

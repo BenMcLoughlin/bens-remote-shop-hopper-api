@@ -10,9 +10,12 @@ export default async function createUser({ body }, res) {
     });
 
     JSON.stringify(userExists, null, 4);
-    if (userExists) { res.json({ error: 'Looks like you have an account! Try logging in. ' }); }
+    if (userExists) {
+        res.json({ error: 'Looks like you have an account! Try logging in. ' });
+    }
 
     const hashedPassword = await bcrypt.hash(body.password, 10);
+    console.log('body: ', body);
     const newUser = await prisma.user.create({
         data: {
             name: body.name,

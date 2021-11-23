@@ -5,11 +5,6 @@ import { uniqueId } from 'lodash';
 import { FormText, TextArea, TextEditor, DatePicker } from 'frontend/components/inputs';
 import { Select } from 'frontend/components/Select';
 
-// import Input from 'components/Input';
-// import TextArea from 'components/TextArea';
-// import TextEditor from 'components/TextEditor';
-// import DatePicker from 'components/DatePicker';
-
 import { StyledField, FieldLabel, FieldTip, FieldError } from './Styles';
 
 const propTypes = {
