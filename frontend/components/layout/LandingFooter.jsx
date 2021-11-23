@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import greenCircles from 'public/assets/landing/footer/greenCircles.png';
 import phone from 'public/assets/landing/footer/phone.png';
-import { Button } from '..';
+import { LinkButton } from '..';
 import { useOnScreen } from 'frontend/hooks/useOnScreen';
 
 export const LandingFooter = ({ top, bottom, options }) => {
@@ -22,15 +22,20 @@ export const LandingFooter = ({ top, bottom, options }) => {
                 <Right>
                     <Title>{top.title}</Title>
                     <SubTitle>{top.subTitle}</SubTitle>
-                    <Button title={'Private Beta Sign Up'} gradient={'secondary'} icon={'rocket'} />
+                    <LinkButton
+                        title={'Private Beta Sign Up'}
+                        gradient={'secondary'}
+                        icon={'rocket'}
+                        href="auth/signup"
+                    />
                 </Right>
             </Top>
             <Bottom>
                 <Title>{bottom.title}</Title>
                 <SubTitle>{bottom.subTitle}</SubTitle>
                 <Buttons>
-                    <Button title={'Private Beta Sign Up'} />
-                    <Button title={'News Letter'} gradient={'none'} icon={'plane'} radius="round" />
+                    <LinkButton title={'Private Beta Sign Up'} />
+                    {/* <Button title={'News Letter'} gradient={'none'} icon={'plane'} radius="round" /> */}
                 </Buttons>
                 {/* <Social>
                     {options.social.map((d) => (

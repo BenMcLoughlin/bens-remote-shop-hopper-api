@@ -38,7 +38,7 @@ const About = () => (
         </Row>
         <Row>
             <Paragraph
-                title={'One spot to find all your favourite local shops'}
+                title={'One simple and personized local shopping experience'}
                 contents={[
                     'We want to bring you that feeling you get when you find that perfect outfits that not only look great but fit perfectly, everyday!',
                     "With our personalized fashion recommendations we'll automatically find you the best deals outfits that perfectly match your style and size from local retailers you love. "
@@ -58,11 +58,7 @@ const About = () => (
         </Row>
         <H1>Our Team </H1>
         <Row>
-            <ProfileCard
-                imgSrc={ryanLancaster}
-                title="Ryan Lancaster"
-                subTitles={['President & CEO', 'Co-Founder']}
-            />
+            <ProfileCard imgSrc={ryanLancaster} title="Ryan Lancaster" subTitles={['President & CEO', 'Co-Founder']} />
             <ProfileCard
                 imgSrc={nathanMoseley}
                 title="Nathan Moseley"

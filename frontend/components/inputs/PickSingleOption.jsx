@@ -8,6 +8,8 @@ export const PickSingleOption = ({ handleChange, value, name, options }) => {
 
     const { length } = options;
     const positionIndex = options.findIndex((d) => d === selected);
+
+  
     return (
         <Wrapper value={value} options={options} length={options.length}>
             {options.map((option, i) => (
@@ -17,8 +19,7 @@ export const PickSingleOption = ({ handleChange, value, name, options }) => {
                     onClick={() => {
                         handleChange(option, name);
                         setSelected(option);
-                    }}
-                >
+                    }}>
                     {option}
                 </Number>
             ))}

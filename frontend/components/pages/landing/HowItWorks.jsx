@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from 'frontend/components';
+import { LinkButton } from 'frontend/components';
 import Image from 'next/image';
 import { brushNumber } from 'public/assets/landing/brushNumbers/allNumbers.js';
 import { images } from 'public/assets/landing/actionStep/images.js';
@@ -32,7 +32,7 @@ export const HowItWorks = ({ title, cards, about }) => (
                 </ActionStep>
             ))}
         </Cards>
-        <Button title={'sign up'} />
+        <LinkButton title={'sign up'} />
     </Wrapper>
 );
 
@@ -103,7 +103,6 @@ const Text = styled.div`
     padding-left: 5rem;
     justify-content: space-around;
     position: relative;
-    
 `;
 const Number = styled.div`
     position: absolute;
@@ -114,12 +113,13 @@ const Number = styled.div`
 `;
 
 const ActionTitle = styled.div`
-    font-size: ${(p) => p.theme.font.smallMedium};
+    font-size: 2.5rem;
     margin-left: 10%;
     width: 100%;
     text-align: left;
-    font-weight: 600;
-
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    margin-top: -4rem;
 `;
 
 const Blotch = styled.div`

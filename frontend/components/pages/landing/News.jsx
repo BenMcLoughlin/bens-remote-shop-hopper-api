@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Button } from 'frontend/components';
+import { LinkButton } from 'frontend/components';
 
 export const News = ({ title, cards }) => (
     <Wrapper>
@@ -12,7 +12,7 @@ export const News = ({ title, cards }) => (
                     <Article {...card} />
                 ))}
             </Cards>
-            <Button title={'All Posts'} gradient="tertiary" /> */}
+            <LinkButton title={'All Posts'} gradient="tertiary" /> */}
     </Wrapper>
 );
 

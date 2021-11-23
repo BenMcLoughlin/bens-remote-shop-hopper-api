@@ -22,9 +22,13 @@ export const Layout = (props) => {
                     rel="stylesheet"
                 />
                 <link
-                    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,800;1,200&display=swap"
+                    href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;900&display=swap"
                     rel="stylesheet"
                 />
+                <style>
+                    @import
+                    url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;900&display=swap')
+                </style>
             </Head>
 
             <Header />

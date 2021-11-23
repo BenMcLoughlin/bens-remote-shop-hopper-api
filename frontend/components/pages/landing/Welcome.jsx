@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Button } from 'frontend/components';
+import { LinkButton } from 'frontend/components';
 import women from 'public/assets/landing/shutterstock/twoWomen.png';
 import paint1 from 'public/assets/landing/paintBlobs/hero-bg-3.png';
 import Image from 'next/image';
@@ -26,7 +26,7 @@ export const Welcome = ({ title, subTitle }) => {
                         <Title>{fontLoaded && title}</Title>
                         <SubTitle>{subTitle}</SubTitle>
                         <ButtonWrapper>
-                            <Button title={'Sign up'} href="/auth/signup" />
+                            <LinkButton title={'Sign up'} href="/auth/signup" />
                         </ButtonWrapper>
                     </Left>
                     <Right>
@@ -86,6 +86,7 @@ const Left = styled.div`
     @media (max-width: 700px) {
         position: absolute;
         width: 100%;
+        height: 60rem;
     }
 `;
 const Right = styled.div`

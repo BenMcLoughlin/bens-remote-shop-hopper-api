@@ -99,12 +99,11 @@ export const landingProps = {
                 image: 'JustinaProfilePhoto'
             },
             {
-                name: 'Julie Cook',
+                name: 'Candacy Glinsbockel',
                 role: 'LOCAL SHOPPER',
-                content:
-                    "OMG… I can't believe you can show me what’s on sale in my size locally... This is amazing!",
+                content: "OMG… I can't believe you can show me what’s on sale in my size locally... This is amazing!",
                 rating: 5,
-                image: 'JulieCook'
+                image: 'candacyGlinsbockel'
             }
         ]
     },
@@ -145,11 +144,7 @@ export const landingProps = {
         },
         options: {
             social: ['Twitter', 'Facebook', 'Instagram', 'Youtube', 'Discord'],
-            copyright: [
-                '© 2021 Shop Hopper. All rights reserved.',
-                'ryan@shophopper.ca',
-                '(250) 318-0225'
-            ]
+            copyright: ['© 2021 Shop Hopper. All rights reserved.', 'ryan@shophopper.ca', '(250) 318-0225']
         }
     }
 };

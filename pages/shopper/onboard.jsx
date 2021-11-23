@@ -95,7 +95,7 @@ const Content = styled.div`
 const NextWrapper = styled.div`
     height: 10rem;
     position: absolute;
-    top: 10%;
+    top: 24%;
     right: 10%;
     z-index: 100;
 `;

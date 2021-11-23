@@ -55,7 +55,7 @@ const Wrapper = styled.div`
     transition: all 0.6s ease;
 `;
 const Title = styled.div`
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     color: white;
     ${(props) => props.theme.flex.vertical.center};
 `;

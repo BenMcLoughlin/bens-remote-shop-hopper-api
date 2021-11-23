@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Search, LinkText } from 'frontend/components';
-import logo from 'public/assets/logos/shopHopperTitle.svg';
+import logo from 'public/assets/logos/shophopper-logo.svg';
 import Image from 'next/image';
 import { QuestionSquare } from '@styled-icons/bootstrap/QuestionSquare';
 

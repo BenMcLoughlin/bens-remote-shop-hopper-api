@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Search } from '..';
-import logo from 'public/assets/logos/shopHopperTitle.svg';
+import logo from 'public/assets/logos/shophopper-logo.svg';
 import Image from 'next/image';
 import { QuestionSquare } from '@styled-icons/bootstrap/QuestionSquare';
 import { startCase } from 'frontend/utils/strings';

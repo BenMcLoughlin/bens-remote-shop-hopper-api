@@ -4,33 +4,42 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { Search as SearchIcon } from '@styled-icons/bootstrap/Search';
 import { CheckCircle } from '@styled-icons/boxicons-solid/CheckCircle';
+import brandsList from 'frontend/content/data/onboardOptions/brands.json';
 
 export const Brands = ({ brands }) => {
     const { selectedValues, handleChange, options } = brands;
-    const [searchValue, setSearchValue] = useState('');
+    const [selectedLetter, setSelectedLetter] = useState('A');
+    const alphabet1 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'];
+    const alphabet2 = ['N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
-    let filteredOptions =
-        searchValue.length > 2
-            ? options.filter((d) => d.toLowerCase().includes(searchValue.toLowerCase()))
-            : options;
+    const selectedBrands = brandsList.filter((d) => d[0] === selectedLetter);
 
-    // filteredOptions = filteredOptions.filter((d) => !selectedValues.includes(d));
     return (
         <Wrapper>
             <Question>{brands.question}</Question>
-            {/* <Options>
-                {selectedValues.map((selected) => (
-                    <Option>{selected}</Option>
-                ))}
-            </Options> */}
-            {/* <SearchBar>
-                <IconWrapper>
-                    <SearchIcon />
-                </IconWrapper>
-                <SearchInput value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
-            </SearchBar> */}
+            <Alphabets>
+                {[alphabet1, alphabet2].map((alphabet, i) => {
+                    const positionIndex = alphabet.findIndex((d) => d === selectedLetter);
+                    return (
+                        <Alphabet key={i}>
+                            {alphabet.includes(selectedLetter) && (
+                                <Pill value={selectedLetter} options={alphabet} positionIndex={positionIndex} />
+                            )}
+                            {alphabet.map((letter) => (
+                                <Letter
+                                    key={letter}
+                                    onClick={() => setSelectedLetter(letter)}
+                                    selected={letter === selectedLetter}>
+                                    {letter}
+                                </Letter>
+                            ))}
+                        </Alphabet>
+                    );
+                })}
+            </Alphabets>
+
             <Options>
-                {filteredOptions.slice(0, 10).map((option) => (
+                {selectedBrands.map((option) => (
                     <Option
                         key={option}
                         onClick={() => handleChange(option)}
@@ -60,7 +69,7 @@ const Wrapper = styled.div`
     margin: 0 auto;
     gap: 2rem;
     @media (max-width: 600px) {
-        height: 60rem;
+        height: 90rem;
     }
 `;
 
@@ -71,8 +80,58 @@ const Question = styled.div`
     height: 8rem;
     text-align: center;
     @media (max-width: 600px) {
+        font-size: ${(p) => p.theme.font.medium};
         width: 80%;
     }
+`;
+const Alphabet = styled.div`
+
+
+    height: 8rem;
+    text-align: center;
+    display: flex;
+    position: relative;
+    @media (max-width: 600px) {
+        width: 80%;
+    }
+`;
+const Alphabets = styled.div`
+    height: 8rem;
+    text-align: center;
+    display: flex;
+    position: relative;
+    margin: 0 auto;
+    @media (max-width: 600px) {
+        flex-direction: column;
+        height: 10rem;
+
+    }
+`;
+const Letter = styled.div`
+    color: ${(p) => (p.selected ? 'white' : ' #12142d')};
+    font-size: ${(p) => p.theme.font.medium};
+    width: 4rem;
+    z-index: 10;
+    cursor: pointer;
+`;
+const Pill = styled.div`
+        position: absolute;
+        min-width: 4rem;
+        height: 4rem;
+        top: -.4rem;
+        left: -.1rem;
+        border-radius: 50%;
+        background: ${(props) => props.theme.color.blue};
+          transform: ${(props) => `translate(${props.positionIndex * 4}rem, 0)`};
+        transition: all .3s ease;
+        animation: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s 1 normal forwards running fmdUjs;
+        -webkit-box-shadow: 0.1rem 11px 42px -28px rgba(0,0,0,0.75);
+-moz-box-shadow: 0.1rem 11px 42px -28px rgba(0,0,0,0.75);
+box-shadow: 0.1rem 11px 42px -28px rgba(0,0,0,0.75);
+    @media (max-width: 600px) {
+        transform: ${(props) => `translate(${props.positionIndex * 3.16}rem, 0)`};
+    }
+}
 `;
 
 const Options = styled.div`
@@ -85,6 +144,9 @@ const Options = styled.div`
     padding: 2rem;
     z-index: 1;
     margin: 0 auto;
+    @media (max-width: 600px) {
+        width: 100%;
+    }
 `;
 
 const Option = styled.div`
@@ -106,30 +168,11 @@ const Option = styled.div`
     padding: 1rem;
     position: relative;
     @media (max-width: 600px) {
-        width: 47%;
-        height: 25%;
+        width: 17rem;
+        height: 7rem;
     }
 `;
-const SearchBar = styled.div`
-    width: 35rem;
-    z-index: 3;
-    height: 8rem;
-    position: relative;
-`;
-const SearchInput = styled.input`
-    height: 4rem;
-    width: 35rem;
-    background: white;
-    padding: 1rem;
-    border-radius: 0.05rem;
-`;
-const IconWrapper = styled.div`
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    height: 1.5rem;
-    width: 1.5rem;
-`;
+
 const CheckCirlcleWrapper = styled.div`
     position: absolute;
     top: 0rem;

@@ -1,11 +1,11 @@
 import AngelProfilePhoto from './AngelProfilePhoto.jpeg';
-import JulieCook from './JulieCook.png';
+import candacyGlinsbockel from './candacyGlinsbockel.jpeg';
 import JustinaProfilePhoto from './JustinaProfilePhoto.jpeg';
 import starSVG from './star.svg';
 
 export const profile = {
     AngelProfilePhoto,
-    JulieCook,
+    candacyGlinsbockel,
     JustinaProfilePhoto
 };
 export const star = starSVG;

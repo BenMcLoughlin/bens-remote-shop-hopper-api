@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button, LinkText, LinkButton } from 'frontend/components';
-import logo from 'public/assets/logos/shopHopperTitle.svg';
+import logo from 'public/assets/logos/shophopper-logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
@@ -22,7 +22,7 @@ export const Header = () => {
             <Link href="/">
                 <Left>
                     <Logo>
-                        <Image src={logo} width={200} height={100} />
+                        <Image src={logo} width={300} height={300} />
                     </Logo>
                 </Left>
             </Link>
@@ -59,6 +59,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     height: 7rem;
+    gap: 3rem;
     width: 100%;
 `;
 const Left = styled.div`
@@ -71,11 +72,23 @@ const Left = styled.div`
     }
 `;
 const Logo = styled.div`
-    width: 10rem;
-    margin-top: 1rem;
+    width: 15rem;
+    height: 15rem;
+    margin-top: -2rem;
     display: flex;
     justify-content: flex-start;
+    flex: 1;
+    position: relative;
+    @media (max-width: 600px) {
+        width: 10rem;
+        height: 10rem;
+        margin-top: -1rem;
+        margin-left: -5rem;
+
+    }
 `;
+
+
 const Right = styled.div`
     display: flex;
     align-items: center;

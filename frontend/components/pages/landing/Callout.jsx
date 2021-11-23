@@ -35,7 +35,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     opacity: ${(p) => p.theme.opacity};
     position: relative;
     font-family: 'Yanone Kaffeesatz', Sans-serif;
@@ -70,9 +70,7 @@ const Title = styled.div`
     text-transform: uppercase;
     text-align: center;
     z-index: 4;
-    margin-left: 7rem;
     height: 20%;
-    margin-top: -10%;
 `;
 
 const SubTitle = styled.div`
