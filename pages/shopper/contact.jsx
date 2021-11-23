@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Banner, FormText, Image, Paragraph, Button, TextArea } from 'frontend/components';
 
+import clothingOnRack from 'public/assets/banners/clothing-on-rack.jpg';
+
 const Contact = () => {
     const [fields, setField] = useState({
         name: '',
@@ -32,7 +34,7 @@ const Contact = () => {
             <Banner
                 title={'Say Hello'}
                 subTitle={'We want to hear from you!'}
-                imgSrc={'/../public/assets/banners/clothingOnRack.jpg'}
+                imgSrc={clothingOnRack}
             />
             <Row>
                 <Column>
