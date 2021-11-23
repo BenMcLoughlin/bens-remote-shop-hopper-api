@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import { Banner, ProfileCard, Paragraph, Image } from 'frontend/components';
 
 import twoFriendsWalking from 'public/assets/banners/two-friends-walking.jpg';
-import womanLookingAtPhone from '/../public/assets/shutterstock/woman-looking-at-phone.jpg';
-import parisStorefront from '/../public/assets/shutterstock/paris-store-front.jpg';
+import womanLookingAtPhone from 'public/assets/shutterstock/woman-looking-at-phone.jpg';
+import parisStorefront from 'public/assets/shutterstock/paris-store-front.jpg';
+import womanChoosing from 'public/assets/shutterstock/woman-choosing.jpg';
 
 const About = () => (
     <Wrapper>
@@ -40,7 +41,7 @@ const About = () => (
                     "With our personalized fashion recommendations we'll automatically find you the best deals outfits that perfectly match your style and size from local retailers you love. "
                 ]}
             />
-            <Image src={'/../public/assets/shutterstock/womanChoosing.jpg'} />
+            <Image src={womanChoosing} />
         </Row>
         <Row>
             <Paragraph
