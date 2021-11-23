@@ -39,10 +39,22 @@ export const Layout = (props) => {
 const Wrapper = styled.div`
     width: 100%;
     height: 100%;
-    background: -webkit-linear-gradient(bottom left, #f6f4f5, #ffffff);
-    background: -moz-linear-gradient(bottom left, #f6f4f5, #ffffff);
-    background: linear-gradient(to top right, #f6f4f5, #ffffff);
+    background: #f6f4f5;
+    background: -webkit-linear-gradient(top left, #f6f4f5, #f6f4f5);
+    background: -moz-linear-gradient(top left, #f6f4f5, #f6f4f5);
+    background: linear-gradient(to bottom right, #f6f4f5, #f6f4f5);
 `;
+
+// Backgrounds
+// background: #F6F4F5;
+// background: -webkit-linear-gradient(top left, #F6F4F5, #F6F4F5);
+// background: -moz-linear-gradient(top left, #F6F4F5, #F6F4F5);
+// background: linear-gradient(to bottom right, #F6F4F5, #F6F4F5);
+
+//    background: -webkit-linear-gradient(bottom left, #f6f4f5, #ffffff);
+//     background: -moz-linear-gradient(bottom left, #f6f4f5, #ffffff);
+//     background: linear-gradient(to top right, #f6f4f5, #ffffff);
+
 const Center = styled.div`
     display: flex;
     flex-direction: column;
