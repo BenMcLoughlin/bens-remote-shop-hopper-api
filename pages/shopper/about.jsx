@@ -3,9 +3,17 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Banner, ProfileCard, Paragraph, Image } from 'frontend/components';
 
+import twoFriendsWalking from 'public/assets/banners/two-friends-walking.jpg';
+import womanLookingAtPhone from 'public/assets/shutterstock/woman-looking-at-phone.jpg';
+import parisStorefront from 'public/assets/shutterstock/paris-store-front.jpg';
+import womanChoosing from 'public/assets/shutterstock/woman-choosing.jpg';
+import ryanLancaster from 'public/assets/profilePhotos/ryan-lancaster.jpg';
+import nathanMoseley from 'public/assets/profilePhotos/nathan-moseley.jpg';
+import benMcLoughlin from 'public/assets/profilePhotos/ben-mcLoughlin.jpg';
+
 const About = () => (
     <Wrapper>
-        <Banner title={'About'} subTitle={'WHO WE ARE'} imgSrc={'/../public/assets/banners/twoFriendsWalking.jpg'} />
+        <Banner title={'About'} subTitle={'WHO WE ARE'} imgSrc={twoFriendsWalking} />
         <Row>
             <Paragraph
                 title={'Building a better way to shop locally'}
@@ -15,15 +23,15 @@ const About = () => (
                     'So we created ShopHopper as a better, easier, and more personalized way to shop boutique local fashion. '
                 ]}
             />
-            <Image src={'/../public/assets/shutterstock/womanLookingAtPhone.jpg'} />
+            <Image src={womanLookingAtPhone} />
         </Row>
         <Row>
-            <Image src={'/../public/assets/shutterstock/parisStorefront.jpg'} />
+            <Image src={parisStorefront} />
             <Paragraph
                 title={'One spot to find all your favourite local shops'}
                 align="right"
                 contents={[
-                    'ShopHopper brings together all the best local boutique fashion retailer in your area to create a convenient and personized local shopping experience.',
+                    'ShopHopper brings together all the best local boutique fashion retailer in your area to create a convenient and personalized local shopping experience.',
                     "Now it's easy to search through the stores in the area to find outfits that match your style and size and also snag some amazing deals!"
                 ]}
             />
@@ -36,7 +44,7 @@ const About = () => (
                     "With our personalized fashion recommendations we'll automatically find you the best deals outfits that perfectly match your style and size from local retailers you love. "
                 ]}
             />
-            <Image src={'/../public/assets/shutterstock/womanChoosing.jpg'} />
+            <Image src={womanChoosing} />
         </Row>
         <Row>
             <Paragraph
@@ -51,17 +59,17 @@ const About = () => (
         <H1>Our Team </H1>
         <Row>
             <ProfileCard
-                imgSrc="/../public/assets/profilePhotos/ryanLancaster.jpg"
+                imgSrc={ryanLancaster}
                 title="Ryan Lancaster"
                 subTitles={['President & CEO', 'Co-Founder']}
             />
             <ProfileCard
-                imgSrc="/../public/assets/profilePhotos/nathanMosely.jpg"
+                imgSrc={nathanMoseley}
                 title="Nathan Moseley"
                 subTitles={['Senior Software Engineer', 'Co-Founder']}
             />
             <ProfileCard
-                imgSrc="/../public/assets/profilePhotos/benMcLoughlin.jpg"
+                imgSrc={benMcLoughlin}
                 title="Ben McLoughlin"
                 subTitles={['Software Engineer', 'Co-Founder']}
             />

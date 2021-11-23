@@ -11,7 +11,7 @@ export const Banner = ({ title, subTitle, imgSrc }) => {
             </Text>
 
             <Background>
-                <Image src={imgSrc} width={700} height={900} loading="eager" layout="fill" />
+                <Image src={imgSrc} loading="eager" layout="fill" />
             </Background>
         </Wrapper>
     );
