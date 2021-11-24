@@ -103,6 +103,7 @@ const Text = styled.div`
     padding-left: 5rem;
     justify-content: space-around;
     position: relative;
+
 `;
 const Number = styled.div`
     position: absolute;
@@ -119,7 +120,7 @@ const ActionTitle = styled.div`
     text-align: left;
     font-weight: 800;
     font-family: 'Poppins', sans-serif;
-    margin-top: -4rem;
+    margin-top: -8rem;
 `;
 
 const Blotch = styled.div`

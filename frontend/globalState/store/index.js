@@ -59,9 +59,9 @@ const initialState = {
             venders: []
         },
         size: {
-            top: 'General / US Size',
-            shoes: 'US Size / Size (MM)',
-            bottom: 'Waist (inches) / US Size'
+            top: '',
+            shoes: '',
+            bottom: ''
         },
         styles: [],
         brands: []

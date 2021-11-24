@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-    withGoogleMap,
-    withScriptjs,
-    GoogleMap as _GoogleMap,
-    Marker,
-    InfoWindow
-} from 'react-google-maps';
+import { withGoogleMap, withScriptjs, GoogleMap as _GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import mapStyles from './mapStyles';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import useGlobal from 'frontend/globalState/store';
@@ -34,6 +28,8 @@ export function GoogleMap() {
 
         setGlobalState({ user: { location: { lat, lng, address: value } } });
     };
+
+    console.log('process.env: ', process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY);
 
     return (
         <Wrapper>
@@ -85,12 +81,7 @@ function UnwrappedMap() {
 
     const { lat, lng } = globalState.user.location;
 
-    return (
-        <_GoogleMap
-            defaultZoom={10}
-            center={{ lat, lng }}
-            defaultOptions={{ styles: mapStyles }}></_GoogleMap>
-    );
+    return <_GoogleMap defaultZoom={10} center={{ lat, lng }} defaultOptions={{ styles: mapStyles }}></_GoogleMap>;
 }
 
 let Map = withScriptjs(withGoogleMap(UnwrappedMap));

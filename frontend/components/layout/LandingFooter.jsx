@@ -22,12 +22,7 @@ export const LandingFooter = ({ top, bottom, options }) => {
                 <Right>
                     <Title>{top.title}</Title>
                     <SubTitle>{top.subTitle}</SubTitle>
-                    <LinkButton
-                        title={'Private Beta Sign Up'}
-                        gradient={'secondary'}
-                        icon={'rocket'}
-                        href="auth/signup"
-                    />
+                    <LinkButton title={'Private Beta Sign Up'} gradient={'secondary'} icon={'rocket'} />
                 </Right>
             </Top>
             <Bottom>

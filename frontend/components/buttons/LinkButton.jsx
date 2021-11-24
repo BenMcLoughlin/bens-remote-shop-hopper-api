@@ -3,33 +3,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { Rocket } from '@styled-icons/fa-solid/Rocket';
 import { PaperPlane } from '@styled-icons/entypo/PaperPlane';
-import Link from 'next/link';
 import { startCase } from 'frontend/utils/strings';
 
-export const LinkButton = ({
-    title = '',
-    gradient = 'primary',
-    icon,
-    href = '',
-    radius = 'square'
-}) => {
-    const icons = {
-        rocket: <Rocket />,
-        plane: <PaperPlane />
-    };
-
+export const LinkButton = ({ title = '', gradient = 'primary', icon, href = '/api/auth/login', radius = 'square' }) => {
     return (
-        <Link href={href}>
+        <a href={href} style={{ textDecoration: 'none' }}>
             <Wrapper gradient={gradient} radius={radius} title={title}>
-                {icon && (
-                    <Icon>
-                        {icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}
-                    </Icon>
-                )}
+                {icon && <Icon>{icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}</Icon>}
 
                 <Title>{startCase(title)}</Title>
             </Wrapper>
-        </Link>
+        </a>
     );
 };
 
@@ -55,7 +39,7 @@ const Wrapper = styled.div`
     transition: all 0.6s ease;
 `;
 const Title = styled.div`
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: white;
     ${(props) => props.theme.flex.vertical.center};
 `;

@@ -26,7 +26,7 @@ export const Welcome = ({ title, subTitle }) => {
                         <Title>{fontLoaded && title}</Title>
                         <SubTitle>{subTitle}</SubTitle>
                         <ButtonWrapper>
-                            <LinkButton title={'Sign up'} href="/auth/signup" />
+                            <LinkButton title={'Sign up'} />
                         </ButtonWrapper>
                     </Left>
                     <Right>
@@ -125,6 +125,5 @@ const Blotch1 = styled.div`
 
 const ButtonWrapper = styled.div`
     margin-top: 3rem;
-    margin-left: 3rem;
     z-index: 2;
 `;

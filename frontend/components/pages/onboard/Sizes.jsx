@@ -34,12 +34,16 @@ const Wrapper = styled.div`
 
 `;
 const ImageWrapper = styled.div`
-    width: 50%;
-    height: 70rem;
+    width: 60%;
+    margin-left: -10%;
+    margin-top: 3%;
+    z-index: 100;
     opacity: 0.8;
     @media (max-width: 600px) {
         position: absolute;
-        width: 100%;
+        top: 0;
+        left: 0;
+        width: 110%;
         opacity: 0.2;
     }
 `;

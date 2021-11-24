@@ -50,10 +50,10 @@ const BackgroundImage = styled.div`
     top: 0;
     left: 0;
     height: 53rem;
-    width: 115%;
+    width: 125%;
     clip-path: polygon(0 0, 100% 4.5%, 100% 93%, 0% 100%);
     overflow: hidden;
-    margin-left: -10%;
+    margin-left: -15%;
     @media (max-width: 600px) {
         opacity: 0.2;
         margin-left: -5%;
@@ -65,7 +65,7 @@ const Title = styled.div`
     font-family: 'Yanone Kaffeesatz', Sans-serif;
     font-size: ${(p) => p.theme.font.large};
     ${(props) => props.theme.flex.vertical.center};
-    width: 80%;
+
     line-height: 5rem;
     text-transform: uppercase;
     text-align: center;
@@ -97,7 +97,7 @@ const Blotch1 = styled.div`
 const Blotch2 = styled.div`
     position: absolute;
     bottom: -20%;
-    right: 0%;
+    right: -8%;
     height: 15%;
     width: 15%;
 

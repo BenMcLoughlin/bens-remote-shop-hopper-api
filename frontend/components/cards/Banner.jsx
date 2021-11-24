@@ -29,8 +29,8 @@ Banner.propTypes = propTypes;
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    width: 120%;
-    margin: 0 auto 0 -10%;
+    width: 140%;
+    margin: 0 auto 0 -20%;
     height: 20rem;
     position: relative;
 `;

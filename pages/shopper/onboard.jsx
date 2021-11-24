@@ -5,12 +5,12 @@ import { Next, Back, SlideToSide } from 'frontend/components';
 import { ProgressBar } from 'frontend/components/layout/ProgressBar.jsx';
 import Image from 'next/image';
 import { renderComponent } from 'frontend/utils/ui';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { withPageAuthRequired, useUser } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 
 const Onboard = () => {
     const router = useRouter();
-    // const { data: session, status } = useSession();
+    const { user, isLoading } = useUser();
 
     const { props, globalState, setGlobalState } = onboardProps();
 
@@ -19,9 +19,9 @@ const Onboard = () => {
     const pages = ['location', 'styles', 'brands', 'sizes'];
 
     let selectedPage = pages[num];
-
+ 
     const sendEmail = async () => {
-        let userEmail = 'dev@shophopper.ca'; //process.env.NODE === 'development' ? 'dev@shophopper.ca' : session?.user?.email;
+        let userEmail = process.env.NODE === 'development' ? 'dev@shophopper.ca' : user?.name;
         const res = await fetch('/api/email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -60,15 +60,17 @@ const Onboard = () => {
                     }}
                 />
             </NextWrapper>
-            <BackWrapper>
-                <Back
-                    handleChange={() => {
-                        setGlobalState({
-                            ui: { onboardPageNum: num > 0 ? num - 1 : 0 }
-                        });
-                    }}
-                />
-            </BackWrapper>
+            {num > 0 && (
+                <BackWrapper>
+                    <Back
+                        handleChange={() => {
+                            setGlobalState({
+                                ui: { onboardPageNum: num > 0 ? num - 1 : 0 }
+                            });
+                        }}
+                    />
+                </BackWrapper>
+            )}
         </Wrapper>
     );
 };
@@ -95,7 +97,7 @@ const Content = styled.div`
 const NextWrapper = styled.div`
     height: 10rem;
     position: absolute;
-    top: 24%;
+    top: 20%;
     right: 10%;
     z-index: 100;
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, LinkText, AuthButton } from 'frontend/components';
+import { Button, LinkText, LinkButton } from 'frontend/components';
 import logo from 'public/assets/logos/shophopper-logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -37,11 +37,11 @@ export const Header = () => {
                 )}
                 {!user ? (
                     <>
-                        <AuthButton href="/api/auth/login" title="Sign up" radius="round" />
-                        <AuthButton href="/api/auth/login" title="Log In" radius="round" />
+                        <LinkButton href="/api/auth/login" title="Sign up" radius="round" />
+                        <LinkButton href="/api/auth/login" title="Log In" radius="round" />
                     </>
                 ) : (
-                    <AuthButton href="/api/auth/logout" title="Sign Out" radius="round" />
+                    <LinkButton href="/api/auth/logout" title="Sign Out" radius="round" />
                 )}
             </Right>
         </Wrapper>

@@ -84,9 +84,7 @@ export function onboardProps() {
                 selectedValues: globalState.user.styles,
                 handleChange: (value) => {
                     const { styles } = globalState.user;
-                    const newValues = styles.includes(value)
-                        ? styles.filter((d) => d !== value)
-                        : [...styles, value];
+                    const newValues = styles.includes(value) ? styles.filter((d) => d !== value) : [...styles, value];
                     setGlobalState({ user: { styles: newValues } });
                 },
                 handleErrors: () => user.styles.length >= 2
@@ -97,9 +95,7 @@ export function onboardProps() {
                 selectedValues: globalState.user.brands,
                 handleChange: (value) => {
                     const { brands } = globalState.user;
-                    const newValues = brands.includes(value)
-                        ? brands.filter((d) => d !== value)
-                        : [...brands, value];
+                    const newValues = brands.includes(value) ? brands.filter((d) => d !== value) : [...brands, value];
                     setGlobalState({ user: { brands: newValues } });
                 },
                 handleErrors: () => user.brands.length >= 2
@@ -169,7 +165,7 @@ export function onboardProps() {
                     console.log('Hello from onboardProps');
                     setGlobalState({ user: { size: { [name]: value } } });
                 },
-                handleErrors: () => true
+                handleErrors: () => Object.values(user.size).every((d) => d.length > 0)
             }
         },
         globalState,

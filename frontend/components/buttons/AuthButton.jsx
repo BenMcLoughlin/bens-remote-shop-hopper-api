@@ -5,14 +5,9 @@ import { Rocket } from '@styled-icons/fa-solid/Rocket';
 import { PaperPlane } from '@styled-icons/entypo/PaperPlane';
 import { startCase } from 'frontend/utils/strings';
 
-export const AuthButton = ({ title = '', gradient = 'primary', icon, href = '', radius = 'square' }) => {
-    const icons = {
-        rocket: <Rocket />,
-        plane: <PaperPlane />
-    };
-
+export const AuthButton = ({ title = '', gradient = 'primary', icon, href = "api/auth/signup", radius = 'square' }) => {
     return (
-        <a href={href} style={{ textDecoration: "none" }}>
+        <a href={href} style={{ textDecoration: 'none' }}>
             <Wrapper gradient={gradient} radius={radius} title={title}>
                 {icon && <Icon>{icon === 'rocket' ? <Rocket /> : icon === 'plane' ? <PaperPlane /> : ''}</Icon>}
 

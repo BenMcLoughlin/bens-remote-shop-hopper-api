@@ -29,6 +29,7 @@ export const Layout = (props) => {
                     @import
                     url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;900&display=swap')
                 </style>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDq4w8FiLqX7vHjEfD23z94GZe7SH25Lik&libraries=places"></script>
             </Head>
 
             <Header />
@@ -43,6 +44,7 @@ export const Layout = (props) => {
 const Wrapper = styled.div`
     width: 100%;
     height: 100%;
+    overflow: hidden;
     background: #f6f4f5;
     background: -webkit-linear-gradient(top left, #f6f4f5, #f6f4f5);
     background: -moz-linear-gradient(top left, #f6f4f5, #f6f4f5);
@@ -64,6 +66,7 @@ const Center = styled.div`
     flex-direction: column;
     margin: 0 auto;
     min-height: 100vh;
+
     @media (min-width: 0px) {
         width: 95vw;
         min-height: 120vh;
