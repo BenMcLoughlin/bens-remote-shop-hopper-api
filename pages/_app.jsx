@@ -26,7 +26,7 @@ Router.events.on('routeChangeError', () => {
 const App = ({ Component, pageProps }) => {
     const { user } = pageProps;
     return (
-        <UserProvider user={user} redirectUri={'http://localhost:3000/shopper/onboard'}>
+        <UserProvider user={user}>
             <ThemeProvider theme={theme}>
                 <Layout>
                     <Component {...pageProps} />
