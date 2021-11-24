@@ -1,21 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, LinkText, LinkButton } from 'frontend/components';
+import { Button, LinkText, AuthButton } from 'frontend/components';
 import logo from 'public/assets/logos/shophopper-logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
-
+import { useUser } from '@auth0/nextjs-auth0';
 export const Header = () => {
-    const { data: session, status } = useSession();
-    // const loading = status === 'loading';
+    const { user, isLoading } = useUser();
 
     const admins = ['Moseley', 'McLoughlin', 'Lancaster'];
 
     let isAdmin = false;
-    if (session) {
-        isAdmin = admins.some((d) => session?.user?.email?.includes(d.toLowerCase()));
-    }
+    // if (session) {
+    //     isAdmin = admins.some((d) => session?.user?.email?.includes(d.toLowerCase()));
+    // }
 
     return (
         <Wrapper>
@@ -36,17 +35,13 @@ export const Header = () => {
                         <LinkText title={'Featured'} href={'/shopper/featured'} />
                     </>
                 )}
-                {!session ? (
+                {!user ? (
                     <>
-                        <LinkButton href="/auth/signup" title="Sign up" radius="round" />
-                        <LinkButton href="/auth/login" title="Log In" radius="round" />
+                        <AuthButton href="/api/auth/login" title="Sign up" radius="round" />
+                        <AuthButton href="/api/auth/login" title="Log In" radius="round" />
                     </>
                 ) : (
-                    <Button
-                        title={'Sign Out'}
-                        // Do we need a URL for this in production BEN?
-                        onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
-                    />
+                    <AuthButton href="/api/auth/logout" title="Sign Out" radius="round" />
                 )}
             </Right>
         </Wrapper>
@@ -84,10 +79,8 @@ const Logo = styled.div`
         height: 10rem;
         margin-top: -1rem;
         margin-left: -5rem;
-
     }
 `;
-
 
 const Right = styled.div`
     display: flex;

@@ -5,12 +5,12 @@ import { Next, Back, SlideToSide } from 'frontend/components';
 import { ProgressBar } from 'frontend/components/layout/ProgressBar.jsx';
 import Image from 'next/image';
 import { renderComponent } from 'frontend/utils/ui';
-import { useSession } from 'next-auth/react';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 
 const Onboard = () => {
     const router = useRouter();
-    const { data: session, status } = useSession();
+    // const { data: session, status } = useSession();
 
     const { props, globalState, setGlobalState } = onboardProps();
 
@@ -21,7 +21,7 @@ const Onboard = () => {
     let selectedPage = pages[num];
 
     const sendEmail = async () => {
-        let userEmail = process.env.NODE === 'development' ? 'dev@shophopper.ca' : session?.user?.email;
+        let userEmail = 'dev@shophopper.ca'; //process.env.NODE === 'development' ? 'dev@shophopper.ca' : session?.user?.email;
         const res = await fetch('/api/email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -73,7 +73,7 @@ const Onboard = () => {
     );
 };
 
-export default Onboard;
+export default withPageAuthRequired(Onboard);
 
 // ---------------------------STYLES-------------------------------------------//
 const Wrapper = styled.div`
@@ -102,7 +102,6 @@ const NextWrapper = styled.div`
 const BackWrapper = styled.div`
     height: 10rem;
     position: absolute;
-    top: -5rem;
     left: 4rem;
     z-index: 100;
 `;

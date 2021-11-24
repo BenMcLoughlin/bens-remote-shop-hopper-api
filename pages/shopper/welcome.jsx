@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Banner, ProfileCard, Paragraph, Image } from 'frontend/components';
-
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import clothingOnRack from 'public/assets/banners/clothing-on-rack.jpg';
 import womanInStripedShirt from 'public/assets/shutterstock/woman-in-striped-shirt.jpg';
 import parisStorefront from 'public/assets/shutterstock/paris-store-front.jpg';
@@ -11,11 +11,7 @@ import ryanLancaster from 'public/assets/profilePhotos/ryan-lancaster.jpg';
 
 const Welcome = () => (
     <Wrapper>
-        <Banner
-            title="Welcome"
-            subTitle="Amazing Local Outfits Our On There Way Soon!"
-            imgSrc={clothingOnRack}
-        />
+        <Banner title="Welcome" subTitle="Amazing Local Outfits Our On There Way Soon!" imgSrc={clothingOnRack} />
         <Row>
             <Paragraph
                 title={'Well Hello There!'}
@@ -62,11 +58,7 @@ const Welcome = () => (
             />
         </Row>
         <Row>
-            <ProfileCard
-                imgSrc={ryanLancaster}
-                title="Ryan Lancaster"
-                subTitles={['President & CEO', 'Co-Founder']}
-            />
+            <ProfileCard imgSrc={ryanLancaster} title="Ryan Lancaster" subTitles={['President & CEO', 'Co-Founder']} />
             <Paragraph
                 title={'Thank You For Being A Part Of This Movement'}
                 align="left"
@@ -84,7 +76,7 @@ Welcome.propTypes = {
     arrayOfComponents: PropTypes.array
 };
 
-export default Welcome;
+export default withPageAuthRequired(Welcome);
 
 // ---------------------------STYLES-------------------------------------------//
 

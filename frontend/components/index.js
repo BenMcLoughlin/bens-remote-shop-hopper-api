@@ -1,5 +1,6 @@
 // buttons
 export {
+    AuthButton,
     Back,
     Next,
     Button,

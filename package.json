@@ -15,7 +15,6 @@
     "license": "MIT",
     "dependencies": {
         "@auth0/nextjs-auth0": "^1.6.1",
-        "@next-auth/prisma-adapter": "^0.5.2-next.19",
         "@prisma/client": "^3.4.1",
         "@sendgrid/mail": "^7.5.0",
         "api": "^3.4.2",
@@ -30,7 +29,6 @@
         "lodash": "^4.17.21",
         "moment": "^2.29.1",
         "next": "^11.1.2",
-        "next-auth": "^4.0.0-next.26",
         "nprogress": "^0.2.0",
         "query-string": "^6.9.0",
         "react": "^17.0.2",

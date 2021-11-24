@@ -17,10 +17,7 @@ export const Styles = ({ styles }) => {
                         onClick={() => handleChange(option)}
                         selected={selectedValues.includes(option)}>
                         <OptionImage>
-                            <Image
-                                src={`/../public/assets/onboard/styles/${option}.jpg`}
-                                layout="fill"
-                            />
+                            <Image src={`/../public/assets/onboard/styles/${option}.jpg`} layout="fill" />
                         </OptionImage>
                         <OptionTitle>{startCase(option)}</OptionTitle>
                     </Option>
@@ -42,7 +39,6 @@ const Wrapper = styled.div`
     margin: 0 auto;
     gap: 2rem;
     min-height: 100%;
-    
 `;
 
 const Options = styled.div`
@@ -87,6 +83,7 @@ const OptionTitle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 `;
 
 const Question = styled.div`

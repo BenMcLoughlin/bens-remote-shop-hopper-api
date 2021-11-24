@@ -5,16 +5,9 @@ import { GoogleMap } from 'frontend/components';
 
 export const Location = (props) => (
     <Wrapper>
-        <ImageWrapper>
-            <Image
-                src={'/../public/assets/onboard/shutterstock/womanInEurope.jpg'}
-                width={1000}
-                height={1000}
-            />
-        </ImageWrapper>
-        <Left>
+        <Content>
             <GoogleMap />
-        </Left>
+        </Content>
     </Wrapper>
 );
 
@@ -26,21 +19,12 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     position: relative;
+    gap: 5rem;
 `;
-const ImageWrapper = styled.div`
-    width: 60%;
-    margin-left: -10%;
-    opacity: 0.8;
-    @media (max-width: 600px) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 110%;
-        opacity: 0.2;
-    }
-`;
-const Left = styled.div`
-    flex: 1;
+
+const Content = styled.div`
+
+    width: 75%;
     display: flex;
     padding: 0.2rem;
     margin-top: 3rem;

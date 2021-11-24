@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React from 'react';
-import { SessionProvider } from 'next-auth/react';
 import { Router } from 'next/dist/client/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
@@ -27,15 +26,13 @@ Router.events.on('routeChangeError', () => {
 const App = ({ Component, pageProps }) => {
     const { user } = pageProps;
     return (
-        <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
-            <UserProvider user={user}>
-                <ThemeProvider theme={theme}>
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
-                </ThemeProvider>
-            </UserProvider>
-        </SessionProvider>
+        <UserProvider user={user} redirectUri={'http://localhost:3000/shopper/onboard'}>
+            <ThemeProvider theme={theme}>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </ThemeProvider>
+        </UserProvider>
     );
 };
 
