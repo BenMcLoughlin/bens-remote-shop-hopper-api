@@ -5,7 +5,7 @@ import { Rocket } from '@styled-icons/fa-solid/Rocket';
 import { PaperPlane } from '@styled-icons/entypo/PaperPlane';
 import { startCase } from 'frontend/utils/strings';
 
-export const LinkButton = ({ title = '', gradient = 'primary', icon, href = '/api/auth/login', radius = 'square' }) => {
+export const LinkButton = ({ title = '', gradient = 'primary', icon, href = '/api/auth/signup', radius = 'square' }) => {
     return (
         <a href={href} style={{ textDecoration: 'none' }}>
             <Wrapper gradient={gradient} radius={radius} title={title}>

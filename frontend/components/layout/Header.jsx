@@ -37,7 +37,7 @@ export const Header = () => {
                 )}
                 {!user ? (
                     <>
-                        <LinkButton href="/api/auth/login" title="Sign up" radius="round" />
+                        <LinkButton title="Sign up" radius="round" />
                         <LinkButton href="/api/auth/login" title="Log In" radius="round" />
                     </>
                 ) : (
