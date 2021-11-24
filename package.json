@@ -14,7 +14,7 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@auth0/nextjs-auth0": "^1.5.0",
+        "@auth0/nextjs-auth0": "^1.6.1",
         "@next-auth/prisma-adapter": "^0.5.2-next.19",
         "@prisma/client": "^3.4.1",
         "@sendgrid/mail": "^7.5.0",

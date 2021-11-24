@@ -5,7 +5,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import prisma from 'prisma/prisma';
-import Auth0Provider from 'next-auth/providers/auth0';
+
 import bcrypt from 'bcryptjs';
 
 const options = {
@@ -47,11 +47,6 @@ const options = {
         FacebookProvider({
             clientId: process.env.FACEBOOK_ID,
             clientSecret: process.env.FACEBOOK_SECRET
-        }),
-        Auth0Provider({
-            clientId: process.env.AUTH0_CLIENT_ID,
-            clientSecret: process.env.AUTH0_CLIENT_SECRET,
-            issuer: process.env.AUTH0_ISSUER
         })
     ],
     adapter: PrismaAdapter(prisma),
