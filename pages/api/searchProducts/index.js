@@ -1,4 +1,3 @@
-// import { getSession } from 'next-auth/react';
 import prisma from 'prisma/prisma.js';
 
 export async function searchProducts(query) {
@@ -33,7 +32,7 @@ export async function searchProducts(query) {
                 {
                     [column]: metric
                 },
-                { 
+                {
                     sizes: size ? { has: size } : undefined
                 },
                 {
@@ -52,7 +51,7 @@ export async function searchProducts(query) {
                         search: metric
                     }
                 },
-                { 
+                {
                     sizes: size ? { has: size } : undefined
                 },
                 {
@@ -71,7 +70,7 @@ export async function searchProducts(query) {
                         has: metric
                     }
                 },
-                { 
+                {
                     sizes: size ? { has: size } : undefined
                 },
                 {

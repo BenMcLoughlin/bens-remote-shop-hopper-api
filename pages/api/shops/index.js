@@ -1,4 +1,3 @@
-// // import { getSession } from 'next-auth/react';
 import prisma from 'prisma/prisma.js';
 
 export async function getRows() {

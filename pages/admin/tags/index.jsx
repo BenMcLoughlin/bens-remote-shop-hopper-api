@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
