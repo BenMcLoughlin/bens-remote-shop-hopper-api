@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, LinkText, LinkButton } from 'frontend/components';
+import { LinkText, LinkButton } from 'frontend/components';
 import logo from 'public/assets/logos/shophopper-logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import { signOut, useSession } from 'next-auth/react';
+
 import { useUser } from '@auth0/nextjs-auth0';
 export const Header = () => {
     const { user, isLoading } = useUser();
@@ -15,6 +15,15 @@ export const Header = () => {
     // if (session) {
     //     isAdmin = admins.some((d) => session?.user?.email?.includes(d.toLowerCase()));
     // }
+
+    const updateProfile = async () => {
+        const res = await fetch('/api/user/updateProfile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: 'benmcl@shaw.ca' })
+        });
+        let data = await res.json();
+    };
 
     return (
         <Wrapper>
@@ -27,6 +36,10 @@ export const Header = () => {
             </Link>
             <Right>
                 <LinkText title={'About'} href={'/shopper/about'} />
+
+                {/* DELETE BELOW */}
+                <button onClick={() => updateProfile()}>store user</button>
+
                 {isAdmin && (
                     <>
                         <LinkText title={'Featured'} href={'/shopper/featured'} />

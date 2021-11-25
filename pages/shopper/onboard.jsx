@@ -10,8 +10,8 @@ import { useRouter } from 'next/router';
 
 const Onboard = () => {
     const router = useRouter();
-    const { user, isLoading } = useUser();
-
+    const { user } = useUser();
+    console.log('user: ', user);
     const { props, globalState, setGlobalState } = onboardProps();
 
     const { onboardPageNum: num } = globalState.ui;
@@ -19,7 +19,7 @@ const Onboard = () => {
     const pages = ['location', 'styles', 'brands', 'sizes'];
 
     let selectedPage = pages[num];
- 
+
     const sendEmail = async () => {
         let userEmail = process.env.NODE === 'development' ? 'dev@shophopper.ca' : user?.name;
         const res = await fetch('/api/email', {
@@ -31,10 +31,10 @@ const Onboard = () => {
     };
 
     const updateProfile = async () => {
-        const res = await fetch('/api/updateProfile', {
+        const res = await fetch('/api/user/updateProfile', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(globalState.user)
+            body: JSON.stringify({ ...globalState.user, email: user.name, image: user.image })
         });
         let data = await res.json();
     };
@@ -57,6 +57,8 @@ const Onboard = () => {
                             sendEmail();
                             updateProfile();
                         }
+
+                        updateProfile();
                     }}
                 />
             </NextWrapper>
