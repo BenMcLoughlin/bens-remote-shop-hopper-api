@@ -1,5 +1,4 @@
 import React from 'react';
-import { signOut } from 'next-auth/react';
 import styled from 'styled-components';
 import { TableDeleteRow } from '@styled-icons/fluentui-system-regular/TableDeleteRow';
 import { BoxArrowUpLeft } from '@styled-icons/bootstrap/BoxArrowUpLeft';
@@ -37,9 +36,9 @@ export const NavBarLeft = () => {
         </Link> */}
 
             <Bottom>
-                <LogOutIcon onClick={() => signOut()}>
+                {/* <LogOutIcon onClick={() => signOut()}>
                     <BoxArrowUpLeft color="white" />
-                </LogOutIcon>
+                </LogOutIcon> */}
                 <DeleteDb onClick={_wipeDatabase}>
                     <TableDeleteRow color="red" />
                 </DeleteDb>
