@@ -8,7 +8,7 @@
 // import { getStoredAuthToken, removeStoredAuthToken } from './session';
 
 // const defaults = {
-//     baseURL: process.env.API_URL || 'http://localhost:3000',
+//     baseURL: process.env.API_URL
 //     headers: () => ({
 //         'Content-Type': 'application/json',
 //         Authorization: getStoredAuthToken() ? `Bearer ${getStoredAuthToken()}` : undefined

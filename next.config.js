@@ -4,23 +4,21 @@ const environment = process.env.NODE_ENV;
 let apiRequestUrl = '';
 
 switch (environment) {
-case 'devCloud':
-    apiRequestUrl = 'https://shop-hopper-dev.vercel.app';
-    break;
-case 'staging':
-    apiRequestUrl = 'https://shop-hopper-staging.vercel.app';
-    break;
-case 'production':
-    apiRequestUrl = 'https://shophopper.ca';
-    break;
-default:
-    apiRequestUrl = 'http://localhost:3000';
-    break;
+    case 'preview':
+        apiRequestUrl = 'https://shop-hopper-dev.vercel.app';
+        break;
+    case 'production':
+        apiRequestUrl = 'https://shophopper.ca';
+        break;
+    default:
+        apiRequestUrl = 'http://localhost:3000';
+        break;
 }
 
 module.exports = {
     env: {
-        apiRequestUrl // todo
+        API_URL: apiRequestUrl // todo
+
     },
     async headers() {
         if (environment === "future todo") {

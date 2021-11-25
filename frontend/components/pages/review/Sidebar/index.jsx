@@ -69,9 +69,9 @@ export const ReviewSidebar = ({ isPID }) => {
                         <Icon size={30} color={isSelected ? color.primary : "white"} />
                         <LinkText isSelected={isSelected}>{text}</LinkText>
                         {
-                            isSet ? 
+                            isSet ?
                                 <CompleteIcon size={20} color="green" />
-                                : 
+                                :
                                 <InCompleteIcon size={20} color="white" />
                         }
                     </>
@@ -92,7 +92,7 @@ export const ReviewSidebar = ({ isPID }) => {
 
             <Divider />
             <Link href={'/admin/review/'}>
-                <Title>{ isPID ? 'Templates Home' : 'Review and Assign'}</Title>
+                <Title>{isPID ? 'Templates Home' : 'Review and Assign'}</Title>
             </Link>
             <Divider />
             {
