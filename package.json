@@ -13,6 +13,7 @@
     "author": "Nathan Moseley, Ben Mc",
     "license": "MIT",
     "dependencies": {
+        "@auth0/nextjs-auth0": "^1.6.1",
         "@prisma/client": "^3.4.1",
         "@sendgrid/mail": "^7.5.0",
         "api": "^3.4.2",
